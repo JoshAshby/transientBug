@@ -19,60 +19,13 @@ import os
 import time
 import config.config as c
 import logging
+import yaml
+
 logger = logging.getLogger(c.general["logName"]+".views")
 
+tmplPath = os.path.dirname(__file__)+"/mustache/"
 
-class templateWalker(object):
-    """
-    Base walker which goes through the given template path and initializes a
-    bucnh of templateFile objects for each mustache template it finds. When a
-    template is requested from it later on, such as in the case in the template
-    object below, then it returns the template from the templateFile object.
-    This is mostly a helper to allow for live file re reading in templateFiles
-    """
-    def __init__(self, path):
-        """
-        Walks through `path` looking for mustache templates and adding any that
-        it finds into it's `_tmpls` dict in the form of templateFile objects
-        """
-        self._tmpls = {}
-        self._path = path
-
-        base = templateFile(self._path+"base.mustache")
-        self._tmpls["base"] = base
-
-
-        for path, folders, files in os.walk(self._path):
-            for directory in folders:
-                tempTmpls = {}
-                for folder in os.walk(self._path + directory + "/"):
-                    allTmpls = folder[2] # files in current directory
-                    where = folder[0].split(self._path)[1].rstrip("/") # relative folder path
-
-                    # Everytime we have files in the current directory, go through and see
-                    # if any are mustache template files, and if they are then read them into
-                    # memory and add them to the watcher
-                    for tmpl in allTmpls:
-                        parts = tmpl.split(".")
-                        extension = parts[len(parts)-1]
-                        if extension != "mustache":
-                            continue
-
-                        fileBit = folder[0]+"/"+tmpl
-                        templateThing = templateFile(fileBit)
-
-                        name = parts[0]
-                        tempTmpls[where+"/"+name] = templateThing
-            break
-
-            self._tmpls.update(tempTmpls)
-
-    def __getitem__(self, item):
-        """
-        Mostly a helper to allow for easy access to either a memory stored
-        template, or reading in the template freshly each time.
-        """
-        return self._tmpls[item].template
+tmpls = {}
 
 
 class templateFile(object):
@@ -81,8 +34,10 @@ class templateFile(object):
         Reads in fileBit into memory, and sets the modified time for the
         object to that of the file at the current moment.
         """
-        self._file = fileBit
+        self._file = ''.join([tmplPath, fileBit])
         self._mtime = 0
+
+        self.config = {}
 
         self.readTemplate()
 
@@ -115,9 +70,15 @@ class templateFile(object):
     NEW MTIME: %s
 """ % (self._file, self._mtime, mtime))
             with open(self._file, "r") as openTmpl:
-                self._template = unicode(openTmpl.read())
-            openTmpl.close()
+                raw = unicode(openTmpl.read())
             self._mtime = mtime
+
+            if raw[:2] == "+++":
+                config, template = raw.split("+++", 2)[1:]
+                self.config = yaml.load(config)
+                self._template = template
+            else:
+                self._template = raw
 
 
 class template(object):
@@ -126,14 +87,12 @@ class template(object):
             "req": data,
             "stylesheets": [],
             "scripts": [],
-            "breadcrumbs": ""
         }
 
-        self._render = u""
-        self.raw = u""
-
         self._template = template
-        self._base = "base"
+        self._base = "skeleton_empty"
+
+        self._render = ""
 
     @property
     def skeleton(self):
@@ -146,7 +105,7 @@ class template(object):
 
     @skeleton.deleter
     def skeleton(self):
-        self._base = "base"
+        self._base = "skeleton_empty"
 
     @property
     def data(self):
@@ -188,20 +147,22 @@ class template(object):
         self._data[placeholder] = pystache.render(template, data)
 
     def render(self):
-        body = self.raw
-        if not self.raw:
-            body = tmpls[self._template]
-
-        body = pystache.render(body, self._baseData)
-
         _data = self._baseData
-        _data.update({
-            "body"  : body,
-        })
-
         _data["req"].session.renderAlerts()
 
-        self._render = pystache.render(tmpls[self._base], _data)
+        template = tmpls[self._template]
+        _data.update(template.config)
+
+        body = pystache.render(template.template, _data)
+
+        if "base" in template.config:
+            _data.update({
+                "body"  : body,
+            })
+
+            self._render = pystache.render(tmpls[template.config["base"]].template, _data)
+        else:
+            self._render = body
 
         return unicode(self._render)
 
@@ -209,46 +170,11 @@ class template(object):
         return unicode(self._render)
 
 
-def listView(template, collection):
-    """
-    Takes a collection and renders a list view, of one template per item in
-    the collection.
-    """
-    rendered = u""
-    for item in collection:
-        rendered += pystache.render(tmpls[template], {"row": item})
-
-    return rendered
-
-
-def paginateView(collection, template="partials/paginate"):
-    """
-    Returns a pagination rendered template based off the settings from the
-    given collection
-    """
-    if collection.pages > 2:
-        previous = (collection.currentPage-1) if (collection.currentPage > 1) else False
-
-        pages = []
-        for page in range(1, (collection.pages+1)):
-            pageDict = {"number": page}
-            if page == collection.currentPage:
-                pageDict.update({"class": "active"})
-            pages.append(pageDict)
-
-        last = (collection.currentPage+1) if collection.hasNextPage else False
-
-        data = {"previous": previous,
-            "pages": pages,
-            "perpage": collection.perPage,
-            "next": last,
-            "last": collection.pages}
-
-        return unicode(pystache.render(tmpls[template], data))
-
-    else:
-        return u""
-
-
-tmplPath = os.path.dirname(__file__)+"/mustache/"
-tmpls = templateWalker(tmplPath)
+for top, folders, files in os.walk(tmplPath):
+    for fi in files:
+        base = top.split(tmplPath)[1]
+        file_name, extension = fi.rsplit('.', 1)
+        if extension == "mustache":
+            name = '/'.join([base, file_name]).lstrip('/')
+            fi = '/'.join([base, fi])
+            tmpls[name] = templateFile(fi)
