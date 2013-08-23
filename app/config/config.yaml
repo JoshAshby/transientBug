@@ -1,0 +1,30 @@
+appName: &APP leach
+logName: *APP
+
+port: 8000
+address: 127.0.0.1
+
+files:
+  pid: pid/leach.pid
+  log: logs/leach.log
+  stderr: logs/error.log
+  stdout: logs/out.log
+
+dirs:
+  pid: pid/
+  log: logs/
+
+databases:
+  rethink:
+    db: app
+  redis:
+    db: 1
+    URL: localhost
+
+sockets:
+  URL: tcp://127.0.0.1
+  port: 9000
+
+debug: true
+
+baseURL: http://transientBug.com/

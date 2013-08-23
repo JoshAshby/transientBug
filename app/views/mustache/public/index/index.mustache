@@ -1,0 +1,19 @@
+<div class="row">
+  <div class="span10 offset1">
+    <div class="hero-unit">
+      <h1><i class="icon-flag"></i> Welcome to fla.gr!</h1>
+      <p>fla.gr is designed to help with storing and sorting out all those sticky notes on your desk! How nice is that?</p>
+      {{^user.loggedIn}}
+        {{#cfg.enableRequests}}
+          <p>Currently, fla.gr is in a closed alpha, however you can get involved by requesting an invite!</p>
+          <p>
+            <a class="btn btn-primary btn-large" href="/request">
+              <i class="icon-comment"></i> Request an invite!
+            </a>
+          </p>
+        {{/cfg.enableRequests}}
+        <p>Currently fla.gr is a work in progress, and no accounts are being given out. We're sorry but we're working on getting fla.gr going as soon as possible!</p>
+      {{/user.loggedIn}}
+    </div>
+  </div>
+</div>
