@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
   <head>
-  <title>transientBug - {{{title}}}</title>
+  <title>transientBug - {{{req.title}}}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
 
@@ -45,11 +45,11 @@
                   <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Ello, {{req.session.username}} <i class="icon-chevron-down"></i></a>
                     <ul class="dropdown-menu">
-                      <li><a href="#">Dashboard</a></li>
-                      <li><a href="#">Gifs</a></li>
-                      <li><a href="#">Screenshots</a></li>
+                      <li><a href="/"><i class="icon-dashboard"></i> Dashboard</a></li>
+                      <li><a href="/phots"><i class="icon-picture"></i> Phots</a></li>
+                      <li><a href="/screenshots"><i class="icon-screenshot"></i> Screenshots</a></li>
                       {{#req.session.has_admin}}
-                        <li><a href="#">Admin</a></li>
+                      <li><a href="/admin"><i class="icon-meh"></i> Admin</a></li>
                       {{/req.session.has_admin}}
                     </ul>
                   </li>
