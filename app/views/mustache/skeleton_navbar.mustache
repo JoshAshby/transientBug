@@ -8,7 +8,7 @@
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.no-icons.min.css" rel="stylesheet">
     <!--<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-theme.min.css">-->
     <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet">
-
+<link href="//netdna.bootstrapcdn.com/bootswatch/3.0.0/cyborg/bootstrap.min.css" rel="stylesheet">
     <!-- Begin page stylsheets -->
     {{#stylesheets}}
       <script src="{{static}}/css/{{.}}.css"></script>
@@ -23,9 +23,10 @@
   </head>
   <body>
     <div class="container">
+      <br>
       <div class="row">
         <div class="col-md-10 col-md-offset-1">
-          <nav class="navbar navbar-default navbar-inverse" role="navigation">
+          <nav class="navbar navbar-default" role="navigation">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
               <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
@@ -40,7 +41,7 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse navbar-ex1-collapse">
               {{#req.session.userID}}
-                <ul class="nav navbar-nav navbar-right">
+                <ul class="nav navbar-nav navbar-right" style="margin-right: 20px">
                   <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Ello, {{req.session.username}} <i class="icon-chevron-down"></i></a>
                     <ul class="dropdown-menu">

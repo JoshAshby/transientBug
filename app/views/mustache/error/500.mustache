@@ -1,34 +1,31 @@
 <div class="row">
-  <div class="span10 offset1">
-    <div class="hero-unit" style="text-align: center;">
+  <div class="col-md-10 col-md-offset-1">
+    <div class="jumbotron">
       <h1><i class="icon-fire-extinguisher"></i> 500 <small>(Internal Server Error)</small></h1>
       <p>We couldn't complete that request because something went wrong. This error has been reported and we're working on getting it fixed.</p>
-      {{#req.session.userID}}
-        <p>In the meantime you can return to your <a href="/your/flags">flags</a> or continue to navigate around fla.gr</p>
-      {{/req.session.userID}}
-      {{^req.session.userID}}
-        <p>In the meantime you can return to the <a href="/">fla.gr homepage here</a>
-      {{/req.session.userID}}
+
+      <small>(This page intentionally left ugly)</small>
     </div>
   </div>
 </div>
 <div class="row">
-  <div class="span10 offset1">
+  <div class="col-md-10 col-md-offset-1">
     {{#req.cfg.enable500Error}}
-      <div class="accordion" id="accordionError">
-        <div class="accordion-group">
-          <div class="accordion-heading">
-            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordionError" href="#collapseError">View Error <i class="icon-chevron-down"></i>
-            </a>
-          </div>
-          <div id="collapseError" class="accordion-body collapse">
-            <div class="accordion-inner">
-              <h3>Stack trace...</h3>
-              <pre>{{tb}}</pre>
-              <h3>Exception Message...</h3>
-              <pre>{{error}}</pre>
-            </div>
-          </div>
+      <div class="panel panel-danger">
+        <div class="panel-heading">
+          <h3 class="panel-title">Stack Trace</h3>
+        </div>
+        <div class="panel-body">
+          <pre>{{tb}}</pre>
+        </div>
+      </div>
+
+      <div class="panel panel-danger">
+        <div class="panel-heading">
+          <h3 class="panel-title">Exception</h3>
+        </div>
+        <div class="panel-body">
+          <pre>{{error}}</pre>
         </div>
       </div>
     {{/req.cfg.enable500Error}}

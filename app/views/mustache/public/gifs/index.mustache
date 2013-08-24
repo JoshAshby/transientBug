@@ -1,0 +1,13 @@
+<div class="row">
+  {{#pictures}}
+    <div class="col-sm-6 col-md-4">
+      <div class="thumbnail">
+        <img src="/transientbug/gifs/{{{.}}}" alt="{{.}}">
+        <div class="caption">
+          <h6>{{{.}}}</h6>
+          <p><a href="/transientbug/gifs/{{{.}}}" class="btn btn-primary">Link</a> <a href="#" class="btn btn-default">Edit</a></p>
+        </div>
+      </div>
+    </div>
+  {{/pictures}}
+</div>

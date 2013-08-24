@@ -91,7 +91,7 @@ class template(object):
         }
 
         self._template = template
-        self._base = "skeleton_empty"
+        self._base = "skeleton_navbar"
 
         self._render = ""
 
@@ -106,7 +106,7 @@ class template(object):
 
     @skeleton.deleter
     def skeleton(self):
-        self._base = "skeleton_empty"
+        self._base = "skeleton_navbar"
 
     @property
     def data(self):

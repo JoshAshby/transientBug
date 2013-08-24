@@ -15,6 +15,9 @@ import config.config as con
 import config.initial as c
 import models.rethink.user.userModel as um
 
+import models.redis.baseRedisModel as brm
+import models.redis.bucket.bucketModel as bm
+
 import rethinkdb
 from models.modelExceptions.userModelExceptions import userError
 
@@ -23,7 +26,7 @@ def setup():
     print "Setting up from config/initial.yaml..."
     initialSetup()
     userSetup()
-    #bucketSetup()
+    bucketSetup()
     print "Done"
 
 
@@ -52,6 +55,27 @@ def userSetup():
             newUser.save()
         except userError:
             print "`%s` is already in the system..." % user["username"]
+
+
+def bucketSetup():
+    print "Setting up buckets..."
+    buckets = c.general.buckets
+    for bucket in buckets:
+        print bucket
+        print "Adding Bucket:"
+        print "\t"  + bucket
+        print "\t" + str(buckets[bucket])
+        newBucket = brm.redisObject("bucket:" + bucket)
+
+        newBucket["name"] = buckets[bucket]["name"]
+        newBucket["value"] = buckets[bucket]["value"]
+        newBucket["description"] = buckets[bucket]["description"]
+
+        if buckets[bucket].has_key("users"):
+            newBucket["users"] = buckets[bucket]["users"]
+
+    pail = bm.bucketPail("bucket:*:value")
+    pail.update()
 
 
 if __name__ == "__main__":

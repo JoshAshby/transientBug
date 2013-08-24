@@ -4,3 +4,9 @@ users:
 
 tables:
   - users
+
+buckets:
+  enable500Error:
+    value: true
+    name: Enable errors on 500 pages
+    description: Enable the display of the server errors on 500 pages

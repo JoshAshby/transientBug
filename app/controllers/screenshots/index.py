@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 """
-main index - reroutes to login if you're not logged in
+main index listing for gifs - reroutes to login if you're not logged in
 
 For more information, see: https://github.com/JoshAshby/
 
@@ -11,6 +11,9 @@ Josh Ashby
 http://joshashby.com
 joshuaashby@joshashby.com
 """
+import os
+import config.config as c
+
 from seshat.route import autoRoute
 from seshat.baseObject import HTMLObject
 from seshat.objectMods import login
@@ -20,14 +23,16 @@ from seshat.objectMods import login
 @autoRoute()
 class index(HTMLObject):
     """
-    Returns base index page.
+    Returns base index page listing all screenshots
     """
-    _title = "home"
-    _defaultTmpl = "public/index/index"
+    _title = "phots"
+    _defaultTmpl = "public/screenshots/index"
     def GET(self):
         """
-        Nothing much, just get the cheetah template for index and return it
-        so Seshat can get cheetah to render it and then return it to the browser
         """
-        raise Exception("wat")
+        f = []
+        for top, folders, files in os.walk(c.general.dirs["screenshots"]):
+            f.extend(files)
+            break
+        self.view.data = {"pictures": f}
         return self.view.render()
