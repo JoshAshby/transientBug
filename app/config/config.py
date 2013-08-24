@@ -19,12 +19,12 @@ import os
 import yaml
 import redis
 import rethinkdb
-from gevent_zeromq import zmq
+#from gevent_zeromq import zmq
 
 from standard import StandardConfig
 
-context = zmq.Context()
-zmqSock = context.socket(zmq.PUB)
+#context = zmq.Context()
+#zmqSock = context.socket(zmq.PUB)
 
 current_path = os.getcwd() + "/config/"
 
@@ -37,7 +37,7 @@ if not general:
 
 general["rethink"] = rethinkdb.connect(db=general["databases"]["rethink"]["db"]).repl()
 general["redis"] = redis.StrictRedis(general["databases"]["redis"]["URL"], db=general["databases"]["redis"]["db"])
-general["zeromq"] = zmqSock.bind(general["sockets"]["URL"]+":"+str(general["sockets"]["port"]))
+#general["zeromq"] = zmqSock.bind(general["sockets"]["URL"]+":"+str(general["sockets"]["port"]))
 
 for directory in general.dirs:
     if not os.path.exists(directory):
