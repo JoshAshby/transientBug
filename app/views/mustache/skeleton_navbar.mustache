@@ -13,13 +13,13 @@
     {{#stylesheets}}
       <script src="{{static}}/css/{{.}}.css"></script>
     {{/stylesheets}}
-    <!-- End page style sheets -->
 
     {{#styles}}
-    <style>
-      {{{styles}}}
-    </style>
+      <style>
+        {{{styles}}}
+      </style>
     {{/styles}}
+    <!-- End page style sheets -->
   </head>
   <body>
     <div class="container">
@@ -41,16 +41,15 @@
             <div class="collapse navbar-collapse navbar-ex1-collapse">
               {{#req.session.userID}}
                 <ul class="nav navbar-nav navbar-right">
-                  <li><a href="#">Ello, {{{req.session.username}}}</a></li>
                   <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-chevron-down"></i></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Ello, {{req.session.username}} <i class="icon-chevron-down"></i></a>
                     <ul class="dropdown-menu">
                       <li><a href="#">Dashboard</a></li>
                       <li><a href="#">Gifs</a></li>
                       <li><a href="#">Screenshots</a></li>
-                      {{#req.session.hasAdmin}}
+                      {{#req.session.has_admin}}
                         <li><a href="#">Admin</a></li>
-                      {{/req.session.hasAdmin}}
+                      {{/req.session.has_admin}}
                     </ul>
                   </li>
                 </ul>
@@ -70,6 +69,14 @@
           </nav>
         </div>
       </div>
+
+      <!-- Begin alerts section -->
+      <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+          {{{req.session._HTMLAlerts}}}
+        </div>
+      </div>
+      <!-- End alerts section -->
 
       <div class="row">
         <div class="col-md-10 col-md-offset-1">
@@ -93,8 +100,14 @@
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
 
     <!-- Begin page scripts -->
-    {{#scripts}}
+    {{#scriptFiles}}
       <script src="{{static}}/js/{{.}}.js"></script>
+    {{/scriptFiles}}
+
+    {{#scripts}}
+      <script>
+        {{{scripts}}}
+      </script>
     {{/scripts}}
     <!-- End page scripts -->
   </body>

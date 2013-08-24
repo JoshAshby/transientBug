@@ -17,10 +17,12 @@ import utils.markdownUtils as mdu
 from models.modelExceptions.userModelExceptions import \
        passwordError, userError
 
+import rethinkdb as r
+
 
 class User(RethinkModel):
     table = "users"
-    _protectedItems = ["formatedAbout", "formatedCreated", "hasAdmin"]
+    _protectedItems = ["formated_about", "formated_created", "has_admin"]
     @classmethod
     def new_user(cls, username, password):
         """
@@ -33,19 +35,21 @@ class User(RethinkModel):
         """
         if password == "":
             raise passwordError("Password cannot be null")
-        elif not cls.find(username):
+
+        found = r.table("users").filter({'username': username}).count().run()
+        if not found:
             passwd = bcrypt.hashpw(password, bcrypt.gensalt())
-            user = cls(username=username,
+            user = cls.create(username=username,
                        password=passwd,
                        created=arrow.utcnow().timestamp,
-                       disabled=False,
+                       disable=False,
                        alerts="")
             return user
         else:
             raise userError("That username is taken, please choose again.",
                     username)
 
-    def setPassword(self, password):
+    def set_password(self, password):
         """
         Sets the users password to `password`
 
@@ -55,12 +59,12 @@ class User(RethinkModel):
         self.save()
 
     @property
-    def hasAdmin(self):
+    def has_admin(self):
         return self.level > 50
 
     def format(self):
         """
         Formats markdown and dates into the right stuff
         """
-        self.formatedAbout = mdu.markClean(self.about)
-        self.formatedCreated = arrow.get(self.created)
+        self.formated_about = mdu.markClean(self.about)
+        self.formated_created = arrow.get(self.created)

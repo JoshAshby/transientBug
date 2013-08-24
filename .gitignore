@@ -30,6 +30,7 @@ app/config/*.json
 *.flagr.js
 old/
 interface/templates/
+app/rethinkdb_data
 
 # Compiled source #
 ###################

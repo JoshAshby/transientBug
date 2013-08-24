@@ -18,13 +18,16 @@ import models.redis.baseRedisModel as brm
 import models.modelExceptions.sessionExceptions as use
 import json
 
+import models.rethink.user.userModel as um
+import rethinkdb as r
+
 
 class session(brm.redisObject):
     def _finishInit(self):
         if not hasattr(self, "rawAlerts"): self.rawAlerts = "[]"
         if not hasattr(self, "username"): self.username = None
         if not hasattr(self, "userID"): self.userID = None
-        if not hasattr(self, "hasAdmin"): self.hasAdmin = None
+        if not hasattr(self, "has_admin"): self.has_admin = None
 
     def loginWithoutCheck(self, user):
         """
@@ -36,12 +39,13 @@ class session(brm.redisObject):
 
         :returns: True if the user was successfully logged in
         """
-        foundUser = None #TODO: FIX THIS SHIT
-        if foundUser:
+        foundUser = list(r.table(um.User.table).filter({'username': user}).run())
+        if len(foundUser) > 0:
+            foundUser = um.User(foundUser[0]["id"])
             if not foundUser.disable:
                 self.username = foundUser.username
                 self.userID = foundUser.id
-                self.hasAdmin = foundUser.hasAdmin
+                self.has_admin = foundUser.has_admin
                 return True
             else:
                 raise use.banError("Your user is currently disabled. \
@@ -63,14 +67,15 @@ class session(brm.redisObject):
 
         :returns: True if the user was successfully logged in
         """
-        foundUser = None #TODO: FIX THIS SHIT
-        if foundUser:
+        foundUser = list(r.table(um.User.table).filter({'username': user}).run())
+        if len(foundUser) > 0:
+            foundUser = um.User.fromRawEntry(**foundUser[0])
             if not foundUser.disable:
                 if foundUser.password == bcrypt.hashpw(password,
                         foundUser.password):
                     self.username = foundUser.username
                     self.userID = foundUser.id
-                    self.hasAdmin = foundUser.hasAdmin
+                    self.has_admin = foundUser.has_admin
                     return True
                 else:
                     raise use.passwordError("Your password appears to \
@@ -88,7 +93,7 @@ class session(brm.redisObject):
         """
         self.username = None
         self.userID = None
-        self.hasAdmin = None
+        self.has_admin = None
         return True
 
     def pushAlert(self, message, quip="", level="success"):

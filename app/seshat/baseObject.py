@@ -40,7 +40,7 @@ class baseHTTPObject(object):
             content = ""
 
             if self.__admin__:
-                if self.request.session.hasAdmin:
+                if self.request.session.has_admin:
                     """
                     Duh, This user is obviously omnicious and has access to every
                     area in the site.

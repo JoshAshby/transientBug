@@ -13,24 +13,31 @@
     {{#stylesheets}}
       <script src="{{static}}/css/{{.}}.css"></script>
     {{/stylesheets}}
-    <!-- End page style sheets -->
 
     {{#styles}}
-    <style>
-      {{{styles}}}
-    </style>
+      <style>
+        {{{styles}}}
+      </style>
     {{/styles}}
+    <!-- End page style sheets -->
+
+    <script src="http://code.jquery.com/jquery.js"></script>
   </head>
   <body>
 
     {{{body}}}
 
-    <script src="http://code.jquery.com/jquery.js"></script>
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
 
     <!-- Begin page scripts -->
-    {{#scripts}}
+    {{#scriptFiles}}
       <script src="{{static}}/js/{{.}}.js"></script>
+    {{/scriptFiles}}
+
+    {{#scripts}}
+      <script>
+        {{{scripts}}}
+      </script>
     {{/scripts}}
     <!-- End page scripts -->
   </body>

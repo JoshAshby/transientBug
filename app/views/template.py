@@ -86,7 +86,8 @@ class template(object):
         self._baseData = {
             "req": data,
             "stylesheets": [],
-            "scripts": [],
+            "scripts": "",
+            "scriptFiles": []
         }
 
         self._template = template
@@ -118,16 +119,14 @@ class template(object):
 
     @property
     def scripts(self):
-        return self._baseData["scripts"]
+        return self._baseData["scriptFiles"], self._baseData["scripts"]
 
     @scripts.setter
     def scripts(self, value):
-        assert type(value) == list
-        self._baseData["scripts"].extend(value)
-
-    @scripts.deleter
-    def scripts(self):
-        self._baseData["scripts"] = []
+        if type(value) == list:
+            self._baseData["scriptFiles"].extend(value)
+        else:
+          self._baseData["scripts"] += value
 
     @property
     def stylesheets(self):
@@ -151,22 +150,29 @@ class template(object):
         _data["req"].session.renderAlerts()
 
         template = tmpls[self._template]
+
+        tmpl = template.template
+
         _data.update(template.config)
 
-        body = pystache.render(template.template, _data)
+        body = pystache.render(tmpl, _data)
 
+        base = None
         if "base" in template.config and template.config["base"] is not None:
-            _data.update({
-                "body"  : body,
-            })
-
-            self._render = pystache.render(tmpls[template.config["base"]].template, _data)
+            base = tmpls[template.config["base"]]
         elif self._base is not None:
+            base = tmpls[self._base]
+
+        if base is not None:
+            baseTmpl = base.template
+            _data.update(base.config)
+
             _data.update({
                 "body"  : body,
             })
 
-            self._render = pystache.render(tmpls[self._base].template, _data)
+            self._render = pystache.render(baseTmpl, _data)
+
         else:
             self._render = body
 

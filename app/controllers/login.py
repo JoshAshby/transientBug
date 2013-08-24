@@ -58,11 +58,20 @@ class login(HTMLObject):
 
         except se.usernameError as e:
             exc = e
+            self.view.data = {"username" : name}
             self.view.data = {"usernameError": True}
+
+            self.view.scripts = """
+              $("#username").popover({trigger: "manual", placement: "left"}).popover("show");
+            """
         except se.passwordError as e:
             exc = e
             self.view.data = {"username": name}
             self.view.data = {"passwordError": True}
+
+            self.view.scripts = """
+              $("#password").popover({trigger: "manual", placement: "left"}).popover("show");
+            """
         except se.banError as e:
             exc = e
 

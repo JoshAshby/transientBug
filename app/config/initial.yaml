@@ -1,3 +1,6 @@
 users:
-  - name: bug
+  - username: bug
     password: josh
+
+tables:
+  - users
