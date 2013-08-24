@@ -13,8 +13,10 @@ joshuaashby@joshashby.com
 """
 from seshat.route import autoRoute
 from seshat.baseObject import HTMLObject
+from seshat.objectMods import login
 
 
+@login()
 @autoRoute()
 class index(HTMLObject):
     """

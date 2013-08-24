@@ -73,7 +73,7 @@ class templateFile(object):
                 raw = unicode(openTmpl.read())
             self._mtime = mtime
 
-            if raw[:2] == "+++":
+            if raw[:3] == "+++":
                 config, template = raw.split("+++", 2)[1:]
                 self.config = yaml.load(config)
                 self._template = template
@@ -155,12 +155,18 @@ class template(object):
 
         body = pystache.render(template.template, _data)
 
-        if "base" in template.config:
+        if "base" in template.config and template.config["base"] is not None:
             _data.update({
                 "body"  : body,
             })
 
             self._render = pystache.render(tmpls[template.config["base"]].template, _data)
+        elif self._base is not None:
+            _data.update({
+                "body"  : body,
+            })
+
+            self._render = pystache.render(tmpls[self._base].template, _data)
         else:
             self._render = body
 

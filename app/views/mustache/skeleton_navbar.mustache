@@ -1,0 +1,83 @@
+<!doctype html>
+<html>
+  <head>
+  <title>transientBug - {{{title}}}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.no-icons.min.css" rel="stylesheet">
+    <!--<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-theme.min.css">-->
+    <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet">
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+          <nav class="navbar navbar-default navbar-inverse" role="navigation">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="/">transientBug</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse navbar-ex1-collapse">
+              {{#req.session.userID}}
+                <ul class="nav navbar-nav navbar-right">
+                  <li><a href="#">Ello, {{{req.session.username}}}</a></li>
+                  <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-chevron-down"></i></a>
+                    <ul class="dropdown-menu">
+                      <li><a href="#">Dashboard</a></li>
+                      <li><a href="#">Gifs</a></li>
+                      <li><a href="#">Screenshots</a></li>
+                      {{#req.session.hasAdmin}}
+                        <li><a href="#">Admin</a></li>
+                      {{/req.session.hasAdmin}}
+                    </ul>
+                  </li>
+                </ul>
+              {{/req.session.userID}}
+              {{^req.session.userID}}
+                <form class="navbar-form navbar-right" role="logic">
+                  <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Username..." name="email">
+                  </div>
+                  <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Password..." name="password">
+                  </div>
+                  <button type="submit" class="btn btn-default btn-primary">Login</button>
+                </form>
+              {{/req.session.userID}}
+            </div><!-- /.navbar-collapse -->
+          </nav>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+          {{{body}}}
+        </div>
+      </div>
+
+      <hr>
+      <footer id="footer">
+        <div class="row">
+          <div class="col-6">
+            transientBug.com by transientBug 2013
+          </div>
+          <div class="col-6">
+            <p class="pull-right"><a href="#top">Back to top</a></p>
+          </div>
+        </div>
+      </footer>
+    </div>
+    <script src="http://code.jquery.com/jquery.js"></script>
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+  </body>
+</html>

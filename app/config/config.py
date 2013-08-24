@@ -35,8 +35,6 @@ with open(current_path + "config.yaml", "r") as open_config:
 if not general:
     raise Exception("Could not load config.yaml into StandardConfig!")
 
-print general._data
-
 general["rethink"] = rethinkdb.connect(db=general["databases"]["rethink"]["db"])
 general["redis"] = redis.StrictRedis(general["databases"]["redis"]["URL"], db=general["databases"]["redis"]["db"])
 general["zeromq"] = zmqSock.bind(general["sockets"]["URL"]+":"+str(general["sockets"]["port"]))
