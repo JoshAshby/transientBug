@@ -39,6 +39,7 @@ class cfgBuckets(StandardConfig):
     def __init__(self):
         keys = {}
         for key in c.general.redis.keys("bucket:*:value"):
-            keys[key.split(":")[1]] = dbu.toBoolean(c.general.redis.get(key))
+            if key:
+                keys[key.split(":")[1]] = dbu.toBoolean(c.general.redis.get(key))
 
         self._data = keys
