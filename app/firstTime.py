@@ -13,13 +13,14 @@ joshuaashby@joshashby.com
 """
 import config.config as con
 import config.initial as c
-import models.rethink.user.userModel as um
+import models.couch.user.userModel as um
 
 import models.redis.baseRedisModel as brm
 import models.redis.bucket.bucketModel as bm
 
-import rethinkdb
+#import rethinkdb
 from models.modelExceptions.userModelExceptions import userError
+from couchdb.design import ViewDefinition
 
 
 def setup():
@@ -32,15 +33,24 @@ def setup():
 
 def initialSetup():
     print "Setting up database..."
-    dbs = rethinkdb.db_list().run()
 
-    if not con.general.databases["rethink"]["db"] in dbs:
-        rethinkdb.db_create(con.general.databases["rethink"]["db"]).run()
+    try:
+        con.general.couch.create(con.general.databases["couch"]["db"])
+        con.general.couch = con.general.couch[con.general.databases["couch"]["db"]]
+    except:
+        pass
 
-    dbt = rethinkdb.table_list().run()
-    for table in c.general.tables:
-        if not table in dbt:
-            rethinkdb.table_create(table).run()
+    view = ViewDefinition('stuff', 'users', '''function(doc) {emit(doc.username, doc);}''')
+    view.sync(con.general.couch)
+    #dbs = rethinkdb.db_list().run()
+
+    #if not con.general.databases["rethink"]["db"] in dbs:
+        #rethinkdb.db_create(con.general.databases["rethink"]["db"]).run()
+
+    #dbt = rethinkdb.table_list().run()
+    #for table in c.general.tables:
+        #if not table in dbt:
+            #rethinkdb.table_create(table).run()
 
 
 def userSetup():

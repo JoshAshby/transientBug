@@ -18,7 +18,8 @@ regex below
 import os
 import yaml
 import redis
-import rethinkdb
+#import rethinkdb
+from couchdb import Server
 #from gevent_zeromq import zmq
 
 from standard import StandardConfig
@@ -35,7 +36,11 @@ with open(current_path + "config.yaml", "r") as open_config:
 if not general:
     raise Exception("Could not load config.yaml into StandardConfig!")
 
-general["rethink"] = rethinkdb.connect(db=general["databases"]["rethink"]["db"]).repl()
+#general["rethink"] = rethinkdb.connect(db=general["databases"]["rethink"]["db"]).repl()
+try:
+    general["couch"] = Server(general["databases"]["couch"]["URL"]+":"+str(general["databases"]["couch"]["port"]))[general["databases"]["couch"]["db"]]
+except:
+    general["couch"] = Server(general["databases"]["couch"]["URL"]+":"+str(general["databases"]["couch"]["port"]))
 general["redis"] = redis.StrictRedis(general["databases"]["redis"]["URL"], db=general["databases"]["redis"]["db"])
 #general["zeromq"] = zmqSock.bind(general["sockets"]["URL"]+":"+str(general["sockets"]["port"]))
 

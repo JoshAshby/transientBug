@@ -19,6 +19,10 @@ dirs:
 databases:
   rethink:
     db: app
+  couch:
+    db: app
+    URL: http://localhost
+    port: 5984
   redis:
     db: 1
     URL: localhost
