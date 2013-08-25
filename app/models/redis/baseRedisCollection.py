@@ -85,8 +85,5 @@ class baseRedisCollection(bc.baseCollection):
         part of the collection.
         """
         key = self.pattern.split(":")[0]
-        try:
-            setPail = list(set([ key+":"+item.split(":")[1] for item in self.redis.keys(self.pattern) ]))
-        except:
-            setPail = []
+        setPail = list(set([ key+":"+item.split(":")[1] for item in self.redis.keys(self.pattern) ]))
         self.pail = brm.redisList(key, setPail, reset=True)

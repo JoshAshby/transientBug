@@ -37,12 +37,6 @@ class bucketPail(bc.baseRedisCollection):
 
 class cfgBuckets(StandardConfig):
     def __init__(self):
-        keys = {}
-        bits = c.general.redis.keys("bucket:*:value")
-        if type(bits) == dict:
-            for key in c.general.redis.keys("bucket:*:value"):
-                keys[key.split(":")[1]] = dbu.toBoolean(c.general.redis.get(key))
-        else:
-            keys[bits.split(":")[1]] = dbu.toBoolean(c.general.redis.get(bits))
+        keys = { key.split(":")[1]:dbu.toBoolean(c.general["redis"].get(key)) for key in c.general.redis.keys("bucket:*:value") }
 
         self._data = keys

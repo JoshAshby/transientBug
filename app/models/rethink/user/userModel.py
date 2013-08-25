@@ -68,11 +68,3 @@ class User(RethinkModel):
         """
         self.formated_about = mdu.markClean(self.about)
         self.formated_created = arrow.get(self.created)
-
-    @staticmethod
-    def find(self, what):
-        foundUser = list(r.table(User.table).filter({'username': what}).run())
-        if len(foundUser) > 0:
-            return User.fromRawEntry(**foundUser[0])
-        else:
-            return None

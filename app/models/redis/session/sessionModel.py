@@ -18,7 +18,8 @@ import models.redis.baseRedisModel as brm
 import models.modelExceptions.sessionExceptions as use
 import json
 
-import models.couch.user.userModel as um
+import models.rethink.user.userModel as um
+import rethinkdb as r
 
 
 class session(brm.redisObject):
@@ -38,8 +39,9 @@ class session(brm.redisObject):
 
         :returns: True if the user was successfully logged in
         """
-        foundUser = um.User.find(user)
-        if foundUser:
+        foundUser = list(r.table(um.User.table).filter({'username': user}).run())
+        if len(foundUser) > 0:
+            foundUser = um.User(foundUser[0]["id"])
             if not foundUser.disable:
                 self.username = foundUser.username
                 self.userID = foundUser.id
@@ -65,8 +67,9 @@ class session(brm.redisObject):
 
         :returns: True if the user was successfully logged in
         """
-        foundUser = um.User.find(user)
-        if foundUser:
+        foundUser = list(r.table(um.User.table).filter({'username': user}).run())
+        if len(foundUser) > 0:
+            foundUser = um.User.fromRawEntry(**foundUser[0])
             if not foundUser.disable:
                 if foundUser.password == bcrypt.hashpw(password,
                         foundUser.password):

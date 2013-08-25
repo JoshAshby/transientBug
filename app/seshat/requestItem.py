@@ -70,8 +70,7 @@ class requestItem(object):
         cookie = Cookie.SimpleCookie()
         try:
             cookie.load(self._env["HTTP_COOKIE"])
-            for key, value in cookie.iteritems():
-                self.sessionCookie[value.key] = value.value
+            self.sessionCookie = { value.key: value.value for key, value in cookie.iteritems() }
             self.sessionID = self.sessionCookie["flagr_sid"]
         except:
             self.sessionID = "".join(random.choice(string.ascii_uppercase + string.digits) for x in range(10))

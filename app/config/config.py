@@ -18,14 +18,13 @@ regex below
 import os
 import yaml
 import redis
-#import rethinkdb
-from couchdb import Server
-#from gevent_zeromq import zmq
+import rethinkdb
+from gevent_zeromq import zmq
 
 from standard import StandardConfig
 
-#context = zmq.Context()
-#zmqSock = context.socket(zmq.PUB)
+context = zmq.Context()
+zmqSock = context.socket(zmq.PUB)
 
 current_path = os.getcwd() + "/config/"
 
@@ -36,13 +35,9 @@ with open(current_path + "config.yaml", "r") as open_config:
 if not general:
     raise Exception("Could not load config.yaml into StandardConfig!")
 
-#general["rethink"] = rethinkdb.connect(db=general["databases"]["rethink"]["db"]).repl()
-try:
-    general["couch"] = Server(general["databases"]["couch"]["URL"]+":"+str(general["databases"]["couch"]["port"]))[general["databases"]["couch"]["db"]]
-except:
-    general["couch"] = Server(general["databases"]["couch"]["URL"]+":"+str(general["databases"]["couch"]["port"]))
+general["rethink"] = rethinkdb.connect(db=general["databases"]["rethink"]["db"]).repl()
 general["redis"] = redis.StrictRedis(general["databases"]["redis"]["URL"], db=general["databases"]["redis"]["db"])
-#general["zeromq"] = zmqSock.bind(general["sockets"]["URL"]+":"+str(general["sockets"]["port"]))
+general["zeromq"] = zmqSock.bind(general["sockets"]["URL"]+":"+str(general["sockets"]["port"]))
 
 for directory in general.dirs:
     if not os.path.exists(directory):
