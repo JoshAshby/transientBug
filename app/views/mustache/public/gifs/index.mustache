@@ -2,6 +2,35 @@
 nav:
   phots: true
 +++
+
+<div class="row">
+  <div class="col-sm-12 col-md-6">
+    <h4><i class="icon-picture"></i> Phots</h4>
+  </div>
+  <div class="col-sm-12 col-md-6">
+    <form class="form-inline pull-right" role="pagination_options">
+      <div class="form-group">
+        <label class="sr-only" for="sort">Sort</label>
+        <select id="sort" name="sort"class="input-sm">
+          {{#page.sort}}<option value={{page.sort}}>{{page.sort}}</option>{{/page.sort}}
+          <option value=asc>asc</option>
+          <option value=desc>desc</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="sr-only" for="perpage">Perpage</label>
+        <select id="perpage" name="perpage" class="input-sm">
+          {{#page.perpage}}<option value={{page.perpage}}>{{page.perpage}}</option>{{/page.perpage}}
+          <option value=24>24</option>
+          <option value=48>48</option>
+          <option value=all>All</option>
+        </select>
+      </div>
+      <button type="submit" class="btn btn-success btn-sm">Update</button>
+    </form>
+  </div>
+</div>
+<br>
 <div class="row">
   {{#pictures}}
     <div class="col-sm-6 col-md-4" style="margin-bottom: 20px;">
@@ -27,3 +56,24 @@ nav:
     </div>
   {{/pictures}}
 </div>
+
+{{#page.show}}
+  <ul class="pager">
+    <li class="previous {{^page.hasPrev}}disabled{{/page.hasPrev}}">
+      {{#page.hasPrev}}
+        <a href="?page={{page.prev}}&perpage={{page.perpage}}&sort={{page.sort}}"><i class="icon-chevron-left"></i> Prev</a>
+      {{/page.hasPrev}}
+      {{^page.hasPrev}}
+        <a><i class="icon-chevron-left"></i> Prev</a>
+      {{/page.hasPrev}}
+    </li>
+    <li class="next {{^page.hasNext}}disabled{{/page.hasNext}}">
+      {{#page.hasNext}}
+        <a href="?page={{page.next}}&perpage={{page.perpage}}&sort={{page.sort}}">Next <i class="icon-chevron-right"></i></a>
+      {{/page.hasNext}}
+      {{^page.hasNext}}
+        <a>Next <i class="icon-chevron-left"></i></a>
+      {{/page.hasNext}}
+    </li>
+  </ul>
+{{/page.show}}
