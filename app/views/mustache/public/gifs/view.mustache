@@ -2,6 +2,19 @@
 nav:
   phots: true
 +++
+{{#req.session.has_admin}}
+  <div class="row">
+    <div class="col-sm-12 col-md-2">
+      <h4><i class="icon-picture"></i> Phots</h4>
+    </div>
+    <div class="col-sm-12 col-md-4">
+      <a href="/phots/new" class="btn btn-success btn-sm">Add</a>
+    </div>
+    <div class="col-sm-12 col-md-6">
+    </div>
+  </div>
+{{/req.session.has_admin}}
+<br>
 <div class="row">
   <div class="col-sm-12 col-md-12">
     <div class="panel panel-success">

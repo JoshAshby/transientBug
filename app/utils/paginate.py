@@ -29,7 +29,7 @@ def pager(pail, perpage, page, sort_dir):
 
     if sort_dir == "asc":
         pail.sort(reverse=True)
-    elif sort_dir == "desc":
+    else:
         pail.sort()
 
     if perpage != "all":
