@@ -161,7 +161,7 @@ class redisList(object):
         return str(self._list)
 
     def sync(self):
-        self._list = self.redis.lrange(self.key, 0, -1)
+        self._list = self.redis.lrange(self.key, 0, -1) or []
         self.listToInt()
 
     def listToInt(self):
