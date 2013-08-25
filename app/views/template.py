@@ -96,6 +96,15 @@ class template(object):
         self._render = ""
 
     @property
+    def template(self):
+        return self._template
+
+    @template.setter
+    def template(self, value):
+        assert type(value) is str
+        self._template = value
+
+    @property
     def skeleton(self):
         return self._base
 

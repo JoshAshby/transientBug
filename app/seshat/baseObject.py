@@ -121,6 +121,15 @@ class HTMLObject(baseHTTPObject):
 
         self.request.title = title
 
+    @property
+    def template(self):
+        return self._defaultTmpl
+
+    @template.setter
+    def template(self, value):
+        assert type(value) is str
+        self.view._template = value
+
     def noErrorHook(self):
         try:
           tmpl = self._defaultTmpl
