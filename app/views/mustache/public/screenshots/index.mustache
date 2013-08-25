@@ -10,9 +10,9 @@ nav:
   <div class="col-sm-12 col-md-6">
     <form class="form-inline pull-right" role="pagination_options">
       <div class="form-group">
-        <label class="sr-only" for="sort">Sort</label>
-        <select id="sort" name="sort"class="input-sm">
-          {{#page.sort}}<option value={{page.sort}}>{{page.sort}}</option>{{/page.sort}}
+        <label class="sr-only" for="dir">Sort</label>
+        <select id="dir" name="dir" class="input-sm">
+          {{#page.dir}}<option value={{page.dir}}>{{page.dir}}</option>{{/page.dir}}
           <option value=asc>asc</option>
           <option value=desc>desc</option>
         </select>
@@ -37,21 +37,24 @@ nav:
   <div class="row">
     <div class="col-sm-12 col-md-12">
       <div class="thumbnail">
-        <img src="/scrn/{{{.}}}" alt="{{.}}">
+        <a href="/scrn/{{{.}}}" class="thumbnail"><img src="/scrn/{{{.}}}" alt="{{.}}"></a>
         <div class="caption">
           <h6>{{{.}}}</h6>
           <p>
             <div class="btn-group">
-              <button type="button" class="btn btn-success btn-sm">Link</button>
-              <button type="button" class="btn btn-success btn-sm dropdown-toggle" data-toggle="dropdown">
-                <i class="icon-chevron-down"></i>
-              </button>
-              <ul class="dropdown-menu" role="menu">
-                <li><a href="/scrn/{{{.}}}">Raw link</a></li>
-                <li><a href="/screenshots/view/{{{.}}}">Page link</a></li>
-              </ul>
+              <a href="/scrn/{{{.}}}" class="btn btn-success btn-sm">Link</a>
+              <div class="btn-group">
+                <button type="button" class="btn btn-success btn-sm dropdown-toggle" data-toggle="dropdown">
+                  <i class="icon-chevron-down"></i>
+                </button>
+                <ul class="dropdown-menu" role="menu">
+                  <li><a href="/screenshots/view/{{{.}}}">Page</a></li>
+                </ul>
+              </div>
             </div>
-            <a href="#" class="btn btn-default btn-sm">Edit</a>
+            {{#req.session.has_admin}}
+              <a href="#" class="btn btn-default btn-sm">Edit</a>
+            {{/req.session.has_admin}}
           </p>
         </div>
       </div>
@@ -64,7 +67,7 @@ nav:
   <ul class="pager">
     <li class="previous {{^page.hasPrev}}disabled{{/page.hasPrev}}">
       {{#page.hasPrev}}
-        <a href="?page={{page.prev}}&perpage={{page.perpage}}&sort={{page.sort}}"><i class="icon-chevron-left"></i> Prev</a>
+        <a href="?page={{page.prev}}&perpage={{page.perpage}}&dir={{page.sort}}"><i class="icon-chevron-left"></i> Prev</a>
       {{/page.hasPrev}}
       {{^page.hasPrev}}
         <a><i class="icon-chevron-left"></i> Prev</a>
@@ -72,7 +75,7 @@ nav:
     </li>
     <li class="next {{^page.hasNext}}disabled{{/page.hasNext}}">
       {{#page.hasNext}}
-        <a href="?page={{page.next}}&perpage={{page.perpage}}&sort={{page.sort}}">Next <i class="icon-chevron-right"></i></a>
+        <a href="?page={{page.next}}&perpage={{page.perpage}}&dir={{page.sort}}">Next <i class="icon-chevron-right"></i></a>
       {{/page.hasNext}}
       {{^page.hasNext}}
         <a>Next <i class="icon-chevron-left"></i></a>
