@@ -1,3 +1,16 @@
++++
+styles: "
+      @import url(http://fonts.googleapis.com/css?family=Maven+Pro:700);
+
+      .navbar-brand, footer {
+        font-family: 'Maven Pro', sans-serif;
+      }
+
+      .thumbnail {
+        border: #2b2b2b solid 2px
+      }
+      "
++++
 <!doctype html>
 <html>
   <head>
@@ -6,9 +19,10 @@
     <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
 
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.no-icons.min.css" rel="stylesheet">
-    <!--<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-theme.min.css">-->
     <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet">
-<link href="//netdna.bootstrapcdn.com/bootswatch/3.0.0/cyborg/bootstrap.min.css" rel="stylesheet">
+    <!--<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-theme.min.css">-->
+    <!--<link href="//netdna.bootstrapcdn.com/bootswatch/3.0.0/cosmo/bootstrap.min.css" rel="stylesheet">-->
+    <link href="//netdna.bootstrapcdn.com/bootswatch/3.0.0/cyborg/bootstrap.min.css" rel="stylesheet">
     <!-- Begin page stylsheets -->
     {{#stylesheets}}
       <script src="{{static}}/css/{{.}}.css"></script>
@@ -26,7 +40,7 @@
       <br>
       <div class="row">
         <div class="col-md-10 col-md-offset-1">
-          <nav class="navbar navbar-default" role="navigation">
+          <nav class="navbar navbar-default navbar-inverse" role="navigation">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
               <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
@@ -41,18 +55,21 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse navbar-ex1-collapse">
               {{#req.session.userID}}
-                <ul class="nav navbar-nav navbar-right" style="margin-right: 20px">
-                  <li class="dropdown">
+                <ul class="nav navbar-nav">
+                  <li {{#nav.phots}}class="active"{{/nav.phots}}><a href="/phots"><i class="icon-picture"></i></a></li>
+                  <li {{#nav.screenshots}}class="active"{{/nav.screenshots}}><a href="/screenshots"><i class="icon-screenshot"></i></a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right" style="margin-right: 15px">
+                  {{#req.session.has_admin}}
+                    <li {{#nav.home}}class="active"{{/nav.home}} class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Ello, {{req.session.username}} <i class="icon-chevron-down"></i></a>
-                    <ul class="dropdown-menu">
-                      <li><a href="/"><i class="icon-dashboard"></i> Dashboard</a></li>
-                      <li><a href="/phots"><i class="icon-picture"></i> Phots</a></li>
-                      <li><a href="/screenshots"><i class="icon-screenshot"></i> Screenshots</a></li>
-                      {{#req.session.has_admin}}
-                      <li><a href="/admin"><i class="icon-meh"></i> Admin</a></li>
-                      {{/req.session.has_admin}}
-                    </ul>
-                  </li>
+                      <ul class="dropdown-menu">
+                        <li {{#nav.admin}}class="active"{{/nav.admin}}><a href="#"><i class="icon-meh"></i> Admin</a></li>
+                        <li class="divider"></li>
+                        <li><a href="/logout"><i class="icon-signout"></i> Logout</a></li>
+                      </ul>
+                    </li>
+                  {{/req.session.has_admin}}
                 </ul>
               {{/req.session.userID}}
               {{^req.session.userID}}

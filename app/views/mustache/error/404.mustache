@@ -1,14 +1,5 @@
-<div class="row">
-  <div class="span10 offset1">
-    <div class="hero-unit" style="text-align: center;">
+    <div class="jumbotron">
       <h1><i class="icon-bell-alt"></i> 404 <small>(Not Found)</small></h1>
-      <p>We couldn't find the page you were looking for, maybe make sure the URL is correct? We've logged this and will take a look into making sure something isn't wrong.</p>
-      {{#req.session.userID}}
-        <p>In the meantime you can return to your <a href="/your/flags">flags</a> or continue to navigate around fla.gr</p>
-      {{/req.session.userID}}
-      {{^req.session.userID}}
-        <p>In the meantime you can return to the <a href="/">fla.gr homepage here</a>
-      {{/req.session.userID}}
+      <p>We couldn't find the page you were looking for, maybe make sure the URL is correct?</p>
+      <p>We've logged this error and will take a look into making sure something isn't wrong.</p>
     </div>
-  </div>
-</div>
