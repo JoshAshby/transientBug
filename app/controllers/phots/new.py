@@ -42,7 +42,7 @@ class new(HTMLObject):
         if len(extension) >= 1:
             extension = extension[1]
         else:
-            self.template = "public/gifs/error"
+            self.view.template = "public/gifs/error"
             self.view.data = {"error": "The extension for %s could not be found." % url}
             return self.view
 
@@ -53,7 +53,7 @@ class new(HTMLObject):
         try:
             r = requests.get(url, stream=True)
         except DNSError:
-            self.template = "public/gifs/error"
+            self.view.template = "public/gifs/error"
             self.view.data = {"error": "DNS error"}
             return self.view
 
@@ -68,5 +68,6 @@ class new(HTMLObject):
             self.head = ("303 SEE OTHER",
                 [("location", loc)])
         else:
-            self.template = "public/gifs/error"
+            self.view.template = "public/gifs/error"
+            self.view.data = {"error": "Something went wrong and the link didn't return a 200 code."}
             return self.view

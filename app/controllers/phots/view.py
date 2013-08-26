@@ -10,6 +10,9 @@ Josh Ashby
 http://joshashby.com
 joshuaashby@joshashby.com
 """
+import os
+
+import config.config as c
 from seshat.route import autoRoute
 from seshat.baseObject import HTMLObject
 
@@ -17,17 +20,24 @@ from seshat.baseObject import HTMLObject
 @autoRoute()
 class view(HTMLObject):
     """
-    Returns base index page listing all gifs
+    view, and if admin modify, a single image
     """
-    _title = "photo"
+    _title = "phot"
     _defaultTmpl = "public/gifs/view"
     def GET(self):
         """
         """
-        raw = self.request.id.rsplit(".", 1)
-        if len(raw) > 1:
+        f = []
+        for top, folders, files in os.walk(c.general.dirs["gifs"]):
+            f.extend(files)
+            break
+
+        if self.request.id in f:
+            raw = self.request.id.rsplit(".", 1)
             name = raw[0].replace("_", " ")
             self.view.data = {"picture": self.request.id, "name": name}
+            return self.view
         else:
-            pass
-        return self.view.render()
+            self.view.template = "public/gifs/error"
+            self.view.data = {"error": "That image could not be found. Sorry :/"}
+            return self.view

@@ -41,4 +41,4 @@ class index(HTMLObject):
         f, page_dict = pager(f, perpage, page, sort_dir)
 
         self.view.data = {"pictures": f, "page": page_dict}
-        return self.view.render()
+        return self.view

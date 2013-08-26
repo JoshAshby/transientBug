@@ -25,9 +25,6 @@ class view(HTMLObject):
         """
         """
         raw = self.request.id.rsplit(".", 1)
-        #if len(raw) > 1:
         name = raw[0].replace("_", " ")
         self.view.data = {"picture": self.request.id, "name": name}
-        #else:
-            #pass
-        return self.view.render()
+        return self.view

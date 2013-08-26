@@ -24,7 +24,7 @@ class error404(HTMLObject):
         """
         """
         self.head = ("404 NOT FOUND", [("Content-Type", "text/html")])
-        return self.view.render()
+        return self.view
 
 
 class error500(HTMLObject):
@@ -38,4 +38,4 @@ class error500(HTMLObject):
         """
         self.head = ("500 INTERNAL SERVER ERROR", [("Content-Type", "text/html")])
         self.view.data = {"error": self.request.error[0], "tb": self.request.error[1]}
-        return self.view.render()
+        return self.view
