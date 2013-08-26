@@ -5,6 +5,8 @@ users:
 tables:
   - users
 
+reset_users: true
+
 buckets:
   enable500Error:
     value: true

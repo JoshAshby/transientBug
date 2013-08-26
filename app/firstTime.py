@@ -37,7 +37,12 @@ def initialSetup():
     if not con.general.databases["rethink"]["db"] in dbs:
         rethinkdb.db_create(con.general.databases["rethink"]["db"]).run()
 
-    dbt = rethinkdb.table_list().run()
+    if c.general.reset_users:
+        # Reseting users
+        dbt = rethinkdb.table_list().run()
+        if "users" in dbt:
+            rethinkdb.table_drop("users").run()
+
     for table in c.general.tables:
         if not table in dbt:
             rethinkdb.table_create(table).run()
