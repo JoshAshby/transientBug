@@ -1,87 +1,111 @@
-<!DOCTYPE html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<!doctype html>
+<html>
   <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>fla.gr - maintenance</title>
-    <meta name="viewport" content="width=device-width">
+  <title>transientBug - Maintenance</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
 
-    <link rel="stylesheet" href="/static/css/bootstrap/bootstrap.css">
+
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.no-icons.min.css" rel="stylesheet">
+    <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet">
+    <!--<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-theme.min.css">-->
+    <!--<link href="//netdna.bootstrapcdn.com/bootswatch/3.0.0/cosmo/bootstrap.min.css" rel="stylesheet">-->
+    <link href="//netdna.bootstrapcdn.com/bootswatch/3.0.0/cyborg/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Begin page stylsheets -->
     <style>
-      body {
-        padding-top: 60px;
-        padding-bottom: 40px;
+      @import url(http://fonts.googleapis.com/css?family=Maven+Pro:700);
+
+      .navbar-brand, footer {
+        font-family: 'Maven Pro', sans-serif;
+      }
+
+      .thumbnail {
+        border: #2b2b2b solid 2px
+      }
+
+      a {
+        color: #77B300;
+      }
+
+      a:hover {
+        color: #507800;
+      }
+
+      .dropdown-menu>li>a:hover, .dropdown-menu>li>a:focus {
+        background-color: #77B300;
+      }
+
+      html,body {
+        height:100%;
+      }
+
+      h1 {
+        font-family: 'Maven Pro', sans-serif;
+        font-size:80px;
+      }
+
+      /* Custom container */
+      .container-full {
+        margin: 0 auto;
+        width: 100%;
+        min-height:100%;
+        background-color:#507800;
+        color:#eee;
+        overflow:hidden;
+      }
+
+      .container-full a {
+        text-decoration:none;
+      }
+
+      .v-center {
+        margin-top:7%;
+      }
+
+      .popover-title, .popover-content {
+        color: black;
       }
     </style>
-    <link rel="stylesheet" href="/static/css/bootstrap/bootstrap-responsive.min.css">
-    <link href="//netdna.bootstrapcdn.com/font-awesome/3.1.1/css/font-awesome.css" rel="stylesheet">
+    <!-- End page style sheets -->
 
-    <link rel="stylesheet" href="/static/css/custom_styles.css">
-    <!--[if IE 7]>
-      <link rel="stylesheet" href="/static/css/font-awesome-ie7.min.css">
-    <![endif]-->
-
-    <script src="/static/js/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+    <script src="http://code.jquery.com/jquery.js"></script>
   </head>
   <body>
-    <!--[if lt IE 7]>
-      <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
-    <![endif]-->
 
-    <!-- Begin nav bar template -->
-    <div class="navbar navbar-fixed-top">
-      <div class="navbar-inner">
-        <div class="container">
-          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </a>
-          <a class="brand" href="/"><i class="icon-flag"></i> fla.gr</a>
+    <div class="container-full">
+      <div class="row">
+        <div class="col-lg-12 text-center v-center">
+          <h1>Maintenance</h1>
+          <p class="lead">transientBug.com is getting updated...</p>
+          <br><br><br>
         </div>
-      </div>
-    </div>
-    <!-- End nav bar template -->
+      </div> <!-- /row -->
+      <br><br><br><br><br><br><br><br><br><br><br><br>
+    </div> <!-- /container full -->
 
-    <!-- Begin main body container -->
     <div class="container">
       <div class="row">
-        <div class="span10 offset1">
-          <div class="hero-unit" style="text-align: center;">
-            <h1><i class="icon-cogs"></i> Maintenance</h1>
-            <p>fla.gr will be right back! We're working hard to get some bugs fixed, and some new features pushed out the door. This shouldn't take more than a few hours so stay tuned!</p>
-          </div>
+        <div class="col-md-10 col-md-offset-1">
         </div>
       </div>
 
       <hr>
-      <div class="row">
-        <div class="span10 offset1">
-          <footer>
-            <small>
-              A project by <a href="http://transientBug.com"><i class="icon-beaker"></i> transientBug</a>
-              &copy 2013 <a href="http://github.com/transientBug"><i class="icon-github"></i></a>
-              <a href="http://twitter.com/transientBug"><i class="icon-twitter"></i></a>
-            </small>
-          </footer>
+      <footer id="footer">
+        <div class="row">
+          <div class="col-md-6">
+            transientBug.com by transientBug 2013
+          </div>
+          <div class="col-md-6">
+            <p class="pull-right"><a href="#top">Back to top</a></p>
+          </div>
         </div>
-      </div>
+      </footer>
     </div>
-    <!-- End main body container -->
 
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-    <script>window.jQuery || document.write('<script src="/static/js/jquery-1.9.1.min.js"><\/script>')</script>
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
 
-    <script src="/static/js/bootstrap.min.js"></script>
-
-    <!-- <script>
-      var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
-      (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
-      g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
-      s.parentNode.insertBefore(g,s)}(document,'script'));
-    </script> -->
+    <!-- Begin page scripts -->
+    <!-- End page scripts -->
   </body>
 </html>
