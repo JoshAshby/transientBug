@@ -23,9 +23,21 @@ nav:
       </div>
       <div class="panel-body">
         <div class="container" style="text-align: center;">
-          <img src="/i/{{{picture}}}" alt="{{name}}">
+          <img src="/i/{{{picture}}}" alt="{{name}}" class="col-md-12">
         </div>
         <br>
+
+        {{#req.session.has_admin}}
+        <form role="form" action="/phots/edit/rename/{{{picture}}}" method="POST">
+          <div class="form-group">
+            <label for="name">Rename</label>
+            <input type="text" class="form-control" id="name" name="name" placeholder="New name..." required>
+            <p class="help-block">All spaces in this name will be replaced with underscores.</p>
+          </div>
+          <button type="submit" class="btn btn-success">Submit</button> <button type="button" class="btn btn-danger" id="del_btn">Delete</button>
+        </form>
+        {{/req.session.has_admin}}
+
       </div>
     </div>
   </div>
