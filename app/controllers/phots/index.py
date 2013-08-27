@@ -49,8 +49,10 @@ class index(HTMLObject):
                 filt = [orig_filt]
 
             for img in f:
-                if img.rsplit(".", 1)[1].lower() in filt:
-                    new_f.append(img)
+                bits = img.rsplit(".", 1)
+                if len(bits) >=1:
+                    if bits[1].lower() in filt:
+                        new_f.append(img)
 
             f = new_f
 
