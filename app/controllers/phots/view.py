@@ -36,6 +36,7 @@ class view(HTMLObject):
             raw = self.request.id.rsplit(".", 1)
             name = raw[0].replace("_", " ")
             self.view.data = {"picture": self.request.id, "name": name}
+            self.view.scripts = ["phot_del"]
             return self.view
         else:
             self.view.template = "public/gifs/error"

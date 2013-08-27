@@ -139,12 +139,14 @@ class template(object):
 
     @property
     def stylesheets(self):
-        return self._baseData["stylesheets"]
+        return self._baseData["stylesheets"], self._baseData["styles"]
 
     @stylesheets.setter
     def stylesheets(self, value):
-        assert type(value) == list
-        self._baseData["stylesheets"].extend(value)
+        if type(value) == list:
+            self._baseData["stylesheets"].extend(value)
+        else:
+            self._baseData["styles"] += value
 
     @stylesheets.deleter
     def stylesheets(self):

@@ -1,6 +1,10 @@
 +++
 nav:
   phots: true
+
+scripts: "
+      $('.thumbnail_h6').tooltip();
+  "
 +++
 
 <div class="row">
@@ -14,6 +18,18 @@ nav:
   </div>
   <div class="col-sm-12 col-md-6">
     <form class="form-inline pull-right" role="pagination_options">
+      <div class="form-group">
+        <label class="sr-only" for="filter">Filter</label>
+        <select id="filer" name="filter"class="input-sm">
+          {{#filter}}<option value={{filter}}>{{filter}}</option>{{/filter}}
+          <option value=all>all</option>
+          <option value=non_gif>non_gif</option>
+          <option value=gif>gif</option>
+          <option value=jpg>jpeg</option>
+          <option value=png>png</option>
+          <option value=tiff>tiff</option>
+        </select>
+      </div>
       <div class="form-group">
         <label class="sr-only" for="dir">Sort</label>
         <select id="dir" name="dir"class="input-sm">
@@ -42,23 +58,14 @@ nav:
       <div class="thumbnail">
         <a href="/i/{{{.}}}" class="thumbnail"><img src="/i/{{{.}}}" style="height: 200px" alt="{{.}}"></a>
         <div class="caption">
-          <h6>{{{.}}}</h6>
-          <p>
-            <div class="btn-group">
-              <a href="/i/{{{.}}}" class="btn btn-success btn-sm">Link</a>
-              <div class="btn-group">
-                <button type="button" class="btn btn-success btn-sm dropdown-toggle" data-toggle="dropdown">
-                  <i class="icon-chevron-down"></i>
-                </button>
-                <ul class="dropdown-menu" role="menu">
-                  <li><a href="/phots/view/{{{.}}}">Page</a></li>
-                </ul>
-              </div>
+          <div class="row">
+            <div class="col-md-8">
+              <h6 class="thumbnail_h6" data-toggle="tooltip" title="{{.}}">{{{.}}}</h6>
             </div>
-            {{#req.session.has_admin}}
-              <a href="#" class="btn btn-default btn-sm">Edit</a>
-            {{/req.session.has_admin}}
-          </p>
+            <div class="col-md-4">
+              <a href="/phots/view/{{{.}}}" class="btn btn-success btn-sm pull-right">Page</a>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -69,7 +76,7 @@ nav:
   <ul class="pager">
     <li class="previous {{^page.hasPrev}}disabled{{/page.hasPrev}}">
       {{#page.hasPrev}}
-        <a href="?page={{page.prev}}&perpage={{page.perpage}}&dir={{page.dir}}"><i class="icon-chevron-left"></i> Prev</a>
+        <a href="?page={{page.prev}}&perpage={{page.perpage}}&dir={{page.dir}}&filter={{filter}}"><i class="icon-chevron-left"></i> Prev</a>
       {{/page.hasPrev}}
       {{^page.hasPrev}}
         <a><i class="icon-chevron-left"></i> Prev</a>
@@ -77,10 +84,10 @@ nav:
     </li>
     <li class="next {{^page.hasNext}}disabled{{/page.hasNext}}">
       {{#page.hasNext}}
-        <a href="?page={{page.next}}&perpage={{page.perpage}}&dir={{page.dir}}">Next <i class="icon-chevron-right"></i></a>
+        <a href="?page={{page.next}}&perpage={{page.perpage}}&dir={{page.dir}}&filter={{filter}}">Next <i class="icon-chevron-right"></i></a>
       {{/page.hasNext}}
       {{^page.hasNext}}
-        <a>Next <i class="icon-chevron-left"></i></a>
+        <a>Next <i class="icon-chevron-right"></i></a>
       {{/page.hasNext}}
     </li>
   </ul>

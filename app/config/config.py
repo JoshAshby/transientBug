@@ -26,7 +26,7 @@ from standard import StandardConfig
 context = zmq.Context()
 zmqSock = context.socket(zmq.PUB)
 
-current_path = os.getcwd() + "/config/"
+current_path = os.path.dirname(__file__) + "/"
 
 general = None
 with open(current_path + "config.yaml", "r") as open_config:
@@ -40,8 +40,13 @@ general["redis"] = redis.StrictRedis(general["databases"]["redis"]["URL"], db=ge
 general["zeromq"] = zmqSock.bind(general["sockets"]["URL"]+":"+str(general["sockets"]["port"]))
 
 for directory in general.dirs:
-    if not os.path.exists(directory):
-        os.makedirs(directory)
+    if general.dirs[directory][0] != "/":
+        direct = current_path + general.dirs[directory]
+    else:
+        direct = general.dirs[directory]
+    if not os.path.exists(direct):
+        os.makedirs(direct)
+    general.dirs[directory] = direct
 
 """
 #########################STOP EDITING#####################################

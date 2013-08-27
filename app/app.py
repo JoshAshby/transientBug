@@ -47,7 +47,7 @@ def setupLog():
     logger = logging.getLogger(c.general.logName)
     logger.setLevel(level)
 
-    fh = logging.FileHandler(c.general.files["log"])
+    fh = logging.FileHandler(c.general.dirs["log"] + c.general.files["log"])
     fh.setLevel(level)
     fh.setFormatter(formatter)
     logger.addHandler(fh)

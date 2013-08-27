@@ -140,6 +140,6 @@ class JSONObject(baseHTTPObject):
         self.head = ("200 OK", [("Content-Type", "application/json")])
 
     def postMethod(self, content):
-        response = [{"status": self.head[0], "data": content, "error": self.request.error}]
+        response = [{"status": self.head[0], "data": content}]
 
         return json.dumps(response)

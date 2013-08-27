@@ -31,14 +31,30 @@ class index(HTMLObject):
         """
         perpage = self.request.getParam("perpage", 24)
         page = self.request.getParam("page", 0)
-        sort_dir = self.request.getParam("dir", "desc")
+        sort_dir = self.request.getParam("dir", "desc").lower()
+        orig_filt = self.request.getParam("filter", "all").lower()
 
         f = []
         for top, folders, files in os.walk(c.general.dirs["gifs"]):
             f.extend(files)
             break
 
+        new_f = []
+        if orig_filt != "all":
+            if orig_filt == "jpg":
+                filt = ["jpg", "jpeg"]
+            elif orig_filt == "non_gif":
+                filt = ["jpg", "jpeg", "png", "tiff"]
+            else:
+                filt = [orig_filt]
+
+            for img in f:
+                if img.rsplit(".", 1)[1].lower() in filt:
+                    new_f.append(img)
+
+            f = new_f
+
         f, page_dict = pager(f, perpage, page, sort_dir)
 
-        self.view.data = {"pictures": f, "page": page_dict}
+        self.view.data = {"pictures": f, "page": page_dict, "filter": orig_filt}
         return self.view

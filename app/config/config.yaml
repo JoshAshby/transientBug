@@ -5,10 +5,10 @@ port: 8000
 address: 127.0.0.1
 
 files:
-  pid: pid/leach.pid
-  log: logs/leach.log
-  stderr: logs/error.log
-  stdout: logs/out.log
+  pid: leach.pid
+  log: leach.log
+  stderr: error.log
+  stdout: out.log
 
 dirs:
   pid: pid/

@@ -14,19 +14,17 @@ import os
 import config.config as c
 
 from seshat.route import autoRoute
-from seshat.baseObject import HTMLObject
+from seshat.baseObject import JSONObject
 from seshat.objectMods import login, admin
 
 
 @admin()
 @login()
 @autoRoute()
-class delete(HTMLObject):
+class delete(JSONObject):
     """
     allows for the renaming of an image
     """
-    _title = "rename phot"
-    _defaultTmpl = "public/gifs/error"
     def POST(self):
         current_path = ''.join([c.general.dirs["gifs"], self.request.id])
 
@@ -39,14 +37,9 @@ class delete(HTMLObject):
             try:
                 os.remove(current_path)
 
-                self.head = ("303 SEE OTHER",
-                    [("location", "/phots")])
-
+                return {"success": True}
             except Exception as e:
-                self.view.data = {"error": "That image could not be renamed: %s" % e.msg}
-                return self.view
+                return {"success": False, "error": str(e)}
 
         else:
-            self.view.template = "public/gifs/error"
-            self.view.data = {"error": "That image could not be found. Sorry :/"}
-            return self.view
+            return {"success": False, "error": "That image couldn't be found. :/"}

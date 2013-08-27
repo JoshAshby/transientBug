@@ -34,7 +34,7 @@ nav:
             <input type="text" class="form-control" id="name" name="name" placeholder="New name..." required>
             <p class="help-block">All spaces in this name will be replaced with underscores.</p>
           </div>
-          <button type="submit" class="btn btn-success">Submit</button> <button type="button" class="btn btn-danger" id="del_btn">Delete</button>
+          <button type="submit" class="btn btn-success">Submit</button> <button type="button" class="btn btn-danger" id="del_btn" data-img={{{picture}}}>Delete</button>
         </form>
         {{/req.session.has_admin}}
 
