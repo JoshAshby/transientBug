@@ -50,7 +50,7 @@ class index(HTMLObject):
 
             for img in f:
                 bits = img.rsplit(".", 1)
-                if len(bits) >=1:
+                if len(bits) > 1:
                     if bits[1].lower() in filt:
                         new_f.append(img)
 
