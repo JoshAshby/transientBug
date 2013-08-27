@@ -46,23 +46,22 @@ class requestItem(object):
         self.rawParams = ""
         members = {}
 
-        # GET Params
-        for item in self._env["QUERY_STRING"].split("&"):
+        def split_members(item):
             if item:
                 self.rawParams += item
                 parts = item.split("&")
                 for part in parts:
                     query = part.split("=")
-                    members.update({re.sub("\+", " ", query[0]): urllib.unquote(re.sub("\+", " ", query[1]))})
+                    if len(query) > 1:
+                        members.update({re.sub("\+", " ", query[0]): urllib.unquote(re.sub("\+", " ", query[1]))})
+
+        # GET Params
+        for item in self._env["QUERY_STRING"].split("&"):
+            split_members(item)
 
         # POST Params
         for item in self._env["wsgi.input"]:
-            if item:
-                self.rawParams += item
-                parts = item.split("&")
-                for part in parts:
-                    query = part.split("=")
-                    members.update({re.sub("\+", " ", query[0]): urllib.unquote(re.sub("\+", " ", query[1]))})
+            split_members(item)
 
         self.params = members
 
