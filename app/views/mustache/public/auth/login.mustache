@@ -37,8 +37,8 @@ styles: "@import url(http://fonts.googleapis.com/css?family=Maven+Pro:700);
       <div class="row">
         <div class="col-lg-12 text-center v-center">
           <h1>Hello There</h1>
-          <p class="lead">transientBug.com requires you to be logged in...</p>
-          <br><br><br>
+          <p class="lead">transientBug.com requires you to be logged in... <a href="#about">What is transientBug?</a></p>
+          <br><br>
           {{^banError}}
           <form class="col-md-4 col-md-offset-4" action="/login" method="POST">
             <input type="text" class="form-control input-lg" placeholder="Username..." name="username" id="username" required autofocus data-content="The username you provided could not be found, are you sure it's correct?" data-title="Oh no!" value="{{username}}"><br>
@@ -53,13 +53,46 @@ styles: "@import url(http://fonts.googleapis.com/css?family=Maven+Pro:700);
           {{/banError}}
         </div>
       </div> <!-- /row -->
-      <br><br><br><br><br><br><br><br><br><br><br><br>
+      <br><br><br><br>
     </div> <!-- /container full -->
 
     <div class="container">
       <div class="row">
-        <div class="col-md-10 col-md-offset-1">
-          {{{body}}}
+        <div class="col-md-10 col-md-offset-1" id="about">
+          <h1>What is transientBug?</h1>
+          <p>First and for most, transientBug is an experiment and sandbox for publishing my own web app, however the site itself is mostly a private, login only site. The one exception is the image collection, consisting of various gifs, memes, and other images from around the web. You can view that <a href="/phots">collection here.</a></p>
+          <hr>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-10 col-md-offset-1" id="about">
+          <h1>Technical information<br><small>What makes transientBug run</small></h1>
+          <p>All code for transientBug can be found online at <a href="https://github.com/JoshAshby/transientBug">Github</a> and is licensed under Creative Commons Attribution-NonCommercial-ShareAlike 3.0.</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-12 col-md-4">
+          <h3>Python</h3>
+          <ul>
+            <li>Seshat, a web framework by me, built on top of <a href="http://www.gevent.org/">Gevent</a></li>
+            <li><a href="https://pypi.python.org/pypi/RethinkORM/">My RethinkORM module</a></li>
+            <li>An unpublished Redis ORM module</li>
+          </ul>
+        </div>
+        <div class="col-sm-12 col-md-4">
+          <h3>Databases</h3>
+          <ul>
+            <li><a href="http://www.rethinkdb.com/">RethinkDB</a></li>
+            <li><a href="http://redis.io/">Redis</a></li>
+          </ul>
+        </div>
+        <div class="col-sm-12 col-md-4">
+          <h3>Front end</h3>
+          <ul>
+            <li><a href="http://getbootstrap.com/">Twitter Bootstrap v3</a></li>
+            <li><a href="http://bootswatch.com/cyborg/">Cyborg Theme from bootswatch with some additional custom css</a></li>
+            <li><a href="http://fontawesome.io/">Fontawesome for the icons</a></li>
+          </ul>
         </div>
       </div>
 
@@ -67,7 +100,8 @@ styles: "@import url(http://fonts.googleapis.com/css?family=Maven+Pro:700);
       <footer id="footer">
         <div class="row">
           <div class="col-md-6">
-            transientBug.com by transientBug 2013
+            transientBug.com by <a href="https://github.com/JoshAshby">transientBug 2013</a>
+            <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>.
           </div>
           <div class="col-md-6">
             <p class="pull-right"><a href="#top">Back to top</a></p>
