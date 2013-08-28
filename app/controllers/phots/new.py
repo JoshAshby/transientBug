@@ -57,7 +57,6 @@ class new(HTMLObject):
             return self.view
 
         if r.status_code == 200:
-            print r.headers
             with open(path, 'wb') as f:
                 for chunk in r.iter_content():
                     f.write(chunk)

@@ -39,14 +39,12 @@ class baseHTTPObject(object):
 
             if self.__login__ and not self.request.session.userID:
                 self.request.session.pushAlert("You need to be logged in to view this page.", level="error")
-                print "login please"
                 self._redirect("/login")
                 return "", self.head
 
             if self._groups and (not self.request.session.has_perm("root") \
                or not len(set(self._groups).union(self.request.session.groups)) >= 1):
                     self.request.session.pushAlert("You are not authorized to perfom this action.", "error")
-                    print "not authorized please"
                     self._redirect("/")
                     return "", self.head
 
