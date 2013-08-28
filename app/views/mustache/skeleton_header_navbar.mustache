@@ -88,9 +88,9 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse navbar-ex1-collapse">
               <ul class="nav navbar-nav">
-                <li {{#nav.phots}}class="active"{{/nav.phots}}><a href="/phots"><i class="icon-picture"></i></a></li>
+                <li {{#nav.phots}}class="active"{{/nav.phots}}><a href="/phots"><i class="icon-picture"></i> Phots</a></li>
                 {{#req.session.userID}}
-                  <li {{#nav.screenshots}}class="active"{{/nav.screenshots}}><a href="/screenshots"><i class="icon-screenshot"></i></a></li>
+                  <li {{#nav.screenshots}}class="active"{{/nav.screenshots}}><a href="/screenshots"><i class="icon-screenshot"></i> Scrns</a></li>
                 {{/req.session.userID}}
               </ul>
               {{#req.session.userID}}
@@ -124,7 +124,7 @@
       </div>
 
       <div class="row">
-        <div class="col-md-10 col-md-offset-1 text-center">
+        <div class="col-md-10 col-md-offset-1">
           <h1>{{{header}}}</h1>
         </div>
       </div> <!-- /row -->

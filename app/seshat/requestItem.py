@@ -28,6 +28,19 @@ import models.redis.session.sessionModel as sm
 import models.redis.bucket.bucketModel as bm
 
 
+def split_members(item):
+    members = {}
+    raw = []
+    if item:
+        raw.append(item)
+        parts = item.split("&")
+        for part in parts:
+            query = part.split("=")
+            if len(query) > 1:
+                members.update({re.sub("\+", " ", query[0]): urllib.unquote(re.sub("\+", " ", query[1]))})
+    return members, raw
+
+
 class requestItem(object):
     def __init__(self, env):
         self._env = env
@@ -38,32 +51,29 @@ class requestItem(object):
 
         self.method = self._env["REQUEST_METHOD"]
         self.url = env["PATH_INFO"]
-        self.remote = env["REMOTE_ADDR"] if env.has_key("REMOTE_ADDR") else (env["HTTP_HOST"] if env.has_key("HTTP_HOST") else "localhost")
+        self.remote = env["HOST"] if "HOST" in env else "Unknown IP"
+        #self.remote = env["REMOTE_ADDR"] if env.has_key("REMOTE_ADDR") else (env["HOST"] if env.has_key("HOST") else "localhost")
 
         self.id = None
 
     def buildParams(self):
-        self.rawParams = ""
-        members = {}
-
-        def split_members(item):
-            if item:
-                self.rawParams += item
-                parts = item.split("&")
-                for part in parts:
-                    query = part.split("=")
-                    if len(query) > 1:
-                        members.update({re.sub("\+", " ", query[0]): urllib.unquote(re.sub("\+", " ", query[1]))})
+        all_mem = {}
+        all_raw = []
 
         # GET Params
         for item in self._env["QUERY_STRING"].split("&"):
-            split_members(item)
+            members, raw = split_members(item)
+            all_mem.update(members)
+            all_raw.extend(raw)
 
         # POST Params
         for item in self._env["wsgi.input"]:
-            split_members(item)
+            members, raw = split_members(item)
+            all_mem.update(members)
+            all_raw.extend(raw)
 
-        self.params = members
+        self.params = all_mem
+        self.rawParams = all_raw
 
     def buildCookie(self):
         cookie = Cookie.SimpleCookie()
@@ -91,13 +101,16 @@ class requestItem(object):
         header.append(("X-Seshat-Says", "Ello!"))
         return header
 
-    def getParam(self, param, default=""):
+    def getParam(self, param, default="", cast=str):
         try:
             p = self.params[param]
-            if p == "True" or p == "true":
-                p = True
-            elif p == "False" or p == "false":
-                p = False
+            if cast and cast != str:
+                p = cast(p)
+            else:
+                if p == "True" or p == "true":
+                    p = True
+                elif p == "False" or p == "false":
+                    p = False
             return p
         except:
             return default
