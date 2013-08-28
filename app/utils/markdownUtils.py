@@ -22,8 +22,8 @@ cleanAttr["img"] = ["src", "width", "height"]
 cleanAttr["i"] = ["class"]
 
 
-def markClean(markdown):
-    mark = md.markdown(markdown)
+def markClean(markdown, markdown_extras=[]):
+    mark = md.markdown(markdown, markdown_extras)
     cleanedMark = bl.clean(mark, tags=cleanTags, attributes=cleanAttr)
 
     return cleanedMark

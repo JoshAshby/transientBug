@@ -21,7 +21,7 @@ from seshat.objectMods import login
 from utils.paginate import pager
 
 
-@login()
+@login(["root"])
 @autoRoute()
 class index(HTMLObject):
     """

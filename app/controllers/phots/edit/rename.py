@@ -15,11 +15,10 @@ import config.config as c
 
 from seshat.route import autoRoute
 from seshat.baseObject import HTMLObject
-from seshat.objectMods import login, admin
+from seshat.objectMods import login
 
 
-@admin()
-@login()
+@login(["phots"])
 @autoRoute()
 class rename(HTMLObject):
     """

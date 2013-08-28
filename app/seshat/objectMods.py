@@ -15,16 +15,9 @@ joshuaashby@joshashby.com
 """
 
 
-def admin(level=50):
-        def wrapper(HTTPObject):
-            HTTPObject.__level__ = level
-            HTTPObject.__admin__ = True
-            return HTTPObject
-        return wrapper
-
-
-def login(allowBan=False):
+def login(groups=[], allowBan=False):
     def wrapper(HTTPObject):
         HTTPObject.__login__ = True
+        HTTPObject._groups = groups
         return HTTPObject
     return wrapper

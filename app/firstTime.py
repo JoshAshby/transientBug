@@ -57,7 +57,8 @@ def userSetup():
             print "Adding new user `%s`"%user["username"]
             print "\tpassword `%s`"%user["password"]
             print "\tlevel `100` - god"
-            newUser.level = 100
+            print "\tgroups" + str(user["groups"])
+            newUser.groups = user["groups"]
             newUser.save()
         except userError:
             print "`%s` is already in the system..." % user["username"]

@@ -88,7 +88,7 @@
               </ul>
               {{#req.session.userID}}
                 <ul class="nav navbar-nav navbar-right" style="margin-right: 15px">
-                  {{#req.session.has_admin}}
+                  {{#req.session.has_perm("root")}}
                     <li {{#nav.home}}class="active"{{/nav.home}} class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Ello, {{req.session.username}} <i class="icon-chevron-down"></i></a>
                       <ul class="dropdown-menu">
@@ -97,7 +97,7 @@
                         <li><a href="/logout"><i class="icon-signout"></i> Logout</a></li>
                       </ul>
                     </li>
-                  {{/req.session.has_admin}}
+                  {{/req.session.has_perm("root")}}
                 </ul>
               {{/req.session.userID}}
               {{^req.session.userID}}

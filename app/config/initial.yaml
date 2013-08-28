@@ -1,9 +1,13 @@
 users:
   - username: bug
     password: josh
+    groups:
+      - admin
+      - root
 
 tables:
   - users
+  - notes
 
 reset_users: true
 

@@ -19,9 +19,8 @@ import traceback
 
 
 class baseHTTPObject(object):
-        __level__ = 0
         __login__ = False
-        __admin__ = False
+        _groups   = []
 
         """
         Base HTTP page response object
@@ -30,66 +29,51 @@ class baseHTTPObject(object):
         """
         def __init__(self, request):
             self.request = request
-            self.finishInit()
+            self.post_init_hook()
 
-        def finishInit(self):
+        def post_init_hook(self):
             pass
 
         def build(self):
-            error = False
             content = ""
 
-            if self.__admin__:
-                if self.request.session.has_admin:
-                    """
-                    Duh, This user is obviously omnicious and has access to every
-                    area in the site.
-                    """
-                    pass
-
-                elif self.request.session.userID:
-                    loc = "/"
-                    self.request.session.pushAlert("You don't have the rights to access this.", level="error")
-                    self.head = ("303 SEE OTHER", [("location", loc)])
-                    error = True
-                else:
-                    loc = "/"
-                    self.request.session.pushAlert("You need to be logged in as an Admin", level="error")
-                    self.head = ("303 SEE OTHER", [("location", loc)])
-                    error = True
-
-            elif self.__login__ and not self.request.session.userID:
+            if self.__login__ and not self.request.session.userID:
                 self.request.session.pushAlert("You need to be logged in to view this page.", level="error")
-                self.head = ("303 SEE OTHER", [("location", "/login")])
-                error = True
+                print "login please"
+                self._redirect("/login")
+                return "", self.head
 
-            if not error:
-                self.noErrorHook()
-                try:
-                    content = getattr(self, self.request.method)() or ""
-                    content = self.postMethod(content)
-                    if content: content = unicode(content)
-                except Exception as e:
-                    content = (e, traceback.format_exc())
-            else:
-                self.errorHook()
+            if self._groups and (not self.request.session.has_perm("root") \
+               or not len(set(self._groups).union(self.request.session.groups)) >= 1):
+                    self.request.session.pushAlert("You are not authorized to perfom this action.", "error")
+                    print "not authorized please"
+                    self._redirect("/")
+                    return "", self.head
+
+            self.pre_content_hook()
+            try:
+                content = getattr(self, self.request.method)() or ""
+                content = self.post_content_hook(content)
+                if content: content = unicode(content)
+            except Exception as e:
+                content = (e, traceback.format_exc())
 
             if self.head[0] != "303 SEE OTHER":
                 del self.request.session.alerts
 
             return content, self.head
 
-        def noErrorHook(self):
+        def pre_content_hook(self):
             pass
 
-        def errorHook(self):
-            pass
-
-        def postMethod(self, content):
+        def post_content_hook(self, content):
             return content
 
         def _404(self):
             self.head = ("404 NOT FOUND", [])
+
+        def _redirect(self, loc):
+            self.head = ("303 SEE OTHER", [("Location", loc)])
 
         def HEAD(self):
             """
@@ -111,7 +95,7 @@ class baseHTTPObject(object):
 
 
 class HTMLObject(baseHTTPObject):
-    def finishInit(self):
+    def post_init_hook(self):
         self.head = ("200 OK", [("Content-Type", "text/html")])
 
         try:
@@ -121,14 +105,14 @@ class HTMLObject(baseHTTPObject):
 
         self.request.title = title
 
-    def noErrorHook(self):
+    def pre_content_hook(self):
         try:
           tmpl = self._defaultTmpl
           self.view = template(tmpl, self.request)
         except:
           self.view = ""
 
-    def postMethod(self, content):
+    def post_content_hook(self, content):
         if type(content) == template:
             return content.render()
         else:
@@ -136,10 +120,10 @@ class HTMLObject(baseHTTPObject):
 
 
 class JSONObject(baseHTTPObject):
-    def finishInit(self):
+    def post_init_hook(self):
         self.head = ("200 OK", [("Content-Type", "application/json")])
 
-    def postMethod(self, content):
+    def post_content_hook(self, content):
         response = [{"status": self.head[0], "data": content}]
 
         return json.dumps(response)

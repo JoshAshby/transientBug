@@ -1,0 +1,6153 @@
+2013-08-28 17:16:08,412 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache//skeleton_empty.mustache
+    OLD MTIME: 0
+    NEW MTIME: Tue Aug 27 10:27:51 2013
+
+2013-08-28 17:16:08,414 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache//skeleton_header_navbar.mustache
+    OLD MTIME: 0
+    NEW MTIME: Wed Aug 28 17:13:00 2013
+
+2013-08-28 17:16:08,416 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache//skeleton_navbar.mustache
+    OLD MTIME: 0
+    NEW MTIME: Wed Aug 28 17:13:18 2013
+
+2013-08-28 17:16:08,419 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/partials/paginate.prt.mustache
+    OLD MTIME: 0
+    NEW MTIME: Thu Aug 22 06:53:29 2013
+
+2013-08-28 17:16:08,423 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/public/screenshots/view.mustache
+    OLD MTIME: 0
+    NEW MTIME: Mon Aug 26 11:20:05 2013
+
+2013-08-28 17:16:08,431 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/public/screenshots/index.mustache
+    OLD MTIME: 0
+    NEW MTIME: Wed Aug 28 16:23:41 2013
+
+2013-08-28 17:16:08,438 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/public/index/index.mustache
+    OLD MTIME: 0
+    NEW MTIME: Tue Aug 27 10:30:49 2013
+
+2013-08-28 17:16:08,451 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/public/gifs/view.mustache
+    OLD MTIME: 0
+    NEW MTIME: Mon Aug 26 21:35:30 2013
+
+2013-08-28 17:16:08,460 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/public/gifs/new.mustache
+    OLD MTIME: 0
+    NEW MTIME: Sun Aug 25 16:31:19 2013
+
+2013-08-28 17:16:08,468 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/public/gifs/error.mustache
+    OLD MTIME: 0
+    NEW MTIME: Mon Aug 26 03:43:30 2013
+
+2013-08-28 17:16:08,476 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/public/gifs/index.mustache
+    OLD MTIME: 0
+    NEW MTIME: Mon Aug 26 23:22:32 2013
+
+2013-08-28 17:16:08,487 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/public/auth/login.mustache
+    OLD MTIME: 0
+    NEW MTIME: Tue Aug 27 10:27:41 2013
+
+2013-08-28 17:16:08,517 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/public/about/about.mustache
+    OLD MTIME: 0
+    NEW MTIME: Tue Aug 27 10:26:26 2013
+
+2013-08-28 17:16:08,532 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/error/500.mustache
+    OLD MTIME: 0
+    NEW MTIME: Sat Aug 24 13:00:01 2013
+
+2013-08-28 17:16:08,540 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/error/404.mustache
+    OLD MTIME: 0
+    NEW MTIME: Sun Aug 25 15:42:33 2013
+
+2013-08-28 17:16:08,545 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/admin/index.mustache
+    OLD MTIME: 0
+    NEW MTIME: Mon Aug 26 12:17:13 2013
+
+2013-08-28 17:16:08,551 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/admin/users/edit.mustache
+    OLD MTIME: 0
+    NEW MTIME: Mon Aug 26 12:17:34 2013
+
+2013-08-28 17:16:08,556 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/admin/users/new.mustache
+    OLD MTIME: 0
+    NEW MTIME: Mon Aug 26 12:31:16 2013
+
+2013-08-28 17:16:08,561 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/admin/users/index.mustache
+    OLD MTIME: 0
+    NEW MTIME: Mon Aug 26 12:17:26 2013
+
+2013-08-28 17:16:08,575 - leach.seshat.route - DEBUG
+    Auto generated route table entry for:
+        Object: controllers.logout/logout
+        Pattern: /logout
+2013-08-28 17:16:08,584 - leach.seshat.route - DEBUG
+    Auto generated route table entry for:
+        Object: controllers.login/login
+        Pattern: /login
+2013-08-28 17:16:08,592 - leach.seshat.route - DEBUG
+    Auto generated route table entry for:
+        Object: controllers.about/about
+        Pattern: /about
+2013-08-28 17:16:08,602 - leach.seshat.route - DEBUG
+    Auto generated route table entry for:
+        Object: controllers.index/index
+        Pattern: 
+2013-08-28 17:16:08,616 - leach.seshat.route - DEBUG
+    Auto generated route table entry for:
+        Object: controllers.screenshots.view/view
+        Pattern: /screenshots/view
+2013-08-28 17:16:08,629 - leach.seshat.route - DEBUG
+    Auto generated route table entry for:
+        Object: controllers.screenshots.index/index
+        Pattern: /screenshots
+2013-08-28 17:16:08,639 - leach.seshat.route - DEBUG
+    Auto generated route table entry for:
+        Object: controllers.phots.view/view
+        Pattern: /phots/view
+2013-08-28 17:16:09,113 - leach.seshat.route - DEBUG
+    Auto generated route table entry for:
+        Object: controllers.phots.new/new
+        Pattern: /phots/new
+2013-08-28 17:16:09,117 - leach.seshat.route - DEBUG
+    Auto generated route table entry for:
+        Object: controllers.phots.index/index
+        Pattern: /phots
+2013-08-28 17:16:09,124 - leach.seshat.route - DEBUG
+    Auto generated route table entry for:
+        Object: controllers.phots.edit.delete/delete
+        Pattern: /phots/edit/delete
+2013-08-28 17:16:09,131 - leach.seshat.route - DEBUG
+    Auto generated route table entry for:
+        Object: controllers.phots.edit.rename/rename
+        Pattern: /phots/edit/rename
+2013-08-28 17:16:09,135 - leach.seshat - INFO
+    Now serving py as a fastcgi server at 127.0.0.1:8000
+    Press Ctrl+c if running as non daemon mode, or send a stop signal
+    
+2013-08-28 17:16:47,779 - leach.seshat - CRITICAL
+    Shutdown py operations for a KeyboardInterrupt. Bye!
+2013-08-28 17:16:49,636 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache//skeleton_empty.mustache
+    OLD MTIME: 0
+    NEW MTIME: Tue Aug 27 10:27:51 2013
+
+2013-08-28 17:16:49,638 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache//skeleton_header_navbar.mustache
+    OLD MTIME: 0
+    NEW MTIME: Wed Aug 28 17:13:00 2013
+
+2013-08-28 17:16:49,641 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache//skeleton_navbar.mustache
+    OLD MTIME: 0
+    NEW MTIME: Wed Aug 28 17:13:18 2013
+
+2013-08-28 17:16:49,644 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/partials/paginate.prt.mustache
+    OLD MTIME: 0
+    NEW MTIME: Thu Aug 22 06:53:29 2013
+
+2013-08-28 17:16:49,647 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/public/screenshots/view.mustache
+    OLD MTIME: 0
+    NEW MTIME: Mon Aug 26 11:20:05 2013
+
+2013-08-28 17:16:49,656 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/public/screenshots/index.mustache
+    OLD MTIME: 0
+    NEW MTIME: Wed Aug 28 16:23:41 2013
+
+2013-08-28 17:16:49,662 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/public/index/index.mustache
+    OLD MTIME: 0
+    NEW MTIME: Tue Aug 27 10:30:49 2013
+
+2013-08-28 17:16:49,676 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/public/gifs/view.mustache
+    OLD MTIME: 0
+    NEW MTIME: Mon Aug 26 21:35:30 2013
+
+2013-08-28 17:16:49,684 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/public/gifs/new.mustache
+    OLD MTIME: 0
+    NEW MTIME: Sun Aug 25 16:31:19 2013
+
+2013-08-28 17:16:49,693 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/public/gifs/error.mustache
+    OLD MTIME: 0
+    NEW MTIME: Mon Aug 26 03:43:30 2013
+
+2013-08-28 17:16:49,702 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/public/gifs/index.mustache
+    OLD MTIME: 0
+    NEW MTIME: Mon Aug 26 23:22:32 2013
+
+2013-08-28 17:16:49,713 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/public/auth/login.mustache
+    OLD MTIME: 0
+    NEW MTIME: Tue Aug 27 10:27:41 2013
+
+2013-08-28 17:16:49,739 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/public/about/about.mustache
+    OLD MTIME: 0
+    NEW MTIME: Tue Aug 27 10:26:26 2013
+
+2013-08-28 17:16:49,747 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/error/500.mustache
+    OLD MTIME: 0
+    NEW MTIME: Sat Aug 24 13:00:01 2013
+
+2013-08-28 17:16:49,752 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/error/404.mustache
+    OLD MTIME: 0
+    NEW MTIME: Sun Aug 25 15:42:33 2013
+
+2013-08-28 17:16:49,756 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/admin/index.mustache
+    OLD MTIME: 0
+    NEW MTIME: Mon Aug 26 12:17:13 2013
+
+2013-08-28 17:16:49,758 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/admin/users/edit.mustache
+    OLD MTIME: 0
+    NEW MTIME: Mon Aug 26 12:17:34 2013
+
+2013-08-28 17:16:49,761 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/admin/users/new.mustache
+    OLD MTIME: 0
+    NEW MTIME: Mon Aug 26 12:31:16 2013
+
+2013-08-28 17:16:49,763 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/admin/users/index.mustache
+    OLD MTIME: 0
+    NEW MTIME: Mon Aug 26 12:17:26 2013
+
+2013-08-28 17:16:49,773 - leach.seshat.route - DEBUG
+    Auto generated route table entry for:
+        Object: controllers.logout/logout
+        Pattern: /logout
+2013-08-28 17:16:49,778 - leach.seshat.route - DEBUG
+    Auto generated route table entry for:
+        Object: controllers.login/login
+        Pattern: /login
+2013-08-28 17:16:49,784 - leach.seshat.route - DEBUG
+    Auto generated route table entry for:
+        Object: controllers.about/about
+        Pattern: /about
+2013-08-28 17:16:49,789 - leach.seshat.route - DEBUG
+    Auto generated route table entry for:
+        Object: controllers.index/index
+        Pattern: 
+2013-08-28 17:16:49,795 - leach.seshat.route - DEBUG
+    Auto generated route table entry for:
+        Object: controllers.screenshots.view/view
+        Pattern: /screenshots/view
+2013-08-28 17:16:49,800 - leach.seshat.route - DEBUG
+    Auto generated route table entry for:
+        Object: controllers.screenshots.index/index
+        Pattern: /screenshots
+2013-08-28 17:16:49,807 - leach.seshat.route - DEBUG
+    Auto generated route table entry for:
+        Object: controllers.phots.view/view
+        Pattern: /phots/view
+2013-08-28 17:16:50,261 - leach.seshat.route - DEBUG
+    Auto generated route table entry for:
+        Object: controllers.phots.new/new
+        Pattern: /phots/new
+2013-08-28 17:16:50,265 - leach.seshat.route - DEBUG
+    Auto generated route table entry for:
+        Object: controllers.phots.index/index
+        Pattern: /phots
+2013-08-28 17:16:50,270 - leach.seshat.route - DEBUG
+    Auto generated route table entry for:
+        Object: controllers.phots.edit.delete/delete
+        Pattern: /phots/edit/delete
+2013-08-28 17:16:50,275 - leach.seshat.route - DEBUG
+    Auto generated route table entry for:
+        Object: controllers.phots.edit.rename/rename
+        Pattern: /phots/edit/rename
+2013-08-28 17:16:50,279 - leach.seshat - INFO
+    Now serving py as a fastcgi server at 127.0.0.1:8000
+    Press Ctrl+c if running as non daemon mode, or send a stop signal
+    
+2013-08-28 17:16:51,306 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /
+    PARAMS: []
+    Object: controllers.index/index
+    IP: Unknown IP
+
+2013-08-28 17:16:51,345 - leach.seshat.dispatch - ERROR
+    
+-------500 INTERNAL SERVER ERROR --------
+    Method: GET
+    URL: /
+    IP: Unknown IP
+    ERROR: (AttributeError("'requestItem' object has no attribute 'user_groups'",), 'Traceback (most recent call last):\n  File "/home/josh/repos/transientbug/app/seshat/dispatch.py", line 73, in dispatch\n    content, replyData = dataThread.get()\n  File "/home/josh/repos/flagr/virt/normal/lib/python2.7/site-packages/gevent/greenlet.py", line 308, in get\n    raise self._exception\nAttributeError: \'requestItem\' object has no attribute \'user_groups\'\n')
+    
+2013-08-28 17:17:39,817 - leach.seshat - CRITICAL
+    Shutdown py operations for a KeyboardInterrupt. Bye!
+2013-08-28 17:17:41,711 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache//skeleton_empty.mustache
+    OLD MTIME: 0
+    NEW MTIME: Tue Aug 27 10:27:51 2013
+
+2013-08-28 17:17:41,713 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache//skeleton_header_navbar.mustache
+    OLD MTIME: 0
+    NEW MTIME: Wed Aug 28 17:13:00 2013
+
+2013-08-28 17:17:41,715 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache//skeleton_navbar.mustache
+    OLD MTIME: 0
+    NEW MTIME: Wed Aug 28 17:13:18 2013
+
+2013-08-28 17:17:41,718 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/partials/paginate.prt.mustache
+    OLD MTIME: 0
+    NEW MTIME: Thu Aug 22 06:53:29 2013
+
+2013-08-28 17:17:41,721 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/public/screenshots/view.mustache
+    OLD MTIME: 0
+    NEW MTIME: Mon Aug 26 11:20:05 2013
+
+2013-08-28 17:17:41,728 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/public/screenshots/index.mustache
+    OLD MTIME: 0
+    NEW MTIME: Wed Aug 28 16:23:41 2013
+
+2013-08-28 17:17:41,736 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/public/index/index.mustache
+    OLD MTIME: 0
+    NEW MTIME: Tue Aug 27 10:30:49 2013
+
+2013-08-28 17:17:41,746 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/public/gifs/view.mustache
+    OLD MTIME: 0
+    NEW MTIME: Mon Aug 26 21:35:30 2013
+
+2013-08-28 17:17:41,758 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/public/gifs/new.mustache
+    OLD MTIME: 0
+    NEW MTIME: Sun Aug 25 16:31:19 2013
+
+2013-08-28 17:17:41,766 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/public/gifs/error.mustache
+    OLD MTIME: 0
+    NEW MTIME: Mon Aug 26 03:43:30 2013
+
+2013-08-28 17:17:41,774 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/public/gifs/index.mustache
+    OLD MTIME: 0
+    NEW MTIME: Mon Aug 26 23:22:32 2013
+
+2013-08-28 17:17:41,786 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/public/auth/login.mustache
+    OLD MTIME: 0
+    NEW MTIME: Tue Aug 27 10:27:41 2013
+
+2013-08-28 17:17:41,811 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/public/about/about.mustache
+    OLD MTIME: 0
+    NEW MTIME: Tue Aug 27 10:26:26 2013
+
+2013-08-28 17:17:41,818 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/error/500.mustache
+    OLD MTIME: 0
+    NEW MTIME: Sat Aug 24 13:00:01 2013
+
+2013-08-28 17:17:41,823 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/error/404.mustache
+    OLD MTIME: 0
+    NEW MTIME: Sun Aug 25 15:42:33 2013
+
+2013-08-28 17:17:41,828 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/admin/index.mustache
+    OLD MTIME: 0
+    NEW MTIME: Mon Aug 26 12:17:13 2013
+
+2013-08-28 17:17:41,839 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/admin/users/edit.mustache
+    OLD MTIME: 0
+    NEW MTIME: Mon Aug 26 12:17:34 2013
+
+2013-08-28 17:17:41,845 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/admin/users/new.mustache
+    OLD MTIME: 0
+    NEW MTIME: Mon Aug 26 12:31:16 2013
+
+2013-08-28 17:17:41,846 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/admin/users/index.mustache
+    OLD MTIME: 0
+    NEW MTIME: Mon Aug 26 12:17:26 2013
+
+2013-08-28 17:17:41,861 - leach.seshat.route - DEBUG
+    Auto generated route table entry for:
+        Object: controllers.logout/logout
+        Pattern: /logout
+2013-08-28 17:17:41,870 - leach.seshat.route - DEBUG
+    Auto generated route table entry for:
+        Object: controllers.login/login
+        Pattern: /login
+2013-08-28 17:17:41,879 - leach.seshat.route - DEBUG
+    Auto generated route table entry for:
+        Object: controllers.about/about
+        Pattern: /about
+2013-08-28 17:17:41,886 - leach.seshat.route - DEBUG
+    Auto generated route table entry for:
+        Object: controllers.index/index
+        Pattern: 
+2013-08-28 17:17:41,896 - leach.seshat.route - DEBUG
+    Auto generated route table entry for:
+        Object: controllers.screenshots.view/view
+        Pattern: /screenshots/view
+2013-08-28 17:17:41,904 - leach.seshat.route - DEBUG
+    Auto generated route table entry for:
+        Object: controllers.screenshots.index/index
+        Pattern: /screenshots
+2013-08-28 17:17:41,919 - leach.seshat.route - DEBUG
+    Auto generated route table entry for:
+        Object: controllers.phots.view/view
+        Pattern: /phots/view
+2013-08-28 17:17:42,365 - leach.seshat.route - DEBUG
+    Auto generated route table entry for:
+        Object: controllers.phots.new/new
+        Pattern: /phots/new
+2013-08-28 17:17:42,369 - leach.seshat.route - DEBUG
+    Auto generated route table entry for:
+        Object: controllers.phots.index/index
+        Pattern: /phots
+2013-08-28 17:17:42,375 - leach.seshat.route - DEBUG
+    Auto generated route table entry for:
+        Object: controllers.phots.edit.delete/delete
+        Pattern: /phots/edit/delete
+2013-08-28 17:17:42,380 - leach.seshat.route - DEBUG
+    Auto generated route table entry for:
+        Object: controllers.phots.edit.rename/rename
+        Pattern: /phots/edit/rename
+2013-08-28 17:17:42,383 - leach.seshat - INFO
+    Now serving py as a fastcgi server at 127.0.0.1:8000
+    Press Ctrl+c if running as non daemon mode, or send a stop signal
+    
+2013-08-28 17:17:43,716 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /
+    PARAMS: []
+    Object: controllers.index/index
+    IP: Unknown IP
+
+2013-08-28 17:17:43,719 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /
+    Status: 303 SEE OTHER
+
+2013-08-28 17:17:43,754 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /
+    PARAMS: []
+    Object: controllers.index/index
+    IP: Unknown IP
+
+2013-08-28 17:17:43,758 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /
+    Status: 303 SEE OTHER
+
+2013-08-28 17:17:43,796 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /
+    PARAMS: []
+    Object: controllers.index/index
+    IP: Unknown IP
+
+2013-08-28 17:17:43,806 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /
+    Status: 303 SEE OTHER
+
+2013-08-28 17:17:43,850 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /
+    PARAMS: []
+    Object: controllers.index/index
+    IP: Unknown IP
+
+2013-08-28 17:17:43,854 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /
+    Status: 303 SEE OTHER
+
+2013-08-28 17:17:43,904 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /
+    PARAMS: []
+    Object: controllers.index/index
+    IP: Unknown IP
+
+2013-08-28 17:17:43,912 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /
+    Status: 303 SEE OTHER
+
+2013-08-28 17:17:43,966 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /
+    PARAMS: []
+    Object: controllers.index/index
+    IP: Unknown IP
+
+2013-08-28 17:17:43,973 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /
+    Status: 303 SEE OTHER
+
+2013-08-28 17:17:44,017 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /
+    PARAMS: []
+    Object: controllers.index/index
+    IP: Unknown IP
+
+2013-08-28 17:17:44,026 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /
+    Status: 303 SEE OTHER
+
+2013-08-28 17:17:44,070 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /
+    PARAMS: []
+    Object: controllers.index/index
+    IP: Unknown IP
+
+2013-08-28 17:17:44,074 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /
+    Status: 303 SEE OTHER
+
+2013-08-28 17:17:44,111 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /
+    PARAMS: []
+    Object: controllers.index/index
+    IP: Unknown IP
+
+2013-08-28 17:17:44,115 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /
+    Status: 303 SEE OTHER
+
+2013-08-28 17:17:44,146 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /
+    PARAMS: []
+    Object: controllers.index/index
+    IP: Unknown IP
+
+2013-08-28 17:17:44,152 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /
+    Status: 303 SEE OTHER
+
+2013-08-28 17:17:44,181 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /
+    PARAMS: []
+    Object: controllers.index/index
+    IP: Unknown IP
+
+2013-08-28 17:17:44,189 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /
+    Status: 303 SEE OTHER
+
+2013-08-28 17:17:44,233 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /
+    PARAMS: []
+    Object: controllers.index/index
+    IP: Unknown IP
+
+2013-08-28 17:17:44,238 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /
+    Status: 303 SEE OTHER
+
+2013-08-28 17:17:44,277 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /
+    PARAMS: []
+    Object: controllers.index/index
+    IP: Unknown IP
+
+2013-08-28 17:17:44,284 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /
+    Status: 303 SEE OTHER
+
+2013-08-28 17:17:44,324 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /
+    PARAMS: []
+    Object: controllers.index/index
+    IP: Unknown IP
+
+2013-08-28 17:17:44,328 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /
+    Status: 303 SEE OTHER
+
+2013-08-28 17:17:44,360 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /
+    PARAMS: []
+    Object: controllers.index/index
+    IP: Unknown IP
+
+2013-08-28 17:17:44,368 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /
+    Status: 303 SEE OTHER
+
+2013-08-28 17:17:44,404 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /
+    PARAMS: []
+    Object: controllers.index/index
+    IP: Unknown IP
+
+2013-08-28 17:17:44,415 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /
+    Status: 303 SEE OTHER
+
+2013-08-28 17:17:44,464 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /
+    PARAMS: []
+    Object: controllers.index/index
+    IP: Unknown IP
+
+2013-08-28 17:17:44,468 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /
+    Status: 303 SEE OTHER
+
+2013-08-28 17:17:44,508 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /
+    PARAMS: []
+    Object: controllers.index/index
+    IP: Unknown IP
+
+2013-08-28 17:17:44,517 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /
+    Status: 303 SEE OTHER
+
+2013-08-28 17:17:44,555 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /
+    PARAMS: []
+    Object: controllers.index/index
+    IP: Unknown IP
+
+2013-08-28 17:17:44,561 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /
+    Status: 303 SEE OTHER
+
+2013-08-28 17:17:44,605 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /
+    PARAMS: []
+    Object: controllers.index/index
+    IP: Unknown IP
+
+2013-08-28 17:17:44,613 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /
+    Status: 303 SEE OTHER
+
+2013-08-28 17:17:44,665 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /
+    PARAMS: []
+    Object: controllers.index/index
+    IP: Unknown IP
+
+2013-08-28 17:17:44,670 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /
+    Status: 303 SEE OTHER
+
+2013-08-28 17:17:56,656 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /login
+    PARAMS: []
+    Object: controllers.login/login
+    IP: Unknown IP
+
+2013-08-28 17:17:56,666 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /login
+    Status: 303 SEE OTHER
+
+2013-08-28 17:17:56,714 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /
+    PARAMS: []
+    Object: controllers.index/index
+    IP: Unknown IP
+
+2013-08-28 17:17:56,720 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /
+    Status: 303 SEE OTHER
+
+2013-08-28 17:17:56,761 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /
+    PARAMS: []
+    Object: controllers.index/index
+    IP: Unknown IP
+
+2013-08-28 17:17:56,769 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /
+    Status: 303 SEE OTHER
+
+2013-08-28 17:17:56,803 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /
+    PARAMS: []
+    Object: controllers.index/index
+    IP: Unknown IP
+
+2013-08-28 17:17:56,808 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /
+    Status: 303 SEE OTHER
+
+2013-08-28 17:17:56,846 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /
+    PARAMS: []
+    Object: controllers.index/index
+    IP: Unknown IP
+
+2013-08-28 17:17:56,851 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /
+    Status: 303 SEE OTHER
+
+2013-08-28 17:17:56,889 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /
+    PARAMS: []
+    Object: controllers.index/index
+    IP: Unknown IP
+
+2013-08-28 17:17:56,895 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /
+    Status: 303 SEE OTHER
+
+2013-08-28 17:17:56,933 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /
+    PARAMS: []
+    Object: controllers.index/index
+    IP: Unknown IP
+
+2013-08-28 17:17:56,939 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /
+    Status: 303 SEE OTHER
+
+2013-08-28 17:17:56,972 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /
+    PARAMS: []
+    Object: controllers.index/index
+    IP: Unknown IP
+
+2013-08-28 17:17:56,978 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /
+    Status: 303 SEE OTHER
+
+2013-08-28 17:17:57,016 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /
+    PARAMS: []
+    Object: controllers.index/index
+    IP: Unknown IP
+
+2013-08-28 17:17:57,023 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /
+    Status: 303 SEE OTHER
+
+2013-08-28 17:17:57,062 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /
+    PARAMS: []
+    Object: controllers.index/index
+    IP: Unknown IP
+
+2013-08-28 17:17:57,070 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /
+    Status: 303 SEE OTHER
+
+2013-08-28 17:17:57,114 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /
+    PARAMS: []
+    Object: controllers.index/index
+    IP: Unknown IP
+
+2013-08-28 17:17:57,122 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /
+    Status: 303 SEE OTHER
+
+2013-08-28 17:17:57,158 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /
+    PARAMS: []
+    Object: controllers.index/index
+    IP: Unknown IP
+
+2013-08-28 17:17:57,165 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /
+    Status: 303 SEE OTHER
+
+2013-08-28 17:17:57,203 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /
+    PARAMS: []
+    Object: controllers.index/index
+    IP: Unknown IP
+
+2013-08-28 17:17:57,209 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /
+    Status: 303 SEE OTHER
+
+2013-08-28 17:17:57,248 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /
+    PARAMS: []
+    Object: controllers.index/index
+    IP: Unknown IP
+
+2013-08-28 17:17:57,254 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /
+    Status: 303 SEE OTHER
+
+2013-08-28 17:17:57,294 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /
+    PARAMS: []
+    Object: controllers.index/index
+    IP: Unknown IP
+
+2013-08-28 17:17:57,300 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /
+    Status: 303 SEE OTHER
+
+2013-08-28 17:17:57,337 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /
+    PARAMS: []
+    Object: controllers.index/index
+    IP: Unknown IP
+
+2013-08-28 17:17:57,346 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /
+    Status: 303 SEE OTHER
+
+2013-08-28 17:17:57,382 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /
+    PARAMS: []
+    Object: controllers.index/index
+    IP: Unknown IP
+
+2013-08-28 17:17:57,393 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /
+    Status: 303 SEE OTHER
+
+2013-08-28 17:17:57,429 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /
+    PARAMS: []
+    Object: controllers.index/index
+    IP: Unknown IP
+
+2013-08-28 17:17:57,435 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /
+    Status: 303 SEE OTHER
+
+2013-08-28 17:17:57,470 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /
+    PARAMS: []
+    Object: controllers.index/index
+    IP: Unknown IP
+
+2013-08-28 17:17:57,476 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /
+    Status: 303 SEE OTHER
+
+2013-08-28 17:17:57,517 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /
+    PARAMS: []
+    Object: controllers.index/index
+    IP: Unknown IP
+
+2013-08-28 17:17:57,522 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /
+    Status: 303 SEE OTHER
+
+2013-08-28 17:17:57,550 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /
+    PARAMS: []
+    Object: controllers.index/index
+    IP: Unknown IP
+
+2013-08-28 17:17:57,557 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /
+    Status: 303 SEE OTHER
+
+2013-08-28 17:19:52,007 - leach.seshat - CRITICAL
+    Shutdown py operations for a KeyboardInterrupt. Bye!
+2013-08-28 17:19:53,842 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache//skeleton_empty.mustache
+    OLD MTIME: 0
+    NEW MTIME: Tue Aug 27 10:27:51 2013
+
+2013-08-28 17:19:53,844 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache//skeleton_header_navbar.mustache
+    OLD MTIME: 0
+    NEW MTIME: Wed Aug 28 17:13:00 2013
+
+2013-08-28 17:19:53,847 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache//skeleton_navbar.mustache
+    OLD MTIME: 0
+    NEW MTIME: Wed Aug 28 17:13:18 2013
+
+2013-08-28 17:19:53,849 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/partials/paginate.prt.mustache
+    OLD MTIME: 0
+    NEW MTIME: Thu Aug 22 06:53:29 2013
+
+2013-08-28 17:19:53,853 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/public/screenshots/view.mustache
+    OLD MTIME: 0
+    NEW MTIME: Mon Aug 26 11:20:05 2013
+
+2013-08-28 17:19:53,861 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/public/screenshots/index.mustache
+    OLD MTIME: 0
+    NEW MTIME: Wed Aug 28 16:23:41 2013
+
+2013-08-28 17:19:53,869 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/public/index/index.mustache
+    OLD MTIME: 0
+    NEW MTIME: Tue Aug 27 10:30:49 2013
+
+2013-08-28 17:19:53,889 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/public/gifs/view.mustache
+    OLD MTIME: 0
+    NEW MTIME: Mon Aug 26 21:35:30 2013
+
+2013-08-28 17:19:53,897 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/public/gifs/new.mustache
+    OLD MTIME: 0
+    NEW MTIME: Sun Aug 25 16:31:19 2013
+
+2013-08-28 17:19:53,906 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/public/gifs/error.mustache
+    OLD MTIME: 0
+    NEW MTIME: Mon Aug 26 03:43:30 2013
+
+2013-08-28 17:19:53,917 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/public/gifs/index.mustache
+    OLD MTIME: 0
+    NEW MTIME: Mon Aug 26 23:22:32 2013
+
+2013-08-28 17:19:53,926 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/public/auth/login.mustache
+    OLD MTIME: 0
+    NEW MTIME: Tue Aug 27 10:27:41 2013
+
+2013-08-28 17:19:53,947 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/public/about/about.mustache
+    OLD MTIME: 0
+    NEW MTIME: Tue Aug 27 10:26:26 2013
+
+2013-08-28 17:19:53,952 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/error/500.mustache
+    OLD MTIME: 0
+    NEW MTIME: Sat Aug 24 13:00:01 2013
+
+2013-08-28 17:19:53,954 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/error/404.mustache
+    OLD MTIME: 0
+    NEW MTIME: Sun Aug 25 15:42:33 2013
+
+2013-08-28 17:19:53,957 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/admin/index.mustache
+    OLD MTIME: 0
+    NEW MTIME: Mon Aug 26 12:17:13 2013
+
+2013-08-28 17:19:53,959 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/admin/users/edit.mustache
+    OLD MTIME: 0
+    NEW MTIME: Mon Aug 26 12:17:34 2013
+
+2013-08-28 17:19:53,961 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/admin/users/new.mustache
+    OLD MTIME: 0
+    NEW MTIME: Mon Aug 26 12:31:16 2013
+
+2013-08-28 17:19:53,962 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/admin/users/index.mustache
+    OLD MTIME: 0
+    NEW MTIME: Mon Aug 26 12:17:26 2013
+
+2013-08-28 17:19:53,971 - leach.seshat.route - DEBUG
+    Auto generated route table entry for:
+        Object: controllers.logout/logout
+        Pattern: /logout
+2013-08-28 17:19:53,979 - leach.seshat.route - DEBUG
+    Auto generated route table entry for:
+        Object: controllers.login/login
+        Pattern: /login
+2013-08-28 17:19:53,984 - leach.seshat.route - DEBUG
+    Auto generated route table entry for:
+        Object: controllers.about/about
+        Pattern: /about
+2013-08-28 17:19:53,988 - leach.seshat.route - DEBUG
+    Auto generated route table entry for:
+        Object: controllers.index/index
+        Pattern: 
+2013-08-28 17:19:53,993 - leach.seshat.route - DEBUG
+    Auto generated route table entry for:
+        Object: controllers.screenshots.view/view
+        Pattern: /screenshots/view
+2013-08-28 17:19:53,998 - leach.seshat.route - DEBUG
+    Auto generated route table entry for:
+        Object: controllers.screenshots.index/index
+        Pattern: /screenshots
+2013-08-28 17:19:54,007 - leach.seshat.route - DEBUG
+    Auto generated route table entry for:
+        Object: controllers.phots.view/view
+        Pattern: /phots/view
+2013-08-28 17:19:54,454 - leach.seshat.route - DEBUG
+    Auto generated route table entry for:
+        Object: controllers.phots.new/new
+        Pattern: /phots/new
+2013-08-28 17:19:54,458 - leach.seshat.route - DEBUG
+    Auto generated route table entry for:
+        Object: controllers.phots.index/index
+        Pattern: /phots
+2013-08-28 17:19:54,464 - leach.seshat.route - DEBUG
+    Auto generated route table entry for:
+        Object: controllers.phots.edit.delete/delete
+        Pattern: /phots/edit/delete
+2013-08-28 17:19:54,469 - leach.seshat.route - DEBUG
+    Auto generated route table entry for:
+        Object: controllers.phots.edit.rename/rename
+        Pattern: /phots/edit/rename
+2013-08-28 17:19:54,473 - leach.seshat - INFO
+    Now serving py as a fastcgi server at 127.0.0.1:8000
+    Press Ctrl+c if running as non daemon mode, or send a stop signal
+    
+2013-08-28 17:19:55,390 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /
+    PARAMS: []
+    Object: controllers.index/index
+    IP: Unknown IP
+
+2013-08-28 17:19:55,397 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /
+    Status: 303 SEE OTHER
+
+2013-08-28 17:19:55,432 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /
+    PARAMS: []
+    Object: controllers.index/index
+    IP: Unknown IP
+
+2013-08-28 17:19:55,439 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /
+    Status: 303 SEE OTHER
+
+2013-08-28 17:19:55,470 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /
+    PARAMS: []
+    Object: controllers.index/index
+    IP: Unknown IP
+
+2013-08-28 17:19:55,477 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /
+    Status: 303 SEE OTHER
+
+2013-08-28 17:19:55,511 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /
+    PARAMS: []
+    Object: controllers.index/index
+    IP: Unknown IP
+
+2013-08-28 17:19:55,518 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /
+    Status: 303 SEE OTHER
+
+2013-08-28 17:19:55,552 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /
+    PARAMS: []
+    Object: controllers.index/index
+    IP: Unknown IP
+
+2013-08-28 17:19:55,559 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /
+    Status: 303 SEE OTHER
+
+2013-08-28 17:19:55,591 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /
+    PARAMS: []
+    Object: controllers.index/index
+    IP: Unknown IP
+
+2013-08-28 17:19:55,598 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /
+    Status: 303 SEE OTHER
+
+2013-08-28 17:19:55,633 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /
+    PARAMS: []
+    Object: controllers.index/index
+    IP: Unknown IP
+
+2013-08-28 17:19:55,641 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /
+    Status: 303 SEE OTHER
+
+2013-08-28 17:19:55,674 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /
+    PARAMS: []
+    Object: controllers.index/index
+    IP: Unknown IP
+
+2013-08-28 17:19:55,683 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /
+    Status: 303 SEE OTHER
+
+2013-08-28 17:19:55,716 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /
+    PARAMS: []
+    Object: controllers.index/index
+    IP: Unknown IP
+
+2013-08-28 17:19:55,723 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /
+    Status: 303 SEE OTHER
+
+2013-08-28 17:19:55,759 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /
+    PARAMS: []
+    Object: controllers.index/index
+    IP: Unknown IP
+
+2013-08-28 17:19:55,766 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /
+    Status: 303 SEE OTHER
+
+2013-08-28 17:19:55,818 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /
+    PARAMS: []
+    Object: controllers.index/index
+    IP: Unknown IP
+
+2013-08-28 17:19:55,831 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /
+    Status: 303 SEE OTHER
+
+2013-08-28 17:19:55,871 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /
+    PARAMS: []
+    Object: controllers.index/index
+    IP: Unknown IP
+
+2013-08-28 17:19:55,880 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /
+    Status: 303 SEE OTHER
+
+2013-08-28 17:19:55,921 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /
+    PARAMS: []
+    Object: controllers.index/index
+    IP: Unknown IP
+
+2013-08-28 17:19:55,928 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /
+    Status: 303 SEE OTHER
+
+2013-08-28 17:19:55,970 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /
+    PARAMS: []
+    Object: controllers.index/index
+    IP: Unknown IP
+
+2013-08-28 17:19:55,978 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /
+    Status: 303 SEE OTHER
+
+2013-08-28 17:19:56,017 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /
+    PARAMS: []
+    Object: controllers.index/index
+    IP: Unknown IP
+
+2013-08-28 17:19:56,027 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /
+    Status: 303 SEE OTHER
+
+2013-08-28 17:19:56,060 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /
+    PARAMS: []
+    Object: controllers.index/index
+    IP: Unknown IP
+
+2013-08-28 17:19:56,068 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /
+    Status: 303 SEE OTHER
+
+2013-08-28 17:19:56,102 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /
+    PARAMS: []
+    Object: controllers.index/index
+    IP: Unknown IP
+
+2013-08-28 17:19:56,108 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /
+    Status: 303 SEE OTHER
+
+2013-08-28 17:19:56,146 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /
+    PARAMS: []
+    Object: controllers.index/index
+    IP: Unknown IP
+
+2013-08-28 17:19:56,153 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /
+    Status: 303 SEE OTHER
+
+2013-08-28 17:19:56,197 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /
+    PARAMS: []
+    Object: controllers.index/index
+    IP: Unknown IP
+
+2013-08-28 17:19:56,207 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /
+    Status: 303 SEE OTHER
+
+2013-08-28 17:19:56,246 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /
+    PARAMS: []
+    Object: controllers.index/index
+    IP: Unknown IP
+
+2013-08-28 17:19:56,254 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /
+    Status: 303 SEE OTHER
+
+2013-08-28 17:19:56,299 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /
+    PARAMS: []
+    Object: controllers.index/index
+    IP: Unknown IP
+
+2013-08-28 17:19:56,313 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /
+    Status: 303 SEE OTHER
+
+2013-08-28 17:20:53,670 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /logout
+    PARAMS: []
+    Object: controllers.logout/logout
+    IP: Unknown IP
+
+2013-08-28 17:20:53,683 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /logout
+    Status: 303 SEE OTHER
+
+2013-08-28 17:20:53,741 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /
+    PARAMS: []
+    Object: controllers.index/index
+    IP: Unknown IP
+
+2013-08-28 17:20:53,756 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /
+    Status: 303 SEE OTHER
+
+2013-08-28 17:20:53,803 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /
+    PARAMS: []
+    Object: controllers.index/index
+    IP: Unknown IP
+
+2013-08-28 17:20:53,821 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /
+    Status: 303 SEE OTHER
+
+2013-08-28 17:20:53,860 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /
+    PARAMS: []
+    Object: controllers.index/index
+    IP: Unknown IP
+
+2013-08-28 17:20:53,873 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /
+    Status: 303 SEE OTHER
+
+2013-08-28 17:20:53,910 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /
+    PARAMS: []
+    Object: controllers.index/index
+    IP: Unknown IP
+
+2013-08-28 17:20:53,923 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /
+    Status: 303 SEE OTHER
+
+2013-08-28 17:20:53,958 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /
+    PARAMS: []
+    Object: controllers.index/index
+    IP: Unknown IP
+
+2013-08-28 17:20:53,973 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /
+    Status: 303 SEE OTHER
+
+2013-08-28 17:20:54,025 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /
+    PARAMS: []
+    Object: controllers.index/index
+    IP: Unknown IP
+
+2013-08-28 17:20:54,036 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /
+    Status: 303 SEE OTHER
+
+2013-08-28 17:20:54,075 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /
+    PARAMS: []
+    Object: controllers.index/index
+    IP: Unknown IP
+
+2013-08-28 17:20:54,083 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /
+    Status: 303 SEE OTHER
+
+2013-08-28 17:20:54,118 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /
+    PARAMS: []
+    Object: controllers.index/index
+    IP: Unknown IP
+
+2013-08-28 17:20:54,132 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /
+    Status: 303 SEE OTHER
+
+2013-08-28 17:20:54,164 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /
+    PARAMS: []
+    Object: controllers.index/index
+    IP: Unknown IP
+
+2013-08-28 17:20:54,173 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /
+    Status: 303 SEE OTHER
+
+2013-08-28 17:20:54,211 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /
+    PARAMS: []
+    Object: controllers.index/index
+    IP: Unknown IP
+
+2013-08-28 17:20:54,219 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /
+    Status: 303 SEE OTHER
+
+2013-08-28 17:20:54,252 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /
+    PARAMS: []
+    Object: controllers.index/index
+    IP: Unknown IP
+
+2013-08-28 17:20:54,263 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /
+    Status: 303 SEE OTHER
+
+2013-08-28 17:20:54,301 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /
+    PARAMS: []
+    Object: controllers.index/index
+    IP: Unknown IP
+
+2013-08-28 17:20:54,316 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /
+    Status: 303 SEE OTHER
+
+2013-08-28 17:20:54,351 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /
+    PARAMS: []
+    Object: controllers.index/index
+    IP: Unknown IP
+
+2013-08-28 17:20:54,362 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /
+    Status: 303 SEE OTHER
+
+2013-08-28 17:20:54,399 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /
+    PARAMS: []
+    Object: controllers.index/index
+    IP: Unknown IP
+
+2013-08-28 17:20:54,408 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /
+    Status: 303 SEE OTHER
+
+2013-08-28 17:20:54,443 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /
+    PARAMS: []
+    Object: controllers.index/index
+    IP: Unknown IP
+
+2013-08-28 17:20:54,453 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /
+    Status: 303 SEE OTHER
+
+2013-08-28 17:20:54,488 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /
+    PARAMS: []
+    Object: controllers.index/index
+    IP: Unknown IP
+
+2013-08-28 17:20:54,497 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /
+    Status: 303 SEE OTHER
+
+2013-08-28 17:20:54,534 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /
+    PARAMS: []
+    Object: controllers.index/index
+    IP: Unknown IP
+
+2013-08-28 17:20:54,543 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /
+    Status: 303 SEE OTHER
+
+2013-08-28 17:20:54,580 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /
+    PARAMS: []
+    Object: controllers.index/index
+    IP: Unknown IP
+
+2013-08-28 17:20:54,589 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /
+    Status: 303 SEE OTHER
+
+2013-08-28 17:20:54,627 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /
+    PARAMS: []
+    Object: controllers.index/index
+    IP: Unknown IP
+
+2013-08-28 17:20:54,638 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /
+    Status: 303 SEE OTHER
+
+2013-08-28 17:20:54,667 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /
+    PARAMS: []
+    Object: controllers.index/index
+    IP: Unknown IP
+
+2013-08-28 17:20:54,673 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /
+    Status: 303 SEE OTHER
+
+2013-08-28 17:20:58,359 - leach.seshat - CRITICAL
+    Shutdown py operations for a KeyboardInterrupt. Bye!
+2013-08-28 17:21:01,309 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache//skeleton_empty.mustache
+    OLD MTIME: 0
+    NEW MTIME: Tue Aug 27 10:27:51 2013
+
+2013-08-28 17:21:01,311 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache//skeleton_header_navbar.mustache
+    OLD MTIME: 0
+    NEW MTIME: Wed Aug 28 17:13:00 2013
+
+2013-08-28 17:21:01,313 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache//skeleton_navbar.mustache
+    OLD MTIME: 0
+    NEW MTIME: Wed Aug 28 17:13:18 2013
+
+2013-08-28 17:21:01,316 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/partials/paginate.prt.mustache
+    OLD MTIME: 0
+    NEW MTIME: Thu Aug 22 06:53:29 2013
+
+2013-08-28 17:21:01,319 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/public/screenshots/view.mustache
+    OLD MTIME: 0
+    NEW MTIME: Mon Aug 26 11:20:05 2013
+
+2013-08-28 17:21:01,326 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/public/screenshots/index.mustache
+    OLD MTIME: 0
+    NEW MTIME: Wed Aug 28 16:23:41 2013
+
+2013-08-28 17:21:01,334 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/public/index/index.mustache
+    OLD MTIME: 0
+    NEW MTIME: Tue Aug 27 10:30:49 2013
+
+2013-08-28 17:21:01,346 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/public/gifs/view.mustache
+    OLD MTIME: 0
+    NEW MTIME: Mon Aug 26 21:35:30 2013
+
+2013-08-28 17:21:01,356 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/public/gifs/new.mustache
+    OLD MTIME: 0
+    NEW MTIME: Sun Aug 25 16:31:19 2013
+
+2013-08-28 17:21:01,364 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/public/gifs/error.mustache
+    OLD MTIME: 0
+    NEW MTIME: Mon Aug 26 03:43:30 2013
+
+2013-08-28 17:21:01,372 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/public/gifs/index.mustache
+    OLD MTIME: 0
+    NEW MTIME: Mon Aug 26 23:22:32 2013
+
+2013-08-28 17:21:01,384 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/public/auth/login.mustache
+    OLD MTIME: 0
+    NEW MTIME: Tue Aug 27 10:27:41 2013
+
+2013-08-28 17:21:01,409 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/public/about/about.mustache
+    OLD MTIME: 0
+    NEW MTIME: Tue Aug 27 10:26:26 2013
+
+2013-08-28 17:21:01,416 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/error/500.mustache
+    OLD MTIME: 0
+    NEW MTIME: Sat Aug 24 13:00:01 2013
+
+2013-08-28 17:21:01,418 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/error/404.mustache
+    OLD MTIME: 0
+    NEW MTIME: Sun Aug 25 15:42:33 2013
+
+2013-08-28 17:21:01,420 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/admin/index.mustache
+    OLD MTIME: 0
+    NEW MTIME: Mon Aug 26 12:17:13 2013
+
+2013-08-28 17:21:01,422 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/admin/users/edit.mustache
+    OLD MTIME: 0
+    NEW MTIME: Mon Aug 26 12:17:34 2013
+
+2013-08-28 17:21:01,424 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/admin/users/new.mustache
+    OLD MTIME: 0
+    NEW MTIME: Mon Aug 26 12:31:16 2013
+
+2013-08-28 17:21:01,426 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/admin/users/index.mustache
+    OLD MTIME: 0
+    NEW MTIME: Mon Aug 26 12:17:26 2013
+
+2013-08-28 17:21:01,436 - leach.seshat.route - DEBUG
+    Auto generated route table entry for:
+        Object: controllers.logout/logout
+        Pattern: /logout
+2013-08-28 17:21:01,442 - leach.seshat.route - DEBUG
+    Auto generated route table entry for:
+        Object: controllers.login/login
+        Pattern: /login
+2013-08-28 17:21:01,448 - leach.seshat.route - DEBUG
+    Auto generated route table entry for:
+        Object: controllers.about/about
+        Pattern: /about
+2013-08-28 17:21:01,455 - leach.seshat.route - DEBUG
+    Auto generated route table entry for:
+        Object: controllers.index/index
+        Pattern: 
+2013-08-28 17:21:01,464 - leach.seshat.route - DEBUG
+    Auto generated route table entry for:
+        Object: controllers.screenshots.view/view
+        Pattern: /screenshots/view
+2013-08-28 17:21:01,469 - leach.seshat.route - DEBUG
+    Auto generated route table entry for:
+        Object: controllers.screenshots.index/index
+        Pattern: /screenshots
+2013-08-28 17:21:01,476 - leach.seshat.route - DEBUG
+    Auto generated route table entry for:
+        Object: controllers.phots.view/view
+        Pattern: /phots/view
+2013-08-28 17:21:01,908 - leach.seshat.route - DEBUG
+    Auto generated route table entry for:
+        Object: controllers.phots.new/new
+        Pattern: /phots/new
+2013-08-28 17:21:01,912 - leach.seshat.route - DEBUG
+    Auto generated route table entry for:
+        Object: controllers.phots.index/index
+        Pattern: /phots
+2013-08-28 17:21:01,918 - leach.seshat.route - DEBUG
+    Auto generated route table entry for:
+        Object: controllers.phots.edit.delete/delete
+        Pattern: /phots/edit/delete
+2013-08-28 17:21:01,923 - leach.seshat.route - DEBUG
+    Auto generated route table entry for:
+        Object: controllers.phots.edit.rename/rename
+        Pattern: /phots/edit/rename
+2013-08-28 17:21:01,927 - leach.seshat - INFO
+    Now serving py as a fastcgi server at 127.0.0.1:8000
+    Press Ctrl+c if running as non daemon mode, or send a stop signal
+    
+2013-08-28 17:21:03,034 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /
+    PARAMS: []
+    Object: controllers.index/index
+    IP: Unknown IP
+
+2013-08-28 17:21:03,042 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /
+    Status: 303 SEE OTHER
+
+2013-08-28 17:21:03,077 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /
+    PARAMS: []
+    Object: controllers.index/index
+    IP: Unknown IP
+
+2013-08-28 17:21:03,095 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /
+    Status: 303 SEE OTHER
+
+2013-08-28 17:21:03,145 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /
+    PARAMS: []
+    Object: controllers.index/index
+    IP: Unknown IP
+
+2013-08-28 17:21:03,171 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /
+    Status: 303 SEE OTHER
+
+2013-08-28 17:21:03,230 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /
+    PARAMS: []
+    Object: controllers.index/index
+    IP: Unknown IP
+
+2013-08-28 17:21:03,251 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /
+    Status: 303 SEE OTHER
+
+2013-08-28 17:21:03,304 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /
+    PARAMS: []
+    Object: controllers.index/index
+    IP: Unknown IP
+
+2013-08-28 17:21:03,323 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /
+    Status: 303 SEE OTHER
+
+2013-08-28 17:21:03,373 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /
+    PARAMS: []
+    Object: controllers.index/index
+    IP: Unknown IP
+
+2013-08-28 17:21:03,395 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /
+    Status: 303 SEE OTHER
+
+2013-08-28 17:21:03,440 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /
+    PARAMS: []
+    Object: controllers.index/index
+    IP: Unknown IP
+
+2013-08-28 17:21:03,453 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /
+    Status: 303 SEE OTHER
+
+2013-08-28 17:21:03,495 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /
+    PARAMS: []
+    Object: controllers.index/index
+    IP: Unknown IP
+
+2013-08-28 17:21:03,513 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /
+    Status: 303 SEE OTHER
+
+2013-08-28 17:21:03,556 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /
+    PARAMS: []
+    Object: controllers.index/index
+    IP: Unknown IP
+
+2013-08-28 17:21:03,566 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /
+    Status: 303 SEE OTHER
+
+2013-08-28 17:21:03,609 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /
+    PARAMS: []
+    Object: controllers.index/index
+    IP: Unknown IP
+
+2013-08-28 17:21:03,623 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /
+    Status: 303 SEE OTHER
+
+2013-08-28 17:21:03,658 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /
+    PARAMS: []
+    Object: controllers.index/index
+    IP: Unknown IP
+
+2013-08-28 17:21:03,674 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /
+    Status: 303 SEE OTHER
+
+2013-08-28 17:21:03,714 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /
+    PARAMS: []
+    Object: controllers.index/index
+    IP: Unknown IP
+
+2013-08-28 17:21:03,729 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /
+    Status: 303 SEE OTHER
+
+2013-08-28 17:21:03,773 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /
+    PARAMS: []
+    Object: controllers.index/index
+    IP: Unknown IP
+
+2013-08-28 17:21:03,789 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /
+    Status: 303 SEE OTHER
+
+2013-08-28 17:21:03,827 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /
+    PARAMS: []
+    Object: controllers.index/index
+    IP: Unknown IP
+
+2013-08-28 17:21:03,839 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /
+    Status: 303 SEE OTHER
+
+2013-08-28 17:21:03,884 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /
+    PARAMS: []
+    Object: controllers.index/index
+    IP: Unknown IP
+
+2013-08-28 17:21:03,905 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /
+    Status: 303 SEE OTHER
+
+2013-08-28 17:21:03,944 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /
+    PARAMS: []
+    Object: controllers.index/index
+    IP: Unknown IP
+
+2013-08-28 17:21:03,953 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /
+    Status: 303 SEE OTHER
+
+2013-08-28 17:21:03,982 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /
+    PARAMS: []
+    Object: controllers.index/index
+    IP: Unknown IP
+
+2013-08-28 17:21:03,991 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /
+    Status: 303 SEE OTHER
+
+2013-08-28 17:21:04,019 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /
+    PARAMS: []
+    Object: controllers.index/index
+    IP: Unknown IP
+
+2013-08-28 17:21:04,027 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /
+    Status: 303 SEE OTHER
+
+2013-08-28 17:21:04,057 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /
+    PARAMS: []
+    Object: controllers.index/index
+    IP: Unknown IP
+
+2013-08-28 17:21:04,065 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /
+    Status: 303 SEE OTHER
+
+2013-08-28 17:21:04,108 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /
+    PARAMS: []
+    Object: controllers.index/index
+    IP: Unknown IP
+
+2013-08-28 17:21:04,118 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /
+    Status: 303 SEE OTHER
+
+2013-08-28 17:21:04,157 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /
+    PARAMS: []
+    Object: controllers.index/index
+    IP: Unknown IP
+
+2013-08-28 17:21:04,173 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /
+    Status: 303 SEE OTHER
+
+2013-08-28 17:21:08,599 - leach.seshat - CRITICAL
+    Shutdown py operations for a KeyboardInterrupt. Bye!
+2013-08-28 17:22:14,431 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache//skeleton_empty.mustache
+    OLD MTIME: 0
+    NEW MTIME: Tue Aug 27 10:27:51 2013
+
+2013-08-28 17:22:14,434 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache//skeleton_header_navbar.mustache
+    OLD MTIME: 0
+    NEW MTIME: Wed Aug 28 17:13:00 2013
+
+2013-08-28 17:22:14,436 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache//skeleton_navbar.mustache
+    OLD MTIME: 0
+    NEW MTIME: Wed Aug 28 17:13:18 2013
+
+2013-08-28 17:22:14,438 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/partials/paginate.prt.mustache
+    OLD MTIME: 0
+    NEW MTIME: Thu Aug 22 06:53:29 2013
+
+2013-08-28 17:22:14,441 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/public/screenshots/view.mustache
+    OLD MTIME: 0
+    NEW MTIME: Mon Aug 26 11:20:05 2013
+
+2013-08-28 17:22:14,449 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/public/screenshots/index.mustache
+    OLD MTIME: 0
+    NEW MTIME: Wed Aug 28 16:23:41 2013
+
+2013-08-28 17:22:14,455 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/public/index/index.mustache
+    OLD MTIME: 0
+    NEW MTIME: Tue Aug 27 10:30:49 2013
+
+2013-08-28 17:22:14,468 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/public/gifs/view.mustache
+    OLD MTIME: 0
+    NEW MTIME: Mon Aug 26 21:35:30 2013
+
+2013-08-28 17:22:14,477 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/public/gifs/new.mustache
+    OLD MTIME: 0
+    NEW MTIME: Sun Aug 25 16:31:19 2013
+
+2013-08-28 17:22:14,486 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/public/gifs/error.mustache
+    OLD MTIME: 0
+    NEW MTIME: Mon Aug 26 03:43:30 2013
+
+2013-08-28 17:22:14,494 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/public/gifs/index.mustache
+    OLD MTIME: 0
+    NEW MTIME: Mon Aug 26 23:22:32 2013
+
+2013-08-28 17:22:14,506 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/public/auth/login.mustache
+    OLD MTIME: 0
+    NEW MTIME: Tue Aug 27 10:27:41 2013
+
+2013-08-28 17:22:14,531 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/public/about/about.mustache
+    OLD MTIME: 0
+    NEW MTIME: Tue Aug 27 10:26:26 2013
+
+2013-08-28 17:22:14,538 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/error/500.mustache
+    OLD MTIME: 0
+    NEW MTIME: Sat Aug 24 13:00:01 2013
+
+2013-08-28 17:22:14,540 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/error/404.mustache
+    OLD MTIME: 0
+    NEW MTIME: Sun Aug 25 15:42:33 2013
+
+2013-08-28 17:22:14,543 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/admin/index.mustache
+    OLD MTIME: 0
+    NEW MTIME: Mon Aug 26 12:17:13 2013
+
+2013-08-28 17:22:14,545 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/admin/users/edit.mustache
+    OLD MTIME: 0
+    NEW MTIME: Mon Aug 26 12:17:34 2013
+
+2013-08-28 17:22:14,547 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/admin/users/new.mustache
+    OLD MTIME: 0
+    NEW MTIME: Mon Aug 26 12:31:16 2013
+
+2013-08-28 17:22:14,549 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/admin/users/index.mustache
+    OLD MTIME: 0
+    NEW MTIME: Mon Aug 26 12:17:26 2013
+
+2013-08-28 17:22:14,559 - leach.seshat.route - DEBUG
+    Auto generated route table entry for:
+        Object: controllers.logout/logout
+        Pattern: /logout
+2013-08-28 17:22:14,565 - leach.seshat.route - DEBUG
+    Auto generated route table entry for:
+        Object: controllers.login/login
+        Pattern: /login
+2013-08-28 17:22:14,573 - leach.seshat.route - DEBUG
+    Auto generated route table entry for:
+        Object: controllers.about/about
+        Pattern: /about
+2013-08-28 17:22:14,580 - leach.seshat.route - DEBUG
+    Auto generated route table entry for:
+        Object: controllers.index/index
+        Pattern: 
+2013-08-28 17:22:14,587 - leach.seshat.route - DEBUG
+    Auto generated route table entry for:
+        Object: controllers.screenshots.view/view
+        Pattern: /screenshots/view
+2013-08-28 17:22:14,592 - leach.seshat.route - DEBUG
+    Auto generated route table entry for:
+        Object: controllers.screenshots.index/index
+        Pattern: /screenshots
+2013-08-28 17:22:14,599 - leach.seshat.route - DEBUG
+    Auto generated route table entry for:
+        Object: controllers.phots.view/view
+        Pattern: /phots/view
+2013-08-28 17:22:15,072 - leach.seshat.route - DEBUG
+    Auto generated route table entry for:
+        Object: controllers.phots.new/new
+        Pattern: /phots/new
+2013-08-28 17:22:15,076 - leach.seshat.route - DEBUG
+    Auto generated route table entry for:
+        Object: controllers.phots.index/index
+        Pattern: /phots
+2013-08-28 17:22:15,083 - leach.seshat.route - DEBUG
+    Auto generated route table entry for:
+        Object: controllers.phots.edit.delete/delete
+        Pattern: /phots/edit/delete
+2013-08-28 17:22:15,088 - leach.seshat.route - DEBUG
+    Auto generated route table entry for:
+        Object: controllers.phots.edit.rename/rename
+        Pattern: /phots/edit/rename
+2013-08-28 17:22:15,091 - leach.seshat - INFO
+    Now serving py as a fastcgi server at 127.0.0.1:8000
+    Press Ctrl+c if running as non daemon mode, or send a stop signal
+    
+2013-08-28 17:22:16,558 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /
+    PARAMS: []
+    Object: controllers.index/index
+    IP: Unknown IP
+
+2013-08-28 17:22:16,564 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /
+    Status: 303 SEE OTHER
+
+2013-08-28 17:22:16,601 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /login
+    PARAMS: []
+    Object: controllers.login/login
+    IP: Unknown IP
+
+2013-08-28 17:22:16,614 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /login
+    Status: 303 SEE OTHER
+
+2013-08-28 17:22:16,683 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /
+    PARAMS: []
+    Object: controllers.index/index
+    IP: Unknown IP
+
+2013-08-28 17:22:16,691 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /
+    Status: 303 SEE OTHER
+
+2013-08-28 17:22:16,739 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /login
+    PARAMS: []
+    Object: controllers.login/login
+    IP: Unknown IP
+
+2013-08-28 17:22:16,750 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /login
+    Status: 303 SEE OTHER
+
+2013-08-28 17:22:16,791 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /
+    PARAMS: []
+    Object: controllers.index/index
+    IP: Unknown IP
+
+2013-08-28 17:22:16,804 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /
+    Status: 303 SEE OTHER
+
+2013-08-28 17:22:16,844 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /login
+    PARAMS: []
+    Object: controllers.login/login
+    IP: Unknown IP
+
+2013-08-28 17:22:16,856 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /login
+    Status: 303 SEE OTHER
+
+2013-08-28 17:22:16,902 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /
+    PARAMS: []
+    Object: controllers.index/index
+    IP: Unknown IP
+
+2013-08-28 17:22:16,919 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /
+    Status: 303 SEE OTHER
+
+2013-08-28 17:22:16,953 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /login
+    PARAMS: []
+    Object: controllers.login/login
+    IP: Unknown IP
+
+2013-08-28 17:22:16,963 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /login
+    Status: 303 SEE OTHER
+
+2013-08-28 17:22:16,993 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /
+    PARAMS: []
+    Object: controllers.index/index
+    IP: Unknown IP
+
+2013-08-28 17:22:17,001 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /
+    Status: 303 SEE OTHER
+
+2013-08-28 17:22:17,034 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /login
+    PARAMS: []
+    Object: controllers.login/login
+    IP: Unknown IP
+
+2013-08-28 17:22:17,043 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /login
+    Status: 303 SEE OTHER
+
+2013-08-28 17:22:17,078 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /
+    PARAMS: []
+    Object: controllers.index/index
+    IP: Unknown IP
+
+2013-08-28 17:22:17,087 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /
+    Status: 303 SEE OTHER
+
+2013-08-28 17:22:17,127 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /login
+    PARAMS: []
+    Object: controllers.login/login
+    IP: Unknown IP
+
+2013-08-28 17:22:17,136 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /login
+    Status: 303 SEE OTHER
+
+2013-08-28 17:22:17,170 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /
+    PARAMS: []
+    Object: controllers.index/index
+    IP: Unknown IP
+
+2013-08-28 17:22:17,181 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /
+    Status: 303 SEE OTHER
+
+2013-08-28 17:22:17,222 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /login
+    PARAMS: []
+    Object: controllers.login/login
+    IP: Unknown IP
+
+2013-08-28 17:22:17,236 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /login
+    Status: 303 SEE OTHER
+
+2013-08-28 17:22:17,277 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /
+    PARAMS: []
+    Object: controllers.index/index
+    IP: Unknown IP
+
+2013-08-28 17:22:17,289 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /
+    Status: 303 SEE OTHER
+
+2013-08-28 17:22:17,325 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /login
+    PARAMS: []
+    Object: controllers.login/login
+    IP: Unknown IP
+
+2013-08-28 17:22:17,334 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /login
+    Status: 303 SEE OTHER
+
+2013-08-28 17:22:17,367 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /
+    PARAMS: []
+    Object: controllers.index/index
+    IP: Unknown IP
+
+2013-08-28 17:22:17,377 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /
+    Status: 303 SEE OTHER
+
+2013-08-28 17:22:17,419 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /login
+    PARAMS: []
+    Object: controllers.login/login
+    IP: Unknown IP
+
+2013-08-28 17:22:17,434 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /login
+    Status: 303 SEE OTHER
+
+2013-08-28 17:22:17,474 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /
+    PARAMS: []
+    Object: controllers.index/index
+    IP: Unknown IP
+
+2013-08-28 17:22:17,490 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /
+    Status: 303 SEE OTHER
+
+2013-08-28 17:22:17,533 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /login
+    PARAMS: []
+    Object: controllers.login/login
+    IP: Unknown IP
+
+2013-08-28 17:22:17,543 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /login
+    Status: 303 SEE OTHER
+
+2013-08-28 17:22:17,580 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /
+    PARAMS: []
+    Object: controllers.index/index
+    IP: Unknown IP
+
+2013-08-28 17:22:17,590 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /
+    Status: 303 SEE OTHER
+
+2013-08-28 17:24:15,194 - leach.seshat - CRITICAL
+    Shutdown py operations for a KeyboardInterrupt. Bye!
+2013-08-28 17:24:17,290 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache//skeleton_empty.mustache
+    OLD MTIME: 0
+    NEW MTIME: Tue Aug 27 10:27:51 2013
+
+2013-08-28 17:24:17,293 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache//skeleton_header_navbar.mustache
+    OLD MTIME: 0
+    NEW MTIME: Wed Aug 28 17:13:00 2013
+
+2013-08-28 17:24:17,295 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache//skeleton_navbar.mustache
+    OLD MTIME: 0
+    NEW MTIME: Wed Aug 28 17:13:18 2013
+
+2013-08-28 17:24:17,297 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/partials/paginate.prt.mustache
+    OLD MTIME: 0
+    NEW MTIME: Thu Aug 22 06:53:29 2013
+
+2013-08-28 17:24:17,300 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/public/screenshots/view.mustache
+    OLD MTIME: 0
+    NEW MTIME: Mon Aug 26 11:20:05 2013
+
+2013-08-28 17:24:17,309 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/public/screenshots/index.mustache
+    OLD MTIME: 0
+    NEW MTIME: Wed Aug 28 16:23:41 2013
+
+2013-08-28 17:24:17,316 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/public/index/index.mustache
+    OLD MTIME: 0
+    NEW MTIME: Tue Aug 27 10:30:49 2013
+
+2013-08-28 17:24:17,330 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/public/gifs/view.mustache
+    OLD MTIME: 0
+    NEW MTIME: Mon Aug 26 21:35:30 2013
+
+2013-08-28 17:24:17,338 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/public/gifs/new.mustache
+    OLD MTIME: 0
+    NEW MTIME: Sun Aug 25 16:31:19 2013
+
+2013-08-28 17:24:17,347 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/public/gifs/error.mustache
+    OLD MTIME: 0
+    NEW MTIME: Mon Aug 26 03:43:30 2013
+
+2013-08-28 17:24:17,355 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/public/gifs/index.mustache
+    OLD MTIME: 0
+    NEW MTIME: Mon Aug 26 23:22:32 2013
+
+2013-08-28 17:24:17,366 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/public/auth/login.mustache
+    OLD MTIME: 0
+    NEW MTIME: Tue Aug 27 10:27:41 2013
+
+2013-08-28 17:24:17,392 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/public/about/about.mustache
+    OLD MTIME: 0
+    NEW MTIME: Tue Aug 27 10:26:26 2013
+
+2013-08-28 17:24:17,399 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/error/500.mustache
+    OLD MTIME: 0
+    NEW MTIME: Sat Aug 24 13:00:01 2013
+
+2013-08-28 17:24:17,401 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/error/404.mustache
+    OLD MTIME: 0
+    NEW MTIME: Sun Aug 25 15:42:33 2013
+
+2013-08-28 17:24:17,403 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/admin/index.mustache
+    OLD MTIME: 0
+    NEW MTIME: Mon Aug 26 12:17:13 2013
+
+2013-08-28 17:24:17,405 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/admin/users/edit.mustache
+    OLD MTIME: 0
+    NEW MTIME: Mon Aug 26 12:17:34 2013
+
+2013-08-28 17:24:17,408 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/admin/users/new.mustache
+    OLD MTIME: 0
+    NEW MTIME: Mon Aug 26 12:31:16 2013
+
+2013-08-28 17:24:17,411 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/admin/users/index.mustache
+    OLD MTIME: 0
+    NEW MTIME: Mon Aug 26 12:17:26 2013
+
+2013-08-28 17:24:17,422 - leach.seshat.route - DEBUG
+    Auto generated route table entry for:
+        Object: controllers.logout/logout
+        Pattern: /logout
+2013-08-28 17:24:17,428 - leach.seshat.route - DEBUG
+    Auto generated route table entry for:
+        Object: controllers.login/login
+        Pattern: /login
+2013-08-28 17:24:17,437 - leach.seshat.route - DEBUG
+    Auto generated route table entry for:
+        Object: controllers.about/about
+        Pattern: /about
+2013-08-28 17:24:17,441 - leach.seshat.route - DEBUG
+    Auto generated route table entry for:
+        Object: controllers.index/index
+        Pattern: 
+2013-08-28 17:24:17,448 - leach.seshat.route - DEBUG
+    Auto generated route table entry for:
+        Object: controllers.screenshots.view/view
+        Pattern: /screenshots/view
+2013-08-28 17:24:17,452 - leach.seshat.route - DEBUG
+    Auto generated route table entry for:
+        Object: controllers.screenshots.index/index
+        Pattern: /screenshots
+2013-08-28 17:24:17,459 - leach.seshat.route - DEBUG
+    Auto generated route table entry for:
+        Object: controllers.phots.view/view
+        Pattern: /phots/view
+2013-08-28 17:24:17,896 - leach.seshat.route - DEBUG
+    Auto generated route table entry for:
+        Object: controllers.phots.new/new
+        Pattern: /phots/new
+2013-08-28 17:24:17,904 - leach.seshat.route - DEBUG
+    Auto generated route table entry for:
+        Object: controllers.phots.index/index
+        Pattern: /phots
+2013-08-28 17:24:17,913 - leach.seshat.route - DEBUG
+    Auto generated route table entry for:
+        Object: controllers.phots.edit.delete/delete
+        Pattern: /phots/edit/delete
+2013-08-28 17:24:17,921 - leach.seshat.route - DEBUG
+    Auto generated route table entry for:
+        Object: controllers.phots.edit.rename/rename
+        Pattern: /phots/edit/rename
+2013-08-28 17:24:17,929 - leach.seshat - INFO
+    Now serving py as a fastcgi server at 127.0.0.1:8000
+    Press Ctrl+c if running as non daemon mode, or send a stop signal
+    
+2013-08-28 17:24:18,904 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /login
+    PARAMS: []
+    Object: controllers.login/login
+    IP: Unknown IP
+
+2013-08-28 17:24:18,917 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /login
+    Status: 303 SEE OTHER
+
+2013-08-28 17:24:18,948 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /
+    PARAMS: []
+    Object: controllers.index/index
+    IP: Unknown IP
+
+2013-08-28 17:24:18,958 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /
+    Status: 303 SEE OTHER
+
+2013-08-28 17:24:18,992 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /login
+    PARAMS: []
+    Object: controllers.login/login
+    IP: Unknown IP
+
+2013-08-28 17:24:19,005 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /login
+    Status: 303 SEE OTHER
+
+2013-08-28 17:24:19,048 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /
+    PARAMS: []
+    Object: controllers.index/index
+    IP: Unknown IP
+
+2013-08-28 17:24:19,061 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /
+    Status: 303 SEE OTHER
+
+2013-08-28 17:24:19,104 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /login
+    PARAMS: []
+    Object: controllers.login/login
+    IP: Unknown IP
+
+2013-08-28 17:24:19,119 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /login
+    Status: 303 SEE OTHER
+
+2013-08-28 17:24:19,156 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /
+    PARAMS: []
+    Object: controllers.index/index
+    IP: Unknown IP
+
+2013-08-28 17:24:19,166 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /
+    Status: 303 SEE OTHER
+
+2013-08-28 17:24:19,217 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /login
+    PARAMS: []
+    Object: controllers.login/login
+    IP: Unknown IP
+
+2013-08-28 17:24:19,230 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /login
+    Status: 303 SEE OTHER
+
+2013-08-28 17:24:19,279 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /
+    PARAMS: []
+    Object: controllers.index/index
+    IP: Unknown IP
+
+2013-08-28 17:24:19,294 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /
+    Status: 303 SEE OTHER
+
+2013-08-28 17:24:19,338 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /login
+    PARAMS: []
+    Object: controllers.login/login
+    IP: Unknown IP
+
+2013-08-28 17:24:19,353 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /login
+    Status: 303 SEE OTHER
+
+2013-08-28 17:24:19,397 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /
+    PARAMS: []
+    Object: controllers.index/index
+    IP: Unknown IP
+
+2013-08-28 17:24:19,409 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /
+    Status: 303 SEE OTHER
+
+2013-08-28 17:24:19,452 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /login
+    PARAMS: []
+    Object: controllers.login/login
+    IP: Unknown IP
+
+2013-08-28 17:24:19,464 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /login
+    Status: 303 SEE OTHER
+
+2013-08-28 17:24:19,497 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /
+    PARAMS: []
+    Object: controllers.index/index
+    IP: Unknown IP
+
+2013-08-28 17:24:19,512 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /
+    Status: 303 SEE OTHER
+
+2013-08-28 17:24:19,546 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /login
+    PARAMS: []
+    Object: controllers.login/login
+    IP: Unknown IP
+
+2013-08-28 17:24:19,557 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /login
+    Status: 303 SEE OTHER
+
+2013-08-28 17:24:19,601 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /
+    PARAMS: []
+    Object: controllers.index/index
+    IP: Unknown IP
+
+2013-08-28 17:24:19,623 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /
+    Status: 303 SEE OTHER
+
+2013-08-28 17:24:19,660 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /login
+    PARAMS: []
+    Object: controllers.login/login
+    IP: Unknown IP
+
+2013-08-28 17:24:19,675 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /login
+    Status: 303 SEE OTHER
+
+2013-08-28 17:24:19,721 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /
+    PARAMS: []
+    Object: controllers.index/index
+    IP: Unknown IP
+
+2013-08-28 17:24:19,731 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /
+    Status: 303 SEE OTHER
+
+2013-08-28 17:24:19,767 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /login
+    PARAMS: []
+    Object: controllers.login/login
+    IP: Unknown IP
+
+2013-08-28 17:24:19,778 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /login
+    Status: 303 SEE OTHER
+
+2013-08-28 17:24:19,822 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /
+    PARAMS: []
+    Object: controllers.index/index
+    IP: Unknown IP
+
+2013-08-28 17:24:19,833 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /
+    Status: 303 SEE OTHER
+
+2013-08-28 17:24:19,874 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /login
+    PARAMS: []
+    Object: controllers.login/login
+    IP: Unknown IP
+
+2013-08-28 17:24:19,890 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /login
+    Status: 303 SEE OTHER
+
+2013-08-28 17:24:19,946 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /
+    PARAMS: []
+    Object: controllers.index/index
+    IP: Unknown IP
+
+2013-08-28 17:24:19,962 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /
+    Status: 303 SEE OTHER
+
+2013-08-28 17:24:20,003 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /login
+    PARAMS: []
+    Object: controllers.login/login
+    IP: Unknown IP
+
+2013-08-28 17:24:20,013 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /login
+    Status: 303 SEE OTHER
+
+2013-08-28 17:24:46,814 - leach.seshat - CRITICAL
+    Shutdown py operations for a KeyboardInterrupt. Bye!
+2013-08-28 17:24:48,772 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache//skeleton_empty.mustache
+    OLD MTIME: 0
+    NEW MTIME: Tue Aug 27 10:27:51 2013
+
+2013-08-28 17:24:48,775 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache//skeleton_header_navbar.mustache
+    OLD MTIME: 0
+    NEW MTIME: Wed Aug 28 17:13:00 2013
+
+2013-08-28 17:24:48,777 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache//skeleton_navbar.mustache
+    OLD MTIME: 0
+    NEW MTIME: Wed Aug 28 17:13:18 2013
+
+2013-08-28 17:24:48,780 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/partials/paginate.prt.mustache
+    OLD MTIME: 0
+    NEW MTIME: Thu Aug 22 06:53:29 2013
+
+2013-08-28 17:24:48,786 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/public/screenshots/view.mustache
+    OLD MTIME: 0
+    NEW MTIME: Mon Aug 26 11:20:05 2013
+
+2013-08-28 17:24:48,799 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/public/screenshots/index.mustache
+    OLD MTIME: 0
+    NEW MTIME: Wed Aug 28 16:23:41 2013
+
+2013-08-28 17:24:48,834 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/public/index/index.mustache
+    OLD MTIME: 0
+    NEW MTIME: Tue Aug 27 10:30:49 2013
+
+2013-08-28 17:24:48,853 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/public/gifs/view.mustache
+    OLD MTIME: 0
+    NEW MTIME: Mon Aug 26 21:35:30 2013
+
+2013-08-28 17:24:48,866 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/public/gifs/new.mustache
+    OLD MTIME: 0
+    NEW MTIME: Sun Aug 25 16:31:19 2013
+
+2013-08-28 17:24:48,890 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/public/gifs/error.mustache
+    OLD MTIME: 0
+    NEW MTIME: Mon Aug 26 03:43:30 2013
+
+2013-08-28 17:24:48,906 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/public/gifs/index.mustache
+    OLD MTIME: 0
+    NEW MTIME: Mon Aug 26 23:22:32 2013
+
+2013-08-28 17:24:48,935 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/public/auth/login.mustache
+    OLD MTIME: 0
+    NEW MTIME: Tue Aug 27 10:27:41 2013
+
+2013-08-28 17:24:48,972 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/public/about/about.mustache
+    OLD MTIME: 0
+    NEW MTIME: Tue Aug 27 10:26:26 2013
+
+2013-08-28 17:24:49,001 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/error/500.mustache
+    OLD MTIME: 0
+    NEW MTIME: Sat Aug 24 13:00:01 2013
+
+2013-08-28 17:24:49,010 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/error/404.mustache
+    OLD MTIME: 0
+    NEW MTIME: Sun Aug 25 15:42:33 2013
+
+2013-08-28 17:24:49,020 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/admin/index.mustache
+    OLD MTIME: 0
+    NEW MTIME: Mon Aug 26 12:17:13 2013
+
+2013-08-28 17:24:49,030 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/admin/users/edit.mustache
+    OLD MTIME: 0
+    NEW MTIME: Mon Aug 26 12:17:34 2013
+
+2013-08-28 17:24:49,040 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/admin/users/new.mustache
+    OLD MTIME: 0
+    NEW MTIME: Mon Aug 26 12:31:16 2013
+
+2013-08-28 17:24:49,054 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/admin/users/index.mustache
+    OLD MTIME: 0
+    NEW MTIME: Mon Aug 26 12:17:26 2013
+
+2013-08-28 17:24:49,078 - leach.seshat.route - DEBUG
+    Auto generated route table entry for:
+        Object: controllers.logout/logout
+        Pattern: /logout
+2013-08-28 17:24:49,097 - leach.seshat.route - DEBUG
+    Auto generated route table entry for:
+        Object: controllers.login/login
+        Pattern: /login
+2013-08-28 17:24:49,111 - leach.seshat.route - DEBUG
+    Auto generated route table entry for:
+        Object: controllers.about/about
+        Pattern: /about
+2013-08-28 17:24:49,132 - leach.seshat.route - DEBUG
+    Auto generated route table entry for:
+        Object: controllers.index/index
+        Pattern: 
+2013-08-28 17:24:49,141 - leach.seshat.route - DEBUG
+    Auto generated route table entry for:
+        Object: controllers.screenshots.view/view
+        Pattern: /screenshots/view
+2013-08-28 17:24:49,163 - leach.seshat.route - DEBUG
+    Auto generated route table entry for:
+        Object: controllers.screenshots.index/index
+        Pattern: /screenshots
+2013-08-28 17:24:49,180 - leach.seshat.route - DEBUG
+    Auto generated route table entry for:
+        Object: controllers.phots.view/view
+        Pattern: /phots/view
+2013-08-28 17:24:50,052 - leach.seshat.route - DEBUG
+    Auto generated route table entry for:
+        Object: controllers.phots.new/new
+        Pattern: /phots/new
+2013-08-28 17:24:50,058 - leach.seshat.route - DEBUG
+    Auto generated route table entry for:
+        Object: controllers.phots.index/index
+        Pattern: /phots
+2013-08-28 17:24:50,069 - leach.seshat.route - DEBUG
+    Auto generated route table entry for:
+        Object: controllers.phots.edit.delete/delete
+        Pattern: /phots/edit/delete
+2013-08-28 17:24:50,080 - leach.seshat.route - DEBUG
+    Auto generated route table entry for:
+        Object: controllers.phots.edit.rename/rename
+        Pattern: /phots/edit/rename
+2013-08-28 17:24:50,088 - leach.seshat - INFO
+    Now serving py as a fastcgi server at 127.0.0.1:8000
+    Press Ctrl+c if running as non daemon mode, or send a stop signal
+    
+2013-08-28 17:24:50,623 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /
+    PARAMS: []
+    Object: controllers.index/index
+    IP: Unknown IP
+
+2013-08-28 17:24:50,636 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /
+    Status: 303 SEE OTHER
+
+2013-08-28 17:24:50,668 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /login
+    PARAMS: []
+    Object: controllers.login/login
+    IP: Unknown IP
+
+2013-08-28 17:24:50,680 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /login
+    Status: 303 SEE OTHER
+
+2013-08-28 17:24:50,714 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /
+    PARAMS: []
+    Object: controllers.index/index
+    IP: Unknown IP
+
+2013-08-28 17:24:50,734 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /
+    Status: 303 SEE OTHER
+
+2013-08-28 17:24:50,769 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /login
+    PARAMS: []
+    Object: controllers.login/login
+    IP: Unknown IP
+
+2013-08-28 17:24:50,780 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /login
+    Status: 303 SEE OTHER
+
+2013-08-28 17:24:50,829 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /
+    PARAMS: []
+    Object: controllers.index/index
+    IP: Unknown IP
+
+2013-08-28 17:24:50,845 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /
+    Status: 303 SEE OTHER
+
+2013-08-28 17:24:50,885 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /login
+    PARAMS: []
+    Object: controllers.login/login
+    IP: Unknown IP
+
+2013-08-28 17:24:50,901 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /login
+    Status: 303 SEE OTHER
+
+2013-08-28 17:24:50,944 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /
+    PARAMS: []
+    Object: controllers.index/index
+    IP: Unknown IP
+
+2013-08-28 17:24:50,957 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /
+    Status: 303 SEE OTHER
+
+2013-08-28 17:24:50,986 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /login
+    PARAMS: []
+    Object: controllers.login/login
+    IP: Unknown IP
+
+2013-08-28 17:24:50,997 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /login
+    Status: 303 SEE OTHER
+
+2013-08-28 17:24:51,032 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /
+    PARAMS: []
+    Object: controllers.index/index
+    IP: Unknown IP
+
+2013-08-28 17:24:51,044 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /
+    Status: 303 SEE OTHER
+
+2013-08-28 17:24:51,078 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /login
+    PARAMS: []
+    Object: controllers.login/login
+    IP: Unknown IP
+
+2013-08-28 17:24:51,092 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /login
+    Status: 303 SEE OTHER
+
+2013-08-28 17:24:51,131 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /
+    PARAMS: []
+    Object: controllers.index/index
+    IP: Unknown IP
+
+2013-08-28 17:24:51,147 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /
+    Status: 303 SEE OTHER
+
+2013-08-28 17:24:51,181 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /login
+    PARAMS: []
+    Object: controllers.login/login
+    IP: Unknown IP
+
+2013-08-28 17:24:51,195 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /login
+    Status: 303 SEE OTHER
+
+2013-08-28 17:24:51,247 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /
+    PARAMS: []
+    Object: controllers.index/index
+    IP: Unknown IP
+
+2013-08-28 17:24:51,261 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /
+    Status: 303 SEE OTHER
+
+2013-08-28 17:24:51,308 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /login
+    PARAMS: []
+    Object: controllers.login/login
+    IP: Unknown IP
+
+2013-08-28 17:24:51,330 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /login
+    Status: 303 SEE OTHER
+
+2013-08-28 17:24:51,375 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /
+    PARAMS: []
+    Object: controllers.index/index
+    IP: Unknown IP
+
+2013-08-28 17:24:51,393 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /
+    Status: 303 SEE OTHER
+
+2013-08-28 17:24:51,441 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /login
+    PARAMS: []
+    Object: controllers.login/login
+    IP: Unknown IP
+
+2013-08-28 17:24:51,455 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /login
+    Status: 303 SEE OTHER
+
+2013-08-28 17:24:51,490 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /
+    PARAMS: []
+    Object: controllers.index/index
+    IP: Unknown IP
+
+2013-08-28 17:24:51,498 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /
+    Status: 303 SEE OTHER
+
+2013-08-28 17:24:51,540 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /login
+    PARAMS: []
+    Object: controllers.login/login
+    IP: Unknown IP
+
+2013-08-28 17:24:51,552 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /login
+    Status: 303 SEE OTHER
+
+2013-08-28 17:24:51,591 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /
+    PARAMS: []
+    Object: controllers.index/index
+    IP: Unknown IP
+
+2013-08-28 17:24:51,599 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /
+    Status: 303 SEE OTHER
+
+2013-08-28 17:24:51,632 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /login
+    PARAMS: []
+    Object: controllers.login/login
+    IP: Unknown IP
+
+2013-08-28 17:24:51,642 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /login
+    Status: 303 SEE OTHER
+
+2013-08-28 17:24:51,679 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /
+    PARAMS: []
+    Object: controllers.index/index
+    IP: Unknown IP
+
+2013-08-28 17:24:51,690 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /
+    Status: 303 SEE OTHER
+
+2013-08-28 17:25:31,505 - leach.seshat - CRITICAL
+    Shutdown py operations for a KeyboardInterrupt. Bye!
+2013-08-28 17:25:33,399 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache//skeleton_empty.mustache
+    OLD MTIME: 0
+    NEW MTIME: Tue Aug 27 10:27:51 2013
+
+2013-08-28 17:25:33,402 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache//skeleton_header_navbar.mustache
+    OLD MTIME: 0
+    NEW MTIME: Wed Aug 28 17:13:00 2013
+
+2013-08-28 17:25:33,404 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache//skeleton_navbar.mustache
+    OLD MTIME: 0
+    NEW MTIME: Wed Aug 28 17:13:18 2013
+
+2013-08-28 17:25:33,406 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/partials/paginate.prt.mustache
+    OLD MTIME: 0
+    NEW MTIME: Thu Aug 22 06:53:29 2013
+
+2013-08-28 17:25:33,409 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/public/screenshots/view.mustache
+    OLD MTIME: 0
+    NEW MTIME: Mon Aug 26 11:20:05 2013
+
+2013-08-28 17:25:33,417 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/public/screenshots/index.mustache
+    OLD MTIME: 0
+    NEW MTIME: Wed Aug 28 16:23:41 2013
+
+2013-08-28 17:25:33,423 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/public/index/index.mustache
+    OLD MTIME: 0
+    NEW MTIME: Tue Aug 27 10:30:49 2013
+
+2013-08-28 17:25:33,434 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/public/gifs/view.mustache
+    OLD MTIME: 0
+    NEW MTIME: Mon Aug 26 21:35:30 2013
+
+2013-08-28 17:25:33,444 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/public/gifs/new.mustache
+    OLD MTIME: 0
+    NEW MTIME: Sun Aug 25 16:31:19 2013
+
+2013-08-28 17:25:33,452 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/public/gifs/error.mustache
+    OLD MTIME: 0
+    NEW MTIME: Mon Aug 26 03:43:30 2013
+
+2013-08-28 17:25:33,460 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/public/gifs/index.mustache
+    OLD MTIME: 0
+    NEW MTIME: Mon Aug 26 23:22:32 2013
+
+2013-08-28 17:25:33,471 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/public/auth/login.mustache
+    OLD MTIME: 0
+    NEW MTIME: Tue Aug 27 10:27:41 2013
+
+2013-08-28 17:25:33,496 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/public/about/about.mustache
+    OLD MTIME: 0
+    NEW MTIME: Tue Aug 27 10:26:26 2013
+
+2013-08-28 17:25:33,503 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/error/500.mustache
+    OLD MTIME: 0
+    NEW MTIME: Sat Aug 24 13:00:01 2013
+
+2013-08-28 17:25:33,505 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/error/404.mustache
+    OLD MTIME: 0
+    NEW MTIME: Sun Aug 25 15:42:33 2013
+
+2013-08-28 17:25:33,507 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/admin/index.mustache
+    OLD MTIME: 0
+    NEW MTIME: Mon Aug 26 12:17:13 2013
+
+2013-08-28 17:25:33,509 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/admin/users/edit.mustache
+    OLD MTIME: 0
+    NEW MTIME: Mon Aug 26 12:17:34 2013
+
+2013-08-28 17:25:33,511 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/admin/users/new.mustache
+    OLD MTIME: 0
+    NEW MTIME: Mon Aug 26 12:31:16 2013
+
+2013-08-28 17:25:33,513 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/admin/users/index.mustache
+    OLD MTIME: 0
+    NEW MTIME: Mon Aug 26 12:17:26 2013
+
+2013-08-28 17:25:33,526 - leach.seshat.route - DEBUG
+    Auto generated route table entry for:
+        Object: controllers.logout/logout
+        Pattern: /logout
+2013-08-28 17:25:33,535 - leach.seshat.route - DEBUG
+    Auto generated route table entry for:
+        Object: controllers.login/login
+        Pattern: /login
+2013-08-28 17:25:33,542 - leach.seshat.route - DEBUG
+    Auto generated route table entry for:
+        Object: controllers.about/about
+        Pattern: /about
+2013-08-28 17:25:33,547 - leach.seshat.route - DEBUG
+    Auto generated route table entry for:
+        Object: controllers.index/index
+        Pattern: 
+2013-08-28 17:25:33,554 - leach.seshat.route - DEBUG
+    Auto generated route table entry for:
+        Object: controllers.screenshots.view/view
+        Pattern: /screenshots/view
+2013-08-28 17:25:33,559 - leach.seshat.route - DEBUG
+    Auto generated route table entry for:
+        Object: controllers.screenshots.index/index
+        Pattern: /screenshots
+2013-08-28 17:25:33,565 - leach.seshat.route - DEBUG
+    Auto generated route table entry for:
+        Object: controllers.phots.view/view
+        Pattern: /phots/view
+2013-08-28 17:25:33,999 - leach.seshat.route - DEBUG
+    Auto generated route table entry for:
+        Object: controllers.phots.new/new
+        Pattern: /phots/new
+2013-08-28 17:25:34,003 - leach.seshat.route - DEBUG
+    Auto generated route table entry for:
+        Object: controllers.phots.index/index
+        Pattern: /phots
+2013-08-28 17:25:34,008 - leach.seshat.route - DEBUG
+    Auto generated route table entry for:
+        Object: controllers.phots.edit.delete/delete
+        Pattern: /phots/edit/delete
+2013-08-28 17:25:34,013 - leach.seshat.route - DEBUG
+    Auto generated route table entry for:
+        Object: controllers.phots.edit.rename/rename
+        Pattern: /phots/edit/rename
+2013-08-28 17:25:34,017 - leach.seshat - INFO
+    Now serving py as a fastcgi server at 127.0.0.1:8000
+    Press Ctrl+c if running as non daemon mode, or send a stop signal
+    
+2013-08-28 17:25:34,995 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /login
+    PARAMS: []
+    Object: controllers.login/login
+    IP: Unknown IP
+
+2013-08-28 17:25:35,004 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /login
+    Status: 303 SEE OTHER
+
+2013-08-28 17:25:35,040 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /
+    PARAMS: []
+    Object: controllers.index/index
+    IP: Unknown IP
+
+2013-08-28 17:25:35,056 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /
+    Status: 303 SEE OTHER
+
+2013-08-28 17:25:35,099 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /login
+    PARAMS: []
+    Object: controllers.login/login
+    IP: Unknown IP
+
+2013-08-28 17:25:35,119 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /login
+    Status: 303 SEE OTHER
+
+2013-08-28 17:25:35,166 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /
+    PARAMS: []
+    Object: controllers.index/index
+    IP: Unknown IP
+
+2013-08-28 17:25:35,182 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /
+    Status: 303 SEE OTHER
+
+2013-08-28 17:25:35,234 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /login
+    PARAMS: []
+    Object: controllers.login/login
+    IP: Unknown IP
+
+2013-08-28 17:25:35,259 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /login
+    Status: 303 SEE OTHER
+
+2013-08-28 17:25:35,308 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /
+    PARAMS: []
+    Object: controllers.index/index
+    IP: Unknown IP
+
+2013-08-28 17:25:35,331 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /
+    Status: 303 SEE OTHER
+
+2013-08-28 17:25:35,387 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /login
+    PARAMS: []
+    Object: controllers.login/login
+    IP: Unknown IP
+
+2013-08-28 17:25:35,404 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /login
+    Status: 303 SEE OTHER
+
+2013-08-28 17:25:35,453 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /
+    PARAMS: []
+    Object: controllers.index/index
+    IP: Unknown IP
+
+2013-08-28 17:25:35,470 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /
+    Status: 303 SEE OTHER
+
+2013-08-28 17:25:35,521 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /login
+    PARAMS: []
+    Object: controllers.login/login
+    IP: Unknown IP
+
+2013-08-28 17:25:35,538 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /login
+    Status: 303 SEE OTHER
+
+2013-08-28 17:25:35,577 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /
+    PARAMS: []
+    Object: controllers.index/index
+    IP: Unknown IP
+
+2013-08-28 17:25:35,592 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /
+    Status: 303 SEE OTHER
+
+2013-08-28 17:25:35,636 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /login
+    PARAMS: []
+    Object: controllers.login/login
+    IP: Unknown IP
+
+2013-08-28 17:25:35,649 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /login
+    Status: 303 SEE OTHER
+
+2013-08-28 17:25:35,687 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /
+    PARAMS: []
+    Object: controllers.index/index
+    IP: Unknown IP
+
+2013-08-28 17:25:35,700 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /
+    Status: 303 SEE OTHER
+
+2013-08-28 17:25:35,749 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /login
+    PARAMS: []
+    Object: controllers.login/login
+    IP: Unknown IP
+
+2013-08-28 17:25:35,763 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /login
+    Status: 303 SEE OTHER
+
+2013-08-28 17:25:35,800 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /
+    PARAMS: []
+    Object: controllers.index/index
+    IP: Unknown IP
+
+2013-08-28 17:25:35,814 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /
+    Status: 303 SEE OTHER
+
+2013-08-28 17:25:35,847 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /login
+    PARAMS: []
+    Object: controllers.login/login
+    IP: Unknown IP
+
+2013-08-28 17:25:35,857 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /login
+    Status: 303 SEE OTHER
+
+2013-08-28 17:25:35,904 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /
+    PARAMS: []
+    Object: controllers.index/index
+    IP: Unknown IP
+
+2013-08-28 17:25:35,923 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /
+    Status: 303 SEE OTHER
+
+2013-08-28 17:25:35,957 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /login
+    PARAMS: []
+    Object: controllers.login/login
+    IP: Unknown IP
+
+2013-08-28 17:25:35,966 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /login
+    Status: 303 SEE OTHER
+
+2013-08-28 17:25:35,996 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /
+    PARAMS: []
+    Object: controllers.index/index
+    IP: Unknown IP
+
+2013-08-28 17:25:36,003 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /
+    Status: 303 SEE OTHER
+
+2013-08-28 17:25:36,036 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /login
+    PARAMS: []
+    Object: controllers.login/login
+    IP: Unknown IP
+
+2013-08-28 17:25:36,052 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /login
+    Status: 303 SEE OTHER
+
+2013-08-28 17:25:36,095 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /
+    PARAMS: []
+    Object: controllers.index/index
+    IP: Unknown IP
+
+2013-08-28 17:25:36,104 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /
+    Status: 303 SEE OTHER
+
+2013-08-28 17:25:36,144 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /login
+    PARAMS: []
+    Object: controllers.login/login
+    IP: Unknown IP
+
+2013-08-28 17:25:36,153 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /login
+    Status: 303 SEE OTHER
+
+2013-08-28 17:26:26,798 - leach.seshat - CRITICAL
+    Shutdown py operations for a KeyboardInterrupt. Bye!
+2013-08-28 17:26:28,780 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache//skeleton_empty.mustache
+    OLD MTIME: 0
+    NEW MTIME: Tue Aug 27 10:27:51 2013
+
+2013-08-28 17:26:28,782 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache//skeleton_header_navbar.mustache
+    OLD MTIME: 0
+    NEW MTIME: Wed Aug 28 17:13:00 2013
+
+2013-08-28 17:26:28,784 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache//skeleton_navbar.mustache
+    OLD MTIME: 0
+    NEW MTIME: Wed Aug 28 17:13:18 2013
+
+2013-08-28 17:26:28,787 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/partials/paginate.prt.mustache
+    OLD MTIME: 0
+    NEW MTIME: Thu Aug 22 06:53:29 2013
+
+2013-08-28 17:26:28,790 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/public/screenshots/view.mustache
+    OLD MTIME: 0
+    NEW MTIME: Mon Aug 26 11:20:05 2013
+
+2013-08-28 17:26:28,797 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/public/screenshots/index.mustache
+    OLD MTIME: 0
+    NEW MTIME: Wed Aug 28 16:23:41 2013
+
+2013-08-28 17:26:28,804 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/public/index/index.mustache
+    OLD MTIME: 0
+    NEW MTIME: Tue Aug 27 10:30:49 2013
+
+2013-08-28 17:26:28,817 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/public/gifs/view.mustache
+    OLD MTIME: 0
+    NEW MTIME: Mon Aug 26 21:35:30 2013
+
+2013-08-28 17:26:28,825 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/public/gifs/new.mustache
+    OLD MTIME: 0
+    NEW MTIME: Sun Aug 25 16:31:19 2013
+
+2013-08-28 17:26:28,833 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/public/gifs/error.mustache
+    OLD MTIME: 0
+    NEW MTIME: Mon Aug 26 03:43:30 2013
+
+2013-08-28 17:26:28,841 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/public/gifs/index.mustache
+    OLD MTIME: 0
+    NEW MTIME: Mon Aug 26 23:22:32 2013
+
+2013-08-28 17:26:28,853 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/public/auth/login.mustache
+    OLD MTIME: 0
+    NEW MTIME: Tue Aug 27 10:27:41 2013
+
+2013-08-28 17:26:28,879 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/public/about/about.mustache
+    OLD MTIME: 0
+    NEW MTIME: Tue Aug 27 10:26:26 2013
+
+2013-08-28 17:26:28,885 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/error/500.mustache
+    OLD MTIME: 0
+    NEW MTIME: Sat Aug 24 13:00:01 2013
+
+2013-08-28 17:26:28,887 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/error/404.mustache
+    OLD MTIME: 0
+    NEW MTIME: Sun Aug 25 15:42:33 2013
+
+2013-08-28 17:26:28,889 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/admin/index.mustache
+    OLD MTIME: 0
+    NEW MTIME: Mon Aug 26 12:17:13 2013
+
+2013-08-28 17:26:28,892 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/admin/users/edit.mustache
+    OLD MTIME: 0
+    NEW MTIME: Mon Aug 26 12:17:34 2013
+
+2013-08-28 17:26:28,894 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/admin/users/new.mustache
+    OLD MTIME: 0
+    NEW MTIME: Mon Aug 26 12:31:16 2013
+
+2013-08-28 17:26:28,896 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/admin/users/index.mustache
+    OLD MTIME: 0
+    NEW MTIME: Mon Aug 26 12:17:26 2013
+
+2013-08-28 17:26:28,905 - leach.seshat.route - DEBUG
+    Auto generated route table entry for:
+        Object: controllers.logout/logout
+        Pattern: /logout
+2013-08-28 17:26:28,911 - leach.seshat.route - DEBUG
+    Auto generated route table entry for:
+        Object: controllers.login/login
+        Pattern: /login
+2013-08-28 17:26:28,917 - leach.seshat.route - DEBUG
+    Auto generated route table entry for:
+        Object: controllers.about/about
+        Pattern: /about
+2013-08-28 17:26:28,923 - leach.seshat.route - DEBUG
+    Auto generated route table entry for:
+        Object: controllers.index/index
+        Pattern: 
+2013-08-28 17:26:28,934 - leach.seshat.route - DEBUG
+    Auto generated route table entry for:
+        Object: controllers.screenshots.view/view
+        Pattern: /screenshots/view
+2013-08-28 17:26:28,939 - leach.seshat.route - DEBUG
+    Auto generated route table entry for:
+        Object: controllers.screenshots.index/index
+        Pattern: /screenshots
+2013-08-28 17:26:28,946 - leach.seshat.route - DEBUG
+    Auto generated route table entry for:
+        Object: controllers.phots.view/view
+        Pattern: /phots/view
+2013-08-28 17:26:29,385 - leach.seshat.route - DEBUG
+    Auto generated route table entry for:
+        Object: controllers.phots.new/new
+        Pattern: /phots/new
+2013-08-28 17:26:29,389 - leach.seshat.route - DEBUG
+    Auto generated route table entry for:
+        Object: controllers.phots.index/index
+        Pattern: /phots
+2013-08-28 17:26:29,395 - leach.seshat.route - DEBUG
+    Auto generated route table entry for:
+        Object: controllers.phots.edit.delete/delete
+        Pattern: /phots/edit/delete
+2013-08-28 17:26:29,400 - leach.seshat.route - DEBUG
+    Auto generated route table entry for:
+        Object: controllers.phots.edit.rename/rename
+        Pattern: /phots/edit/rename
+2013-08-28 17:26:29,403 - leach.seshat - INFO
+    Now serving py as a fastcgi server at 127.0.0.1:8000
+    Press Ctrl+c if running as non daemon mode, or send a stop signal
+    
+2013-08-28 17:26:30,423 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /
+    PARAMS: []
+    Object: controllers.index/index
+    IP: Unknown IP
+
+2013-08-28 17:26:30,427 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /
+    Status: 303 SEE OTHER
+
+2013-08-28 17:26:30,462 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /login
+    PARAMS: []
+    Object: controllers.login/login
+    IP: Unknown IP
+
+2013-08-28 17:26:30,467 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /login
+    Status: 303 SEE OTHER
+
+2013-08-28 17:26:30,500 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /
+    PARAMS: []
+    Object: controllers.index/index
+    IP: Unknown IP
+
+2013-08-28 17:26:30,509 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /
+    Status: 303 SEE OTHER
+
+2013-08-28 17:26:30,545 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /login
+    PARAMS: []
+    Object: controllers.login/login
+    IP: Unknown IP
+
+2013-08-28 17:26:30,555 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /login
+    Status: 303 SEE OTHER
+
+2013-08-28 17:26:30,587 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /
+    PARAMS: []
+    Object: controllers.index/index
+    IP: Unknown IP
+
+2013-08-28 17:26:30,591 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /
+    Status: 303 SEE OTHER
+
+2013-08-28 17:26:30,634 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /login
+    PARAMS: []
+    Object: controllers.login/login
+    IP: Unknown IP
+
+2013-08-28 17:26:30,642 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /login
+    Status: 303 SEE OTHER
+
+2013-08-28 17:26:30,683 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /
+    PARAMS: []
+    Object: controllers.index/index
+    IP: Unknown IP
+
+2013-08-28 17:26:30,688 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /
+    Status: 303 SEE OTHER
+
+2013-08-28 17:26:30,729 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /login
+    PARAMS: []
+    Object: controllers.login/login
+    IP: Unknown IP
+
+2013-08-28 17:26:30,734 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /login
+    Status: 303 SEE OTHER
+
+2013-08-28 17:26:30,787 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /
+    PARAMS: []
+    Object: controllers.index/index
+    IP: Unknown IP
+
+2013-08-28 17:26:30,792 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /
+    Status: 303 SEE OTHER
+
+2013-08-28 17:26:30,830 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /login
+    PARAMS: []
+    Object: controllers.login/login
+    IP: Unknown IP
+
+2013-08-28 17:26:30,836 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /login
+    Status: 303 SEE OTHER
+
+2013-08-28 17:26:30,871 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /
+    PARAMS: []
+    Object: controllers.index/index
+    IP: Unknown IP
+
+2013-08-28 17:26:30,876 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /
+    Status: 303 SEE OTHER
+
+2013-08-28 17:26:30,905 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /login
+    PARAMS: []
+    Object: controllers.login/login
+    IP: Unknown IP
+
+2013-08-28 17:26:30,909 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /login
+    Status: 303 SEE OTHER
+
+2013-08-28 17:26:30,946 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /
+    PARAMS: []
+    Object: controllers.index/index
+    IP: Unknown IP
+
+2013-08-28 17:26:30,951 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /
+    Status: 303 SEE OTHER
+
+2013-08-28 17:26:30,986 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /login
+    PARAMS: []
+    Object: controllers.login/login
+    IP: Unknown IP
+
+2013-08-28 17:26:30,991 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /login
+    Status: 303 SEE OTHER
+
+2013-08-28 17:26:31,025 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /
+    PARAMS: []
+    Object: controllers.index/index
+    IP: Unknown IP
+
+2013-08-28 17:26:31,029 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /
+    Status: 303 SEE OTHER
+
+2013-08-28 17:26:31,072 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /login
+    PARAMS: []
+    Object: controllers.login/login
+    IP: Unknown IP
+
+2013-08-28 17:26:31,077 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /login
+    Status: 303 SEE OTHER
+
+2013-08-28 17:26:31,107 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /
+    PARAMS: []
+    Object: controllers.index/index
+    IP: Unknown IP
+
+2013-08-28 17:26:31,112 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /
+    Status: 303 SEE OTHER
+
+2013-08-28 17:26:31,139 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /login
+    PARAMS: []
+    Object: controllers.login/login
+    IP: Unknown IP
+
+2013-08-28 17:26:31,143 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /login
+    Status: 303 SEE OTHER
+
+2013-08-28 17:26:31,176 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /
+    PARAMS: []
+    Object: controllers.index/index
+    IP: Unknown IP
+
+2013-08-28 17:26:31,180 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /
+    Status: 303 SEE OTHER
+
+2013-08-28 17:26:31,206 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /login
+    PARAMS: []
+    Object: controllers.login/login
+    IP: Unknown IP
+
+2013-08-28 17:26:31,211 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /login
+    Status: 303 SEE OTHER
+
+2013-08-28 17:26:31,245 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /
+    PARAMS: []
+    Object: controllers.index/index
+    IP: Unknown IP
+
+2013-08-28 17:26:31,255 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /
+    Status: 303 SEE OTHER
+
+2013-08-28 17:27:20,809 - leach.seshat - CRITICAL
+    Shutdown py operations for a KeyboardInterrupt. Bye!
+2013-08-28 17:27:22,735 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache//skeleton_empty.mustache
+    OLD MTIME: 0
+    NEW MTIME: Tue Aug 27 10:27:51 2013
+
+2013-08-28 17:27:22,737 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache//skeleton_header_navbar.mustache
+    OLD MTIME: 0
+    NEW MTIME: Wed Aug 28 17:13:00 2013
+
+2013-08-28 17:27:22,739 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache//skeleton_navbar.mustache
+    OLD MTIME: 0
+    NEW MTIME: Wed Aug 28 17:13:18 2013
+
+2013-08-28 17:27:22,741 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/partials/paginate.prt.mustache
+    OLD MTIME: 0
+    NEW MTIME: Thu Aug 22 06:53:29 2013
+
+2013-08-28 17:27:22,745 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/public/screenshots/view.mustache
+    OLD MTIME: 0
+    NEW MTIME: Mon Aug 26 11:20:05 2013
+
+2013-08-28 17:27:22,752 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/public/screenshots/index.mustache
+    OLD MTIME: 0
+    NEW MTIME: Wed Aug 28 16:23:41 2013
+
+2013-08-28 17:27:22,759 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/public/index/index.mustache
+    OLD MTIME: 0
+    NEW MTIME: Tue Aug 27 10:30:49 2013
+
+2013-08-28 17:27:22,770 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/public/gifs/view.mustache
+    OLD MTIME: 0
+    NEW MTIME: Mon Aug 26 21:35:30 2013
+
+2013-08-28 17:27:22,781 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/public/gifs/new.mustache
+    OLD MTIME: 0
+    NEW MTIME: Sun Aug 25 16:31:19 2013
+
+2013-08-28 17:27:22,789 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/public/gifs/error.mustache
+    OLD MTIME: 0
+    NEW MTIME: Mon Aug 26 03:43:30 2013
+
+2013-08-28 17:27:22,797 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/public/gifs/index.mustache
+    OLD MTIME: 0
+    NEW MTIME: Mon Aug 26 23:22:32 2013
+
+2013-08-28 17:27:22,808 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/public/auth/login.mustache
+    OLD MTIME: 0
+    NEW MTIME: Tue Aug 27 10:27:41 2013
+
+2013-08-28 17:27:22,834 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/public/about/about.mustache
+    OLD MTIME: 0
+    NEW MTIME: Tue Aug 27 10:26:26 2013
+
+2013-08-28 17:27:22,857 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/error/500.mustache
+    OLD MTIME: 0
+    NEW MTIME: Sat Aug 24 13:00:01 2013
+
+2013-08-28 17:27:22,859 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/error/404.mustache
+    OLD MTIME: 0
+    NEW MTIME: Sun Aug 25 15:42:33 2013
+
+2013-08-28 17:27:22,862 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/admin/index.mustache
+    OLD MTIME: 0
+    NEW MTIME: Mon Aug 26 12:17:13 2013
+
+2013-08-28 17:27:22,865 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/admin/users/edit.mustache
+    OLD MTIME: 0
+    NEW MTIME: Mon Aug 26 12:17:34 2013
+
+2013-08-28 17:27:22,867 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/admin/users/new.mustache
+    OLD MTIME: 0
+    NEW MTIME: Mon Aug 26 12:31:16 2013
+
+2013-08-28 17:27:22,874 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/admin/users/index.mustache
+    OLD MTIME: 0
+    NEW MTIME: Mon Aug 26 12:17:26 2013
+
+2013-08-28 17:27:22,885 - leach.seshat.route - DEBUG
+    Auto generated route table entry for:
+        Object: controllers.logout/logout
+        Pattern: /logout
+2013-08-28 17:27:22,891 - leach.seshat.route - DEBUG
+    Auto generated route table entry for:
+        Object: controllers.login/login
+        Pattern: /login
+2013-08-28 17:27:22,897 - leach.seshat.route - DEBUG
+    Auto generated route table entry for:
+        Object: controllers.about/about
+        Pattern: /about
+2013-08-28 17:27:22,904 - leach.seshat.route - DEBUG
+    Auto generated route table entry for:
+        Object: controllers.index/index
+        Pattern: 
+2013-08-28 17:27:22,913 - leach.seshat.route - DEBUG
+    Auto generated route table entry for:
+        Object: controllers.screenshots.view/view
+        Pattern: /screenshots/view
+2013-08-28 17:27:22,918 - leach.seshat.route - DEBUG
+    Auto generated route table entry for:
+        Object: controllers.screenshots.index/index
+        Pattern: /screenshots
+2013-08-28 17:27:22,925 - leach.seshat.route - DEBUG
+    Auto generated route table entry for:
+        Object: controllers.phots.view/view
+        Pattern: /phots/view
+2013-08-28 17:27:23,344 - leach.seshat.route - DEBUG
+    Auto generated route table entry for:
+        Object: controllers.phots.new/new
+        Pattern: /phots/new
+2013-08-28 17:27:23,348 - leach.seshat.route - DEBUG
+    Auto generated route table entry for:
+        Object: controllers.phots.index/index
+        Pattern: /phots
+2013-08-28 17:27:23,354 - leach.seshat.route - DEBUG
+    Auto generated route table entry for:
+        Object: controllers.phots.edit.delete/delete
+        Pattern: /phots/edit/delete
+2013-08-28 17:27:23,359 - leach.seshat.route - DEBUG
+    Auto generated route table entry for:
+        Object: controllers.phots.edit.rename/rename
+        Pattern: /phots/edit/rename
+2013-08-28 17:27:23,362 - leach.seshat - INFO
+    Now serving py as a fastcgi server at 127.0.0.1:8000
+    Press Ctrl+c if running as non daemon mode, or send a stop signal
+    
+2013-08-28 17:27:24,253 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /login
+    PARAMS: []
+    Object: controllers.login/login
+    IP: Unknown IP
+
+2013-08-28 17:27:24,260 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /login
+    Status: 303 SEE OTHER
+
+2013-08-28 17:27:24,290 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /
+    PARAMS: []
+    Object: controllers.index/index
+    IP: Unknown IP
+
+2013-08-28 17:27:24,297 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /
+    Status: 303 SEE OTHER
+
+2013-08-28 17:27:24,338 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /login
+    PARAMS: []
+    Object: controllers.login/login
+    IP: Unknown IP
+
+2013-08-28 17:27:24,349 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /login
+    Status: 303 SEE OTHER
+
+2013-08-28 17:27:24,384 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /
+    PARAMS: []
+    Object: controllers.index/index
+    IP: Unknown IP
+
+2013-08-28 17:27:24,394 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /
+    Status: 303 SEE OTHER
+
+2013-08-28 17:27:24,424 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /login
+    PARAMS: []
+    Object: controllers.login/login
+    IP: Unknown IP
+
+2013-08-28 17:27:24,438 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /login
+    Status: 303 SEE OTHER
+
+2013-08-28 17:27:24,471 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /
+    PARAMS: []
+    Object: controllers.index/index
+    IP: Unknown IP
+
+2013-08-28 17:27:24,481 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /
+    Status: 303 SEE OTHER
+
+2013-08-28 17:27:24,516 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /login
+    PARAMS: []
+    Object: controllers.login/login
+    IP: Unknown IP
+
+2013-08-28 17:27:24,527 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /login
+    Status: 303 SEE OTHER
+
+2013-08-28 17:27:24,559 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /
+    PARAMS: []
+    Object: controllers.index/index
+    IP: Unknown IP
+
+2013-08-28 17:27:24,569 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /
+    Status: 303 SEE OTHER
+
+2013-08-28 17:27:24,606 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /login
+    PARAMS: []
+    Object: controllers.login/login
+    IP: Unknown IP
+
+2013-08-28 17:27:24,617 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /login
+    Status: 303 SEE OTHER
+
+2013-08-28 17:27:24,648 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /
+    PARAMS: []
+    Object: controllers.index/index
+    IP: Unknown IP
+
+2013-08-28 17:27:24,659 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /
+    Status: 303 SEE OTHER
+
+2013-08-28 17:27:24,702 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /login
+    PARAMS: []
+    Object: controllers.login/login
+    IP: Unknown IP
+
+2013-08-28 17:27:24,714 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /login
+    Status: 303 SEE OTHER
+
+2013-08-28 17:27:24,756 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /
+    PARAMS: []
+    Object: controllers.index/index
+    IP: Unknown IP
+
+2013-08-28 17:27:24,770 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /
+    Status: 303 SEE OTHER
+
+2013-08-28 17:27:24,804 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /login
+    PARAMS: []
+    Object: controllers.login/login
+    IP: Unknown IP
+
+2013-08-28 17:27:24,820 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /login
+    Status: 303 SEE OTHER
+
+2013-08-28 17:27:24,860 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /
+    PARAMS: []
+    Object: controllers.index/index
+    IP: Unknown IP
+
+2013-08-28 17:27:24,870 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /
+    Status: 303 SEE OTHER
+
+2013-08-28 17:27:24,907 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /login
+    PARAMS: []
+    Object: controllers.login/login
+    IP: Unknown IP
+
+2013-08-28 17:27:24,922 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /login
+    Status: 303 SEE OTHER
+
+2013-08-28 17:27:24,960 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /
+    PARAMS: []
+    Object: controllers.index/index
+    IP: Unknown IP
+
+2013-08-28 17:27:24,966 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /
+    Status: 303 SEE OTHER
+
+2013-08-28 17:27:25,031 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /login
+    PARAMS: []
+    Object: controllers.login/login
+    IP: Unknown IP
+
+2013-08-28 17:27:25,037 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /login
+    Status: 303 SEE OTHER
+
+2013-08-28 17:27:25,062 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /
+    PARAMS: []
+    Object: controllers.index/index
+    IP: Unknown IP
+
+2013-08-28 17:27:25,067 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /
+    Status: 303 SEE OTHER
+
+2013-08-28 17:27:25,092 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /login
+    PARAMS: []
+    Object: controllers.login/login
+    IP: Unknown IP
+
+2013-08-28 17:27:25,097 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /login
+    Status: 303 SEE OTHER
+
+2013-08-28 17:27:25,127 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /
+    PARAMS: []
+    Object: controllers.index/index
+    IP: Unknown IP
+
+2013-08-28 17:27:25,133 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /
+    Status: 303 SEE OTHER
+
+2013-08-28 17:27:25,166 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /login
+    PARAMS: []
+    Object: controllers.login/login
+    IP: Unknown IP
+
+2013-08-28 17:27:25,172 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /login
+    Status: 303 SEE OTHER
+
+2013-08-28 17:27:48,274 - leach.seshat - CRITICAL
+    Shutdown py operations for a KeyboardInterrupt. Bye!
+2013-08-28 17:27:50,233 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache//skeleton_empty.mustache
+    OLD MTIME: 0
+    NEW MTIME: Tue Aug 27 10:27:51 2013
+
+2013-08-28 17:27:50,235 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache//skeleton_header_navbar.mustache
+    OLD MTIME: 0
+    NEW MTIME: Wed Aug 28 17:13:00 2013
+
+2013-08-28 17:27:50,237 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache//skeleton_navbar.mustache
+    OLD MTIME: 0
+    NEW MTIME: Wed Aug 28 17:13:18 2013
+
+2013-08-28 17:27:50,240 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/partials/paginate.prt.mustache
+    OLD MTIME: 0
+    NEW MTIME: Thu Aug 22 06:53:29 2013
+
+2013-08-28 17:27:50,243 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/public/screenshots/view.mustache
+    OLD MTIME: 0
+    NEW MTIME: Mon Aug 26 11:20:05 2013
+
+2013-08-28 17:27:50,250 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/public/screenshots/index.mustache
+    OLD MTIME: 0
+    NEW MTIME: Wed Aug 28 16:23:41 2013
+
+2013-08-28 17:27:50,257 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/public/index/index.mustache
+    OLD MTIME: 0
+    NEW MTIME: Tue Aug 27 10:30:49 2013
+
+2013-08-28 17:27:50,266 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/public/gifs/view.mustache
+    OLD MTIME: 0
+    NEW MTIME: Mon Aug 26 21:35:30 2013
+
+2013-08-28 17:27:50,278 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/public/gifs/new.mustache
+    OLD MTIME: 0
+    NEW MTIME: Sun Aug 25 16:31:19 2013
+
+2013-08-28 17:27:50,286 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/public/gifs/error.mustache
+    OLD MTIME: 0
+    NEW MTIME: Mon Aug 26 03:43:30 2013
+
+2013-08-28 17:27:50,298 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/public/gifs/index.mustache
+    OLD MTIME: 0
+    NEW MTIME: Mon Aug 26 23:22:32 2013
+
+2013-08-28 17:27:50,326 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/public/auth/login.mustache
+    OLD MTIME: 0
+    NEW MTIME: Tue Aug 27 10:27:41 2013
+
+2013-08-28 17:27:50,368 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/public/about/about.mustache
+    OLD MTIME: 0
+    NEW MTIME: Tue Aug 27 10:26:26 2013
+
+2013-08-28 17:27:50,375 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/error/500.mustache
+    OLD MTIME: 0
+    NEW MTIME: Sat Aug 24 13:00:01 2013
+
+2013-08-28 17:27:50,377 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/error/404.mustache
+    OLD MTIME: 0
+    NEW MTIME: Sun Aug 25 15:42:33 2013
+
+2013-08-28 17:27:50,379 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/admin/index.mustache
+    OLD MTIME: 0
+    NEW MTIME: Mon Aug 26 12:17:13 2013
+
+2013-08-28 17:27:50,381 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/admin/users/edit.mustache
+    OLD MTIME: 0
+    NEW MTIME: Mon Aug 26 12:17:34 2013
+
+2013-08-28 17:27:50,383 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/admin/users/new.mustache
+    OLD MTIME: 0
+    NEW MTIME: Mon Aug 26 12:31:16 2013
+
+2013-08-28 17:27:50,385 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/admin/users/index.mustache
+    OLD MTIME: 0
+    NEW MTIME: Mon Aug 26 12:17:26 2013
+
+2013-08-28 17:27:50,395 - leach.seshat.route - DEBUG
+    Auto generated route table entry for:
+        Object: controllers.logout/logout
+        Pattern: /logout
+2013-08-28 17:27:50,400 - leach.seshat.route - DEBUG
+    Auto generated route table entry for:
+        Object: controllers.login/login
+        Pattern: /login
+2013-08-28 17:27:50,406 - leach.seshat.route - DEBUG
+    Auto generated route table entry for:
+        Object: controllers.about/about
+        Pattern: /about
+2013-08-28 17:27:50,410 - leach.seshat.route - DEBUG
+    Auto generated route table entry for:
+        Object: controllers.index/index
+        Pattern: 
+2013-08-28 17:27:50,417 - leach.seshat.route - DEBUG
+    Auto generated route table entry for:
+        Object: controllers.screenshots.view/view
+        Pattern: /screenshots/view
+2013-08-28 17:27:50,422 - leach.seshat.route - DEBUG
+    Auto generated route table entry for:
+        Object: controllers.screenshots.index/index
+        Pattern: /screenshots
+2013-08-28 17:27:50,429 - leach.seshat.route - DEBUG
+    Auto generated route table entry for:
+        Object: controllers.phots.view/view
+        Pattern: /phots/view
+2013-08-28 17:27:50,845 - leach.seshat.route - DEBUG
+    Auto generated route table entry for:
+        Object: controllers.phots.new/new
+        Pattern: /phots/new
+2013-08-28 17:27:50,849 - leach.seshat.route - DEBUG
+    Auto generated route table entry for:
+        Object: controllers.phots.index/index
+        Pattern: /phots
+2013-08-28 17:27:50,854 - leach.seshat.route - DEBUG
+    Auto generated route table entry for:
+        Object: controllers.phots.edit.delete/delete
+        Pattern: /phots/edit/delete
+2013-08-28 17:27:50,859 - leach.seshat.route - DEBUG
+    Auto generated route table entry for:
+        Object: controllers.phots.edit.rename/rename
+        Pattern: /phots/edit/rename
+2013-08-28 17:27:50,863 - leach.seshat - INFO
+    Now serving py as a fastcgi server at 127.0.0.1:8000
+    Press Ctrl+c if running as non daemon mode, or send a stop signal
+    
+2013-08-28 17:27:51,588 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /
+    PARAMS: []
+    Object: controllers.index/index
+    IP: Unknown IP
+
+2013-08-28 17:27:51,596 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /
+    Status: 303 SEE OTHER
+
+2013-08-28 17:27:51,629 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /login
+    PARAMS: []
+    Object: controllers.login/login
+    IP: Unknown IP
+
+2013-08-28 17:27:51,645 - leach.seshat.dispatch - ERROR
+    
+-------500 INTERNAL SERVER ERROR --------
+    Method: GET
+    URL: /login
+    IP: Unknown IP
+    ERROR: (AttributeError("'login' object has no attribute 'groups'",), 'Traceback (most recent call last):\n  File "/home/josh/repos/transientbug/app/seshat/dispatch.py", line 73, in dispatch\n    content, replyData = dataThread.get()\n  File "/home/josh/repos/flagr/virt/normal/lib/python2.7/site-packages/gevent/greenlet.py", line 308, in get\n    raise self._exception\nAttributeError: \'login\' object has no attribute \'groups\'\n')
+    
+2013-08-28 17:27:59,857 - leach.seshat - CRITICAL
+    Shutdown py operations for a KeyboardInterrupt. Bye!
+2013-08-28 17:28:02,170 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache//skeleton_empty.mustache
+    OLD MTIME: 0
+    NEW MTIME: Tue Aug 27 10:27:51 2013
+
+2013-08-28 17:28:02,172 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache//skeleton_header_navbar.mustache
+    OLD MTIME: 0
+    NEW MTIME: Wed Aug 28 17:13:00 2013
+
+2013-08-28 17:28:02,174 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache//skeleton_navbar.mustache
+    OLD MTIME: 0
+    NEW MTIME: Wed Aug 28 17:13:18 2013
+
+2013-08-28 17:28:02,177 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/partials/paginate.prt.mustache
+    OLD MTIME: 0
+    NEW MTIME: Thu Aug 22 06:53:29 2013
+
+2013-08-28 17:28:02,180 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/public/screenshots/view.mustache
+    OLD MTIME: 0
+    NEW MTIME: Mon Aug 26 11:20:05 2013
+
+2013-08-28 17:28:02,187 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/public/screenshots/index.mustache
+    OLD MTIME: 0
+    NEW MTIME: Wed Aug 28 16:23:41 2013
+
+2013-08-28 17:28:02,194 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/public/index/index.mustache
+    OLD MTIME: 0
+    NEW MTIME: Tue Aug 27 10:30:49 2013
+
+2013-08-28 17:28:02,207 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/public/gifs/view.mustache
+    OLD MTIME: 0
+    NEW MTIME: Mon Aug 26 21:35:30 2013
+
+2013-08-28 17:28:02,216 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/public/gifs/new.mustache
+    OLD MTIME: 0
+    NEW MTIME: Sun Aug 25 16:31:19 2013
+
+2013-08-28 17:28:02,224 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/public/gifs/error.mustache
+    OLD MTIME: 0
+    NEW MTIME: Mon Aug 26 03:43:30 2013
+
+2013-08-28 17:28:02,232 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/public/gifs/index.mustache
+    OLD MTIME: 0
+    NEW MTIME: Mon Aug 26 23:22:32 2013
+
+2013-08-28 17:28:02,243 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/public/auth/login.mustache
+    OLD MTIME: 0
+    NEW MTIME: Tue Aug 27 10:27:41 2013
+
+2013-08-28 17:28:02,269 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/public/about/about.mustache
+    OLD MTIME: 0
+    NEW MTIME: Tue Aug 27 10:26:26 2013
+
+2013-08-28 17:28:02,275 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/error/500.mustache
+    OLD MTIME: 0
+    NEW MTIME: Sat Aug 24 13:00:01 2013
+
+2013-08-28 17:28:02,277 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/error/404.mustache
+    OLD MTIME: 0
+    NEW MTIME: Sun Aug 25 15:42:33 2013
+
+2013-08-28 17:28:02,280 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/admin/index.mustache
+    OLD MTIME: 0
+    NEW MTIME: Mon Aug 26 12:17:13 2013
+
+2013-08-28 17:28:02,282 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/admin/users/edit.mustache
+    OLD MTIME: 0
+    NEW MTIME: Mon Aug 26 12:17:34 2013
+
+2013-08-28 17:28:02,285 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/admin/users/new.mustache
+    OLD MTIME: 0
+    NEW MTIME: Mon Aug 26 12:31:16 2013
+
+2013-08-28 17:28:02,287 - leach.views - DEBUG
+    
+============== Template =================
+    Rereading template into memory...
+    TEMPLATE:  /home/josh/repos/transientbug/app/views/mustache/admin/users/index.mustache
+    OLD MTIME: 0
+    NEW MTIME: Mon Aug 26 12:17:26 2013
+
+2013-08-28 17:28:02,302 - leach.seshat.route - DEBUG
+    Auto generated route table entry for:
+        Object: controllers.logout/logout
+        Pattern: /logout
+2013-08-28 17:28:02,311 - leach.seshat.route - DEBUG
+    Auto generated route table entry for:
+        Object: controllers.login/login
+        Pattern: /login
+2013-08-28 17:28:02,320 - leach.seshat.route - DEBUG
+    Auto generated route table entry for:
+        Object: controllers.about/about
+        Pattern: /about
+2013-08-28 17:28:02,327 - leach.seshat.route - DEBUG
+    Auto generated route table entry for:
+        Object: controllers.index/index
+        Pattern: 
+2013-08-28 17:28:02,337 - leach.seshat.route - DEBUG
+    Auto generated route table entry for:
+        Object: controllers.screenshots.view/view
+        Pattern: /screenshots/view
+2013-08-28 17:28:02,345 - leach.seshat.route - DEBUG
+    Auto generated route table entry for:
+        Object: controllers.screenshots.index/index
+        Pattern: /screenshots
+2013-08-28 17:28:02,355 - leach.seshat.route - DEBUG
+    Auto generated route table entry for:
+        Object: controllers.phots.view/view
+        Pattern: /phots/view
+2013-08-28 17:28:02,814 - leach.seshat.route - DEBUG
+    Auto generated route table entry for:
+        Object: controllers.phots.new/new
+        Pattern: /phots/new
+2013-08-28 17:28:02,818 - leach.seshat.route - DEBUG
+    Auto generated route table entry for:
+        Object: controllers.phots.index/index
+        Pattern: /phots
+2013-08-28 17:28:02,823 - leach.seshat.route - DEBUG
+    Auto generated route table entry for:
+        Object: controllers.phots.edit.delete/delete
+        Pattern: /phots/edit/delete
+2013-08-28 17:28:02,828 - leach.seshat.route - DEBUG
+    Auto generated route table entry for:
+        Object: controllers.phots.edit.rename/rename
+        Pattern: /phots/edit/rename
+2013-08-28 17:28:02,832 - leach.seshat - INFO
+    Now serving py as a fastcgi server at 127.0.0.1:8000
+    Press Ctrl+c if running as non daemon mode, or send a stop signal
+    
+2013-08-28 17:28:03,747 - leach.seshat.dispatch - DEBUG
+    
+------- Request ---------------------
+    Method: GET
+    URL: /login
+    PARAMS: []
+    Object: controllers.login/login
+    IP: Unknown IP
+
+2013-08-28 17:28:03,773 - leach.seshat.dispatch - DEBUG
+    
+--------- Response ---------------------
+    URL: /login
+    Status: 200 OK
+

@@ -22,7 +22,7 @@ import rethinkdb as r
 
 class User(RethinkModel):
     table = "users"
-    _protectedItems = ["formated_about", "formated_created", "has_admin"]
+    _protectedItems = ["formated_about", "formated_created"]
     @classmethod
     def new_user(cls, username, password):
         """
@@ -43,7 +43,8 @@ class User(RethinkModel):
                        password=passwd,
                        created=arrow.utcnow().timestamp,
                        disable=False,
-                       alerts="")
+                       alerts="",
+                       groups=[])
             return user
         else:
             raise userError("That username is taken, please choose again.",
@@ -58,13 +59,15 @@ class User(RethinkModel):
         self.password = bcrypt.hashpw(password, bcrypt.gensalt())
         self.save()
 
-    @property
-    def has_admin(self):
-        return self.level > 50
-
     def format(self):
         """
         Formats markdown and dates into the right stuff
         """
         self.formated_about = mdu.markClean(self.about)
         self.formated_created = arrow.get(self.created)
+
+    def has_perm(self, group_name):
+        if group_name in self.groups:
+            return True
+
+        return False

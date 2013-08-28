@@ -40,22 +40,6 @@ nav:
         <a href="/scrn/{{{.}}}" class="thumbnail"><img src="/scrn/{{{.}}}" alt="{{.}}"></a>
         <div class="caption">
           <h6>{{{.}}}</h6>
-          <p>
-            <div class="btn-group">
-              <a href="/scrn/{{{.}}}" class="btn btn-success btn-sm">Link</a>
-              <div class="btn-group">
-                <button type="button" class="btn btn-success btn-sm dropdown-toggle" data-toggle="dropdown">
-                  <i class="icon-chevron-down"></i>
-                </button>
-                <ul class="dropdown-menu" role="menu">
-                  <li><a href="/screenshots/view/{{{.}}}">Page</a></li>
-                </ul>
-              </div>
-            </div>
-            {{#req.session.has_admin}}
-              <a href="#" class="btn btn-default btn-sm">Edit</a>
-            {{/req.session.has_admin}}
-          </p>
         </div>
       </div>
     </div>

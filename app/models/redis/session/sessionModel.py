@@ -25,9 +25,9 @@ import rethinkdb as r
 class session(brm.redisObject):
     def _finishInit(self):
         if not hasattr(self, "rawAlerts"): self.rawAlerts = "[]"
-        if not hasattr(self, "username"): self.username = None
-        if not hasattr(self, "userID"): self.userID = None
-        if not hasattr(self, "has_admin"): self.has_admin = None
+        if not hasattr(self, "username"): self.username = ""
+        if not hasattr(self, "userID"): self.userID = ""
+        if not hasattr(self, "groups"): self.groups = []
 
     def loginWithoutCheck(self, user):
         """
@@ -45,7 +45,7 @@ class session(brm.redisObject):
             if not foundUser.disable:
                 self.username = foundUser.username
                 self.userID = foundUser.id
-                self.has_admin = foundUser.has_admin
+                self.groups = foundUser.groups
                 return True
             else:
                 raise use.banError("Your user is currently disabled. \
@@ -75,7 +75,7 @@ class session(brm.redisObject):
                         foundUser.password):
                     self.username = foundUser.username
                     self.userID = foundUser.id
-                    self.has_admin = foundUser.has_admin
+                    self.groups = foundUser.groups
                     return True
                 else:
                     raise use.passwordError("Your password appears to \
@@ -91,9 +91,9 @@ class session(brm.redisObject):
         Sets the users loggedIn to False then removes the link between their
         session and their `userORM`
         """
-        self.username = None
-        self.userID = None
-        self.has_admin = None
+        self.username = ""
+        self.userID = ""
+        self.groups = []
         return True
 
     def pushAlert(self, message, quip="", level="success"):
@@ -148,3 +148,9 @@ class session(brm.redisObject):
             alertStr += ("""<div class="alert alert-{level}"><i class="icon-{icon}"></i><strong>{quip}</strong> {msg}</div>""").format(**alert)
 
         self._HTMLAlerts = unicode(alertStr)
+
+    def has_perm(self, group_name):
+        if group_name in self.groups:
+            return True
+
+        return False
