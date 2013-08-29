@@ -95,16 +95,16 @@
               </ul>
               {{#req.session.userID}}
                 <ul class="nav navbar-nav navbar-right" style="margin-right: 15px">
-                  {{#req.session.has_perm("root")}}
-                    <li {{#nav.home}}class="active"{{/nav.home}} class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Ello, {{req.session.username}} <i class="icon-chevron-down"></i></a>
-                      <ul class="dropdown-menu">
+                  <li {{#nav.home}}class="active"{{/nav.home}} class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Ello, {{req.session.username}} <i class="icon-chevron-down"></i></a>
+                    <ul class="dropdown-menu">
+                      {{#req.session.has_root}}
                         <li {{#nav.admin}}class="active"{{/nav.admin}}><a href="#"><i class="icon-meh"></i> Admin</a></li>
                         <li class="divider"></li>
-                        <li><a href="/logout"><i class="icon-signout"></i> Logout</a></li>
-                      </ul>
-                    </li>
-                  {{/req.session.has_perm("root")}}
+                      {{/req.session.has_root}}
+                      <li><a href="/logout"><i class="icon-signout"></i> Logout</a></li>
+                    </ul>
+                  </li>
                 </ul>
               {{/req.session.userID}}
               {{^req.session.userID}}

@@ -72,6 +72,13 @@ class requestItem(object):
             all_mem.update(members)
             all_raw.extend(raw)
 
+        if len(all_raw) == 0:
+            bits = self._env["PATH_INFO"].split("?", 1)
+            if len(bits) > 1:
+                members, raw = split_members(bits[1])
+                all_mem.update(members)
+                all_raw.extend(raw)
+
         self.params = all_mem
         self.rawParams = all_raw
 

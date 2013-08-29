@@ -2,7 +2,7 @@
 nav:
   phots: true
 +++
-{{#req.session.has_admin}}
+{{#req.session.has_phots}}
   <div class="row">
     <div class="col-sm-12 col-md-2">
       <h4><i class="icon-picture"></i> Phots</h4>
@@ -13,7 +13,7 @@ nav:
     <div class="col-sm-12 col-md-6">
     </div>
   </div>
-{{/req.session.has_admin}}
+{{/req.session.has_phots}}
 <br>
 <div class="row">
   <div class="col-sm-12 col-md-12">
@@ -27,7 +27,7 @@ nav:
         </div>
         <br>
 
-        {{#req.session.has_admin}}
+        {{#req.session.has_phots}}
         <form role="form" action="/phots/edit/rename/{{{picture}}}" method="POST">
           <div class="form-group">
             <label for="name">Rename</label>
@@ -36,7 +36,7 @@ nav:
           </div>
           <button type="submit" class="btn btn-success">Submit</button> <button type="button" class="btn btn-danger" id="del_btn" data-img={{{picture}}}>Delete</button>
         </form>
-        {{/req.session.has_admin}}
+        {{/req.session.has_phots}}
 
       </div>
     </div>

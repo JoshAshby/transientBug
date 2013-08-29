@@ -23,11 +23,27 @@ import rethinkdb as r
 
 
 class session(brm.redisObject):
+    groups = []
     def _finishInit(self):
         if not hasattr(self, "rawAlerts"): self.rawAlerts = "[]"
         if not hasattr(self, "username"): self.username = ""
         if not hasattr(self, "userID"): self.userID = ""
         if not hasattr(self, "groups"): self.groups = []
+
+    def _get(self, item):
+        if "groups" in self._keys:
+            groups = self._keys["groups"]
+            if "has_" in item:
+                if "root" in groups or (item[4:] in groups):
+                    return True
+                else:
+                    return False
+        if item not in object.__getattribute__(self, "protectedItems") \
+                and item[0] != "_":
+            keys = object.__getattribute__(self, "_keys")
+            if item in keys:
+                return keys[item]
+        return object.__getattribute__(self, item)
 
     def loginWithoutCheck(self, user):
         """
@@ -152,5 +168,4 @@ class session(brm.redisObject):
     def has_perm(self, group_name):
         if group_name in self.groups:
             return True
-
         return False
