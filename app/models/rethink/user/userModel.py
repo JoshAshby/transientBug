@@ -23,6 +23,7 @@ import rethinkdb as r
 class User(RethinkModel):
     table = "users"
     _protectedItems = ["formated_about", "formated_created"]
+
     @classmethod
     def new_user(cls, username, password):
         """
@@ -36,7 +37,7 @@ class User(RethinkModel):
         if password == "":
             raise passwordError("Password cannot be null")
 
-        found = r.table("users").filter({'username': username}).count().run()
+        found = r.table(cls.table).filter({'username': username}).count().run()
         if not found:
             passwd = bcrypt.hashpw(password, bcrypt.gensalt())
             user = cls.create(username=username,
@@ -69,5 +70,4 @@ class User(RethinkModel):
     def has_perm(self, group_name):
         if group_name in self.groups:
             return True
-
         return False

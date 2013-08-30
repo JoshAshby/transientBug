@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 """
-fla.gr session model
+session model
 
 Takes advantage of collections to make a dynamic system allowing
 both regular needed session data along with temporary session data storage
@@ -23,7 +23,6 @@ import rethinkdb as r
 
 
 class session(brm.redisObject):
-    groups = []
     def _finishInit(self):
         if not hasattr(self, "rawAlerts"): self.rawAlerts = "[]"
         if not hasattr(self, "username"): self.username = ""
@@ -32,9 +31,8 @@ class session(brm.redisObject):
 
     def _get(self, item):
         if "groups" in self._keys:
-            groups = self._keys["groups"]
             if "has_" in item:
-                if "root" in groups or (item[4:] in groups):
+                if "root" in self.groups or item[4:] in self.groups:
                     return True
                 else:
                     return False
@@ -109,7 +107,7 @@ class session(brm.redisObject):
         """
         self.username = ""
         self.userID = ""
-        self.groups = []
+        self.groups.reset()
         return True
 
     def pushAlert(self, message, quip="", level="success"):
