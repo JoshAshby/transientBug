@@ -38,9 +38,9 @@ def initialSetup():
         print "Creating database in rethink"
         rethinkdb.db_create(con.general.databases["rethink"]["db"]).run()
 
-    print "Reset rethink user table"
-    dbt = rethinkdb.table_list().run()
     if c.general.reset_users:
+        print "Reset rethink user table"
+        dbt = rethinkdb.table_list().run()
         # Reseting users
         if "users" in dbt:
             rethinkdb.table_drop("users").run()
@@ -51,8 +51,9 @@ def initialSetup():
         if not table in dbt:
             rethinkdb.table_create(table).run()
 
-    print "Flushing redis..."
-    con.general.redis.flushdb()
+    if c.general.flush_redis:
+        print "Flushing redis..."
+        con.general.redis.flushdb()
 
 
 def userSetup():

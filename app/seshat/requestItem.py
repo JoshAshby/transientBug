@@ -54,6 +54,8 @@ class requestItem(object):
         self.url = env["PATH_INFO"]
         self.remote = env["HTTP_HOST"] if "HTTP_HOST" in env else "Unknown IP"
 
+        print self._env
+
         self.id = None
 
     def buildParams(self):
@@ -87,10 +89,10 @@ class requestItem(object):
         try:
             cookie.load(self._env["HTTP_COOKIE"])
             self.sessionCookie = { value.key: value.value for key, value in cookie.iteritems() }
-            self.sessionID = self.sessionCookie["flagr_sid"]
+            self.sessionID = self.sessionCookie["bug_sid"]
         except:
-            self.sessionID = uuid.uuid4()
-            self.sessionCookie = {"flagr_sid": self.sessionID}
+            self.sessionID = str(uuid.uuid4())
+            self.sessionCookie = {"bug_sid": self.sessionID}
 
     def buildSession(self):
         self.session = sm.session("session:"+self.sessionID)

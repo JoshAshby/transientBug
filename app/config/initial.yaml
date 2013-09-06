@@ -9,10 +9,11 @@ tables:
   - users
   - notes
 
-reset_users: true
-
 buckets:
   enable500Error:
     value: true
     name: Enable errors on 500 pages
     description: Enable the display of the server errors on 500 pages
+
+reset_users: true
+flush_redis: true

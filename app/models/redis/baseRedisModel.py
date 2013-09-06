@@ -172,13 +172,15 @@ class redisList(object):
                 pass
 
     def append(self, other):
+        assert type(other) == list
         self._list.append(other)
         self.redis.rpush(self.key, other)
         return self._list
 
     def extend(self, other):
+        assert type(other) == list
         self._list.extend(other)
-        self.redis.rpush(self.key, *other)
+        self.redis.rpush(self.key, other) # this
         return self._list
 
     def insert(self, index, elem):
