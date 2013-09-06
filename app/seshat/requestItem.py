@@ -52,9 +52,7 @@ class requestItem(object):
 
         self.method = self._env["REQUEST_METHOD"]
         self.url = env["PATH_INFO"]
-        self.remote = env["HTTP_HOST"] if "HTTP_HOST" in env else "Unknown IP"
-
-        print self._env
+        self.remote = env["HTTP_X_REAL_IP"] if "HTTP_X_REAL_IP" in env else "Unknown IP"
 
         self.id = None
 
