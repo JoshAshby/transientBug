@@ -43,12 +43,6 @@ for fi in config["files"]:
     elif "log" in extension:
         config["files"][fi] = config["dirs"]["log"] + config["files"][fi]
 
-    print config["files"][fi]
-
-#for key, fi in config["files"].items():
-    #if fi[0] != "/":
-      #config["files"][key] = current_path + fi
-
 
 def setupLog():
     """
@@ -66,7 +60,7 @@ def setupLog():
     logger = logging.getLogger(c.general.logName)
     logger.setLevel(level)
 
-    fh = logging.FileHandler(c.general.dirs["log"] + c.general.files["log"])
+    fh = logging.FileHandler(c.general.files["log"])
     fh.setLevel(level)
     fh.setFormatter(formatter)
     logger.addHandler(fh)
@@ -115,7 +109,7 @@ class AppNoDaemon(object):
 if __name__ == "__main__":
     arguments = docopt(__doc__, version='Seshat v0.1.0')
 
-    if arguments["--daemon"]:
+    if arguments["--daemon"] or arguments["stop"] or arguments["restart"]:
         app = AppDaemon(config["files"]["pid"], stderr=config["files"]["stderr"])
     else:
         app = AppNoDaemon()

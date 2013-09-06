@@ -28,7 +28,6 @@ zmqSock = context.socket(zmq.PUB)
 
 current_path = os.path.dirname(__file__) + "/"
 base_path = current_path.rsplit("config")[0]
-print base_path
 
 general = None
 with open(current_path + "config.yaml", "r") as open_config:
@@ -50,12 +49,13 @@ for directory in general.dirs:
         os.makedirs(direct)
     general.dirs[directory] = direct
 
+
 for fi in general.files:
     extension = general.files[fi].rsplit(".", 1)
-    if extension == "pid":
-        general.files[fi] = general.dirs["pid"] + fi
-    elif extension == "log":
-        general.files[fi] = general.dirs["log"] + fi
+    if "pid" in extension:
+        general.files[fi] = general.dirs["pid"] + general.files[fi]
+    elif "log" in extension:
+        general.files[fi] = general.dirs["log"] + general.files[fi]
 
 """
 #########################STOP EDITING#####################################
