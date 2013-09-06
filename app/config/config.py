@@ -27,6 +27,8 @@ context = zmq.Context()
 zmqSock = context.socket(zmq.PUB)
 
 current_path = os.path.dirname(__file__) + "/"
+base_path = current_path.rsplit("config")[0]
+print base_path
 
 general = None
 with open(current_path + "config.yaml", "r") as open_config:
@@ -37,16 +39,23 @@ if not general:
 
 general["rethink"] = rethinkdb.connect(db=general["databases"]["rethink"]["db"]).repl()
 general["redis"] = redis.StrictRedis(general["databases"]["redis"]["URL"], db=general["databases"]["redis"]["db"])
-general["zeromq"] = zmqSock.bind(general["sockets"]["URL"]+":"+str(general["sockets"]["port"]))
+general["zeromq"] = zmqSock.bind(general["sockets"]["zeromq"]["URL"]+":"+str(general["sockets"]["zeromq"]["port"]))
 
 for directory in general.dirs:
     if general.dirs[directory][0] != "/":
-        direct = current_path + general.dirs[directory]
+        direct = base_path + general.dirs[directory]
     else:
         direct = general.dirs[directory]
     if not os.path.exists(direct):
         os.makedirs(direct)
     general.dirs[directory] = direct
+
+for fi in general.files:
+    extension = general.files[fi].rsplit(".", 1)
+    if extension == "pid":
+        general.files[fi] = general.dirs["pid"] + fi
+    elif extension == "log":
+        general.files[fi] = general.dirs["log"] + fi
 
 """
 #########################STOP EDITING#####################################

@@ -42,7 +42,7 @@ class baseHTTPObject(object):
                 self._redirect("/login")
                 return "", self.head
 
-            if self._groups and (not self.request.session.has_root \
+            if self._groups and (not self.request.session.has_perm("root") \
                or not len(set(self._groups).union(self.request.session.groups)) >= 1):
                     self.request.session.pushAlert("You are not authorized to perfom this action.", "error")
                     self._redirect("/")

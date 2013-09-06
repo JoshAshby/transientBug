@@ -21,10 +21,13 @@ class Note(RethinkModel):
     _protectedItems = []
 
     @classmethod
-    def new_note(cls, user="", title="", contents="", public=False, tags=[]):
+    def new_note(cls, user, title="", contents="", public=False, tags=[]):
         """
         """
-        created = arrow.utcnow().timestamp
+        time = arrow.utcnow()
+        if not title:
+          title = "Untitled Note @ %s" % time.format("YY/MM/DD HH:mm:ss")
+        created = time.timestamp
         what = cls.create(user=user,
                           created=created,
                           contents=contents,
@@ -32,7 +35,6 @@ class Note(RethinkModel):
                           tags=tags)
 
         return what
-
 
     def format(self, time_format="human"):
         """

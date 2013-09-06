@@ -24,9 +24,8 @@ databases:
     URL: localhost
 
 sockets:
-  URL: tcp://127.0.0.1
-  port: 9000
+  zeromq:
+    URL: tcp://127.0.0.1
+    port: 9000
 
 debug: true
-
-baseURL: http://transientBug.com/

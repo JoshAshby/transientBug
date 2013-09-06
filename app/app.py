@@ -26,9 +26,28 @@ os.chdir(abspath)
 current_path = os.getcwd() + "/"
 
 config = yaml.load(file(current_path+"/config/config.yaml", 'r'))
-for key, fi in config["files"].items():
-    if fi[0] != "/":
-      config["files"][key] = current_path + fi
+
+for directory in config["dirs"]:
+    if config["dirs"][directory][0] != "/":
+        direct = current_path + config["dirs"][directory]
+    else:
+        direct = config["dirs"][directory]
+    if not os.path.exists(direct):
+        os.makedirs(direct)
+    config["dirs"][directory] = direct
+
+for fi in config["files"]:
+    extension = config["files"][fi].rsplit(".", 1)
+    if "pid" in extension:
+        config["files"][fi] = config["dirs"]["pid"] + config["files"][fi]
+    elif "log" in extension:
+        config["files"][fi] = config["dirs"]["log"] + config["files"][fi]
+
+    print config["files"][fi]
+
+#for key, fi in config["files"].items():
+    #if fi[0] != "/":
+      #config["files"][key] = current_path + fi
 
 
 def setupLog():
