@@ -52,7 +52,7 @@ def initialSetup():
             rethinkdb.table_create(table).run()
 
     print "Flushing redis..."
-    con.general.flushdb()
+    con.general.redis.flushdb()
 
 
 def userSetup():
