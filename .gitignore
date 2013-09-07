@@ -32,6 +32,9 @@ old/
 interface/templates/
 app/rethinkdb_data
 
+app/config/config.yaml
+app/config/initial.yaml
+
 # Compiled source #
 ###################
 *.a

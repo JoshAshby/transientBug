@@ -15,7 +15,7 @@ import os
 import config.config as c
 
 from seshat.route import autoRoute
-from seshat.baseObject import HTMLObject
+from seshat.baseObject import HTMLObject, JSONObject
 from seshat.objectMods import login
 
 from utils.paginate import pager
@@ -35,6 +35,8 @@ class index(HTMLObject):
         perpage = self.request.getParam("perpage", 24)
         page = self.request.getParam("page", 0)
         sort_dir = self.request.getParam("dir", "desc")
+
+        self.view.scripts = ["scrn"]
 
         f = []
         for top, folders, files in os.walk(c.general.dirs["screenshots"]):

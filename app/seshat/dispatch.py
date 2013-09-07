@@ -159,7 +159,9 @@ def logURL(request, url):
     PARAMS: %s
     Object: %s
     IP: %s
-""" % (request.method, request.url, request.rawParams, url.pageObject.__module__+"/"+url.pageObject.__name__, request.remote))
+    UA: %s
+    R: %s
+""" % (request.method, request.url, request.rawParams, url.pageObject.__module__+"/"+url.pageObject.__name__, request.remote, request.user_agent, request.referer))
 
 
 def logResponse(request, status):
@@ -173,14 +175,20 @@ def log500(request):
     logger.error("""\n\r-------500 INTERNAL SERVER ERROR --------
     Method: %s
     URL: %s
+    PARAMS: %s
     IP: %s
+    UA: %s
+    R: %s
     ERROR: %s
-    """ % (request.method, request.url, request.remote, request.error))
+    """ % (request.method, request.url, request.rawParams, request.remote, request.user_agent, request.referer, request.error))
 
 
 def log404(request):
     logger.warn("""\n\r-------404 NOT FOUND--------
     Method: %s
     URL: %s
+    PARAMS: %s
     IP: %s
-    """ % (request.method, request.url, request.remote))
+    UA: %s
+    R: %s
+    """ % (request.method, request.url, request.rawParams, request.remote, request.user_agent, request.referer))

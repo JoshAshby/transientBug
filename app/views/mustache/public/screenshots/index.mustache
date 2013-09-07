@@ -39,7 +39,14 @@ nav:
       <div class="thumbnail">
         <a href="/scrn/{{{.}}}" class="thumbnail"><img src="/scrn/{{{.}}}" alt="{{.}}"></a>
         <div class="caption">
-          <h6>{{{.}}}</h6>
+          <div class="row">
+            <div class="col-sm-12 col-md-6">
+              <a href="/scrn/{{{.}}}"><h6>{{{.}}}</h6></a>
+            </div>
+            <div class="col-sm-12 col-md-6">
+              <button type="button" class="btn btn-danger pull-right" id="del_btn" data-img={{{.}}}>Delete</button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -62,7 +69,7 @@ nav:
         <a href="?page={{page.next}}&perpage={{page.perpage}}&dir={{page.dir}}">Next <i class="icon-chevron-right"></i></a>
       {{/page.hasNext}}
       {{^page.hasNext}}
-        <a>Next <i class="icon-chevron-left"></i></a>
+        <a>Next <i class="icon-chevron-right"></i></a>
       {{/page.hasNext}}
     </li>
   </ul>

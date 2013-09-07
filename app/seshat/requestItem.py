@@ -30,15 +30,14 @@ import models.redis.bucket.bucketModel as bm
 def split_members(item):
     members = {}
     raw = {}
-    if item:
-        parts = item.split("&")
-        for part in parts:
-            query = part.split("=")
+    for part in item.split("&"):
+        query = part.split("=")
+        if query[0]:
             if len(query) > 1:
                 raw.update({query[0]: query[1]})
                 members.update({re.sub("\+", " ", query[0]): urllib.unquote(re.sub("\+", " ", query[1]))})
             else:
-                raw.update(part)
+              raw.update({part: None})
     return members, raw
 
 
@@ -53,6 +52,8 @@ class requestItem(object):
         self.method = self._env["REQUEST_METHOD"]
         self.url = env["PATH_INFO"]
         self.remote = env["HTTP_X_REAL_IP"] if "HTTP_X_REAL_IP" in env else "Unknown IP"
+        self.user_agent = env["HTTP_USER_AGENT"] if "HTTP_USER_AGENT" in env else "Unknown User Agent"
+        self.referer = env["HTTP_REFERER"] if "HTTP_REFERER" in env else "No Referer"
 
         self.id = None
 
@@ -61,16 +62,14 @@ class requestItem(object):
         all_raw = {}
 
         # GET Params
-        for item in self._env["QUERY_STRING"].split("&"):
-            members, raw = split_members(item)
-            all_mem.update(members)
-            all_raw.update(raw)
+        members, raw = split_members(self._env["QUERY_STRING"])
+        all_mem.update(members)
+        all_raw.update(raw)
 
         # POST Params
-        for item in self._env["wsgi.input"]:
-            members, raw = split_members(item)
-            all_mem.update(members)
-            all_raw.update(raw)
+        members, raw = split_members(self._env["wsgi.input"].read())
+        all_mem.update(members)
+        all_raw.update(raw)
 
         if len(all_raw) == 0:
             bits = self._env["PATH_INFO"].split("?", 1)
