@@ -56,11 +56,13 @@ class Note(RethinkModel):
 
         return what
 
-    def format(self, time_format="human"):
+    def format(self, time_format="human", length=160):
         """
         Formats markdown and dates into the right stuff
         """
         self._formated_contents = mdu.markClean(self.contents, ['footnotes'])
+
+        self._formated_short_contents = mdu.markClean(self.contents[:length]+"...", ['footnotes'])
         if time_format != "human":
             self._formated_created = arrow.get(self.created).format(time_format)
         else:
