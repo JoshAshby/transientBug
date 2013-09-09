@@ -34,8 +34,14 @@ a.thumbnail {
 a:hover {
   color: #2180ac;
 }
+.dropdown-menu > .active > a,
+.dropdown-menu > .active > a:hover,
+.dropdown-menu > .active > a:focus,
 .dropdown-menu > li > a:hover,
-.dropdown-menu > li > a:focus {
+.dropdown-menu > li > a:focus,
+.nav-pills > li.active > a,
+.nav-pills > li.active > a:hover,
+.nav-pills > li.active > a:focus {
   background-color: #2a9fd6;
 }
 .pager li > a:hover,
@@ -60,4 +66,9 @@ a:hover {
 }
 .container-full {
   background-color: #1d7097;
+}
+.label-theme {
+  color: white;
+  background-color: #2a9fd6;
+  border: #2a9fd6 solid 1px;
 }

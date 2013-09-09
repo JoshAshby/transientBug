@@ -17,15 +17,17 @@ nav:
   <div class="col-sm-12 col-md-6">
     <form class="form-inline pull-right" role="pagination_options">
       {{#req.session.has_notes}}
-        <div class="form-group">
-          <label class="sr-only" for="filter">Filter</label>
-          <select name="filter" class="input-sm">
-            {{#type}}<option value={{type}}>{{type}}</option>{{/type}}
-            <option value=all>all</option>
-            <option value=private>private</option>
-            <option value=public>public</option>
-          </select>
-        </div>
+        {{#type}}
+          <div class="form-group">
+            <label class="sr-only" for="filter">Filter</label>
+            <select name="filter" class="input-sm">
+              {{#type}}<option value={{type}}>{{type}}</option>{{/type}}
+              <option value=all>all</option>
+              <option value=private>private</option>
+              <option value=public>public</option>
+            </select>
+          </div>
+        {{/type}}
       {{/req.session.has_notes}}
       <div class="form-group">
         <label class="sr-only" for="dir">Sort</label>
@@ -57,7 +59,7 @@ nav:
     <br>
     {{{_formated_short_contents}}}
     {{#tags}}
-      <a href="/notes/tags/{{.}}"><span class="label label-primary">{{.}}</span></a>
+      <a href="/notes/tags/{{.}}"><span class="label label-theme">{{.}}</span></a>
     {{/tags}}
     <hr>
   </div>

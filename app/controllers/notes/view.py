@@ -51,7 +51,8 @@ class view(HTMLObject):
 
             note.format()
 
-            self.view.scripts = ["note"]
+            if self.request.session.has_notes:
+                self.view.scripts = ["note"]
 
             if note.public:
                 title = """<i class="icon-eye-open"></i> """

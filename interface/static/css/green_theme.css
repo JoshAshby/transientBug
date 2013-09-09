@@ -34,8 +34,14 @@ a.thumbnail {
 a:hover {
   color: #558000;
 }
+.dropdown-menu > .active > a,
+.dropdown-menu > .active > a:hover,
+.dropdown-menu > .active > a:focus,
 .dropdown-menu > li > a:hover,
-.dropdown-menu > li > a:focus {
+.dropdown-menu > li > a:focus,
+.nav-pills > li.active > a,
+.nav-pills > li.active > a:hover,
+.nav-pills > li.active > a:focus {
   background-color: #77b300;
 }
 .pager li > a:hover,
@@ -60,4 +66,9 @@ a:hover {
 }
 .container-full {
   background-color: #446600;
+}
+.label-theme {
+  color: white;
+  background-color: #77b300;
+  border: #77b300 solid 1px;
 }

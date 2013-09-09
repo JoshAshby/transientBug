@@ -49,12 +49,12 @@ class tags(HTMLObject):
         if not self.request.session.has_notes:
             parts = parts.filter({"public": True})
 
-        elif what_type != "all":
+        else:
+            parts = parts.filter({"user": self.request.session.userID})
             if what_type=="private":
                 parts = parts.filter({"public": False})
-            else:
+            elif what_type=="public":
                 parts = parts.filter({"public": True})
-
 
         for part in parts.run():
             note = nm.Note.fromRawEntry(**part)

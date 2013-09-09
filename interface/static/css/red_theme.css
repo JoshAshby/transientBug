@@ -26,13 +26,13 @@ h6.thumbnail_h6 {
   text-decoration: none;
 }
 a {
-  color: #cc0000;
+  color: #b30000;
 }
 a.thumbnail {
-  border: #cc0000 solid 1px;
+  border: #b30000 solid 1px;
 }
 a:hover {
-  color: #990000;
+  color: #800000;
 }
 .dropdown-menu > .active > a,
 .dropdown-menu > .active > a:hover,
@@ -42,18 +42,18 @@ a:hover {
 .nav-pills > li.active > a,
 .nav-pills > li.active > a:hover,
 .nav-pills > li.active > a:focus {
-  background-color: #cc0000;
+  background-color: #b30000;
 }
 .pager li > a:hover,
 .pager li > a:focus {
-  background-color: #cc0000;
+  background-color: #b30000;
   color: white;
 }
 .btn-primary,
 .btn-theme {
   color: white;
-  background-color: #cc0000;
-  border: #cc0000 solid 1px;
+  background-color: #b30000;
+  border: #b30000 solid 1px;
 }
 .btn-primary:focus,
 .btn-theme:focus,
@@ -61,9 +61,14 @@ a:hover {
 .btn-theme:hover,
 .btn-primary:active,
 .btn-theme:active {
-  background-color: #990000;
-  border: #990000 solid 1px;
+  background-color: #800000;
+  border: #800000 solid 1px;
 }
 .container-full {
-  background-color: #800000;
+  background-color: #660000;
+}
+.label-theme {
+  color: white;
+  background-color: #b30000;
+  border: #b30000 solid 1px;
 }

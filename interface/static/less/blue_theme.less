@@ -12,7 +12,7 @@ a {
   }
 }
 
-.dropdown-menu>li>a:hover, .dropdown-menu>li>a:focus {
+.dropdown-menu>.active>a, .dropdown-menu>.active>a:hover, .dropdown-menu>.active>a:focus, .dropdown-menu>li>a:hover, .dropdown-menu>li>a:focus, .nav-pills>li.active>a, .nav-pills>li.active>a:hover, .nav-pills>li.active>a:focus {
   background-color: @blue;
 }
 
@@ -34,4 +34,10 @@ a {
 
 .container-full {
   background-color: darken(@blue, 15%); //#507800;
+}
+
+.label-theme {
+  color: white;
+  background-color: @blue;
+  border: @blue solid 1px;
 }
