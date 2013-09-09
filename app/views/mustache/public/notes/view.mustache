@@ -12,7 +12,7 @@ nav:
     <br>
     {{{note._formated_contents}}}
     {{#note.tags}}
-      <span class="label label-primary">{{.}}</span>
+      <a href="/notes/tags/{{.}}"><span class="label label-primary">{{.}}</span></a>
     {{/note.tags}}
   {{/is_author}}
 
@@ -28,7 +28,7 @@ nav:
           <br>
           {{{note._formated_contents}}}
           {{#note.tags}}
-            <span class="label label-primary">{{.}}</span>
+            <a href="/notes/tags/{{.}}"><span class="label label-primary">{{.}}</span></a>
           {{/note.tags}}
 
         </div>
@@ -51,7 +51,7 @@ nav:
                 <input type="text" class="form-control" name="tags" placeholder="Tags..." value="{{note._formated_tags}}">
               </div>
               <hr>
-              <button id="save_btn" class="btn btn-theme" data-short={{note.short_code}}>Save</button> <button type="button" class="btn btn-danger pull-right" id="del_btn" data-short={{note.short_code}}>Delete</button>
+              <button id="save_btn" class="btn btn-sm btn-theme" data-short={{note.short_code}}>Save</button> <button type="button" class="btn btn-sm btn-danger pull-right" id="del_btn" data-short={{note.short_code}}>Delete</button>
             </fieldset>
           </form>
         </div>

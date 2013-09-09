@@ -23,7 +23,7 @@ import models.rethink.note.noteModel as nm
 
 #@login(["notes"])
 @autoRoute()
-class index(HTMLObject):
+class tags(HTMLObject):
     """
     """
     _title = "notes"
@@ -31,6 +31,8 @@ class index(HTMLObject):
     def GET(self):
         """
         """
+        tag = self.request.id
+
         perpage = self.request.getParam("perpage", 25)
         page = self.request.getParam("page", 0)
         sort_dir = self.request.getParam("dir", "desc")
@@ -42,7 +44,7 @@ class index(HTMLObject):
         else:
             sort = "created"
 
-        parts = r.table(nm.Note.table).order_by(sort)
+        parts = r.table(nm.Note.table).order_by(sort).filter(r.row['tags'].filter(lambda el: el == tag).count() > 0)
 
         if not self.request.session.has_notes:
             parts = parts.filter({"public": True})

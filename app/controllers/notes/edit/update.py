@@ -48,8 +48,6 @@ class update(JSONObject):
             try:
                 note = nm.Note.fromRawEntry(**f)
 
-                print note
-
                 note.user=self.request.session.userID
                 note.title=title
                 note.contents=contents
@@ -58,7 +56,6 @@ class update(JSONObject):
                 note.created=time
 
                 note.save()
-
 
                 return {"success": True}
             except Exception as e:

@@ -50,15 +50,13 @@
                 <li {{#nav.phots}}class="active"{{/nav.phots}}><a href="/phots"><i class="icon-picture"></i> Phots</a></li>
                 {{#req.session.userID}}
                   <li {{#nav.screenshots}}class="active"{{/nav.screenshots}}><a href="/screenshots"><i class="icon-screenshot"></i> Scrns</a></li>
-                  <li class="dropdown {{#nav.notes}}active{{/nav.notes}}">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-chevron-down"></i></a>
-                    <ul class="dropdown-menu">
-                      {{#req.session.has_notes}}
-                        <li {{#nav.notes}}class="active"{{/nav.notes}}><a href="/notes"><i class="icon-file-text"></i> Notes</a></li>
-                      {{/req.session.has_notes}}
-                    </ul>
-                  </li>
                 {{/req.session.userID}}
+                <li class="dropdown {{#nav.notes}}active{{/nav.notes}}">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-chevron-down"></i></a>
+                  <ul class="dropdown-menu">
+                    <li {{#nav.notes}}class="active"{{/nav.notes}}><a href="/notes"><i class="icon-file-text"></i> Notes</a></li>
+                  </ul>
+                </li>
               </ul>
               {{#req.session.userID}}
                 <ul class="nav navbar-nav navbar-right" style="margin-right: 15px">

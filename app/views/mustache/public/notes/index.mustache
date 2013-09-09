@@ -10,19 +10,23 @@ nav:
     <h4><i class="icon-file-text"></i> Notes</h4>
   </div>
   <div class="col-sm-12 col-md-4">
-    <a href="/notes/new" class="btn btn-theme btn-sm">Add</a>
+    {{#req.session.has_notes}}
+      <a href="/notes/new" class="btn btn-theme btn-sm">Add</a>
+    {{/req.session.has_notes}}
   </div>
   <div class="col-sm-12 col-md-6">
     <form class="form-inline pull-right" role="pagination_options">
-      <div class="form-group">
-        <label class="sr-only" for="dir">Sort</label>
-        <select name="filter" class="input-sm">
-          {{#type}}<option value={{type}}>{{type}}</option>{{/type}}
-          <option value=all>all</option>
-          <option value=private>private</option>
-          <option value=public>public</option>
-        </select>
-      </div>
+      {{#req.session.has_notes}}
+        <div class="form-group">
+          <label class="sr-only" for="filter">Filter</label>
+          <select name="filter" class="input-sm">
+            {{#type}}<option value={{type}}>{{type}}</option>{{/type}}
+            <option value=all>all</option>
+            <option value=private>private</option>
+            <option value=public>public</option>
+          </select>
+        </div>
+      {{/req.session.has_notes}}
       <div class="form-group">
         <label class="sr-only" for="dir">Sort</label>
         <select id="dir" name="dir"class="input-sm">
@@ -53,7 +57,7 @@ nav:
     <br>
     {{{_formated_short_contents}}}
     {{#tags}}
-      <span class="label label-primary">{{.}}</span>
+      <a href="/notes/tags/{{.}}"><span class="label label-primary">{{.}}</span></a>
     {{/tags}}
     <hr>
   </div>
