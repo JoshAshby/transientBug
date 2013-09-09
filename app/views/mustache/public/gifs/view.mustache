@@ -8,7 +8,7 @@ nav:
       <h4><i class="icon-picture"></i> Phots</h4>
     </div>
     <div class="col-sm-12 col-md-4">
-      <a href="/phots/new" class="btn btn-success btn-sm">Add</a>
+      <a href="/phots/new" class="btn btn-theme btn-sm">Add</a>
     </div>
     <div class="col-sm-12 col-md-6">
     </div>
@@ -34,7 +34,7 @@ nav:
             <input type="text" class="form-control" id="name" name="name" placeholder="New name..." required>
             <p class="help-block">All spaces in this name will be replaced with underscores.</p>
           </div>
-          <button type="submit" class="btn btn-success">Submit</button> <button type="button" class="btn btn-danger" id="del_btn" data-img={{{picture}}}>Delete</button>
+          <button type="submit" class="btn btn-theme">Submit</button> <button type="button" class="btn btn-danger" id="del_btn" data-img={{{picture}}}>Delete</button>
         </form>
         {{/req.session.has_phots}}
 

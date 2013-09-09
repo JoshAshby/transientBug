@@ -13,7 +13,7 @@ scripts: "
   </div>
   <div class="col-sm-12 col-md-4">
     {{#req.session.has_phots}}
-      <a href="/phots/new" class="btn btn-success btn-sm">Add</a>
+      <a href="/phots/new" class="btn btn-theme btn-sm">Add</a>
     {{/req.session.has_phots}}
   </div>
   <div class="col-sm-12 col-md-6">
@@ -47,7 +47,7 @@ scripts: "
           <option value=all>All</option>
         </select>
       </div>
-      <button type="submit" class="btn btn-success btn-sm">Update</button>
+      <button type="submit" class="btn btn-theme btn-sm">Update</button>
     </form>
   </div>
 </div>
@@ -63,7 +63,7 @@ scripts: "
               <a href="/i/{{{.}}}"><h6 class="thumbnail_h6" data-toggle="tooltip" title="{{.}}">{{{.}}}</h6></a>
             </div>
             <div class="col-md-4">
-              <a href="/phots/view/{{{.}}}" class="btn btn-success btn-sm pull-right">Page</a>
+              <a href="/phots/view/{{{.}}}" class="btn btn-theme btn-sm pull-right">Page</a>
             </div>
           </div>
         </div>

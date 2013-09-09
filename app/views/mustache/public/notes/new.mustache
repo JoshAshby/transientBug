@@ -1,0 +1,28 @@
++++
+theme_color: red
+
+nav:
+  notes: true
++++
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="thumbnail">
+      <div class="caption">
+        <form method="POST">
+          <fieldset>
+            <legend>New Note...</legend>
+            <div class="form-group">
+              <input type="text" class="form-control" id="title" name="title" placeholder="Title..." required>
+            </div>
+            <div class="form-group">
+              <textarea rows="20" class="form-control" name="content" id="content"></textarea>
+            </div>
+            <hr>
+            <button class="btn btn-theme" type="submit">Save</button>
+          </fieldset>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

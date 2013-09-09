@@ -13,48 +13,14 @@
     <!--<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-theme.min.css">-->
     <!--<link href="//netdna.bootstrapcdn.com/bootswatch/3.0.0/cosmo/bootstrap.min.css" rel="stylesheet">-->
     <link href="//netdna.bootstrapcdn.com/bootswatch/3.0.0/cyborg/bootstrap.min.css" rel="stylesheet">
+
     <!-- Begin page stylsheets -->
+    <link href="/static/css/{{theme_color}}_theme.css" rel="stylesheet">
     {{#stylesheets}}
-      <script src="/static/css/{{.}}.css"></script>
+      <link href="/static/css/{{.}}.css" rel="stylesheet">
     {{/stylesheets}}
 
     <style>
-      @import url(http://fonts.googleapis.com/css?family=Maven+Pro:700);
-
-      .navbar-brand, footer {
-        font-family: 'Maven Pro', sans-serif;
-      }
-
-      a.thumbnail {
-        border: #77B300 solid 1px
-      }
-
-      .thumbnail {
-        border: #2b2b2b solid 2px
-      }
-
-      a {
-        color: #77B300;
-      }
-
-      a:hover {
-        color: #507800;
-      }
-
-      .dropdown-menu>li>a:hover, .dropdown-menu>li>a:focus {
-        background-color: #77B300;
-      }
-
-      .pager li>a:hover, .pager li>a:focus {
-        background-color: #77B300;
-        color: white;
-      }
-
-      h6.thumbnail_h6 {
-        white-space: nowrap;
-        overflow: hidden;
-      }
-
       {{{styles}}}
     </style>
     <!-- End page style sheets -->

@@ -71,5 +71,6 @@ class new(HTMLObject):
                 self.view.template = "public/gifs/error"
                 self.view.data = {"error": "Something went wrong and the link didn't return a 200 code."}
                 return self.view
+
         elif img_file is not None:
             pass

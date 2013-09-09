@@ -1,0 +1,37 @@
+@import "base.less";
+
+a {
+  color: @blue;
+
+  .thumbnail {
+    border: @blue solid 1px
+  }
+
+  &:hover {
+    color: darken(@blue, 10%); //#507800;
+  }
+}
+
+.dropdown-menu>li>a:hover, .dropdown-menu>li>a:focus {
+  background-color: @blue;
+}
+
+.pager li>a:hover, .pager li>a:focus {
+  background-color: @blue;
+  color: white;
+}
+
+.btn-primary, .btn-theme {
+  color: white;
+  background-color: @blue;
+  border: @blue solid 1px;
+
+  &:focus, &:hover, &:active {
+    background-color: darken(@blue, 10%);
+    border: darken(@blue, 10%) solid 1px;
+  }
+}
+
+.container-full {
+  background-color: darken(@blue, 15%); //#507800;
+}

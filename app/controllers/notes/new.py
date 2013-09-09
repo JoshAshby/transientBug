@@ -27,7 +27,7 @@ class new(HTMLObject):
     Returns base index page listing all gifs
     """
     _title = "new note"
-    _defaultTmpl = "public/note/new"
+    _defaultTmpl = "public/notes/new"
     def GET(self):
         """
         """
@@ -37,14 +37,19 @@ class new(HTMLObject):
         title = self.request.getParam("title",
                                       "Untitled Note %s" %
                                       arrow.utcnow().format("YYYY-MM-dd"))
-        contents = self.request.getParam("contents")
+        contents = self.request.getParam("contents", "")
         public = self.request.getParam("public", False)
         tags = self.request.getParam("tags", [], list)
 
-        note = nm.Note.new_note(user=self.request.session.userID,
-                    title=title,
-                    contents=contents,
-                    public=public,
-                    tags=tags)
+        try:
+            note = nm.Note.new_note(user=self.request.session.userID,
+                        title=title,
+                        contents=contents,
+                        public=public,
+                        tags=tags)
+        except Exception as e:
+            self.request.session.pushAlert("That note could not be created! %s" % e.message)
+            self._redirect("/notes/new")
+            return
 
         self._redirect("/notes/view/%s" % note.id)

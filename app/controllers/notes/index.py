@@ -17,11 +17,11 @@ from seshat.objectMods import login
 
 from utils.paginate import pager
 
-import rethink as r
+import rethinkdb as r
 import models.rethink.note.noteModel as nm
 
 
-@login(["root"])
+@login(["notes"])
 @autoRoute()
 class index(HTMLObject):
     """
@@ -36,7 +36,7 @@ class index(HTMLObject):
         sort_dir = self.request.getParam("dir", "desc")
 
         f = []
-        parts = r.table("notes").run()
+        parts = r.table(nm.Note.table).run()
         for part in parts:
             f.append(nm.fromRawEntry)
 

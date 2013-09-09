@@ -1,0 +1,60 @@
+@import url(http://fonts.googleapis.com/css?family=Maven+Pro:700);
+.navbar-brand,
+footer {
+  font-family: 'Maven Pro', sans-serif;
+}
+.thumbnail {
+  border: #2b2b2b solid 2px;
+}
+h6.thumbnail_h6 {
+  white-space: nowrap;
+  overflow: hidden;
+}
+.container-full {
+  width: 100%;
+  color: #eee;
+  padding-bottom: 30px;
+  max-width: 100%;
+}
+.container-full h1 {
+  font-family: 'Maven Pro', sans-serif;
+}
+.container-full a {
+  text-decoration: none;
+}
+a {
+  color: #cc0000;
+}
+a .thumbnail {
+  border: #cc0000 solid 1px;
+}
+a:hover {
+  color: #990000;
+}
+.dropdown-menu > li > a:hover,
+.dropdown-menu > li > a:focus {
+  background-color: #cc0000;
+}
+.pager li > a:hover,
+.pager li > a:focus {
+  background-color: #cc0000;
+  color: white;
+}
+.btn-primary,
+.btn-theme {
+  color: white;
+  background-color: #cc0000;
+  border: #cc0000 solid 1px;
+}
+.btn-primary:focus,
+.btn-theme:focus,
+.btn-primary:hover,
+.btn-theme:hover,
+.btn-primary:active,
+.btn-theme:active {
+  background-color: #990000;
+  border: #990000 solid 1px;
+}
+.container-full {
+  background-color: #800000;
+}

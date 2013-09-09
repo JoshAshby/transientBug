@@ -174,6 +174,9 @@ class template(object):
         elif self._base is not None:
             base = tmpls[self._base]
 
+        if not "theme_color" in template.config:
+            _data["theme_color"] = "green"
+
         if base is not None:
             baseTmpl = base.template
             _data.update(base.config)

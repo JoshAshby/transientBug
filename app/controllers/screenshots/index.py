@@ -15,7 +15,7 @@ import os
 import config.config as c
 
 from seshat.route import autoRoute
-from seshat.baseObject import HTMLObject, JSONObject
+from seshat.baseObject import HTMLObject
 from seshat.objectMods import login
 
 from utils.paginate import pager
@@ -32,6 +32,8 @@ class index(HTMLObject):
     def GET(self):
         """
         """
+        self.view.data = {"header": "Screenshots"}
+
         perpage = self.request.getParam("perpage", 24)
         page = self.request.getParam("page", 0)
         sort_dir = self.request.getParam("dir", "desc")
