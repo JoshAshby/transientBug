@@ -164,6 +164,6 @@ class session(brm.redisObject):
         self._HTMLAlerts = unicode(alertStr)
 
     def has_perm(self, group_name):
-        if group_name in self.groups:
+        if group_name in self.groups or "root" in self.groups:
             return True
         return False

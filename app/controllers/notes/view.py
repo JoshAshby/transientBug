@@ -17,7 +17,7 @@ import rethinkdb as r
 import models.rethink.note.noteModel as nm
 
 
-@login(["notes"])
+#@login(["notes"])
 @autoRoute()
 class view(HTMLObject):
     """
@@ -29,9 +29,40 @@ class view(HTMLObject):
         """
         note = self.request.id
 
-        f = r.table(nm.Note.table).filter({"note_code": note}).run()
+        f = r.table(nm.Note.table).filter({"short_code": note}).run()
 
-        print f
+        f = list(f)
+        if f:
+            f = f[0]
 
-        self.view.data = {"note": f}
-        return self.view
+            note = nm.Note.fromRawEntry(**f)
+
+            if not note.public:
+                if not self.request.session.userID \
+                      or not self.request.session.has_notes \
+                      or self.request.session.userID!=note.user:
+                    self.request.session.pushAlert("That note is not public and you do not have the rights to access it.", level="error")
+                    self._redirect("/notes")
+                    return
+
+            is_author = False
+            if note.user == self.request.session.userID:
+                is_author = True
+
+            note.format()
+
+            self.view.scripts = ["note"]
+
+            if note.public:
+                title = """<i class="icon-eye-open"></i> """
+            else:
+                title = """<i class="icon-eye-close"></i> """
+
+            title += note.title
+
+            self.view.data = {"note": note, "header": title, "is_author": is_author}
+            return self.view
+        else:
+            self.request.session.pushAlert("That note could not be found!", level="error")
+            self._redirect("/notes")
+            return

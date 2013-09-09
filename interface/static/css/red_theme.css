@@ -25,14 +25,20 @@ h6.thumbnail_h6 {
 a {
   color: #cc0000;
 }
-a .thumbnail {
+a.thumbnail {
   border: #cc0000 solid 1px;
 }
 a:hover {
   color: #990000;
 }
+.dropdown-menu > .active > a,
+.dropdown-menu > .active > a:hover,
+.dropdown-menu > .active > a:focus,
 .dropdown-menu > li > a:hover,
-.dropdown-menu > li > a:focus {
+.dropdown-menu > li > a:focus,
+.nav-pills > li.active > a,
+.nav-pills > li.active > a:hover,
+.nav-pills > li.active > a:focus {
   background-color: #cc0000;
 }
 .pager li > a:hover,

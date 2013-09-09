@@ -34,22 +34,26 @@ class new(HTMLObject):
         return self.view
 
     def POST(self):
-        title = self.request.getParam("title",
-                                      "Untitled Note %s" %
-                                      arrow.utcnow().format("YYYY-MM-dd"))
-        contents = self.request.getParam("contents", "")
+        title = self.request.getParam("title")
+        contents = self.request.getParam("contents")
         public = self.request.getParam("public", False)
-        tags = self.request.getParam("tags", [], list)
+        tags = self.request.getParam("tags")
+
+        if tags:
+            tag = [ bit.lstrip().rstrip() for bit in tags.split(",") ]
+        else:
+            tag = []
 
         try:
             note = nm.Note.new_note(user=self.request.session.userID,
                         title=title,
                         contents=contents,
                         public=public,
-                        tags=tags)
+                        tags=tag)
+
         except Exception as e:
-            self.request.session.pushAlert("That note could not be created! %s" % e.message)
+            self.request.session.pushAlert("That note could not be created! %s" % e.message, level="error")
             self._redirect("/notes/new")
             return
 
-        self._redirect("/notes/view/%s" % note.id)
+        self._redirect("/notes/view/%s" % note.short_code)

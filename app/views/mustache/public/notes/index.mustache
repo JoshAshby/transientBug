@@ -4,3 +4,79 @@ theme_color: red
 nav:
   notes: true
 +++
+
+<div class="row">
+  <div class="col-sm-12 col-md-2">
+    <h4><i class="icon-file-text"></i> Notes</h4>
+  </div>
+  <div class="col-sm-12 col-md-4">
+    <a href="/notes/new" class="btn btn-theme btn-sm">Add</a>
+  </div>
+  <div class="col-sm-12 col-md-6">
+    <form class="form-inline pull-right" role="pagination_options">
+      <div class="form-group">
+        <label class="sr-only" for="dir">Sort</label>
+        <select name="filter" class="input-sm">
+          {{#type}}<option value={{type}}>{{type}}</option>{{/type}}
+          <option value=all>all</option>
+          <option value=private>private</option>
+          <option value=public>public</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="sr-only" for="dir">Sort</label>
+        <select id="dir" name="dir"class="input-sm">
+          {{#dir}}<option value={{dir}}>{{dir}}</option>{{/dir}}
+          <option value=desc>desc</option>
+          <option value=asc>asc</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="sr-only" for="perpage">Perpage</label>
+        <select id="perpage" name="perpage" class="input-sm">
+          {{#page.perpage}}<option value={{page.perpage}}>{{page.perpage}}</option>{{/page.perpage}}
+          <option value=25>25</option>
+          <option value=50>50</option>
+          <option value=all>All</option>
+        </select>
+      </div>
+      <button type="submit" class="btn btn-theme btn-sm">Update</button>
+    </form>
+  </div>
+</div>
+<br>
+
+{{#notes}}
+<div class="row">
+  <div class="col-md-12">
+    <a href="/notes/view/{{short_code}}"><h2><i class="icon-eye-{{#public}}open{{/public}}{{^public}}close{{/public}}"></i> {{title}} <small> By {{_formated_author}} - {{_formated_created}}</small></h2></a>
+    <br>
+    {{{_formated_contents}}}
+    {{#tags}}
+      <span class="label label-primary">{{.}}</span>
+    {{/tags}}
+    <hr>
+  </div>
+</div>
+{{/notes}}
+
+{{#page.show}}
+  <ul class="pager">
+    <li class="previous {{^page.hasPrev}}disabled{{/page.hasPrev}}">
+      {{#page.hasPrev}}
+        <a href="?page={{page.prev}}&perpage={{page.perpage}}&dir={{dir}}&filter={{type}}"><i class="icon-chevron-left"></i> Prev</a>
+      {{/page.hasPrev}}
+      {{^page.hasPrev}}
+        <a><i class="icon-chevron-left"></i> Prev</a>
+      {{/page.hasPrev}}
+    </li>
+    <li class="next {{^page.hasNext}}disabled{{/page.hasNext}}">
+      {{#page.hasNext}}
+        <a href="?page={{page.next}}&perpage={{page.perpage}}&dir={{dir}}&filter={{type}}">Next <i class="icon-chevron-right"></i></a>
+      {{/page.hasNext}}
+      {{^page.hasNext}}
+        <a>Next <i class="icon-chevron-right"></i></a>
+      {{/page.hasNext}}
+    </li>
+  </ul>
+{{/page.show}}

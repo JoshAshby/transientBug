@@ -31,16 +31,33 @@ class index(HTMLObject):
     def GET(self):
         """
         """
-        perpage = self.request.getParam("perpage", 24)
+        perpage = self.request.getParam("perpage", 25)
         page = self.request.getParam("page", 0)
         sort_dir = self.request.getParam("dir", "desc")
+        what_type = self.request.getParam("filter", "all")
+        print what_type
 
         f = []
-        parts = r.table(nm.Note.table).run()
-        for part in parts:
-            f.append(nm.fromRawEntry)
+        if sort_dir.lower() == "desc":
+            sort = r.desc("created")
+        else:
+            sort = "created"
 
-        f, page_dict = pager(f, perpage, page, sort_dir)
+        parts = r.table(nm.Note.table).order_by(sort)
 
-        self.view.data = {"notes": f, "page": page_dict}
+        if what_type!="all":
+            if what_type=="private":
+                parts = parts.filter({"public": False})
+            else:
+                parts = parts.filter({"public": True})
+
+
+        for part in parts.run():
+            note = nm.Note.fromRawEntry(**part)
+            note.format()
+            f.append(note)
+
+        f, page_dict = pager(f, perpage, page)
+
+        self.view.data = {"notes": f, "page": page_dict, "dir": sort_dir.lower(), "type": what_type.lower()}
         return self.view

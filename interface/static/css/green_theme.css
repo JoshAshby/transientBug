@@ -25,7 +25,7 @@ h6.thumbnail_h6 {
 a {
   color: #77b300;
 }
-a .thumbnail {
+a.thumbnail {
   border: #77b300 solid 1px;
 }
 a:hover {

@@ -13,7 +13,7 @@ joshuaashby@joshashby.com
 """
 
 
-def pager(pail, perpage, page, sort_dir):
+def pager(pail, perpage, page, sort_dir=""):
     """
     Creates a pager for pail
 
@@ -29,7 +29,7 @@ def pager(pail, perpage, page, sort_dir):
 
     if sort_dir == "asc":
         pail.sort(reverse=True)
-    else:
+    elif sort_dir == "desc":
         pail.sort()
 
     if perpage != "all":

@@ -9,11 +9,20 @@ http://joshashby.com
 joshuaashby@joshashby.com
 """
 from rethinkORM import RethinkModel
+import models.rethink.user.userModel as um
 import arrow
 
 import utils.markdownUtils as mdu
 
 import rethinkdb as r
+
+import string
+import random
+
+
+def short_code():
+  chars = string.ascii_uppercase + string.digits
+  return ''.join(random.choice(chars) for x in range(10))
 
 
 class Note(RethinkModel):
@@ -28,11 +37,22 @@ class Note(RethinkModel):
         if not title:
           title = "Untitled Note @ %s" % time.format("YY/MM/DD HH:mm:ss")
         created = time.timestamp
+
+        code_good = False
+        code = ""
+        while not code_good:
+            code = short_code()
+            f = r.table(cls.table).filter({"short_code": code}).count().run()
+            if f == 0:
+                code_good = True
+
         what = cls.create(user=user,
                           created=created,
+                          title=title,
                           contents=contents,
                           public=public,
-                          tags=tags)
+                          tags=tags,
+                          short_code=code)
 
         return what
 
@@ -40,8 +60,11 @@ class Note(RethinkModel):
         """
         Formats markdown and dates into the right stuff
         """
-        self._formated_text = mdu.markClean(self.about, ['footnotes'])
+        self._formated_contents = mdu.markClean(self.contents, ['footnotes'])
         if time_format != "human":
             self._formated_created = arrow.get(self.created).format(time_format)
         else:
             self._formated_created = arrow.get(self.created).humanize()
+
+        self._formated_author = um.User(self.user).username
+        self._formated_tags = ', '.join(self.tags)
