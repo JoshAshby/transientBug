@@ -16,6 +16,9 @@ scripts: "
   <div class="col-sm-12 col-md-5">
     <h4><i class="icon-picture"></i> Phots{{#tag}} - Tag: {{tag}}{{/tag}}</h4>
   </div>
+  {{^req.session.has_phots}}
+    <div class="col-sm-12 col-md-1"></div>
+  {{/req.session.has_phots}}
   <div class="col-sm-12 col-md-6">
     <form class="form-inline pull-right" role="pagination_options">
       <div class="form-group">
