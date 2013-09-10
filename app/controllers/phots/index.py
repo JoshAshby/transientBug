@@ -33,6 +33,7 @@ class index(HTMLObject):
         page = self.request.getParam("page", 0)
         sort_dir = self.request.getParam("dir", "asc")
         orig_filt = self.request.getParam("filter", "all")
+        view = self.request.getParam("v", 'cards').lower()
 
         if orig_filt == "all":
             filt = ""
@@ -53,7 +54,7 @@ class index(HTMLObject):
                 phot.format()
                 new_f.append(phot)
 
-            self.view.data = {"pictures": new_f, "page": pager_dict, "filter": orig_filt}
+            self.view.data = {"pictures": new_f, "page": pager_dict, "filter": orig_filt, view:True, "v":view}
             return self.view
 
         else:

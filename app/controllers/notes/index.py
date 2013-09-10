@@ -37,6 +37,7 @@ class index(HTMLObject):
         page = self.request.getParam("page", 0)
         sort_dir = self.request.getParam("dir", "desc")
         what_type = self.request.getParam("filter", "all")
+        view = self.request.getParam("v", "cards")
 
         parts = r.table(nm.Note.table).filter({"user": self.request.session.userID})
 
@@ -54,7 +55,11 @@ class index(HTMLObject):
                 note.format()
                 new_f.append(note)
 
-            self.view.data = {"notes": new_f, "page": pager_dict, "type": what_type.lower()}
+            data = {"notes": new_f, "page": pager_dict, "type": what_type.lower()}
+            data[view] = True
+
+            self.view.data = data
+
             return self.view
 
         else:
