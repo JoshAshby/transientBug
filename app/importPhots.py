@@ -26,6 +26,8 @@ dbt = r.table_list().run()
 if pm.Phot.table in dbt:
     r.table_drop(pm.Phot.table).run()
 
+r.table_create(pm.Phot.table).run()
+
 f = []
 for top, folders, files in os.walk(c.general.dirs["gifs"]):
     f.extend(files)
