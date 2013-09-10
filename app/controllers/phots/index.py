@@ -44,7 +44,7 @@ class index(HTMLObject):
         if orig_filt != "all":
             query = query.filter({"extension": filt})
 
-        f, pager_dict = rethink_pager(query, perpage, page, sort_dir, "filename")
+        f, pager_dict = rethink_pager(query, perpage, page, sort_dir, "title")
 
         new_f = []
         for bit in f:

@@ -48,7 +48,7 @@ class tags(HTMLObject):
 
         query = query.filter(r.row["tags"].filter(lambda t: t == tag).count() > 0)
 
-        f, pager_dict = rethink_pager(query, perpage, page, sort_dir, "filename")
+        f, pager_dict = rethink_pager(query, perpage, page, sort_dir, "title")
 
         new_f = []
         for bit in f:
