@@ -8,11 +8,11 @@ scripts: "
 +++
 
 <div class="row">
-  <div class="col-sm-12 col-md-1">
-    {{#req.session.has_phots}}
+  {{#req.session.has_phots}}
+    <div class="col-sm-12 col-md-1">
       <a href="/phots/new" class="btn btn-theme btn-sm">Add</a>
-    {{/req.session.has_phots}}
-  </div>
+    </div>
+  {{/req.session.has_phots}}
   <div class="col-sm-12 col-md-5">
     <h4><i class="icon-picture"></i> Phots{{#tag}} - Tag: {{tag}}{{/tag}}</h4>
   </div>
