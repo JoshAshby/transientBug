@@ -25,7 +25,12 @@ nav:
         <div style="text-align: center;">
           <img src="/i/{{{phot.filename}}}" alt="{{phot.filename}}" class="col-md-12">
         </div>
-        Added to collection on: {{phot._formated_created}}
+        <br>
+        Added to collection on: {{phot._formated_created}} {{#phot.url}}from: {{phot.url}}{{/phot.url}}<br>
+        {{#phot.tags}}
+          <a href="/phots/tags/{{.}}"><span class="label label-theme">{{.}}</span></a>
+        {{/phot.tags}}
+        <br>
         <br>
 
         {{#req.session.has_phots}}

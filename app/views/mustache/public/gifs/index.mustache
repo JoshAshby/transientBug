@@ -8,13 +8,13 @@ scripts: "
 +++
 
 <div class="row">
-  <div class="col-sm-12 col-md-2">
-    <h4><i class="icon-picture"></i> Phots</h4>
-  </div>
-  <div class="col-sm-12 col-md-4">
+  <div class="col-sm-12 col-md-1">
     {{#req.session.has_phots}}
       <a href="/phots/new" class="btn btn-theme btn-sm">Add</a>
     {{/req.session.has_phots}}
+  </div>
+  <div class="col-sm-12 col-md-5">
+    <h4><i class="icon-picture"></i> Phots{{#tag}} - Tag: {{tag}}{{/tag}}</h4>
   </div>
   <div class="col-sm-12 col-md-6">
     <form class="form-inline pull-right" role="pagination_options">
@@ -59,7 +59,7 @@ scripts: "
         <div class="caption">
           <div class="row">
             <div class="col-md-8">
-              <a href="/i/{{{filename}}}"><h6 class="thumbnail_h6" data-toggle="tooltip" title="{{title}}">{{{filename}}}</h6></a>
+              <a href="/i/{{{filename}}}"><h6 class="thumbnail_h6" data-toggle="tooltip" title="{{title}}">{{{title}}}</h6></a>
             </div>
             <div class="col-md-4">
               <a href="/phots/view/{{{filename}}}" class="btn btn-theme btn-sm pull-right">Page</a>
