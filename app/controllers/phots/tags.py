@@ -31,30 +31,49 @@ class tags(HTMLObject):
         """
         tag = self.request.id
 
-        perpage = self.request.getParam("perpage", 24)
-        page = self.request.getParam("page", 0)
-        sort_dir = self.request.getParam("dir", "asc")
-        orig_filt = self.request.getParam("filter", "all")
+        if tag:
+            perpage = self.request.getParam("perpage", 24)
+            page = self.request.getParam("page", 0)
+            sort_dir = self.request.getParam("dir", "asc")
+            orig_filt = self.request.getParam("filter", "all")
 
-        if orig_filt == "all":
-            filt = ""
+            if orig_filt == "all":
+                filt = ""
+            else:
+                filt = orig_filt
+
+            query = r.table(pm.Phot.table)
+
+            if orig_filt != "all":
+                query = query.filter({"extension": filt})
+
+            query = query.filter(r.row["tags"].filter(lambda t: t == tag).count() > 0)
+
+            f, pager_dict = rethink_pager(query, perpage, page, sort_dir, "title")
+
+            if f:
+                new_f = []
+                for bit in f:
+                    phot = pm.Phot.fromRawEntry(**bit)
+                    phot.format()
+                    new_f.append(phot)
+
+                self.view.data = {"pictures": new_f, "page": pager_dict, "filter": orig_filt, "tag": tag}
+                return self.view
+
+            else:
+                self.view.template = "public/gifs/error"
+                self.view.data = {"error": "We do not currently have any photos in the tag: %s" % tag}
+                return self.view
+
         else:
-            filt = orig_filt
+            tags = list(r.table(pm.Phot.table).concat_map(lambda doc: doc["tags"]).run())
 
-        query = r.table(pm.Phot.table)
+            if not tags:
+                self.view.template = "public/gifs/error"
+                self.view.data = {"error": "We do not currently have any tags within the system!"}
+                return self.view
 
-        if orig_filt != "all":
-            query = query.filter({"extension": filt})
-
-        query = query.filter(r.row["tags"].filter(lambda t: t == tag).count() > 0)
-
-        f, pager_dict = rethink_pager(query, perpage, page, sort_dir, "title")
-
-        new_f = []
-        for bit in f:
-            phot = pm.Phot.fromRawEntry(**bit)
-            phot.format()
-            new_f.append(phot)
-
-        self.view.data = {"pictures": new_f, "page": pager_dict, "filter": orig_filt, "tag": tag}
-        return self.view
+            self.view.template = "public/gifs/tags"
+            self.view.data = {"tags": tags}
+            return self.view

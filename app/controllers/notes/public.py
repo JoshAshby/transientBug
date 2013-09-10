@@ -37,11 +37,17 @@ class public(HTMLObject):
 
         f, pager_dict = rethink_pager(parts, perpage, page, sort_dir, "created")
 
-        new_f = []
-        for part in f:
-            note = nm.Note.fromRawEntry(**part)
-            note.format()
-            new_f.append(note)
+        if f:
+            new_f = []
+            for part in f:
+                note = nm.Note.fromRawEntry(**part)
+                note.format()
+                new_f.append(note)
 
-        self.view.data = {"notes": new_f, "page": pager_dict}
-        return self.view
+            self.view.data = {"notes": new_f, "page": pager_dict}
+            return self.view
+
+        else:
+            self.view.template = "public/notes/error"
+            self.view.data = {"error": "There are not any publicly visible notes yet!"}
+            return self.view

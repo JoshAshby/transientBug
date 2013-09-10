@@ -46,11 +46,17 @@ class index(HTMLObject):
 
         f, pager_dict = rethink_pager(query, perpage, page, sort_dir, "title")
 
-        new_f = []
-        for bit in f:
-            phot = pm.Phot.fromRawEntry(**bit)
-            phot.format()
-            new_f.append(phot)
+        if f:
+            new_f = []
+            for bit in f:
+                phot = pm.Phot.fromRawEntry(**bit)
+                phot.format()
+                new_f.append(phot)
 
-        self.view.data = {"pictures": new_f, "page": pager_dict, "filter": orig_filt}
-        return self.view
+            self.view.data = {"pictures": new_f, "page": pager_dict, "filter": orig_filt}
+            return self.view
+
+        else:
+            self.view.template = "public/gifs/error"
+            self.view.data = {"error": "We do not currently have any photos that fit what you're looking for."}
+            return self.view

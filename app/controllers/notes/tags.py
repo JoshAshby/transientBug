@@ -31,30 +31,49 @@ class tags(HTMLObject):
         """
         tag = self.request.id
 
-        perpage = self.request.getParam("perpage", 25)
-        page = self.request.getParam("page", 0)
-        sort_dir = self.request.getParam("dir", "desc")
-        what_type = self.request.getParam("filter", "all")
+        if tag:
+            perpage = self.request.getParam("perpage", 25)
+            page = self.request.getParam("page", 0)
+            sort_dir = self.request.getParam("dir", "desc")
+            what_type = self.request.getParam("filter", "all")
 
-        parts = r.table(nm.Note.table).filter(r.row['tags'].filter(lambda el: el == tag).count() > 0)
+            parts = r.table(nm.Note.table).filter(r.row['tags'].filter(lambda el: el == tag).count() > 0)
 
-        if not self.request.session.has_notes:
-            parts = parts.filter({"public": True})
-
-        else:
-            parts = parts.filter({"user": self.request.session.userID})
-            if what_type=="private":
-                parts = parts.filter({"public": False})
-            elif what_type=="public":
+            if not self.request.session.has_notes:
                 parts = parts.filter({"public": True})
 
-        f, pager_dict = rethink_pager(parts, perpage, page, sort_dir, "created")
+            else:
+                parts = parts.filter({"user": self.request.session.userID})
+                if what_type=="private":
+                    parts = parts.filter({"public": False})
+                elif what_type=="public":
+                    parts = parts.filter({"public": True})
 
-        new_f = []
-        for part in f:
-            note = nm.Note.fromRawEntry(**part)
-            note.format()
-            new_f.append(note)
+            f, pager_dict = rethink_pager(parts, perpage, page, sort_dir, "created")
 
-        self.view.data = {"notes": new_f, "page": pager_dict, "type": what_type.lower(), "tag": tag}
-        return self.view
+            if f:
+                new_f = []
+                for part in f:
+                    note = nm.Note.fromRawEntry(**part)
+                    note.format()
+                    new_f.append(note)
+
+                self.view.data = {"notes": new_f, "page": pager_dict, "type": what_type.lower(), "tag": tag}
+                return self.view
+
+            else:
+                self.view.template = "public/notes/error"
+                self.view.data = {"error": "There are not any notes with the tag: %s!" % tag}
+                return self.view
+
+        else:
+            tags = list(r.table(nm.Note.table).concat_map(lambda doc: doc["tags"]).run())
+
+            if not tags:
+                self.view.template = "public/notes/error"
+                self.view.data = {"error": "We do not currently have any tags within the system!"}
+                return self.view
+
+            self.view.template = "public/notes/tags"
+            self.view.data = {"tags": tags}
+            return self.view
