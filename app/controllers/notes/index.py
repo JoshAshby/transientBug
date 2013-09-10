@@ -14,7 +14,7 @@ joshuaashby@joshashby.com
 from seshat.route import autoRoute
 from seshat.baseObject import HTMLObject
 
-from utils.paginate import pager
+from utils.paginate import rethink_pager
 
 import rethinkdb as r
 import models.rethink.note.noteModel as nm
@@ -38,25 +38,20 @@ class index(HTMLObject):
         sort_dir = self.request.getParam("dir", "desc")
         what_type = self.request.getParam("filter", "all")
 
-        f = []
-        if sort_dir.lower() == "desc":
-            sort = r.desc("created")
-        else:
-            sort = "created"
-
-        parts = r.table(nm.Note.table).order_by(sort).filter({"user": self.request.session.userID})
+        parts = r.table(nm.Note.table).filter({"user": self.request.session.userID})
 
         if what_type=="private":
             parts = parts.filter({"public": False})
         elif what_type=="public":
             parts = parts.filter({"public": True})
 
-        for part in parts.run():
+        f, pager_dict = rethink_pager(parts, perpage, page, sort_dir, "created")
+
+        new_f = []
+        for part in f:
             note = nm.Note.fromRawEntry(**part)
             note.format()
-            f.append(note)
+            new_f.append(note)
 
-        f, page_dict = pager(f, perpage, page)
-
-        self.view.data = {"notes": f, "page": page_dict, "dir": sort_dir.lower(), "type": what_type.lower()}
+        self.view.data = {"notes": new_f, "page": pager_dict, "type": what_type.lower()}
         return self.view

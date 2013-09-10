@@ -13,16 +13,14 @@ joshuaashby@joshashby.com
 """
 from seshat.route import autoRoute
 from seshat.baseObject import HTMLObject
-from seshat.objectMods import login
 
-from utils.paginate import pager
+from utils.paginate import rethink_pager
 
 import rethinkdb as r
 import models.rethink.note.noteModel as nm
 import models.rethink.user.userModel as um
 
 
-#@login(["notes"])
 @autoRoute()
 class user(HTMLObject):
     """
@@ -34,28 +32,26 @@ class user(HTMLObject):
         """
         user = self.request.id
 
-        u = r.table(um.User.table).filter({"username": user}).run()
+        u = list(r.table(um.User.table).filter({"username": user}).run())
 
-        user_id = u.id
+        if len(u):
+            u = u[0]
 
-        perpage = self.request.getParam("perpage", 25)
-        page = self.request.getParam("page", 0)
-        sort_dir = self.request.getParam("dir", "desc")
+            user_id = u["id"]
 
-        f = []
-        if sort_dir.lower() == "desc":
-            sort = r.desc("created")
-        else:
-            sort = "created"
+            perpage = self.request.getParam("perpage", 25)
+            page = self.request.getParam("page", 0)
+            sort_dir = self.request.getParam("dir", "desc")
 
-        parts = r.table(nm.Note.table).order_by(sort).filter({"public": True, "user": user_id})
+            parts = r.table(nm.Note.table).filter({"public": True, "user": user_id})
 
-        for part in parts.run():
-            note = nm.Note.fromRawEntry(**part)
-            note.format()
-            f.append(note)
+            f, pager_dict = rethink_pager(parts, perpage, page, sort_dir, "created")
 
-        f, page_dict = pager(f, perpage, page)
+            new_f = []
+            for part in f:
+                note = nm.Note.fromRawEntry(**part)
+                note.format()
+                new_f.append(note)
 
-        self.view.data = {"notes": f, "page": page_dict, "dir": sort_dir.lower()}
-        return self.view
+            self.view.data = {"notes": new_f, "page": pager_dict, "user": u["username"]}
+            return self.view

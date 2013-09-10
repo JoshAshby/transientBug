@@ -105,4 +105,7 @@ def pager(pail, perpage, page, sort_dir=""):
 
         pail = pail[offset_start:offset_end]
 
+        if len(pail) <= perpage:
+            page_dict["show"] = False
+
     return pail, page_dict

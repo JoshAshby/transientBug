@@ -35,8 +35,6 @@ def download_photo(url, filename):
     else:
         raise Exception("Image could not be found")
 
-    print "Down"
-
 
 class Phot(RethinkModel):
     table = "phots"
@@ -75,8 +73,6 @@ class Phot(RethinkModel):
             if f == 0:
                 code_good = True
 
-        tags.append(extension)
-
         new_tags = []
         for tag in tags:
             new_tags.append(tag.replace(" ", "_"))
@@ -87,6 +83,7 @@ class Phot(RethinkModel):
                           url=url,
                           tags=new_tags,
                           short_code=code,
+                          extension=extension,
                           filename=filename)
 
         return what
@@ -118,8 +115,9 @@ class Phot(RethinkModel):
                           created=created,
                           title=title,
                           url="",
-                          tags=[extension],
+                          tags=[],
                           short_code=code,
+                          extension=extension,
                           filename=filename)
 
         return what
@@ -135,12 +133,3 @@ class Phot(RethinkModel):
 
         self._formated_user = um.User(self.user).username
         self._formated_tags = ', '.join(self.tags)
-
-    @property
-    def extension(self):
-        extension = self.filename.rsplit(".", 1)
-        if len(extension) > 1:
-            extension = extension[1]
-        else:
-            raise Exception("Extension could not be found!")
-        return extension

@@ -6,14 +6,17 @@ nav:
 +++
 
 <div class="row">
-  <div class="col-sm-12 col-md-2">
-    <h4><i class="icon-file-text"></i> Notes</h4>
-  </div>
-  <div class="col-sm-12 col-md-4">
-    {{#req.session.has_notes}}
+  {{#req.session.has_notes}}
+    <div class="col-sm-12 col-md-1">
       <a href="/notes/new" class="btn btn-theme btn-sm">Add</a>
-    {{/req.session.has_notes}}
+    </div>
+  {{/req.session.has_notes}}
+  <div class="col-sm-12 col-md-5">
+    <h4><i class="icon-file-text"></i> Notes{{#tag}} - Tag: {{tag}}{{/tag}}{{#user}} - User: {{user}}{{/user}}</h4>
   </div>
+  {{^req.session.has_notes}}
+    <div class="col-sm-12 col-md-1"></div>
+  {{/req.session.has_notes}}
   <div class="col-sm-12 col-md-6">
     <form class="form-inline pull-right" role="pagination_options">
       {{#req.session.has_notes}}
@@ -32,7 +35,7 @@ nav:
       <div class="form-group">
         <label class="sr-only" for="dir">Sort</label>
         <select id="dir" name="dir"class="input-sm">
-          {{#dir}}<option value={{dir}}>{{dir}}</option>{{/dir}}
+          {{#page.dir}}<option value={{page.dir}}>{{page.dir}}</option>{{/page.dir}}
           <option value=desc>desc</option>
           <option value=asc>asc</option>
         </select>

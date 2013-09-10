@@ -42,7 +42,7 @@ class index(HTMLObject):
         query = r.table(pm.Phot.table)
 
         if orig_filt != "all":
-            query = query.filter(r.row['tags'].filter(lambda el: el == filt).count() > 0)
+            query = query.filter({"extension": filt})
 
         f, pager_dict = rethink_pager(query, perpage, page, sort_dir, "filename")
 

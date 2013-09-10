@@ -44,7 +44,7 @@ class tags(HTMLObject):
         query = r.table(pm.Phot.table)
 
         if orig_filt != "all":
-            query = query.filter(r.row['tags'].filter(lambda el: el == filt).count() > 0)
+            query = query.filter({"extension": filt})
 
         query = query.filter(r.row["tags"].filter(lambda t: t == tag).count() > 0)
 
