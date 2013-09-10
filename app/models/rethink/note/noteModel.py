@@ -16,13 +16,7 @@ import utils.markdownUtils as mdu
 
 import rethinkdb as r
 
-import string
-import random
-
-
-def short_code():
-  chars = string.ascii_uppercase + string.digits
-  return ''.join(random.choice(chars) for x in range(10))
+import models.utils.dbUtils as dbu
 
 
 class Note(RethinkModel):
@@ -41,7 +35,7 @@ class Note(RethinkModel):
         code_good = False
         code = ""
         while not code_good:
-            code = short_code()
+            code = dbu.short_code()
             f = r.table(cls.table).filter({"short_code": code}).count().run()
             if f == 0:
                 code_good = True

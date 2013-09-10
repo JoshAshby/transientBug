@@ -14,8 +14,12 @@ nav:
               <input type="url" class="form-control" id="url" name="url" placeholder="URL..." required>
             </div>
             <div class="form-group">
-              <!--<label for="name">Name</label>-->
-              <input type="text" class="form-control" id="name" name="name" placeholder="Image Name..." required>
+              <input type="text" class="form-control" id="title" name="title" placeholder="Image Title..." required>
+              <span class="help-block"><small>All spaces will be replaced with underscores for the filename.</small></span>
+            </div>
+            <div class="form-group">
+              <input type="text" class="form-control" id="tags" name="tags" placeholder="Image Tags..." required>
+              <span class="help-block"><small>Tags are comma seperated single word.</small></span>
             </div>
             <hr>
             <button class="btn btn-theme btn-block" type="submit">Add</button>
@@ -24,23 +28,4 @@ nav:
       </div>
     </div>
   </div>
-<!--  <div class="col-sm-12 col-md-6">
-    <div class="thumbnail">
-      <div class="caption">
-        <form method="POST">
-          <fieldset>
-            <legend>Or upload it...</legend>
-            <div class="form-group">
-              <input type="file" id="file" name="file">
-            </div>
-            <div class="form-group">
-              <input type="text" class="form-control" id="name" name="name" placeholder="Image Name..." required>
-            </div>
-            <hr>
-            <button class="btn btn-theme btn-block" type="submit">Add</button>
-          </fieldset>
-        </form>
-      </div>
-    </div>
-  </div> -->
 </div>

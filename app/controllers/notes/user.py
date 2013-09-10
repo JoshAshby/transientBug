@@ -13,15 +13,18 @@ joshuaashby@joshashby.com
 """
 from seshat.route import autoRoute
 from seshat.baseObject import HTMLObject
+from seshat.objectMods import login
 
 from utils.paginate import pager
 
 import rethinkdb as r
 import models.rethink.note.noteModel as nm
+import models.rethink.user.userModel as um
 
 
+#@login(["notes"])
 @autoRoute()
-class index(HTMLObject):
+class user(HTMLObject):
     """
     """
     _title = "notes"
@@ -29,14 +32,15 @@ class index(HTMLObject):
     def GET(self):
         """
         """
-        if not self.request.session.has_notes:
-            self._redirect("/notes/public")
-            return
+        user = self.request.id
+
+        u = r.table(um.User.table).filter({"username": user}).run()
+
+        user_id = u.id
 
         perpage = self.request.getParam("perpage", 25)
         page = self.request.getParam("page", 0)
         sort_dir = self.request.getParam("dir", "desc")
-        what_type = self.request.getParam("filter", "all")
 
         f = []
         if sort_dir.lower() == "desc":
@@ -44,12 +48,7 @@ class index(HTMLObject):
         else:
             sort = "created"
 
-        parts = r.table(nm.Note.table).order_by(sort).filter({"user": self.request.session.userID})
-
-        if what_type=="private":
-            parts = parts.filter({"public": False})
-        elif what_type=="public":
-            parts = parts.filter({"public": True})
+        parts = r.table(nm.Note.table).order_by(sort).filter({"public": True, "user": user_id})
 
         for part in parts.run():
             note = nm.Note.fromRawEntry(**part)
@@ -58,5 +57,5 @@ class index(HTMLObject):
 
         f, page_dict = pager(f, perpage, page)
 
-        self.view.data = {"notes": f, "page": page_dict, "dir": sort_dir.lower(), "type": what_type.lower()}
+        self.view.data = {"notes": f, "page": page_dict, "dir": sort_dir.lower()}
         return self.view

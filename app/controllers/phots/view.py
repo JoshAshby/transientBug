@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 """
-
 For more information, see: https://github.com/JoshAshby/
 
 http://xkcd.com/353/
@@ -10,11 +9,11 @@ Josh Ashby
 http://joshashby.com
 joshuaashby@joshashby.com
 """
-import os
-
-import config.config as c
 from seshat.route import autoRoute
 from seshat.baseObject import HTMLObject
+
+import models.rethink.phot.photModel as pm
+import rethinkdb as r
 
 
 @autoRoute()
@@ -27,19 +26,29 @@ class view(HTMLObject):
     def GET(self):
         """
         """
-        f = []
-        for top, folders, files in os.walk(c.general.dirs["gifs"]):
-            f.extend(files)
-            break
+        phot = self.request.id
 
-        if self.request.id in f:
-            raw = self.request.id.rsplit(".", 1)
-            name = raw[0].replace("_", " ")
-            self.view.data = {"picture": self.request.id, "name": name}
+        # check if its a short code by looking for an extension
+        # otherwise we assume it's a filename
+        if len(phot.rsplit(".")) >= 1:
+              f = r.table(pm.Phot.table).filter({"short_code": phot}).run()
+              f = list(f)
+              if f:
+                  self._redirect("/phots/view/%s" % f[0]["filename"])
+                  return
+
+        f = r.table(pm.Phot.table).filter({"filename": phot}).run()
+        f = list(f)
+        if len(f):
+            photo = pm.Phot.fromRawEntry(**f[0])
+            photo.format()
+
+            self.view.data = {"phot": photo}
 
             if self.request.session.has_phots:
                 self.view.scripts = ["phot_del"]
             return self.view
+
         else:
             self.view.template = "public/gifs/error"
             self.view.data = {"error": "That image could not be found. Sorry :/"}

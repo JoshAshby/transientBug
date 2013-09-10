@@ -19,22 +19,26 @@ nav:
   <div class="col-sm-12 col-md-12">
     <div class="panel panel-success">
       <div class="panel-heading">
-        <h3 class="panel-title">{{name}} <small>({{picture}})</small></h3>
+        <h3 class="panel-title">{{phot.title}} <small>({{phot.filename}} from {{phot._formated_user}})</small></h3>
       </div>
       <div class="panel-body">
         <div style="text-align: center;">
-          <img src="/i/{{{picture}}}" alt="{{name}}" class="col-md-12">
+          <img src="/i/{{{phot.filename}}}" alt="{{phot.filename}}" class="col-md-12">
         </div>
+        Added to collection on: {{phot._formated_created}}
         <br>
 
         {{#req.session.has_phots}}
-        <form role="form" action="/phots/edit/rename/{{{picture}}}" method="POST">
+        <form role="form" action="/phots/edit/update/{{{phot.filename}}}" method="POST">
           <div class="form-group">
             <label for="name">Rename</label>
-            <input type="text" class="form-control" id="name" name="name" placeholder="New name..." required>
+            <input type="text" class="form-control" id="name" name="name" value="{{phot.title}}" required>
             <p class="help-block">All spaces in this name will be replaced with underscores.</p>
           </div>
-          <button type="submit" class="btn btn-theme">Submit</button> <button type="button" class="btn btn-danger" id="del_btn" data-img={{{picture}}}>Delete</button>
+          <div class="form-group">
+            <input type="text" class="form-control" name="tags" placeholder="Tags..." value="{{phot._formated_tags}}">
+          </div>
+          <button type="submit" class="btn btn-theme">Submit</button> <button type="button" class="btn btn-danger" id="del_btn" data-img={{{phot.filename}}}>Delete</button>
         </form>
         {{/req.session.has_phots}}
 

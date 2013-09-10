@@ -11,12 +11,12 @@ Josh Ashby
 http://joshashby.com
 joshuaashby@joshashby.com
 """
-import os
-import config.config as c
-
 from seshat.route import autoRoute
 from seshat.baseObject import HTMLObject
-from utils.paginate import pager
+from utils.paginate import rethink_pager
+
+import rethinkdb as r
+import models.rethink.phot.photModel as pm
 
 
 @autoRoute()
@@ -31,32 +31,26 @@ class index(HTMLObject):
         """
         perpage = self.request.getParam("perpage", 24)
         page = self.request.getParam("page", 0)
-        sort_dir = self.request.getParam("dir", "desc").lower()
-        orig_filt = self.request.getParam("filter", "all").lower()
+        sort_dir = self.request.getParam("dir", "asc")
+        orig_filt = self.request.getParam("filter", "all")
 
-        f = []
-        for top, folders, files in os.walk(c.general.dirs["gifs"]):
-            f.extend(files)
-            break
+        if orig_filt == "all":
+            filt = ""
+        else:
+            filt = orig_filt
+
+        query = r.table(pm.Phot.table)
+
+        if orig_filt != "all":
+            query = query.filter(r.row['tags'].filter(lambda el: el == filt).count() > 0)
+
+        f, pager_dict = rethink_pager(query, perpage, page, sort_dir, "filename")
 
         new_f = []
-        if orig_filt != "all":
-            if orig_filt == "jpg":
-                filt = ["jpg", "jpeg"]
-            elif orig_filt == "non_gif":
-                filt = ["jpg", "jpeg", "png", "tiff"]
-            else:
-                filt = [orig_filt]
+        for bit in f:
+            phot = pm.Phot.fromRawEntry(**bit)
+            phot.format()
+            new_f.append(phot)
 
-            for img in f:
-                bits = img.rsplit(".", 1)
-                if len(bits) > 1:
-                    if bits[1].lower() in filt:
-                        new_f.append(img)
-
-            f = new_f
-
-        f, page_dict = pager(f, perpage, page, sort_dir)
-
-        self.view.data = {"pictures": f, "page": page_dict, "filter": orig_filt}
+        self.view.data = {"pictures": new_f, "page": pager_dict, "filter": orig_filt}
         return self.view

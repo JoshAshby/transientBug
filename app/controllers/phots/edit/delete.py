@@ -17,6 +17,9 @@ from seshat.route import autoRoute
 from seshat.baseObject import JSONObject
 from seshat.objectMods import login
 
+import models.rethink.phot.photModel as pm
+import rethinkdb as r
+
 
 @login(["phots"])
 @autoRoute()
@@ -34,9 +37,18 @@ class delete(JSONObject):
 
         if self.request.id in f:
             try:
-                os.remove(current_path)
+                f = r.table(pm.Phot.table).filter({"filename": self.request.id}).run()
+                f = list(f)
+                if len(f):
+                    photo = pm.Phot.fromRawEntry(**f[0])
+                    photo.delete()
+                    os.remove(current_path)
 
-                return {"success": True}
+                    return {"success": True}
+
+                else:
+                    return {"success": False, "error": "Could not find photo in db"}
+
             except Exception as e:
                 return {"success": False, "error": str(e)}
 

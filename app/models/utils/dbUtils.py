@@ -9,6 +9,13 @@ Josh Ashby
 http://joshashby.com
 joshuaashby@joshashby.com
 """
+import string
+import random
+
+
+def short_code():
+  chars = string.ascii_uppercase + string.digits
+  return ''.join(random.choice(chars) for x in range(10))
 
 def toBoolean(str):
     if str == 'True':

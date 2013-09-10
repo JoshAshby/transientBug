@@ -11,14 +11,11 @@ Josh Ashby
 http://joshashby.com
 joshuaashby@joshashby.com
 """
-import config.config as c
-
 from seshat.route import autoRoute
 from seshat.baseObject import HTMLObject
 from seshat.objectMods import login
 
-import requests
-from gevent.dns import DNSError
+import models.rethink.phot.photModel as pm
 
 
 @login(["phots"])
@@ -36,41 +33,19 @@ class new(HTMLObject):
 
     def POST(self):
         url = self.request.getParam("url", None)
-        img_file = self.request.getParam("file", None)
+        title = self.request.getParam("title", "")
+        tags = self.request.getParam("tags", "")
 
-        if url is not None:
-            extension = url.rsplit(".", 1)
-            if len(extension) >= 1:
-                extension = extension[1]
-            else:
-                self.view.template = "public/gifs/error"
-                self.view.data = {"error": "The extension for %s could not be found." % url}
-                return self.view
+        if tags:
+            tag = [ bit.lstrip().rstrip() for bit in tags.split(",") ]
+        else:
+            tag = []
 
-            name = self.request.getParam("name").replace(" ", "_")
+        phot = pm.Phot.new_phot(self.request.session.userID,
+                                url=url,
+                                title=title,
+                                tags=tag)
 
-            path = ''.join([c.general.dirs["gifs"], name, ".", extension])
-
-            try:
-                r = requests.get(url, stream=True)
-            except DNSError:
-                self.view.template = "public/gifs/error"
-                self.view.data = {"error": "DNS error"}
-                return self.view
-
-            if r.status_code == 200:
-                with open(path, 'wb') as f:
-                    for chunk in r.iter_content():
-                        f.write(chunk)
-
-                loc = ''.join(["/phots/view/", name, ".", extension])
-
-                self.head = ("303 SEE OTHER",
-                    [("location", loc)])
-            else:
-                self.view.template = "public/gifs/error"
-                self.view.data = {"error": "Something went wrong and the link didn't return a 200 code."}
-                return self.view
-
-        elif img_file is not None:
-            pass
+        self._redirect("/phots/view/%s" % phot.filename)
+        self.request.session.pushAlert("Image is being downloaded...")
+        return

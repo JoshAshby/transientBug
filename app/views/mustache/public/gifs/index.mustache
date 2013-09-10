@@ -23,9 +23,8 @@ scripts: "
         <select id="filer" name="filter"class="input-sm">
           {{#filter}}<option value={{filter}}>{{filter}}</option>{{/filter}}
           <option value=all>all</option>
-          <option value=non_gif>non_gif</option>
           <option value=gif>gif</option>
-          <option value=jpg>jpeg</option>
+          <option value=jpg>jpg</option>
           <option value=png>png</option>
           <option value=tiff>tiff</option>
         </select>
@@ -56,14 +55,14 @@ scripts: "
   {{#pictures}}
     <div class="col-sm-6 col-md-4" style="margin-bottom: 20px;">
       <div class="thumbnail">
-        <a href="/i/{{{.}}}" class="thumbnail"><img src="/i/{{{.}}}" style="height: 200px" alt="{{.}}"></a>
+        <a href="/i/{{{filename}}}" class="thumbnail"><img src="/i/{{{filename}}}" style="height: 200px" alt="{{filename}}"></a>
         <div class="caption">
           <div class="row">
             <div class="col-md-8">
-              <a href="/i/{{{.}}}"><h6 class="thumbnail_h6" data-toggle="tooltip" title="{{.}}">{{{.}}}</h6></a>
+              <a href="/i/{{{filename}}}"><h6 class="thumbnail_h6" data-toggle="tooltip" title="{{title}}">{{{filename}}}</h6></a>
             </div>
             <div class="col-md-4">
-              <a href="/phots/view/{{{.}}}" class="btn btn-theme btn-sm pull-right">Page</a>
+              <a href="/phots/view/{{{filename}}}" class="btn btn-theme btn-sm pull-right">Page</a>
             </div>
           </div>
         </div>
