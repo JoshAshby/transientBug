@@ -1,0 +1,43 @@
+@import "base.less";
+
+a {
+  color: @orange;
+
+  &.thumbnail {
+    border: @orange solid 1px
+  }
+
+  &:hover {
+    color: darken(@orange, 10%); //#507800;
+  }
+}
+
+.dropdown-menu>.active>a, .dropdown-menu>.active>a:hover, .dropdown-menu>.active>a:focus, .dropdown-menu>li>a:hover, .dropdown-menu>li>a:focus, .nav-pills>li.active>a, .nav-pills>li.active>a:hover, .nav-pills>li.active>a:focus {
+  background-color: @orange;
+}
+
+.pager li>a:hover, .pager li>a:focus {
+  background-color: @orange;
+  color: white;
+}
+
+.btn-primary, .btn-theme {
+  color: white;
+  background-color: @orange;
+  border: @orange solid 1px;
+
+  &:focus, &:hover, &:active {
+    background-color: darken(@orange, 10%);
+    border: darken(@orange, 10%) solid 1px;
+  }
+}
+
+.container-full {
+  background-color: darken(@orange, 15%); //#507800;
+}
+
+.label-theme {
+  color: white;
+  background-color: @orange;
+  border: @orange solid 1px;
+}

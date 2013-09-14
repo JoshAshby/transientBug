@@ -8,14 +8,12 @@
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
     <link rel="icon" href="/favicon.ico" type="image/x-icon">
 
-    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.no-icons.min.css" rel="stylesheet">
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
     <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet">
-    <!--<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-theme.min.css">-->
-    <!--<link href="//netdna.bootstrapcdn.com/bootswatch/3.0.0/cosmo/bootstrap.min.css" rel="stylesheet">-->
     <link href="//netdna.bootstrapcdn.com/bootswatch/3.0.0/cyborg/bootstrap.min.css" rel="stylesheet">
 
     <!-- Begin page stylsheets -->
-    <link href="/static/css/{{theme_color}}_theme.css" rel="stylesheet">
+    <link href="/static/css/{{theme_color}}_theme.less.css" rel="stylesheet">
     {{#stylesheets}}
       <link href="/static/css/{{.}}.css" rel="stylesheet">
     {{/stylesheets}}
@@ -28,6 +26,20 @@
     <script src="http://code.jquery.com/jquery.js"></script>
   </head>
   <body>
+    {{#req.has_announcements}}
+      <div class="container container-alert">
+        <div class="row">
+          <div class="col-md-1 col-sm-1">
+            <i class="icon-exclamation icon-3x"></i>
+          </div>
+          <div class="col-md-10 col-sm-10">
+            {{#req.announcements}}
+              {{{.}}}
+            {{/req.announcements}}
+          </div>
+        </div>
+      </div>
+    {{/req.has_announcements}}
 
     {{{body}}}
 

@@ -15,7 +15,7 @@ joshuaashby@joshashby.com
 """
 
 
-def login(groups=[], allowBan=False):
+def login(groups=[]):
     def wrapper(HTTPObject):
         HTTPObject.__login__ = True
         HTTPObject._groups = groups

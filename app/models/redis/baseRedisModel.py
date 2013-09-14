@@ -180,7 +180,6 @@ class redisList(object):
 
     def extend(self, other):
         assert type(other) == list
-        print other
         self._list.extend(other)
         for key in other:
             self.redis.rpush(self.key, key) # because live fucks this up

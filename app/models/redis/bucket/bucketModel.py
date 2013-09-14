@@ -13,26 +13,17 @@ Josh Ashby
 http://joshashby.com
 joshuaashby@joshashby.com
 """
-from models.rethink.user.userModel import User
 import config.config as c
 import models.utils.dbUtils as dbu
-import models.redis.baseRedisCollection as bc
 from config.standard import StandardConfig
 
 
-class bucketPail(bc.baseRedisCollection):
-    def preInitAppend(self, drip):
-        if "users" in drip:
-            userList = []
-            for user in drip.users:
-                userList.append(User(user))
-            drip._userObjects = userList
-        return drip
-
-    @staticmethod
-    def toggle(bucketID):
-        current = dbu.toBoolean(c.general["redis"].get("bucket:%s:value"%bucketID))
-        return c.general["redis"].set("bucket:%s:value"%bucketID, not current)
+def toggle_bucket(bucketID):
+    """
+    Toggles the given bucket via `bucketID` to the inverse of its current value
+    """
+    current = dbu.toBoolean(c.general["redis"].get("bucket:%s:value"%bucketID))
+    return c.general["redis"].set("bucket:%s:value"%bucketID, not current)
 
 
 class cfgBuckets(StandardConfig):

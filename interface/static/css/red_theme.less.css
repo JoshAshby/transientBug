@@ -1,0 +1,98 @@
+@import url(http://fonts.googleapis.com/css?family=Maven+Pro:700);
+.navbar-brand,
+footer {
+  font-family: 'Maven Pro', sans-serif;
+}
+.navbar-header {
+  padding-right: 0px;
+}
+.thumbnail {
+  border: #2b2b2b solid 2px;
+}
+h6.thumbnail_h6 {
+  white-space: nowrap;
+  overflow: hidden;
+}
+.container-full {
+  width: 100%;
+  color: #eee;
+  padding-bottom: 30px;
+  max-width: 100%;
+}
+.container-full h1 {
+  font-family: 'Maven Pro', sans-serif;
+}
+.container-full a {
+  text-decoration: none;
+}
+.container-alert {
+  width: 100%;
+  color: #eee;
+  padding-bottom: 30px;
+  max-width: 100%;
+  background-color: #660000;
+  background-color: #b30000;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+.container-alert h1 {
+  font-family: 'Maven Pro', sans-serif;
+}
+.container-alert a {
+  text-decoration: none;
+}
+.container-alert h1,
+.container-alert h2,
+.container-alert h3,
+.container-alert h4,
+.container-alert h5,
+.container-alert h6 {
+  margin-top: 0px;
+}
+a {
+  color: #b30000;
+}
+a.thumbnail {
+  border: #b30000 solid 1px;
+}
+a:hover {
+  color: #800000;
+}
+.dropdown-menu > .active > a,
+.dropdown-menu > .active > a:hover,
+.dropdown-menu > .active > a:focus,
+.dropdown-menu > li > a:hover,
+.dropdown-menu > li > a:focus,
+.nav-pills > li.active > a,
+.nav-pills > li.active > a:hover,
+.nav-pills > li.active > a:focus {
+  background-color: #b30000;
+}
+.pager li > a:hover,
+.pager li > a:focus {
+  background-color: #b30000;
+  color: white;
+}
+.btn-primary,
+.btn-theme {
+  color: white;
+  background-color: #b30000;
+  border: #b30000 solid 1px;
+}
+.btn-primary:focus,
+.btn-theme:focus,
+.btn-primary:hover,
+.btn-theme:hover,
+.btn-primary:active,
+.btn-theme:active {
+  background-color: #800000;
+  border: #800000 solid 1px;
+}
+.container-full {
+  background-color: #660000;
+}
+.label-theme {
+  color: white;
+  background-color: #b30000;
+  border: #b30000 solid 1px;
+}

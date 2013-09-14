@@ -25,6 +25,7 @@ import uuid
 
 import models.redis.session.sessionModel as sm
 import models.redis.bucket.bucketModel as bm
+import models.redis.announcement.announcementModel as am
 
 
 def split_members(item):
@@ -96,6 +97,11 @@ class requestItem(object):
 
     def buildCfg(self):
         self.cfg = bm.cfgBuckets()
+        self.announcements = am.CfgAnnouncements()
+
+    @property
+    def has_announcements(self):
+        return len(self.announcements._data) >= 1
 
     def generateHeader(self, header, length):
         for morsal in self.sessionCookie:

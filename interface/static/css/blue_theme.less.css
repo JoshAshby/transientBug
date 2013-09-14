@@ -25,14 +25,38 @@ h6.thumbnail_h6 {
 .container-full a {
   text-decoration: none;
 }
+.container-alert {
+  width: 100%;
+  color: #eee;
+  padding-bottom: 30px;
+  max-width: 100%;
+  background-color: #1d7097;
+  background-color: #b30000;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+.container-alert h1 {
+  font-family: 'Maven Pro', sans-serif;
+}
+.container-alert a {
+  text-decoration: none;
+}
+.container-alert h1,
+.container-alert h2,
+.container-alert h3,
+.container-alert h4,
+.container-alert h5,
+.container-alert h6 {
+  margin-top: 0px;
+}
 a {
-  color: #b30000;
+  color: #2a9fd6;
 }
 a.thumbnail {
-  border: #b30000 solid 1px;
+  border: #2a9fd6 solid 1px;
 }
 a:hover {
-  color: #800000;
+  color: #2180ac;
 }
 .dropdown-menu > .active > a,
 .dropdown-menu > .active > a:hover,
@@ -42,18 +66,18 @@ a:hover {
 .nav-pills > li.active > a,
 .nav-pills > li.active > a:hover,
 .nav-pills > li.active > a:focus {
-  background-color: #b30000;
+  background-color: #2a9fd6;
 }
 .pager li > a:hover,
 .pager li > a:focus {
-  background-color: #b30000;
+  background-color: #2a9fd6;
   color: white;
 }
 .btn-primary,
 .btn-theme {
   color: white;
-  background-color: #b30000;
-  border: #b30000 solid 1px;
+  background-color: #2a9fd6;
+  border: #2a9fd6 solid 1px;
 }
 .btn-primary:focus,
 .btn-theme:focus,
@@ -61,14 +85,14 @@ a:hover {
 .btn-theme:hover,
 .btn-primary:active,
 .btn-theme:active {
-  background-color: #800000;
-  border: #800000 solid 1px;
+  background-color: #2180ac;
+  border: #2180ac solid 1px;
 }
 .container-full {
-  background-color: #660000;
+  background-color: #1d7097;
 }
 .label-theme {
   color: white;
-  background-color: #b30000;
-  border: #b30000 solid 1px;
+  background-color: #2a9fd6;
+  border: #2a9fd6 solid 1px;
 }

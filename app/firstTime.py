@@ -88,9 +88,6 @@ def bucketSetup():
         if buckets[bucket].has_key("users"):
             newBucket["users"] = buckets[bucket]["users"]
 
-    pail = bm.bucketPail("bucket:*:value")
-    pail.update()
-
 
 if __name__ == "__main__":
     setup()
