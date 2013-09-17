@@ -15,7 +15,6 @@ import config.config as con
 import config.initial as c
 import models.rethink.user.userModel as um
 
-import models.redis.baseRedisModel as brm
 import models.redis.bucket.bucketModel as bm
 
 import rethinkdb
@@ -38,7 +37,7 @@ def initialSetup():
         print "Creating database in rethink"
         rethinkdb.db_create(con.general.databases["rethink"]["db"]).run()
 
-    if c.general.reset_users:
+    if c.general.flush["users"]:
         print "Reset rethink user table"
         dbt = rethinkdb.table_list().run()
         # Reseting users
@@ -51,9 +50,19 @@ def initialSetup():
         if not table in dbt:
             rethinkdb.table_create(table).run()
 
-    if c.general.flush_redis:
+    if c.general.flush["redis"]:
         print "Flushing redis..."
         con.general.redis.flushdb()
+
+    if c.general.flush["sessions"]:
+        print "Flushing sessions..."
+        keys = con.general.redis.keys("session:*")
+        for key in keys: con.general.redis.delete(key)
+
+    if c.general.flush["buckets"]:
+        print "Flushing buckets..."
+        keys = con.general.redis.keys("bucket:*")
+        for key in keys: con.general.redis.delete(key)
 
 
 def userSetup():
@@ -68,26 +77,27 @@ def userSetup():
             newUser.groups = user["groups"]
             newUser.save()
         except userError:
-            print "`%s` is already in the system..." % user["username"]
+            print "User `%s` is already in the system..." % user["username"]
 
 
 def bucketSetup():
     print "Setting up buckets..."
     buckets = c.general.buckets
-    for bucket in buckets:
-        print bucket
-        print "Adding Bucket:"
-        print "\t"  + bucket
-        print "\t" + str(buckets[bucket])
-        newBucket = brm.redisObject("bucket:" + bucket)
-
-        newBucket["name"] = buckets[bucket]["name"]
-        newBucket["value"] = buckets[bucket]["value"]
-        newBucket["description"] = buckets[bucket]["description"]
-
-        if buckets[bucket].has_key("users"):
-            newBucket["users"] = buckets[bucket]["users"]
-
+    pre_buckets = bm.CfgBuckets()
+    for ID in buckets:
+        bucket = buckets[ID]
+        if bucket["name"] in pre_buckets:
+            print "\tUpdating Bucket: {}".format(ID)
+            pre_buckets.edit(ID,
+                             bucket["name"],
+                             bucket["description"],
+                             bucket["status"])
+        else:
+            print "\tAdding Bucket: {}".format(ID)
+            pre_buckets.new(ID,
+                            bucket["name"],
+                            bucket["description"],
+                            bucket["status"])
 
 if __name__ == "__main__":
     setup()

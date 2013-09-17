@@ -12,9 +12,12 @@ tables:
 
 buckets:
   enable500Error:
-    value: true
+    status: true
     name: Enable errors on 500 pages
     description: Enable the display of the server errors on 500 pages
 
-reset_users: false
-flush_redis: true
+flush:
+  users: false
+  redis: false
+  sessions: true
+  buckets: true

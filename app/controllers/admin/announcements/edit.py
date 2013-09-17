@@ -21,16 +21,9 @@ import arrow
 @login(["admin"])
 @autoRoute()
 class edit(HTMLObject):
-    """
-    Returns base index page.
-    """
     _title = "Site Announcements"
     _defaultTmpl = "admin/announcements/edit"
     def GET(self):
-        """
-        Nothing much, just get the cheetah template for index and return it
-        so Seshat can get cheetah to render it and then return it to the browser
-        """
         announcement_id = self.request.id
 
         announcement = brm.redisObject("announcement:"+announcement_id)

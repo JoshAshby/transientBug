@@ -116,7 +116,7 @@ class requestItem(object):
         self.session = sm.session("session:"+self.sessionID)
 
     def buildCfg(self):
-        self.cfg = bm.cfgBuckets()
+        self.buckets = bm.CfgBuckets()
         self.announcements = am.CfgAnnouncements()
 
     @property

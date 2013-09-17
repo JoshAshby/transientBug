@@ -24,16 +24,9 @@ import arrow
 @login(["admin"])
 @autoRoute()
 class index(HTMLObject):
-    """
-    Returns base index page.
-    """
     _title = "Site Announcements"
     _defaultTmpl = "admin/announcements/index"
     def GET(self):
-        """
-        Nothing much, just get the cheetah template for index and return it
-        so Seshat can get cheetah to render it and then return it to the browser
-        """
         perpage = self.request.getParam("perpage", 24)
         page = self.request.getParam("page", 0)
 
