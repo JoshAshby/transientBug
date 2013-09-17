@@ -24,3 +24,9 @@ def toBoolean(str):
         return False
     else:
         raise Exception("Not a boolean")
+
+def upload_photo(files, filename, loc):
+    path = ''.join([loc, filename])
+
+    with open(path, 'wb') as f:
+        f.write(files.read())

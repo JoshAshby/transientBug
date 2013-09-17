@@ -84,7 +84,7 @@ def dispatch(env, start_response):
         if content:
             header = request.generateHeader(header, len(content))
 
-        if c.general["debug"]: logResponse(request, status)
+        if c.general["debug"]: gevent.spawn(logResponse, request, status)
 
         start_response(status, header)
 
@@ -107,7 +107,7 @@ def error404(request, start_response):
     Returns a base 404 not found error page
     """
     newHTTPObject = error.error404(request)
-    if c.general["debug"]: log404(request)
+    if c.general["debug"]: gevent.spawn(log404, request)
 
     dataThread = gevent.spawn(newHTTPObject.build)
     dataThread.join()
@@ -133,7 +133,7 @@ def error500(request, start_response):
     error logged to the default logger.
     """
     newHTTPObject = error.error500(request)
-    if c.general["debug"]: log500(request)
+    if c.general["debug"]: gevent.spawn(log500, request)
 
     dataThread = gevent.spawn(newHTTPObject.build)
     dataThread.join()
@@ -157,11 +157,12 @@ def logURL(request, url):
     Method: %s
     URL: %s
     PARAMS: %s
+    FILES:
     Object: %s
     IP: %s
     UA: %s
     R: %s
-""" % (request.method, request.url, request.rawParams, url.pageObject.__module__+"/"+url.pageObject.__name__, request.remote, request.user_agent, request.referer))
+""" % (request.method, request.url, request.raw_params, url.pageObject.__module__+"/"+url.pageObject.__name__, request.remote, request.user_agent, request.referer))
 
 
 def logResponse(request, status):
@@ -180,7 +181,7 @@ def log500(request):
     UA: %s
     R: %s
     ERROR: %s
-    """ % (request.method, request.url, request.rawParams, request.remote, request.user_agent, request.referer, request.error))
+    """ % (request.method, request.url, request.raw_params, request.remote, request.user_agent, request.referer, request.error))
 
 
 def log404(request):
@@ -191,4 +192,4 @@ def log404(request):
     IP: %s
     UA: %s
     R: %s
-    """ % (request.method, request.url, request.rawParams, request.remote, request.user_agent, request.referer))
+    """ % (request.method, request.url, request.raw_params, request.remote, request.user_agent, request.referer))

@@ -33,6 +33,7 @@ class new(HTMLObject):
 
     def POST(self):
         url = self.request.getParam("url", None)
+        files = self.request.getFile("file")
         title = self.request.getParam("title", "")
         tags = self.request.getParam("tags", "")
 
@@ -41,10 +42,18 @@ class new(HTMLObject):
         else:
             tag = []
 
-        phot = pm.Phot.new_phot(self.request.session.userID,
-                                url=url,
-                                title=title,
-                                tags=tag)
+        if url:
+            phot = pm.Phot.download_phot(self.request.session.userID,
+                                    url=url,
+                                    title=title,
+                                    tags=tag)
+        elif files:
+            phot = pm.Phot.upload_phot(self.request.session.userID,
+                                    file_obj=files,
+                                    title=title,
+                                    tags=tag)
+        else:
+            return
 
         self._redirect("/phots/view/%s" % phot.filename)
         self.request.session.pushAlert("Image is being downloaded...")

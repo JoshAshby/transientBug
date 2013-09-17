@@ -19,27 +19,46 @@ import logging
 logger = logging.getLogger(c.general["logName"]+".seshat.request")
 
 import Cookie
-import re
-import urllib
 import uuid
 
 import models.redis.session.sessionModel as sm
 import models.redis.bucket.bucketModel as bm
 import models.redis.announcement.announcementModel as am
 
+import cgi
+import tempfile
 
-def split_members(item):
-    members = {}
-    raw = {}
-    for part in item.split("&"):
-        query = part.split("=")
-        if query[0]:
-            if len(query) > 1:
-                raw.update({query[0]: query[1]})
-                members.update({re.sub("\+", " ", query[0]): urllib.unquote(re.sub("\+", " ", query[1]))})
-            else:
-              raw.update({part: None})
-    return members, raw
+
+class FileObject(object):
+    def __init__(self, file_obj):
+        self.filename = file_obj.filename
+        self.name = file_obj.name
+        self.type = file_obj.type
+        self.expanded_type = self.type.split("/")
+        self.file = file_obj.file
+
+        self.extension = ""
+        parts = self.filename.rsplit(".", 1)
+        if len(parts) > 1:
+            self.extension = parts[1]
+
+    def read(self):
+        return self.file.read()
+
+    def readline(self):
+        return self.file.readline()
+
+    def seek(self, where):
+        return self.file.seek(where)
+
+    def readlines(self):
+        return self.file.readlines()
+
+    def __repr__(self):
+        return "< FileObject "+self.filename+" at "+str(id(self))+">"
+
+    def __str__(self):
+        return "< FileObject "+self.filename+" at "+str(id(self))+">"
 
 
 class requestItem(object):
@@ -61,26 +80,27 @@ class requestItem(object):
     def buildParams(self):
         all_mem = {}
         all_raw = {}
+        all_files = {}
 
-        # GET Params
-        members, raw = split_members(self._env["QUERY_STRING"])
-        all_mem.update(members)
-        all_raw.update(raw)
+        #temp_file = cStringIO.StringIO()
+        temp_file = tempfile.TemporaryFile()
+        temp_file.write(self._env['wsgi.input'].read()) # or use buffered read()
+        temp_file.seek(0)
+        form = cgi.FieldStorage(fp=temp_file, environ=self._env, keep_blank_values=True)
 
-        # POST Params
-        members, raw = split_members(self._env["wsgi.input"].read())
-        all_mem.update(members)
-        all_raw.update(raw)
+        for bit in form:
+            if form[bit].filename is not None:
+                fi = FileObject(form[bit])
+                all_files[fi.name] = fi
+            else:
+                all_mem[bit] = form.getvalue(bit)
+                all_raw[bit] = form.getvalue(bit)
 
-        if len(all_raw) == 0:
-            bits = self._env["PATH_INFO"].split("?", 1)
-            if len(bits) > 1:
-                members, raw = split_members(bits[1])
-                all_mem.update(members)
-                all_raw.update(raw)
+        temp_file.close()
 
         self.params = all_mem
-        self.rawParams = all_raw
+        self.files = all_files
+        self.raw_params = all_raw
 
     def buildCookie(self):
         cookie = Cookie.SimpleCookie()
@@ -126,3 +146,7 @@ class requestItem(object):
             return p
         except:
             return default
+
+    def getFile(self, name):
+        if name in self.files:
+            return self.files[name]

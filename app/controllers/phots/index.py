@@ -54,7 +54,7 @@ class index(HTMLObject):
                 phot.format()
                 new_f.append(phot)
 
-            self.view.data = {"pictures": new_f, "page": pager_dict, "filter": orig_filt, view:True, "v":view}
+            self.view.data = {"pictures": new_f, "page": pager_dict, "filter": orig_filt, view: True, "v": view}
             return self.view
 
         else:

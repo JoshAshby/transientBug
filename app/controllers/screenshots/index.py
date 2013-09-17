@@ -13,12 +13,16 @@ joshuaashby@joshashby.com
 """
 import os
 import config.config as c
+import gevent
 
 from seshat.route import autoRoute
 from seshat.baseObject import HTMLObject
 from seshat.objectMods import login
+from seshat.actions import Redirect
 
 from utils.paginate import pager
+
+import models.utils.dbUtils as dbu
 
 
 @login(["root"])
@@ -49,3 +53,11 @@ class index(HTMLObject):
 
         self.view.data = {"pictures": f, "page": page_dict}
         return self.view
+
+    def POST(self):
+        scrn = self.request.getFile("file")
+
+        gevent.spawn(dbu.upload_photo, scrn, scrn.filename, c.general.dirs["screenshots"])
+
+        self.request.session.pushAlert("Screenshot is being uploaded...", level="success")
+        return Redirect("/screenshots")

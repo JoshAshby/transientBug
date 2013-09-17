@@ -16,9 +16,10 @@ joshuaashby@joshashby.com
 from views.template import template
 import json
 import traceback
+import seshat.actions as actions
 
 
-class baseHTTPObject(object):
+class BaseHTTPObject(object):
         __login__ = False
         _groups   = []
 
@@ -50,9 +51,13 @@ class baseHTTPObject(object):
 
             self.pre_content_hook()
             try:
-                content = getattr(self, self.request.method)() or ""
-                content = self.post_content_hook(content)
-                if content: content = unicode(content)
+                content = getattr(self, self.request.method)()
+                if isinstance(content, actions.BaseAction):
+                    self.head = content.head
+                else:
+                    if not content: content = ""
+                    content = self.post_content_hook(content)
+                    if content: content = unicode(content)
             except Exception as e:
                 content = (e, traceback.format_exc())
 
@@ -92,7 +97,7 @@ class baseHTTPObject(object):
             pass
 
 
-class HTMLObject(baseHTTPObject):
+class HTMLObject(BaseHTTPObject):
     def post_init_hook(self):
         self.head = ("200 OK", [("Content-Type", "text/html")])
 
@@ -111,13 +116,13 @@ class HTMLObject(baseHTTPObject):
           self.view = ""
 
     def post_content_hook(self, content):
-        if type(content) == template:
+        if isinstance(content, template):
             return content.render()
         else:
             return content
 
 
-class JSONObject(baseHTTPObject):
+class JSONObject(BaseHTTPObject):
     def post_init_hook(self):
         self.head = ("200 OK", [("Content-Type", "application/json")])
 

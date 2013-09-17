@@ -41,7 +41,7 @@ class Phot(RethinkModel):
     _protectedItems = []
 
     @classmethod
-    def new_phot(cls, user, url, title="", tags=[]):
+    def download_phot(cls, user, url, title, tags=[]):
         """
         """
         extension = url.rsplit(".", 1)
@@ -55,10 +55,7 @@ class Phot(RethinkModel):
         name = title.replace(" ", "_")
         filename = ''.join([name, ".", extension])
 
-        if url and url is not None:
-            gevent.spawn(download_photo, url, filename)
-        else:
-            raise Exception("URL required")
+        gevent.spawn(download_photo, url, filename)
 
         time = arrow.utcnow()
         if not title:
@@ -84,6 +81,41 @@ class Phot(RethinkModel):
                           tags=new_tags,
                           short_code=code,
                           extension=extension,
+                          filename=filename)
+
+        return what
+
+    @classmethod
+    def upload_phot(cls, user, file_obj, title, tags=[], url=""):
+        name = title.replace(" ", "_")
+        filename = ''.join([name, ".", file_obj.extension])
+
+        gevent.spawn(dbu.upload_photo, file_obj, filename, c.general.dirs["gifs"])
+
+        time = arrow.utcnow()
+        if not title:
+          title = "Untitled Phot @ %s" % time.format("YY/MM/DD HH:mm:ss")
+        created = time.timestamp
+
+        code_good = False
+        code = ""
+        while not code_good:
+            code = dbu.short_code()
+            f = r.table(cls.table).filter({"short_code": code}).count().run()
+            if f == 0:
+                code_good = True
+
+        new_tags = []
+        for tag in tags:
+            new_tags.append(tag.replace(" ", "_"))
+
+        what = cls.create(user=user,
+                          created=created,
+                          title=title,
+                          url=url,
+                          tags=new_tags,
+                          short_code=code,
+                          extension=file_obj.extension,
                           filename=filename)
 
         return what

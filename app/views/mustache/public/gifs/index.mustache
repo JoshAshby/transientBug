@@ -14,7 +14,7 @@ scripts: "
     </div>
   {{/req.session.has_phots}}
   <div class="col-sm-12 col-md-3">
-    <h4><i class="icon-picture"></i> Phots{{#tag}} - Tag: {{tag}}{{/tag}}</h4>
+    <h4><a href="/phots"><i class="icon-picture"></i> Phots</a>{{#tag}} - Tag: {{tag}}{{/tag}}</h4>
   </div>
   {{^req.session.has_phots}}
     <div class="col-sm-12 col-md-1"></div>
@@ -89,7 +89,7 @@ scripts: "
     <div class="col-md-12">
       {{#pictures}}
         <ul class="list-unstyled">
-          <li><a href="/phots/view/{{filename}}" class="btn btn-theme btn-xs">Page</a> <a href="/i/{{{filename}}}">{{{filename}}}</a> {{#tags}}<a href="/phots/tags/{{.}}"><span class="label label-theme">{{.}}</span></a>{{/tags}}</li>
+          <li><a href="/phots/view/{{filename}}" class="btn btn-theme btn-xs">Page</a> <a href="/i/{{{filename}}}">{{{filename}}}</a> {{#tags}}<a href="/phots/tags/{{.}}"><span class="label label-theme">{{.}}</span></a> {{/tags}}</li>
         </ul>
       {{/pictures}}
     </div>
@@ -106,7 +106,7 @@ scripts: "
             <a href="/phots/view/{{filename}}" class="btn btn-theme btn-xs">Page</a> Tags:
 
             {{#tags}}
-              <a href="/phots/tags/{{.}}"><span class="label label-theme">{{.}}</span></a>
+              <a href="/phots/tags/{{.}}"><span class="label label-theme">{{.}}</span></a> 
             {{/tags}}
             {{^tags}}
               No tags...
