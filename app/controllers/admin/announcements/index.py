@@ -12,7 +12,11 @@ joshuaashby@joshashby.com
 from seshat.route import autoRoute
 from seshat.baseObject import HTMLObject
 from seshat.objectMods import login
+from seshat.actions import Redirect
+
 import models.redis.announcement.announcementModel as am
+
+from utils.paginate import pager
 
 import arrow
 
@@ -30,9 +34,14 @@ class index(HTMLObject):
         Nothing much, just get the cheetah template for index and return it
         so Seshat can get cheetah to render it and then return it to the browser
         """
+        perpage = self.request.getParam("perpage", 24)
+        page = self.request.getParam("page", 0)
+
         announcements = am.all_announcements()
 
-        self.view.data = {"announcements": announcements, "now": arrow.utcnow().format("MM/DD/YYYY HH:mm")}
+        f, page_dict = pager(announcements, perpage, page)
+
+        self.view.data = {"announcements": f, "page": page_dict, "now": arrow.utcnow().format("MM/DD/YYYY HH:mm")}
         self.view.scripts = ["admin/announcement", "lib/bootstrap-datetimepicker.min"]
         self.view.stylesheets = ["lib/bootstrap-datetimepicker.min"]
 
@@ -52,5 +61,4 @@ class index(HTMLObject):
 
         self.request.announcements.new_announcement(message, status, start, end)
 
-        self._redirect("/admin/announcements")
-        return
+        return Redirect("/admin/announcements")

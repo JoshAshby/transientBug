@@ -93,6 +93,9 @@ def pager(pail, perpage, page, sort_dir=""):
         page_dict["next"] = page + 1
         page_dict["prev"] = page - 1
 
+        if len(pail) <= perpage:
+            page_dict["show"] = False
+
         if page != 0:
             page_dict["hasPrev"] = True
         else:
@@ -104,8 +107,5 @@ def pager(pail, perpage, page, sort_dir=""):
             page_dict["hasNext"] = False
 
         pail = pail[offset_start:offset_end]
-
-        if len(pail) <= perpage:
-            page_dict["show"] = False
 
     return pail, page_dict

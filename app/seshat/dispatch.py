@@ -157,12 +157,12 @@ def logURL(request, url):
     Method: %s
     URL: %s
     PARAMS: %s
-    FILES:
+    FILES: %s
     Object: %s
     IP: %s
     UA: %s
     R: %s
-""" % (request.method, request.url, request.raw_params, url.pageObject.__module__+"/"+url.pageObject.__name__, request.remote, request.user_agent, request.referer))
+""" % (request.method, request.url, request.raw_params, request.files, url.pageObject.__module__+"/"+url.pageObject.__name__, request.remote, request.user_agent, request.referer))
 
 
 def logResponse(request, status):

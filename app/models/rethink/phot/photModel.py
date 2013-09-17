@@ -44,9 +44,9 @@ class Phot(RethinkModel):
     def download_phot(cls, user, url, title, tags=[]):
         """
         """
-        extension = url.rsplit(".", 1)
-        if len(extension) >= 1:
-            extension = extension[1]
+        parts = url.rsplit(".", 1)
+        if len(parts) > 1:
+            extension = parts[1]
             if extension == "jpeg":
                 extension = "jpg"
         else:

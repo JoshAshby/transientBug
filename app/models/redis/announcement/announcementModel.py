@@ -80,6 +80,8 @@ class CfgAnnouncements(StandardConfig):
                 val = False
             elif start and start > now:
                 val = False
+            elif end and end < now:
+                val = False
 
             if val:
                 ID = key.split(":")[1]
