@@ -27,7 +27,7 @@ class tags(HTMLObject):
     Returns base index page listing all gifs
     """
     _title = "phots"
-    _defaultTmpl = "public/gif/index"
+    _defaultTmpl = "public/gifs/index"
     def GET(self):
         """
         """
@@ -78,18 +78,18 @@ class tags(HTMLObject):
                 self.view.data = {"error": "We do not currently have any tags within the system!"}
                 return self.view
 
-            tags = [ item.replace("_", " ") for item in tags ]
-
             if query:
                 new_tags = []
                 for tag in tags:
-                    match = fuzz.partial_ratio(query, tag)
+                    match = fuzz.partial_ratio(query, tag.replace("_", " "))
                     if match >= 85:
                         new_tags.append(tag)
 
                 tags = new_tags
 
                 self.view.data = {"q": query}
+
+            tags = list(set(tags))
 
             self.view.template = "public/common/tags"
             self.view.data = {"tags": tags, "nav": {"phots": True}, "type": "Phots"}

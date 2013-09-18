@@ -82,13 +82,15 @@ class tags(HTMLObject):
             if query:
                 new_tags = []
                 for tag in tags:
-                    match = fuzz.partial_ratio(query, tag)
+                    match = fuzz.partial_ratio(query, tag.replace("_", " "))
                     if match >= 85:
                         new_tags.append(tag)
 
                 tags = new_tags
 
                 self.view.data = {"q": query}
+
+            tags = list(set(tags))
 
             self.view.template = "public/common/tags"
             self.view.data = {"tags": tags, "nav": {"notes": True}, "theme_color": "red", "type": "Notes"}
