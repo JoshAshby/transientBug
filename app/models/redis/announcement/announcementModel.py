@@ -120,7 +120,6 @@ class CfgAnnouncements(StandardConfig):
         """
         self._redis.set("announcement:%s:status" % ID, status)
         self._redis.set("announcement:%s:message" % ID, message)
-        self._redis.set("announcement:%s:created" % ID, arrow.utcnow().timestamp)
 
         self._redis.set("announcement:%s:start" % ID, start)
         self._redis.set("announcement:%s:end" % ID, end)

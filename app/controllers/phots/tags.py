@@ -18,6 +18,8 @@ from utils.paginate import rethink_pager
 import rethinkdb as r
 import models.rethink.phot.photModel as pm
 
+from fuzzywuzzy import fuzz
+
 
 @autoRoute()
 class tags(HTMLObject):
@@ -25,11 +27,12 @@ class tags(HTMLObject):
     Returns base index page listing all gifs
     """
     _title = "phots"
-    _defaultTmpl = "public/gifs/index"
+    _defaultTmpl = "public/gif/index"
     def GET(self):
         """
         """
         tag = self.request.id
+        query = self.request.getParam("q")
 
         if tag:
             perpage = self.request.getParam("perpage", 24)
@@ -75,6 +78,19 @@ class tags(HTMLObject):
                 self.view.data = {"error": "We do not currently have any tags within the system!"}
                 return self.view
 
-            self.view.template = "public/gifs/tags"
-            self.view.data = {"tags": tags}
+            tags = [ item.replace("_", " ") for item in tags ]
+
+            if query:
+                new_tags = []
+                for tag in tags:
+                    match = fuzz.partial_ratio(query, tag)
+                    if match >= 85:
+                        new_tags.append(tag)
+
+                tags = new_tags
+
+                self.view.data = {"q": query}
+
+            self.view.template = "public/common/tags"
+            self.view.data = {"tags": tags, "nav": {"phots": True}, "type": "Phots"}
             return self.view

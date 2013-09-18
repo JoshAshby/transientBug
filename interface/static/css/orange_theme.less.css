@@ -13,6 +13,15 @@ h6.thumbnail_h6 {
   white-space: nowrap;
   overflow: hidden;
 }
+h4 a {
+  text-decoration: none;
+  color: white;
+}
+h4 a:hover,
+h4 a:focus,
+h4 a:active {
+  text-decoration: none;
+}
 .container-full {
   width: 100%;
   color: #eee;
@@ -48,6 +57,9 @@ h6.thumbnail_h6 {
 .container-alert h5,
 .container-alert h6 {
   margin-top: 0px;
+}
+.tags {
+  line-height: 25px;
 }
 a {
   color: #ff8800;

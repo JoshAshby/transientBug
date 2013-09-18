@@ -19,6 +19,8 @@ from utils.paginate import rethink_pager
 import rethinkdb as r
 import models.rethink.note.noteModel as nm
 
+from fuzzywuzzy import fuzz
+
 
 @autoRoute()
 class tags(HTMLObject):
@@ -30,6 +32,7 @@ class tags(HTMLObject):
         """
         """
         tag = self.request.id
+        query = self.request.getParam("q")
 
         if tag:
             perpage = self.request.getParam("perpage", 25)
@@ -74,6 +77,19 @@ class tags(HTMLObject):
                 self.view.data = {"error": "We do not currently have any tags within the system!"}
                 return self.view
 
-            self.view.template = "public/notes/tags"
-            self.view.data = {"tags": tags}
+            tags = [ item.replace("_", " ") for item in tags ]
+
+            if query:
+                new_tags = []
+                for tag in tags:
+                    match = fuzz.partial_ratio(query, tag)
+                    if match >= 85:
+                        new_tags.append(tag)
+
+                tags = new_tags
+
+                self.view.data = {"q": query}
+
+            self.view.template = "public/common/tags"
+            self.view.data = {"tags": tags, "nav": {"notes": True}, "theme_color": "red", "type": "Notes"}
             return self.view

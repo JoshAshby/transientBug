@@ -174,7 +174,7 @@ class template(object):
         elif self._base is not None:
             base = tmpls[self._base]
 
-        if not "theme_color" in template.config:
+        if not "theme_color" in template.config and not "theme_color" in _data:
             _data["theme_color"] = "green"
 
         if base is not None:
