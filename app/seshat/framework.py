@@ -14,16 +14,13 @@ http://joshashby.com
 joshuaashby@joshashby.com
 """
 from gevent import monkey; monkey.patch_all()
-
 import gevent
 from gevent.pywsgi import WSGIServer
 
-import logging
-
-from seshat.dispatch import dispatch
-
 import traceback
 
+import logging
+from seshat.dispatch import dispatch
 
 import config.config as c
 logger = logging.getLogger(c.general["logName"]+".seshat")
@@ -47,7 +44,7 @@ def main():
 
     server = WSGIServer((address, port), dispatch, log=None)
 
-    logger.info("""Now serving py as a fastcgi server at %(address)s:%(port)i
+    logger.info("""Now serving py as a WSGI server at %(address)s:%(port)s
     Press Ctrl+c if running as non daemon mode, or send a stop signal
     """ % {"address": address, "port": port})
 
@@ -73,5 +70,5 @@ def serveForever():
     except:
         logger.critical(traceback.format_exc())
     else:
-        logger.critical("""Shutdown py operations for unknown reason, possibly a KeyboardInterrupt...""")
+        logger.critical("""Shutdown py operations for unknown reason!""")
         gevent.shutdown

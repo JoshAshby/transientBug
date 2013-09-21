@@ -41,35 +41,26 @@ def dispatch(env, start_response):
     the regex as the key and the object to route a match on that regex to as
     the value. From there it's either processing and returning the data from
     that controller object or it's returning a 404 or 500 error page.
-
     """
     request = requestItem(env)
     newHTTPObject = None
 
-    """
-    This needs to be rewritten to automatically pull out the URL since the URL scheme
-    is settled upon with /blah/blah/id the use of regex and matching a regex is
-    old slower and partially redudant with the autorouter
-    """
-    for url in c.urls:
-        matched = url.regex.match(request.url)
+    if c.general.debug: logRequest(request)
 
-        if matched:
-            matchedItems = matched.groups()
-            if len(matchedItems) > 0:
-                request.id = matchedItems[0]
+    found, ID = c.urls.get(request.url)
+    if found is not None:
+        request.id = ID
+        obj = found.__module__+"/"+found.__name__
+        newHTTPObject = found(request)
+        if c.general["debug"]: logObj(request, obj)
 
-            newHTTPObject = url.pageObject(request)
-            if c.general["debug"]: logURL(request, url)
-
-            break
+    else:
+        return error404(request, start_response)
 
     try:
-        if not newHTTPObject:
-            return error404(request, start_response)
-
         dataThread = gevent.spawn(newHTTPObject.build)
         dataThread.join()
+
         content, replyData = dataThread.get()
         if type(content) == tuple:
             request.error = content
@@ -84,14 +75,12 @@ def dispatch(env, start_response):
         if content:
             header = request.generateHeader(header, len(content))
 
-        if c.general["debug"]: gevent.spawn(logResponse, request, status)
+        if c.general["debug"]: gevent.spawn(logResponse, request, status, header)
 
         start_response(status, header)
 
-        if content:
-            return [str(content)]
-        else:
-            return []
+        if content: return [str(content)]
+        else: return []
 
     except Exception as e:
         request.error = (e, traceback.format_exc())
@@ -152,44 +141,50 @@ def error500(request, start_response):
     return [str(content)]
 
 
-def logURL(request, url):
+def logRequest(request):
     logger.debug("""\n\r------- Request ---------------------
     Method: %s
     URL: %s
-    PARAMS: %s
     FILES: %s
-    Object: %s
     IP: %s
     UA: %s
     R: %s
-""" % (request.method, request.url, request.raw_params, request.files, url.pageObject.__module__+"/"+url.pageObject.__name__, request.remote, request.user_agent, request.referer))
+    """ % (request.method, request.url, request.files, request.remote, request.user_agent, request.referer))
 
 
-def logResponse(request, status):
-  logger.debug("""\n\r--------- Response ---------------------
+def logObj(request, obj):
+    logger.debug("""\n\r\t------- Processing ------------------
+    Method: %s
     URL: %s
-    Status: %s
-""" % (request.url, status))
+    FILES: %s
+    Object: %s
+    """ % (request.method, request.url, request.files, obj))
+
+
+def logResponse(request, status, header):
+    header_str = str(header) if status != "200 OK" else ""
+    logger.debug("""\n\r\t--------- Response ---------------------
+    URL: %s
+    Status: %s %s
+    """ % (request.url, status, header_str))
 
 
 def log500(request):
     logger.error("""\n\r-------500 INTERNAL SERVER ERROR --------
     Method: %s
     URL: %s
-    PARAMS: %s
     IP: %s
     UA: %s
     R: %s
     ERROR: %s
-    """ % (request.method, request.url, request.raw_params, request.remote, request.user_agent, request.referer, request.error))
+    """ % (request.method, request.url, request.remote, request.user_agent, request.referer, request.error))
 
 
 def log404(request):
     logger.warn("""\n\r-------404 NOT FOUND--------
     Method: %s
     URL: %s
-    PARAMS: %s
     IP: %s
     UA: %s
     R: %s
-    """ % (request.method, request.url, request.raw_params, request.remote, request.user_agent, request.referer))
+    """ % (request.method, request.url, request.remote, request.user_agent, request.referer))

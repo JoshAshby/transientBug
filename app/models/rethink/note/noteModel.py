@@ -8,15 +8,14 @@ Josh Ashby
 http://joshashby.com
 joshuaashby@joshashby.com
 """
-from rethinkORM import RethinkModel
-import models.rethink.user.userModel as um
 import arrow
-
-import utils.markdownUtils as mdu
-
 import rethinkdb as r
 
-import models.utils.dbUtils as dbu
+from rethinkORM import RethinkModel
+import models.rethink.user.userModel as um
+import utils.markdownUtils as mdu
+
+import utils.short_codes as sc
 
 
 class Note(RethinkModel):
@@ -35,7 +34,7 @@ class Note(RethinkModel):
         code_good = False
         code = ""
         while not code_good:
-            code = dbu.short_code()
+            code = sc.rand_short_code()
             f = r.table(cls.table).filter({"short_code": code}).count().run()
             if f == 0:
                 code_good = True

@@ -23,6 +23,8 @@ from gevent_zeromq import zmq
 
 from standard import StandardConfig
 
+from seshat.routeTable import RouteTable
+
 context = zmq.Context()
 zmqSock = context.socket(zmq.PUB)
 
@@ -63,4 +65,4 @@ for fi in general.files:
 Don't change these following settings unless you know what you're doing!!!
 ##########################################################################
 """
-urls = []
+urls = RouteTable()

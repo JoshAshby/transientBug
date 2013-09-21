@@ -16,7 +16,7 @@ joshuaashby@joshashby.com
 from views.template import template
 import json
 import traceback
-import seshat.actions as actions
+import actions
 
 
 class BaseHTTPObject(object):

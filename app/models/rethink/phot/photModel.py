@@ -8,32 +8,18 @@ Josh Ashby
 http://joshashby.com
 joshuaashby@joshashby.com
 """
-from rethinkORM import RethinkModel
-import models.rethink.user.userModel as um
+import gevent
 import arrow
-
-import rethinkdb as r
-
-import requests
+import urlparse
 
 import config.config as c
 
-import models.utils.dbUtils as dbu
+import rethinkdb as r
+from rethinkORM import RethinkModel
+import models.rethink.user.userModel as um
 
-import gevent
-
-
-def download_photo(url, filename):
-    path = ''.join([c.general.dirs["gifs"], filename])
-
-    req = requests.get(url, stream=True)
-
-    if req.status_code == 200:
-        with open(path, 'wb') as f:
-            for chunk in req.iter_content():
-                f.write(chunk)
-    else:
-        raise Exception("Image could not be found")
+import utils.short_codes as sc
+import utils.files as fu
 
 
 class Phot(RethinkModel):
@@ -44,18 +30,11 @@ class Phot(RethinkModel):
     def download_phot(cls, user, url, title, tags=[]):
         """
         """
-        parts = url.rsplit(".", 1)
-        if len(parts) > 1:
-            extension = parts[1]
-            if extension == "jpeg":
-                extension = "jpg"
-        else:
-            raise Exception("Image extension not found")
-
         name = title.replace(" ", "_")
-        filename = ''.join([name, ".", extension])
+        gevent.spawn(fu.download_file, url, name)
 
-        gevent.spawn(download_photo, url, filename)
+        extension = urlparse.urlparse(url).path.rsplit(".", 1)[1]
+        filename = '.'.join([name, extension])
 
         time = arrow.utcnow()
         if not title:
@@ -65,7 +44,7 @@ class Phot(RethinkModel):
         code_good = False
         code = ""
         while not code_good:
-            code = dbu.short_code()
+            code = sc.rand_short_code()
             f = r.table(cls.table).filter({"short_code": code}).count().run()
             if f == 0:
                 code_good = True
@@ -80,7 +59,6 @@ class Phot(RethinkModel):
                           url=url,
                           tags=new_tags,
                           short_code=code,
-                          extension=extension,
                           filename=filename)
 
         return what
@@ -90,7 +68,8 @@ class Phot(RethinkModel):
         name = title.replace(" ", "_")
         filename = ''.join([name, ".", file_obj.extension])
 
-        gevent.spawn(dbu.upload_photo, file_obj, filename, c.general.dirs["gifs"])
+        path = ''.join([c.general.dirs["gifs"], filename])
+        gevent.spawn(fu.write_file, file_obj, path)
 
         time = arrow.utcnow()
         if not title:
@@ -100,7 +79,7 @@ class Phot(RethinkModel):
         code_good = False
         code = ""
         while not code_good:
-            code = dbu.short_code()
+            code = sc.rand_short_code()
             f = r.table(cls.table).filter({"short_code": code}).count().run()
             if f == 0:
                 code_good = True
@@ -115,11 +94,28 @@ class Phot(RethinkModel):
                           url=url,
                           tags=new_tags,
                           short_code=code,
-                          extension=file_obj.extension,
                           filename=filename)
 
         return what
 
+    @property
+    def extension(self):
+        return self.filename.rsplit(".", 1)[1]
+
+    def format(self, time_format="human"):
+        """
+        Formats markdown and dates into the right stuff
+        """
+        if time_format != "human":
+            self._formated_created = arrow.get(self.created).format(time_format)
+        else:
+            self._formated_created = arrow.get(self.created).humanize()
+
+        self._formated_user = um.User(self.user).username
+        self._formated_tags = ', '.join(self.tags)
+
+
+class ImportPhot(Phot):
     @classmethod
     def import_phot(cls, user, filename):
         """
@@ -138,7 +134,7 @@ class Phot(RethinkModel):
         code_good = False
         code = ""
         while not code_good:
-            code = dbu.short_code()
+            code = sc.rand_short_code()
             f = r.table(cls.table).filter({"short_code": code}).count().run()
             if f == 0:
                 code_good = True
@@ -149,19 +145,6 @@ class Phot(RethinkModel):
                           url="",
                           tags=[],
                           short_code=code,
-                          extension=extension,
                           filename=filename)
 
         return what
-
-    def format(self, time_format="human"):
-        """
-        Formats markdown and dates into the right stuff
-        """
-        if time_format != "human":
-            self._formated_created = arrow.get(self.created).format(time_format)
-        else:
-            self._formated_created = arrow.get(self.created).humanize()
-
-        self._formated_user = um.User(self.user).username
-        self._formated_tags = ', '.join(self.tags)

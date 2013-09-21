@@ -90,6 +90,7 @@ class tags(HTMLObject):
                 self.view.data = {"q": query}
 
             tags = list(set(tags))
+            tags.sort()
 
             self.view.template = "public/common/tags"
             self.view.data = {"tags": tags, "nav": {"phots": True}, "type": "Phots"}

@@ -32,12 +32,10 @@ class delete(JSONObject):
             break
 
         if self.request.id in f:
-            try:
-                os.remove(current_path)
+            os.remove(current_path)
 
-                return {"success": True}
-            except Exception as e:
-                return {"success": False, "error": str(e)}
+            self.request.session.pushAlert("Deleting screenshot...")
+            return {"success": True}
 
         else:
-            return {"success": False, "error": "That image couldn't be found. :/"}
+            raise Exception("That image could not be found.")

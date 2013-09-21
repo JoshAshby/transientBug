@@ -1,4 +1,11 @@
 $(function() {
+  $('.date').datetimepicker({
+    language: 'en',
+    pick12HourFormat: true,
+    pickSeconds: false,
+  });
+
+  $(".toggle_btn").tooltip();
   function toggle(what) {
     id=$(what).data("id");
 
@@ -8,11 +15,13 @@ $(function() {
         if($(what).hasClass("btn-default")) {
           $(what).removeClass("btn-default")
                  .addClass("btn-theme")
-                 .html('<i class="icon-ok"></i>');
+                 .html('<i class="icon-ok"></i>')
+                 .data("title", "Enabled");
         } else {
           $(what).removeClass("btn-theme")
                  .addClass("btn-default")
-                 .html('<i class="icon-remove"></i>');
+                 .html('<i class="icon-remove"></i>')
+                 .data("title", "Enabled");
         }
       }
     });

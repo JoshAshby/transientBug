@@ -22,12 +22,12 @@ logger = logging.getLogger(c.general["logName"]+".seshat.route")
 
 def autoRoute(urls=c.urls):
     def wrapper(HTTPObject):
-        urlObject = bu.autoURL(HTTPObject)
+        urlObject = bu.AutoURL(HTTPObject)
 
         urls.append(urlObject)
-        HTTPObject.__url__ = urlObject.url
         if c.general["debug"]: logger.debug("""Auto generated route table entry for:
         Object: %(objectName)s
-        Pattern: %(regex)s""" % {"regex": urlObject.url, "objectName": HTTPObject.__module__ + "/" + HTTPObject.__name__})
+        Pattern: %(url)s""" % {"url": urlObject.url, "objectName": HTTPObject.__module__ + "/" + HTTPObject.__name__})
+        #if c.general.debug: logger.debug(urlObject)
         return HTTPObject
     return wrapper

@@ -21,8 +21,7 @@ from seshat.objectMods import login
 from seshat.actions import Redirect
 
 from utils.paginate import pager
-
-import models.utils.dbUtils as dbu
+import utils.files as fu
 
 
 @login(["root"])
@@ -57,7 +56,13 @@ class index(HTMLObject):
     def POST(self):
         scrn = self.request.getFile("file")
 
-        gevent.spawn(dbu.upload_photo, scrn, scrn.filename, c.general.dirs["screenshots"])
+        if scrn:
+            path = ''.join([c.general.dirs["screenshots"], scrn.filename])
+            try:
+                fu.write_file(scrn, path)
+                self.request.session.pushAlert("Screenshot is being uploaded...", level="success")
+            except IOError as e:
+                self.request.session.pushAlert("There was a problem executing \
+                    that: {}".format(str(e)), level="error")
 
-        self.request.session.pushAlert("Screenshot is being uploaded...", level="success")
         return Redirect("/screenshots")

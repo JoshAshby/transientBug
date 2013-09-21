@@ -13,17 +13,16 @@ Josh Ashby
 http://joshashby.com
 joshuaashby@joshashby.com
 """
-import re
 
 
-class autoURL(object):
+class AutoURL(object):
     """
     Base container and for generating and storing the url, and regex
     along with the object for the route table.
     """
     def __init__(self, pageObject):
         """
-        Attempts to generate the URL from the module name. This uses
+        Attempts to generate the base URL from the module name. This uses
         the file hierarchy within the controllers file to represent the URL.
         Controller files must contain the word `Controller` and the folder names
         can not. The actual name of the class within each Controller must be
@@ -33,13 +32,16 @@ class autoURL(object):
             controllers/admin/dev/buckets/bucketsController.py
 
             contains a class adminDevBucketsIndex which will be routed to
-            `/admin/dev/buckets/`
+            `/admin/dev/buckets`
             and also a class adminDevBucketsSave which will be routed to
             `/admin/dev/buckets/save/`
         """
         fullModule = pageObject.__module__
         bits = fullModule.split(".")
         bases = []
+
+        # Ignore the first and last parts of the module and make everything
+        # lowercased so controllers can maybe be pep8 sometimes.
         for bit in bits[1:len(bits)-1]:
             bases.append(bit.lower())
 
@@ -47,23 +49,23 @@ class autoURL(object):
         for base in bases:
             self.url += base + "/"
 
-        name = pageObject.__name__
+        # Everything lowercased. Because fuck uppercase... wait.
+        name = pageObject.__name__.lower()
 
         if name == "index":
+            self.is_index = True
             self.url = self.url.rstrip("/")
-            self.preRegex = "^" + self.url + "(?:|/)$"
+            if not self.url: self.url = "/"
         else:
+            self.is_index = False
             self.url += name
-            self.preRegex = "^" + self.url +"(?:|/(.*))(?:|/)$"
 
-        self.regex = re.compile(self.preRegex)
         self.pageObject = pageObject
-        self.name = name
 
-        try:
-            self.title = pageObject._title
-        except:
-            self.title = "unnamedFalgrPage"
+    @property
+    def title(self):
+        if hasattr(self.pageObject, "title"): return self.pageObject.title
+        else: return ""
 
     def __repr__(self):
-        return "< baseURL Object, title: " + self.title + " url: " + self.preRegex + " page object: " + self.pageObject.__name__ + " >"
+        return "< baseURL Object, title: " + self.title + " url: " + self.url + " object: " + self.pageObject.__module__ + "/" + self.pageObject.__name__ + " >"

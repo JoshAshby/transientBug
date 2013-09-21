@@ -20,16 +20,17 @@ logger = logging.getLogger(c.general["logName"]+".seshat.request")
 
 import Cookie
 import uuid
+import cgi
+import tempfile
+import urlparse
 
 import models.redis.session.sessionModel as sm
 import models.redis.bucket.bucketModel as bm
 import models.redis.announcement.announcementModel as am
 
-import cgi
-import tempfile
-
 
 class FileObject(object):
+    _template = "< FileObject @ {id} Filename: {filename} Data: {data} >"
     def __init__(self, file_obj):
         self.filename = file_obj.filename
         self.name = file_obj.name
@@ -54,23 +55,33 @@ class FileObject(object):
     def readlines(self):
         return self.file.readlines()
 
-    def __repr__(self):
-        return "< FileObject "+self.filename+" at "+str(id(self))+">"
+    def auto_read(self):
+        self.seek(0)
+        data = self.read()
+        self.seek(0)
+        return data
 
-    def __str__(self):
-        return "< FileObject "+self.filename+" at "+str(id(self))+">"
+    def __repr__(self):
+      string = self._template.format(**{
+          "id": id(self),
+          "filename": self.filename,
+          "data": len(self.auto_read())
+        })
+      return string
 
 
 class requestItem(object):
     def __init__(self, env):
         self._env = env
+
+        self.url = urlparse.urlparse(env["PATH_INFO"])
+
         self.buildParams()
         self.buildCookie()
         self.buildSession()
         self.buildCfg()
 
         self.method = self._env["REQUEST_METHOD"]
-        self.url = env["PATH_INFO"]
         self.remote = env["HTTP_X_REAL_IP"] if "HTTP_X_REAL_IP" in env else "Unknown IP"
         self.user_agent = env["HTTP_USER_AGENT"] if "HTTP_USER_AGENT" in env else "Unknown User Agent"
         self.referer = env["HTTP_REFERER"] if "HTTP_REFERER" in env else "No Referer"
@@ -100,7 +111,6 @@ class requestItem(object):
 
         self.params = all_mem
         self.files = all_files
-        self.raw_params = all_raw
 
     def buildCookie(self):
         cookie = Cookie.SimpleCookie()
@@ -131,6 +141,7 @@ class requestItem(object):
         header.append(("Content-Length", str(length)))
         header.append(("Server", self._env["SERVER_SOFTWARE"]))
         header.append(("X-Seshat-Says", "Ello!"))
+        if hasattr(self, "error"): header.append(("X-Error"), str(self.error))
         return header
 
     def getParam(self, param, default="", cast=str):
@@ -148,5 +159,5 @@ class requestItem(object):
             return default
 
     def getFile(self, name):
-        if name in self.files:
-            return self.files[name]
+        if name in self.files and self.files[name].filename:
+              return self.files[name]

@@ -5,17 +5,6 @@ nav:
   admin_annoucements: true
 
 scripts: "
-  $(function() {
-    $('#datetimepicker_start').datetimepicker({
-      language: 'en',
-      pick12HourFormat: true,
-      pickSeconds: false,
-    });
-    $('#datetimepicker_end').datetimepicker({
-      language: 'en',
-      pick12HourFormat: true,
-      pickSeconds: false,
-    });
   });
   "
 +++
@@ -64,12 +53,12 @@ scripts: "
             <div class="col-md-3">
               <div class="btn-group pull-right">
                 {{#status}}
-                  <a href="#" data-id="{{id}}" class="btn btn-theme btn-sm toggle_btn">
+                  <a href="#" data-id="{{id}}" class="btn btn-theme btn-sm toggle_btn" data-toggle="tooltip" title="Enabled" data-placement="auto left">
                     <i class="icon-ok"></i>
                   </a>
                 {{/status}}
                 {{^status}}
-                  <a href="#" data-id="{{id}}" class="btn btn-default btn-sm toggle_btn">
+                  <a href="#" data-id="{{id}}" class="btn btn-default btn-sm toggle_btn" data-toggle="tooltip" title="Disabled" data-placement="auto left">
                     <i class="icon-remove"></i>
                   </a>
                 {{/status}}
@@ -134,13 +123,13 @@ scripts: "
                 <div class="form-group">
                   <div class="row">
                     <div class="col-md-6">
-                      <div class='input-group date' id='datetimepicker_start'>
+                      <div class='input-group date'>
                         <span class="input-group-addon"><i class="icon-calendar"></i></span>
                         <input type='text' class="form-control" name="start" placeholder="{{now}}" />
                       </div>
                     </div>
                     <div class="col-md-6">
-                      <div class='input-group date' id='datetimepicker_end'>
+                      <div class='input-group date'>
                         <input type='text' class="form-control" name="end" placeholder="{{now}}" />
                         <span class="input-group-addon"><i class="icon-calendar"></i></span>
                       </div>
