@@ -145,11 +145,12 @@ def logRequest(request):
     logger.debug("""\n\r------- Request ---------------------
     Method: %s
     URL: %s
+    PARAMS: %s
     FILES: %s
     IP: %s
     UA: %s
     R: %s
-    """ % (request.method, request.url, request.files, request.remote, request.user_agent, request.referer))
+    """ % (request.method, request.url.path, request.params, request.files, request.remote, request.user_agent, request.referer))
 
 
 def logObj(request, obj):

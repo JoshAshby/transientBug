@@ -116,7 +116,7 @@ class templateFile(object):
         return template
 
     def render(self, data):
-        _data = self._config
+        _data = self._config.copy()
         _data.update(data)
 
         if(self.is_jinja):
@@ -131,6 +131,9 @@ class templateFile(object):
     def __getitem__(self, item):
         return self._config[item]
 
+    def __setitem__(self, item, value):
+        self._config[item] = value
+
 
 class template(object):
     def __init__(self, template, data):
@@ -143,8 +146,6 @@ class template(object):
 
         self._template = template
         self._base = "skeleton_navbar"
-
-        self._render = ""
 
     @property
     def template(self):
@@ -214,37 +215,37 @@ class template(object):
         self._data[placeholder] = tmpls[template].render(data)
 
     def render(self):
-        _data = self._baseData
+        data = self._baseData.copy()
 
         template = tmpls[self._template]
-        body = template.render(_data)
+        body = template.render(data)
 
-        _data.update(template.config)
+        data.update(template.config.copy())
 
         if "base" in template:
             base = template["base"]
         else:
             base = self._base
 
-        if not "theme_color" in template and not "theme_color" in _data:
-            _data["theme_color"] = "green"
+        if not "theme_color" in template and not "theme_color" in data:
+            data["theme_color"] = "green"
 
         if base is not None:
             baseTmpl= tmpls[base]
-            _data["body"] = body
+            data["body"] = body
 
-            self._render = baseTmpl.render(_data)
+            _render = baseTmpl.render(data)
 
         else:
-            self._render = body
+            _render = body
 
-        return unicode(self._render)
+        self._baseData = {}
+        data = {}
 
-    def __str__(self):
-        if self._render:
-            return unicode(self._render)
-        else:
-            raise Exception("Not rendered yet.")
+        del data
+        del self._baseData
+
+        return unicode(_render)
 
 
 for top, folders, files in os.walk(tmplPath):

@@ -117,7 +117,9 @@ class HTMLObject(BaseHTTPObject):
 
     def post_content_hook(self, content):
         if isinstance(content, template):
-            return content.render()
+            string = content.render()
+            del content
+            return string
         else:
             return content
 

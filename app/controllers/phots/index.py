@@ -30,7 +30,7 @@ class index(HTMLObject):
         """
         """
         orig_filt = self.request.getParam("filter", "all")
-        view = self.request.getParam("v", 'cards').lower()
+        view = self.request.getParam("v", 'cards')
 
         if orig_filt == "all":
             filt = ""
