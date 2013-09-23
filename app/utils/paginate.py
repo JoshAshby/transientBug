@@ -23,6 +23,8 @@ def rethink_pager(query, request, sort="", perpage_default=24):
     di = sort
     if sort_dir == "desc":
         di = r.desc(sort)
+    if sort_dir == "asc":
+        di = r.asc(sort)
 
     query = query.order_by(di)
 

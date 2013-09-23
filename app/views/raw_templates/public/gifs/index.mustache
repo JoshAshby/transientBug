@@ -6,9 +6,6 @@ scripts: "
       $('.thumbnail_h6').tooltip();
   "
 +++
-{{#tags}}
-
-{{/tags}}
 
 <div class="row">
   {{#req.session.has_phots}}
@@ -49,7 +46,7 @@ scripts: "
       <div class="form-group">
         <label class="sr-only" for="dir">Sort</label>
         <select id="dir" name="dir"class="input-sm">
-          {{#page.dir}}<option value={{page.dir}}>{{page.dir}}</option>{{/page.dir}}
+          {{#page.direction}}<option value={{page.direction}}>{{page.direction}}</option>{{/page.direction}}
           <option value=desc>desc</option>
           <option value=asc>asc</option>
         </select>
@@ -121,23 +118,23 @@ scripts: "
   {{/list}}
 </div>
 
-{{#page.show}}
+{{#page.show_pager}}
   <ul class="pager">
-    <li class="previous {{^page.hasPrev}}disabled{{/page.hasPrev}}">
-      {{#page.hasPrev}}
-        <a href="?page={{page.prev}}&perpage={{page.perpage}}&dir={{page.dir}}&filter={{filter}}&v={{v}}"><i class="icon-chevron-left"></i> Prev</a>
-      {{/page.hasPrev}}
-      {{^page.hasPrev}}
+    <li class="previous {{^page.has_prev}}disabled{{/page.has_prev}}">
+      {{#page.has_prev}}
+        <a href="?page={{page.prev_page}}&perpage={{page.perpage}}&dir={{page.direction}}&filter={{filter}}&v={{v}}"><i class="icon-chevron-left"></i> Prev</a>
+      {{/page.has_prev}}
+      {{^page.has_prev}}
         <a><i class="icon-chevron-left"></i> Prev</a>
-      {{/page.hasPrev}}
+      {{/page.has_prev}}
     </li>
-    <li class="next {{^page.hasNext}}disabled{{/page.hasNext}}">
-      {{#page.hasNext}}
-        <a href="?page={{page.next}}&perpage={{page.perpage}}&dir={{page.dir}}&filter={{filter}}&v={{v}}">Next <i class="icon-chevron-right"></i></a>
-      {{/page.hasNext}}
-      {{^page.hasNext}}
+    <li class="next {{^page.has_next}}disabled{{/page.has_next}}">
+      {{#page.has_next}}
+        <a href="?page={{page.next_page}}&perpage={{page.perpage}}&dir={{page.direction}}&filter={{filter}}&v={{v}}">Next <i class="icon-chevron-right"></i></a>
+      {{/page.has_next}}
+      {{^page.has_next}}
         <a>Next <i class="icon-chevron-right"></i></a>
-      {{/page.hasNext}}
+      {{/page.has_next}}
     </li>
   </ul>
-{{/page.show}}
+{{/page.show_pager}}
