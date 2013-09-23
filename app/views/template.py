@@ -212,7 +212,7 @@ class template(object):
 
     def partial(self, placeholder, template, data):
         data.update(self._baseData)
-        self._data[placeholder] = tmpls[template].render(data)
+        self._baseData[placeholder] = tmpls[template].render(data)
 
     def render(self):
         data = self._baseData.copy()

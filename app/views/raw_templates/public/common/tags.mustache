@@ -1,23 +1,23 @@
 <div class="row">
   <div class="col-md-6 col-sm-12">
-    {{^q}}
-      <h2 style="margin-top:0px;"><i class="icon-tags"></i> {{type}} Tags - All</h2>
-    {{/q}}
-    {{#q}}
-      <h2 style="margin-top:0px;"><i class="icon-tags"></i> {{type}} Tags - Search</h2>
-    {{/q}}
-  </div>
-  <div class="col-md-6 col-sm-12">
     <form method="GET" class="form-inline">
 
       <div class="input-group">
-        <input type="text" class="form-control" name="q" value="{{q}}" placeholder="Search...">
+        <input type="text" class="form-control input-sm" name="q" value="{{q}}" placeholder="Search...">
         <span class="input-group-btn">
-          <button class="btn btn-theme" type="submit"><i class="icon-search"></i></button>
+          <button class="btn btn-theme btn-sm" type="submit"><i class="icon-search"></i></button>
         </span>
       </div>
 
     </form>
+  </div>
+  <div class="col-md-6 col-sm-12">
+    {{^q}}
+      <h3 style="margin-top:0px;"><i class="icon-tags"></i> {{type}} Tags - All</h3>
+    {{/q}}
+    {{#q}}
+      <h3 style="margin-top:0px;"><i class="icon-tags"></i> {{type}} Tags - Search</h3>
+    {{/q}}
   </div>
 </div>
 <br>

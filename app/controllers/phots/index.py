@@ -44,6 +44,8 @@ class index(HTMLObject):
 
         f, pager_dict = rethink_pager(query, self.request, "title")
 
+        self.view.partial("pager", "public/common/pager", pager_dict)
+
         if f:
             new_f = []
             for bit in f:
@@ -51,7 +53,7 @@ class index(HTMLObject):
                 phot.format()
                 new_f.append(phot)
 
-            self.view.data = {"pictures": new_f, "page": pager_dict, "filter": orig_filt, view: True, "v": view}
+            self.view.data = {"pictures": new_f, "page": pager_dict, "filter": orig_filt, "v": view}
             return self.view
 
         else:

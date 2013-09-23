@@ -19,6 +19,7 @@ import rethinkdb as r
 import models.rethink.phot.photModel as pm
 
 from fuzzywuzzy import fuzz
+import operator
 
 
 @autoRoute()
@@ -30,11 +31,27 @@ class tags(HTMLObject):
     _defaultTmpl = "public/gifs/index"
     def GET(self):
         """
+        HOLY HELL WHAT A MESS
         """
         tag = self.request.id
         query = self.request.getParam("q")
 
-        if tag:
+        if not query and tag: query = tag
+
+        if query:
+            tags = list(r.table(pm.Phot.table).concat_map(lambda doc: doc["tags"]).run())
+            new_tags = {}
+            for tag in tags:
+                match = fuzz.partial_ratio(query, tag.replace("_", " "))
+                if match >= 85:
+                    new_tags[tag] = match
+
+            tags = new_tags.iterkeys()
+
+            tag = max(new_tags.iteritems(), key=operator.itemgetter(1))[0]
+
+            self.view.data = {"q": query}
+
             orig_filt = self.request.getParam("filter", "all")
             view = self.request.getParam("v", 'cards').lower()
 
@@ -48,9 +65,10 @@ class tags(HTMLObject):
             if orig_filt != "all":
                 query = query.filter({"extension": filt})
 
-            query = query.filter(r.row["tags"].filter(lambda t: t == tag).count() > 0)
+            query = query.filter(r.row["tags"].filter(lambda t: t == tag ).count() > 0)
 
             f, pager_dict = rethink_pager(query, self.request, "title")
+            self.view.partial("pager", "public/common/pager", pager_dict)
 
             if f:
                 new_f = []
@@ -59,7 +77,7 @@ class tags(HTMLObject):
                     phot.format()
                     new_f.append(phot)
 
-                self.view.data = {"pictures": new_f, "page": pager_dict, "filter": orig_filt, "tag": tag, view: True, "v": view}
+                self.view.data = {"pictures": new_f, "tags": tags, "page": pager_dict, "filter": orig_filt, "tag": tag, "v": view}
                 return self.view
 
             else:
@@ -74,17 +92,6 @@ class tags(HTMLObject):
                 self.view.template = "public/gifs/error"
                 self.view.data = {"error": "We do not currently have any tags within the system!"}
                 return self.view
-
-            if query:
-                new_tags = []
-                for tag in tags:
-                    match = fuzz.partial_ratio(query, tag.replace("_", " "))
-                    if match >= 85:
-                        new_tags.append(tag)
-
-                tags = new_tags
-
-                self.view.data = {"q": query}
 
             tags = list(set(tags))
             tags.sort()

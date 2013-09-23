@@ -1,0 +1,20 @@
+{{#show_pager}}
+  <ul class="pager">
+    <li class="previous {{^has_prev}}disabled{{/has_prev}}">
+      {{#has_prev}}
+        <a href="?page={{prev_page}}&perpage={{perpage}}&dir={{direction}}&filter={{filter}}&v={{v}}"><i class="icon-chevron-left"></i> Prev</a>
+      {{/has_prev}}
+      {{^has_prev}}
+        <a><i class="icon-chevron-left"></i> Prev</a>
+      {{/has_prev}}
+    </li>
+    <li class="next {{^has_next}}disabled{{/has_next}}">
+      {{#has_next}}
+        <a href="?page={{next_page}}&perpage={{perpage}}&dir={{direction}}&filter={{filter}}&v={{v}}">Next <i class="icon-chevron-right"></i></a>
+      {{/has_next}}
+      {{^has_next}}
+        <a>Next <i class="icon-chevron-right"></i></a>
+      {{/has_next}}
+    </li>
+  </ul>
+{{/show_pager}}
