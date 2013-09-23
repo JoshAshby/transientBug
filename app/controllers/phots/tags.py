@@ -68,6 +68,7 @@ class tags(HTMLObject):
             query = query.filter(r.row["tags"].filter(lambda t: t == tag ).count() > 0)
 
             f, pager_dict = rethink_pager(query, self.request, "title")
+            pager_dict.update({"v": view, "filter": orig_filt})
             self.view.partial("pager", "public/common/pager", pager_dict)
 
             if f:

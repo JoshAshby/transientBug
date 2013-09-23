@@ -43,6 +43,7 @@ class index(HTMLObject):
             query = query.filter({"extension": filt})
 
         f, pager_dict = rethink_pager(query, self.request, "title")
+        pager_dict.update({"v": view, "filter": orig_filt})
 
         self.view.partial("pager", "public/common/pager", pager_dict)
 
