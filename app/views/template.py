@@ -16,14 +16,17 @@ joshuaashby@joshashby.com
 """
 import pystache
 import os
-import time
 import config.config as c
 import logging
 import yaml
+import jinja2
+import arrow
 
 logger = logging.getLogger(c.general["logName"]+".views")
 
-tmplPath = os.path.dirname(__file__)+"/mustache/"
+time_format = "dd MMM DD HH:mm:ss:SS YYYY"
+
+tmplPath = os.path.dirname(__file__)+"/raw_templates/"
 
 tmpls = {}
 
@@ -54,21 +57,36 @@ class templateFile(object):
 
         return self._template
 
+    @property
+    def extension(self):
+        return self._file.rsplit(".", 1)[1]
+
+    @property
+    def is_jinja(self):
+        return self.extension=="jinja"
+
+    @property
+    def is_mustache(self):
+        return self.extension=="mustache"
+
     def readTemplate(self):
         """
         Read in the template only if it has been modified since we first
         read it into our `_template`
         """
-        mtime = time.ctime(os.path.getmtime(self._file))
+        mtime = os.path.getmtime(self._file)
 
         if self._mtime < mtime:
             if c.general["debug"]:
+                pt = arrow.get(self._mtime).format(time_format)
+                nt = arrow.get(mtime).format(time_format)
                 logger.debug("""\n\r============== Template =================
     Rereading template into memory...
     TEMPLATE:  %s
+    TYPE: %s
     OLD MTIME: %s
     NEW MTIME: %s
-""" % (self._file, self._mtime, mtime))
+""" % (self._file, self.extension, pt, nt))
             with open(self._file, "r") as openTmpl:
                 raw = unicode(openTmpl.read())
             self._mtime = mtime
@@ -76,9 +94,24 @@ class templateFile(object):
             if raw[:3] == "+++":
                 config, template = raw.split("+++", 2)[1:]
                 self.config = yaml.load(config)
-                self._template = template
+                template = template
             else:
-                self._template = raw
+                template = raw
+
+        if(self.is_mustache):
+            self._template = template
+        if(self.is_jinja):
+            self._template = jinja2.Template(template)
+
+    def render(self, data):
+        _data = self.config
+        _data.update(data)
+
+        if(self.is_jinja):
+            return unicode(self._template.render(_data))
+        else:
+            result = pystache.render(self._template, _data)
+            return unicode(result)
 
 
 class template(object):
@@ -126,6 +159,12 @@ class template(object):
         assert type(value) == dict
         self._baseData.update(value)
 
+    def append(self, value):
+        self.data = value
+
+    def update(self, value):
+        self.data = value
+
     @property
     def scripts(self):
         return self._baseData["scriptFiles"], self._baseData["scripts"]
@@ -154,38 +193,27 @@ class template(object):
 
     def partial(self, placeholder, template, data):
         data.update(self._baseData)
-        self._data[placeholder] = pystache.render(template, data)
+        self._data[placeholder] = tmpls[template].render(data)
 
     def render(self):
         _data = self._baseData
-        _data["req"].session.renderAlerts()
 
         template = tmpls[self._template]
+        body = template.render(_data)
 
-        tmpl = template.template
-
-        _data.update(template.config)
-
-        body = pystache.render(tmpl, _data)
-
-        base = None
-        if "base" in template.config and template.config["base"] is not None:
-            base = tmpls[template.config["base"]]
-        elif self._base is not None:
-            base = tmpls[self._base]
+        if "base" in template.config:
+            base = template.config["base"]
+        else:
+            base = self._base
 
         if not "theme_color" in template.config and not "theme_color" in _data:
             _data["theme_color"] = "green"
 
         if base is not None:
-            baseTmpl = base.template
-            _data.update(base.config)
+            baseTmpl= tmpls[base]
+            _data["body"] = body
 
-            _data.update({
-                "body"  : body,
-            })
-
-            self._render = pystache.render(baseTmpl, _data)
+            self._render = baseTmpl.render(_data)
 
         else:
             self._render = body
@@ -193,14 +221,17 @@ class template(object):
         return unicode(self._render)
 
     def __str__(self):
-        return unicode(self._render)
+        if self._render:
+            return unicode(self._render)
+        else:
+            raise Exception("Not rendered yet.")
 
 
 for top, folders, files in os.walk(tmplPath):
     for fi in files:
         base = top.split(tmplPath)[1]
         file_name, extension = fi.rsplit('.', 1)
-        if extension == "mustache":
+        if extension in ["mustache", "jinja"]:
             name = '/'.join([base, file_name]).lstrip('/')
             fi = '/'.join([base, fi])
             tmpls[name] = templateFile(fi)

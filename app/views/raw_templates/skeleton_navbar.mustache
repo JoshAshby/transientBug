@@ -29,8 +29,8 @@
     {{#req.has_announcements}}
       <div class="container container-alert">
         <div class="row">
-          <div class="col-md-1 col-sm-1">
-            <i class="icon-exclamation icon-3x"></i>
+          <div class="col-md-1 col-sm-1" style="text-align: center;">
+            <i class="icon-exclamation icon-4x"></i>
           </div>
           <div class="col-md-10 col-sm-10">
             {{#req.announcements}}
@@ -40,7 +40,7 @@
         </div>
       </div>
     {{/req.has_announcements}}
-    <div class="container container-full">
+    <div class="container">
       <br>
       <div class="row">
         <div class="col-md-10 col-md-offset-1">
@@ -59,7 +59,7 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse navbar-ex1-collapse">
               <ul class="nav navbar-nav">
-                <li {{#nav.phots}}class="active"{{/nav.phots}}><a href="/phots"><i class="icon-picture"></i> Phots</a></li>
+                <li {{#nav.phots}}class="active"{{/nav.phots}}><a href="/phots"><i class="icon-picture"> Phots</i></a></li>
                 {{#req.session.userID}}
                   <li {{#nav.screenshots}}class="active"{{/nav.screenshots}}><a href="/screenshots"><i class="icon-screenshot"></i> Scrns</a></li>
                 {{/req.session.userID}}
@@ -72,8 +72,8 @@
               </ul>
               {{#req.session.userID}}
                 <ul class="nav navbar-nav navbar-right" style="margin-right: 15px">
-                  <li {{#nav.home}}class="active"{{/nav.home}} class="dropdown">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Ello, {{req.session.username}} <i class="icon-chevron-down"></i></a>
+                  <li class="active" class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Ello, {{req.session.username}} <i class="icon-chevron-down"></i></a>
                     <ul class="dropdown-menu">
                       {{#req.session.has_root}}
                         <li {{#nav.admin}}class="active"{{/nav.admin}}><a href="/admin"><i class="icon-meh"></i> Admin</a></li>
@@ -87,7 +87,7 @@
               {{^req.session.userID}}
                 <form class="navbar-form navbar-right" role="logic" action="/login" method="POST">
                   <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Username..." name="username">
+                    <input type="text" class="form-control col-md-2" placeholder="Username..." name="username">
                   </div>
                   <div class="form-group">
                     <input type="password" class="form-control" placeholder="Password..." name="password">
@@ -103,19 +103,11 @@
       <!-- Begin alerts section -->
       <div class="row">
         <div class="col-md-10 col-md-offset-1">
-          {{{req.session._HTMLAlerts}}}
+          {{{req.session.alerts}}}
         </div>
       </div>
       <!-- End alerts section -->
 
-      <div class="row">
-        <div class="col-md-10 col-md-offset-1">
-          <h1>{{{header}}}</h1>
-        </div>
-      </div> <!-- /row -->
-    </div> <!-- /container full -->
-
-    <div class="container">
       <div class="row">
         <div class="col-md-10 col-md-offset-1">
           {{{body}}}
@@ -135,7 +127,6 @@
         </div>
       </footer>
     </div>
-
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
 
     <!-- Begin page scripts -->
