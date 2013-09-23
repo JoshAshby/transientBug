@@ -129,9 +129,7 @@ class requestItem(object):
         self.buckets = bm.CfgBuckets()
         self.announcements = am.CfgAnnouncements()
 
-    @property
-    def has_announcements(self):
-        return len(self.announcements._data) >= 1
+        self.has_announcements = (len(self.announcements._data)>=1)
 
     def generateHeader(self, header, length):
         for morsal in self.sessionCookie:
@@ -141,7 +139,7 @@ class requestItem(object):
         header.append(("Content-Length", str(length)))
         header.append(("Server", self._env["SERVER_SOFTWARE"]))
         header.append(("X-Seshat-Says", "Ello!"))
-        if hasattr(self, "error"): header.append(("X-Error"), str(self.error))
+        if hasattr(self, "error"): header.append(("X-Error", str(self.error)))
         return header
 
     def getParam(self, param, default="", cast=str):

@@ -32,7 +32,7 @@ class index(HTMLObject):
 
         announcements = am.all_announcements()
 
-        f, page_dict = pager(announcements, perpage, page)
+        f, page_dict = pager(announcements, perpage, page, sort="created")
 
         self.view.data = {"announcements": f, "page": page_dict, "now": arrow.utcnow().format("MM/DD/YYYY HH:mm")}
         self.view.scripts = ["admin/announcement", "lib/bootstrap-datetimepicker.min"]

@@ -35,9 +35,6 @@ class tags(HTMLObject):
         query = self.request.getParam("q")
 
         if tag:
-            perpage = self.request.getParam("perpage", 24)
-            page = self.request.getParam("page", 0)
-            sort_dir = self.request.getParam("dir", "asc")
             orig_filt = self.request.getParam("filter", "all")
             view = self.request.getParam("v", 'cards').lower()
 
@@ -53,7 +50,7 @@ class tags(HTMLObject):
 
             query = query.filter(r.row["tags"].filter(lambda t: t == tag).count() > 0)
 
-            f, pager_dict = rethink_pager(query, perpage, page, sort_dir, "title")
+            f, pager_dict = rethink_pager(query, self.request, "title")
 
             if f:
                 new_f = []

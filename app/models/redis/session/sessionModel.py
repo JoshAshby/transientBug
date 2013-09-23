@@ -28,6 +28,7 @@ class session(brm.redisObject):
         if not hasattr(self, "username"): self.username = ""
         if not hasattr(self, "userID"): self.userID = ""
         if not hasattr(self, "groups"): self.groups = []
+        self._HTML_alerts = ""
 
     def _get(self, item):
         if "groups" in self._keys:
@@ -131,7 +132,9 @@ class session(brm.redisObject):
 
         :return: List of Dicts
         """
-        return json.loads(self.rawAlerts)
+        if not self._HTML_alerts:
+            self._render_alerts
+        return self._HTML_alerts
 
     @alerts.deleter
     def alerts(self):
@@ -145,7 +148,7 @@ class session(brm.redisObject):
 
         self.rawAlerts = json.dumps(alerts)
 
-    def renderAlerts(self):
+    def _render_alerts(self):
         alerts = json.loads(self.rawAlerts)
 
         alertStr = ""

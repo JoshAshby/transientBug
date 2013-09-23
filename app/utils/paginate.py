@@ -12,9 +12,14 @@ http://joshashby.com
 joshuaashby@joshashby.com
 """
 import rethinkdb as r
+from operator import itemgetter
 
 
-def rethink_pager(query, perpage, page, sort_dir="asc", sort=""):
+def rethink_pager(query, request, sort="", perpage_default=24):
+    perpage = request.getParam("perpage", perpage_default)
+    page = request.getParam("page", 0)
+    sort_dir = request.getParam("dir", "asc").lower()
+
     di = sort
     if sort_dir == "desc":
         di = r.desc(sort)
@@ -23,11 +28,11 @@ def rethink_pager(query, perpage, page, sort_dir="asc", sort=""):
 
     page_dict = {
         "perpage": perpage,
-        "dir": sort_dir.lower()
+        "direction": sort_dir
         }
 
     if perpage != "all":
-        page_dict["show"] = True
+        page_dict["show_pager"] = True
 
         perpage = int(perpage)
         page = int(page)
@@ -40,29 +45,29 @@ def rethink_pager(query, perpage, page, sort_dir="asc", sort=""):
         if length <= perpage:
             page_dict["show"] = False
 
-        page_dict["next"] = page + 1
-        page_dict["prev"] = page - 1
+        page_dict["next_page"] = page + 1
+        page_dict["prev_page"] = page - 1
 
         if page != 0:
-            page_dict["hasPrev"] = True
+            page_dict["has_prev"] = True
         else:
-            page_dict["hasPrev"] = False
+            page_dict["has_prev"] = False
 
         if length > offset_end:
-            page_dict["hasNext"] = True
+            page_dict["has_next"] = True
         else:
-            page_dict["hasNext"] = False
+            page_dict["has_next"] = False
 
         query = query.skip(offset_start).limit(perpage)
     else:
-        page_dict["show"] = False
+        page_dict["show_pager"] = False
 
     results = list(query.run())
 
     return results, page_dict
 
 
-def pager(pail, perpage, page, sort_dir=""):
+def pager(pail, perpage, page, sort_dir="", sort=""):
     """
     Creates a pager for pail
 
@@ -76,10 +81,11 @@ def pager(pail, perpage, page, sort_dir=""):
         "dir": sort_dir
         }
 
+    if sort:
+        pail.sort(key=itemgetter(sort), reverse=True)
+
     if sort_dir == "asc":
-        pail.sort(reverse=True)
-    elif sort_dir == "desc":
-        pail.sort()
+        pail.reverse()
 
     if perpage != "all":
         page_dict["show"] = True

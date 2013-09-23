@@ -153,7 +153,7 @@ def logRequest(request):
 
 
 def logObj(request, obj):
-    logger.debug("""\n\r\t------- Processing ------------------
+    logger.debug("""\n\r------- Processing ------------------
     Method: %s
     URL: %s
     FILES: %s
@@ -163,7 +163,7 @@ def logObj(request, obj):
 
 def logResponse(request, status, header):
     header_str = str(header) if status != "200 OK" else ""
-    logger.debug("""\n\r\t--------- Response ---------------------
+    logger.debug("""\n\r--------- Response ---------------------
     URL: %s
     Status: %s %s
     """ % (request.url, status, header_str))
