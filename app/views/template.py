@@ -119,9 +119,6 @@ class templateFile(object):
         _data = self._config
         _data.update(data)
 
-        if "theme_color" in _data:
-            print _data["theme_color"], self._file_bit
-
         if(self.is_jinja):
             return unicode(self.template.render(_data))
         else:
@@ -221,7 +218,6 @@ class template(object):
 
         template = tmpls[self._template]
         body = template.render(_data)
-        print body
 
         _data.update(template.config)
 

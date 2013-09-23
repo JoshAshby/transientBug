@@ -29,5 +29,5 @@ class index(HTMLObject):
         Nothing much, just get the cheetah template for index and return it
         so Seshat can get cheetah to render it and then return it to the browser
         """
-        self.view.data = {"header": "Coming soon!"}
+        self.view.update({"header": "Coming soon!", "is_awesome": True})
         return self.view
