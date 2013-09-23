@@ -25,6 +25,7 @@ import arrow
 logger = logging.getLogger(c.general["logName"]+".views")
 
 time_format = "dd MMM DD HH:mm:ss:SS YYYY"
+config_delim = "+++"
 
 tmplPath = os.path.dirname(__file__)+"/raw_templates/"
 
@@ -37,12 +38,12 @@ class templateFile(object):
         Reads in fileBit into memory, and sets the modified time for the
         object to that of the file at the current moment.
         """
+        self._file_bit = fileBit
         self._file = ''.join([tmplPath, fileBit])
         self._mtime = 0
 
-        self.config = {}
-
-        self.readTemplate()
+        self._config = {}
+        self._read_template()
 
     @property
     def template(self):
@@ -53,9 +54,13 @@ class templateFile(object):
         from first read/startup.
         """
         if c.general["debug"]:
-            self.readTemplate()
+            self._read_template()
 
         return self._template
+
+    @property
+    def config(self):
+        return self._config
 
     @property
     def extension(self):
@@ -69,7 +74,7 @@ class templateFile(object):
     def is_mustache(self):
         return self.extension=="mustache"
 
-    def readTemplate(self):
+    def _read_template(self):
         """
         Read in the template only if it has been modified since we first
         read it into our `_template`
@@ -87,31 +92,47 @@ class templateFile(object):
     OLD MTIME: %s
     NEW MTIME: %s
 """ % (self._file, self.extension, pt, nt))
+
             with open(self._file, "r") as openTmpl:
                 raw = unicode(openTmpl.read())
+
             self._mtime = mtime
 
-            if raw[:3] == "+++":
-                config, template = raw.split("+++", 2)[1:]
-                self.config = yaml.load(config)
-                template = template
-            else:
-                template = raw
+            self._raw = raw
+            template = self._parse_raw()
 
-        if(self.is_mustache):
-            self._template = template
-        if(self.is_jinja):
-            self._template = jinja2.Template(template)
+            if(self.is_mustache):
+                self._template = template
+            if(self.is_jinja):
+                self._template = jinja2.Template(template)
+
+    def _parse_raw(self):
+        if self._raw[:3] == config_delim:
+            config, template = self._raw.split("+++", 2)[1:]
+            self._config = yaml.load(config)
+        else:
+            template = self._raw
+
+        return template
 
     def render(self, data):
-        _data = self.config
+        _data = self._config
         _data.update(data)
 
+        if "theme_color" in _data:
+            print _data["theme_color"], self._file_bit
+
         if(self.is_jinja):
-            return unicode(self._template.render(_data))
+            return unicode(self.template.render(_data))
         else:
-            result = pystache.render(self._template, _data)
+            result = pystache.render(self.template, _data)
             return unicode(result)
+
+    def __contains__(self, item):
+        return item in self._config
+
+    def __getitem__(self, item):
+        return self._config[item]
 
 
 class template(object):
@@ -200,13 +221,16 @@ class template(object):
 
         template = tmpls[self._template]
         body = template.render(_data)
+        print body
 
-        if "base" in template.config:
-            base = template.config["base"]
+        _data.update(template.config)
+
+        if "base" in template:
+            base = template["base"]
         else:
             base = self._base
 
-        if not "theme_color" in template.config and not "theme_color" in _data:
+        if not "theme_color" in template and not "theme_color" in _data:
             _data["theme_color"] = "green"
 
         if base is not None:
