@@ -48,7 +48,11 @@ class tags(HTMLObject):
 
             tags = new_tags.iterkeys()
 
-            tag = max(new_tags.iteritems(), key=operator.itemgetter(1))[0]
+            try:
+                tag = max(new_tags.iteritems(), key=operator.itemgetter(1))[0]
+
+            except:
+                tag = None
 
             self.view.data = {"q": query}
 
@@ -77,14 +81,17 @@ class tags(HTMLObject):
                     phot = pm.Phot.fromRawEntry(**bit)
                     phot.format()
                     new_f.append(phot)
-
-                self.view.data = {"pictures": new_f, "tags": tags, "page": pager_dict, "filter": orig_filt, "tag": tag, "v": view}
-                return self.view
-
+                f = new_f
             else:
-                self.view.template = "public/gifs/error"
-                self.view.data = {"error": "We do not currently have any photos in the tag: %s" % tag}
-                return self.view
+                f = []
+
+            self.view.data = {"pictures": f, "tags": tags, "page": pager_dict, "filter": orig_filt, "tag": tag, "v": view}
+            return self.view
+
+            #else:
+                #self.view.template = "public/gifs/error"
+                #self.view.data = {"error": "We do not currently have any photos in the tag: %s" % tag}
+                #return self.view
 
         else:
             tags = list(r.table(pm.Phot.table).concat_map(lambda doc: doc["tags"]).run())
