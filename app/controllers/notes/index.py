@@ -33,9 +33,6 @@ class index(HTMLObject):
             self._redirect("/notes/public")
             return
 
-        perpage = self.request.getParam("perpage", 25)
-        page = self.request.getParam("page", 0)
-        sort_dir = self.request.getParam("dir", "desc")
         what_type = self.request.getParam("filter", "all")
         view = self.request.getParam("v", "cards")
 
@@ -46,7 +43,7 @@ class index(HTMLObject):
         elif what_type=="public":
             parts = parts.filter({"public": True})
 
-        f, pager_dict = rethink_pager(parts, perpage, page, sort_dir, "created")
+        f, pager_dict = rethink_pager(parts, self.request, "created")
 
         if f:
             new_f = []

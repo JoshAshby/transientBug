@@ -45,7 +45,7 @@ def rethink_pager(query, request, sort="", perpage_default=24):
         length = query.count().run()
 
         if length <= perpage:
-            page_dict["show"] = False
+            page_dict["show_pager"] = False
 
         page_dict["next_page"] = page + 1
         page_dict["prev_page"] = page - 1

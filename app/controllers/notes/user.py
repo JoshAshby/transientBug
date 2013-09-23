@@ -39,13 +39,9 @@ class user(HTMLObject):
 
             user_id = u["id"]
 
-            perpage = self.request.getParam("perpage", 25)
-            page = self.request.getParam("page", 0)
-            sort_dir = self.request.getParam("dir", "desc")
-
             parts = r.table(nm.Note.table).filter({"public": True, "user": user_id})
 
-            f, pager_dict = rethink_pager(parts, perpage, page, sort_dir, "created")
+            f, pager_dict = rethink_pager(parts, self.request, "created")
 
             if f:
                 new_f = []

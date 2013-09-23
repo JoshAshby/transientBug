@@ -29,9 +29,6 @@ class index(HTMLObject):
     def GET(self):
         """
         """
-        perpage = self.request.getParam("perpage", 24)
-        page = self.request.getParam("page", 0)
-        sort_dir = self.request.getParam("dir", "asc")
         orig_filt = self.request.getParam("filter", "all")
         view = self.request.getParam("v", 'cards').lower()
 
