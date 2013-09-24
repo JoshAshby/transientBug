@@ -104,5 +104,5 @@ class tags(HTMLObject):
             tags.sort()
 
             self.view.template = "public/common/tags"
-            self.view.data = {"tags": tags, "nav": {"phots": True}, "type": "Phots"}
+            self.view.data = {"tags": tags, "nav": {"phots": True}, "type": "Phots", "where": "phots"}
             return self.view

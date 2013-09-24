@@ -53,7 +53,6 @@ class index(HTMLObject):
                 new_f.append(note)
 
             data = {"notes": new_f, "page": page, "type": what_type.lower()}
-            data[view] = True
 
             self.view.data = data
 

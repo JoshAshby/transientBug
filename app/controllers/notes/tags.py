@@ -91,5 +91,5 @@ class tags(HTMLObject):
             tags = list(set(tags))
 
             self.view.template = "public/common/tags"
-            self.view.data = {"tags": tags, "nav": {"notes": True}, "theme_color": "red", "type": "Notes"}
+            self.view.data = {"tags": tags, "nav": {"notes": True}, "where": "notes", "theme_color": "red", "type": "Notes"}
             return self.view
