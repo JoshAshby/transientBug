@@ -92,6 +92,7 @@ class Paginate(StandardConfig):
 
             pages = math.ceil(length/perpage)+1
 
+            page_dict["last_page"] = int(pages)-1
             page_dict["count_start"] = int(max([min([page-math.ceil(self.offset/2)+1, pages-self.offset]), 0]))
             page_dict["count_end"] = int(min([max([page+math.floor(self.offset/2)+1, self.offset]), pages]))
 
