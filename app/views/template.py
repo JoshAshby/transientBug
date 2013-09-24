@@ -248,6 +248,17 @@ class template(object):
         return unicode(_render)
 
 
+class PartialTemplate(template):
+    def render(self):
+        data = self._baseData.copy()
+
+        template = tmpls[self._template]
+        body = template.render(data)
+
+        del data
+
+        return unicode(body)
+
 for top, folders, files in os.walk(tmplPath):
     for fi in files:
         base = top.split(tmplPath)[1]

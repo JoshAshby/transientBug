@@ -13,13 +13,12 @@ joshuaashby@joshashby.com
 """
 from seshat.route import autoRoute
 from seshat.baseObject import HTMLObject
-from utils.paginate import rethink_pager
+from utils.paginate import Paginate
 
 import rethinkdb as r
 import models.rethink.phot.photModel as pm
 
 from fuzzywuzzy import fuzz
-import operator
 
 
 @autoRoute()
@@ -41,18 +40,14 @@ class tags(HTMLObject):
         if query:
             tags = list(r.table(pm.Phot.table).concat_map(lambda doc: doc["tags"]).run())
             new_tags = {}
-            for tag in tags:
-                match = fuzz.partial_ratio(query, tag.replace("_", " "))
+            for t in tags:
+                match = fuzz.partial_ratio(query, t.replace("_", " "))
                 if match >= 85:
-                    new_tags[tag] = match
+                    new_tags[t] = match
 
-            tags = new_tags.iterkeys()
-
-            try:
-                tag = max(new_tags.iteritems(), key=operator.itemgetter(1))[0]
-
-            except:
-                tag = None
+            tags = new_tags.copy().keys()
+            if not tag:
+                tag = max(new_tags, key=new_tags.get)
 
             self.view.data = {"q": query}
 
@@ -71,9 +66,8 @@ class tags(HTMLObject):
 
             query = query.filter(r.row["tags"].filter(lambda t: t == tag ).count() > 0)
 
-            f, pager_dict = rethink_pager(query, self.request, "title")
-            pager_dict.update({"v": view, "filter": orig_filt})
-            self.view.partial("pager", "public/common/pager", pager_dict)
+            page = Paginate(query, self.request, "title")
+            f = page.pail
 
             if f:
                 new_f = []
@@ -85,7 +79,12 @@ class tags(HTMLObject):
             else:
                 f = []
 
-            self.view.data = {"pictures": f, "tags": tags, "page": pager_dict, "filter": orig_filt, "tag": tag, "v": view}
+            self.view.data = {"pictures": f,
+                              "tags": tags,
+                              "tag": tag,
+                              "pager": page,
+                              "filter": orig_filt,
+                              "v": view}
             return self.view
 
             #else:

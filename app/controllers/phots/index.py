@@ -13,7 +13,7 @@ joshuaashby@joshashby.com
 """
 from seshat.route import autoRoute
 from seshat.baseObject import HTMLObject
-from utils.paginate import rethink_pager
+from utils.paginate import Paginate
 
 import rethinkdb as r
 import models.rethink.phot.photModel as pm
@@ -42,10 +42,8 @@ class index(HTMLObject):
         if orig_filt != "all":
             query = query.filter({"extension": filt})
 
-        f, pager_dict = rethink_pager(query, self.request, "title")
-        pager_dict.update({"v": view, "filter": orig_filt})
-
-        self.view.partial("pager", "public/common/pager", pager_dict)
+        page = Paginate(query, self.request, "title")
+        f = page.pail
 
         if f:
             new_f = []
@@ -54,7 +52,10 @@ class index(HTMLObject):
                 phot.format()
                 new_f.append(phot)
 
-            self.view.data = {"pictures": new_f, "page": pager_dict, "filter": orig_filt, "v": view}
+            self.view.data = {"pictures": new_f,
+                              "filter": orig_filt,
+                              "v": view,
+                              "pager": page}
             return self.view
 
         else:

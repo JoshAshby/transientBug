@@ -8,46 +8,35 @@ scripts: "
 +++
 
 <div class="row">
-  {% if not single %}
-    {% if req.session.has_phots %}
-      <div class="col-md-5 col-sm-12">
-        <form method="GET" action="/phots/tags" class="form-inline">
+  {% if req.session.has_phots %}
+    <div class="col-md-5 col-sm-12">
+      <form method="GET" action="/phots/tags" class="form-inline">
 
-          <div class="input-group">
-            <span class="input-group-btn">
-              <a href="/phots/new" class="btn btn-theme btn-sm">Add</a>
-            </span>
-            <input type="text" class="form-control input-sm" name="q" value="{{q}}" placeholder="Search Tags...">
-            <span class="input-group-btn">
-              <button class="btn btn-theme btn-sm" type="submit"><i class="icon-search"></i></button>
-            </span>
-          </div>
+        <div class="input-group">
+          <span class="input-group-btn">
+            <a href="/phots/new" class="btn btn-theme btn-sm">Add</a>
+          </span>
+          <input type="text" class="form-control input-sm" name="q" value="{{ q }}" placeholder="Search Tags...">
+          <span class="input-group-btn">
+            <button class="btn btn-theme btn-sm" type="submit"><i class="icon-search"></i></button>
+          </span>
+        </div>
 
-        </form>
-      </div>
-    {% else %}
-      <div class="col-md-5 col-sm-12">
-        <form method="GET" class="form-inline">
-
-          <div class="input-group">
-            <input type="text" class="form-control input-sm" name="q" value="{{q}}" placeholder="Search Tags...">
-            <span class="input-group-btn">
-              <button class="btn btn-theme btn-sm" type="submit"><i class="icon-search"></i></button>
-            </span>
-          </div>
-
-        </form>
-      </div>
-    {% endif %}
+      </form>
+    </div>
   {% else %}
-    {% if req.session.has_phots %}
-      <div class="col-md-5 col-sm-12">
-        <a href="/phots/new" class="btn btn-theme btn-sm">Add</a>
-      </div>
-    {% else %}
-      <div class="col-md-5 col-sm-12">
-      </div>
-    {% endif %}
+    <div class="col-md-5 col-sm-12">
+      <form method="GET" action="/phots/tags" class="form-inline">
+
+        <div class="input-group">
+          <input type="text" class="form-control input-sm" name="q" value="{{ q }}" placeholder="Search Tags...">
+          <span class="input-group-btn">
+            <button class="btn btn-theme btn-sm" type="submit"><i class="icon-search"></i></button>
+          </span>
+        </div>
+
+      </form>
+    </div>
   {% endif %}
   <div class="col-sm-12 col-md-7">
     <form class="form-inline pull-right" role="pagination_options">
@@ -64,7 +53,7 @@ scripts: "
       </div>
       <div class="form-group">
         <label class="sr-only" for="filter">Filter</label>
-        <select id="filer" name="filter"class="input-sm">
+        <select id="filer" name="filter" class="input-sm">
           <option value=all {{ 'selected="selected"' if filter=="all" }}>all</option>
           <option value=gif {{ 'selected="selected"' if filter=="gif" }}>gif</option>
           <option value=jpg {{ 'selected="selected"' if filter=="jpg" }}>jpg</option>
@@ -72,22 +61,9 @@ scripts: "
           <option value=tiff {{ 'selected="selected"' if filter=="tiff" }}>tiff</option>
         </select>
       </div>
-      <div class="form-group">
-        <label class="sr-only" for="dir">Sort</label>
-        <select id="dir" name="dir"class="input-sm">
-          <option value=desc {{ 'selected="selected"' if page.direction=="desc" }}>desc</option>
-          <option value=asc {{ 'selected="selected"' if page.direction=="asc" }}>asc</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <label class="sr-only" for="perpage">Perpage</label>
-        <select id="perpage" name="perpage" class="input-sm">
-          <option value=24 {{ 'selected="selected"' if perpage=="24" }}>24</option>
-          <option value=48 {{ 'selected="selected"' if perpage=="48" }}>48</option>
-          <option value=all {{ 'selected="selected"' if perpage=="all" }}>All</option>
-        </select>
-      </div>
-      <button type="submit" class="btn btn-theme btn-sm">Update</button>
+
+      {{pager.options}}
+
     </form>
   </div>
 </div>
@@ -95,32 +71,22 @@ scripts: "
 
 {% if tags %}
   <div class="row">
-    <div class="col-md-4">
-      <h4>Searched tags:</h4>
-    </div>
-    <div class="col-md-8">
-      {% for tag in tags %}
-        <a href="/phots/tags/{{tag}}"><span class="label label-theme">{{tag}}</span></a> 
-      {% else %}
-        <h4> We couldn't find any matches to {{q}}! Try again?</h4>
-      {% endfor %}
-    </div>
-  </div>
-  <hr>
-{% endif %}
-{% if tag %}
-  <div class="row">
-    <div class="col-md-6 col-sm-12">
-      <h4>
-        Displaying phots within tag:
-        <a href="/phots/tags/{{tag}}"><span class="label label-theme">{{tag}}</span></a>
-      </h4>
-    </div>
-    <div class="col-md-6 col-sm-12">
-      <a class="pull-right" href="/phots/tags"><i class="icon-level-up"></i> View all tags</a>
+    <div class="col-md-12">
+      <dl class="dl-horizontal">
+        <dt>Top match:</dt>
+        <dd><a href="/phots/tags/{{tag}}"><span class="label label-theme">{{tag}}</span></a></dd>
+        <br>
+        <dt>Similar tags:</dt>
+        <dd>
+          {%- for tag in tags %}
+            <a href="/phots/tags/{{tag}}"><span class="label label-theme">{{tag}}</span></a> 
+          {%- else %}
+            We couldn't find anything similar to {{q}}!
+          {%- endfor %}
+        </dd>
+      </dl>
     </div>
   </div>
-  <br>
 {% endif %}
 
 <div class="row">
@@ -151,7 +117,7 @@ scripts: "
             {% if pic.tags %}
               {% for tag in pic.tags %}
                 <a href="/phots/{{ tag }}">
-                  <span class="label label-theme"></span>
+                  <span class="label label-theme">{{tag}}</span>
                 </a>
               {% endfor %}
             {% endif %}
@@ -170,8 +136,8 @@ scripts: "
             <a href="/i/{{pic.filename}}"><h4 class="media-heading">{{pic.title}}</h4></a>
             <a href="/phots/view/{{pic.filename}}" class="btn btn-theme btn-xs">Page</a> Tags:
             {% if pic.tags %}
-              {% for tag in pic.tags[:3] %}
-                <a href="/phots/{{tag}}"><span class="label label-theme"></span></a> 
+              {% for tag in pic.tags %}
+                <a href="/phots/{{tag}}"><span class="label label-theme">{{tag}}</span></a> 
               {% endfor %}
             {% else %}
               No Tags...
@@ -183,4 +149,4 @@ scripts: "
   {% endif %}
 </div>
 
-{{pager}}
+{{pager.pager}}
