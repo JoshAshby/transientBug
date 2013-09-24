@@ -16,7 +16,7 @@ from seshat.actions import Redirect
 
 import models.redis.announcement.announcementModel as am
 
-from utils.paginate import pager
+from utils.paginate import Paginate
 
 import arrow
 
@@ -27,14 +27,12 @@ class index(HTMLObject):
     _title = "Site Announcements"
     _defaultTmpl = "admin/announcements/index"
     def GET(self):
-        perpage = self.request.getParam("perpage", 24)
-        page = self.request.getParam("page", 0)
-
         announcements = am.all_announcements()
 
-        f, page_dict = pager(announcements, perpage, page, sort="created")
+        page = Paginate(announcements, self.request, "created")
+        f = page.pail
 
-        self.view.data = {"announcements": f, "page": page_dict, "now": arrow.utcnow().format("MM/DD/YYYY HH:mm")}
+        self.view.data = {"announcements": f, "page": page, "now": arrow.utcnow().format("MM/DD/YYYY HH:mm")}
         self.view.scripts = ["admin/announcement", "lib/bootstrap-datetimepicker.min"]
         self.view.stylesheets = ["lib/bootstrap-datetimepicker.min"]
 

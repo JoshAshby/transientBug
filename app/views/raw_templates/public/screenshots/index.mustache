@@ -12,26 +12,7 @@ nav:
   </div>
   <div class="col-sm-12 col-md-6">
     <form class="form-inline pull-right" role="pagination_options">
-      <div class="form-group">
-        <label class="sr-only" for="dir">Sort</label>
-        <select id="dir" name="dir" class="input-sm">
-          {{#page.dir}}<option value={{page.dir}}>{{page.dir}}</option>{{/page.dir}}
-          <option value=desc>desc</option>
-          <option value=asc>asc</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <label class="sr-only" for="perpage">Perpage</label>
-        <select id="perpage" name="perpage" class="input-sm">
-          {{#page.perpage}}<option value={{page.perpage}}>{{page.perpage}}</option>{{/page.perpage}}
-          <option value=5>5</option>
-          <option value=10>10</option>
-          <option value=20>20</option>
-          <option value=50>50</option>
-          <option value=all>All</option>
-        </select>
-      </div>
-      <button type="submit" class="btn btn-theme btn-sm">Update</button>
+      {{{page.options}}}
     </form>
   </div>
 </div>
@@ -66,23 +47,4 @@ nav:
   <br>
 {{/pictures}}
 
-{{#page.show}}
-  <ul class="pager">
-    <li class="previous {{^page.hasPrev}}disabled{{/page.hasPrev}}">
-      {{#page.hasPrev}}
-        <a href="?page={{page.prev}}&perpage={{page.perpage}}&dir={{page.dir}}"><i class="icon-chevron-left"></i> Prev</a>
-      {{/page.hasPrev}}
-      {{^page.hasPrev}}
-        <a><i class="icon-chevron-left"></i> Prev</a>
-      {{/page.hasPrev}}
-    </li>
-    <li class="next {{^page.hasNext}}disabled{{/page.hasNext}}">
-      {{#page.hasNext}}
-        <a href="?page={{page.next}}&perpage={{page.perpage}}&dir={{page.dir}}">Next <i class="icon-chevron-right"></i></a>
-      {{/page.hasNext}}
-      {{^page.hasNext}}
-        <a>Next <i class="icon-chevron-right"></i></a>
-      {{/page.hasNext}}
-    </li>
-  </ul>
-{{/page.show}}
+{{{page.pager}}}

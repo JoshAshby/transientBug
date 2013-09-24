@@ -20,7 +20,7 @@ from seshat.baseObject import HTMLObject
 from seshat.objectMods import login
 from seshat.actions import Redirect
 
-from utils.paginate import pager
+from utils.paginate import Paginate
 import utils.files as fu
 
 
@@ -36,11 +36,6 @@ class index(HTMLObject):
         """
         """
         self.view.data = {"header": "Screenshots"}
-
-        perpage = self.request.getParam("perpage", 24)
-        page = self.request.getParam("page", 0)
-        sort_dir = self.request.getParam("dir", "desc")
-
         self.view.scripts = ["scrn"]
 
         f = []
@@ -48,9 +43,10 @@ class index(HTMLObject):
             f.extend(files)
             break
 
-        f, page_dict = pager(f, perpage, page, sort_dir)
+        page = Paginate(f, self.request)
+        f = page.pail
 
-        self.view.data = {"pictures": f, "page": page_dict}
+        self.view.data = {"pictures": f, "page": page}
         return self.view
 
     def POST(self):

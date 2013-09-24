@@ -14,7 +14,7 @@ joshuaashby@joshashby.com
 from seshat.route import autoRoute
 from seshat.baseObject import HTMLObject
 
-from utils.paginate import rethink_pager
+from utils.paginate import Paginate
 
 import rethinkdb as r
 import models.rethink.note.noteModel as nm
@@ -31,7 +31,8 @@ class public(HTMLObject):
         """
         parts = r.table(nm.Note.table).filter({"public": True})
 
-        f, pager_dict = rethink_pager(parts, self.request, "created")
+        page = Paginate(parts, self.request, "created")
+        f = page.pail
 
         if f:
             new_f = []
@@ -40,7 +41,7 @@ class public(HTMLObject):
                 note.format()
                 new_f.append(note)
 
-            self.view.data = {"notes": new_f, "page": pager_dict}
+            self.view.data = {"notes": new_f, "page": page}
             return self.view
 
         else:

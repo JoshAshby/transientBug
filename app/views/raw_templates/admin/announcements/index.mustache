@@ -25,17 +25,7 @@ scripts: "
   </div>
   <div class="col-sm-12 col-md-4">
     <form class="form-inline pull-right" role="pagination_options">
-      <div class="form-group">
-        <label class="sr-only" for="perpage">Perpage</label>
-        <select id="perpage" name="perpage" class="input-sm">
-          {{#page.perpage}}<option value={{page.perpage}}>{{page.perpage}}</option>{{/page.perpage}}
-          <option value=25>25</option>
-          <option value=50>50</option>
-          <option value=100>100</option>
-          <option value=all>All</option>
-        </select>
-      </div>
-      <button type="submit" class="btn btn-theme btn-sm">Update</button>
+      {{{page.options}}}
     </form>
   </div>
 </div>
@@ -88,30 +78,7 @@ scripts: "
           <hr>
         {{/announcements}}
 
-        {{#page.show}}
-          <div class="row">
-            <div class="col-md-12">
-              <ul class="pager">
-                <li class="previous {{^page.hasPrev}}disabled{{/page.hasPrev}}">
-                  {{#page.hasPrev}}
-                    <a href="?page={{page.prev}}&perpage={{page.perpage}}"><i class="icon-chevron-left"></i> Prev</a>
-                  {{/page.hasPrev}}
-                  {{^page.hasPrev}}
-                    <a><i class="icon-chevron-left"></i> Prev</a>
-                  {{/page.hasPrev}}
-                </li>
-                <li class="next {{^page.hasNext}}disabled{{/page.hasNext}}">
-                  {{#page.hasNext}}
-                    <a href="?page={{page.next}}&perpage={{page.perpage}}">Next <i class="icon-chevron-right"></i></a>
-                  {{/page.hasNext}}
-                  {{^page.hasNext}}
-                    <a>Next <i class="icon-chevron-right"></i></a>
-                  {{/page.hasNext}}
-                </li>
-              </ul>
-            </div>
-          </div>
-        {{/page.show}}
+        {{{page.pager}}}
 
       </div>
       <div class="tab-pane" id="new">

@@ -13,7 +13,7 @@ from seshat.route import autoRoute
 from seshat.baseObject import HTMLObject
 from seshat.objectMods import login
 
-from utils.paginate import pager
+from utils.paginate import Paginate
 
 
 @login(["admin"])
@@ -22,12 +22,10 @@ class index(HTMLObject):
     _title = "Buckets"
     _defaultTmpl = "admin/buckets/index"
     def GET(self):
-        perpage = self.request.getParam("perpage", 24)
-        page = self.request.getParam("page", 0)
+        page = Paginate(self.request.buckets.list, self.request)
+        f = page.pail
 
-        f, page_dict = pager(self.request.buckets.list, perpage, page)
-
-        self.view.data = {"buckets": f, "page": page_dict}
+        self.view.data = {"buckets": f}
         self.view.scripts = ["admin/bucket"]
 
         return self.view

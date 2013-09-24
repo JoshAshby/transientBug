@@ -42,6 +42,8 @@ class Paginate(StandardConfig):
         if type(self._pail) is list:
             if self.sort:
                 self._pail.sort(key=itemgetter(self.sort), reverse=True)
+            else:
+                self._pail.sort()
 
             if self.sort_direction == "asc":
                 self._pail.reverse()
@@ -122,7 +124,11 @@ class Paginate(StandardConfig):
         tmpl.data.update(self._data)
         tmpl.data.update({"query": self.query_string})
 
-        return tmpl.render()
+        v = tmpl.render()
+
+        print v, type(v)
+
+        return v
 
     @property
     def paginate(self):

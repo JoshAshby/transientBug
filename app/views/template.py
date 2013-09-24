@@ -255,6 +255,8 @@ class PartialTemplate(template):
         template = tmpls[self._template]
         body = template.render(data)
 
+        body = body if body else ""
+
         del data
 
         return unicode(body)
