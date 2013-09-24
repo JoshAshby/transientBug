@@ -15,6 +15,7 @@ import rethinkdb as r
 from operator import itemgetter
 
 import urllib
+import math
 
 from config.standard import StandardConfig
 from views.template import PartialTemplate
@@ -24,6 +25,7 @@ class Paginate(StandardConfig):
     def __init__(self, pail, request, sort="", perpage_default=24):
         self._data = {
             "perpage_default": perpage_default,
+            "offset": 4,
             "perpage": request.getParam("perpage", perpage_default),
             "page": request.getParam("page", 0, int),
             "sort_direction": request.getParam("dir", "desc"),
@@ -57,7 +59,7 @@ class Paginate(StandardConfig):
             self._pail = self._pail.order_by(di)
 
         if self.perpage != "all":
-            page_dict["show_pager"] = True
+            page_dict["show"] = True
 
             perpage = int(self.perpage)
             page = int(self.page)
@@ -71,7 +73,7 @@ class Paginate(StandardConfig):
                 length = self._pail.count().run()
 
             if length <= perpage:
-                page_dict["show_pager"] = False
+                page_dict["show"] = False
 
             if page != 0:
                 page_dict["has_prev"] = True
@@ -87,8 +89,24 @@ class Paginate(StandardConfig):
                 self._pail = self._pail[offset_start:offset_end]
             else:
                 self._pail = self._pail.skip(offset_start).limit(perpage)
+
+            pages = math.ceil(length/perpage)+1
+
+            page_dict["count_start"] = int(max([min([page-math.ceil(self.offset/2)+1, pages-self.offset]), 0]))
+            page_dict["count_end"] = int(min([max([page+math.floor(self.offset/2)+1, self.offset]), pages]))
+
+            #if (page-self.offset) <= 0:
+                #page_dict["count_start"] = 0
+            #else:
+                #page_dict["count_start"] = (page-self.offset)
+
+            #if (page+self.offset) <= (length/perpage):
+                #page_dict["count_end"] = int(length/perpage)+1
+            #else:
+                #page_dict["count_end"] = (page+self.offset)
+
         else:
-            page_dict["show_pager"] = False
+            page_dict["show"] = False
 
         if type(self._pail) is not list:
             results = list(self._pail.run())
@@ -124,120 +142,13 @@ class Paginate(StandardConfig):
         tmpl.data.update(self._data)
         tmpl.data.update({"query": self.query_string})
 
-        v = tmpl.render()
-
-        print v, type(v)
-
-        return v
+        return tmpl.render()
 
     @property
     def paginate(self):
-        pass
-        #tmpl = PartialTemplate("partials/paginate", self._request)
-        #tmpl.data.update(self._page_dict)
+        tmpl = PartialTemplate("partials/paginate", self._request)
+        tmpl.data.update(self._page_dict)
+        tmpl.data.update(self._data)
+        tmpl.data.update({"query": self.query_string})
 
-        #return tmpl.render()
-
-
-def rethink_pager(query, request, sort="", perpage_default=24):
-    perpage = request.getParam("perpage", perpage_default)
-    page = request.getParam("page", 0)
-    sort_dir = request.getParam("dir", "asc").lower()
-
-    di = sort
-    if sort_dir == "desc":
-        di = r.desc(sort)
-    if sort_dir == "asc":
-        di = r.asc(sort)
-
-    query = query.order_by(di)
-
-    page_dict = {
-        "perpage": perpage,
-        "direction": sort_dir
-        }
-
-    if perpage != "all":
-        page_dict["show_pager"] = True
-
-        perpage = int(perpage)
-        page = int(page)
-
-        offset_start = (perpage * page)
-        offset_end = offset_start + perpage
-
-        length = query.count().run()
-
-        if length <= perpage:
-            page_dict["show_pager"] = False
-
-        page_dict["next_page"] = page + 1
-        page_dict["prev_page"] = page - 1
-
-        if page != 0:
-            page_dict["has_prev"] = True
-        else:
-            page_dict["has_prev"] = False
-
-        if length > offset_end:
-            page_dict["has_next"] = True
-        else:
-            page_dict["has_next"] = False
-
-        query = query.skip(offset_start).limit(perpage)
-    else:
-        page_dict["show_pager"] = False
-
-    results = list(query.run())
-
-    return results, page_dict
-
-
-def pager(pail, perpage, page, sort_dir="", sort=""):
-    """
-    Creates a pager for pail
-
-    :param pail: A list of items to paginate
-    :param perpage: An int or string of "all" for how many results per page
-    :param page: An int or string for which page the pager is on
-    :param sort_dir: The direction to sort, asc or desc
-    """
-    page_dict = {
-        "perpage": perpage,
-        "dir": sort_dir
-        }
-
-    if sort:
-        pail.sort(key=itemgetter(sort), reverse=True)
-
-    if sort_dir == "asc":
-        pail.reverse()
-
-    if perpage != "all":
-        page_dict["show"] = True
-
-        perpage = int(perpage)
-        page = int(page)
-
-        offset_start = (perpage * page)
-        offset_end = offset_start + perpage
-
-        page_dict["next"] = page + 1
-        page_dict["prev"] = page - 1
-
-        if len(pail) <= perpage:
-            page_dict["show"] = False
-
-        if page != 0:
-            page_dict["hasPrev"] = True
-        else:
-            page_dict["hasPrev"] = False
-
-        if len(pail) > offset_end:
-            page_dict["hasNext"] = True
-        else:
-            page_dict["hasNext"] = False
-
-        pail = pail[offset_start:offset_end]
-
-    return pail, page_dict
+        return tmpl.render()

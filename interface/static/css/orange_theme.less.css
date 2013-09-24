@@ -61,6 +61,9 @@ h4 a:active {
 .tags {
   line-height: 25px;
 }
+.paginate {
+  text-align: center;
+}
 a {
   color: #ff8800;
 }
@@ -84,6 +87,16 @@ a:hover {
 .pager li > a:focus {
   background-color: #ff8800;
   color: white;
+}
+.pagination > .active > a,
+.pagination > .active > span,
+.pagination > .active > a:hover,
+.pagination > .active > span:hover,
+.pagination > .active > a:focus,
+.pagination > .active > span:focus {
+  color: white;
+  background-color: #ff8800;
+  border: #ff8800 solid 1px;
 }
 .btn-primary,
 .btn-theme {
