@@ -159,7 +159,7 @@ def logObj(request, obj):
     URL: %s
     FILES: %s
     Object: %s
-    """ % (request.method, request.url, request.files, obj))
+    """ % (request.method, request.url.path, request.files, obj))
 
 
 def logResponse(request, status, header):
@@ -167,7 +167,7 @@ def logResponse(request, status, header):
     logger.debug("""\n\r--------- Response ---------------------
     URL: %s
     Status: %s %s
-    """ % (request.url, status, header_str))
+    """ % (request.url.path, status, header_str))
 
 
 def log500(request):
@@ -178,7 +178,7 @@ def log500(request):
     UA: %s
     R: %s
     ERROR: %s
-    """ % (request.method, request.url, request.remote, request.user_agent, request.referer, request.error))
+    """ % (request.method, request.url.path, request.remote, request.user_agent, request.referer, request.error))
 
 
 def log404(request):
@@ -188,4 +188,4 @@ def log404(request):
     IP: %s
     UA: %s
     R: %s
-    """ % (request.method, request.url, request.remote, request.user_agent, request.referer))
+    """ % (request.method, request.url.path, request.remote, request.user_agent, request.referer))
