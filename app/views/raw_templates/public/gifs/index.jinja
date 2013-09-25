@@ -116,7 +116,7 @@ scripts: "
         </div>
       </div>
     </div>
-    {% if loop.index%3==0 %}
+    {% if loop.index%3==0 or loop.last %}
       </div>
     {% endif %}
   {% endfor %}
@@ -162,7 +162,7 @@ scripts: "
         </div>
       </div>
     </div>
-    {% if loop.index%2==0 %}
+    {% if loop.index%2==0 or loop.last %}
       </div>
     {% endif %}
   {% endfor %}
