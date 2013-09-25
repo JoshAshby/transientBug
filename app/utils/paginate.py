@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 """
-helper files for generating pagination from a list of objects
+Pagination object for use in templates
 
 For more information, see: https://github.com/JoshAshby/
 
@@ -23,9 +23,29 @@ from views.template import PartialTemplate
 
 class Paginate(StandardConfig):
     def __init__(self, pail, request, sort="", perpage_default=24):
+        """
+        Now: PAGINATE ALL THE THINGS.
+
+        General pagination object that can handle a plain list, a list of dicts or
+        other objects that behave similarly, or a rethink rql query.
+
+        Once initialized with a list or query, and a requestItem object, it will use
+        "perpage" "page" and "dir" in the request params (or defaults) to compute
+        the needed information and finish the query, setting the objects `pail`
+        property to the result. It will also sort, if given a sort parameter.
+
+        After initialized, the resulting, paginated and sorted results should be
+        grabed from the `pail` attribute.
+
+        :param pail: Either a List, or a Rethink RQL query
+        :param request: The requestItem
+        :param sort: The field within dictionaries, or RQL to sort by, only useful
+        if the List is a List of Dicts or Similar objects.
+        :para perpage_default: The default for how many objects to display per page
+        """
         self._data = {
             "perpage_default": perpage_default,
-            "offset": 4,
+            "offset": 6,
             "perpage": request.getParam("perpage", perpage_default),
             "page": request.getParam("page", 0, int),
             "sort_direction": request.getParam("dir", "desc"),
@@ -39,6 +59,10 @@ class Paginate(StandardConfig):
         self._calc()
 
     def _calc(self):
+        """
+        Internal function for calculating the pagination options and such
+        that are passed to the templates.
+        """
         page_dict = {}
 
         if type(self._pail) is list:
@@ -96,16 +120,6 @@ class Paginate(StandardConfig):
             page_dict["count_start"] = int(max([min([page-math.ceil(self.offset/2)+1, pages-self.offset]), 0]))
             page_dict["count_end"] = int(min([max([page+math.floor(self.offset/2)+1, self.offset]), pages]))
 
-            #if (page-self.offset) <= 0:
-                #page_dict["count_start"] = 0
-            #else:
-                #page_dict["count_start"] = (page-self.offset)
-
-            #if (page+self.offset) <= (length/perpage):
-                #page_dict["count_end"] = int(length/perpage)+1
-            #else:
-                #page_dict["count_end"] = (page+self.offset)
-
         else:
             page_dict["show"] = False
 
@@ -118,10 +132,18 @@ class Paginate(StandardConfig):
 
     @property
     def pail(self):
+        """
+        Return the sorted and paginated results
+        """
         return self._pail
 
     @property
-    def query_string(self, extra={}):
+    def _query_string(self, extra={}):
+        """
+        Internal function for generating a query string so that perpage and
+        other parameters that are acting as options aren't lost on each
+        page increment/decrement.
+        """
         extra_pre = self._request.params.copy()
         extra_pre.pop("page", None)
         extra.update(extra_pre)
@@ -129,27 +151,39 @@ class Paginate(StandardConfig):
 
     @property
     def options(self):
+        """
+        Generate and return a string consisting of two selects
+        and an update/submit button to be used for the pagination options form.
+        """
         tmpl = PartialTemplate("partials/options", self._request)
         tmpl.data.update(self._page_dict)
         tmpl.data.update(self._data)
-        tmpl.data.update({"query": self.query_string})
+        tmpl.data.update({"query": self._query_string})
 
         return tmpl.render()
 
     @property
     def pager(self):
+        """
+        Generate and return a string consisting of just a simple pager:
+        next and previous buttons.
+        """
         tmpl = PartialTemplate("partials/pager", self._request)
         tmpl.data.update(self._page_dict)
         tmpl.data.update(self._data)
-        tmpl.data.update({"query": self.query_string})
+        tmpl.data.update({"query": self._query_string})
 
         return tmpl.render()
 
     @property
     def paginate(self):
+        """
+        Generate and return a string consisting of a full pagination module.
+        Next, previous, first, last and page numbers.
+        """
         tmpl = PartialTemplate("partials/paginate", self._request)
         tmpl.data.update(self._page_dict)
         tmpl.data.update(self._data)
-        tmpl.data.update({"query": self.query_string})
+        tmpl.data.update({"query": self._query_string})
 
         return tmpl.render()

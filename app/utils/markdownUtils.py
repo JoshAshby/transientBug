@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 """
-utils for handling unsafe markdown
-renders and cleans
+Utils for handling unsafe markdown
+Renders and cleans
 
 For more information, see: https://github.com/JoshAshby/
 
@@ -23,13 +23,23 @@ cleanAttr["i"] = ["class"]
 
 
 def markClean(markdown, markdown_extras=[]):
+    """
+    Renders markdown into, well, markdown and then run it through bleach
+    to sanitize the output.
+    """
     mark = md.markdown(markdown, markdown_extras)
     cleanedMark = bl.clean(mark, tags=cleanTags, attributes=cleanAttr)
 
     return cleanedMark
 
 def mark(markdown):
+    """
+    Renders markdown. Currently just a helper function.
+    """
     return md.markdown(markdown)
 
 def cleanInput(preClean):
+    """
+    Sanitize the input into safe HTML
+    """
     return bl.clean(preClean, tags=cleanTags, attributes=cleanAttr)
