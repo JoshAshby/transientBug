@@ -210,8 +210,10 @@ class template(object):
     def stylesheets(self):
         self._baseData["stylesheets"] = []
 
-    def partial(self, placeholder, template, data):
-        data.update(self._baseData)
+    def partial(self, placeholder, template, data=None):
+        if data is None: data = {}
+        assert type(data) is dict
+        data.update(self._baseData.copy())
         self._baseData[placeholder] = tmpls[template].render(data)
 
     def render(self):

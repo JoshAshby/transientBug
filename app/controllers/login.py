@@ -35,6 +35,7 @@ class login(HTMLObject):
                                            "Whoa!", "info")
 
         else:
+            self.view.partial("about", "public/about/about")
             return self.view
 
     def POST(self):
