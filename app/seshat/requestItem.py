@@ -72,6 +72,8 @@ class FileObject(object):
 
 class requestItem(object):
     def __init__(self, env):
+        self.params = {}
+        self.files = {}
         self._env = env
 
         self.url = urlparse.urlparse(env["PATH_INFO"])
@@ -140,6 +142,7 @@ class requestItem(object):
         header.append(("Server", self._env["SERVER_SOFTWARE"]))
         header.append(("X-Seshat-Says", "Ello!"))
         if hasattr(self, "error"): header.append(("X-Error", str(self.error)))
+
         return header
 
     def getParam(self, param, default="", cast=str):

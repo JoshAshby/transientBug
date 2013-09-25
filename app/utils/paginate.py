@@ -138,12 +138,13 @@ class Paginate(StandardConfig):
         return self._pail
 
     @property
-    def _query_string(self, extra={}):
+    def _query_string(self, extra=None):
         """
         Internal function for generating a query string so that perpage and
         other parameters that are acting as options aren't lost on each
         page increment/decrement.
         """
+        if extra is None: extra = {}
         extra_pre = self._request.params.copy()
         extra_pre.pop("page", None)
         extra.update(extra_pre)

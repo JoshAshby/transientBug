@@ -12,14 +12,16 @@ scripts: "
     <div class="col-md-5 col-sm-12">
       <form method="GET" action="/phots/tags" class="form-inline">
 
-        <div class="input-group">
-          <span class="input-group-btn">
-            <a href="/phots/new" class="btn btn-theme btn-sm">Add</a>
-          </span>
-          <input type="text" class="form-control input-sm" name="q" value="{{ q }}" placeholder="Search Tags...">
-          <span class="input-group-btn">
-            <button class="btn btn-theme btn-sm" type="submit"><i class="icon-search"></i></button>
-          </span>
+        <div class="form-group">
+          <div class="input-group">
+            <span class="input-group-btn">
+              <a href="/phots/new" class="btn btn-theme btn-sm">Add</a>
+            </span>
+            <input type="text" class="form-control input-sm" name="q" value="{{ q }}" placeholder="Search Tags...">
+            <span class="input-group-btn">
+              <button class="btn btn-theme btn-sm" type="submit"><i class="icon-search"></i></button>
+            </span>
+          </div>
         </div>
 
       </form>
@@ -28,11 +30,13 @@ scripts: "
     <div class="col-md-5 col-sm-12">
       <form method="GET" action="/phots/tags" class="form-inline">
 
-        <div class="input-group">
-          <input type="text" class="form-control input-sm" name="q" value="{{ q }}" placeholder="Search Tags...">
-          <span class="input-group-btn">
-            <button class="btn btn-theme btn-sm" type="submit"><i class="icon-search"></i></button>
-          </span>
+        <div class="form-group">
+          <div class="input-group">
+            <input type="text" class="form-control input-sm" name="q" value="{{ q }}" placeholder="Search Tags...">
+            <span class="input-group-btn">
+              <button class="btn btn-theme btn-sm" type="submit"><i class="icon-search"></i></button>
+            </span>
+          </div>
         </div>
 
       </form>
@@ -51,14 +55,17 @@ scripts: "
           <input type="radio" name="v" value="links" {{ 'checked' if v=="links" }}/><i class="icon-link"></i>
         </label>
       </div>
+      <div class="hidden-md">
+        <br>
+      </div>
       <div class="form-group">
         <label class="sr-only" for="filter">Filter</label>
-        <select id="filer" name="filter" class="input-sm">
-          <option value=all {{ 'selected="selected"' if filter=="all" }}>all</option>
-          <option value=gif {{ 'selected="selected"' if filter=="gif" }}>gif</option>
-          <option value=jpg {{ 'selected="selected"' if filter=="jpg" }}>jpg</option>
-          <option value=png {{ 'selected="selected"' if filter=="png" }}>png</option>
-          <option value=tiff {{ 'selected="selected"' if filter=="tiff" }}>tiff</option>
+        <select id="filer" name="filter" class="form-control input-sm">
+          <option value=all {{ 'selected="selected"' if filter=="all" }}>All</option>
+          <option value=gif {{ 'selected="selected"' if filter=="gif" }}>GIF</option>
+          <option value=jpg {{ 'selected="selected"' if filter=="jpg" }}>JPG</option>
+          <option value=png {{ 'selected="selected"' if filter=="png" }}>PNG</option>
+          <option value=tiff {{ 'selected="selected"' if filter=="tiff" }}>TIFF</option>
         </select>
       </div>
 
@@ -89,26 +96,32 @@ scripts: "
   </div>
 {% endif %}
 
-<div class="row">
-  {% if v=="cards" %}
-    {% for pic in pictures %}
-      <div class="col-sm-6 col-md-4" style="margin-bottom: 20px;">
-        <div class="thumbnail">
-          <a href="/i/{{pic.filename}}" class="thumbnail"><img src="/i/{{pic.filename}}" style="height: 200px" alt="{{pic.filename}}"></a>
-          <div class="caption">
-            <div class="row">
-              <div class="col-md-8">
-                <a href="/i/{{pic.filename}}"><h6 class="thumbnail_h6" data-toggle="tooltip" title="{{pic.title}}">{{pic.title}}</h6></a>
-              </div>
-              <div class="col-md-4">
-                <a href="/phots/view/{{pic.filename}}" class="btn btn-theme btn-sm pull-right">Page</a>
-              </div>
+{% if v=="cards" %}
+  {% for pic in pictures %}
+    {% if loop.index%3==1 %}
+      <div class="row">
+    {% endif %}
+    <div class="col-sm-6 col-md-4" style="margin-bottom: 20px;">
+      <div class="thumbnail">
+        <a href="/i/{{pic.filename}}" class="thumbnail"><img src="/i/{{pic.filename}}" style="height: 200px" alt="{{pic.filename}}"></a>
+        <div class="caption">
+          <div class="row">
+            <div class="col-md-8">
+              <a href="/i/{{pic.filename}}"><h6 class="thumbnail_h6" data-toggle="tooltip" title="{{pic.title}}">{{pic.title}}</h6></a>
+            </div>
+            <div class="col-md-4">
+              <a href="/phots/view/{{pic.filename}}" class="btn btn-theme btn-sm pull-right">Page</a>
             </div>
           </div>
         </div>
       </div>
-    {% endfor %}
-  {% elif v=="links" %}
+    </div>
+    {% if loop.index%3==0 %}
+      </div>
+    {% endif %}
+  {% endfor %}
+{% elif v=="links" %}
+  <div class="row">
     <div class="col-md-12">
       {% for pic in pictures %}
         <ul class="list-unstyled">
@@ -125,28 +138,34 @@ scripts: "
         </ul>
       {% endfor %}
     </div>
-  {% elif v=="list" %}
-    {% for pic in pictures %}
-      <div class="col-md-6 col-sm-12" style="margin-bottom: 20px;">
-        <div class="media">
-          <a class="pull-left" href="#">
-            <img class="media-object" src="/i/{{pic.filename}}" alt="{{pic.title}}" height="64px" width="64px">
-          </a>
-          <div class="media-body">
-            <a href="/i/{{pic.filename}}"><h4 class="media-heading">{{pic.title}}</h4></a>
-            <a href="/phots/view/{{pic.filename}}" class="btn btn-theme btn-xs">Page</a> Tags:
-            {% if pic.tags %}
-              {% for tag in pic.tags %}
-                <a href="/phots/{{tag}}"><span class="label label-theme">{{tag}}</span></a> 
-              {% endfor %}
-            {% else %}
-              No Tags...
-            {% endif %}
-          </div>
+  </div>
+{% elif v=="list" %}
+  {% for pic in pictures %}
+    {% if loop.index%2==1 %}
+      <div class="row">
+    {% endif %}
+    <div class="col-md-6 col-sm-12" style="margin-bottom: 20px;">
+      <div class="media">
+        <a class="pull-left" href="#">
+          <img class="media-object" src="/i/{{pic.filename}}" alt="{{pic.title}}" height="64px" width="64px">
+        </a>
+        <div class="media-body">
+          <a href="/i/{{pic.filename}}"><h4 class="media-heading">{{pic.title}}</h4></a>
+          <a href="/phots/view/{{pic.filename}}" class="btn btn-theme btn-xs">Page</a> Tags:
+          {% if pic.tags %}
+            {% for tag in pic.tags %}
+              <a href="/phots/{{tag}}"><span class="label label-theme">{{tag}}</span></a> 
+            {% endfor %}
+          {% else %}
+            No Tags...
+          {% endif %}
         </div>
       </div>
-    {% endfor %}
-  {% endif %}
-</div>
+    </div>
+    {% if loop.index%2==0 %}
+      </div>
+    {% endif %}
+  {% endfor %}
+{% endif %}
 
 {{pager.paginate}}
