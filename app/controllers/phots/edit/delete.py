@@ -40,7 +40,7 @@ class delete(JSONObject):
                 f = r.table(pm.Phot.table).filter({"filename": self.request.id}).run()
                 f = list(f)
                 if len(f):
-                    photo = pm.Phot.fromRawEntry(**f[0])
+                    photo = pm.Phot(**f[0])
                     photo.delete()
                     os.remove(current_path)
 

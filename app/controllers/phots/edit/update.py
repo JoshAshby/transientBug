@@ -40,7 +40,7 @@ class update(HTMLObject):
 
         f = list(r.table(pm.Phot.table).filter({"filename": self.request.id}).run())
         if len(f):
-            photo = pm.Phot.fromRawEntry(**f[0])
+            photo = pm.Phot(**f[0])
             photo.tags = tag
 
             self._redirect("/phots/view/%s" % photo.filename)
@@ -62,9 +62,6 @@ class update(HTMLObject):
                 loc = ''.join(["/phots/view/", new_name, ".", extension])
                 self._redirect(loc)
 
-            photo._new = True # wat the fuck
-            # Okay, I wrote this ORM and I don't know why the fuck this isn't working, or
-            # why it does work if I set _new to True. WHAT THE FUCKING SHIT
             photo.save()
 
         else:

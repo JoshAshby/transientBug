@@ -1,28 +1,21 @@
-@import url(http://fonts.googleapis.com/css?family=Maven+Pro:700);
+@import url(http://fonts.googleapis.com/css?family=Maven+Pro:400,700|Oxygen:300,500);
+@import "lesshat";
+@import "flexbox";
 
-@blue:         #2A9FD6;
-@green:        #77B300;
-@orange:       #FF8800;
-@red:          darken(#CC0000, 5%);
-@purple:       #9933CC;
-@grey:         #2b2b2b;
-
-
-.navbar-brand, footer {
-  font-family: 'Maven Pro', sans-serif;
+*, html, body, p, a, h1, h2, h3, h4, h5, h6 {
+  font-family: 'Oxygen', sans-serif;
 }
 
-.navbar-header {
-  padding-right: 0px;
-}
+/*body {*/
+  /*background: url(/static/css/imgs/subtle_carbon.png) repeat;*/
+/*}*/
 
-.thumbnail {
-  border: @grey solid 2px
-}
+a {
+  color: @theme;
 
-h6.thumbnail_h6 {
-  white-space: nowrap;
-  overflow: hidden;
+  &:hover {
+    color: darken(@theme, 10%); //#507800;
+  }
 }
 
 h4 {
@@ -41,9 +34,11 @@ h4 {
   color: #eee;
   padding-bottom: 30px;
   max-width: 100%;
+  background-color: darken(@theme, 15%); //#507800;
 
   h1 {
     font-family: 'Maven Pro', sans-serif;
+    font-weight: 700;
   }
 
   a {
@@ -63,6 +58,132 @@ h4 {
   }
 }
 
+.navbar-brand, footer {
+  font-family: 'Maven Pro', sans-serif;
+  font-weight: 700;
+}
+
+.navbar-header {
+  padding-right: 0px;
+}
+
 .tags {
   line-height: 25px;
+}
+
+.cards {
+  h6 {
+    white-space: nowrap;
+    overflow: hidden;
+  }
+
+  .thumbnail {
+    border: @grey solid 2px;
+  }
+
+  a.thumbnail {
+    .transition(all, 0.5s, ease);
+    border: @theme solid 1px;
+
+    &:hover, &:active, &:focus {
+      border-color: @blue;
+    }
+  }
+}
+
+.cards-clean {
+  .flex-display();
+  .flex-direction(row);
+  .flex-wrap(wrap);
+  .justify-content(space-between);
+  .align-content(space-around);
+
+  .image {
+    .border-radius(5px);
+    .transition(all, 0.5s, ease);
+    width: 250px;
+    margin-bottom: 20px;
+
+    &:hover, &:active, &:focus {
+      .box-shadow(0px, 0px, 5px, 0px, @theme);
+
+      & > .caption {
+        .opacity(0.75);
+      }
+    }
+
+    img {
+      padding: 0px;
+      margin: 0px;
+      .border-radius(5px);
+      height: 200px;
+      width: 250px;
+    }
+
+    .caption {
+      .flex-display();
+      .flex-direction(row);
+      .justify-content(space-around);
+      .align-items(baseline);
+
+      position: absolute;
+      padding: 10px;
+      margin: 0px;
+      width: 250px;
+
+      background-color: black;
+      .transition(all, 0.5s, ease);
+      .opacity(0);
+      .border-top-right-radius(5px);
+      .border-top-left-radius(5px);
+
+      & h6 {
+        font-weight: 500;
+      }
+
+      & > * { // Yeah yeah...
+        position: static;
+      }
+
+      & > .pull-right {
+        margin-left: auto;
+      }
+    }
+  }
+}
+
+.btn-primary, .btn-theme {
+  color: white;
+  background-color: @theme;
+  border: @theme solid 1px;
+
+  &:focus, &:hover, &:active {
+    background-color: darken(@theme, 10%);
+    border: darken(@theme, 10%) solid 1px;
+  }
+}
+
+.label-theme {
+  color: white;
+  background-color: @theme;
+  border: @theme solid 1px;
+}
+
+.dropdown-menu>.active>a, .dropdown-menu>.active>a:hover, .dropdown-menu>.active>a:focus, .dropdown-menu>li>a:hover, .dropdown-menu>li>a:focus, .nav-pills>li.active>a, .nav-pills>li.active>a:hover, .nav-pills>li.active>a:focus {
+  background-color: @theme;
+}
+
+.pager li>a:hover, .pager li>a:focus {
+  background-color: @theme;
+  color: white;
+}
+
+.pagination>.active>a, .pagination>.active>span, .pagination>.active>a:hover, .pagination>.active>span:hover, .pagination>.active>a:focus, .pagination>.active>span:focus {
+  color: white;
+  background-color: @theme;
+  border: @theme solid 1px;
+}
+
+.input-group .form-control {
+  border: 1px;
 }

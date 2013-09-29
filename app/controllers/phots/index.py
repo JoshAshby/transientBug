@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 """
-main index listing for gifs - reroutes to login if you're not logged in
+main index listing for gifs
 
 For more information, see: https://github.com/JoshAshby/
 
@@ -21,14 +21,9 @@ import models.rethink.phot.photModel as pm
 
 @autoRoute()
 class index(HTMLObject):
-    """
-    Returns base index page listing all gifs
-    """
     _title = "phots"
     _defaultTmpl = "public/gifs/index"
     def GET(self):
-        """
-        """
         orig_filt = self.request.getParam("filter", "all")
         view = self.request.getParam("v", 'cards')
 
@@ -48,7 +43,7 @@ class index(HTMLObject):
         if f:
             new_f = []
             for bit in f:
-                phot = pm.Phot.fromRawEntry(**bit)
+                phot = pm.Phot(**bit)
                 phot.format()
                 new_f.append(phot)
 
@@ -60,5 +55,6 @@ class index(HTMLObject):
 
         else:
             self.view.template = "public/gifs/error"
-            self.view.data = {"error": "We do not currently have any photos that fit what you're looking for."}
+            self.view.data = {"error": "We do not currently have any photos \
+                that fit what you're looking for."}
             return self.view

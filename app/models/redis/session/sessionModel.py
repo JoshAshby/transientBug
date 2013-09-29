@@ -84,7 +84,7 @@ class session(brm.redisObject):
         """
         foundUser = list(r.table(um.User.table).filter({'username': user}).run())
         if len(foundUser) > 0:
-            foundUser = um.User.fromRawEntry(**foundUser[0])
+            foundUser = um.User(**foundUser[0])
             if not foundUser.disable:
                 if foundUser.password == bcrypt.hashpw(password,
                         foundUser.password):
@@ -121,6 +121,7 @@ class session(brm.redisObject):
         :param quip: Similar to a title, however just a quick attention getter
         :param level: Can be any of `success` `error` `info` `warning`
         """
+        print "here"
         alerts = json.loads(self.rawAlerts)
         alerts.append({"msg": message, "level": level, "expire": "next", "quip": quip})
         self.rawAlerts = json.dumps(alerts)
@@ -133,7 +134,8 @@ class session(brm.redisObject):
         :return: List of Dicts
         """
         if not self._HTML_alerts:
-            self._render_alerts
+            self._render_alerts()
+        print self._HTML_alerts
         return self._HTML_alerts
 
     @alerts.deleter
@@ -164,7 +166,7 @@ class session(brm.redisObject):
 
             alertStr += ("""<div class="alert alert-{level}"><i class="icon-{icon}"></i><strong>{quip}</strong> {msg}</div>""").format(**alert)
 
-        self._HTMLAlerts = unicode(alertStr)
+        self._HTML_alerts = unicode(alertStr)
 
     def has_perm(self, group_name):
         if group_name in self.groups or "root" in self.groups:

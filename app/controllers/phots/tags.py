@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 """
-main index listing for gifs - reroutes to login if you're not logged in
 
 For more information, see: https://github.com/JoshAshby/
 
@@ -23,9 +22,6 @@ from fuzzywuzzy import fuzz
 
 @autoRoute()
 class tags(HTMLObject):
-    """
-    Returns base index page listing all gifs
-    """
     _title = "phots"
     _defaultTmpl = "public/gifs/index"
     def GET(self):
@@ -47,7 +43,12 @@ class tags(HTMLObject):
 
             tags = new_tags.copy().keys()
             if not tag:
-                tag = max(new_tags, key=new_tags.get)
+                try:
+                    tag = max(new_tags, key=new_tags.get)
+                except ValueError as e:
+                    self.view.template = "public/gifs/error"
+                    self.view.data = {"error": "I couldn't find any matching tags!"}
+                    return self.view
 
             self.view.data = {"q": query}
 
@@ -72,7 +73,7 @@ class tags(HTMLObject):
             if f:
                 new_f = []
                 for bit in f:
-                    phot = pm.Phot.fromRawEntry(**bit)
+                    phot = pm.Phot(**bit)
                     phot.format()
                     new_f.append(phot)
                 f = new_f
@@ -87,10 +88,6 @@ class tags(HTMLObject):
                               "v": view}
             return self.view
 
-            #else:
-                #self.view.template = "public/gifs/error"
-                #self.view.data = {"error": "We do not currently have any photos in the tag: %s" % tag}
-                #return self.view
 
         else:
             tags = list(r.table(pm.Phot.table).concat_map(lambda doc: doc["tags"]).run())
