@@ -28,6 +28,8 @@ def write_file(files, path):
 def download_file(url, path):
     """
     Download the given url to the path. File extension added automatically.
+
+    This needs to be moved into its own little thingy so it stops blocking
     """
     req = requests.get(url, stream=True)
 
@@ -44,8 +46,6 @@ def download_file(url, path):
         for chunk in req.iter_content():
             fi.write(chunk)
         fi.seek(0)
-
-        print path
 
         write_file(fi, path)
 
