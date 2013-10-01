@@ -261,6 +261,6 @@ footer {
   background-color: #2a9fd6;
   border: #2a9fd6 solid 1px;
 }
-.input-group .form-control .input-sm {
-  border: 1px;
+.input-group .form-control {
+  border: white solid 1px;
 }
