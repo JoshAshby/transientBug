@@ -16,6 +16,8 @@ from seshat.baseObject import HTMLObject
 from seshat.objectMods import login
 from seshat.actions import Redirect
 
+from utils.paginate import Paginate
+
 import models.rethink.maintenance.maintenanceModel as mm
 
 
@@ -34,13 +36,13 @@ class index(HTMLObject):
             }
 
         previous = RethinkCollection(mm.Maintenance, {"active": False})
-        previous.order_by("created")
-        previous.fetch()
+        page = Paginate(previous, self.request, "created")
+        previous = page.pail
 
         for item in previous:
             item.format()
 
-        self.view.data.update({"current": current_msg, "previous": previous})
+        self.view.data.update({"current": current_msg, "previous": previous, "page": page})
         return self.view
 
     def POST(self):

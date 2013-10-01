@@ -25,7 +25,7 @@ class index(HTMLObject):
         page = Paginate(self.request.buckets.list, self.request)
         f = page.pail
 
-        self.view.data = {"buckets": f}
+        self.view.data = {"buckets": f, "page": page}
         self.view.scripts = ["admin/bucket"]
 
         return self.view

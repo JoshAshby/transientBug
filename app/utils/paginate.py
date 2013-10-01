@@ -12,6 +12,7 @@ http://joshashby.com
 joshuaashby@joshashby.com
 """
 import rethinkdb as r
+from rethinkORM import RethinkCollection
 from operator import itemgetter
 
 import urllib
@@ -27,7 +28,7 @@ class Paginate(StandardConfig):
         Now: PAGINATE ALL THE THINGS.
 
         General pagination object that can handle a plain list, a list of dicts or
-        other objects that behave similarly, or a rethink rql query.
+        other objects that behave similarly, or a rethink rql query or collection
 
         Once initialized with a list or query, and a requestItem object, it will use
         "perpage" "page" and "dir" in the request params (or defaults) to compute
@@ -73,6 +74,15 @@ class Paginate(StandardConfig):
 
             if self.sort_direction == "asc":
                 self._pail.reverse()
+
+        elif isinstance(self._pail, RethinkCollection):
+            if self.sort and self.sort_direction == "asc":
+                self._pail.order_by(self.sort, "asc")
+            elif self.sort:
+                self._pail.order_by(self.sort, "desc")
+
+            self._pail.fetch()
+
         else:
             di = self.sort
             if self.sort_direction == "desc":
@@ -93,6 +103,8 @@ class Paginate(StandardConfig):
 
             if type(self._pail) is list:
                 length = len(self._pail)
+            elif isinstance(self._pail, RethinkCollection):
+                length = self._pail._query.count().run()
             else:
                 length = self._pail.count().run()
 
@@ -111,6 +123,8 @@ class Paginate(StandardConfig):
 
             if type(self._pail) is list:
                 self._pail = self._pail[offset_start:offset_end]
+            elif isinstance(self._pail, RethinkCollection):
+                self._pail.limit(perpage, offset_start)
             else:
                 self._pail = self._pail.skip(offset_start).limit(perpage)
 
@@ -123,10 +137,11 @@ class Paginate(StandardConfig):
         else:
             page_dict["show"] = False
 
-        if type(self._pail) is not list:
+        if type(self._pail) is not list and not isinstance(self._pail, RethinkCollection):
             results = list(self._pail.run())
-
             self._pail = results
+        elif isinstance(self._pail, RethinkCollection):
+            self._pail.fetch()
 
         self._page_dict = page_dict
 
