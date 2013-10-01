@@ -47,7 +47,7 @@ class user(HTMLObject):
             if f:
                 new_f = []
                 for part in f:
-                    note = nm.Note.fromRawEntry(**part)
+                    note = nm.Note(**part)
                     note.format()
                     new_f.append(note)
 

@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 """
-main index listing for gifs - reroutes to login if you're not logged in
 
 For more information, see: https://github.com/JoshAshby/
 
@@ -14,6 +13,7 @@ joshuaashby@joshashby.com
 from seshat.route import autoRoute
 from seshat.baseObject import HTMLObject
 from seshat.objectMods import login
+from seshat.actions import Redirect
 
 import models.rethink.phot.photModel as pm
 
@@ -21,14 +21,9 @@ import models.rethink.phot.photModel as pm
 @login(["phots"])
 @autoRoute()
 class new(HTMLObject):
-    """
-    Returns base index page listing all gifs
-    """
     _title = "new phots"
     _defaultTmpl = "public/gifs/new"
     def GET(self):
-        """
-        """
         return self.view.render()
 
     def POST(self):
@@ -44,17 +39,14 @@ class new(HTMLObject):
 
         if url:
             phot = pm.Phot.download_phot(self.request.session.userID,
-                                    url=url,
-                                    title=title,
-                                    tags=tag)
+                                         url=url,
+                                         title=title,
+                                         tags=tag)
         elif files:
             phot = pm.Phot.upload_phot(self.request.session.userID,
-                                    file_obj=files,
-                                    title=title,
-                                    tags=tag)
-        else:
-            return
+                                       file_obj=files,
+                                       title=title,
+                                       tags=tag)
 
-        self._redirect("/phots/view/%s" % phot.filename)
         self.request.session.pushAlert("Image is being downloaded...")
-        return
+        return Redirect("/phots/view/%s" % phot.filename)

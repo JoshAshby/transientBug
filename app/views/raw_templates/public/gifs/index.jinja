@@ -97,75 +97,93 @@ scripts: "
 {% endif %}
 
 {% if v=="cards" %}
-  {% for pic in pictures %}
-    {% if loop.index%3==1 %}
-      <div class="row">
-    {% endif %}
-    <div class="col-sm-6 col-md-4" style="margin-bottom: 20px;">
-      <div class="thumbnail">
-        <a href="/i/{{pic.filename}}" class="thumbnail"><img src="/i/{{pic.filename}}" style="height: 200px" alt="{{pic.filename}}"></a>
-        <div class="caption">
-          <div class="row">
-            <div class="col-md-8">
-              <a href="/i/{{pic.filename}}"><h6 class="thumbnail_h6" data-toggle="tooltip" title="{{pic.title}}">{{pic.title}}</h6></a>
-            </div>
-            <div class="col-md-4">
-              <a href="/phots/view/{{pic.filename}}" class="btn btn-theme btn-sm pull-right">Page</a>
+  <div class="cards">
+    {% for pic in pictures %}
+      {% if loop.index%3==1 %}
+        <div class="row">
+      {% endif %}
+      <div class="col-sm-6 col-md-4" style="margin-bottom: 20px;">
+        <div class="thumbnail">
+          <a href="/i/{{pic.filename}}" class="thumbnail"><img src="/i/{{pic.filename}}" style="height: 200px" alt="{{pic.filename}}"></a>
+          <div class="caption">
+            <div class="row">
+              <div class="col-md-8">
+                <a href="/i/{{pic.filename}}"><h6 data-toggle="tooltip" title="{{pic.title}}">{{pic.title}}</h6></a>
+              </div>
+              <div class="col-md-4">
+                <a href="/phots/view/{{pic.filename}}" class="btn btn-theme btn-sm pull-right">Page</a>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-    {% if loop.index%3==0 or loop.last %}
+      {% if loop.index%3==0 or loop.last %}
+        </div>
+      {% endif %}
+    {% endfor %}
+  </div>
+{% elif v=="cards-clean" %}
+  <div class="cards-clean">
+    {% for pic in pictures %}
+      <div class="image">
+        <div class="caption">
+          <a href="/i/{{pic.filename}}"><h6>{{pic.title}}</h6></a></li>
+          <a href="/phots/view/{{pic.filename}}" class="btn btn-theme btn-sm pull-right">Page</a></li>
+        </div>
+        <a href="/i/{{pic.filename}}" class="photo"><img src="/i/{{pic.filename}}" alt="{{pic.filename}}"></a>
       </div>
-    {% endif %}
-  {% endfor %}
+    {% endfor %}
+  </div>
 {% elif v=="links" %}
-  <div class="row">
-    <div class="col-md-12">
-      {% for pic in pictures %}
-        <ul class="list-unstyled">
-          <li>
-            <a href="/phots/view/{{pic.filename}}" class="btn btn-theme btn-xs">Page</a> <a href="/i/{{pic.filename}}">{{pic.filename}}</a>
-            {% if pic.tags %}
-              {% for tag in pic.tags %}
-                <a href="/phots/{{ tag }}">
-                  <span class="label label-theme">{{tag}}</span>
-                </a>
-              {% endfor %}
-            {% endif %}
-          </li>
-        </ul>
-      {% endfor %}
+  <div class="links">
+    <div class="row">
+      <div class="col-md-12">
+        {% for pic in pictures %}
+          <ul class="list-unstyled">
+            <li>
+              <a href="/phots/view/{{pic.filename}}" class="btn btn-theme btn-xs">Page</a> <a href="/i/{{pic.filename}}">{{pic.filename}}</a>
+              {% if pic.tags %}
+                {% for tag in pic.tags %}
+                  <a href="/phots/tags/{{ tag }}">
+                    <span class="label label-theme">{{tag}}</span>
+                  </a>
+                {% endfor %}
+              {% endif %}
+            </li>
+          </ul>
+        {% endfor %}
+      </div>
     </div>
   </div>
 {% elif v=="list" %}
-  {% for pic in pictures %}
-    {% if loop.index%2==1 %}
-      <div class="row">
-    {% endif %}
-    <div class="col-md-6 col-sm-12" style="margin-bottom: 20px;">
-      <div class="media">
-        <a class="pull-left" href="#">
-          <img class="media-object" src="/i/{{pic.filename}}" alt="{{pic.title}}" height="64px" width="64px">
-        </a>
-        <div class="media-body">
-          <a href="/i/{{pic.filename}}"><h4 class="media-heading">{{pic.title}}</h4></a>
-          <a href="/phots/view/{{pic.filename}}" class="btn btn-theme btn-xs">Page</a> Tags:
-          {% if pic.tags %}
-            {% for tag in pic.tags %}
-              <a href="/phots/{{tag}}"><span class="label label-theme">{{tag}}</span></a> 
-            {% endfor %}
-          {% else %}
-            No Tags...
-          {% endif %}
+  <div class="list">
+    {% for pic in pictures %}
+      {% if loop.index%2==1 %}
+        <div class="row">
+      {% endif %}
+      <div class="col-md-6 col-sm-12" style="margin-bottom: 20px;">
+        <div class="media">
+          <a class="pull-left" href="#">
+            <img class="media-object" src="/i/{{pic.filename}}" alt="{{pic.title}}" height="64px" width="64px">
+          </a>
+          <div class="media-body">
+            <a href="/i/{{pic.filename}}"><h4 class="media-heading">{{pic.title}}</h4></a>
+            <a href="/phots/view/{{pic.filename}}" class="btn btn-theme btn-xs">Page</a> Tags:
+            {% if pic.tags %}
+              {% for tag in pic.tags %}
+                <a href="/phots/tags/{{tag}}"><span class="label label-theme">{{tag}}</span></a> 
+              {% endfor %}
+            {% else %}
+              No Tags...
+            {% endif %}
+          </div>
         </div>
       </div>
-    </div>
-    {% if loop.index%2==0 or loop.last %}
-      </div>
-    {% endif %}
-  {% endfor %}
+      {% if loop.index%2==0 or loop.last %}
+        </div>
+      {% endif %}
+    {% endfor %}
+  </div>
 {% endif %}
 
 <div class="row">

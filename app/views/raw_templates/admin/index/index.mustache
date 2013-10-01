@@ -1,10 +1,12 @@
 +++
-#base: skeleton_header_navbar
+base: skeleton_header_navbar
 theme_color: orange
 nav:
   admin_home: true
-+++
 
+header: <i class="icon-dashboard"></i> Admin Panel
++++
+<br>
 <ol class="breadcrumb">
   <li class="active">Admin</li>
 </ol>
@@ -15,4 +17,7 @@ nav:
 
   <dt><a href="/admin/buckets"> Buckets</a></dt>
   <dd>Manage feature flags for the site; These could enable or disable various advanced features, or some helpful debugging features.</dd>
+
+  <dt><a href="/admin/maintenance">Maintenance Page</a></dt>
+  <dd>Manage the currently displayed static maintenance page, for when things deserve a custom message.</dd>
 </dl>

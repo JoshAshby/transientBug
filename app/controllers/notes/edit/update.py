@@ -46,7 +46,7 @@ class update(JSONObject):
 
             time = arrow.utcnow().timestamp
             try:
-                note = nm.Note.fromRawEntry(**f)
+                note = nm.Note(**f)
 
                 note.user=self.request.session.userID
                 note.title=title

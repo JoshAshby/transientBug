@@ -1,49 +1,5 @@
-@import "base.less";
+@import "colors";
 
-a {
-  color: @red;
+@theme: @red;
 
-  &.thumbnail {
-    border: @red solid 1px
-  }
-
-  &:hover {
-    color: darken(@red, 10%); //#507800;
-  }
-}
-
-.dropdown-menu>.active>a, .dropdown-menu>.active>a:hover, .dropdown-menu>.active>a:focus, .dropdown-menu>li>a:hover, .dropdown-menu>li>a:focus, .nav-pills>li.active>a, .nav-pills>li.active>a:hover, .nav-pills>li.active>a:focus {
-  background-color: @red;
-}
-
-.pager li>a:hover, .pager li>a:focus {
-  background-color: @red;
-  color: white;
-}
-
-.pagination>.active>a, .pagination>.active>span, .pagination>.active>a:hover, .pagination>.active>span:hover, .pagination>.active>a:focus, .pagination>.active>span:focus {
-  color: white;
-  background-color: @red;
-  border: @red solid 1px;
-}
-
-.btn-primary, .btn-theme {
-  color: white;
-  background-color: @red;
-  border: @red solid 1px;
-
-  &:focus, &:hover, &:active {
-    background-color: darken(@red, 10%);
-    border: darken(@red, 10%) solid 1px;
-  }
-}
-
-.container-full {
-  background-color: darken(@red, 15%); //#507800;
-}
-
-.label-theme {
-  color: white;
-  background-color: @red;
-  border: @red solid 1px;
-}
+@import "base";

@@ -35,7 +35,7 @@ class view(HTMLObject):
         if f:
             f = f[0]
 
-            note = nm.Note.fromRawEntry(**f)
+            note = nm.Note(**f)
 
             if not note.public:
                 if not self.request.session.userID \

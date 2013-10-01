@@ -35,22 +35,17 @@ class delete(JSONObject):
             f.extend(files)
             break
 
-        if self.request.id in f:
-            try:
-                f = r.table(pm.Phot.table).filter({"filename": self.request.id}).run()
-                f = list(f)
-                if len(f):
-                    photo = pm.Phot.fromRawEntry(**f[0])
-                    photo.delete()
-                    os.remove(current_path)
+        f_db = r.table(pm.Phot.table).filter({"filename": self.request.id}).run()
+        f_db = list(f_db)
 
-                    return {"success": True}
+        if len(f_db):
+            photo = pm.Phot(**f_db[0])
+            photo.delete()
 
-                else:
-                    return {"success": False, "error": "Could not find photo in db"}
+            if self.request.id in f:
+                os.remove(current_path)
 
-            except Exception as e:
-                return {"success": False, "error": str(e)}
+            return {"success": True}
 
         else:
             return {"success": False, "error": "That image couldn't be found. :/"}

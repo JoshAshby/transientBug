@@ -9,6 +9,7 @@ tables:
   - users
   - notes
   - phots
+  - maintenance
 
 buckets:
   enable500Error:
