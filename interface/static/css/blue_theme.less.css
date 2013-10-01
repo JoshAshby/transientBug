@@ -1,4 +1,4 @@
-@import url(http://fonts.googleapis.com/css?family=Maven+Pro:400,700|Oxygen:300,500);
+@import url(http://fonts.googleapis.com/css?family=Maven+Pro:400,700|Noto+Sans:300,500);
 *,
 html,
 body,
@@ -10,7 +10,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: 'Oxygen', sans-serif;
+  font-family: 'Noto Sans', sans-serif;
 }
 /*body {*/
 /*background: url(/static/css/imgs/subtle_carbon.png) repeat;*/
@@ -80,14 +80,14 @@ footer {
 .tags {
   line-height: 25px;
 }
-.cards h6 {
+.thumbnail {
+  border: #2b2b2b solid 2px;
+}
+.thumbnail h6 {
   white-space: nowrap;
   overflow: hidden;
 }
-.cards .thumbnail {
-  border: #2b2b2b solid 2px;
-}
-.cards a.thumbnail {
+.thumbnail a.thumbnail {
   -webkit-transition: all 0.5s ease;
   -moz-transition: all 0.5s ease;
   -o-transition: all 0.5s ease;
@@ -95,9 +95,9 @@ footer {
   transition: all 0.5s ease;
   border: #2a9fd6 solid 1px;
 }
-.cards a.thumbnail:hover,
-.cards a.thumbnail:active,
-.cards a.thumbnail:focus {
+.thumbnail a.thumbnail:hover,
+.thumbnail a.thumbnail:active,
+.thumbnail a.thumbnail:focus {
   border-color: #2a9fd6;
 }
 .cards-clean {
@@ -149,9 +149,9 @@ footer {
 .cards-clean .image:hover > .caption,
 .cards-clean .image:active > .caption,
 .cards-clean .image:focus > .caption {
-  -webkit-opacity: 0.75;
-  -moz-opacity: 0.75;
-  opacity: 0.75;
+  -webkit-opacity: 0.9;
+  -moz-opacity: 0.9;
+  opacity: 0.9;
 }
 .cards-clean .image img {
   padding: 0px;

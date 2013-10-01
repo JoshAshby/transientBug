@@ -1,9 +1,9 @@
-@import url(http://fonts.googleapis.com/css?family=Maven+Pro:400,700|Oxygen:300,500);
+@import url(http://fonts.googleapis.com/css?family=Maven+Pro:400,700|Noto+Sans:300,500);
 @import "lesshat";
 @import "flexbox";
 
 *, html, body, p, a, h1, h2, h3, h4, h5, h6 {
-  font-family: 'Oxygen', sans-serif;
+  font-family: 'Noto Sans', sans-serif;
 }
 
 /*body {*/
@@ -71,14 +71,12 @@ h4 {
   line-height: 25px;
 }
 
-.cards {
+.thumbnail {
+  border: @grey solid 2px;
+
   h6 {
     white-space: nowrap;
     overflow: hidden;
-  }
-
-  .thumbnail {
-    border: @grey solid 2px;
   }
 
   a.thumbnail {
@@ -108,7 +106,7 @@ h4 {
       .box-shadow(0px, 0px, 5px, 0px, @theme);
 
       & > .caption {
-        .opacity(0.75);
+        .opacity(0.90);
       }
     }
 
@@ -137,7 +135,7 @@ h4 {
       .border-top-right-radius(5px);
       .border-top-left-radius(5px);
 
-      & h6 {
+      h6 {
         font-weight: 500;
       }
 

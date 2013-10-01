@@ -13,6 +13,7 @@ joshuaashby@joshashby.com
 from seshat.route import autoRoute
 from seshat.baseObject import HTMLObject
 from seshat.objectMods import login
+from seshat.actions import Redirect
 
 import models.rethink.phot.photModel as pm
 
@@ -46,9 +47,6 @@ class new(HTMLObject):
                                        file_obj=files,
                                        title=title,
                                        tags=tag)
-        else:
-            return
 
-        self._redirect("/phots/view/%s" % phot.filename)
         self.request.session.pushAlert("Image is being downloaded...")
-        return
+        return Redirect("/phots/view/%s" % phot.filename)

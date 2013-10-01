@@ -123,7 +123,7 @@ scripts: "
     {% endfor %}
   </div>
 {% elif v=="cards-clean" %}
-  <div class="cards">
+  <div class="cards-clean">
     {% for pic in pictures %}
       <div class="image">
         <div class="caption">
@@ -144,7 +144,7 @@ scripts: "
               <a href="/phots/view/{{pic.filename}}" class="btn btn-theme btn-xs">Page</a> <a href="/i/{{pic.filename}}">{{pic.filename}}</a>
               {% if pic.tags %}
                 {% for tag in pic.tags %}
-                  <a href="/phots/{{ tag }}">
+                  <a href="/phots/tags/{{ tag }}">
                     <span class="label label-theme">{{tag}}</span>
                   </a>
                 {% endfor %}
@@ -171,7 +171,7 @@ scripts: "
             <a href="/phots/view/{{pic.filename}}" class="btn btn-theme btn-xs">Page</a> Tags:
             {% if pic.tags %}
               {% for tag in pic.tags %}
-                <a href="/phots/{{tag}}"><span class="label label-theme">{{tag}}</span></a> 
+                <a href="/phots/tags/{{tag}}"><span class="label label-theme">{{tag}}</span></a> 
               {% endfor %}
             {% else %}
               No Tags...

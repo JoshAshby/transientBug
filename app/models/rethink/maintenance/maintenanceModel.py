@@ -36,20 +36,22 @@ class Maintenance(RethinkModel):
         if not ID:
             created = arrow.utcnow().timestamp
 
-            # Oh yeah, I went here. This.
-            this = cls.create(user=user,
-                              created=created,
-                              title=title,
-                              sub_title=sub_title,
-                              contents=contents,
-                              active=active)
+            wat = cls.create(user=user,
+                             created=created,
+                             title=title,
+                             sub_title=sub_title,
+                             contents=contents,
+                             active=active)
 
         else:
-            this = cls(ID)
-            this.title = title
-            this.sub_title = sub_title
-            this.contents = contents
-            this.active = active
+            data = {
+              "id": ID,
+              "title": title,
+              "sub_title": sub_title,
+              "contents": contents,
+              "active": active
+            }
+            wat = cls(**data)
 
         if active:
             tmpl = PartialTemplate("admin/maintenance/msg")
@@ -64,9 +66,9 @@ class Maintenance(RethinkModel):
             with open(path, 'wb') as msg_file:
                 msg_file.write(fi)
 
-        this.save()
+        wat.save()
 
-        return this
+        return wat
 
     def toggle(self):
         # Set current active message to inactive

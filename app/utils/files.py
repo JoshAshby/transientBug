@@ -45,10 +45,12 @@ def download_file(url, path):
             fi.write(chunk)
         fi.seek(0)
 
+        print path
+
         write_file(fi, path)
 
         return path
 
     else:
-        # TODO: DO THINGS
+        # TODO: DO Shit
         raise Exception(req.status_code)
