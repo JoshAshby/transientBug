@@ -28,45 +28,47 @@ class Maintenance(RethinkModel):
     _protectedItems = []
 
     @classmethod
-    def new_or_update(cls, user, ID, title="Maintenance", sub_title="", contents="", active=True):
+    def get_current(cls):
+        current = list(r.table(cls.table).filter({"active": True}).run())
+
+        if current:
+            current_msg = cls(**current[0])
+        else:
+            current_msg = None
+
+        return current_msg
+
+    @classmethod
+    def update(cls, user, title="Maintenance", sub_title="", contents="", active=True):
         if active:
             # Set current active message to inactive
             r.table(cls.table).update(lambda x: {'active': False}).run()
 
-        if not ID:
-            created = arrow.utcnow().timestamp
+        created = arrow.utcnow().timestamp
 
-            wat = cls.create(user=user,
-                             created=created,
-                             title=title,
-                             sub_title=sub_title,
-                             contents=contents,
-                             active=active)
+        wat = cls.create(user=user,
+                         created=created,
+                         title=title,
+                         sub_title=sub_title,
+                         contents=contents,
+                         active=active)
 
-        else:
-            data = {
-              "id": ID,
-              "title": title,
-              "sub_title": sub_title,
-              "contents": contents,
-              "active": active
-            }
-            wat = cls(**data)
+        wat.format()
 
         if active:
             tmpl = PartialTemplate("admin/maintenance/msg")
             tmpl.data = {
-                "title": title,
-                "sub_title": sub_title,
-                "content": contents
+                "title": wat.title,
+                "sub_title": wat.sub_title,
+                "contents": wat._formated_contents,
+                "author": wat._formated_author,
+                "created": wat._formated_created
             }
 
             fi = tmpl.render()
 
             with open(path, 'wb') as msg_file:
                 msg_file.write(fi)
-
-        wat.save()
 
         return wat
 

@@ -79,7 +79,10 @@
           <br><br><br>
           <div class="row">
             <div class="col-md-8 col-md-offset-2">
-              <p>{{{content}}}</p>
+              <p>{{{contents}}}<br>
+              {{#contents}}
+                <small> - {{author}}</small>
+              {{/contents}}</p>
             </div>
           </div>
         </div>

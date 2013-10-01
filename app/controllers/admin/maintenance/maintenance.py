@@ -9,7 +9,7 @@ Josh Ashby
 http://joshashby.com
 joshuaashby@joshashby.com
 """
-import rethinkdb as r
+from rethinkORM import RethinkCollection
 
 from seshat.route import autoRoute
 from seshat.baseObject import HTMLObject
@@ -25,32 +25,35 @@ class index(HTMLObject):
     _title = "Maintenance Msg"
     _defaultTmpl = "admin/maintenance/index"
     def GET(self):
-        current = list(r.table(mm.Maintenance.table).filter({"active": True}).run())
+        current_msg = mm.Maintenance.get_current()
 
-        if current:
-            current_msg = mm.Maintenance(**current[0])
-        else:
-          current_msg = {
-              "title": "Maintenance",
-              "sub_title": "transientBug is undergoing maintenance and will return shortly..."
-          }
+        if not current_msg:
+            current_msg = {
+                "title": "Maintenance",
+                "sub_title": "transientBug is undergoing maintenance and will return shortly..."
+            }
 
-        self.view.data.update({"current": current_msg})
+        previous = RethinkCollection(mm.Maintenance, {"active": False})
+        previous.order_by("created")
+        previous.fetch()
+
+        for item in previous:
+            item.format()
+
+        self.view.data.update({"current": current_msg, "previous": previous})
         return self.view
 
     def POST(self):
-        ID = self.request.getParam("id", None)
         title = self.request.getParam("title")
         sub_title = self.request.getParam("sub_title")
         contents = self.request.getParam("contents")
         active = self.request.getParam("active", True)
 
-        mm.Maintenance.new_or_update(self.request.session.userID,
-                                     ID,
-                                     title,
-                                     sub_title,
-                                     contents,
-                                     active)
+        mm.Maintenance.update(self.request.session.userID,
+                              title,
+                              sub_title,
+                              contents,
+                              active)
 
         self.request.session.pushAlert("Maintenance page updated", level="success")
         return Redirect("/admin/maintenance")

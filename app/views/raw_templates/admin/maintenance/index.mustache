@@ -56,7 +56,24 @@ nav:
       </div>
       <div class="tab-pane" id="old">
         {{#previous}}
-          
+          <div class="row">
+            <div class="col-md-12">
+              <h4>{{title}}<br>
+              <small>{{sub_title}}</small></h4>
+              <p>{{{_formated_contents}}}</p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <b>Created: </b>{{_formated_created}}
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <b>Author: </b>{{_formated_author}}
+            </div>
+          </div>
+          <hr>
         {{/previous}}
       </div>
     </div>
