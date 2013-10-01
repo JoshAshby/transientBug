@@ -42,6 +42,7 @@ class index(HTMLObject):
         for item in previous:
             item.format()
 
+        self.view.scripts = ["admin/maintenance"]
         self.view.data.update({"current": current_msg, "previous": previous, "page": page})
         return self.view
 

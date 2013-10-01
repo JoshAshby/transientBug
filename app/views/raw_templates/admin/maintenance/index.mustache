@@ -57,10 +57,19 @@ nav:
       <div class="tab-pane" id="old">
         {{#previous}}
           <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-9">
               <h4>{{title}}<br>
               <small>{{sub_title}}</small></h4>
               <p>{{{_formated_contents}}}</p>
+            </div>
+            <div class="col-md-3">
+              <div class="btn-group pull-right">
+                {{^active}}
+                  <a href="#" data-id="{{id}}" class="btn btn-default btn-sm toggle_btn">
+                    <i class="icon-remove"></i> Restore
+                  </a>
+                {{/active}}
+              </div>
             </div>
           </div>
           <div class="row">

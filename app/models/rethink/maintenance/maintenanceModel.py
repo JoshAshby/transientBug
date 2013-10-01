@@ -33,6 +33,7 @@ class Maintenance(RethinkModel):
 
         if current:
             current_msg = cls(**current[0])
+            current_msg.format()
         else:
             current_msg = None
 
@@ -72,9 +73,34 @@ class Maintenance(RethinkModel):
 
         return wat
 
-    def toggle(self):
-        # Set current active message to inactive
-        r.table(self.table).update(lambda x: {'active': False}).get(self.id).update({"active": True}).run()
+    @classmethod
+    def toggle(cls, id):
+        # Set current active message to inactive then toggle this one
+        current = cls.get_current()
+        if current:
+            current.active = False
+            current.save()
+
+        wat = Maintenance(id)
+        wat.active = True
+        wat.save()
+        wat.format()
+
+        tmpl = PartialTemplate("admin/maintenance/msg")
+        tmpl.data = {
+            "title": wat.title,
+            "sub_title": wat.sub_title,
+            "contents": wat._formated_contents,
+            "author": wat._formated_author,
+            "created": wat._formated_created
+        }
+
+        fi = tmpl.render()
+
+        with open(path, 'wb') as msg_file:
+            msg_file.write(fi)
+
+        return wat
 
     def format(self, time_format="human"):
         """
