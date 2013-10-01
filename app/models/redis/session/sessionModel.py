@@ -22,8 +22,9 @@ import models.rethink.user.userModel as um
 import rethinkdb as r
 
 
-class session(brm.redisObject):
-    def _finishInit(self):
+class session(brm.SeshatRedisModel):
+    _protected_items = ["rawAlerts"]
+    def _finish_init(self):
         if not hasattr(self, "rawAlerts"): self.rawAlerts = "[]"
         if not hasattr(self, "username"): self.username = ""
         if not hasattr(self, "userID"): self.userID = ""
@@ -37,14 +38,9 @@ class session(brm.redisObject):
                     return True
                 else:
                     return False
-        if item not in object.__getattribute__(self, "protectedItems") \
-                and item[0] != "_":
-            keys = object.__getattribute__(self, "_keys")
-            if item in keys:
-                return keys[item]
-        return object.__getattribute__(self, item)
+        return super(session, self)._get(item)
 
-    def loginWithoutCheck(self, user):
+    def login_without_check(self, user):
         """
         Tries to find the user in the database, if the user is successfully
         logged in then the sessions username and user ID is set to that users
@@ -121,21 +117,20 @@ class session(brm.redisObject):
         :param quip: Similar to a title, however just a quick attention getter
         :param level: Can be any of `success` `error` `info` `warning`
         """
-        print "here"
         alerts = json.loads(self.rawAlerts)
         alerts.append({"msg": message, "level": level, "expire": "next", "quip": quip})
         self.rawAlerts = json.dumps(alerts)
 
     @property
-    def alerts(self):
+    def alerts(self, no_cache=False):
         """
         Returns a list of dictonary elements representing the users alerts
 
         :return: List of Dicts
         """
-        if not self._HTML_alerts:
-            self._render_alerts()
-        print self._HTML_alerts
+        if not self._HTML_alerts or no_cache:
+            self._render_alerts() # cache results if we haven't already,
+                                  #   or if we're overriding the cache
         return self._HTML_alerts
 
     @alerts.deleter
