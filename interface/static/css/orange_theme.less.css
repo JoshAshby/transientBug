@@ -1,17 +1,25 @@
-@import url(http://fonts.googleapis.com/css?family=Maven+Pro:700);
-.navbar-brand,
-footer {
-  font-family: 'Maven Pro', sans-serif;
+@import url(http://fonts.googleapis.com/css?family=Maven+Pro:400,700|Noto+Sans:300,500);
+*,
+html,
+body,
+p,
+a,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Noto Sans', sans-serif;
 }
-.navbar-header {
-  padding-right: 0px;
+/*body {*/
+/*background: url(/static/css/imgs/subtle_carbon.png) repeat;*/
+/*}*/
+a {
+  color: #ff8800;
 }
-.thumbnail {
-  border: #2b2b2b solid 2px;
-}
-h6.thumbnail_h6 {
-  white-space: nowrap;
-  overflow: hidden;
+a:hover {
+  color: #cc6d00;
 }
 h4 a {
   text-decoration: none;
@@ -27,9 +35,11 @@ h4 a:active {
   color: #eee;
   padding-bottom: 30px;
   max-width: 100%;
+  background-color: #b35f00;
 }
 .container-full h1 {
   font-family: 'Maven Pro', sans-serif;
+  font-weight: 700;
 }
 .container-full a {
   text-decoration: none;
@@ -46,6 +56,7 @@ h4 a:active {
 }
 .container-alert h1 {
   font-family: 'Maven Pro', sans-serif;
+  font-weight: 700;
 }
 .container-alert a {
   text-decoration: none;
@@ -58,20 +69,172 @@ h4 a:active {
 .container-alert h6 {
   margin-top: 0px;
 }
+.navbar-brand,
+footer {
+  font-family: 'Maven Pro', sans-serif;
+  font-weight: 700;
+}
+.navbar-header {
+  padding-right: 0px;
+}
 .tags {
   line-height: 25px;
 }
-.paginate {
-  text-align: center;
+.thumbnail {
+  border: #2b2b2b solid 2px;
 }
-a {
-  color: #ff8800;
+.thumbnail h6 {
+  white-space: nowrap;
+  overflow: hidden;
 }
-a.thumbnail {
+.thumbnail a.thumbnail {
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  -ms-transition: all 0.5s ease;
+  transition: all 0.5s ease;
   border: #ff8800 solid 1px;
 }
-a:hover {
-  color: #cc6d00;
+.thumbnail a.thumbnail:hover,
+.thumbnail a.thumbnail:active,
+.thumbnail a.thumbnail:focus {
+  border-color: #2a9fd6;
+}
+.cards-clean {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flexbox;
+  display: -ms-flex;
+  display: flex;
+  -webkit-flex-direction: row;
+  -moz-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-flex-wrap: wrap;
+  -moz-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -webkit-justify-content: space-between;
+  -moz-justify-content: space-between;
+  -ms-justify-content: space-between;
+  justify-content: space-between;
+  -webkit-align-content: space-around;
+  -moz-align-content: space-around;
+  -ms-align-content: space-around;
+  align-content: space-around;
+}
+.cards-clean .image {
+  -webkit-border-radius: 5px;
+  -webkit-background-clip: padding-box;
+  -moz-border-radius: 5px;
+  -moz-background-clip: padding;
+  border-radius: 5px;
+  background-clip: padding-box;
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  -ms-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+  width: 250px;
+  margin-bottom: 20px;
+}
+.cards-clean .image:hover,
+.cards-clean .image:active,
+.cards-clean .image:focus {
+  -webkit-box-shadow: 0px 0px 5px 0px #ff8800;
+  -moz-box-shadow: 0px 0px 5px 0px #ff8800;
+  box-shadow: 0px 0px 5px 0px #ff8800;
+}
+.cards-clean .image:hover > .caption,
+.cards-clean .image:active > .caption,
+.cards-clean .image:focus > .caption {
+  -webkit-opacity: 0.9;
+  -moz-opacity: 0.9;
+  opacity: 0.9;
+}
+.cards-clean .image img {
+  padding: 0px;
+  margin: 0px;
+  -webkit-border-radius: 5px;
+  -webkit-background-clip: padding-box;
+  -moz-border-radius: 5px;
+  -moz-background-clip: padding;
+  border-radius: 5px;
+  background-clip: padding-box;
+  height: 200px;
+  width: 250px;
+}
+.cards-clean .image .caption {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flexbox;
+  display: -ms-flex;
+  display: flex;
+  -webkit-flex-direction: row;
+  -moz-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-justify-content: space-around;
+  -moz-justify-content: space-around;
+  -ms-justify-content: space-around;
+  justify-content: space-around;
+  -webkit-align-items: baseline;
+  -moz-align-items: baseline;
+  -ms-align-items: baseline;
+  align-items: baseline;
+  position: absolute;
+  padding: 10px;
+  margin: 0px;
+  width: 250px;
+  background-color: black;
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  -ms-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+  -webkit-opacity: 0;
+  -moz-opacity: 0;
+  opacity: 0;
+  -webkit-border-top-right-radius: 5px;
+  -moz-border-radius-topright: 5px;
+  border-top-right-radius: 5px;
+  -webkit-border-top-left-radius: 5px;
+  -webkit-background-clip: padding-box;
+  -moz-border-radius-topleft: 5px;
+  -moz-background-clip: padding;
+  border-top-left-radius: 5px;
+  background-clip: padding-box;
+}
+.cards-clean .image .caption h6 {
+  font-weight: 500;
+}
+.cards-clean .image .caption > * {
+  position: static;
+}
+.cards-clean .image .caption > .pull-right {
+  margin-left: auto;
+}
+.btn-primary,
+.btn-theme {
+  color: white;
+  background-color: #ff8800;
+  border: #ff8800 solid 1px;
+}
+.btn-primary:focus,
+.btn-theme:focus,
+.btn-primary:hover,
+.btn-theme:hover,
+.btn-primary:active,
+.btn-theme:active {
+  background-color: #cc6d00;
+  border: #cc6d00 solid 1px;
+}
+.label-theme {
+  color: white;
+  background-color: #ff8800;
+  border: #ff8800 solid 1px;
 }
 .dropdown-menu > .active > a,
 .dropdown-menu > .active > a:hover,
@@ -98,26 +261,6 @@ a:hover {
   background-color: #ff8800;
   border: #ff8800 solid 1px;
 }
-.btn-primary,
-.btn-theme {
-  color: white;
-  background-color: #ff8800;
-  border: #ff8800 solid 1px;
-}
-.btn-primary:focus,
-.btn-theme:focus,
-.btn-primary:hover,
-.btn-theme:hover,
-.btn-primary:active,
-.btn-theme:active {
-  background-color: #cc6d00;
-  border: #cc6d00 solid 1px;
-}
-.container-full {
-  background-color: #b35f00;
-}
-.label-theme {
-  color: white;
-  background-color: #ff8800;
-  border: #ff8800 solid 1px;
+.input-group .form-control {
+  border: 1px;
 }

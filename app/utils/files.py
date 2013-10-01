@@ -28,6 +28,8 @@ def write_file(files, path):
 def download_file(url, path):
     """
     Download the given url to the path. File extension added automatically.
+
+    This needs to be moved into its own little thingy so it stops blocking
     """
     req = requests.get(url, stream=True)
 
@@ -50,5 +52,5 @@ def download_file(url, path):
         return path
 
     else:
-        # TODO: DO THINGS
+        # TODO: DO Shit
         raise Exception(req.status_code)

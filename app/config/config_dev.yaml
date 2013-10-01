@@ -13,6 +13,7 @@ files:
 dirs:
   pid: pid/
   log: logs/
+  base: /srv/http/
   gifs: /srv/http/i/
   screenshots: /srv/http/scrn/
 

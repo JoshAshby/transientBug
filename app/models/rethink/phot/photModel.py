@@ -31,14 +31,15 @@ class Phot(RethinkModel):
         """
         """
         name = title.replace(" ", "_")
-        gevent.spawn(fu.download_file, url, name)
+        path = ''.join([c.general.dirs["gifs"], name])
+        gevent.spawn(fu.download_file, url, path)
 
         extension = urlparse.urlparse(url).path.rsplit(".", 1)[1]
         filename = '.'.join([name, extension])
 
         time = arrow.utcnow()
         if not title:
-          title = "Untitled Phot @ %s" % time.format("YY/MM/DD HH:mm:ss")
+            title = "Untitled Phot @ %s" % time.format("YY/MM/DD HH:mm:ss")
         created = time.timestamp
 
         code_good = False
@@ -73,7 +74,7 @@ class Phot(RethinkModel):
 
         time = arrow.utcnow()
         if not title:
-          title = "Untitled Phot @ %s" % time.format("YY/MM/DD HH:mm:ss")
+            title = "Untitled Phot @ %s" % time.format("YY/MM/DD HH:mm:ss")
         created = time.timestamp
 
         code_good = False

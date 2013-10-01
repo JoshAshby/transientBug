@@ -32,7 +32,7 @@ class delete(JSONObject):
         if f:
             f = f[0]
 
-            note = nm.Note.fromRawEntry(**f)
+            note = nm.Note(**f)
 
             try:
                 note.delete()

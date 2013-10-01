@@ -136,7 +136,8 @@ class templateFile(object):
 
 
 class template(object):
-    def __init__(self, template, data):
+    def __init__(self, template, data=None):
+        if data is None: data = {}
         self._baseData = {
             "req": data,
             "stylesheets": [],
@@ -167,7 +168,7 @@ class template(object):
 
     @skeleton.deleter
     def skeleton(self):
-        self._base = "skeleton_navbar"
+        self._base = ""
 
     @property
     def data(self):
@@ -232,7 +233,7 @@ class template(object):
         if not "theme_color" in template and not "theme_color" in data:
             data["theme_color"] = "green"
 
-        if base is not None:
+        if base is not None and base:
             baseTmpl= tmpls[base]
             data["body"] = body
 

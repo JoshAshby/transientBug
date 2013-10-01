@@ -26,20 +26,22 @@
     <script src="http://code.jquery.com/jquery.js"></script>
   </head>
   <body>
-    {{#req.has_announcements}}
-      <div class="container container-alert">
-        <div class="row">
-          <div class="col-md-1 col-sm-1">
-            <i class="icon-exclamation icon-3x"></i>
-          </div>
-          <div class="col-md-10 col-sm-10">
-            {{#req.announcements}}
-              {{{.}}}
-            {{/req.announcements}}
+    {{^hide_announcements}}
+      {{#req.has_announcements}}
+        <div class="container container-alert">
+          <div class="row">
+            <div class="col-md-1 col-sm-1">
+              <i class="icon-exclamation icon-3x"></i>
+            </div>
+            <div class="col-md-10 col-sm-10">
+              {{#req.announcements}}
+                {{{.}}}
+              {{/req.announcements}}
+            </div>
           </div>
         </div>
-      </div>
-    {{/req.has_announcements}}
+      {{/req.has_announcements}}
+    {{/hide_announcements}}
 
     {{{body}}}
 

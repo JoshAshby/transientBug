@@ -18,14 +18,9 @@ import rethinkdb as r
 
 @autoRoute()
 class view(HTMLObject):
-    """
-    view, and if admin modify, a single image
-    """
     _title = "phot"
     _defaultTmpl = "public/gifs/view"
     def GET(self):
-        """
-        """
         phot = self.request.id
 
         # check if its a short code by looking for an extension
@@ -40,7 +35,7 @@ class view(HTMLObject):
         f = r.table(pm.Phot.table).filter({"filename": phot}).run()
         f = list(f)
         if len(f):
-            photo = pm.Phot.fromRawEntry(**f[0])
+            photo = pm.Phot(**f[0])
             photo.format()
 
             self.view.data = {"phot": photo}
@@ -51,5 +46,6 @@ class view(HTMLObject):
 
         else:
             self.view.template = "public/gifs/error"
-            self.view.data = {"error": "That image could not be found. Sorry :/"}
+            self.view.data = {"error": "That image could not be found. \
+                Sorry :/"}
             return self.view
