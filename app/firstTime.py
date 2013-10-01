@@ -48,6 +48,7 @@ def initialSetup():
     dbt = rethinkdb.table_list().run()
     for table in c.general.tables:
         if not table in dbt:
+            print "Creating table {}".format(table)
             rethinkdb.table_create(table).run()
 
     if c.general.flush["redis"]:

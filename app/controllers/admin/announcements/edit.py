@@ -26,7 +26,7 @@ class edit(HTMLObject):
     def GET(self):
         announcement_id = self.request.id
 
-        announcement = brm.redisObject("announcement:"+announcement_id)
+        announcement = brm.SeshatRedisModel("announcement:"+announcement_id)
 
         if announcement.start:
             announcement._formated_start = arrow.get(announcement.start).format("MM/DD/YYYY HH:mm")
