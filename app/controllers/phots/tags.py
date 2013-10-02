@@ -33,8 +33,10 @@ class tags(HTMLObject):
 
         if not query and tag: query = tag
 
+        hidden_ids = list(r.table(pm.Phot.table).filter(r.row["disable"].eq(True)).concat_map(lambda doc: [doc["id"]]).run())
+
         if query:
-            tags = list(r.table(pm.Phot.table).concat_map(lambda doc: doc["tags"]).run())
+            tags = list(r.table(pm.Phot.table).filter( ~r.expr(hidden_ids).contains(r.row["id"]) ).concat_map(lambda doc: doc["tags"]).run())
             new_tags = {}
             for t in tags:
                 match = fuzz.partial_ratio(query, t.replace("_", " "))
@@ -45,7 +47,7 @@ class tags(HTMLObject):
             if not tag:
                 try:
                     tag = max(new_tags, key=new_tags.get)
-                except ValueError as e:
+                except ValueError:
                     self.view.template = "public/gifs/error"
                     self.view.data = {"error": "I couldn't find any matching tags!"}
                     return self.view
@@ -60,7 +62,7 @@ class tags(HTMLObject):
             else:
                 filt = orig_filt
 
-            query = r.table(pm.Phot.table)
+            query = r.table(pm.Phot.table).filter( ~r.expr(hidden_ids).contains(r.row["id"]) )
 
             if orig_filt != "all":
                 query = query.filter({"extension": filt})
@@ -90,7 +92,7 @@ class tags(HTMLObject):
 
 
         else:
-            tags = list(r.table(pm.Phot.table).concat_map(lambda doc: doc["tags"]).run())
+            tags = list(r.table(pm.Phot.table).filter({"disable": False}).concat_map(lambda doc: doc["tags"]).run())
 
             if not tags:
                 self.view.template = "public/gifs/error"

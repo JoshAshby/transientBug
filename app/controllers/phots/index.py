@@ -32,10 +32,16 @@ class index(HTMLObject):
         else:
             filt = orig_filt
 
-        query = r.table(pm.Phot.table)
+        """
+        The SQL ~equ to what I'm aiming for
+        SELECT * FROM phots WHERE id NOT IN ( SELECT * FROM phots WHERE disable == TRUE )
+        """
+        hidden_ids = list(r.table(pm.Phot.table).filter(r.row["disable"].eq(True)).concat_map(lambda doc: [doc["id"]]).run())
+
+        query = r.table(pm.Phot.table).filter(~r.expr(hidden_ids).contains(r.row["id"]))
 
         if orig_filt != "all":
-            query = query.filter({"extension": filt})
+          query = query.filter({"extension": filt})
 
         page = Paginate(query, self.request, "title")
         f = page.pail
@@ -55,6 +61,5 @@ class index(HTMLObject):
 
         else:
             self.view.template = "public/gifs/error"
-            self.view.data = {"error": "We do not currently have any photos \
-                that fit what you're looking for."}
+            self.view.data = {"error": "We do not currently have any photos that fit what you're looking for."}
             return self.view

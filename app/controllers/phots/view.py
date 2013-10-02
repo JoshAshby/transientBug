@@ -32,9 +32,14 @@ class view(HTMLObject):
                   self._redirect("/phots/view/%s" % f[0]["filename"])
                   return
 
-        f = r.table(pm.Phot.table).filter({"filename": phot}).run()
-        f = list(f)
+        f = list(r.table(pm.Phot.table).filter({"filename": phot}).run())
+
         if len(f):
+            if "disable" in f[0] and f[0]["disable"]:
+                self.view.template = "public/gifs/error"
+                self.view.data = {"error": "That image seems to have been removed."}
+                return self.view
+
             photo = pm.Phot(**f[0])
             photo.format()
 
@@ -46,6 +51,5 @@ class view(HTMLObject):
 
         else:
             self.view.template = "public/gifs/error"
-            self.view.data = {"error": "That image could not be found. \
-                Sorry :/"}
+            self.view.data = {"error": "That image could not be found. Sorry :/"}
             return self.view
