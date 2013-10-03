@@ -77,9 +77,9 @@ class Paginate(StandardConfig):
 
         elif isinstance(self._pail, RethinkCollection):
             if self.sort and self.sort_direction == "asc":
-                self._pail.order_by(self.sort, "asc")
-            elif self.sort:
                 self._pail.order_by(self.sort, "desc")
+            elif self.sort:
+                self._pail.order_by(self.sort, "asc")
 
             self._pail.fetch()
 

@@ -243,7 +243,8 @@ footer {
 .dropdown-menu > li > a:focus,
 .nav-pills > li.active > a,
 .nav-pills > li.active > a:hover,
-.nav-pills > li.active > a:focus {
+.nav-pills > li.active > a:focus,
+.nav-tabs > li.active > a {
   background-color: #ff8800;
 }
 .pager li > a:hover,

@@ -1,0 +1,87 @@
++++
+theme_color: orange
+nav:
+  admin_phots: true
+
+styles: "img.img {height: 100px;
+width: 100px;
+margin: 2px;
+border: 1px solid;
+padding: 5px;}"
++++
+
+<ol class="breadcrumb">
+  <li><a href="/admin">Admin</a></li>
+  <li class="active">Phots</li>
+</ol>
+<br>
+
+<div class="row">
+  <div class="col-md-6 col-sm-12">
+    <ul class="nav nav-pills" id="myTab">
+      <li {{ 'class="active"' if what!="disabled" }}><a href="/admin/phots">Enabled</a></li>
+      <li {{ 'class="active"' if what=="disabled" }}><a href="/admin/phots/disabled">Disabled</a></li>
+    </ul>
+  </div>
+  <div class="col-sm-12 col-md-6">
+    <form class="form-inline pull-right" role="pagination_options">
+      <div class="form-group">
+        <label class="sr-only" for="filter">Filter</label>
+        <select id="filer" name="filter" class="form-control input-sm">
+          <option value=all {{ 'selected="selected"' if filter=="all" }}>All</option>
+          <option value=gif {{ 'selected="selected"' if filter=="gif" }}>GIF</option>
+          <option value=jpg {{ 'selected="selected"' if filter=="jpg" }}>JPG</option>
+          <option value=png {{ 'selected="selected"' if filter=="png" }}>PNG</option>
+          <option value=tiff {{ 'selected="selected"' if filter=="tiff" }}>TIFF</option>
+        </select>
+      </div>
+
+      {{page.options}}
+    </form>
+  </div>
+</div>
+<br>
+<div class="row">
+  <div class="col-md-12">
+    <div id="myTabContent" class="tab-content">
+      <div class="tab-pane active" id="e">
+
+        <div class="row">
+          <div class="col-md-4 col-md-offset-2">
+            <h4>Title</h4>
+          </div>
+          <div class="col-md-4">
+            <h4>Filename</h4>
+          </div>
+        </div>
+        {% for pic in page.pail %}
+          <div class="row" id="{{pic.id}}">
+            <div class="col-md-2">
+              <a href="/i/{{pic.filename}}"><img src="/i/{{pic.filename}}" alt="{{pic.filename}}" class="img"></a>
+            </div>
+            <div class="col-md-4">
+              {{pic.title}}
+            </div>
+            <div class="col-md-4">
+              {{pic.filename}}
+            </div>
+            <div class="col-md-2">
+              {% if pic.disable %}
+                <button class="btn btn-default btn-sm toggle_btn" data-id="{{pic.id}}"><i class="icon-remove"></i> Disabled</button>
+              {% else %}
+                <button class="btn btn-theme btn-sm toggle_btn" data-id="{{pic.id}}"><i class="icon-ok"></i> Enabled</button>
+              {% endif %}
+            </div>
+          </div>
+        {% endfor %}
+
+        {{page.paginate}}
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
