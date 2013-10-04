@@ -37,23 +37,20 @@ class view(HTMLObject):
 
             note = nm.Note(**f)
 
-            if not note.public:
-                if not self.request.session.userID \
-                      or not self.request.session.has_notes \
-                      or self.request.session.userID!=note.user:
+            if not note.public and (not self.request.session.userID \
+                      or self.request.session.userID!=note.user):
                     self.request.session.pushAlert("That note is not public and you do not have the rights to access it.", level="error")
                     self._redirect("/notes")
                     return
 
-            note.format()
-
             if self.request.session.has_notes:
                 self.view.scripts = ["note"]
 
-            if note.public:
-                title = """<i class="icon-eye-open"></i> """
-            else:
-                title = """<i class="icon-eye-close"></i> """
+            if self.request.session.userID:
+                if note.public:
+                    title = """<i class="icon-eye-open"></i> """
+                else:
+                    title = """<i class="icon-eye-close"></i> """
 
             title += note.title
 

@@ -36,7 +36,6 @@ class index(HTMLObject):
             f = f[0]
 
             note = nm.Note(**f)
-            note.format()
 
             tags = ', '.join(note.tags)
 

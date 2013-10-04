@@ -49,17 +49,43 @@ class Note(RethinkModel):
 
         return what
 
-    def format(self, time_format="human", length=160):
-        """
-        Formats markdown and dates into the right stuff
-        """
-        self._formated_contents = mdu.markClean(self.contents, ['footnotes'])
+    def format_time_spec(self, time_format):
+        if not hasattr(self, "_formated_created_spec"):
+            self._formated_created_spec = arrow.get(self.created).format(time_format)
 
-        self._formated_short_contents = mdu.markClean(self.contents[:length]+"...", ['footnotes'])
-        if time_format != "human":
-            self._formated_created = arrow.get(self.created).format(time_format)
-        else:
+        return self._formated_created_spec
+
+    @property
+    def formated_author(self):
+        if not hasattr(self, "_formated_author"):
+            self._formated_author = um.User(self.user).username
+
+        return self._formated_author
+
+    @property
+    def formated_tags(self):
+        if not hasattr(self, "_formated_tags"):
+            self._formated_tags = ', '.join(self.tags)
+
+        return self._formated_tags
+
+    @property
+    def formated_time(self):
+        if not hasattr(self, "_formated_created"):
             self._formated_created = arrow.get(self.created).humanize()
 
-        self._formated_author = um.User(self.user).username
-        self._formated_tags = ', '.join(self.tags)
+        return self._formated_created
+
+    @property
+    def formated_contents(self):
+        if not hasattr(self, "_formated_contents"):
+            self._formated_contents = mdu.markClean(self.contents, ['footnotes'])
+
+        return self._formated_contents
+
+    @property
+    def formated_short(self):
+        if not hasattr(self, "_formated_short_contents"):
+            self._formated_short_contents = mdu.markClean(self.contents[:160]+"...", ['footnotes'])
+
+        return self._formated_short_contents
