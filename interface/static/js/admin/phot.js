@@ -1,11 +1,11 @@
 $(function() {
   function toggle(what) {
-    id=$(what).data("id");
+    var id = $(what).data("id");
+    var di = $("#"+id);
 
     $.post("/admin/phots/toggle/"+id, function(data) {
       if(data[0]["data"]["success"]) {
-        $(what).popover('hide'); // hmm
-        $(what).slideUp();
+        di.fadeOut().find("button").popover('hide');
       };
     });
   };
@@ -14,26 +14,33 @@ $(function() {
     toggle(this);
   });
 
-  $(".toggle_btn").click(function(){
-    if($(this).hasClass("btn-theme")) {
-      var title = "Disable?";
-    } else {
-      var title = "Enable?";
-    };
+  $(document).on("click", ".nope_btn", function() {
+    $(".toggle_btn").popover('hide');
+  });
 
-    var id = $(this).data("id");
-
-    $(this).popover({trigger: "manual",
-      placement: "bottom",
-      html: true,
-      title: title,
-      content: '<div class="btn-group"><button class="btn btn-success confirm_btn" data-id="'+id+'"><i class="icon-ok"></i></button><button class="btn btn-default nope_btn"><i class="icon-remove"></i></button></div>',
-      container: "body"});
+  $(".toggle_btn").click(function() {
+    id = $(this);
+    $(".toggle_btn").not(this).popover('hide');
     $(this).popover('show');
+    $(".popover").find(".confirm_btn").data("id", $(this).data("id"));
 
-    var wat = this;
-    setTimeout(function() {
-      $(wat).popover('hide');
-    }, 2000);
+    var timeout = setTimeout(function () {
+      id.popover('hide');
+    }, 3000);
+
+    $(document).on("mouseenter", ".popover", function() {
+      clearTimeout(timeout);
+    }).on("mouseleave", ".popover", function() {
+      timeout = setTimeout(function () {
+        id.popover('hide');
+      }, 3000);
+    });
+
+  }).popover({
+    trigger: "manual",
+    placement: "auto right",
+    html: true,
+    content: '<div class="btn-group"><button class="btn btn-success btn-sm confirm_btn"><i class="icon-ok"></i></button><button class="btn btn-default btn-sm nope_btn"><i class="icon-remove"></i></button></div>',
+    container: "body"
   });
 });
