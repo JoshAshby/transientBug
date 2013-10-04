@@ -45,10 +45,6 @@ class view(HTMLObject):
                     self._redirect("/notes")
                     return
 
-            is_author = False
-            if note.user == self.request.session.userID:
-                is_author = True
-
             note.format()
 
             if self.request.session.has_notes:
@@ -61,7 +57,7 @@ class view(HTMLObject):
 
             title += note.title
 
-            self.view.data = {"note": note, "header": title, "is_author": is_author}
+            self.view.data = {"note": note, "header": title}
             return self.view
         else:
             self.request.session.pushAlert("That note could not be found!", level="error")

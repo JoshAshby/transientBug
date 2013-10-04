@@ -17,8 +17,6 @@ from seshat.objectMods import login
 
 import models.rethink.note.noteModel as nm
 
-import arrow
-
 
 @login(["notes"])
 @autoRoute()
@@ -27,10 +25,11 @@ class new(HTMLObject):
     Returns base index page listing all gifs
     """
     _title = "new note"
-    _defaultTmpl = "public/notes/new"
+    _defaultTmpl = "public/notes/edit"
     def GET(self):
         """
         """
+        self.view.data = {"note": None}
         return self.view
 
     def POST(self):

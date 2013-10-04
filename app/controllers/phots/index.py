@@ -17,6 +17,7 @@ from utils.paginate import Paginate
 
 import rethinkdb as r
 import models.rethink.phot.photModel as pm
+import models.utils.dbUtils as dbu
 
 
 @autoRoute()
@@ -24,13 +25,9 @@ class index(HTMLObject):
     _title = "phots"
     _defaultTmpl = "public/gifs/index"
     def GET(self):
-        orig_filt = self.request.getParam("filter", "all")
+        orig = self.request.getParam("filter", "all")
+        filt = dbu.phot_filter(orig)
         view = self.request.getParam("v", 'cards')
-
-        if orig_filt == "all":
-            filt = ""
-        else:
-            filt = orig_filt
 
         """
         The SQL ~equ to what I'm aiming for
@@ -38,10 +35,7 @@ class index(HTMLObject):
         """
         hidden_ids = list(r.table(pm.Phot.table).filter(r.row["disable"].eq(True)).concat_map(lambda doc: [doc["id"]]).run())
 
-        query = r.table(pm.Phot.table).filter(~r.expr(hidden_ids).contains(r.row["id"]))
-
-        if orig_filt != "all":
-          query = query.filter({"extension": filt})
+        query = r.table(pm.Phot.table).filter(lambda doc: ~r.expr(hidden_ids).contains(doc["id"])).filter(lambda doc: doc["filename"].match(filt))
 
         page = Paginate(query, self.request, "title")
         f = page.pail
@@ -54,7 +48,7 @@ class index(HTMLObject):
                 new_f.append(phot)
 
             self.view.data = {"pictures": new_f,
-                              "filter": orig_filt,
+                              "filter": orig,
                               "v": view,
                               "pager": page}
             return self.view

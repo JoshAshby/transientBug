@@ -7,56 +7,11 @@ nav:
 <br>
 <div class="row">
   <div class="col-md-12">
-  {{^is_author}}
-    <h2><small> By {{note._formated_author}} - {{note._formated_created}}</small></h2>
+    <h2><small> By {{note._formated_author}} - {{note._formated_created}} {{#req.session.has_notes}}<a href="/notes/edit/{{note.short_code}}">Edit</a>{{/req.session.has_notes}}</small></h2>
     <br>
     {{{note._formated_contents}}}
     {{#note.tags}}
       <a href="/notes/tags/{{.}}"><span class="label label-theme">{{.}}</span></a>
     {{/note.tags}}
-  {{/is_author}}
-
-  {{#is_author}}
-      <ul class="nav nav-pills" id="myTab">
-        <li class="active"><a href="#view" data-toggle="tab">View</a></li>
-        <li><a href="#edit" data-toggle="tab">Edit</a></li>
-      </ul>
-
-      <div id="myTabContent" class="tab-content">
-        <div class="tab-pane active" id="view">
-          <h2><small> By {{note._formated_author}} - {{note._formated_created}}</small></h2>
-          <br>
-          {{{note._formated_contents}}}
-          {{#note.tags}}
-            <a href="/notes/tags/{{.}}"><span class="label label-theme">{{.}}</span></a>
-          {{/note.tags}}
-
-        </div>
-        <div class="tab-pane" id="edit">
-          <br>
-          <form id="edit_tab_form">
-            <fieldset>
-              <div class="form-group">
-                <input type="text" class="form-control" id="title" name="title" placeholder="Title..." value="{{note.title}}" required>
-              </div>
-              <div class="form-group">
-                <textarea rows="20" class="form-control" name="contents" id="content">{{{note.contents}}}</textarea>
-              </div>
-              <div class="checkbox">
-                <label>
-                  <input type="checkbox" name="public" value="true" {{#note.public}}checked{{/note.public}} /> Make this note public?
-                </label>
-              </div>
-              <div class="form-group">
-                <input type="text" class="form-control" name="tags" placeholder="Tags..." value="{{note._formated_tags}}">
-              </div>
-              <hr>
-              <button id="save_btn" class="btn btn-sm btn-theme" data-short={{note.short_code}}>Save</button> <button type="button" class="btn btn-sm btn-danger pull-right" id="del_btn" data-short={{note.short_code}}>Delete</button>
-            </fieldset>
-          </form>
-        </div>
-      </div>
-    {{/is_author}}
-
   </div>
 </div>

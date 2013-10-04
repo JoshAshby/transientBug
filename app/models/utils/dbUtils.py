@@ -18,3 +18,12 @@ def toBoolean(str):
         return False
     else:
         raise Exception("Not a boolean")
+
+def phot_filter(filt):
+    if filt == "all":
+        orig = ""
+    if filt in ["gif", "png", "tiff"]:
+        orig = filt+"$"
+    if filt == "jpg":
+        orig = "jp(eg|g)$"
+    return orig

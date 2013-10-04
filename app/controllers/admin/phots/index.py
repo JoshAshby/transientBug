@@ -19,6 +19,7 @@ from seshat.objectMods import login
 from utils.paginate import Paginate
 
 import models.rethink.phot.photModel as pm
+import models.utils.dbUtils as dbu
 
 
 @login(["admin"])
@@ -28,30 +29,24 @@ class index(HTMLObject):
     _defaultTmpl = "admin/phots/index"
     def GET(self):
         what = self.request.id
-        orig_filt = self.request.getParam("filter", "all")
-
-        if orig_filt == "all":
-            filt = ""
-        else:
-            filt = orig_filt
+        orig = self.request.getParam("filter", "all")
+        filt = dbu.phot_filter(orig)
 
         hidden_ids = list(r.table(pm.Phot.table).filter(r.row["disable"].eq(True)).concat_map(lambda doc: [doc["id"]]).run())
 
         if what == "enabled":
             query = r.table(pm.Phot.table).filter(lambda doc: ~r.expr(hidden_ids).contains(doc["id"]))
-            if orig_filt != "all":
-                query = query.filter({"extension": filt})
 
         else:
             query = r.table(pm.Phot.table).filter(lambda doc: r.expr(hidden_ids).contains(doc["id"]))
-            if orig_filt != "all":
-                query = query.filter({"extension": filt})
+
+        query = query.filter(lambda doc: doc["filename"].match(filt))
 
         result = RethinkCollection(pm.Phot, query=query)
         page = Paginate(result, self.request, "filename")
 
 
-        self.view.data = {"page": page, "what": what}
+        self.view.data = {"page": page, "what": what, "filter": orig}
         self.view.scripts = ["admin/phot"]
 
         return self.view

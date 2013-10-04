@@ -1,0 +1,69 @@
++++
+base: skeleton_empty
+theme_color: red
+
+scriptFiles:
+  - lib/epiceditor.min
+  - note
+
+stylesheets:
+  - sidebar.less
++++
+
+<div id="wrapper">
+  <div id="sidebar-wrapper">
+    <ul class="sidebar-nav">
+      <li class="sidebar-brand"><a href="/notes">Notes</a></li>
+      <li><a href="#" data-toggle="edit"><i class="icon-edit"></i> Edit</a></li>
+      <li><a href="#" data-toggle="info"><i class="icon-info"></i> Info</a></li>
+      <br><br><br><br>
+      <small>Text can be formated with <a href="http://daringfireball.net/projects/markdown/syntax">Daring Fireball's Markdown</a>. Most HTML is escaped.</small>
+      <br>
+      <li style="text-align: center; text-indent: -20px;"><button class="btn btn-theme" id="save_btn">Save!</button></li>
+    </ul>
+  </div>
+
+  <div id="page-content-wrapper">
+    <div class="content-header">
+      <div class="row">
+        <div class="col-md-1 col-xs-1 hidden-md">
+          <h1><a id="menu-toggle" href="#" class="btn btn-default"><i class="icon-reorder"></i></a></h1>
+        </div>
+        <div class="col-md-11 col-xs-11">
+          <h1 id="title_header">{{ 'Untitled...' if not note.title else note.title }}</h1>
+        </div>
+      </div>
+    </div>
+    <div class="page-content inset" style="display: none;" id="info">
+
+        <form method="POST" id="edit_form">
+          <fieldset>
+            <textarea name="contents" id="content" style="display:none">{{ 'Write something!' if not note.contents else note.contents }}</textarea>
+            <div class="form-group">
+              <input type="text" class="form-control" id="title" name="title" placeholder="Title..." value="{{ note.title if note.title }}" required>
+            </div>
+            <div class="checkbox">
+              <label>
+                <input type="checkbox" name="public" value="true" {{ 'checked' if note.public }}/> Make this note public?
+                <span class="help-block"><small>This determines if the note will be visible on <a href="/notes/public">/notes/public</a> and <a href="/notes/tags">/notes/tags</a> pages.</small></span>
+              </label>
+            </div>
+            <div class="form-group">
+              <input type="text" class="form-control" name="tags" placeholder="Tags..." value="{{ tags if tags }}"/>
+              <span class="help-block"><small>Tags can be comma separated.</small></span>
+            </div>
+
+            {% if note.short_code %}
+              <button type="button" class="btn btn-sm btn-danger pull-right" id="del_btn" data-short={{note.short_code}}>Delete</button>
+            {% endif %}
+
+          </fieldset>
+        </form>
+
+    </div>
+    <div class="page-content inset" id="edit">
+      <div id="epiceditor"></div>
+      <div id="preview"></div>
+    </div>
+  </div>
+</div>

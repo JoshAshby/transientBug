@@ -16,6 +16,7 @@ from utils.paginate import Paginate
 
 import rethinkdb as r
 import models.rethink.phot.photModel as pm
+import models.utils.dbUtils as dbu
 
 from fuzzywuzzy import fuzz
 
@@ -28,6 +29,8 @@ class tags(HTMLObject):
         """
         HOLY HELL WHAT A MESS
         """
+        orig = self.request.getParam("filter", "all")
+        filt = dbu.phot_filter(orig)
         tag = self.request.id
         query = self.request.getParam("q")
 
@@ -36,7 +39,7 @@ class tags(HTMLObject):
         hidden_ids = list(r.table(pm.Phot.table).filter(r.row["disable"].eq(True)).concat_map(lambda doc: [doc["id"]]).run())
 
         if query:
-            tags = list(r.table(pm.Phot.table).filter( ~r.expr(hidden_ids).contains(r.row["id"]) ).concat_map(lambda doc: doc["tags"]).run())
+            tags = list(r.table(pm.Phot.table).filter(lambda doc: ~r.expr(hidden_ids).contains(doc["id"])).concat_map(lambda doc: doc["tags"]).filter(lambda doc: doc["filename"].match(filt)).run())
             new_tags = {}
             for t in tags:
                 match = fuzz.partial_ratio(query, t.replace("_", " "))
@@ -54,18 +57,11 @@ class tags(HTMLObject):
 
             self.view.data = {"q": query}
 
-            orig_filt = self.request.getParam("filter", "all")
+            orig = self.request.getParam("filter", "all")
+            filt = dbu.phot_filter(orig)
             view = self.request.getParam("v", 'cards').lower()
 
-            if orig_filt == "all":
-                filt = ""
-            else:
-                filt = orig_filt
-
-            query = r.table(pm.Phot.table).filter( ~r.expr(hidden_ids).contains(r.row["id"]) )
-
-            if orig_filt != "all":
-                query = query.filter({"extension": filt})
+            query = r.table(pm.Phot.table).filter(lambda doc: ~r.expr(hidden_ids).contains(doc["id"])).filter(lambda doc: doc["filename"].match(filt))
 
             query = query.filter(r.row["tags"].filter(lambda t: t == tag ).count() > 0)
 
@@ -86,13 +82,13 @@ class tags(HTMLObject):
                               "tags": tags,
                               "tag": tag,
                               "pager": page,
-                              "filter": orig_filt,
+                              "filter": orig,
                               "v": view}
             return self.view
 
 
         else:
-            tags = list(r.table(pm.Phot.table).filter({"disable": False}).concat_map(lambda doc: doc["tags"]).run())
+            tags = list(r.table(pm.Phot.table).filter(lambda doc: ~r.expr(hidden_ids).contains(doc["id"])).filter(lambda doc: doc["filename"].match(filt)).concat_map(lambda doc: doc["tags"]).run())
 
             if not tags:
                 self.view.template = "public/gifs/error"
