@@ -19,8 +19,8 @@ padding: 5px;}"
 <div class="row">
   <div class="col-md-6 col-sm-12">
     <ul class="nav nav-pills" id="myTab">
-      <li {{ 'class="active"' if what!="disabled" }}><a href="/admin/phots">Enabled</a></li>
-      <li {{ 'class="active"' if what=="disabled" }}><a href="/admin/phots/disabled">Disabled</a></li>
+      <li {{ 'class="active"' if what!="enabled" }}><a href="/admin/phots">Disabled</a></li>
+      <li {{ 'class="active"' if what=="enabled" }}><a href="/admin/phots/enabled">Enabled</a></li>
     </ul>
   </div>
   <div class="col-sm-12 col-md-6">

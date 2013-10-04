@@ -37,13 +37,13 @@ class index(HTMLObject):
 
         hidden_ids = list(r.table(pm.Phot.table).filter(r.row["disable"].eq(True)).concat_map(lambda doc: [doc["id"]]).run())
 
-        if what == "disabled":
-            query = r.table(pm.Phot.table).filter(lambda doc: r.expr(hidden_ids).contains(doc["id"]))
+        if what == "enabled":
+            query = r.table(pm.Phot.table).filter(lambda doc: ~r.expr(hidden_ids).contains(doc["id"]))
             if orig_filt != "all":
                 query = query.filter({"extension": filt})
 
         else:
-            query = r.table(pm.Phot.table).filter(lambda doc: ~r.expr(hidden_ids).contains(doc["id"]))
+            query = r.table(pm.Phot.table).filter(lambda doc: r.expr(hidden_ids).contains(doc["id"]))
             if orig_filt != "all":
                 query = query.filter({"extension": filt})
 
