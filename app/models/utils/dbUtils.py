@@ -21,7 +21,7 @@ def toBoolean(str):
 
 def phot_filter(filt):
     if filt == "all":
-        orig = ""
+        orig = "$"
     if filt in ["gif", "png", "tiff"]:
         orig = filt+"$"
     if filt == "jpg":

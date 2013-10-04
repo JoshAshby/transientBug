@@ -39,7 +39,7 @@ class tags(HTMLObject):
         hidden_ids = list(r.table(pm.Phot.table).filter(r.row["disable"].eq(True)).concat_map(lambda doc: [doc["id"]]).run())
 
         if query:
-            tags = list(r.table(pm.Phot.table).filter(lambda doc: ~r.expr(hidden_ids).contains(doc["id"])).concat_map(lambda doc: doc["tags"]).filter(lambda doc: doc["filename"].match(filt)).run())
+            tags = list(r.table(pm.Phot.table).filter(lambda doc: doc["filename"].match(filt)).filter(lambda doc: ~r.expr(hidden_ids).contains(doc["id"])).concat_map(lambda doc: doc["tags"]).run())
             new_tags = {}
             for t in tags:
                 match = fuzz.partial_ratio(query, t.replace("_", " "))
