@@ -31,7 +31,7 @@ class index(HTMLObject):
     def GET(self):
         """
         """
-        parts = r.table(nm.Note.table)
+        parts = r.table(nm.Note.table).filter({"disable": False})
 
         if self.request.session.userID:
             what_type = self.request.getParam("filter", "all")
@@ -58,6 +58,5 @@ class index(HTMLObject):
             if self.request.session.userID:
                 return Redirect("/notes/new")
 
-            self.view.template = "public/notes/error"
-            self.view.data = {"error": "No notes have been written yet!"}
+            self.view.template = "public/notes/errors/empty"
             return self.view

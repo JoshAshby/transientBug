@@ -35,7 +35,7 @@ class delete(JSONObject):
             note = nm.Note(**f)
 
             try:
-                note.delete()
+                note.disable = True
 
                 return {"success": True}
             except Exception as e:

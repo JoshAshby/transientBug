@@ -11,13 +11,12 @@ joshuaashby@joshashby.com
 """
 from seshat.route import autoRoute
 from seshat.baseObject import HTMLObject
-from seshat.objectMods import login
+from seshat.actions import Redirect, NotFound
 
 import rethinkdb as r
 import models.rethink.note.noteModel as nm
 
 
-#@login(["notes"])
 @autoRoute()
 class view(HTMLObject):
     """
@@ -29,9 +28,8 @@ class view(HTMLObject):
         """
         note = self.request.id
 
-        f = r.table(nm.Note.table).filter({"short_code": note}).run()
+        f = list(r.table(nm.Note.table).filter({"short_code": note}).filter({"disable": False}).run())
 
-        f = list(f)
         if f:
             f = f[0]
 
@@ -40,8 +38,7 @@ class view(HTMLObject):
             if not note.public and (not self.request.session.userID \
                       or self.request.session.userID!=note.user):
                     self.request.session.pushAlert("That note is not public and you do not have the rights to access it.", level="error")
-                    self._redirect("/notes")
-                    return
+                    return Redirect("/notes")
 
             if self.request.session.has_notes:
                 self.view.scripts = ["note"]
@@ -58,5 +55,4 @@ class view(HTMLObject):
             return self.view
         else:
             self.request.session.pushAlert("That note could not be found!", level="error")
-            self._redirect("/notes")
-            return
+            return NotFound()

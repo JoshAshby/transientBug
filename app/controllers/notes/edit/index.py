@@ -12,6 +12,7 @@ joshuaashby@joshashby.com
 from seshat.route import autoRoute
 from seshat.baseObject import HTMLObject
 from seshat.objectMods import login
+from seshat.actions import Redirect, NotFound
 
 import rethinkdb as r
 import models.rethink.note.noteModel as nm
@@ -29,9 +30,8 @@ class index(HTMLObject):
         """
         note = self.request.id
 
-        f = r.table(nm.Note.table).filter({"short_code": note}).run()
+        f = list(r.table(nm.Note.table).filter({"short_code": note}).run())
 
-        f = list(f)
         if f:
             f = f[0]
 
@@ -41,10 +41,10 @@ class index(HTMLObject):
 
             self.view.data = {"note": note, "tags": tags}
             return self.view
+
         else:
             self.request.session.pushAlert("That note could not be found!", level="error")
-            self._redirect("/notes")
-            return
+            return NotFound()
 
     def POST(self):
         ID = self.request.id
@@ -53,17 +53,18 @@ class index(HTMLObject):
         public = self.request.getParam("public", False)
         tags = self.request.getParam("tags")
 
+        tag = []
         if tags:
             tag = [ bit.lstrip().rstrip() for bit in tags.split(",") ]
-        else:
-            tag = []
 
-        f = r.table(nm.Note.table).filter({"short_code": ID}).run()
+        f = list(r.table(nm.Note.table).filter({"short_code": ID}).run())
 
-        f = list(f)
         if f:
             f = f[0]
             note = nm.Note(f["id"])
+
+            if note.user != self.request.session.userID:
+                note.copy()
 
             note.title = title
             note.contents = contents
@@ -72,4 +73,7 @@ class index(HTMLObject):
 
             note.save()
 
-        self._redirect("/notes/view/%s" % note.short_code)
+        else:
+            return NotFound()
+
+        return Redirect("/notes/view/%s" % note.short_code)

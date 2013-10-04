@@ -23,7 +23,7 @@ import rethinkdb as r
 
 
 class session(brm.SeshatRedisModel):
-    _protected_items = ["rawAlerts"]
+    _protected_items = []
     def _finish_init(self):
         if not hasattr(self, "rawAlerts"): self.rawAlerts = "[]"
         if not hasattr(self, "username"): self.username = ""
@@ -158,6 +158,7 @@ class session(brm.SeshatRedisModel):
                 alert["icon"] = "excalmation-mark"
             elif alert["level"] == "error":
                 alert["icon"] = "warning-sign"
+                alert["level"] = "danger"
 
             alertStr += ("""<div class="alert alert-{level}"><i class="icon-{icon}"></i><strong>{quip}</strong> {msg}</div>""").format(**alert)
 

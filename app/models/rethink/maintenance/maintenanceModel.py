@@ -25,7 +25,6 @@ path = ''.join([c.general.dirs["base"], "static/502.html"])
 
 class Maintenance(RethinkModel):
     table = "maintenance"
-    _protectedItems = []
 
     @classmethod
     def get_current(cls):

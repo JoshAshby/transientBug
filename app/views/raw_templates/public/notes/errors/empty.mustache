@@ -1,0 +1,14 @@
++++
+theme_color: red
+
+nav:
+  notes: true
++++
+
+<div class="jumbotron">
+  <h1>Whoa there...</h1>
+  <p>Slow down! There aren't any notes currently in the system!</p>
+  {{#req.session.userID}}
+    <p>Maybe you should <a href="/notes/new">make one...</a></p>
+  {{/req.session.userID}}
+</div>

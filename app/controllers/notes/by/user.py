@@ -13,10 +13,12 @@ joshuaashby@joshashby.com
 """
 from seshat.route import autoRoute
 from seshat.baseObject import HTMLObject
+from seshat.actions import NotFound
 
 from utils.paginate import Paginate
 
 import rethinkdb as r
+from rethinkORM import RethinkCollection
 import models.rethink.note.noteModel as nm
 import models.rethink.user.userModel as um
 
@@ -35,31 +37,20 @@ class user(HTMLObject):
         u = list(r.table(um.User.table).filter({"username": user}).run())
 
         if u:
-            u = u[0]
-
-            user_id = u["id"]
+            user_id = u[0]["id"]
 
             parts = r.table(nm.Note.table).filter({"public": True, "user": user_id})
+            result = RethinkCollection(nm.Note, query=parts)
+            page = Paginate(result, self.request, "created")
 
-            page = Paginate(parts, self.request, "created")
-            f = page.pail
-
-            if f:
-                new_f = []
-                for part in f:
-                    note = nm.Note(**part)
-                    note.format()
-                    new_f.append(note)
-
-                self.view.data = {"notes": new_f, "page": page, "user": user}
+            if page.pail:
+                self.view.data = {"page": page, "user": user}
                 return self.view
 
             else:
-                self.view.template = "public/notes/error"
-                self.view.data = {"error": "The user: %s has not written any notes yet!" % user}
+                self.view.template = "public/notes/errors/no_public"
+                self.view.data = {"user": user}
                 return self.view
 
         else:
-            self.view.template = "public/notes/error"
-            self.view.data = {"error": "The user: %s does not exist in the system yet" % user}
-            return self.view
+            return NotFound()

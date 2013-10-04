@@ -61,7 +61,7 @@ class BaseHTTPObject(object):
             except Exception as e:
                 content = (e, traceback.format_exc())
 
-            if self.head[0] != "303 SEE OTHER":
+            if self.head[0] not in ["303 SEE OTHER"]:
                 del self.request.session.alerts
 
             return content, self.head

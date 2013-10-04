@@ -14,6 +14,7 @@ joshuaashby@joshashby.com
 from seshat.route import autoRoute
 from seshat.baseObject import HTMLObject
 from seshat.objectMods import login
+from seshat.actions import Redirect
 
 import models.rethink.note.noteModel as nm
 
@@ -52,7 +53,6 @@ class new(HTMLObject):
 
         except Exception as e:
             self.request.session.pushAlert("That note could not be created! %s" % e.message, level="error")
-            self._redirect("/notes/new")
-            return
+            return Redirect("/notes/new")
 
-        self._redirect("/notes/view/%s" % note.short_code)
+        return Redirect("/notes/view/%s" % note.short_code)

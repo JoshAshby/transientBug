@@ -12,13 +12,13 @@ nav:
         {% if req.session.userID==note.user %}
           Yours! <a href="/notes/edit/{{note.short_code}}">(Edit)</a>
         {% else %}
-          By {{note.formated_author}}
+          By <a href="/notes/by/user/{{note.formated_author}}">{{note.formated_author}}</a>
         {% endif %} - {{note.formated_time}}
       </small>
     </h2>
     {{note.formated_contents}}
     {% for tag in note.tags %}
-      <a href="/notes/tags/{{tag}}"><span class="label label-theme">{{tag}}</span></a>
+      <a href="/notes/by/tags/{{tag}}"><span class="label label-theme">{{tag}}</span></a>
     {% endfor %}
   </div>
 </div>

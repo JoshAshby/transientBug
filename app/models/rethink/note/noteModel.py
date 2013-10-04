@@ -20,7 +20,6 @@ import utils.short_codes as sc
 
 class Note(RethinkModel):
     table = "notes"
-    _protectedItems = []
 
     @classmethod
     def new_note(cls, user, title="", contents="", public=False, tags=[]):
@@ -45,9 +44,26 @@ class Note(RethinkModel):
                           contents=contents,
                           public=public,
                           tags=tags,
-                          short_code=code)
+                          short_code=code,
+                          disable=False)
 
         return what
+
+    def copy(self):
+        time = arrow.utcnow()
+        created = time.timestamp
+
+        code_good = False
+        code = ""
+        while not code_good:
+            code = sc.rand_short_code()
+            f = r.table(self.table).filter({"short_code": code}).count().run()
+            if f == 0:
+                code_good = True
+
+        self.copy = self._data.pop("id")
+        self.short_code = code
+        self.created = created
 
     def format_time_spec(self, time_format):
         if not hasattr(self, "_formated_created_spec"):

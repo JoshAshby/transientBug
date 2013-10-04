@@ -24,7 +24,6 @@ import utils.files as fu
 
 class Phot(RethinkModel):
     table = "phots"
-    _protectedItems = []
 
     @classmethod
     def download_phot(cls, user, url, title, tags=[]):

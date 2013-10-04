@@ -22,7 +22,7 @@ import rethinkdb as r
 
 class User(RethinkModel):
     table = "users"
-    _protectedItems = ["formated_about", "formated_created"]
+    _protected_items = ["formated_about", "formated_created"]
 
     @classmethod
     def new_user(cls, username, password):

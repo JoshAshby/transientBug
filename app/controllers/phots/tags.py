@@ -36,6 +36,8 @@ class tags(HTMLObject):
 
         if not query and tag: query = tag
 
+        query = query.replace("_", " ")
+
         hidden_ids = list(r.table(pm.Phot.table).filter(r.row["disable"].eq(True)).concat_map(lambda doc: [doc["id"]]).run())
 
         if query:
