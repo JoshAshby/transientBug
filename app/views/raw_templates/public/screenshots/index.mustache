@@ -26,7 +26,7 @@ nav:
   </form>
 </div>
 <br>
-{{#pictures}}
+{{#page.pail}}
   <div class="row">
     <div class="col-sm-12 col-md-12">
       <div class="thumbnail">
@@ -37,7 +37,7 @@ nav:
               <a href="/scrn/{{{.}}}"><h6>{{{.}}}</h6></a>
             </div>
             <div class="col-sm-12 col-md-6">
-              <button type="button" class="btn btn-danger btn-sm pull-right" id="del_btn" data-img={{{.}}}>Delete</button>
+              <button type="button" class="btn btn-danger btn-sm pull-right del_btn" data-img={{{.}}}>Delete</button>
             </div>
           </div>
         </div>
@@ -45,6 +45,6 @@ nav:
     </div>
   </div>
   <br>
-{{/pictures}}
+{{/page.pail}}
 
-{{{page.pager}}}
+{{{page.paginate}}}

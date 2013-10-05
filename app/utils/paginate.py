@@ -23,7 +23,7 @@ from views.template import PartialTemplate
 
 
 class Paginate(StandardConfig):
-    def __init__(self, pail, request, sort="", perpage_default=24):
+    def __init__(self, pail, request, sort="", perpage_default=24, sort_direction=""):
         """
         Now: PAGINATE ALL THE THINGS.
 
@@ -49,7 +49,7 @@ class Paginate(StandardConfig):
             "offset": 6,
             "perpage": request.getParam("perpage", perpage_default),
             "page": request.getParam("page", 0, int),
-            "sort_direction": request.getParam("dir", "desc"),
+            "sort_direction": request.getParam("dir", "desc") if not sort_direction else sort_direction,
             "sort": sort
         }
 

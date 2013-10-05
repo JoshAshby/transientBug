@@ -41,7 +41,7 @@ class user(HTMLObject):
 
             parts = r.table(nm.Note.table).filter({"public": True, "user": user_id})
             result = RethinkCollection(nm.Note, query=parts)
-            page = Paginate(result, self.request, "created")
+            page = Paginate(result, self.request, "created", sort_direction="asc")
 
             if page.pail:
                 self.view.data = {"page": page, "user": user}

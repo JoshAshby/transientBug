@@ -1,7 +1,5 @@
 #!/usr/bin/env python
 """
-main index listing for gifs - reroutes to login if you're not logged in
-
 For more information, see: https://github.com/JoshAshby/
 
 http://xkcd.com/353/
@@ -13,7 +11,7 @@ joshuaashby@joshashby.com
 """
 import os
 import config.config as c
-import gevent
+import arrow
 
 from seshat.route import autoRoute
 from seshat.baseObject import HTMLObject
@@ -27,9 +25,6 @@ import utils.files as fu
 @login(["root"])
 @autoRoute()
 class index(HTMLObject):
-    """
-    Returns base index page listing all screenshots
-    """
     _title = "screenshots"
     _defaultTmpl = "public/screenshots/index"
     def GET(self):
@@ -43,22 +38,22 @@ class index(HTMLObject):
             f.extend(files)
             break
 
-        page = Paginate(f, self.request)
-        f = page.pail
+        page = Paginate(f, self.request, sort_direction="asc")
 
-        self.view.data = {"pictures": f, "page": page}
+        self.view.data = {"page": page}
         return self.view
 
     def POST(self):
         scrn = self.request.getFile("file")
 
         if scrn:
-            path = ''.join([c.general.dirs["screenshots"], scrn.filename])
+            date = str(arrow.utcnow().timestamp) + "_"
+
+            path = ''.join([c.general.dirs["screenshots"], date, scrn.filename])
             try:
                 fu.write_file(scrn, path)
-                self.request.session.pushAlert("Screenshot is being uploaded...", level="success")
+                self.request.session.pushAlert("Screenshot uploaded...", level="success")
             except IOError as e:
-                self.request.session.pushAlert("There was a problem executing \
-                    that: {}".format(str(e)), level="error")
+                self.request.session.pushAlert("There was a problem executing that: {}".format(str(e)), level="error")
 
         return Redirect("/screenshots")

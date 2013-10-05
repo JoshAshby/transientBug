@@ -74,7 +74,7 @@ class tags(HTMLObject):
             parts = parts.filter(r.row["tags"].filter(lambda t: t == tag ).count() > 0)
 
             result = RethinkCollection(nm.Note, query=parts)
-            page = Paginate(result, self.request, "created")
+            page = Paginate(result, self.request, "created", sort_direction="asc")
 
             if page.pail:
                 self.view.data = {"page": page,

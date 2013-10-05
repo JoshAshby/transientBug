@@ -45,7 +45,7 @@ class index(HTMLObject):
             parts = parts.filter({"public": True})
 
         result = RethinkCollection(nm.Note, query=parts)
-        page = Paginate(result, self.request, "created")
+        page = Paginate(result, self.request, "created", sort_direction="asc")
 
         if page.pail:
             data = {"page": page, "type": what_type.lower()}

@@ -1,5 +1,5 @@
 $(function() {
-  $("#del_btn").click(function(){
+  $(".del_btn").click(function(){
     var yesno = confirm("Are you sure you want to delete this screenshot?");
 
     if(yesno) {
