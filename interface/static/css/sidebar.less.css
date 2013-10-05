@@ -61,9 +61,6 @@ body {
   color: #fff;
   background: none;
 }
-.sidebar-nav > small {
-  text-indent: 20px;
-}
 .content-header {
   line-height: 65px;
   padding: 5px;

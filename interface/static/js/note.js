@@ -27,8 +27,13 @@ $(function() {
   });
 
   $("#menu-toggle").click(function(e) {
-      e.preventDefault();
-      $("#wrapper").toggleClass("active");
+    e.preventDefault();
+    $("#wrapper").toggleClass("active");
+  });
+
+  $(".sidebar-nav").find('a[href="#"]').click(function(e) {
+    e.preventDefault();
+    $("#wrapper").toggleClass("active");
   });
 
   var editor = new EpicEditor({

@@ -31,18 +31,38 @@ styles: "@import url(http://fonts.googleapis.com/css?family=Maven+Pro:700);
         <div class="col-lg-12 text-center v-center">
           <h1>Hello There</h1>
           <p class="lead">transientBug.com requires you to be logged in... <a href="#about">What is transientBug?</a></p>
+          <p>You can also visit the <a href="/notes">blog</a> or view the <a href="/phots">gif/image collection</a></p>
           <br><br>
           {{^banError}}
           <form class="col-md-4 col-md-offset-4" action="/login" method="POST">
-            <input type="text" class="form-control input-lg" placeholder="Username..." name="username" id="username" required autofocus data-content="The username you provided could not be found, are you sure it's correct?" data-title="Oh no!" value="{{username}}"><br>
-            <input type="password" class="form-control input-lg" placeholder="Password..." name="password" id="password" required data-content="The password you supplied did not match the one for this account. Are you sure you typed it in correctly?" data-title="Uh oh...">
-            <hr>
-            <button class="btn btn-lg btn-success btn-block" type="submit">Login</button>
+            {{^usernameError}}
+              <div class="form-group">
+                <input type="text" class="form-control input-lg" placeholder="Username..." name="username" id="username" required autofocus value="{{username}}">
+              </div>
+            {{/usernameError}}
+            {{#usernameError}}
+              <div class="form-group has-error">
+                <input type="text" class="form-control input-lg " placeholder="Username..." name="username" id="username" required autofocus value="{{username}}">
+                <span class="help-block">We couldn't find this username in our system. Are you sure you typed it in correctly?</span>
+              </div>
+            {{/usernameError}}
+            {{^passwordError}}
+              <div class="form-group">
+                <input type="password" class="form-control input-lg" placeholder="Password..." name="password" id="password" required>
+              </div>
+            {{/passwordError}}
+            {{#passwordError}}
+              <div class="form-group has-error">
+                <input type="password" class="form-control input-lg" placeholder="Password..." name="password" id="password" required>
+                <span class="help-block">This password doesn't match up with the username! Are you sure it's typed in correctly?</span>
+              </div>
+            {{/passwordError}}
+            <button class="btn btn-lg btn-theme btn-block" type="submit">Login</button>
           </form>
           {{/banError}}
           {{#banError}}
           <h2>We have a problem <i class="icon-meh"></i></h2>
-          <p>You're account is currently disabled. Please wait to be contacted by transientBug.com via email before trying to log in again.</p>
+          <p>Your account is currently disabled. Please wait to be contacted by transientBug staff via email before trying to log in again.</p>
           {{/banError}}
         </div>
       </div> <!-- /row -->

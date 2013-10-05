@@ -25,5 +25,4 @@ class index(HTMLObject):
     _title = "home"
     _defaultTmpl = "public/index/index"
     def GET(self):
-        self.view.update({"header": "Coming soon!"})
         return self.view
