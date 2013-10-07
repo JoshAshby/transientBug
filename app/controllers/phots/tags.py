@@ -34,12 +34,14 @@ class tags(HTMLObject):
         hidden_ids = list(r.table(pm.Phot.table)\
             .filter(r.row["disable"].eq(True))\
             .concat_map(lambda doc: [doc["id"]]).run())
+
         base_query = r.table(pm.Phot.table)\
             .filter(lambda doc: ~r.expr(hidden_ids).contains(doc["id"]))\
             .filter(lambda doc: doc["filename"].match(filt))
 
         all_tags = base_query\
             .concat_map(lambda doc: doc["tags"])\
+            .distinct()\
             .coerce_to('array').run()
 
         if query:
@@ -67,8 +69,6 @@ class tags(HTMLObject):
             if not all_tags:
                 self.view.template = "public/gifs/errors/no_tags"
                 return self.view
-
-            all_tags.sort()
 
             self.view.template = "public/common/tags"
             self.view.data = {"tags": all_tags,

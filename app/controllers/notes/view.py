@@ -28,7 +28,9 @@ class view(HTMLObject):
         """
         note = self.request.id
 
-        f = list(r.table(nm.Note.table).filter({"short_code": note}).filter({"disable": False}).run())
+        f = r.table(nm.Note.table)\
+            .filter({"short_code": note, "disable": False})\
+            .coerce_to('array').run()
 
         if f:
             f = f[0]
@@ -49,7 +51,9 @@ class view(HTMLObject):
                 else:
                     title = """<i class="icon-eye-close"></i> """
 
-            title += note.title
+                title += note.title
+            else:
+                title = note.title
 
             self.view.data = {"note": note, "header": title}
             return self.view

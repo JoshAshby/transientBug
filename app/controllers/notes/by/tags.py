@@ -20,7 +20,7 @@ import rethinkdb as r
 from rethinkORM import RethinkCollection
 import models.rethink.note.noteModel as nm
 
-from fuzzywuzzy import fuzz
+import models.utils.dbUtils as dbu
 
 
 @autoRoute()
@@ -32,12 +32,8 @@ class tags(HTMLObject):
     def GET(self):
         """
         """
-        tag = self.request.id
-        query = self.request.getParam("q")
-
-        if not query and tag: query = tag
-
-        query = query.replace("_", " ")
+        tag = self.request.id or self.request.getParam("q")
+        query = tag.replace("_", " ")
 
         parts = r.table(nm.Note.table).filter({"disable": False})
 
@@ -52,49 +48,47 @@ class tags(HTMLObject):
         else:
             parts = parts.filter({"public": True})
 
-        tags = list(parts.concat_map(lambda doc: doc["tags"]).run())
+        all_tags = parts.concat_map(lambda doc: doc["tags"])\
+            .distinct()\
+            .coerce_to('array').run()
+
+        all_tags.sort()
 
         if query:
-            new_tags = {}
-            for t in tags:
-                match = fuzz.partial_ratio(query, t.replace("_", " "))
-                if match >= 85:
-                    new_tags[t] = match
-
-            tags = new_tags.copy().keys()
             try:
-                tag = max(new_tags, key=new_tags.get)
-            except ValueError:
+                similar, top = dbu.search_tags(all_tags, query)
+            except Exception:
                 self.view.template = "public/notes/errors/no_matching_tags"
                 self.view.data = {"tag": query}
                 return self.view
 
-            self.view.data = {"q": query}
-
-            parts = parts.filter(r.row["tags"].filter(lambda t: t == tag ).count() > 0)
-
+            parts = parts.filter(r.row["tags"]\
+                .filter(lambda t: t == top ).count() > 0)
             result = RethinkCollection(nm.Note, query=parts)
             page = Paginate(result, self.request, "created", sort_direction="asc")
 
             if page.pail:
                 self.view.data = {"page": page,
                                   "type": what_type.lower(),
-                                  "tags": tags,
-                                  "tag": tag,}
+                                  "tags": similar,
+                                  "tag": top,
+                                  "q": query}
                 return self.view
 
             else:
                 self.view.template = "public/notes/errors/empty_tag"
-                self.view.data = {"error": "There are not any notes with the tag: %s!" % tag}
+                self.view.data = {"tag": top}
                 return self.view
 
         else:
-            if not tags:
+            if not all_tags:
                 self.view.template = "public/notes/errors/tags"
                 return self.view
 
-            tags = list(set([ item.replace("_", " ") for item in tags ]))
-
             self.view.template = "public/common/tags"
-            self.view.data = {"tags": tags, "nav": {"notes": True}, "where": "notes/by", "theme_color": "red", "type": "Notes"}
+            self.view.data = {"tags": all_tags,
+                              "nav": {"notes": True},
+                              "where": "notes/by",
+                              "theme_color": "red",
+                              "type": "Notes"}
             return self.view
