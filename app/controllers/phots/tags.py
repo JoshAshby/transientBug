@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 """
-
 For more information, see: https://github.com/JoshAshby/
 
 http://xkcd.com/353/
@@ -15,10 +14,9 @@ from seshat.baseObject import HTMLObject
 from utils.paginate import Paginate
 
 import rethinkdb as r
+from rethinkORM import RethinkCollection
 import models.rethink.phot.photModel as pm
 import models.utils.dbUtils as dbu
-
-from fuzzywuzzy import fuzz
 
 
 @autoRoute()
@@ -26,80 +24,55 @@ class tags(HTMLObject):
     _title = "phots"
     _defaultTmpl = "public/gifs/index"
     def GET(self):
-        """
-        HOLY HELL WHAT A MESS
-        """
         orig = self.request.getParam("filter", "all")
         filt = dbu.phot_filter(orig)
-        tag = self.request.id
-        query = self.request.getParam("q")
+        tag = self.request.id or self.request.getParam("q")
+        view = self.request.getParam("v", 'cards').lower()
 
-        if not query and tag: query = tag
+        query = tag.replace("_", " ")
 
-        query = query.replace("_", " ")
+        hidden_ids = list(r.table(pm.Phot.table)\
+            .filter(r.row["disable"].eq(True))\
+            .concat_map(lambda doc: [doc["id"]]).run())
+        base_query = r.table(pm.Phot.table)\
+            .filter(lambda doc: ~r.expr(hidden_ids).contains(doc["id"]))\
+            .filter(lambda doc: doc["filename"].match(filt))
 
-        hidden_ids = list(r.table(pm.Phot.table).filter(r.row["disable"].eq(True)).concat_map(lambda doc: [doc["id"]]).run())
+        all_tags = base_query\
+            .concat_map(lambda doc: doc["tags"])\
+            .coerce_to('array').run()
 
         if query:
-            tags = list(r.table(pm.Phot.table).filter(lambda doc: doc["filename"].match(filt)).filter(lambda doc: ~r.expr(hidden_ids).contains(doc["id"])).concat_map(lambda doc: doc["tags"]).run())
-            new_tags = {}
-            for t in tags:
-                match = fuzz.partial_ratio(query, t.replace("_", " "))
-                if match >= 85:
-                    new_tags[t] = match
-
-            tags = new_tags.copy().keys()
-            if not tag:
-                try:
-                    tag = max(new_tags, key=new_tags.get)
-                except ValueError:
-                    self.view.template = "public/gifs/error"
-                    self.view.data = {"error": "I couldn't find any matching tags!"}
-                    return self.view
-
-            self.view.data = {"q": query}
-
-            orig = self.request.getParam("filter", "all")
-            filt = dbu.phot_filter(orig)
-            view = self.request.getParam("v", 'cards').lower()
-
-            query = r.table(pm.Phot.table).filter(lambda doc: ~r.expr(hidden_ids).contains(doc["id"])).filter(lambda doc: doc["filename"].match(filt))
-
-            query = query.filter(r.row["tags"].filter(lambda t: t == tag ).count() > 0)
-
-            page = Paginate(query, self.request, "title")
-            f = page.pail
-
-            if f:
-                new_f = []
-                for bit in f:
-                    phot = pm.Phot(**bit)
-                    phot.format()
-                    new_f.append(phot)
-                f = new_f
-            else:
-                f = []
-
-            self.view.data = {"pictures": f,
-                              "tags": tags,
-                              "tag": tag,
-                              "pager": page,
-                              "filter": orig,
-                              "v": view}
-            return self.view
-
-
-        else:
-            tags = list(r.table(pm.Phot.table).filter(lambda doc: ~r.expr(hidden_ids).contains(doc["id"])).filter(lambda doc: doc["filename"].match(filt)).concat_map(lambda doc: doc["tags"]).run())
-
-            if not tags:
-                self.view.template = "public/gifs/error"
-                self.view.data = {"error": "We do not currently have any tags within the system!"}
+            try:
+                similar, top = dbu.search_tags(all_tags, query)
+            except Exception:
+                self.view.template = "public/gifs/errors/no_matching_tags"
+                self.view.data = {"tag": query}
                 return self.view
 
-            tags = list(set(tags))
-            tags.sort()
+            q = base_query.filter(r.row["tags"]\
+                .filter(lambda t: t == top ).count() > 0)
+            res = RethinkCollection(pm.Phot, query=q)
+            page = Paginate(res, self.request, "title")
+
+            self.view.data = {"tags": similar,
+                              "tag": top,
+                              "page": page,
+                              "filter": orig,
+                              "v": view,
+                              "q": query}
+            return self.view
+
+        else:
+            if not all_tags:
+                self.view.template = "public/gifs/errors/no_tags"
+                return self.view
+
+            all_tags.sort()
 
             self.view.template = "public/common/tags"
-            self.view.data = {"tags": tags, "nav": {"phots": True}, "type": "Phots", "where": "phots"}
+            self.view.data = {"tags": all_tags,
+                              "nav": {"phots": True},
+                              "type": "Phots",
+                              "where": "phots"}
             return self.view

@@ -11,6 +11,7 @@ joshuaashby@joshashby.com
 """
 from seshat.route import autoRoute
 from seshat.baseObject import HTMLObject
+from seshat.actions import NotFound
 
 import models.rethink.phot.photModel as pm
 import rethinkdb as r
@@ -36,12 +37,10 @@ class view(HTMLObject):
 
         if len(f):
             if "disable" in f[0] and f[0]["disable"]:
-                self.view.template = "public/gifs/error"
-                self.view.data = {"error": "That image seems to have been removed."}
+                self.view.template = "public/gifs/errors/removed"
                 return self.view
 
             photo = pm.Phot(**f[0])
-            photo.format()
 
             self.view.data = {"phot": photo}
 
@@ -50,6 +49,4 @@ class view(HTMLObject):
             return self.view
 
         else:
-            self.view.template = "public/gifs/error"
-            self.view.data = {"error": "That image could not be found. Sorry :/"}
-            return self.view
+            return NotFound()

@@ -16,6 +16,7 @@ from seshat.baseObject import HTMLObject
 from utils.paginate import Paginate
 
 import rethinkdb as r
+from rethinkORM import RethinkCollection
 import models.rethink.phot.photModel as pm
 import models.utils.dbUtils as dbu
 
@@ -36,24 +37,15 @@ class index(HTMLObject):
         hidden_ids = list(r.table(pm.Phot.table).filter(r.row["disable"].eq(True)).concat_map(lambda doc: [doc["id"]]).run())
 
         query = r.table(pm.Phot.table).filter(lambda doc: ~r.expr(hidden_ids).contains(doc["id"])).filter(lambda doc: doc["filename"].match(filt))
+        res = RethinkCollection(pm.Phot, query=query)
 
-        page = Paginate(query, self.request, "title")
-        f = page.pail
-
-        if f:
-            new_f = []
-            for bit in f:
-                phot = pm.Phot(**bit)
-                phot.format()
-                new_f.append(phot)
-
-            self.view.data = {"pictures": new_f,
-                              "filter": orig,
+        page = Paginate(res, self.request, "title")
+        if page.pail:
+            self.view.data = {"filter": orig,
                               "v": view,
-                              "pager": page}
+                              "page": page}
             return self.view
 
         else:
-            self.view.template = "public/gifs/error"
-            self.view.data = {"error": "We do not currently have any photos that fit what you're looking for."}
+            self.view.template = "public/gifs/errors/empty"
             return self.view

@@ -22,14 +22,14 @@ nav:
   <div class="col-sm-12 col-md-12">
     <div class="panel panel-success">
       <div class="panel-heading">
-        <h3 class="panel-title">{{phot.title}} <small>({{phot.filename}} from {{phot._formated_user}})</small></h3>
+        <h3 class="panel-title">{{phot.title}} <small>({{phot.filename}} from {{phot.formated_user}})</small></h3>
       </div>
       <div class="panel-body">
         <div style="text-align: center;">
           <img src="/i/{{{phot.filename}}}" alt="{{phot.filename}}" class="col-md-12">
         </div>
         <br>
-        Added to collection: {{phot._formated_created}} {{#phot.url}}from: {{phot.url}}{{/phot.url}}<br>
+        Added to collection: {{phot.formated_created}} {{#phot.url}}from: {{phot.url}}{{/phot.url}}<br>
         {{#phot.tags}}
           <a href="/phots/tags/{{.}}"><span class="label label-theme">{{.}}</span></a>
         {{/phot.tags}}
@@ -44,7 +44,7 @@ nav:
             <p class="help-block">All spaces in this name will be replaced with underscores.</p>
           </div>
           <div class="form-group">
-            <input type="text" class="form-control" name="tags" placeholder="Tags..." value="{{phot._formated_tags}}">
+            <input type="text" class="form-control" name="tags" placeholder="Tags..." value="{{phot.formated_tags}}">
           </div>
           <button type="submit" class="btn btn-theme">Submit</button> <button type="button" class="btn btn-danger" id="del_btn" data-img={{{phot.filename}}}>Delete</button>
         </form>

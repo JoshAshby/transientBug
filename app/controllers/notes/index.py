@@ -41,6 +41,8 @@ class index(HTMLObject):
             elif what_type=="public":
                 parts = parts.filter({"public": True})
 
+            self.view.data = {"type": what_type.lower()}
+
         else:
             parts = parts.filter({"public": True})
 
@@ -48,7 +50,7 @@ class index(HTMLObject):
         page = Paginate(result, self.request, "created", sort_direction="asc")
 
         if page.pail:
-            data = {"page": page, "type": what_type.lower()}
+            data = {"page": page}
 
             self.view.data = data
 

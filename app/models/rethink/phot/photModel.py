@@ -102,17 +102,32 @@ class Phot(RethinkModel):
     def extension(self):
         return self.filename.rsplit(".", 1)[1]
 
-    def format(self, time_format="human"):
-        """
-        Formats markdown and dates into the right stuff
-        """
-        if time_format != "human":
-            self._formated_created = arrow.get(self.created).format(time_format)
-        else:
+    @property
+    def formated_created(self):
+        if not hasattr(self, "_formated_created"):
             self._formated_created = arrow.get(self.created).humanize()
 
-        self._formated_user = um.User(self.user).username
-        self._formated_tags = ', '.join(self.tags)
+        return self._formated_created
+
+    def formated_created_spec(self, time_format):
+        if not hasattr(self, "_formated_created_spec"):
+            self._formated_created_spec = arrow.get(self.created).format(time_format)
+
+        return self._formated_created_spec
+
+    @property
+    def formated_user(self):
+        if not hasattr(self, "_formated_user"):
+            self._formated_user = um.User(self.user).username
+
+        return self._formated_user
+
+    @property
+    def formated_tags(self):
+        if not hasattr(self, "_formated_tags"):
+            self._formated_tags = ', '.join(self.tags)
+
+        return self._formated_tags
 
 
 class ImportPhot(Phot):
