@@ -29,7 +29,7 @@
     {{#req.has_announcements}}
       <div class="container container-alert">
         <div class="row">
-          <div class="col-md-1 col-sm-1">
+          <div class="col-md-1 col-sm-1" style="text-align: center;">
             <i class="icon-exclamation icon-3x"></i>
           </div>
           <div class="col-md-10 col-sm-10">
@@ -67,16 +67,25 @@
               </ul>
               {{#req.session.userID}}
                 <ul class="nav navbar-nav navbar-right" style="margin-right: 15px">
-                  <li {{#nav.home}}class="active"{{/nav.home}} class="dropdown">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Ello, {{req.session.username}} <i class="icon-chevron-down"></i></a>
-                    <ul class="dropdown-menu">
-                      {{#req.session.has_root}}
-                        <li {{#nav.admin}}class="active"{{/nav.admin}}><a href="/admin"><i class="icon-meh"></i> Admin</a></li>
-                        <li class="divider"></li>
-                      {{/req.session.has_root}}
-                      <li><a href="/logout"><i class="icon-signout"></i> Logout</a></li>
-                    </ul>
-                  </li>
+                  <li class="active"><a href="#" id="nav_extra_menu_btn" data-html="true" data-content='
+<div class="list-group nav_list">
+  {{#req.session.username}}
+    <a href="/admin" class="list-group-item"><i class="icon-dashboard"></i> Admin</a>
+  {{/req.session.username}}
+  <a href="/logout" class="list-group-item"><i class="icon-signout"></i> Logout</a>
+</div>
+                    ' data-container="body" data-title="What to do..." data-placement="bottom">Ello, {{req.session.username}} <i class="icon-chevron-down"></i></a></li>
+
+                  <!--<li class="active" class="dropdown">-->
+                    <!--<a href="#" class="dropdown-toggle" data-toggle="dropdown">Ello, {{req.session.username}} <i class="icon-chevron-down"></i></a>-->
+                    <!--<ul class="dropdown-menu">-->
+                      <!--{{#req.session.has_root}}-->
+                        <!--<li {{#nav.admin}}class="active"{{/nav.admin}}><a href="/admin"><i class="icon-meh"></i> Admin</a></li>-->
+                        <!--<li class="divider"></li>-->
+                      <!--{{/req.session.has_root}}-->
+                      <!--<li><a href="/logout"><i class="icon-signout"></i> Logout</a></li>-->
+                    <!--</ul>-->
+                  <!--</li>-->
                 </ul>
               {{/req.session.userID}}
               {{^req.session.userID}}
@@ -134,12 +143,9 @@
     {{/scriptFiles}}
 
     <script>
-      {{^req.session.userID}}
-        $(function() {
-          $("#signin_btn").popover();
-          console.log("twat")
-        });
-      {{/req.session.userID}}
+      $(function() {
+        $("#nav_extra_menu_btn").popover();
+      });
 
       {{#scripts}}
         {{{scripts}}}
