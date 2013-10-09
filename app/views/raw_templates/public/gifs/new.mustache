@@ -4,50 +4,36 @@ nav:
 +++
 
 <div class="row">
-  <div class="col-sm-12 col-md-6">
-    <div class="thumbnail">
-      <div class="caption">
-        <form method="POST">
-          <fieldset>
-            <legend>The usual...</legend>
-            <div class="form-group">
-              <input type="url" class="form-control" id="url" name="url" placeholder="URL..." required>
-            </div>
-            <div class="form-group">
-              <input type="text" class="form-control" id="title" name="title" placeholder="Image Title..." required>
-              <span class="help-block"><small>All spaces will be replaced with underscores for the filename.</small></span>
-            </div>
-            <div class="form-group">
-              <input type="text" class="form-control" id="tags" name="tags" placeholder="Image Tags..." required>
-              <span class="help-block"><small>Tags are comma seperated single word.</small></span>
-            </div>
-            <hr>
-            <button class="btn btn-theme btn-block" type="submit">Add</button>
-          </fieldset>
-        </form>
-      </div>
-    </div>
-  </div>
-
-  <div class="col-sm-12 col-md-6">
+  <div class="col-sm-12 col-md-12">
     <div class="thumbnail">
       <div class="caption">
         <form method="POST" enctype="multipart/form-data">
           <fieldset>
-            <legend>Or upload...</legend>
-            <div class="form-group">
-              <input type="file" class="form-control" id="file" name="file" required>
+            <legend>The usual...</legend>
+            <div class="row">
+              <div class="col-md-5">
+                <div class="form-group">
+                  <input type="url" class="form-control" id="url" name="url" placeholder="URL...">
+                </div>
+              </div>
+              <div class="col-md-2">
+                <h2>Or...</h2>
+              </div>
+              <div class="col-md-5">
+                <div class="form-group">
+                  <input type="file" class="form-control" id="file" name="file">
+                </div>
+              </div>
             </div>
+
             <div class="form-group">
               <input type="text" class="form-control" id="title" name="title" placeholder="Image Title..." required>
-              <span class="help-block"><small>All spaces will be replaced with underscores for the filename.</small></span>
             </div>
             <div class="form-group">
-              <input type="text" class="form-control" id="tags" name="tags" placeholder="Image Tags..." required>
-              <span class="help-block"><small>Tags are comma seperated single word.</small></span>
+              <input type="text" id="pillbox" name="tags">
             </div>
             <hr>
-            <button class="btn btn-theme btn-block" type="submit">Upload</button>
+            <button class="btn btn-theme btn-block" type="submit">Add</button>
           </fieldset>
         </form>
       </div>

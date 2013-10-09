@@ -24,6 +24,8 @@ class new(HTMLObject):
     _title = "new phots"
     _defaultTmpl = "public/gifs/new"
     def GET(self):
+        self.view.scripts = ["pillbox", "phot", "lib/typeahead.min"]
+        self.view.stylesheets = ["pillbox"]
         return self.view.render()
 
     def POST(self):
