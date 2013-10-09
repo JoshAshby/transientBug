@@ -41,10 +41,9 @@ nav:
           <div class="form-group">
             <label for="name">Rename</label>
             <input type="text" class="form-control" id="name" name="name" value="{{phot.title}}" required>
-            <p class="help-block">All spaces in this name will be replaced with underscores.</p>
           </div>
           <div class="form-group">
-            <input type="text" class="form-control" name="tags" placeholder="Tags..." value="{{phot.formated_tags}}">
+            <input type="text" name="tags" id="pillbox" value="{{phot.formated_tags}}">
           </div>
           <button type="submit" class="btn btn-theme">Submit</button> <button type="button" class="btn btn-danger" id="del_btn" data-img={{{phot.filename}}}>Delete</button>
         </form>

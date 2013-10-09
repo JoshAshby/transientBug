@@ -18,7 +18,7 @@ for top, folders, files in os.walk(os.path.dirname(os.path.realpath(__file__))):
     if filename[0] not in ["~", "."]:
       name, extension = filename.split(".", 1)
 
-      if extension == "less" and name not in ["base", "colors", "flexbox", "lesshat"]:
+      if extension == "coffee" and name not in []:
          path = os.path.realpath(filename)
-         print "Compiling {filename} to {name}.css".format(name=name, filename=filename)
-         subprocess.call("lessc {path} > ../css/{name}.css".format(name=name, path=path), shell=True)
+         print "Compiling {filename} to {name}.js".format(name=name, filename=filename)
+         subprocess.call("coffee -c -o ../js/ {path}".format(name=name, path=path), shell=True)

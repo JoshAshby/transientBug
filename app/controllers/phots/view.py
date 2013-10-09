@@ -45,7 +45,9 @@ class view(HTMLObject):
             self.view.data = {"phot": photo}
 
             if self.request.session.has_phots:
-                self.view.scripts = ["phot_del"]
+                self.view.scripts = ["pillbox", "phot", "lib/typeahead.min"]
+                self.view.stylesheets = ["pillbox"]
+
             return self.view
 
         else:

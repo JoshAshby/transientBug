@@ -223,7 +223,15 @@ class template(object):
         template = tmpls[self._template]
         body = template.render(data)
 
+        #temp_data = template.config.copy()
+        #scriptFiles = temp_data.pop("scriptFiles")
+        #scripts = temp_data.pop("scripts")
+        #stylesheets = temp_data.pop("stylesheets")
+        #styles = temp_data.pop("styles")
+
         data.update(template.config.copy())
+
+        #data["scriptFiles"] = 
 
         if "base" in template:
             base = template["base"]

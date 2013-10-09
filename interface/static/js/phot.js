@@ -12,4 +12,14 @@ $(function() {
       });
     };
   });
+
+  $("#pillbox").pillbox();
+
+  var tags = $.ajax({url: "/phots/json/tags", async: false});
+
+  $('.pillbox input').typeahead({
+    name: 'phots_tags',
+    local: tags.responseJSON[0]["data"],
+    limit: 10
+  });
 });
