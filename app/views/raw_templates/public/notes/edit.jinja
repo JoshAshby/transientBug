@@ -4,10 +4,13 @@ theme_color: red
 
 scriptFiles:
   - lib/epiceditor.min
+  - lib/typeahead.min
+  - pillbox
   - note
 
 stylesheets:
   - sidebar
+  - pillbox
 +++
 
 <div id="wrapper">
@@ -50,8 +53,7 @@ stylesheets:
               </label>
             </div>
             <div class="form-group">
-              <input type="text" class="form-control" name="tags" placeholder="Tags..." value="{{ tags if tags }}"/>
-              <span class="help-block"><small>Tags can be comma separated.</small></span>
+              <input type="text" class="form-control" name="tags" id="tags" placeholder="Tags..." value="{{ tags if tags }}"/>
             </div>
 
             {% if note.short_code %}

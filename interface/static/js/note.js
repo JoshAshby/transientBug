@@ -70,4 +70,13 @@ $(function() {
     $("#title_header").html($("#title").val());
   };
 
+  $("#tags").pillbox();
+
+  var tags = $.ajax({url: "/notes/json/tags", async: false});
+
+  $('.pillbox input').typeahead({
+    name: 'notes_tags',
+    local: tags.responseJSON[0]["data"],
+    limit: 10
+  });
 });
