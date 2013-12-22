@@ -1,0 +1,28 @@
+<div class="row">
+  <div class="col-md-6 col-sm-12">
+    <form method="GET" class="form-inline">
+
+      <div class="input-group">
+        <input type="text" class="form-control input-sm" name="q" value="{{q}}" placeholder="Search...">
+        <span class="input-group-btn">
+          <button class="btn btn-theme btn-sm" type="submit"><i class="fa fa-search"></i></button>
+        </span>
+      </div>
+
+    </form>
+  </div>
+  <div class="col-md-6 col-sm-12">
+    {{^q}}
+      <h3 style="margin-top:0px;"><i class="fa fa-tags"></i> {{type}} Tags - All</h3>
+    {{/q}}
+    {{#q}}
+      <h3 style="margin-top:0px;"><i class="fa fa-tags"></i> {{type}} Tags - Search</h3>
+    {{/q}}
+  </div>
+</div>
+<br>
+<div class="tags">
+  {{#tags}}
+    <a href="/{{where}}/tags/{{.}}"><span class="label label-theme">{{.}}</span></a>
+  {{/tags}}
+</div>

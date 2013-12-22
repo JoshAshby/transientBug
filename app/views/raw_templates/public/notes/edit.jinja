@@ -16,14 +16,14 @@ stylesheets:
 <div id="wrapper">
   <div id="sidebar-wrapper">
     <ul class="sidebar-nav">
-      <li class="sidebar-brand"><a href="/"><i class="icon-bug"></i> transientBug</a></li>
-      <li><a href="/notes"><i class="icon-chevron-left"></i> Back to Notes</a></li>
-      <li><a href="#" data-toggle="edit"><i class="icon-edit"></i> Edit</a></li>
-      <li><a href="#" data-toggle="info"><i class="icon-info-sign"></i> Info</a></li>
+      <li class="sidebar-brand"><a href="/"><i class="fa fa-bug"></i> transientBug</a></li>
+      <li><a href="/notes"><i class="fa-chevron-left"></i> Back to Notes</a></li>
+      <li><a href="#" data-toggle="edit"><i class="fa fa-edit"></i> Edit</a></li>
+      <li><a href="#" data-toggle="info"><i class="fa fa-info-circle"></i> Info</a></li>
       <br><br><br><br>
       <small>Text can be formated with <a href="http://daringfireball.net/projects/markdown/syntax">Daring Fireball's Markdown</a>. Most HTML is escaped.</small>
       <br>
-      <li style="text-align: center; text-indent: -20px;"><button class="btn btn-theme" id="save_btn"><i class="icon-save"></i> Save!</button></li>
+      <li style="text-align: center; text-indent: -20px;"><button class="btn btn-theme" id="save_btn"><i class="fa fa-save"></i> Save!</button></li>
     </ul>
   </div>
 
@@ -31,7 +31,7 @@ stylesheets:
     <div class="content-header">
       <div class="row">
         <div class="col-md-1 col-xs-2 hidden-md">
-          <h1><a id="menu-toggle" href="#" class="btn btn-default"><i class="icon-reorder"></i></a></h1>
+          <h1><a id="menu-toggle" href="#" class="btn btn-default"><i class="fa fa-reorder"></i></a></h1>
         </div>
         <div class="col-md-11 col-xs-10">
           <h1 id="title_header">{{ 'Untitled...' if not note.title else note.title }}</h1>
@@ -57,7 +57,7 @@ stylesheets:
             </div>
 
             {% if note.short_code %}
-              <button type="button" class="btn btn-sm btn-danger pull-right" id="del_btn" data-short={{note.short_code}}><i class="icon-trash"></i> Delete</button>
+              <button type="button" class="btn btn-sm btn-danger pull-right" id="del_btn" data-short={{note.short_code}}><i class="fa fa-trash-o"></i> Delete</button>
             {% endif %}
 
           </fieldset>

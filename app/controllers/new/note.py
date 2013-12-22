@@ -39,7 +39,7 @@ class note(MixedObject):
             tag = []
 
         try:
-            note = nm.Note.new_note(user=self.request.session.userID,
+            note = nm.Note.new_note(user=self.request.session.id,
                         title=title,
                         contents=contents,
                         public=public,

@@ -12,11 +12,11 @@ nav:
     </div>
   {% endif %}
   <div class="col-sm-12 col-md-{{ '5' if req.session.has_notes else '6' }}">
-    <h4><a href="/notes"><i class="icon-file-text"></i> Notes</a></h4>
+    <h4><a href="/notes"><i class="fa fa-file-text"></i> Notes</a></h4>
   </div>
   <div class="col-sm-12 col-md-6">
     <form class="form-inline pull-right" role="pagination_options">
-      {% if req.session.userID %}
+      {% if req.session.id %}
         <div class="form-group">
           <label class="sr-only" for="filter">Filter</label>
           <select name="filter" class="input-sm form-control">
@@ -37,16 +37,16 @@ nav:
   <div class="row">
     <div class="col-md-12">
       <h2>
-        {% if req.session.userID==note.user %}
+        {% if req.session.id==note.user %}
           {% if note.public %}
-            <i class="icon-eye-open"></i>
+            <i class="fa fa-eye-open"></i>
           {% else %}
-            <i class="icon-eye-close"></i>
+            <i class="fa fa-eye-close"></i>
           {% endif %}
         {% endif %}
         <a href="/notes/view/{{note.short_code}}">{{note.title}}</a><br>
         <small>
-          {% if req.session.userID==note.user %}
+          {% if req.session.id==note.user %}
             Yours! <a href="/notes/edit/{{note.short_code}}">(Edit)</a>
           {% else %}
             By <a href="/notes/by/user/{{note.formated_author}}">{{note.formated_author}}</a>

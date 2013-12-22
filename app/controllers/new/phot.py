@@ -41,12 +41,12 @@ class phot(MixedObject):
             tag = []
 
         if url:
-            phot = pm.Phot.download_phot(self.request.session.userID,
+            phot = pm.Phot.download_phot(self.request.session.id,
                                          url=url,
                                          title=title,
                                          tags=tag)
         elif files:
-            phot = pm.Phot.upload_phot(self.request.session.userID,
+            phot = pm.Phot.upload_phot(self.request.session.id,
                                        file_obj=files,
                                        title=title,
                                        tags=tag)

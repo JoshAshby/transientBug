@@ -29,19 +29,19 @@ class view(MixedObject):
         if f:
             note = nm.Note(**f[0])
 
-            if not note.public and (not self.request.session.userID \
-                      or self.request.session.userID!=note.user):
+            if not note.public and (not self.request.session.id \
+                      or self.request.session.id!=note.user):
                     self.request.session.push_alert("That note is not public and you do not have the rights to access it.", level="error")
                     return Unauthorized()
 
             if self.request.session.has_notes:
                 self.view.scripts = ["note"]
 
-            if self.request.session.userID:
+            if self.request.session.id:
                 if note.public:
-                    title = """<i class="icon-eye-open"></i> """
+                    title = """<i class="fa fa-eye"></i> """
                 else:
-                    title = """<i class="icon-eye-close"></i> """
+                    title = """<i class="fa fa-eye-slash"></i> """
 
                 title += note.title
             else:

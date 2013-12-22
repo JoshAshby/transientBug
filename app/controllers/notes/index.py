@@ -29,7 +29,7 @@ class index(MixedObject):
     def GET(self):
         parts = r.table(nm.Note.table).filter({"disable": False})
 
-        if self.request.session.userID:
+        if self.request.session.id:
             what_type = self.request.getParam("filter", "all")
 
             if what_type=="private":

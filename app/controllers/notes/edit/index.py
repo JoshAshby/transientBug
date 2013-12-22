@@ -53,7 +53,7 @@ class index(MixedObject):
         if f:
             note = nm.Note(**f[0])
 
-            if note.user != self.request.session.userID:
+            if note.user != self.request.session.id:
                 note.copy()
 
             note.title = title
