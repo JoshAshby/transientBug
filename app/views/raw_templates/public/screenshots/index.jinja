@@ -1,0 +1,49 @@
++++
+base: skeletons/header
+theme_color: blue
+nav: screenshots
++++
+
+<br>
+<div class="row">
+  <div class="col-sm-12 col-md-6">
+    <h4><i class="icon-screenshot"></i> Screenshots</h4>
+  </div>
+  <div class="col-sm-12 col-md-6">
+    <form class="form-inline pull-right" role="pagination_options">
+      {{page.options}}
+    </form>
+  </div>
+</div>
+<br>
+<div class="row">
+  <form method="POST"  enctype="multipart/form-data" class="form-inline">
+    <div class="form-group col-md-6">
+      <input type="file" name="file" class="form-control" />
+    </div>
+    <button type="submit" class="btn btn-theme">Upload</button>
+  </form>
+</div>
+<br>
+{% for img in page.pail %}
+  <div class="row">
+    <div class="col-sm-12 col-md-12">
+      <div class="thumbnail">
+        <a href="/scrn/{{img}}" class="thumbnail"><img src="/scrn/{{img}}" alt="{{img}}"></a>
+        <div class="caption">
+          <div class="row">
+            <div class="col-sm-12 col-md-6">
+              <a href="/scrn/{{img}}"><h6>{{img}}</h6></a>
+            </div>
+            <div class="col-sm-12 col-md-6">
+              <button type="button" class="btn btn-danger btn-sm pull-right del_btn" data-img={{img}}>Delete</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br>
+{% endfor %}
+
+{{page.paginate}}

@@ -10,37 +10,31 @@ http://joshashby.com
 joshuaashby@joshashby.com
 """
 from seshat.route import autoRoute
-from seshat.baseObject import HTMLObject
-from seshat.actions import Redirect, NotFound
+from seshat.MixedObject import MixedObject
+from seshat.actions import NotFound, Unauthorized
 
 import rethinkdb as r
 import models.rethink.note.noteModel as nm
 
 
 @autoRoute()
-class view(HTMLObject):
-    """
-    """
+class view(MixedObject):
     _title = "note"
-    _defaultTmpl = "public/notes/view"
+    _default_tmpl = "public/notes/view"
     def GET(self):
         """
         """
-        note = self.request.id
-
         f = r.table(nm.Note.table)\
-            .filter({"short_code": note, "disable": False})\
+            .filter({"short_code": self.request.id, "disable": False})\
             .coerce_to('array').run()
 
         if f:
-            f = f[0]
-
-            note = nm.Note(**f)
+            note = nm.Note(**f[0])
 
             if not note.public and (not self.request.session.userID \
                       or self.request.session.userID!=note.user):
                     self.request.session.pushAlert("That note is not public and you do not have the rights to access it.", level="error")
-                    return Redirect("/notes")
+                    return Unauthorized()
 
             if self.request.session.has_notes:
                 self.view.scripts = ["note"]
@@ -57,6 +51,7 @@ class view(HTMLObject):
 
             self.view.data = {"note": note, "header": title}
             return self.view
+
         else:
             self.request.session.pushAlert("That note could not be found!", level="error")
             return NotFound()

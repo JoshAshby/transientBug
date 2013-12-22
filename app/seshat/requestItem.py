@@ -13,10 +13,8 @@ Josh Ashby
 http://joshashby.com
 joshuaashby@joshashby.com
 """
-import config.config as c
-
 import logging
-logger = logging.getLogger(c.general["logName"]+".seshat.request")
+logger = logging.getLogger("seshat.request")
 
 import Cookie
 import uuid
@@ -39,7 +37,7 @@ class FileObject(object):
         self.file = file_obj.file
 
         self.extension = ""
-        parts = self.filename.rsplit(".", 1)
+        parts = self.filename.split(".", 1)
         if len(parts) > 1:
             self.extension = parts[1]
 
@@ -88,21 +86,36 @@ class requestItem(object):
         self.user_agent = env["HTTP_USER_AGENT"] if "HTTP_USER_AGENT" in env else "Unknown User Agent"
         self.referer = env["HTTP_REFERER"] if "HTTP_REFERER" in env else "No Referer"
 
+        self.pre_id_url = None
         self.id = None
+        self.command = None
+
+    def post_route(self, extended):
+        if extended:
+            parts = extended.split('/', 1)
+            self.id = parts[0]
+            if len(parts) > 1:
+                self.command = parts[1]
+            else:
+                self.command = None
+
+        if self.id:
+            self.pre_id_url = self.url.path.split(self.id)[0].strip("/").split("/")
+        else:
+            self.pre_id_url = self.url.path.strip("/").split("/")
 
     def buildParams(self):
         all_mem = {}
         all_raw = {}
         all_files = {}
 
-        #temp_file = cStringIO.StringIO()
         temp_file = tempfile.TemporaryFile()
         temp_file.write(self._env['wsgi.input'].read()) # or use buffered read()
         temp_file.seek(0)
         form = cgi.FieldStorage(fp=temp_file, environ=self._env, keep_blank_values=True)
 
         for bit in form:
-            if form[bit].filename is not None:
+            if hasattr(form[bit], "filename") and form[bit].filename is not None:
                 fi = FileObject(form[bit])
                 all_files[fi.name] = fi
             else:
@@ -162,3 +175,10 @@ class requestItem(object):
     def getFile(self, name):
         if name in self.files and self.files[name].filename:
               return self.files[name]
+
+    @property
+    def id_extended(self):
+        if self.command is None:
+            return str(self.id)
+        else:
+            return "/".join([self.id, self.command])

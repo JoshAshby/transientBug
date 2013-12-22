@@ -22,7 +22,7 @@ class RouteTable(object):
     def append(self, url):
         self._data[url.url] = url
 
-    def get(self, parsed_url):
+    def get(self, request):
         """
         Attempts to find the closest match to the given url.
         Its messy but it gets the job done. mostly well. not sure on
@@ -31,15 +31,18 @@ class RouteTable(object):
 
         :parsed_url: urlparse.ParseResult
         """
+        parsed_url = request.url
         obj = None
         extended = ""
         base = None
         orig_path = parsed_url.path.rstrip("/")
         if not orig_path:
             base = "/"
+
         else:
             if orig_path in self._data:
                 base = orig_path
+
             else:
                 found = False
                 path = orig_path
@@ -49,14 +52,30 @@ class RouteTable(object):
                     if base in self._data:
                         found = True
                         extended = orig_path[len(base)+1:]
+
                     else:
                         path = path_parts[0]
                         if not path:
                             base = None
                             found = True
+
         if base is not None:
-            obj = self._data[base].pageObject
-        return obj, extended
+            request.post_route(extended)
+
+            name = base
+
+            if request.command:
+                tmp = "/".join([base, request.command])
+                if tmp in self._data:
+                    name = tmp
+            elif request.id:
+                tmp = "/".join([base, "view"])
+                if tmp in self._data:
+                    name = tmp
+
+            obj = self._data[name].pageObject
+
+        return obj
 
     def __repr__(self):
         routes = ""
@@ -70,57 +89,7 @@ class RouteTable(object):
             "id": id(self),
             "table": routes
           })
+
         return string
 
-#import urlparse
-
-#a = urlparse.urlparse("/")
-#b = urlparse.urlparse("/test/5")
-#c = urlparse.urlparse("/test/this/6/view")
-#d = urlparse.urlparse("/t")
-#e = urlparse.urlparse("/13ASG5A88AAG/view")
-#f = urlparse.urlparse("")
-
-#_data = {
-    #"/": 0,
-    #"/test": 1,
-    #"/test/this": 2,
-    #"/blah": 3
-    #}
-
-#def get(parsed_url):
-    #obj = None
-    #extended = ""
-    #base = None
-    #orig_path = parsed_url.path.rstrip("/")
-    #if not orig_path:
-        #base = "/"
-    #else:
-        #if orig_path in _data:
-            #base = orig_path
-        #else:
-            #found = False
-            #path = orig_path
-            #while not found:
-                #path_parts = path.rsplit("/", 1)
-                #base = path_parts[0]
-                #if base in _data:
-                    #found = True
-                    #extended = orig_path[len(base)+1:]
-                #else:
-                    #path = path_parts[0]
-                    #if not path:
-                        #base = None
-                        #found = True
-    #if base is not None:
-        #obj = _data[base]
-    #return obj, extended
-
-
-
-#get(a)
-#get(b)
-#get(c)
-#get(d)
-#get(e)
-#get(f)
+urls = RouteTable()

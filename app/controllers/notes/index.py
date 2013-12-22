@@ -12,7 +12,7 @@ http://joshashby.com
 joshuaashby@joshashby.com
 """
 from seshat.route import autoRoute
-from seshat.baseObject import HTMLObject
+from seshat.MixedObject import MixedObject
 from seshat.actions import Redirect
 
 from utils.paginate import Paginate
@@ -23,11 +23,9 @@ import models.rethink.note.noteModel as nm
 
 
 @autoRoute()
-class index(HTMLObject):
-    """
-    """
+class index(MixedObject):
     _title = "notes"
-    _defaultTmpl = "public/notes/index"
+    _default_tmpl = "public/notes/index"
     def GET(self):
         """
         """

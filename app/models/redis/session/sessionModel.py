@@ -15,7 +15,7 @@ joshuaashby@joshashby.com
 """
 import bcrypt
 import models.redis.baseRedisModel as brm
-import models.modelExceptions.sessionExceptions as use
+import errors.session as use
 import json
 
 import models.rethink.user.userModel as um
@@ -25,9 +25,9 @@ import rethinkdb as r
 class session(brm.SeshatRedisModel):
     _protected_items = []
     def _finish_init(self):
-        if not hasattr(self, "rawAlerts"): self.rawAlerts = "[]"
+        if not hasattr(self, "raw_alerts"): self.raw_alerts = "[]"
         if not hasattr(self, "username"): self.username = ""
-        if not hasattr(self, "userID"): self.userID = ""
+        if not hasattr(self, "id"): self.id = ""
         if not hasattr(self, "groups"): self.groups = []
         self._HTML_alerts = ""
 
@@ -55,13 +55,13 @@ class session(brm.SeshatRedisModel):
             foundUser = um.User(foundUser[0]["id"])
             if not foundUser.disable:
                 self.username = foundUser.username
-                self.userID = foundUser.id
+                self.id = foundUser.id
                 self.groups = foundUser.groups
                 return True
             else:
-                raise use.banError("Your user is currently disabled. \
+                raise use.DisableError("Your user is currently disabled. \
                         Please contact an admin for additional information.")
-        raise use.usernameError("We can't find your user, are you \
+        raise use.UsernameError("We can't find your user, are you \
                 sure you have the correct information?")
 
     def login(self, user, password):
@@ -85,16 +85,16 @@ class session(brm.SeshatRedisModel):
                 if foundUser.password == bcrypt.hashpw(password,
                         foundUser.password):
                     self.username = foundUser.username
-                    self.userID = foundUser.id
+                    self.id = foundUser.id
                     self.groups = foundUser.groups
                     return True
                 else:
-                    raise use.passwordError("Your password appears to \
+                    raise use.PasswordError("Your password appears to \
                             be wrong.")
             else:
-                raise use.banError("Your user is currently disabled. \
+                raise use.DisableError("Your user is currently disabled. \
                         Please contact an admin for additional information.")
-        raise use.usernameError("We can't find your user, are you \
+        raise use.UsernameError("We can't find your user, are you \
                 sure you have the correct information?")
 
     def logout(self):
@@ -103,11 +103,11 @@ class session(brm.SeshatRedisModel):
         session and their `userORM`
         """
         self.username = ""
-        self.userID = ""
+        self.id = ""
         self.groups.reset()
         return True
 
-    def pushAlert(self, message, quip="", level="success"):
+    def push_alert(self, message, quip="", level="success"):
         """
         Creates an alert message to be displayed or relayed to the user,
         This is a higher level one for use in HTML templates.
@@ -117,9 +117,9 @@ class session(brm.SeshatRedisModel):
         :param quip: Similar to a title, however just a quick attention getter
         :param level: Can be any of `success` `error` `info` `warning`
         """
-        alerts = json.loads(self.rawAlerts)
+        alerts = json.loads(self.raw_alerts)
         alerts.append({"msg": message, "level": level, "expire": "next", "quip": quip})
-        self.rawAlerts = json.dumps(alerts)
+        self.raw_alerts = json.dumps(alerts)
 
     @property
     def alerts(self, no_cache=False):
@@ -138,29 +138,29 @@ class session(brm.SeshatRedisModel):
         """
         Clears the current users expired alerts.
         """
-        alerts = json.loads(self.rawAlerts)
+        alerts = json.loads(self.raw_alerts)
         for alert in alerts:
             if alert["expire"] == "next":
                 alerts.pop(alerts.index(alert))
 
-        self.rawAlerts = json.dumps(alerts)
+        self.raw_alerts = json.dumps(alerts)
 
     def _render_alerts(self):
-        alerts = json.loads(self.rawAlerts)
+        alerts = json.loads(self.raw_alerts)
 
         alertStr = ""
         for alert in alerts:
             if alert["level"] == "info":
-                alert["icon"] = "info-sign"
+                alert["icon"] = "info"
             elif alert["level"] == "success":
                 alert["icon"] = "thumbs-up"
             elif alert["level"] == "warning":
-                alert["icon"] = "excalmation-mark"
+                alert["icon"] = "excalmation"
             elif alert["level"] == "error":
-                alert["icon"] = "warning-sign"
+                alert["icon"] = "warning"
                 alert["level"] = "danger"
 
-            alertStr += ("""<div class="alert alert-{level}"><i class="icon-{icon}"></i><strong>{quip}</strong> {msg}</div>""").format(**alert)
+            alertStr += ("""<div class="alert alert-{level}"><i class="fa fa-{icon}"></i><strong>{quip}</strong> {msg}</div>""").format(**alert)
 
         self._HTML_alerts = unicode(alertStr)
 

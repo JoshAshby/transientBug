@@ -10,22 +10,14 @@ http://joshashby.com
 joshuaashby@joshashby.com
 """
 from seshat.route import autoRoute
-from seshat.baseObject import HTMLObject
+from seshat.MixedObject import MixedObject
 from seshat.objectMods import login
 
 
 @login(["admin"])
 @autoRoute()
-class index(HTMLObject):
-    """
-    Returns base index page.
-    """
+class index(MixedObject):
     _title = "Admin Home"
-    _defaultTmpl = "admin/index/index"
+    _default_tmpl = "admin/index/index"
     def GET(self):
-        """
-        Nothing much, just get the cheetah template for index and return it
-        so Seshat can get cheetah to render it and then return it to the browser
-        """
-        #self.view.data = {"header": "Admin Panel"}
         return self.view

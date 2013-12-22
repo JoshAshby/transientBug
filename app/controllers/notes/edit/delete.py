@@ -10,7 +10,7 @@ http://joshashby.com
 joshuaashby@joshashby.com
 """
 from seshat.route import autoRoute
-from seshat.baseObject import JSONObject
+from seshat.MixedObject import MixedObject
 from seshat.objectMods import login
 
 import rethinkdb as r
@@ -19,27 +19,14 @@ import models.rethink.note.noteModel as nm
 
 @login(["notes"])
 @autoRoute()
-class delete(JSONObject):
-    """
-    allows for the deletion of an screenshot
-    """
+class delete(MixedObject):
     def POST(self):
-        note = self.request.id
+        f = r.table(nm.Note.table).filter({"short_code": self.request.id}).coerce_to("array").run()
 
-        f = r.table(nm.Note.table).filter({"short_code": note}).run()
-
-        f = list(f)
         if f:
-            f = f[0]
-
-            note = nm.Note(**f)
-
-            try:
-                note.disable = True
-
-                return {"success": True}
-            except Exception as e:
-                return {"success": False, "error": str(e)}
+            note = nm.Note(**f[0])
+            note.disable = True
+            return {"success": True}
 
         else:
             return {"success": False, "error": "That note couldn't be found. :/"}

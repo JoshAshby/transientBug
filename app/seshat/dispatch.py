@@ -13,16 +13,18 @@ Josh Ashby
 http://joshashby.com
 joshuaashby@joshashby.com
 """
-import config.config as c
+import routeTable as u
 
 import gevent
 
 import logging
-logger = logging.getLogger(c.general["logName"]+".seshat.dispatch")
+logger = logging.getLogger("seshat.dispatch")
 
 from seshat.requestItem import requestItem
-import controllers.error as error
 import traceback
+
+
+import controllers.error as error
 
 
 def dispatch(env, start_response):
@@ -45,14 +47,13 @@ def dispatch(env, start_response):
     request = requestItem(env)
     newHTTPObject = None
 
-    if c.general.debug: logRequest(request)
+    logRequest(request)
 
-    found, ID = c.urls.get(request.url)
+    found = u.urls.get(request)
     if found is not None:
-        request.id = ID
         obj = found.__module__+"/"+found.__name__
         newHTTPObject = found(request)
-        if c.general["debug"]: logObj(request, obj)
+        logObj(request, obj)
 
     else:
         return error404(request, start_response)
@@ -72,10 +73,13 @@ def dispatch(env, start_response):
         if status == "404 NOT FOUND":
             return error404(request, start_response)
 
+        if status == "401 UNAUTHORIZED":
+            return error401(request, start_response)
+
         if content:
             header = request.generateHeader(header, len(content))
 
-        if c.general["debug"]: gevent.spawn(logResponse, request, status, header)
+        logResponse(request, status, header)
 
         start_response(status, header)
 
@@ -96,7 +100,7 @@ def error404(request, start_response):
     Returns a base 404 not found error page
     """
     newHTTPObject = error.error404(request)
-    if c.general["debug"]: gevent.spawn(log404, request)
+    gevent.spawn(log404, request)
 
     dataThread = gevent.spawn(newHTTPObject.build)
     dataThread.join()
@@ -122,7 +126,31 @@ def error500(request, start_response):
     error logged to the default logger.
     """
     newHTTPObject = error.error500(request)
-    if c.general["debug"]: gevent.spawn(log500, request)
+    gevent.spawn(log500, request)
+
+    dataThread = gevent.spawn(newHTTPObject.build)
+    dataThread.join()
+
+    content, replyData = dataThread.get()
+
+    header = replyData[1]
+    status = replyData[0]
+
+    header = request.generateHeader(header, len(content))
+
+    start_response(status, header)
+
+    del newHTTPObject
+
+    return [str(content)]
+
+
+def error401(request, start_response):
+    """
+    Returns the base 401 Unauthorized page.
+    """
+    newHTTPObject = error.error401(request)
+    gevent.spawn(log401, request)
 
     dataThread = gevent.spawn(newHTTPObject.build)
     dataThread.join()
@@ -170,7 +198,7 @@ def logResponse(request, status, header):
 
 
 def log500(request):
-    logger.error("""\n\r-------500 INTERNAL SERVER ERROR --------
+    logger.error("""\n\r-------500 INTERNAL SERVER ERROR--------
     Method: %s
     URL: %s
     IP: %s
@@ -182,6 +210,15 @@ def log500(request):
 
 def log404(request):
     logger.warn("""\n\r-------404 NOT FOUND--------
+    Method: %s
+    URL: %s
+    IP: %s
+    UA: %s
+    R: %s
+    """ % (request.method, request.url.path, request.remote, request.user_agent, request.referer))
+
+def log401(request):
+    logger.error("""\n\r-------401 UNAUTHORIZED-------
     Method: %s
     URL: %s
     IP: %s

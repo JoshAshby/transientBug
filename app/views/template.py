@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 """
-TEMPLATE ALL THE THINGS WITH HANDLEBARS!!!!
-Uses the mustache templating language to make a base template object by which is
+TEMPLATE ALL THE THINGS WITH Jinja (And Mustache)!!!!
+Uses the Jinja templating language to make a base template object by which is
 easy to work with in the controllers, and a walker and templateFile objects
 which provide automatic reading and rereading in debug mode of template files.
 
@@ -26,8 +26,7 @@ logger = logging.getLogger(c.general["logName"]+".views")
 
 time_format = "dd MMM DD HH:mm:ss:SS YYYY"
 config_delim = "+++"
-
-tmplPath = os.path.dirname(__file__)+"/raw_templates/"
+default_theme_color = "green"
 
 tmpls = {}
 
@@ -39,7 +38,7 @@ class templateFile(object):
         object to that of the file at the current moment.
         """
         self._file_bit = fileBit
-        self._file = ''.join([tmplPath, fileBit])
+        self._file = ''.join([c.dirs.templates, fileBit])
         self._mtime = 0
 
         self._config = {}
@@ -53,7 +52,7 @@ class templateFile(object):
         mode. Otherwise this will just return the template stored in memory
         from first read/startup.
         """
-        if c.general["debug"]:
+        if c.debug:
             self._read_template()
 
         return self._template
@@ -82,7 +81,7 @@ class templateFile(object):
         mtime = os.path.getmtime(self._file)
 
         if self._mtime < mtime:
-            if c.general["debug"]:
+            if c.debug:
                 pt = arrow.get(self._mtime).format(time_format)
                 nt = arrow.get(mtime).format(time_format)
                 logger.debug("""\n\r============== Template =================
@@ -117,7 +116,23 @@ class templateFile(object):
 
     def render(self, data):
         _data = self._config.copy()
-        _data.update(data)
+
+        for bit in data:
+          if bit in _data:
+            ty = type(data[bit])
+            if ty is type(_data[bit]):
+              if ty is list:
+                _data[bit].extend(data[bit])
+              elif ty is dict:
+                _data[bit].update(data[bit])
+              elif ty is str:
+                _data[bit] += data[bit]
+              else:
+                _data[bit] = data[bit]
+            else:
+              logger.critical("Meh, miss matching data: {}, {} -> {}".format(bit, ty, type(_data[bit])) )
+          else:
+            _data[bit] = data[bit]
 
         if(self.is_jinja):
             return unicode(self.template.render(_data))
@@ -139,14 +154,17 @@ class template(object):
     def __init__(self, template, data=None):
         if data is None: data = {}
         self._baseData = {
+            "title": "",
             "req": data,
             "stylesheets": [],
             "scripts": "",
-            "scriptFiles": []
+            "scriptFiles": [],
+            "breadcrumbs": False,
+            "breadcrumbs_top": False,
         }
 
         self._template = template
-        self._base = "skeleton_navbar"
+        self._base = "skeletons/navbar"
 
     @property
     def template(self):
@@ -178,6 +196,14 @@ class template(object):
     def data(self, value):
         assert type(value) == dict
         self._baseData.update(value)
+
+    @property
+    def title(self):
+        return self._baseData["title"]
+
+    @title.setter
+    def title(self, value):
+        self._baseData.update({"title": value})
 
     def append(self, value):
         self.data = value
@@ -223,15 +249,7 @@ class template(object):
         template = tmpls[self._template]
         body = template.render(data)
 
-        #temp_data = template.config.copy()
-        #scriptFiles = temp_data.pop("scriptFiles")
-        #scripts = temp_data.pop("scripts")
-        #stylesheets = temp_data.pop("stylesheets")
-        #styles = temp_data.pop("styles")
-
         data.update(template.config.copy())
-
-        #data["scriptFiles"] = 
 
         if "base" in template:
             base = template["base"]
@@ -239,7 +257,7 @@ class template(object):
             base = self._base
 
         if not "theme_color" in template and not "theme_color" in data:
-            data["theme_color"] = "green"
+            data["theme_color"] = default_theme_color
 
         if base is not None and base:
             baseTmpl= tmpls[base]
@@ -249,9 +267,6 @@ class template(object):
 
         else:
             _render = body
-
-        self._baseData = {}
-        data = {}
 
         del data
         del self._baseData
@@ -272,9 +287,10 @@ class PartialTemplate(template):
 
         return unicode(body)
 
-for top, folders, files in os.walk(tmplPath):
+
+for top, folders, files in os.walk(c.dirs.templates):
     for fi in files:
-        base = top.split(tmplPath)[1]
+        base = top.split(c.dirs.templates)[1]
         file_name, extension = fi.rsplit('.', 1)
         if extension in ["mustache", "jinja"]:
             name = '/'.join([base, file_name]).lstrip('/')

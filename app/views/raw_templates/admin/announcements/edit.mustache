@@ -1,8 +1,8 @@
 +++
 theme_color: orange
 
-nav:
-  admin_annoucements: true
+nav: admin_annoucements
+breadcrumbs_top: True
 
 scriptFiles:
   - lib/bootstrap-datetimepicker.min
@@ -22,10 +22,6 @@ scripts: "
 +++
 
 <ol class="breadcrumb">
-  <li><a href="/admin">Admin</a></li>
-  <li><a href="/admin/announcements">Announcements</a></li>
-  <li class="active">Edit</li>
-
   <span class="pull-right">T'would be {{now}}</span>
 </ol>
 
@@ -40,14 +36,14 @@ scripts: "
               <div class="row">
                 <div class="col-md-6">
                   <div class='input-group date datetimepicker'>
-                    <span class="input-group-addon"><i class="icon-calendar"></i></span>
+                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                     <input type='text' class="form-control" name="start" placeholder="{{now}}" value="{{announcement._formated_start}}" />
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class='input-group date datetimepicker'>
                     <input type='text' class="form-control" name="end" placeholder="{{now}}" value="{{announcement._formated_end}}" />
-                    <span class="input-group-addon"><i class="icon-calendar"></i></span>
+                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                   </div>
                 </div>
               </div>

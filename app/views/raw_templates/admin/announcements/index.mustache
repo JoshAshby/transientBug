@@ -1,14 +1,18 @@
 +++
 theme_color: orange
 
-nav:
-  admin_annoucements: true
+nav: admin_annoucements
+breadcrumbs_top: True
+
+scriptFiles:
+  - lib/bootstrap-datetimepicker.min
+  - psh/admin/announcement
+
+stylesheets:
+  - lib/bootstrap-datetimepicker.min
 +++
 
 <ol class="breadcrumb">
-  <li><a href="/admin">Admin</a></li>
-  <li class="active">Announcements</li>
-
   <span class="pull-right">T'would be {{now}}</span>
 </ol>
 
@@ -30,7 +34,7 @@ nav:
   <div class="col-md-8 col-md-offset-2 col-sm-12">
     <div id="myTabContent" class="tab-content">
       <div class="tab-pane active" id="view">
-        {{#announcements}}
+        {{#page.pail}}
           <div class="row">
             <div class="col-md-9">
               <small class="muted">ID: {{id}}<br>
@@ -40,16 +44,16 @@ nav:
               <div class="btn-group pull-right">
                 {{#status}}
                   <a href="#" data-id="{{id}}" class="btn btn-theme btn-sm toggle_btn" data-toggle="tooltip" title="Enabled" data-placement="auto left">
-                    <i class="icon-ok"></i>
+                    <i class="fa fa-check"></i>
                   </a>
                 {{/status}}
                 {{^status}}
                   <a href="#" data-id="{{id}}" class="btn btn-default btn-sm toggle_btn" data-toggle="tooltip" title="Disabled" data-placement="auto left">
-                    <i class="icon-remove"></i>
+                    <i class="fa fa-times"></i>
                   </a>
                 {{/status}}
                 <a href="/admin/announcements/edit/{{id}}" class="btn btn-theme btn-sm">
-                  <i class="icon-edit"></i>
+                  <i class="fa fa-edit"></i>
                 </a>
               </div>
             </div>
@@ -72,7 +76,7 @@ nav:
             </div>
           </div>
           <hr>
-        {{/announcements}}
+        {{/page.pail}}
 
         {{{page.pager}}}
 
@@ -87,14 +91,14 @@ nav:
                   <div class="row">
                     <div class="col-md-6">
                       <div class='input-group date'>
-                        <span class="input-group-addon"><i class="icon-calendar"></i></span>
+                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                         <input type='text' class="form-control" name="start" placeholder="{{now}}" />
                       </div>
                     </div>
                     <div class="col-md-6">
                       <div class='input-group date'>
                         <input type='text' class="form-control" name="end" placeholder="{{now}}" />
-                        <span class="input-group-addon"><i class="icon-calendar"></i></span>
+                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                       </div>
                     </div>
                   </div>

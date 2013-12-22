@@ -9,47 +9,89 @@ Josh Ashby
 http://joshashby.com
 joshuaashby@joshashby.com
 """
+import os
+import config.config as c
 from seshat.route import autoRoute
-from seshat.baseObject import HTMLObject
-from seshat.actions import NotFound
+from seshat.MixedObject import MixedObject
+from seshat.actions import NotFound, Redirect, Unauthorized
 
 import models.rethink.phot.photModel as pm
 import rethinkdb as r
 
 
 @autoRoute()
-class view(HTMLObject):
+class view(MixedObject):
     _title = "phot"
-    _defaultTmpl = "public/gifs/view"
+    _default_tmpl = "public/gifs/view"
     def GET(self):
         phot = self.request.id
 
         # check if its a short code by looking for an extension
         # otherwise we assume it's a filename
         if len(phot.rsplit(".")) >= 1:
-              f = r.table(pm.Phot.table).filter({"short_code": phot}).run()
-              f = list(f)
-              if f:
-                  self._redirect("/phots/view/%s" % f[0]["filename"])
-                  return
+            f = r.table(pm.Phot.table).filter({"short_code": phot})\
+                .coerce_to("array").run()
+        else:
+            f = list(r.table(pm.Phot.table).filter({"filename": phot}).run())
 
-        f = list(r.table(pm.Phot.table).filter({"filename": phot}).run())
+        if not f:
+            return NotFound()
 
-        if len(f):
-            if "disable" in f[0] and f[0]["disable"] and \
-                    not self.request.session.has_phots:
-                self.view.template = "public/gifs/errors/removed"
-                return self.view
+        if "disable" in f[0] and f[0]["disable"] and \
+                not self.request.session.has_phots:
+            return NotFound()
 
+        photo = pm.Phot(**f[0])
+
+        self.view.data = {"phot": photo}
+
+        # TODO: CLEAN (WITH FIRE)
+        if self.request.session.has_phots:
+            self.view.scripts = ["pillbox",
+                                 "lib/typeahead.min",
+                                 "phot",
+                                 "admin/phot"]
+            self.view.stylesheets = ["pillbox"]
+
+        return self.view
+
+    def POST(self):
+        if not self.request.session.has_phots:
+            return Unauthorized()
+
+        new_name = self.request.getParam("name")
+        tags = self.request.getParam("tags")
+
+        if tags:
+            tag = [ bit.lstrip().rstrip().replace(" ", "_") for bit in tags.split(",") ]
+        else:
+            tag = []
+
+        f = list(r.table(pm.Phot.table).filter({"filename": self.request.id}).run())
+        if f:
             photo = pm.Phot(**f[0])
+            photo.tags = tag
 
-            self.view.data = {"phot": photo}
+            if new_name != photo.title:
+                new_name = new_name.replace(" ", "_")
 
-            if self.request.session.has_phots:
-                self.view.scripts = ["pillbox", "lib/typeahead.min", "phot", "admin/phot"]
-                self.view.stylesheets = ["pillbox"]
+                current_path = ''.join([c.dirs.gifs, self.request.id])
 
-            return self.view
+                extension = self.request.id.rsplit(".", 1)[1]
+                new_filename = ''.join([new_name, ".", extension])
+
+                photo.filename = new_filename
+                photo.title = self.request.getParam("name")
+
+                new_name_path = ''.join([c.dirs.gifs, new_filename])
+                os.rename(current_path, new_name_path)
+
+                loc = ''.join(["/phots/view/", new_name, ".", extension])
+                self._redirect(loc)
+
+            photo.save()
+
+            return Redirect("/phots/"+photo.short_code)
 
         else:
             return NotFound()

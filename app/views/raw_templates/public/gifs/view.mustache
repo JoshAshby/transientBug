@@ -10,7 +10,7 @@ nav:
     </div>
   {{/req.session.has_phots}}
   <div class="col-sm-12 col-md-3">
-    <h4><a href="/phots"><i class="icon-picture"></i> Phots</a>{{#tag}} - Tag: {{tag}}{{/tag}}</h4>
+    <h4><a href="/phots"><i class="fa fa-picture"></i> Phots</a>{{#tag}} - Tag: {{tag}}{{/tag}}</h4>
   </div>
   {{^req.session.has_phots}}
     <div class="col-sm-12 col-md-1"></div>
@@ -50,10 +50,10 @@ nav:
           <button type="submit" class="btn btn-theme">Submit</button>
 
           {{^phot.disable}}
-            <button class="btn btn-default toggle_btn pull-right" data-id="{{phot.id}}" data-title="Enable?"><i class="icon-remove"></i> Disabled</button>
+            <button class="btn btn-default toggle_btn pull-right" data-id="{{phot.id}}" data-title="Enable?"><i class="fa fa-times"></i> Disabled</button>
           {{/phot.disable}}
           {{#phot.disable}}
-            <button class="btn btn-theme toggle_btn pull-right" data-id="{{phot.id}}" data-title="Disable?"><i class="icon-ok"></i> Enabled</button>
+            <button class="btn btn-theme toggle_btn pull-right" data-id="{{phot.id}}" data-title="Disable?"><i class="fa fa-check"></i> Enabled</button>
           {{/phot.disable}}
         </form>
         {{/req.session.has_phots}}

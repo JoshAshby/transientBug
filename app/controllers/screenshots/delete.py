@@ -13,21 +13,19 @@ import os
 import config.config as c
 
 from seshat.route import autoRoute
-from seshat.baseObject import JSONObject
+from seshat.MixedObject import MixedObject
 from seshat.objectMods import login
+from seshat.actions import NotFound
 
 
 @login(["root"])
 @autoRoute()
-class delete(JSONObject):
-    """
-    allows for the deletion of an screenshot
-    """
+class delete(MixedObject):
     def POST(self):
-        current_path = ''.join([c.general.dirs["screenshots"], self.request.id])
+        current_path = ''.join([c.dirs.screenshots, self.request.id])
 
         f = []
-        for top, folders, files in os.walk(c.general.dirs["screenshots"]):
+        for top, folders, files in os.walk(c.dirs.screenshots):
             f.extend(files)
             break
 
@@ -38,4 +36,4 @@ class delete(JSONObject):
             return {"success": True}
 
         else:
-            raise Exception("That image could not be found.")
+            return NotFound()

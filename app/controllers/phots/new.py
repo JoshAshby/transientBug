@@ -11,7 +11,7 @@ http://joshashby.com
 joshuaashby@joshashby.com
 """
 from seshat.route import autoRoute
-from seshat.baseObject import HTMLObject
+from seshat.MixedObject import MixedObject
 from seshat.objectMods import login
 from seshat.actions import Redirect
 
@@ -20,10 +20,11 @@ import models.rethink.phot.photModel as pm
 
 @login(["phots"])
 @autoRoute()
-class new(HTMLObject):
+class new(MixedObject):
     _title = "new phots"
-    _defaultTmpl = "public/gifs/new"
+    _default_tmpl = "public/gifs/new"
     def GET(self):
+        # TODO: CLEAN WITH FIRE
         self.view.scripts = ["pillbox", "phot", "lib/typeahead.min"]
         self.view.stylesheets = ["pillbox"]
         return self.view.render()
@@ -50,5 +51,5 @@ class new(HTMLObject):
                                        title=title,
                                        tags=tag)
 
-        self.request.session.pushAlert("Image is being downloaded...")
+        self.request.session.push_alert("Image is being downloaded...")
         return Redirect("/phots/view/%s" % phot.filename)

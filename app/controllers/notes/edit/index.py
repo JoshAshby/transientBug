@@ -10,7 +10,7 @@ http://joshashby.com
 joshuaashby@joshashby.com
 """
 from seshat.route import autoRoute
-from seshat.baseObject import HTMLObject
+from seshat.MixedObject import MixedObject
 from seshat.objectMods import login
 from seshat.actions import Redirect, NotFound
 
@@ -20,22 +20,14 @@ import models.rethink.note.noteModel as nm
 
 @login(["notes"])
 @autoRoute()
-class index(HTMLObject):
-    """
-    """
+class index(MixedObject):
     _title = "note"
-    _defaultTmpl = "public/notes/edit"
+    _default_tmpl = "public/notes/edit"
     def GET(self):
-        """
-        """
-        note = self.request.id
-
-        f = list(r.table(nm.Note.table).filter({"short_code": note}).run())
+        f = list(r.table(nm.Note.table).filter({"short_code": self.request.id}).run())
 
         if f:
-            f = f[0]
-
-            note = nm.Note(**f)
+            note = nm.Note(**f[0])
 
             tags = ', '.join(note.tags)
 
@@ -47,7 +39,6 @@ class index(HTMLObject):
             return NotFound()
 
     def POST(self):
-        ID = self.request.id
         title = self.request.getParam("title")
         contents = self.request.getParam("contents")
         public = self.request.getParam("public", False)
@@ -57,11 +48,10 @@ class index(HTMLObject):
         if tags:
             tag = [ bit.lstrip().rstrip() for bit in tags.split(",") ]
 
-        f = list(r.table(nm.Note.table).filter({"short_code": ID}).run())
+        f = list(r.table(nm.Note.table).filter({"short_code": self.request.id}).run())
 
         if f:
-            f = f[0]
-            note = nm.Note(f["id"])
+            note = nm.Note(**f[0])
 
             if note.user != self.request.session.userID:
                 note.copy()

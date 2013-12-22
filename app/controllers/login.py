@@ -12,27 +12,29 @@ http://joshashby.com
 joshuaashby@joshashby.com
 """
 from seshat.route import autoRoute
-from seshat.baseObject import HTMLObject
-import models.modelExceptions.sessionExceptions as se
+from seshat.MixedObject import MixedObject
+from seshat.actions import Redirect
+import errors.session as se
 
 
 @autoRoute()
-class login(HTMLObject):
+class login(MixedObject):
     """
 
     """
     _title = "Login"
-    _defaultTmpl = "public/auth/login"
+    _default_tmpl = "public/auth/login"
     def GET(self):
         """
         Display the login page or redirect to their dashboard if they are already logged in
         """
-        if self.request.session.userID:
-            self.head = ("303 SEE OTHER",
-                [("location", "/")])
-            self.request.session.pushAlert("You've already been signed in as: %s"
+        if self.request.session.id:
+            where = self.request.getParam("return-to", "/")
+            self.request.session.push_alert("You've already been signed in as: %s"
                                            % self.request.session.username,
                                            "Whoa!", "info")
+
+            return Redirect(where)
 
         else:
             self.view.partial("about", "public/about/about")
@@ -52,26 +54,29 @@ class login(HTMLObject):
         exc = ""
         try:
             self.request.session.login(name, passwd)
-            self.head = ("303 SEE OTHER", [("location", "/")])
-            self.request.session.pushAlert("Welcome back, %s!" % name,
+            self.request.session.push_alert("Welcome back, %s!" % name,
                                            "Ohia!", "success")
-            return
 
-        except se.usernameError as e:
+            where = self.request.getParam("return-to", "/")
+
+            return Redirect(where)
+
+        except se.UsernameError as e:
             exc = e
             self.view.data = {"username" : name}
             self.view.data = {"usernameError": True}
 
-        except se.passwordError as e:
+        except se.PasswordError as e:
             exc = e
             self.view.data = {"username": name}
             self.view.data = {"passwordError": True}
 
-        except se.banError as e:
+        except se.DisableError as e:
             exc = e
+            self.view.data = {"banError": True}
 
         exc = unicode(exc).strip("'")
 
-        self.request.session.pushAlert("%s <br/>Please try again." % exc,
+        self.request.session.push_alert("%s <br/>Please try again." % exc,
                                        "Uh oh...", "error")
         return self.view

@@ -10,15 +10,13 @@ http://joshashby.com
 joshuaashby@joshashby.com
 """
 from seshat.route import autoRoute
-from seshat.baseObject import JSONObject
+from seshat.MixedObject import MixedObject
 from seshat.objectMods import login
 
 
 @login(["admin"])
 @autoRoute()
-class toggle(JSONObject):
+class toggle(MixedObject):
     def POST(self):
-        announcement_id = self.request.id
-
-        self.request.announcements.toggle_announcement(announcement_id)
-        return {"success": True, "id": announcement_id}
+        self.request.announcements.toggle_announcement(self.request.id)
+        return {"success": True, "id": self.request.id}

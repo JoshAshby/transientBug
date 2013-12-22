@@ -1,0 +1,32 @@
+appName: &APP transientbug
+logName: *APP
+
+debug: true
+
+port: 8001
+address: 127.0.0.1
+use_pool: true
+max_connections: 10000
+
+time_format: "MM/DD/YYYY hh:mm a"
+
+files:
+  pid: transientbug.pid
+  log: transientbug.log
+  stderr: transientbug_error.log
+  stdout: transientbug_out.log
+
+dirs:
+  pid: pid/
+  log: logs/
+  base: /srv/http/
+  templates: views/raw_templates/
+  screenshots: /srv/http/scrn/
+  gifs: /srv/http/i/
+
+databases:
+  rethink:
+    db: transientbug
+  redis:
+    db: 1
+    URL: localhost

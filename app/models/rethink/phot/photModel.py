@@ -27,10 +27,10 @@ class Phot(RethinkModel):
 
     @classmethod
     def download_phot(cls, user, url, title, tags=[]):
-        """
-        """
         name = title.replace(" ", "_")
         path = ''.join([c.general.dirs["gifs"], name])
+
+# TODO: Move the download stuff to a daemon.
         gevent.spawn(fu.download_file, url, path)
 
         extension = urlparse.urlparse(url).path.rsplit(".", 1)[1]
@@ -109,57 +109,9 @@ class Phot(RethinkModel):
 
         return self._formated_created
 
-    def formated_created_spec(self, time_format):
-        if not hasattr(self, "_formated_created_spec"):
-            self._formated_created_spec = arrow.get(self.created).format(time_format)
-
-        return self._formated_created_spec
-
     @property
-    def formated_user(self):
-        if not hasattr(self, "_formated_user"):
-            self._formated_user = um.User(self.user).username
+    def user(self):
+        if not hasattr(self, "_user"):
+            self._user = um.User(self.user).username
 
-        return self._formated_user
-
-    @property
-    def formated_tags(self):
-        if not hasattr(self, "_formated_tags"):
-            self._formated_tags = ', '.join(self.tags)
-
-        return self._formated_tags
-
-
-class ImportPhot(Phot):
-    @classmethod
-    def import_phot(cls, user, filename):
-        """
-        """
-        parts = filename.rsplit(".", 1)
-        if len(parts) >= 1:
-            extension = parts[1]
-            if extension == "jpeg":
-                extension = "jpg"
-        else:
-            raise Exception("Image extension not found")
-
-        title = parts[0].replace("_", " ")
-        created = arrow.utcnow().timestamp
-
-        code_good = False
-        code = ""
-        while not code_good:
-            code = sc.rand_short_code()
-            f = r.table(cls.table).filter({"short_code": code}).count().run()
-            if f == 0:
-                code_good = True
-
-        what = cls.create(user=user,
-                          created=created,
-                          title=title,
-                          url="",
-                          tags=[],
-                          short_code=code,
-                          filename=filename)
-
-        return what
+        return self._user

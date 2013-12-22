@@ -51,7 +51,7 @@ def setupLog():
     import logging
     import config.config as c
     level = logging.WARNING
-    if c.general.debug:
+    if c.debug:
             level = logging.DEBUG
 
     formatter = logging.Formatter("""%(asctime)s - %(name)s - %(levelname)s
@@ -60,12 +60,16 @@ def setupLog():
     logger = logging.getLogger(c.general.logName)
     logger.setLevel(level)
 
-    fh = logging.FileHandler(c.general.files["log"])
+    fh = logging.FileHandler(c.files.log)
     fh.setLevel(level)
     fh.setFormatter(formatter)
     logger.addHandler(fh)
 
-    if c.general.debug:
+    logger_seshat = logging.getLogger("seshat")
+    logger_seshat.setLevel(level)
+    logger_seshat.addHandler(fh)
+
+    if c.debug:
         """
         Make sure we're not in daemon mode if we're logging to console too
         """
@@ -74,6 +78,7 @@ def setupLog():
             ch.setLevel(level)
             ch.setFormatter(formatter)
             logger.addHandler(ch)
+            logger_seshat.addHandler(ch)
         except:
             pass
 
@@ -107,7 +112,7 @@ class AppNoDaemon(object):
 
 
 if __name__ == "__main__":
-    arguments = docopt(__doc__, version='Seshat v0.1.0')
+    arguments = docopt(__doc__, version='Seshat v1.0.0')
 
     if arguments["--daemon"] or arguments["stop"] or arguments["restart"]:
         app = AppDaemon(config["files"]["pid"], stderr=config["files"]["stderr"])

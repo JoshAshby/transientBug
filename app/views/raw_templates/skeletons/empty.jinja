@@ -1,0 +1,58 @@
+<!doctype html>
+<html>
+  <head>
+  <title>transientBug - {{title}}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+
+    <!-- Begin page stylsheets -->
+    <link href="/static/css/{{theme_color}}_theme.css" rel="stylesheet">
+    {% for sheet in stylesheets %}
+      <link href="/static/css/{{sheet}}.css" rel="stylesheet">
+    {% endfor %}
+
+    <style>
+      {{styles}}
+    </style>
+    <!-- End page style sheets -->
+
+    <script src="http://code.jquery.com/jquery.js"></script>
+  </head>
+  <body>
+    {% if req.has_announcements and not hide_announcements %}
+      <div class="container container-alert">
+        <div class="row">
+          <div class="col-md-1 col-sm-1" style="text-align: center;">
+            <i class="fa fa-exclamation fa-4x"></i>
+          </div>
+          <div class="col-md-10 col-sm-10">
+            {% for announcement in req.announcements %}
+              {{announcement}}
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    {% endif %}
+
+    {{body}}
+
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+
+    <!-- Begin page scripts -->
+    {% for script in scriptFiles %}
+      <script src="/static/js/{{script}}.js"></script>
+    {% endfor %}
+
+    <script>
+      {{scripts}}
+    </script>
+    <!-- End page scripts -->
+    <br>
+  </body>
+</html>

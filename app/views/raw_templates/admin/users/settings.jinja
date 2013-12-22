@@ -1,0 +1,35 @@
++++
+theme_color: orange
+nav: admin_users
+breadcrumbs_top: True
++++
+{{tabs}}
+
+<div class="row">
+  <div class="col-md-12">
+    <br>
+    <b>Created on:</b> {{user.formated_created}}<br>
+    <br>
+    <form role="form" method="POST">
+      <div class="form-group {{ 'has-error' if error=="password" }}">
+        <label for="password">Password</label>
+        <input type="password" class="form-control" id="password" placeholder="Password..." name="password" value="{{password}}">
+        <span class="help-text">
+          Only changes the password if not blank. If resetting a users password, be sure to send them an email with the new password and instructions to change it.
+        </span>
+        {% if error=="password" %}
+          <span class="help-text">
+            {{error_msg}}
+          </span>
+        {% endif %}
+      </div>
+      <div class="checkbox">
+        <label>
+          <input type="checkbox" name="disable" value="true" {{ 'checked' if user.disable }}> Disable account?
+        </label>
+      </div>
+      <button type="submit" class="btn btn-theme">Update</button>
+    </form>
+
+  </div>
+</div>

@@ -23,11 +23,9 @@ class Note(RethinkModel):
 
     @classmethod
     def new_note(cls, user, title="", contents="", public=False, tags=[]):
-        """
-        """
         time = arrow.utcnow()
         if not title:
-          title = "Untitled Note @ %s" % time.format("YY/MM/DD HH:mm:ss")
+            title = "Untitled Note @ %s" % time.format("YY/MM/DD HH:mm:ss")
         created = time.timestamp
 
         code_good = False
@@ -65,25 +63,12 @@ class Note(RethinkModel):
         self.short_code = code
         self.created = created
 
-    def format_time_spec(self, time_format):
-        if not hasattr(self, "_formated_created_spec"):
-            self._formated_created_spec = arrow.get(self.created).format(time_format)
-
-        return self._formated_created_spec
-
     @property
-    def formated_author(self):
+    def author(self):
         if not hasattr(self, "_formated_author"):
             self._formated_author = um.User(self.user).username
 
         return self._formated_author
-
-    @property
-    def formated_tags(self):
-        if not hasattr(self, "_formated_tags"):
-            self._formated_tags = ', '.join(self.tags)
-
-        return self._formated_tags
 
     @property
     def formated_time(self):

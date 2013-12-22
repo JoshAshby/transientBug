@@ -12,7 +12,7 @@ http://joshashby.com
 joshuaashby@joshashby.com
 """
 from seshat.route import autoRoute
-from seshat.baseObject import HTMLObject
+from seshat.MixedObject import MixedObject
 from seshat.objectMods import login
 from seshat.actions import Redirect
 
@@ -21,12 +21,9 @@ import models.rethink.note.noteModel as nm
 
 @login(["notes"])
 @autoRoute()
-class new(HTMLObject):
-    """
-    Returns base index page listing all gifs
-    """
+class new(MixedObject):
     _title = "new note"
-    _defaultTmpl = "public/notes/edit"
+    _default_tmpl = "public/notes/edit"
     def GET(self):
         """
         """

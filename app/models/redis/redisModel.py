@@ -67,8 +67,9 @@ class RedisKeysBase(object):
             self.redis.set(key, value)
 
     def __delitem__(self, item):
+        key = ':'.join([self.key, item])
         self._data.pop(item)
-        self.redis.delete(self.key+item)
+        self.redis.delete(key)
 
     def __contains__(self, item):
         return item in self._data
@@ -112,11 +113,13 @@ class RedisList(object):
                 pass
 
     def append(self, other):
-        assert type(other) == list
         self._list.append(other)
-        for key in other:
-            self.redis.rpush(self.key, key) # because live fucks this up
+        self.redis.rpush(self.key, other)
         return self._list
+
+    def prepend(self, other):
+        self._list.insert(0, other)
+        self.redis.lpush(self.key, other)
 
     def extend(self, other):
         assert type(other) == list
@@ -137,6 +140,11 @@ class RedisList(object):
 
     def pop(self):
         value = self._list.pop()
+        self.redis.rpop(self.key)
+        return value
+
+    def lpop(self):
+        value = self._list.pop(0)
         self.redis.lpop(self.key)
         return value
 
@@ -224,12 +232,19 @@ class RedisModel(object):
     def __setitem__(self, item, value):
         return self._set(item, value)
 
+    def __delattr__(self, item):
+        keys = object.__getattribute__(self, "_keys")
+        if item in keys:
+            del keys[item]
+        else:
+            object.__delattr__(self, item)
+
     def __delitem__(self, item):
         keys = object.__getattribute__(self, "_keys")
         if item in keys:
-            keys.pop(item)
+            del keys[item]
         else:
-            object.__delitem__(self, item)
+            object.__delattr__(self, item)
 
     def __contains__(self, item):
         keys = object.__getattribute__(self, "_keys")

@@ -10,7 +10,7 @@ http://joshashby.com
 joshuaashby@joshashby.com
 """
 from seshat.route import autoRoute
-from seshat.baseObject import HTMLObject
+from seshat.MixedObject import MixedObject
 from seshat.objectMods import login
 
 from utils.paginate import Paginate
@@ -18,14 +18,15 @@ from utils.paginate import Paginate
 
 @login(["admin"])
 @autoRoute()
-class index(HTMLObject):
+class index(MixedObject):
     _title = "Buckets"
-    _defaultTmpl = "admin/buckets/index"
+    _default_tmpl = "admin/buckets/index"
     def GET(self):
         page = Paginate(self.request.buckets.list, self.request)
-        f = page.pail
-
-        self.view.data = {"buckets": f, "page": page}
-        self.view.scripts = ["admin/bucket"]
-
+        self.view.data = {"page": page}
         return self.view
+
+    def POST(self):
+        bucket_id = self.request.id
+        self.request.buckets.toggle(bucket_id)
+        return {"success": True, "id": bucket_id}

@@ -12,11 +12,12 @@ http://joshashby.com
 joshuaashby@joshashby.com
 """
 from seshat.route import autoRoute
-from seshat.baseObject import HTMLObject
+from seshat.actions import Redirect
+from seshat.MixedObject import MixedObject
 
 
 @autoRoute()
-class logout(HTMLObject):
+class logout(MixedObject):
     def GET(self):
         """
         Simply log the user out. Nothing much to do here.
@@ -24,9 +25,7 @@ class logout(HTMLObject):
         redirect to login page after we're done.
         """
         if self.request.session.logout():
-            self.request.session.pushAlert("Come back soon!",
+            self.request.session.push_alert("Come back soon!",
                                            "B'ahBye...", "info")
 
-        self.head = ("303 SEE OTHER", [("location", ("/login"))])
-
-
+        return Redirect("/login")

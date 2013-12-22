@@ -13,7 +13,7 @@ import rethinkdb as r
 from rethinkORM import RethinkCollection
 
 from seshat.route import autoRoute
-from seshat.baseObject import HTMLObject
+from seshat.MixedObject import MixedObject
 from seshat.objectMods import login
 
 from utils.paginate import Paginate
@@ -24,9 +24,9 @@ import models.utils.dbUtils as dbu
 
 @login(["admin"])
 @autoRoute()
-class index(HTMLObject):
+class index(MixedObject):
     _title = "Phots"
-    _defaultTmpl = "admin/phots/index"
+    _default_tmpl = "admin/phots/index"
     def GET(self):
         what = self.request.id
         orig = self.request.getParam("filter", "all")
@@ -50,3 +50,15 @@ class index(HTMLObject):
         self.view.scripts = ["admin/phot"]
 
         return self.view
+
+    def POST(self):
+        current = pm.Phot(self.request.id)
+
+        if current.filename:
+            current.disable = not current.disable if "disable" in current._data else True
+            current.save()
+
+            return {"success": True}
+
+        else:
+            return {"success": False, "error": "That image couldn't be found. :/"}

@@ -14,7 +14,7 @@ import config.config as c
 import arrow
 
 from seshat.route import autoRoute
-from seshat.baseObject import HTMLObject
+from seshat.MixedObject import MixedObject
 from seshat.objectMods import login
 from seshat.actions import Redirect
 
@@ -22,19 +22,16 @@ from utils.paginate import Paginate
 import utils.files as fu
 
 
-@login(["root"])
+@login(["screenshots"])
 @autoRoute()
-class index(HTMLObject):
+class index(MixedObject):
     _title = "screenshots"
-    _defaultTmpl = "public/screenshots/index"
+    _default_tmpl = "public/screenshots/index"
     def GET(self):
         """
         """
-        self.view.data = {"header": "Screenshots"}
-        self.view.scripts = ["scrn"]
-
         f = []
-        for top, folders, files in os.walk(c.general.dirs["screenshots"]):
+        for top, folders, files in os.walk(c.dirs.screenshots):
             f.extend(files)
             break
 
@@ -49,11 +46,11 @@ class index(HTMLObject):
         if scrn:
             date = str(arrow.utcnow().timestamp) + "_"
 
-            path = ''.join([c.general.dirs["screenshots"], date, scrn.filename])
+            path = ''.join([c.dirs.screenshots, date, scrn.filename])
             try:
-                fu.write_file(scrn, path)
-                self.request.session.pushAlert("Screenshot uploaded...", level="success")
+                fu.write_file(path, scrn)
+                self.request.session.push_alert("Screenshot uploaded...", level="success")
             except IOError as e:
-                self.request.session.pushAlert("There was a problem executing that: {}".format(str(e)), level="error")
+                self.request.session.push_alert("There was a problem executing that: {}".format(str(e)), level="error")
 
         return Redirect("/screenshots")

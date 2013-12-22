@@ -14,17 +14,17 @@ http://joshashby.com
 joshuaashby@joshashby.com
 """
 from gevent import monkey; monkey.patch_all()
-import gevent
 from gevent.pywsgi import WSGIServer
+from gevent.pool import Pool
 
 import traceback
 
 import logging
 from seshat.dispatch import dispatch
 
-import config.config as c
-logger = logging.getLogger(c.general["logName"]+".seshat")
+logger = logging.getLogger("seshat")
 
+import config.config as c
 
 def main():
     """
@@ -32,7 +32,7 @@ def main():
 
     Sets up the server and all that messy stuff
     """
-    if c.general["port"] and type(c.general["port"]) is str:
+    if c.general["port"]:
         port = int(c.general["port"])
     else:
         port = 8000
@@ -42,7 +42,12 @@ def main():
     else:
         address = c.general["address"]
 
-    server = WSGIServer((address, port), dispatch, log=None)
+    if c.general.use_pool:
+        pool = Pool(c.general.max_connections)
+    else:
+        pool = "default"
+
+    server = WSGIServer((address, port), dispatch, spawn=pool, log=None)
 
     logger.info("""Now serving py as a WSGI server at %(address)s:%(port)s
     Press Ctrl+c if running as non daemon mode, or send a stop signal
@@ -63,12 +68,7 @@ def serveForever():
         logger.warn("Shutdown py operations.")
     except Exception as exc:
         logger.critical("""Shutdown py operations, here's why: %s""" % exc)
-        gevent.shutdown
-    except KeyboardInterrupt:
-        logger.critical("""Shutdown py operations for a KeyboardInterrupt. Bye!""")
-        gevent.shutdown
     except:
         logger.critical(traceback.format_exc())
     else:
         logger.critical("""Shutdown py operations for unknown reason!""")
-        gevent.shutdown

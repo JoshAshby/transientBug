@@ -18,7 +18,7 @@ import models.rethink.user.userModel as um
 import models.redis.bucket.bucketModel as bm
 
 import rethinkdb
-from models.modelExceptions.userModelExceptions import userError
+from errors.user import UsernameError
 
 
 def setup():
@@ -37,47 +37,39 @@ def initialSetup():
         print "Creating database in rethink"
         rethinkdb.db_create(con.general.databases["rethink"]["db"]).run()
 
-    if c.general.flush["users"]:
-        print "Reset rethink user table"
-        dbt = rethinkdb.table_list().run()
-        # Reseting users
-        if "users" in dbt:
-            rethinkdb.table_drop("users").run()
+    dbt = list(rethinkdb.table_list().run())
+    for db in c.general.flush["rethink"]:
+        if c.general.flush["rethink"][db]:
+            print "Flushing rethink "+db+" table..."
+            if db in dbt:
+                rethinkdb.table_drop(db).run()
+                dbt.pop(dbt.index(db))
 
     print "Creating new rethink tables..."
-    dbt = rethinkdb.table_list().run()
     for table in c.general.tables:
         if not table in dbt:
             print "Creating table {}".format(table)
             rethinkdb.table_create(table).run()
 
-    if c.general.flush["redis"]:
-        print "Flushing redis..."
-        con.general.redis.flushdb()
-
-    if c.general.flush["sessions"]:
-        print "Flushing sessions..."
-        keys = con.general.redis.keys("session:*")
-        for key in keys: con.general.redis.delete(key)
-
-    if c.general.flush["buckets"]:
-        print "Flushing buckets..."
-        keys = con.general.redis.keys("bucket:*")
-        for key in keys: con.general.redis.delete(key)
+    for key in c.general.flush["redis"]:
+        if c.general.flush["redis"][key]:
+            print "Flushing redis "+key+" keys..."
+            keys = con.redis.keys(key+":*")
+            for key in keys: con.redis.delete(key)
 
 
 def userSetup():
     print "Setting up inital users..."
     for user in c.general.users:
         try:
-            newUser = um.User.new_user(user["username"], user["password"])
+            newUser = um.User.new_user(user["username"], user["password"], user["email"])
             print "Adding new user `%s`"%user["username"]
             print "\tpassword `%s`"%user["password"]
-            print "\tlevel `100` - god"
+            print "\temail `%s`"%user["email"]
             print "\tgroups" + str(user["groups"])
             newUser.groups = user["groups"]
             newUser.save()
-        except userError:
+        except UsernameError:
             print "User `%s` is already in the system..." % user["username"]
 
 
@@ -99,6 +91,7 @@ def bucketSetup():
                             bucket["name"],
                             bucket["description"],
                             bucket["status"])
+
 
 if __name__ == "__main__":
     setup()

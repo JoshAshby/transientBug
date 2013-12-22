@@ -1,7 +1,5 @@
 #!/usr/bin/env python
 """
-main index - reroutes to login if you're not logged in
-
 For more information, see: https://github.com/JoshAshby/
 
 http://xkcd.com/353/
@@ -12,17 +10,14 @@ http://joshashby.com
 joshuaashby@joshashby.com
 """
 from seshat.route import autoRoute
-from seshat.baseObject import HTMLObject
+from seshat.MixedObject import MixedObject
 from seshat.objectMods import login
 
 
-@login()
+@login(redirect="/phots")
 @autoRoute()
-class index(HTMLObject):
-    """
-    Returns base index page.
-    """
-    _title = "home"
-    _defaultTmpl = "public/index/index"
+class index(MixedObject):
+    _title = "Home"
+    _default_tmpl = "public/index/index"
     def GET(self):
         return self.view
