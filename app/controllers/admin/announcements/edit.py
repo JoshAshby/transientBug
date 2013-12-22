@@ -23,18 +23,21 @@ import arrow
 @autoRoute()
 class edit(MixedObject):
     _title = "Site Announcements"
-    _defaultTmpl = "admin/announcements/edit"
+    _default_tmpl = "admin/announcements/edit"
     def GET(self):
         announcement_id = self.request.id
 
         announcement = brm.SeshatRedisModel("announcement:"+announcement_id)
 
         if announcement.start:
-            announcement._formated_start = arrow.get(announcement.start).format("MM/DD/YYYY HH:mm")
+            announcement._formated_start = arrow.get(announcement.start)\
+                .format("MM/DD/YYYY HH:mm")
         if announcement.end:
-            announcement._formated_end   = arrow.get(announcement.end).format("MM/DD/YYYY HH:mm")
+            announcement._formated_end = arrow.get(announcement.end)\
+                .format("MM/DD/YYYY HH:mm")
 
-        self.view.data = {"announcement": announcement, "now": arrow.utcnow().format("MM/DD/YYYY HH:mm")}
+        self.view.data = {"announcement": announcement,
+                          "now": arrow.utcnow().format("MM/DD/YYYY HH:mm")}
 
         return self.view
 

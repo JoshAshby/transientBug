@@ -23,7 +23,7 @@ import models.utils.dbUtils as dbu
 @autoRoute()
 class index(MixedObject):
     _title = "phots"
-    _default_tmpl = "public/gifs/index"
+    _default_tmpl = "public/phots/index"
     def GET(self):
         orig = self.request.getParam("filter", "all")
         filt = dbu.phot_filter(orig)

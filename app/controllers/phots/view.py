@@ -22,7 +22,7 @@ import rethinkdb as r
 @autoRoute()
 class view(MixedObject):
     _title = "phot"
-    _default_tmpl = "public/gifs/view"
+    _default_tmpl = "public/phots/view"
     def GET(self):
         phot = self.request.id
 
@@ -49,8 +49,8 @@ class view(MixedObject):
         if self.request.session.has_phots:
             self.view.scripts = ["pillbox",
                                  "lib/typeahead.min",
-                                 "phot",
-                                 "admin/phot"]
+                                 "transientbug/phot",
+                                 "transientbug/admin/phot"]
             self.view.stylesheets = ["pillbox"]
 
         return self.view

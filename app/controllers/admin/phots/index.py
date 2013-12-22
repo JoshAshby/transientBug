@@ -47,7 +47,8 @@ class index(MixedObject):
 
 
         self.view.data = {"page": page, "what": what, "filter": orig}
-        self.view.scripts = ["admin/phot"]
+# TODO: KILL
+        self.view.scripts = ["transientbug/admin/phot"]
 
         return self.view
 
@@ -55,7 +56,7 @@ class index(MixedObject):
         current = pm.Phot(self.request.id)
 
         if current.filename:
-            current.disable = not current.disable if "disable" in current._data else True
+            current.disable = not current.disable
             current.save()
 
             return {"success": True}

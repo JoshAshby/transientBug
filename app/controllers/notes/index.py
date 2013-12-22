@@ -27,8 +27,6 @@ class index(MixedObject):
     _title = "notes"
     _default_tmpl = "public/notes/index"
     def GET(self):
-        """
-        """
         parts = r.table(nm.Note.table).filter({"disable": False})
 
         if self.request.session.userID:
@@ -47,16 +45,6 @@ class index(MixedObject):
         result = RethinkCollection(nm.Note, query=parts)
         page = Paginate(result, self.request, "created", sort_direction="asc")
 
-        if page.pail:
-            data = {"page": page}
+        self.view.data = {"page": page}
 
-            self.view.data = data
-
-            return self.view
-
-        else:
-            if self.request.session.userID:
-                return Redirect("/notes/new")
-
-            self.view.template = "public/notes/errors/empty"
-            return self.view
+        return self.view

@@ -3,8 +3,8 @@ $(function() {
     var id = $(what).data("id");
     var di = $("#"+id);
 
-    $.post("/admin/phots/toggle/"+id, function(data) {
-      if(data[0]["data"]["success"]) {
+    $.post("/admin/phots/"+id+"/toggle", function(data) {
+      if(data[0]["success"]) {
         di.fadeOut().find("button").popover('hide');
       };
     });
@@ -40,7 +40,7 @@ $(function() {
     trigger: "manual",
     placement: "auto right",
     html: true,
-    content: '<div class="btn-group"><button class="btn btn-success btn-sm confirm_btn"><i class="icon-ok"></i></button><button class="btn btn-default btn-sm nope_btn"><i class="icon-remove"></i></button></div>',
+    content: '<div class="btn-group"><button class="btn btn-success btn-sm confirm_btn"><i class="fa fa-check"></i></button><button class="btn btn-default btn-sm nope_btn"><i class="fa fa-times"></i></button></div>',
     container: "body"
   });
 });

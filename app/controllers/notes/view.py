@@ -22,8 +22,6 @@ class view(MixedObject):
     _title = "note"
     _default_tmpl = "public/notes/view"
     def GET(self):
-        """
-        """
         f = r.table(nm.Note.table)\
             .filter({"short_code": self.request.id, "disable": False})\
             .coerce_to('array').run()
@@ -33,7 +31,7 @@ class view(MixedObject):
 
             if not note.public and (not self.request.session.userID \
                       or self.request.session.userID!=note.user):
-                    self.request.session.pushAlert("That note is not public and you do not have the rights to access it.", level="error")
+                    self.request.session.push_alert("That note is not public and you do not have the rights to access it.", level="error")
                     return Unauthorized()
 
             if self.request.session.has_notes:
@@ -53,5 +51,5 @@ class view(MixedObject):
             return self.view
 
         else:
-            self.request.session.pushAlert("That note could not be found!", level="error")
+            self.request.session.push_alert("That note could not be found!", level="error")
             return NotFound()

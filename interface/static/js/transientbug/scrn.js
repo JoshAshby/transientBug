@@ -5,8 +5,8 @@ $(function() {
     if(yesno) {
       img=$(this).data("img");
 
-      $.post("/screenshots/delete/"+img, function(data) {
-        if(data[0]["data"]["success"]) {
+      $.post("/screenshots/"+img+"/delete/", function(data) {
+        if(data[0]["success"]) {
           window.location.href="/screenshots";
         }
       });

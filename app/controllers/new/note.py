@@ -21,13 +21,10 @@ import models.rethink.note.noteModel as nm
 
 @login(["notes"])
 @autoRoute()
-class new(MixedObject):
+class note(MixedObject):
     _title = "new note"
-    _default_tmpl = "public/notes/edit"
+    _default_tmpl = "public/new/note"
     def GET(self):
-        """
-        """
-        self.view.data = {"note": None}
         return self.view
 
     def POST(self):
@@ -49,7 +46,7 @@ class new(MixedObject):
                         tags=tag)
 
         except Exception as e:
-            self.request.session.pushAlert("That note could not be created! %s" % e.message, level="error")
-            return Redirect("/notes/new")
+            self.request.session.push_alert("That note could not be created! %s" % e.message, level="error")
+            return Redirect("/new/note")
 
-        return Redirect("/notes/view/%s" % note.short_code)
+        return Redirect("/notes/%s" % note.short_code)

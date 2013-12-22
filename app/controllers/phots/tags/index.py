@@ -22,7 +22,7 @@ import models.utils.dbUtils as dbu
 @autoRoute()
 class index(MixedObject):
     _title = "phots"
-    _default_tmpl = "public/gifs/index"
+    _default_tmpl = "public/phots/index"
     def GET(self):
         orig = self.request.getParam("filter", "all")
         filt = dbu.phot_filter(orig)
@@ -40,12 +40,7 @@ class index(MixedObject):
             .coerce_to('array').run()
 
         if query:
-            try:
-                similar, top = dbu.search_tags(all_tags, query)
-            except Exception:
-                self.view.template = "public/gifs/errors/no_matching_tags"
-                self.view.data = {"tag": query}
-                return self.view
+            similar, top = dbu.search_tags(all_tags, query)
 
             q = q.filter(r.row["tags"]\
                  .filter(lambda t: t == top ).count() > 0)
@@ -62,10 +57,11 @@ class index(MixedObject):
             return self.view
 
         else:
+            # TODO: KILL
             self.view.template = "public/common/tags"
 
             self.view.data = {"tags": all_tags,
-                              "nav": {"phots": True},
+                              "nav": "phots",
                               "type": "Phots",
                               "where": "phots"}
 

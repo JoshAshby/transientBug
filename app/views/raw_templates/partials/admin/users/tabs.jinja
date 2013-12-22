@@ -13,8 +13,8 @@
     <ul class="nav nav-tabs">
       <li {{ 'class="active"' if not command }}><a href="/admin/users/{{user.id}}">Settings</a></li>
       <li {{ 'class="active"' if command=="emails" }}><a href="/admin/users/{{user.id}}/emails">Emails</a></li>
-      <li {{ 'class="active"' if command=="images" }}><a href="/admin/users/{{user.id}}/images">Images <span class="badge">{{images}}</span></a></li>
-      <li {{ 'class="active"' if command=="containers" }}><a href="/admin/users/{{user.id}}/containers">Containers <span class="badge">{{containers}}</span></a></li>
+      <li {{ 'class="active"' if command=="notes" }}><a href="/admin/users/{{user.id}}/notes">Notes</a></li>
+      <li {{ 'class="active"' if command=="phots" }}><a href="/admin/users/{{user.id}}/phots">Phots</a></li>
     </ul>
   </div>
 </div>

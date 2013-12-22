@@ -19,10 +19,10 @@ files:
 dirs:
   pid: pid/
   log: logs/
-  base: /srv/http/
+  base: /srv/http/transientbug/
   templates: views/raw_templates/
-  screenshots: /srv/http/scrn/
-  gifs: /srv/http/i/
+  screenshots: /srv/http/transientbug/scrn/
+  gifs: /srv/http/transientbug/i/
 
 databases:
   rethink:

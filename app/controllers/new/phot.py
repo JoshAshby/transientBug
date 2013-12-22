@@ -20,12 +20,12 @@ import models.rethink.phot.photModel as pm
 
 @login(["phots"])
 @autoRoute()
-class new(MixedObject):
+class phot(MixedObject):
     _title = "new phots"
-    _default_tmpl = "public/gifs/new"
+    _default_tmpl = "public/new/phot"
     def GET(self):
         # TODO: CLEAN WITH FIRE
-        self.view.scripts = ["pillbox", "phot", "lib/typeahead.min"]
+        self.view.scripts = ["pillbox", "transientbug/phot", "lib/typeahead.min"]
         self.view.stylesheets = ["pillbox"]
         return self.view.render()
 
@@ -52,4 +52,4 @@ class new(MixedObject):
                                        tags=tag)
 
         self.request.session.push_alert("Image is being downloaded...")
-        return Redirect("/phots/view/%s" % phot.filename)
+        return Redirect("/phots/%s" % phot.filename)

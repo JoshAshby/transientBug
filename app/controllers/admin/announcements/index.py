@@ -31,7 +31,8 @@ class index(MixedObject):
 
         page = Paginate(announcements, self.request, "created")
 
-        self.view.data = {"page": page, "now": arrow.utcnow().format("MM/DD/YYYY HH:mm")}
+        self.view.data = {"page": page,
+                          "now": arrow.utcnow().format("MM/DD/YYYY HH:mm")}
 
         return self.view
 

@@ -35,7 +35,7 @@ class index(MixedObject):
             return self.view
 
         else:
-            self.request.session.pushAlert("That note could not be found!", level="error")
+            self.request.session.push_alert("That note could not be found!", level="error")
             return NotFound()
 
     def POST(self):
@@ -66,4 +66,4 @@ class index(MixedObject):
         else:
             return NotFound()
 
-        return Redirect("/notes/view/%s" % note.short_code)
+        return Redirect("/notes/%s" % note.short_code)

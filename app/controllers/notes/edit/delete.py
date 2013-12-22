@@ -21,7 +21,9 @@ import models.rethink.note.noteModel as nm
 @autoRoute()
 class delete(MixedObject):
     def POST(self):
-        f = r.table(nm.Note.table).filter({"short_code": self.request.id}).coerce_to("array").run()
+        f = r.table(nm.Note.table)\
+            .filter({"short_code": self.request.id})\
+            .coerce_to("array").run()
 
         if f:
             note = nm.Note(**f[0])
@@ -29,4 +31,5 @@ class delete(MixedObject):
             return {"success": True}
 
         else:
-            return {"success": False, "error": "That note couldn't be found. :/"}
+            return {"success": False,
+                    "error": "That note couldn't be found. :/"}

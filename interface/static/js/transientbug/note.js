@@ -5,8 +5,8 @@ $(function() {
     if(yesno) {
       var img=$(this).data("short");
 
-      $.post("/notes/edit/delete/"+img, function(data) {
-        if(data[0]["data"]["success"]) {
+      $.post("/notes/edit/"+img+"/delete", function(data) {
+        if(data[0]["success"]) {
           window.location.href="/notes";
         }
       });
@@ -72,11 +72,11 @@ $(function() {
 
   $("#tags").pillbox();
 
-  var tags = $.ajax({url: "/notes/json/tags", async: false});
+  var tags = $.ajax({url: "/notes/tags/json", async: false});
 
   $('.pillbox input').typeahead({
     name: 'notes_tags',
-    local: tags.responseJSON[0]["data"],
+    local: tags.responseJSON[0],
     limit: 10
   });
 });
