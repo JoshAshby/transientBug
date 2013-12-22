@@ -145,9 +145,9 @@ footer {
   background-color: #2a9fd6;
   border: #2a9fd6 solid 1px;
 }
-/*.input-group .form-control {*/
-/*border: white solid 1px;*/
-/*}*/
+.input-group .form-control {
+  border: white solid 1px;
+}
 .nav_list {
   width: 200px;
   margin: 0px;
