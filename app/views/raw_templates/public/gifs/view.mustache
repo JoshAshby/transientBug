@@ -2,6 +2,7 @@
 nav:
   phots: true
 +++
+
 <div class="row">
   {{#req.session.has_phots}}
     <div class="col-sm-12 col-md-1">
@@ -18,11 +19,12 @@ nav:
   </div>
 </div>
 <br>
+
 <div class="row">
   <div class="col-sm-12 col-md-12">
-    <div class="panel panel-success">
+    <div class="panel panel-{{#phot.disable}}danger{{/phot.disable}}{{^phot.disable}}success{{/phot.disable}}">
       <div class="panel-heading">
-        <h3 class="panel-title">{{phot.title}} <small>({{phot.filename}} from {{phot.formated_user}})</small></h3>
+        <h3 class="panel-title">{{phot.title}} <small>({{phot.filename}} from {{phot.formated_user}})</small> {{ 'Disabled' if phot.disable }}</h3>
       </div>
       <div class="panel-body">
         <div style="text-align: center;">
@@ -45,7 +47,14 @@ nav:
           <div class="form-group">
             <input type="text" name="tags" id="pillbox" value="{{phot.formated_tags}}">
           </div>
-          <button type="submit" class="btn btn-theme">Submit</button> <button type="button" class="btn btn-danger" id="del_btn" data-img={{{phot.filename}}}>Delete</button>
+          <button type="submit" class="btn btn-theme">Submit</button>
+
+          {{^phot.disable}}
+            <button class="btn btn-default toggle_btn pull-right" data-id="{{phot.id}}" data-title="Enable?"><i class="icon-remove"></i> Disabled</button>
+          {{/phot.disable}}
+          {{#phot.disable}}
+            <button class="btn btn-theme toggle_btn pull-right" data-id="{{phot.id}}" data-title="Disable?"><i class="icon-ok"></i> Enabled</button>
+          {{/phot.disable}}
         </form>
         {{/req.session.has_phots}}
 

@@ -4,14 +4,15 @@ theme_color: orange
 nav:
   admin_annoucements: true
 
+scriptFiles:
+  - lib/bootstrap-datetimepicker.min
+
+stylesheets:
+  - lib/bootstrap-datetimepicker.min
+
 scripts: "
   $(function() {
-    $('#datetimepicker_start').datetimepicker({
-      language: 'en',
-      pick12HourFormat: true,
-      pickSeconds: false,
-    });
-    $('#datetimepicker_end').datetimepicker({
+    $('.datetimepicker').datetimepicker({
       language: 'en',
       pick12HourFormat: true,
       pickSeconds: false,
@@ -38,13 +39,13 @@ scripts: "
             <div class="form-group">
               <div class="row">
                 <div class="col-md-6">
-                  <div class='input-group date' id='datetimepicker_start'>
+                  <div class='input-group date datetimepicker'>
                     <span class="input-group-addon"><i class="icon-calendar"></i></span>
                     <input type='text' class="form-control" name="start" placeholder="{{now}}" value="{{announcement._formated_start}}" />
                   </div>
                 </div>
                 <div class="col-md-6">
-                  <div class='input-group date' id='datetimepicker_end'>
+                  <div class='input-group date datetimepicker'>
                     <input type='text' class="form-control" name="end" placeholder="{{now}}" value="{{announcement._formated_end}}" />
                     <span class="input-group-addon"><i class="icon-calendar"></i></span>
                   </div>

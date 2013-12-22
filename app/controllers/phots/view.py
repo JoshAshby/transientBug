@@ -36,7 +36,8 @@ class view(HTMLObject):
         f = list(r.table(pm.Phot.table).filter({"filename": phot}).run())
 
         if len(f):
-            if "disable" in f[0] and f[0]["disable"]:
+            if "disable" in f[0] and f[0]["disable"] and \
+                    not self.request.session.has_phots:
                 self.view.template = "public/gifs/errors/removed"
                 return self.view
 
@@ -45,7 +46,7 @@ class view(HTMLObject):
             self.view.data = {"phot": photo}
 
             if self.request.session.has_phots:
-                self.view.scripts = ["pillbox", "phot", "lib/typeahead.min"]
+                self.view.scripts = ["pillbox", "lib/typeahead.min", "phot", "admin/phot"]
                 self.view.stylesheets = ["pillbox"]
 
             return self.view

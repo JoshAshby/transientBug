@@ -34,8 +34,6 @@ class edit(HTMLObject):
             announcement._formated_end   = arrow.get(announcement.end).format("MM/DD/YYYY HH:mm")
 
         self.view.data = {"announcement": announcement, "now": arrow.utcnow().format("MM/DD/YYYY HH:mm")}
-        self.view.scripts = ["lib/bootstrap-datetimepicker.min"]
-        self.view.stylesheets = ["lib/bootstrap-datetimepicker.min"]
 
         return self.view
 

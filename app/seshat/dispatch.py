@@ -157,9 +157,8 @@ def logObj(request, obj):
     logger.debug("""\n\r------- Processing ------------------
     Method: %s
     URL: %s
-    FILES: %s
     Object: %s
-    """ % (request.method, request.url.path, request.files, obj))
+    """ % (request.method, request.url.path, obj))
 
 
 def logResponse(request, status, header):

@@ -25,7 +25,7 @@ import models.utils.dbUtils as dbu
 @login(["admin"])
 @autoRoute()
 class index(HTMLObject):
-    _title = "Buckets"
+    _title = "Phots"
     _defaultTmpl = "admin/phots/index"
     def GET(self):
         what = self.request.id
