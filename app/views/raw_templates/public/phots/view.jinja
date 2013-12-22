@@ -1,0 +1,72 @@
++++
+nav: phots
++++
+
+<div class="row">
+  <div class="col-md-6 col-sm-12">
+    <form method="GET" class="form-inline">
+
+      <div class="input-group">
+        {% if req.session.has_phots %}
+          <span class="input-group-btn">
+            <a href="/new/phot" class="btn btn-theme btn-sm">Add</a>
+          </span>
+        {% endif %}
+        <input type="text" class="form-control input-sm" name="q" placeholder="Search...">
+        <span class="input-group-btn">
+          <button class="btn btn-theme btn-sm" type="submit"><i class="fa fa-search"></i></button>
+        </span>
+      </div>
+
+    </form>
+  </div>
+  <div class="col-md-6 col-sm-12">
+  </div>
+</div>
+<br>
+
+<div class="row">
+  <div class="col-sm-12 col-md-12">
+    <div class="panel panel-{{ 'danger' if phot.disable else 'success' }}">
+      <div class="panel-heading">
+        <h3 class="panel-title">{{phot.title}} {{ 'Disabled' if phot.disable }} <small>({{phot.filename}})</small></h3>
+      </div>
+      <div class="panel-body">
+        <div style="text-align: center;">
+          <img src="/i/{{phot.filename}}" alt="{{phot.filename}}" class="col-md-12">
+        </div>
+        <br>
+        <b>Added to collection: </b>{{phot.formated_created}}<br>
+        {% if phot.url %}
+          <b>From: </b>{{phot.url}}<br>
+        {% endif %}
+        <br>
+        {% for tag in phot.tags %}
+          <a href="/phots/tags/{{tag}}"><span class="label label-theme">{{tag}}</span></a>
+        {% endfor %}
+        <br>
+        <br>
+
+        {% if req.session.has_phots %}
+          <form role="form" method="POST">
+            <div class="form-group">
+              <label for="name">Rename</label>
+              <input type="text" class="form-control" id="name" name="name" value="{{phot.title}}" required>
+            </div>
+            <div class="form-group">
+              <input type="text" name="tags" id="pillbox" value="{{phot.tags|join(",")}}">
+            </div>
+            {% if phot.disable %}
+              <button class="btn btn-default toggle_btn" data-id="{{phot.id}}" data-title="Enable?"><i class="icon-remove"></i> Disabled</button>
+            {% else %}
+              <button class="btn btn-theme toggle_btn" data-id="{{phot.id}}" data-title="Disable?"><i class="icon-ok"></i> Enabled</button>
+            {% endif %}
+
+            <button type="submit" class="btn btn-theme pull-right"><i class="fa fa-check"></i> Update</button>
+          </form>
+        {% endif %}
+
+      </div>
+    </div>
+  </div>
+</div>

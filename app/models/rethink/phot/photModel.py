@@ -69,7 +69,7 @@ class Phot(RethinkModel):
         filename = ''.join([name, ".", file_obj.extension])
 
         path = ''.join([c.general.dirs["gifs"], filename])
-        gevent.spawn(fu.write_file, file_obj, path)
+        gevent.spawn(fu.write_file, path, file_obj)
 
         time = arrow.utcnow()
         if not title:
@@ -110,8 +110,8 @@ class Phot(RethinkModel):
         return self._formated_created
 
     @property
-    def user(self):
+    def author(self):
         if not hasattr(self, "_user"):
-            self._user = um.User(self.user).username
+            self._user = um.User(self.user)
 
         return self._user

@@ -69,6 +69,7 @@
                 {% endif %}
 
                 <li {{ 'class="active"' if nav=="phots" }}><a href="/phots"><i class="fa fa-picture-o"></i> Phots</a></li>
+                <li {{ 'class="active"' if nav=="notes" }}><a href="/notes"><i class="fa fa-file-text"></i> Notes</a></li>
 
                 {% if req.session.id %}
                   <li {{ 'class="active"' if nav=="screenshots" }}><a href="/screenshots"><i class="fa fa-desktop"></i> Scrns</a></li>

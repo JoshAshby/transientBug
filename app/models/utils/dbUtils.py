@@ -89,15 +89,15 @@ def search_tags(tags, query, min_score=85):
     final_tags = []
     final_tags.extend(tag_scores.copy().keys())
 
-    if final_tags:
-        if query in final_tags:
-            final_tags.pop(final_tags.index(query))
-            query.replace(" ", "_")
-            return final_tags, query
-        else:
-            top_match = max(tag_scores, key=tag_scores.get)
-            final_tags.pop(final_tags.index(top_match))
-            top_match.replace(" ", "_")
-            return final_tags, top_match
+    if not final_tags:
+        return [], ""
+
+    if query in final_tags:
+        final_tags.pop(final_tags.index(query))
+        query.replace(" ", "_")
+        return final_tags, query
     else:
-        raise Exception("Could not find any matching tags")
+        top_match = max(tag_scores, key=tag_scores.get)
+        final_tags.pop(final_tags.index(top_match))
+        top_match.replace(" ", "_")
+        return final_tags, top_match

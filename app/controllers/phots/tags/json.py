@@ -12,12 +12,12 @@ joshuaashby@joshashby.com
 from seshat.route import autoRoute
 from seshat.MixedObject import MixedObject
 
-import utils.dbUtils as dbu
+import models.utils.dbUtils as dbu
 import models.rethink.phot.photModel as pm
 
 
 @autoRoute()
-class tags(MixedObject):
+class json(MixedObject):
     def GET(self):
         base_query = dbu.rql_where_not(pm.Phot.table, "disable", True)
 
@@ -35,4 +35,4 @@ class tags(MixedObject):
             }
             all_tags.append(res)
 
-        return all_tags
+        return {"tags": all_tags}

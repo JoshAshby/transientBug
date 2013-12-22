@@ -28,11 +28,12 @@ class view(MixedObject):
 
         # check if its a short code by looking for an extension
         # otherwise we assume it's a filename
-        if len(phot.rsplit(".")) >= 1:
+        if len(phot.rsplit(".")) == 1:
             f = r.table(pm.Phot.table).filter({"short_code": phot})\
                 .coerce_to("array").run()
         else:
-            f = list(r.table(pm.Phot.table).filter({"filename": phot}).run())
+            f = r.table(pm.Phot.table).filter({"filename": phot})\
+                .coerce_to("array").run()
 
         if not f:
             return NotFound()
@@ -45,12 +46,10 @@ class view(MixedObject):
 
         self.view.data = {"phot": photo}
 
-        # TODO: CLEAN (WITH FIRE)
         if self.request.session.has_phots:
             self.view.scripts = ["pillbox",
                                  "lib/typeahead.min",
-                                 "transientbug/phot",
-                                 "transientbug/admin/phot"]
+                                 "transientbug/phot"]
             self.view.stylesheets = ["pillbox"]
 
         return self.view
@@ -67,7 +66,15 @@ class view(MixedObject):
         else:
             tag = []
 
-        f = list(r.table(pm.Phot.table).filter({"filename": self.request.id}).run())
+
+        phot = self.request.id
+        if len(phot.rsplit(".")) == 1:
+            f = r.table(pm.Phot.table).filter({"short_code": phot})\
+                .coerce_to("array").run()
+        else:
+            f = r.table(pm.Phot.table).filter({"filename": phot})\
+                .coerce_to("array").run()
+
         if f:
             photo = pm.Phot(**f[0])
             photo.tags = tag
@@ -85,9 +92,6 @@ class view(MixedObject):
 
                 new_name_path = ''.join([c.dirs.gifs, new_filename])
                 os.rename(current_path, new_name_path)
-
-                loc = ''.join(["/phots/view/", new_name, ".", extension])
-                self._redirect(loc)
 
             photo.save()
 

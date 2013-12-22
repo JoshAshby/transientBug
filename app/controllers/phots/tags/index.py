@@ -22,12 +22,11 @@ import models.utils.dbUtils as dbu
 @autoRoute()
 class index(MixedObject):
     _title = "phots"
-    _default_tmpl = "public/phots/index"
+    _default_tmpl = "public/phots/view_tag"
     def GET(self):
         orig = self.request.getParam("filter", "all")
         filt = dbu.phot_filter(orig)
         tag = self.request.id or self.request.getParam("q")
-        view = self.request.getParam("v", 'cards').lower()
 
         query = tag.replace("_", " ")
 
@@ -50,19 +49,12 @@ class index(MixedObject):
 
             self.view.data = {"tags": similar,
                               "tag": top,
-                              "page": page,
-                              "filter": orig,
-                              "v": view,
-                              "q": query}
+                              "page": page}
             return self.view
 
         else:
-            # TODO: KILL
-            self.view.template = "public/common/tags"
+            self.view.template = "public/phots/tags"
 
-            self.view.data = {"tags": all_tags,
-                              "nav": "phots",
-                              "type": "Phots",
-                              "where": "phots"}
+            self.view.data = {"tags": all_tags}
 
             return self.view

@@ -25,6 +25,8 @@ buckets:
 flush:
   rethink:
     users: false
+    phots: true
+    notes: true
 
   redis:
     session: false

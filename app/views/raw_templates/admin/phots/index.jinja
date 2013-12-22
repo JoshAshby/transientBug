@@ -10,11 +10,13 @@ border: 1px solid;
 padding: 5px;}"
 +++
 
+{% set filter=req.getParam("filter", "all") %}
+
 <div class="row">
   <div class="col-md-6 col-sm-12">
     <ul class="nav nav-pills" id="myTab">
-      <li {{ 'class="active"' if what!="enabled" }}><a href="/admin/phots">Disabled</a></li>
-      <li {{ 'class="active"' if what=="enabled" }}><a href="/admin/phots/enabled">Enabled</a></li>
+      <li {{ 'class="active"' if req.id!="enabled" }}><a href="/admin/phots">Disabled</a></li>
+      <li {{ 'class="active"' if req.id=="enabled" }}><a href="/admin/phots/enabled">Enabled</a></li>
     </ul>
   </div>
   <div class="col-sm-12 col-md-6">
