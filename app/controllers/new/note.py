@@ -34,7 +34,7 @@ class note(MixedObject):
         tags = self.request.getParam("tags")
 
         if tags:
-            tag = [ bit.lstrip().rstrip() for bit in tags.split(",") ]
+            tag = [ bit.lstrip().rstrip().replace(" ", "_").lower() for bit in tags.split(",") ]
         else:
             tag = []
 

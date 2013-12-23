@@ -41,10 +41,11 @@ class index(MixedObject):
         if query:
             similar, top = s.search_tags(all_tags, query)
 
+            top_other = top.replace("_", " ")
             top = top.replace(" ", "_")
 
             q = q.filter(r.row["tags"]\
-                 .filter(lambda t: t == top ).count() > 0)
+                 .contains(lambda t: (t == top) | (t == top_other) ))
 
             res = RethinkCollection(pm.Phot, query=q)
             page = Paginate(res, self.request, "title")

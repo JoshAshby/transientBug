@@ -46,7 +46,7 @@ class index(MixedObject):
 
         tag = []
         if tags:
-            tag = [ bit.lstrip().rstrip() for bit in tags.split(",") ]
+            tag = [ bit.lstrip().rstrip().replace(" ", "_").lower() for bit in tags.split(",") ]
 
         f = list(r.table(nm.Note.table).filter({"short_code": self.request.id}).run())
 

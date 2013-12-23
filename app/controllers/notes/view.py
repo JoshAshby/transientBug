@@ -35,7 +35,7 @@ class view(MixedObject):
                     return Unauthorized()
 
             if self.request.session.has_notes:
-                self.view.scripts = ["note"]
+                self.view.scripts = ["transientbuug/note"]
 
             if self.request.session.id:
                 if note.public:

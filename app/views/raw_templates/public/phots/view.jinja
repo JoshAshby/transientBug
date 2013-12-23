@@ -42,7 +42,7 @@ nav: phots
         {% endif %}
         <br>
         {% for tag in phot.tags %}
-          <a href="/phots/tags/{{tag}}"><span class="label label-theme">{{tag}}</span></a>
+          <a href="/phots/tags/{{tag}}"><span class="label label-theme">{{tag|replace("_", " ")}}</span></a>
         {% endfor %}
         <br>
         <br>

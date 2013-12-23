@@ -26,7 +26,7 @@ nav: phots
 {% if tags %}
   <div class="tags">
     {% for tag in tags %}
-      <a href="/phots/tags/{{tag}}"><span class="label label-theme">{{tag}}</span></a>
+      <a href="/phots/tags/{{tag}}"><span class="label label-theme">{{tag|replace("_", " ")}}</span></a>
     {% endfor %}
   </div>
 {% else %}
