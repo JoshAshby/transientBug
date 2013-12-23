@@ -28,6 +28,8 @@ class Note(RethinkModel):
             title = "Untitled Note @ %s" % time.format("YY/MM/DD HH:mm:ss")
         created = time.timestamp
 
+        new_tags = [ tag.replace(" ", "_").lower() for tag in tags ]
+
         code_good = False
         code = ""
         while not code_good:
@@ -41,7 +43,7 @@ class Note(RethinkModel):
                           title=title,
                           contents=contents,
                           public=public,
-                          tags=tags,
+                          tags=new_tags,
                           short_code=code,
                           disable=False)
 

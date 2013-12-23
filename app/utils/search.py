@@ -24,27 +24,30 @@ def photo_filter(filt):
 
     return orig
 
-def search_tags(tags, query, min_score=65):
-    query = query.lower()
+def search_tags(tags, query, min_score=75):
+    q = query.replace("_", " ").lower()
+
+    match = ""
+
     tag_scores = {}
     for tag in tags:
         tag_search = tag.replace("_", " ").lower()
-        score = fuzz.partial_ratio(query, tag_search)
-        if score >= min_score:
-            tag_scores[tag] = score
+
+        if tag_search == q:
+            match = query
+        else:
+            score = fuzz.partial_ratio(query, tag_search)
+            if score >= min_score:
+                tag_scores[tag] = score
 
     final_tags = []
     final_tags.extend(tag_scores.copy().keys())
 
-    if final_tags:
-        if query in final_tags:
-            final_tags.pop(final_tags.index(query))
-            query.replace(" ", "_")
-            return final_tags, query
-        else:
-            top_match = max(tag_scores, key=tag_scores.get)
-            final_tags.pop(final_tags.index(top_match))
-            top_match.replace(" ", "_")
-            return final_tags, top_match
+    if match:
+        return final_tags, match
+    elif final_tags:
+        top_match = max(tag_scores, key=tag_scores.get)
+        final_tags.pop(final_tags.index(top_match))
+        return final_tags, top_match
     else:
         return [], ""

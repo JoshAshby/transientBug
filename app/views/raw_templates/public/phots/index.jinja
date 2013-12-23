@@ -96,7 +96,7 @@ scripts: "
                 {% if pic.tags %}
                   {% for tag in pic.tags %}
                     <a href="/phots/tags/{{ tag }}">
-                      <span class="label label-theme">{{tag}}</span>
+                      <span class="label label-theme">{{tag|replace("_", " ")}}</span>
                     </a>
                   {% endfor %}
                 {% endif %}

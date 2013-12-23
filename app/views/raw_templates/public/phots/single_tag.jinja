@@ -19,7 +19,7 @@ scripts: "
                 <a href="/new/phot" class="btn btn-theme btn-sm">Add</a>
               </span>
             {% endif %}
-            <input type="text" class="form-control input-sm" name="q" value="{{ tag }}" placeholder="Search Tags...">
+            <input type="text" class="form-control input-sm" name="q" value="{{ tag|replace("_", " ") }}" placeholder="Search Tags...">
             <span class="input-group-btn">
               <button class="btn btn-theme btn-sm" type="submit"><i class="fa fa-search"></i></button>
             </span>
@@ -62,12 +62,12 @@ scripts: "
 
 <div class="row">
   <div class="col-md-12">
-    <b>Top match: </b> <span class="label label-theme">{{tag}}</span><br>
+    <b>Top match: </b> <span class="label label-theme">{{tag|replace("_", " ")}}</span><br>
     <br>
     {% if tags %}
       <b>Similar tags: </b>
       {% for tag in tags %}
-        <a href="/phots/tags/{{tag}}"><span class="label label-theme">{{tag}}</span></a> 
+        <a href="/phots/tags/{{tag}}"><span class="label label-theme">{{tag|replace("_", " ")}}</span></a> 
       {% endfor %}
     {% else %}
       <p>No similar tags found...</p>
@@ -114,7 +114,7 @@ scripts: "
                 {% if pic.tags %}
                   {% for tag in pic.tags %}
                     <a href="/phots/tags/{{ tag }}">
-                      <span class="label label-theme">{{tag}}</span>
+                      <span class="label label-theme">{{tag|replace("_", " ")}}</span>
                     </a>
                   {% endfor %}
                 {% endif %}

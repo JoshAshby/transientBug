@@ -28,9 +28,7 @@ class index(MixedObject):
     def GET(self):
         orig = self.request.getParam("filter", "all")
         filt = dbu.phot_filter(orig)
-        tag = self.request.id or self.request.getParam("q")
-
-        query = tag.replace("_", " ")
+        query = self.request.id or self.request.getParam("q")
 
         q = dbu.rql_where_not(pm.Phot.table, "disable", True)
         q = q.filter(lambda doc: doc["filename"].match(filt))
@@ -42,6 +40,8 @@ class index(MixedObject):
 
         if query:
             similar, top = s.search_tags(all_tags, query)
+
+            top = top.replace(" ", "_")
 
             q = q.filter(r.row["tags"]\
                  .filter(lambda t: t == top ).count() > 0)

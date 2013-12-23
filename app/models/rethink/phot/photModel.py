@@ -41,6 +41,8 @@ class Phot(RethinkModel):
             title = "Untitled Phot @ %s" % time.format("YY/MM/DD HH:mm:ss")
         created = time.timestamp
 
+        new_tags = [ tag.replace(" ", "_").lower() for tag in tags ]
+
         code_good = False
         code = ""
         while not code_good:
@@ -48,10 +50,6 @@ class Phot(RethinkModel):
             f = r.table(cls.table).filter({"short_code": code}).count().run()
             if f == 0:
                 code_good = True
-
-        new_tags = []
-        for tag in tags:
-            new_tags.append(tag.replace(" ", "_"))
 
         what = cls.create(user=user,
                           created=created,
@@ -76,6 +74,8 @@ class Phot(RethinkModel):
             title = "Untitled Phot @ %s" % time.format("YY/MM/DD HH:mm:ss")
         created = time.timestamp
 
+        new_tags = [ tag.replace(" ", "_") for tag in tags ]
+
         code_good = False
         code = ""
         while not code_good:
@@ -83,10 +83,6 @@ class Phot(RethinkModel):
             f = r.table(cls.table).filter({"short_code": code}).count().run()
             if f == 0:
                 code_good = True
-
-        new_tags = []
-        for tag in tags:
-            new_tags.append(tag.replace(" ", "_"))
 
         what = cls.create(user=user,
                           created=created,
