@@ -1,0 +1,10 @@
+- whoosh searching of notes
+- better way to access notes by user and public/private
+- notes tag controller
+- better tag searching for phots and notes
+- media upload/pairing for notes
+- rework the notes editor page
+- better adim panel
+- better homepage
+- move image downloading to a daemon so it doesn't halt everything
+- management & error viewing page for said daemon

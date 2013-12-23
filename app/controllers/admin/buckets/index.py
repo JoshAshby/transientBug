@@ -22,6 +22,7 @@ class index(MixedObject):
     _title = "Buckets"
     _default_tmpl = "admin/buckets/index"
     def GET(self):
+        self.view.partial("sidebar", "partials/admin/sidebar", {"command": "buckets"})
         page = Paginate(self.request.buckets.list, self.request)
         self.view.data = {"page": page}
         return self.view

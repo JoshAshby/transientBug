@@ -28,6 +28,7 @@ class index(MixedObject):
     _title = "Phots"
     _default_tmpl = "admin/phots/index"
     def GET(self):
+        self.view.partial("sidebar", "partials/admin/sidebar", {"command": "phots"})
         what = self.request.id
         orig = self.request.getParam("filter", "all")
         filt = dbu.phot_filter(orig)

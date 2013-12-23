@@ -1,79 +1,38 @@
 +++
-base: skeletons/header
+base: skeletons/sidebar_nav
 theme_color: orange
 nav: admin_home
-breadcrumbs_top: False
+
+scriptFiles:
+ - transientbug/admin/dashboard
 +++
-<br>
-
-<div class="btn-group btn-group-justified">
-  <a href="#" class="btn disabled btn-theme">Jump to:</a>
-  <a href="#basics" class="btn btn-theme">Basics</a>
-  <a href="#users" class="btn btn-theme">Users</a>
-  <a href="#system" class="btn btn-theme">System</a>
-</div>
-
-<br>
 
 <div class="row">
-  <div class="col-md-10 col-sm-10">
-    <h2 id="basics">Basics</h2>
+  <div class="col-md-6">
+    <div class="panel">
+      <div class="panel-heading">
+        <h3 class="panel-title">Quick New</h3>
+      </div>
+      <div class="panel-content">
+        <div class="btn-group btn-group-large btn-group-justified">
+          <a href="/admin/users/new" class="btn btn-theme btn-lg">
+            <i class="fa fa-user"></i>
+            <p>User</p>
+          </a>
+        </div>
+      </div>
+    </div>
   </div>
-  <div class="col-md-2 col-sm-10">
-    <a href="#" class="btn btn-default pull-right"><i class="fa fa-chevron-up"></i></a>
-  </div>
-</div>
-<div class="row">
-  <div class="col-md-12">
-    <dl class="dl-horizontal">
-      <dt><a href="/admin/announcements">Site Announcements</a></dt>
-      <dd>Manage which announcements are currently active and when they will start and end.</dd>
-
-      <dt><a href="/admin/buckets">Buckets</a></dt>
-      <dd>Manage feature flags for the site; These could enable or disable various advanced features, or some helpful debugging features.</dd>
-
-    </dl>
-  </div>
-</div>
-<hr>
-
-<div class="row">
-  <div class="col-md-10 col-sm-10">
-    <h2 id="users">Users</h2>
-  </div>
-  <div class="col-md-2 col-sm-10">
-    <a href="#" class="btn btn-default pull-right"><i class="fa fa-chevron-up"></i></a>
-  </div>
-</div>
-<div class="row">
-  <div class="col-md-12">
-    <dl class="dl-horizontal">
-      <dt><a href="/admin/users">Users</a></dt>
-      <dd>Play god with the user accounts. They make excelent hackysacks too.</dd>
-
-      <dt><a href="/admin/phots">Phots</a></dt>
-      <dd>Manage the photo collection</dd>
-
-      <dt><a href="/admin/notes">Notes</a></dt>
-      <dd>ALL THE WORDS</dd>
-    </dl>
+  <div class="col-md-6">
+    <div class="panel">
+      <div class="panel-heading">
+        <h3 class="panel-title">Quick Links</h3>
+      </div>
+      <ul class="list-group">
+        <li class="list-group-item"><a href="/admin/announcements"><i class="fa fa-fw fa-bullhorn"></i> Announcements</a></li>
+        <li class="list-group-item"><a href="/admin/users"><i class="fa fa-fw fa-user"></i> Users</a></li>
+        <li class="list-group-item"><a href="/admin/phots"><i class="fa fa-fw fa-picture-o"></i> Phots</a></li>
+      </ul>
+    </div>
   </div>
 </div>
-<hr>
-
-<div class="row">
-  <div class="col-md-10 col-sm-10">
-    <h2 id="system">System</h2>
-  </div>
-  <div class="col-md-2 col-sm-10">
-    <a href="#" class="btn btn-default pull-right"><i class="fa fa-chevron-up"></i></a>
-  </div>
-</div>
-<div class="row">
-  <div class="col-md-12">
-    <dl class="dl-horizontal">
-    # TODO: METOOPLZ
-    </dl>
-  </div>
-</div>
-<hr>

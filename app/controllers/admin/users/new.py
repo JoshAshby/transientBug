@@ -25,6 +25,7 @@ class new(MixedObject):
     _title = "New User"
     _default_tmpl = "admin/users/new"
     def GET(self):
+        self.view.partial("sidebar", "partials/admin/sidebar", {"command": "users"})
         return self.view
 
     def POST(self):

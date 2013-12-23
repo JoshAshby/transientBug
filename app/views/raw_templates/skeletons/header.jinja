@@ -13,7 +13,7 @@
     <link href="//netdna.bootstrapcdn.com/bootswatch/3.0.0/cyborg/bootstrap.min.css" rel="stylesheet">
 
     <!-- Begin page stylsheets -->
-    <link href="/static/css/{{theme_color}}_theme.css" rel="stylesheet">
+    <link href="/static/css/themes/{{theme_color}}_theme.css" rel="stylesheet">
     {% for sheet in stylesheets %}
       <link href="/static/css/{{sheet}}.css" rel="stylesheet">
     {% endfor %}
@@ -81,7 +81,13 @@
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown">Heya, {{req.session.username}} <i class="fa fa-caret-down"></i></a>
                     <ul class="dropdown-menu">
                       {% if req.session.has_admin %}
-                      <li><a href="/admin"><i class="fa fa-cogs"></i> Admin</a></li>
+                        <li class="menu-item dropdown dropdown-submenu"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-cogs"></i> Admin</a>
+                          <ul class="dropdown-menu">
+                            <li class="menu-item"><a href="/admin">Dashboard</a></li>
+                            <li class="menu-item"><a href="/admin/users">Users</a></li>
+                            <li class="menu-item"><a href="/admin/announcements">Announcements</a></li>
+                          </ul>
+                        </li>
                         <li class="divider"></li>
                       {% endif %}
                       <li><a href="/logout"><i class="fa fa-sign-out"></i> Logout</a></li>
@@ -203,6 +209,28 @@
       {% endif %}
 
       {{scripts}}
+
+
+      // Multi level menus from: http://bootply.com/92442
+      $('ul.dropdown-menu [data-toggle=dropdown]').on('click', function(event) {
+        // Avoid following the href location when clicking
+        event.preventDefault(); 
+        // Avoid having the menu to close when clicking
+        event.stopPropagation(); 
+        // If a menu is already open we close it
+        //$('ul.dropdown-menu [data-toggle=dropdown]').parent().removeClass('open');
+        // opening the one you clicked on
+        $(this).parent().addClass('open');
+
+        var menu = $(this).parent().find("ul");
+        var menupos = menu.offset();
+        if ((menupos.left + menu.width()) + 30 > $(window).width()) {
+            var newpos = - menu.width();
+        } else {
+            var newpos = $(this).parent().width();
+        }
+        menu.css({ left:newpos });
+      });
     </script>
     <!-- End page scripts -->
     <br>

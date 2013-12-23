@@ -6,47 +6,12 @@
   font-family: 'Noto Sans', sans-serif;
 }
 
-/*body {*/
-  /*background: url(/static/css/imgs/subtle_carbon.png) repeat;*/
-/*}*/
-
 a {
   color: lighten(@theme, 10%);
 
   &:hover {
     color: darken(@theme, 10%); //#507800;
   }
-}
-
-.typeahead {
-  input:not([type=submit]):not([type=file]) {
-    border: 0px;
-    margin: 0px;
-    padding: 5px;
-    outline: none;
-  }
-
-  .twitter-typeahead {
-    display: inline;
-    top: -1px;
-    position: relative;
-  }
-
-  .tt-hint {
-    height: 30px;
-    top: 0px;
-    padding-top: 1px;
-    width: 100%;
-  }
-
-  .tt-query {
-    width: 100%;
-  }
-
-  .tt-dropdown-menu {
-    top: inherit;
-  }
-  font-size: 12px;
 }
 
 h4 {
@@ -161,6 +126,38 @@ h4 {
   margin: 0px;
 }
 
+
+// Typeahead styling, because fuck typeahead
+.typeahead {
+  input:not([type=submit]):not([type=file]) {
+    border: 0px;
+    margin: 0px;
+    padding: 5px;
+    outline: none;
+  }
+
+  .twitter-typeahead {
+    display: inline;
+    top: -1px;
+    position: relative;
+  }
+
+  .tt-hint {
+    height: 30px;
+    top: 0px;
+    padding-top: 1px;
+    width: 100%;
+  }
+
+  .tt-query {
+    width: 100%;
+  }
+
+  .tt-dropdown-menu {
+    top: inherit;
+  }
+  font-size: 12px;
+}
 .tt-dropdown-menu {
   min-width: 160px;
   margin-top: 2px;
@@ -176,30 +173,67 @@ h4 {
      -moz-background-clip: padding;
           background-clip: padding-box;
 }
-
 .tt-suggestion {
   display: block;
   padding: 3px 20px;
 }
-
 .tt-suggestion.tt-is-under-cursor {
   color: white;
   background-color: @theme;
 }
-
 .tt-suggestion.tt-is-under-cursor a {
   color: @theme;
 }
-
 .tt-suggestion p {
   margin: 0;
 }
-
 .tt-hint {
   right: 1px;
   color: lighten(#888, 20%);
 }
-
 .tt-query {
   color: black;
+}
+
+
+// Multilevel menus from http://bootply.com/92442
+.dropdown-submenu {
+  position:relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top:0;
+  left:100%;
+  margin-top:-6px;
+  margin-left:-1px;
+  -webkit-border-radius:0 6px 6px 6px;
+  -moz-border-radius:0 6px 6px 6px;
+  border-radius:0 6px 6px 6px;
+}
+/*.dropdown-submenu:hover>.dropdown-menu {
+  display:block;
+}*/
+.dropdown-submenu>a:after {
+  display:block;
+  content:" ";
+  float:right;
+  width:0;
+  height:0;
+  border-color:transparent;
+  border-style:solid;
+  border-width:5px 0 5px 5px;
+  border-left-color:#cccccc;
+  margin-top:5px;
+  margin-right:-10px;}
+.dropdown-submenu:hover>a:after {
+  border-left-color:#ffffff;
+}
+.dropdown-submenu.pull-left {
+  float:none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left:-100%;
+  margin-left:10px;
+  -webkit-border-radius:6px 0 6px 6px;
+  -moz-border-radius:6px 0 6px 6px;
+  border-radius:6px 0 6px 6px;
 }

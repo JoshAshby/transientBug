@@ -25,6 +25,7 @@ class edit(MixedObject):
     _title = "Site Announcements"
     _default_tmpl = "admin/announcements/edit"
     def GET(self):
+        self.view.partial("sidebar", "partials/admin/sidebar", {"command": "announcements"})
         announcement_id = self.request.id
 
         announcement = brm.SeshatRedisModel("announcement:"+announcement_id)

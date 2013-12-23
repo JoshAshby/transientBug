@@ -1,4 +1,5 @@
 +++
+base: skeletons/sidebar_nav
 theme_color: orange
 
 nav: admin_annoucements
@@ -6,6 +7,7 @@ breadcrumbs_top: True
 
 scriptFiles:
   - lib/bootstrap-datetimepicker.min
+  - transientbug/admin/dashboard
 
 stylesheets:
   - lib/bootstrap-datetimepicker.min
@@ -21,9 +23,7 @@ scripts: "
   "
 +++
 
-<ol class="breadcrumb">
-  <span class="pull-right">T'would be {{now}}</span>
-</ol>
+<span class="pull-right">T'would be {{now}}</span>
 
 <div class="row">
   <div class="col-md-8 col-md-offset-2 col-sm-12">

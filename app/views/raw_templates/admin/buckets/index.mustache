@@ -1,4 +1,5 @@
 +++
+base: skeletons/sidebar_nav
 theme_color: orange
 
 nav: admin_buckets
@@ -6,11 +7,12 @@ breadcrumbs_top: True
 
 scriptFiles:
   - transientbug/admin/bucket
+  - transientbug/admin/dashboard
 +++
 <div class="row">
-  <div class="col-md-4 col-md-offset-2 col-sm-12">
+  <div class="col-md-6 col-sm-12">
   </div>
-  <div class="col-sm-12 col-md-4">
+  <div class="col-sm-12 col-md-6">
     <form class="form-inline pull-right" role="pagination_options">
       {{{page.options}}}
     </form>
@@ -18,7 +20,7 @@ scriptFiles:
 </div>
 <br>
 <div class="row">
-  <div class="col-md-8 col-md-offset-2 col-sm-12">
+  <div class="col-md-12">
     {{#page.pail}}
       <div class="row">
         <div class="col-md-9">

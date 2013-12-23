@@ -1,4 +1,5 @@
 +++
+base: skeletons/sidebar_nav
 theme_color: orange
 nav: admin_phots
 breadcrumbs_top: True
@@ -8,6 +9,9 @@ width: 100px;
 margin: 2px;
 border: 1px solid;
 padding: 5px;}"
+
+scriptFiles:
+ - transientbug/admin/dashboard
 +++
 
 {% set filter=req.getParam("filter", "all") %}
