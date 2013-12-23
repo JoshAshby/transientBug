@@ -91,7 +91,7 @@
                 </ul>
               {% else %}
                 <ul class="nav navbar-nav navbar-right" style="margin-right: 15px">
-                  <li><a id="nav_extra_menu_btn" href="#" data-html="true" data-content='<form role="logic" action="/login" method="POST"><div class="form-group"><input type="text" class="form-control" placeholder="Username..." name="username"></div><div class="form-group"><input type="password" class="form-control" placeholder="Password..." name="password"></div><button type="submit" class="btn btn-default btn-theme btn-block">Login</button></form>' data-container="body" data-title="Login" data-placement="bottom">Heya, stranger <i class="fa fa-chevron-down"></i></a>
+                  <li><a id="nav_extra_menu_btn" href="#" data-html="true" data-content='<form role="logic" action="/login" method="POST"><div class="form-group"><input type="text" class="form-control" placeholder="Username..." name="username"></div><div class="form-group"><input type="password" class="form-control" placeholder="Password..." name="password"></div><input type="hidden" name="return-to" value="{{req.url.path}}" /><button type="submit" class="btn btn-default btn-theme btn-block">Login</button></form>' data-container="body" data-title="Login" data-placement="bottom">Heya, stranger <i class="fa fa-chevron-down"></i></a>
                   </li>
                 </ul>
               {% endif %}

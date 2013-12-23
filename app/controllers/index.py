@@ -11,13 +11,15 @@ joshuaashby@joshashby.com
 """
 from seshat.route import autoRoute
 from seshat.MixedObject import MixedObject
-from seshat.objectMods import login
+from seshat.actions import Redirect
 
 
-@login(redirect="/phots")
 @autoRoute()
 class index(MixedObject):
     _title = "Home"
     _default_tmpl = "public/index/index"
     def GET(self):
-        return self.view
+        if self.request.session.id:
+            return self.view
+        else:
+            return Redirect("/phots")

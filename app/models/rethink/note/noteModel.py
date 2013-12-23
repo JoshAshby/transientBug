@@ -66,7 +66,7 @@ class Note(RethinkModel):
     @property
     def author(self):
         if not hasattr(self, "_formated_author"):
-            self._formated_author = um.User(self.user).username
+            self._formated_author = um.User(self.user)
 
         return self._formated_author
 

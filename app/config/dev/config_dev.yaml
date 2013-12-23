@@ -19,8 +19,9 @@ files:
 dirs:
   pid: pid/
   log: logs/
-  base: /srv/http/transientbug/
+  search_index: s_index/
   templates: views/raw_templates/
+  base: /srv/http/transientbug/
   screenshots: /srv/http/transientbug/scrn/
   gifs: /srv/http/transientbug/i/
 

@@ -140,7 +140,10 @@ footer {
 .pagination > .active > span:focus,
 .nav-pills > li.active > a,
 .nav-pills > li.active > a:hover,
-.nav-pills > li.active > a:focus {
+.nav-pills > li.active > a:focus,
+.nav-tabs > li.active > a,
+.nav-tabs > li.active > a:hover,
+.nav-tabs > li.active > a:focus {
   color: white;
   background-color: #b30000;
   border: #b30000 solid 1px;

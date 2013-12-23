@@ -1,24 +1,23 @@
 +++
 theme_color: red
-base: skeleton_header_navbar
-nav:
-  notes: true
+base: skeletons/header
+nav: notes
 +++
 <br>
 <div class="row">
   <div class="col-md-12">
     <h2>
       <small>
-        {% if req.session.id==note.user %}
+        {% if req.session.id==note.author.id %}
           Yours! <a href="/notes/edit/{{note.short_code}}">(Edit)</a>
         {% else %}
-          By <a href="/notes/by/user/{{note.formated_author}}">{{note.formated_author}}</a>
+          By {{note.author.username}}
         {% endif %} - {{note.formated_time}}
       </small>
     </h2>
     {{note.formated_contents}}
     {% for tag in note.tags %}
-      <a href="/notes/by/tags/{{tag}}"><span class="label label-theme">{{tag}}</span></a>
+      <a href="/notes/tags/{{tag}}"><span class="label label-theme">{{tag}}</span></a>
     {% endfor %}
   </div>
 </div>

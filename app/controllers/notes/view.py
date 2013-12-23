@@ -47,6 +47,8 @@ class view(MixedObject):
             else:
                 title = note.title
 
+            title = "<h1>{}</h1>".format(title)
+
             self.view.data = {"note": note, "header": title}
             return self.view
 

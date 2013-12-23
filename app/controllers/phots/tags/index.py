@@ -18,11 +18,13 @@ from rethinkORM import RethinkCollection
 import models.rethink.phot.photModel as pm
 import models.utils.dbUtils as dbu
 
+import utils.search as s
+
 
 @autoRoute()
 class index(MixedObject):
     _title = "phots"
-    _default_tmpl = "public/phots/view_tag"
+    _default_tmpl = "public/phots/single_tag"
     def GET(self):
         orig = self.request.getParam("filter", "all")
         filt = dbu.phot_filter(orig)
@@ -39,7 +41,7 @@ class index(MixedObject):
             .coerce_to('array').run()
 
         if query:
-            similar, top = dbu.search_tags(all_tags, query)
+            similar, top = s.search_tags(all_tags, query)
 
             q = q.filter(r.row["tags"]\
                  .filter(lambda t: t == top ).count() > 0)

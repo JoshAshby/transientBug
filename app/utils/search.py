@@ -46,4 +46,4 @@ def search_tags(tags, query, min_score=85):
             top_match.replace(" ", "_")
             return final_tags, top_match
     else:
-        raise Exception("Could not find any matching tags")
+        return [], ""
