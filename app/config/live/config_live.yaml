@@ -1,0 +1,33 @@
+appName: &APP leach
+logName: *APP
+
+debug: true
+
+port: 8000
+address: 127.0.0.1
+use_pool: true
+max_connections: 10000
+
+time_format: "MM/DD/YYYY hh:mm a"
+
+files:
+  pid: leach.pid
+  log: leach.log
+  stderr: leach_error.log
+  stdout: leach_out.log
+
+dirs:
+  pid: pid/
+  log: logs/
+  search_index: s_index/
+  templates: views/raw_templates/
+  base: /var/www/transientbug/html/
+  screenshots: /var/www/transientbug/html/scrn/
+  gifs: /var/www/transientbug/html/i/
+
+databases:
+  rethink:
+    db: app
+  redis:
+    db: 1
+    URL: localhost

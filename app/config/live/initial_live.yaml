@@ -1,0 +1,27 @@
+users:
+  - username: bug
+    password: josh
+    email: joshuaashby@joshashby.com
+    groups:
+      - root
+
+tables:
+  - users
+  - notes
+  - phots
+
+buckets:
+  enable500Error:
+    status: false
+    name: Enable errors on 500 pages
+    description: Enable the display of the server errors on 500 pages
+
+flush:
+  rethink:
+    users: false
+    phots: false
+    notes: false
+
+  redis:
+    session: false
+    bucket: false
