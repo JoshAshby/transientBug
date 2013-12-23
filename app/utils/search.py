@@ -24,10 +24,11 @@ def photo_filter(filt):
 
     return orig
 
-def search_tags(tags, query, min_score=85):
+def search_tags(tags, query, min_score=65):
+    query = query.lower()
     tag_scores = {}
     for tag in tags:
-        tag_search = tag.replace("_", " ")
+        tag_search = tag.replace("_", " ").lower()
         score = fuzz.partial_ratio(query, tag_search)
         if score >= min_score:
             tag_scores[tag] = score

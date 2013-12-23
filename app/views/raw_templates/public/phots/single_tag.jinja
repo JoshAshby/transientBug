@@ -62,11 +62,12 @@ scripts: "
 
 <div class="row">
   <div class="col-md-12">
-    <b>Top match: </b> {{tag}}<br>
+    <b>Top match: </b> <span class="label label-theme">{{tag}}</span><br>
+    <br>
     {% if tags %}
       <b>Similar tags: </b>
       {% for tag in tags %}
-        <span class="label label-theme"><a href="/phots/tags/{{tag}}">{{tag}}</a></span> 
+        <a href="/phots/tags/{{tag}}"><span class="label label-theme">{{tag}}</span></a> 
       {% endfor %}
     {% else %}
       <p>No similar tags found...</p>
