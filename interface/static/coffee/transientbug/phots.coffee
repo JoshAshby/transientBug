@@ -9,7 +9,9 @@ $ ->
     limit: 10
 
   $("#views").click ->
-    $(this).parents("form").submit()
+    setTimeout ->
+      $("#views").parents("form").submit()
+    , 100
 
   $('.thumbnail_h6').tooltip()
 

@@ -13,7 +13,9 @@
       limit: 10
     });
     $("#views").click(function() {
-      return $(this).parents("form").submit();
+      return setTimeout(function() {
+        return $("#views").parents("form").submit();
+      }, 100);
     });
     $('.thumbnail_h6').tooltip();
     $(".twitter-typeahead").removeAttr("style");
