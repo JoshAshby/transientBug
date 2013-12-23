@@ -1,18 +1,21 @@
 +++
 nav: phots
+scriptFiles:
+ - lib/typeahead.min
+ - transientbug/phots
 +++
 
 <div class="row">
   <div class="col-md-6 col-sm-12">
     <form method="GET" action="/phots/tags" class="form-inline">
 
-      <div class="input-group">
+      <div class="input-group typeahead">
         {% if req.session.has_phots %}
           <span class="input-group-btn">
             <a href="/new/phot" class="btn btn-theme btn-sm">Add</a>
           </span>
         {% endif %}
-        <input type="text" class="form-control input-sm" name="q" placeholder="Search...">
+        <input type="text" class="form-control input-sm" name="q" id="q" placeholder="Search...">
         <span class="input-group-btn">
           <button class="btn btn-theme btn-sm" type="submit"><i class="fa fa-search"></i></button>
         </span>

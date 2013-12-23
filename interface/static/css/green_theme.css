@@ -21,6 +21,32 @@ a {
 a:hover {
   color: #558000;
 }
+.typeahead {
+  font-size: 12px;
+}
+.typeahead input:not([type=submit]):not([type=file]) {
+  border: 0px;
+  margin: 0px;
+  padding: 5px;
+  outline: none;
+}
+.typeahead .twitter-typeahead {
+  display: inline;
+  top: -1px;
+  position: relative;
+}
+.typeahead .tt-hint {
+  height: 30px;
+  top: 0px;
+  padding-top: 1px;
+  width: 100%;
+}
+.typeahead .tt-query {
+  width: 100%;
+}
+.typeahead .tt-dropdown-menu {
+  top: inherit;
+}
 h4 a {
   text-decoration: none;
   color: white;
@@ -189,6 +215,7 @@ footer {
   margin: 0;
 }
 .tt-hint {
+  right: 1px;
   color: #bbbbbb;
 }
 .tt-query {

@@ -1,9 +1,9 @@
 +++
 nav: phots
 
-scripts: "
-      $('.thumbnail_h6').tooltip();
-  "
+scriptFiles:
+ - lib/typeahead.min
+ - transientbug/phots
 +++
 
 {% if page.pail %}
@@ -13,13 +13,13 @@ scripts: "
     <div class="col-md-5 col-sm-12">
       <form method="GET" action="/phots/tags" class="form-inline">
         <div class="form-group">
-          <div class="input-group">
+          <div class="input-group typeahead">
             {% if req.session.has_phots %}
               <span class="input-group-btn">
                 <a href="/new/phot" class="btn btn-theme btn-sm">Add</a>
               </span>
             {% endif %}
-            <input type="text" class="form-control input-sm" name="q" value="" placeholder="Search Tags...">
+            <input type="text" class="form-control input-sm" name="q" id="q" value="" placeholder="Search Tags...">
             <span class="input-group-btn">
               <button class="btn btn-theme btn-sm" type="submit"><i class="fa fa-search"></i></button>
             </span>
@@ -30,7 +30,7 @@ scripts: "
 
     <div class="col-sm-12 col-md-7">
       <form class="form-inline pull-right" role="pagination_options">
-        <div class="btn-group" data-toggle="buttons">
+        <div class="btn-group" data-toggle="buttons" id="views">
           <label class="btn btn-default btn-sm {{ 'active' if v=="cards" }}">
             <input type="radio" name="v" value="cards" {{ 'checked' if v=="cards" }}/><i class="fa fa-th"></i>
           </label>

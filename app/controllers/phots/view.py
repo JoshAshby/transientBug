@@ -48,7 +48,6 @@ class view(MixedObject):
 
         if self.request.session.has_phots:
             self.view.scripts = ["pillbox",
-                                 "lib/typeahead.min",
                                  "transientbug/phot"]
             self.view.stylesheets = ["pillbox"]
 
