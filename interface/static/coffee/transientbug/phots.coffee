@@ -4,7 +4,7 @@ $ ->
     async: false
 
   $('#q').typeahead
-    name: 'phots_tags'
+    name: 'tag_search'
     local: tags.responseJSON[0]["tags"]
     limit: 10
 

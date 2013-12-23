@@ -46,11 +46,6 @@ class view(MixedObject):
 
         self.view.data = {"phot": photo}
 
-        if self.request.session.has_phots:
-            self.view.scripts = ["pillbox",
-                                 "transientbug/phot"]
-            self.view.stylesheets = ["pillbox"]
-
         return self.view
 
     def POST(self):

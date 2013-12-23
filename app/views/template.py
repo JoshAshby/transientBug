@@ -21,6 +21,7 @@ import logging
 import yaml
 import jinja2
 import arrow
+import copy
 
 logger = logging.getLogger(c.general["logName"]+".views")
 
@@ -115,30 +116,38 @@ class templateFile(object):
         return template
 
     def render(self, data):
-        _data = self._config.copy()
+        _data = copy.deepcopy(self._config)
 
-        for bit in data:
-          if bit in _data:
-            ty = type(data[bit])
-            if ty is type(_data[bit]):
-              if ty is list:
-                _data[bit].extend(data[bit])
-              elif ty is dict:
-                _data[bit].update(data[bit])
-              elif ty is str:
-                _data[bit] += data[bit]
-              else:
-                _data[bit] = data[bit]
-            else:
-              logger.critical("Meh, miss matching data: {}, {} -> {}".format(bit, ty, type(_data[bit])) )
-          else:
-            _data[bit] = data[bit]
+        _data.update(data)
+
+        # Fuck this for the time being, and fuck pythons want to use copies as
+        # references to the original... >_>
+        #for bit in data:
+          #if bit in _data:
+            #ty = type(data[bit])
+            #if ty is type(_data[bit]):
+              #if ty is list:
+                #_data[bit].extend(data[bit])
+                #_data[bit] = list(set(_data[bit]))
+              #elif ty is dict:
+                #_data[bit].update(data[bit])
+              #elif ty is str:
+                #_data[bit] += data[bit]
+              #else:
+                #_data[bit] = data[bit]
+            #else:
+              #logger.critical("Meh, miss matching data: {}, {} -> {}".format(bit, ty, type(_data[bit])) )
+          #else:
+            #_data[bit] = data[bit]
 
         if(self.is_jinja):
-            return unicode(self.template.render(_data))
+            wat = unicode(self.template.render(_data))
         else:
             result = pystache.render(self.template, _data)
-            return unicode(result)
+            wat = unicode(result)
+
+        del _data
+        return wat
 
     def __contains__(self, item):
         return item in self._config
@@ -249,7 +258,7 @@ class template(object):
         template = tmpls[self._template]
         body = template.render(data)
 
-        data.update(template.config.copy())
+        data.update(template.config)
 
         if "base" in template:
             base = template["base"]
