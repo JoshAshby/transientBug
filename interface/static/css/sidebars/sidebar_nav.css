@@ -13,6 +13,7 @@ body {
     top: 0;
     left: 0;
     display: inline-block;
+    padding-bottom: 50px;
   }
   #main-wrapper {
     height: 100%;
@@ -29,9 +30,8 @@ body {
   }
   #sidebar-wrapper {
     height: 100%;
-    padding: 50px 0 0px 0;
+    padding: 50px 0 50px 0;
     position: fixed;
-    border-right: 1px solid black;
   }
   #sidebar {
     position: relative;
@@ -46,7 +46,13 @@ body {
     text-decoration: none;
     background-color: #222;
   }
+  .footer {
+    padding-top: 10px;
+  }
 }
 #show {
   margin-bottom: 10px;
+}
+.navbar-fixed-top {
+  border-width: 0px;
 }
