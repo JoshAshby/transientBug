@@ -99,27 +99,26 @@
       </div>
       <div id="main-wrapper" class="col-sm-10 pull-right">
 
-        {% if req.has_announcements and not hide_announcements %}
-          <div class="container container-alert">
-            <div class="row">
-              <div class="col-md-1 col-sm-1" style="text-align: center;">
-                <i class="fa fa-exclamation fa-4x"></i>
-              </div>
-              <div class="col-md-10 col-sm-10">
-                {% for announcement in req.announcements %}
-                  {{announcement}}
-                {% endfor %}
-              </div>
-            </div>
-          </div>
-        {% endif %}
-
         <div id="main">
           <div class="row" style="display: none">
             <div class="col-sm-12">
               <a href="#" id="show" class="btn btn-default btn-sm"><i class="fa fa-chevron-left fa-fw"></i> Show sidebar</a>
             </div>
           </div>
+
+          {% if req.has_announcements and not hide_announcements %}
+            <div class="alert alert-danger">
+              <div class="row">
+                <div class="col-md-1 col-sm-1" style="text-align: center;">
+                  <i class="fa fa-exclamation fa-2x"></i>
+                </div>
+                <div class="col-md-10 col-sm-10">
+                  {% for announcement in req.announcements %}
+                    {{announcement}}
+                  {% endfor %}
+                </div>
+              </div>
+            </div>
 
           {% if req.session.alerts %}
             <!-- Begin alerts section -->
