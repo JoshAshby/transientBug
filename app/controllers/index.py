@@ -20,6 +20,8 @@ class index(MixedObject):
     _default_tmpl = "public/index/index"
     def GET(self):
         if self.request.session.id:
+            self.view.partial("sidebar", "partials/public/index/sidebar",
+                             {"command": "home"})
             return self.view
         else:
             return Redirect("/phots")

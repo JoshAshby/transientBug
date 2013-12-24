@@ -97,17 +97,13 @@ footer {
 .thumbnail a.thumbnail:focus {
   border-color: #2a9fd6;
 }
-.btn-primary,
 .btn-theme {
   color: white;
   background-color: #2a9fd6;
   border: #2a9fd6 solid 1px;
 }
-.btn-primary:focus,
 .btn-theme:focus,
-.btn-primary:hover,
 .btn-theme:hover,
-.btn-primary:active,
 .btn-theme:active {
   background-color: #2180ac;
   border: #2180ac solid 1px;
@@ -144,6 +140,13 @@ footer {
   color: white;
   background-color: #2a9fd6;
   border: #2a9fd6 solid 1px;
+}
+.panel-theme {
+  border-color: #2a9fd6;
+}
+.panel-theme > .panel-heading {
+  background-color: #2a9fd6;
+  border-color: #2a9fd6;
 }
 .input-group .form-control {
   border: white solid 1px;

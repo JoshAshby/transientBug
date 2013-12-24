@@ -13,16 +13,14 @@ stylesheets:
   - lib/bootstrap-datetimepicker.min
 +++
 
-<span class="pull-right">T'would be {{now}}</span>
-
 <div class="row">
-  <div class="col-md-6 col-sm-12">
+  <div class="col-md-4 col-md-offset-2 col-sm-12">
     <ul class="nav nav-pills" id="myTab">
       <li class="active"><a href="#view" data-toggle="tab">View</a></li>
       <li><a href="#new" data-toggle="tab">New</a></li>
     </ul>
   </div>
-  <div class="col-sm-12 col-md-6">
+  <div class="col-sm-12 col-md-4">
     <form class="form-inline pull-right" role="pagination_options">
       {{{page.options}}}
     </form>
@@ -30,7 +28,7 @@ stylesheets:
 </div>
 <br>
 <div class="row">
-  <div class="col-sm-12">
+  <div class="col-md-8 col-md-offset-2 col-sm-12">
     <div id="myTabContent" class="tab-content">
       <div class="tab-pane active" id="view">
         {{#page.pail}}
@@ -42,12 +40,12 @@ stylesheets:
             <div class="col-md-3">
               <div class="btn-group pull-right">
                 {{#status}}
-                  <a href="#" data-id="{{id}}" class="btn btn-theme btn-sm toggle_btn" data-toggle="tooltip" title="Enabled" data-placement="auto left">
+                  <a href="#" data-id="{{id}}" class="btn btn-theme btn-sm toggle_btn" data-toggle="tooltip" title="Enabled" data-placement="left">
                     <i class="fa fa-check"></i>
                   </a>
                 {{/status}}
                 {{^status}}
-                  <a href="#" data-id="{{id}}" class="btn btn-default btn-sm toggle_btn" data-toggle="tooltip" title="Disabled" data-placement="auto left">
+                  <a href="#" data-id="{{id}}" class="btn btn-default btn-sm toggle_btn" data-toggle="tooltip" title="Disabled" data-placement="left">
                     <i class="fa fa-times"></i>
                   </a>
                 {{/status}}
@@ -85,7 +83,8 @@ stylesheets:
           <div class="caption">
             <form method="POST">
               <fieldset>
-                <legend>New Announcement...</legend>
+                <legend>New Announcement...
+                <small class="pull-right">T'would be {{now}}</small></legend>
                 <div class="form-group">
                   <div class="row">
                     <div class="col-md-6">
