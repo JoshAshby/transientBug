@@ -144,6 +144,7 @@ footer {
   border-color: #2a9fd6;
 }
 .panel-theme > .panel-heading {
+  color: white;
   background-color: #2a9fd6;
   border-color: #2a9fd6;
 }

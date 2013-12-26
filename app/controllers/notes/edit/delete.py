@@ -28,6 +28,7 @@ class delete(MixedObject):
         if f:
             note = nm.Note(**f[0])
             note.disable = True
+            note.save()
             return {"success": True}
 
         else:

@@ -11,53 +11,73 @@ stylesheets:
   - pillbox
 +++
 
-<div class="row">
-  {% if req.session.has_phots %}
-    <div class="col-md-6">
-      <div class="panel panel-theme">
-        <div class="panel-heading">
-          <h3 class="panel-title">Quick Phot Upload</h3>
-        </div>
-        <div class="panel-body">
-          <form method="POST" action="/new/phot" enctype="multipart/form-data">
-            <fieldset>
-              <div class="form-group">
-                <input type="file" class="form-control" id="file" name="file">
-              </div>
-
-              <div class="form-group">
-                <input type="text" class="form-control" id="title" name="title" placeholder="Image Title..." required>
-              </div>
-              <div class="form-group">
-                <input type="text" id="pillbox" name="tags">
-              </div>
-              <hr>
-              <button class="btn btn-theme btn-block" type="submit">Add</button>
-            </fieldset>
-          </form>
-        </div>
-      </div>
-    </div>
-  {% endif %}
-  {% if req.session.has_screenshots %}
-    <div class="col-md-6">
-      <div class="panel panel-primary">
-        <div class="panel-heading">
-          <h3 class="panel-title">Quick Screenshot Upload</h3>
-        </div>
-        <div class="panel-body">
-
-          <form method="POST" action="/screenshots" enctype="multipart/form-data">
-            <div class="input-group">
-              <input type="file" name="file" class="form-control" />
-              <span class="input-group-btn">
-                <button type="submit" class="btn btn-primary">Upload</button>
-              </span>
+<div class="tab-content">
+  <div class="tab-pane active" id="home">
+    <div class="row">
+      {% if req.session.has_phots %}
+        <div class="col-md-6">
+          <div class="panel panel-theme">
+            <div class="panel-heading">
+              <h3 class="panel-title">Quick Phot Upload</h3>
             </div>
-          </form>
+            <div class="panel-body">
+              <form method="POST" action="/new/phot" enctype="multipart/form-data">
+                <fieldset>
+                  <div class="form-group">
+                    <input type="file" class="form-control" id="file" name="file">
+                  </div>
 
+                  <div class="form-group">
+                    <input type="text" class="form-control" id="title" name="title" placeholder="Image Title..." required>
+                  </div>
+                  <div class="form-group">
+                    <input type="text" id="pillbox" name="tags">
+                  </div>
+                  <hr>
+                  <button class="btn btn-theme btn-block" type="submit">Add</button>
+                </fieldset>
+              </form>
+            </div>
+          </div>
         </div>
-      </div>
+      {% endif %}
+      {% if req.session.has_screenshots %}
+        <div class="col-md-6">
+          <div class="panel panel-primary">
+            <div class="panel-heading">
+              <h3 class="panel-title">Quick Screenshot Upload</h3>
+            </div>
+            <div class="panel-body">
+
+              <form method="POST" action="/screenshots" enctype="multipart/form-data">
+                <div class="input-group">
+                  <input type="file" name="file" class="form-control" />
+                  <span class="input-group-btn">
+                    <button type="submit" class="btn btn-primary">Upload</button>
+                  </span>
+                </div>
+              </form>
+
+            </div>
+          </div>
+        </div>
+      {% endif %}
     </div>
-  {% endif %}
+  </div>
+  <div class="tab-pane" id="quick_note">
+    <div class="row">
+      {% if req.session.has_notess %}
+        <div class="col-md-12">
+          <div class="panel panel-danger">
+            <div class="panel-heading">
+              <h3 class="panel-title">Quick Note</h3>
+            </div>
+            <div class="panel-body">
+
+            </div>
+          </div>
+        </div>
+      {% endif %}
+    </div>
+  </div>
 </div>

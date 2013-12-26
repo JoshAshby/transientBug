@@ -24,6 +24,7 @@ class index(MixedObject):
     _title = "note"
     _default_tmpl = "public/notes/edit"
     def GET(self):
+        self.view.partial("sidebar", "partials/public/notes/sidebar_links")
         f = list(r.table(nm.Note.table).filter({"short_code": self.request.id}).run())
 
         if f:

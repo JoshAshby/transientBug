@@ -3,8 +3,9 @@
 
   $(function() {
     var editor, tags;
-    $("#del_btn").click(function() {
+    $("#del_btn").click(function(e) {
       var img, yesno;
+      e.preventDefault();
       yesno = confirm("Are you sure you want to delete this note?");
       if (yesno) {
         img = $(this).data("short");
