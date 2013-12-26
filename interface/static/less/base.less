@@ -76,7 +76,7 @@ h4 {
   }
 
   a.thumbnail {
-    .transition(all, 0.5s, ease);
+    .lh-transition(all, 0.5s, ease);
     border: @theme solid 1px;
 
     &:hover, &:active, &:focus {
@@ -175,8 +175,8 @@ h4 {
   border: 1px solid black;
   *border-right-width: 2px;
   *border-bottom-width: 2px;
-  .border-radius(6px);
-  .box-shadow(0 5px 10px rgba(0,0,0,.2));
+  .lh-border-radius(6px);
+  .lh-box-shadow(0 5px 10px rgba(0,0,0,.2));
   -webkit-background-clip: padding-box;
      -moz-background-clip: padding;
           background-clip: padding-box;
@@ -231,7 +231,8 @@ h4 {
   border-width:5px 0 5px 5px;
   border-left-color:#cccccc;
   margin-top:5px;
-  margin-right:-10px;}
+  margin-right:-10px;
+}
 .dropdown-submenu:hover>a:after {
   border-left-color:#ffffff;
 }
