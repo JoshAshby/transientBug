@@ -16,7 +16,7 @@ $ ->
       editor: 'css/lib/epic/editor/epic-dark.css'
     basePath: '/static/'
     autogrow:
-      minHeight: $("main").height()
+      minHeight: 400
     textarea: "content"
   .load()
 

@@ -37,17 +37,17 @@ nav: notes
     <div class="row">
       <div class="col-md-12">
         <h2>
-          {% if req.session.id==note.user %}
+          {% if req.session.id == note.user %}
             {% if note.public %}
-              <i class="fa fa-eye-open"></i>
+              <i class="fa fa-eye"></i>
             {% else %}
-              <i class="fa fa-eye-close"></i>
+              <i class="fa fa-eye-slash"></i>
             {% endif %}
           {% endif %}
-          <a href="/notes/view/{{note.short_code}}">{{note.title}}</a><br>
+          <a href="/notes/{{note.short_code}}">{{note.title}}</a><br>
           <small>
             {% if req.session.id==note.user %}
-              Yours! <a href="/notes/edit/{{note.short_code}}">(Edit)</a>
+              Yours! <a href="/notes/{{note.short_code}}/edit">(Edit)</a>
             {% else %}
               By {{note.author.username}}
             {% endif %} - {{note.formated_time}}
@@ -59,7 +59,7 @@ nav: notes
           {{note.formated_short}}
         {% endif %}
         {% for tag in note.tags %}
-          <a href="/notes/by/tags/{{tag}}"><span class="label label-theme">{{tag}}</span></a>
+          <a href="/notes/tags/{{tag}}"><span class="label label-theme">{{tag}}</span></a>
         {% endfor %}
         {% if not loop.last %}<hr>{% endif %}
       </div>

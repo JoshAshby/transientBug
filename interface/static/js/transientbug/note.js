@@ -24,7 +24,7 @@
       },
       basePath: '/static/',
       autogrow: {
-        minHeight: $("main").height()
+        minHeight: 400
       },
       textarea: "content"
     }).load();

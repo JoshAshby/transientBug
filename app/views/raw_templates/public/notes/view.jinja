@@ -8,8 +8,8 @@ nav: notes
   <div class="col-md-12">
     <h2>
       <small>
-        {% if req.session.id==note.author.id %}
-          Yours! <a href="/notes/edit/{{note.short_code}}">(Edit)</a>
+        {% if req.session.id==note.user %}
+          Yours! <a href="/notes/{{note.short_code}}/edit">(Edit)</a>
         {% else %}
           By {{note.author.username}}
         {% endif %} - {{note.formated_time}}

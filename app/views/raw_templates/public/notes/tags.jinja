@@ -1,0 +1,40 @@
++++
+nav: phots
+scriptFiles:
+ - lib/typeahead.min
+ - transientbug/phots
++++
+<div class="row">
+  <div class="col-md-6 col-sm-12">
+    <form method="GET" class="form-inline">
+
+      <div class="input-group typeahead">
+        {% if req.session.has_notes %}
+          <span class="input-group-btn">
+            <a href="/new/note" class="btn btn-theme btn-sm">Add</a>
+          </span>
+        {% endif %}
+        <input type="text" class="form-control input-sm" name="q" id="q" placeholder="Search...">
+        <span class="input-group-btn">
+          <button class="btn btn-theme btn-sm" type="submit"><i class="fa fa-search"></i></button>
+        </span>
+      </div>
+
+    </form>
+  </div>
+  <div class="col-md-6 col-sm-12">
+  </div>
+</div>
+<br>
+{% if tags %}
+  <div class="tags">
+    {% for tag in tags %}
+      <a href="/notes/tags/{{tag}}"><span class="label label-theme">{{tag|replace("_", " ")}}</span></a>
+    {% endfor %}
+  </div>
+{% else %}
+  <div class="jumbotron">
+    <h1>No tags</h1>
+    <p>So sad...</p>
+  </div>
+{% endif %}
