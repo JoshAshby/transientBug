@@ -19,12 +19,17 @@ from errors.general import NotFoundError
 
 from models.rethink.user import userModel as um
 
+import rethinkdb as r
+from rethinkORM import RethinkCollection
+import models.rethink.note.noteModel as nm
+from utils.paginate import Paginate
+
 
 @login(["admin"])
 @autoRoute()
-class view(MixedObject):
+class notes(MixedObject):
     _title = "Users"
-    _default_tmpl = "admin/users/settings"
+    _default_tmpl = "admin/users/notes"
     def GET(self):
         self.view.partial("sidebar", "partials/admin/sidebar", {"command": "users"})
         try:
@@ -35,34 +40,25 @@ class view(MixedObject):
 
         self.view.title = user.username
 
-
         self.view.partial("tabs",
                           "partials/admin/users/tabs",
                           {"user": user,
                            "command": self.request.command})
 
-        self.view.data = {"user": user}
+        parts = r.table(nm.Note.table).filter({"user": self.request.session.id})
+
+        what_type = self.request.getParam("filter", "all")
+
+        if what_type=="private":
+            parts = parts.filter({"public": False})
+        elif what_type=="public":
+            parts = parts.filter({"public": True})
+
+        self.view.data = {"type": what_type.lower()}
+
+        result = RethinkCollection(nm.Note, query=parts)
+        page = Paginate(result, self.request, "created", sort_direction="asc")
+
+        self.view.data = {"page": page}
 
         return self.view
-
-    def POST(self):
-        try:
-            user = um.User(self.request.id)
-        except NotFoundError:
-            return NotFound()
-
-        password = self.request.getParam("password")
-        disable = self.request.getParam("disable", False)
-        email = self.request.getParam("email")
-
-        if password:
-            user.set_password(password)
-
-        if email and email != user.email:
-            user.email = email
-
-        user.disable = disable
-
-        user.save()
-
-        return Redirect("/admin/users/"+self.request.id_extended)

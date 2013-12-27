@@ -22,9 +22,9 @@ from models.rethink.user import userModel as um
 
 @login(["admin"])
 @autoRoute()
-class view(MixedObject):
+class phots(MixedObject):
     _title = "Users"
-    _default_tmpl = "admin/users/settings"
+    _default_tmpl = "admin/users/phots"
     def GET(self):
         self.view.partial("sidebar", "partials/admin/sidebar", {"command": "users"})
         try:
@@ -35,34 +35,9 @@ class view(MixedObject):
 
         self.view.title = user.username
 
-
         self.view.partial("tabs",
                           "partials/admin/users/tabs",
                           {"user": user,
                            "command": self.request.command})
 
-        self.view.data = {"user": user}
-
         return self.view
-
-    def POST(self):
-        try:
-            user = um.User(self.request.id)
-        except NotFoundError:
-            return NotFound()
-
-        password = self.request.getParam("password")
-        disable = self.request.getParam("disable", False)
-        email = self.request.getParam("email")
-
-        if password:
-            user.set_password(password)
-
-        if email and email != user.email:
-            user.email = email
-
-        user.disable = disable
-
-        user.save()
-
-        return Redirect("/admin/users/"+self.request.id_extended)
