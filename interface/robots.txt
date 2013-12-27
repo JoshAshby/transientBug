@@ -1,3 +1,3 @@
 User-agent: *
-Disallow: /docker
-Disallow: /admin
+Disallow: /notes
+Disallow: /phots
