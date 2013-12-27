@@ -21,7 +21,6 @@ def login(groups=None, redirect=""):
     def wrapper(HTTPObject):
         HTTPObject._login = True
         HTTPObject._groups = groups
-        print HTTPObject._groups
         HTTPObject._redirect_url = redirect
         return HTTPObject
     return wrapper
