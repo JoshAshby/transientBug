@@ -8,8 +8,7 @@ scriptFiles:
   - check_field
   - lib/typeahead.min
   - lib/epiceditor.min
-  - transientbug/phot
-  - transientbug/note
+  - transientbug/index
 
 stylesheets:
   - pillbox
@@ -18,8 +17,8 @@ stylesheets:
 <div class="tab-content">
   <div class="tab-pane active" id="home">
     <div class="row">
-      {% if req.session.has_phots %}
-        <div class="col-md-6">
+      <div class="col-md-6">
+        {% if req.session.has_phots %}
           <div class="panel panel-theme">
             <div class="panel-heading">
               <h3 class="panel-title">New Phot</h3>
@@ -47,10 +46,29 @@ stylesheets:
               </form>
             </div>
           </div>
+        {% endif %}
+      </div>
+      <div class="col-md-6">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">Phot Search</h3>
+          </div>
+          <div class="panel-body">
+
+            <form method="GET" action="/phots/tags" class="form-inline">
+              <div class="form-group">
+                <div class="input-group typeahead">
+                  <input type="text" class="form-control input-sm" name="q" id="q" value="" placeholder="Search Tags...">
+                  <span class="input-group-btn">
+                    <button class="btn btn-theme btn-sm" type="submit"><i class="fa fa-search"></i></button>
+                  </span>
+                </div>
+              </div>
+            </form>
+
+          </div>
         </div>
-      {% endif %}
-      {% if req.session.has_screenshots %}
-        <div class="col-md-6">
+        {% if req.session.has_screenshots %}
           <div class="panel panel-primary">
             <div class="panel-heading">
               <h3 class="panel-title">Media Upload</h3>
@@ -68,8 +86,8 @@ stylesheets:
 
             </div>
           </div>
-        </div>
-      {% endif %}
+        {% endif %}
+      </div>
     </div>
   </div>
   {% if req.session.has_notes %}
@@ -83,6 +101,7 @@ stylesheets:
           </ul>
           <div class="tab-content">
             <div class="tab-pane" id="quick_note_info">
+              <br>
               <form method="POST" action="/new/note" id="edit_form">
                 <fieldset>
                   <textarea name="contents" id="content" style="display:none">Write something!</textarea>

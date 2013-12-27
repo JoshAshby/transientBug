@@ -13,13 +13,13 @@ from seshat.route import autoRoute
 from seshat.MixedObject import MixedObject
 
 import models.utils.dbUtils as dbu
-import models.rethink.phot.photModel as pm
+import models.rethink.note.noteModel as nm
 
 
 @autoRoute()
 class json(MixedObject):
     def GET(self):
-        base_query = dbu.rql_where_not(pm.Phot.table, "disable", True)
+        base_query = dbu.rql_where_not(nm.Note.table, "disable", True)
 
         raw_tags = base_query\
             .concat_map(lambda doc: doc["tags"])\

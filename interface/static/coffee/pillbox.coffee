@@ -70,7 +70,7 @@ class Pillbox
       tags = $.ajax url: @opts.url, async: false
 
       @input.typeahead
-        name: @opts.name+'_tags'
+        name: "#{ @opts.name }_tags"
         local: tags.responseJSON[0][@opts.field]
         limit: 10
 

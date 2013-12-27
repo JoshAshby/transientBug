@@ -88,7 +88,7 @@
           async: false
         });
         return this.input.typeahead({
-          name: this.opts.name + '_tags',
+          name: "" + this.opts.name + "_tags",
           local: tags.responseJSON[0][this.opts.field],
           limit: 10
         });
