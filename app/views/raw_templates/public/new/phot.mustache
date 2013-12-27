@@ -1,5 +1,15 @@
 +++
-nav: phots
+nav: new_phot
+
+scriptFiles:
+  - lib/typeahead.min
+  - pillbox
+  - done_typing
+  - check_field
+  - transientbug/phot
+
+stylesheets:
+  - pillbox
 +++
 
 <div class="row">
@@ -26,13 +36,13 @@ nav: phots
             </div>
 
             <div class="form-group">
-              <input type="text" class="form-control" id="title" name="title" placeholder="Image Title..." required>
+              <input type="text" class="form-control" id="phot_name" name="title" placeholder="Image Title..." required>
             </div>
             <div class="form-group">
-              <input type="text" id="pillbox" name="tags">
+              <input type="text" id="phot_tags" name="tags">
             </div>
             <hr>
-            <button class="btn btn-theme btn-block" type="submit">Add</button>
+            <button id="new_phot" class="btn btn-theme btn-block" type="submit">Add</button>
           </fieldset>
         </form>
       </div>

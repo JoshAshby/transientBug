@@ -15,7 +15,10 @@ from seshat.MixedObject import MixedObject
 from seshat.objectMods import login
 from seshat.actions import Redirect
 
+import rethinkdb as r
 import models.rethink.phot.photModel as pm
+
+import arrow
 
 
 @login(["phots"])
@@ -39,6 +42,10 @@ class phot(MixedObject):
             tag = [ bit.lstrip().rstrip().replace(" ", "_").lower() for bit in tags.split(",") ]
         else:
             tag = []
+
+        found = r.table(pm.Phot.table).filter({"filename": title})
+        if found:
+          title = "_".join([title, arrow.utcnow().timestamp])
 
         if url:
             phot = pm.Phot.download_phot(self.request.session.id,

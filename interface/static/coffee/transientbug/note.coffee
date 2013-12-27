@@ -16,19 +16,25 @@ $ ->
       editor: 'css/lib/epic/editor/epic-dark.css'
     basePath: '/static/'
     autogrow:
-      minHeight: 400
+      minHeight: 200
     textarea: "content"
+    button:
+      preview: false
+      fullscreen: false
   .load()
 
   editor.on 'update', ->
     $("#preview").html this.exportFile null, 'html'
   .emit 'update'
 
-  $("#tags").pillbox()
+  $(document).on "sidebar-toggle", ->
+    setTimeout ->
+      editor.reflow()
+    , 100
 
-  tags = $.ajax url: "/notes/tags/json", async: false
+  $(document).on "sidebar-link", ->
+    setTimeout ->
+      editor.reflow()
+    , 100
 
-  $('.pillbox input').typeahead
-    name: 'notes_tags'
-    local: tags.responseJSON[0]
-    limit: 10
+  $("#note_tags").pillbox url: "/notes/tags/json", name: "note"

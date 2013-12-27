@@ -8,7 +8,7 @@ nav: notes
   <div class="row">
     {% if req.session.has_notes %}
       <div class="col-md-1">
-        <a href="/new/notes" class="btn btn-theme btn-sm">New</a>
+        <a href="/new/note" class="btn btn-theme btn-sm">New</a>
       </div>
     {% endif %}
     <div class="col-sm-12 col-md-{{ '5' if req.session.has_notes else '6' }}">

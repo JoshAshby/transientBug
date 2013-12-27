@@ -2,7 +2,7 @@
 (function() {
 
   $(function() {
-    var editor, tags;
+    var editor;
     $("#del_btn").click(function(e) {
       var img, yesno;
       e.preventDefault();
@@ -24,22 +24,30 @@
       },
       basePath: '/static/',
       autogrow: {
-        minHeight: 400
+        minHeight: 200
       },
-      textarea: "content"
+      textarea: "content",
+      button: {
+        preview: false,
+        fullscreen: false
+      }
     }).load();
     editor.on('update', function() {
       return $("#preview").html(this.exportFile(null, 'html'));
     }).emit('update');
-    $("#tags").pillbox();
-    tags = $.ajax({
-      url: "/notes/tags/json",
-      async: false
+    $(document).on("sidebar-toggle", function() {
+      return setTimeout(function() {
+        return editor.reflow();
+      }, 100);
     });
-    return $('.pillbox input').typeahead({
-      name: 'notes_tags',
-      local: tags.responseJSON[0],
-      limit: 10
+    $(document).on("sidebar-link", function() {
+      return setTimeout(function() {
+        return editor.reflow();
+      }, 100);
+    });
+    return $("#note_tags").pillbox({
+      url: "/notes/tags/json",
+      name: "note"
     });
   });
 

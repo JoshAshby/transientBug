@@ -1,22 +1,11 @@
 $ ->
   timeout = null
 
-  $("#pillbox").pillbox()
-
-  tags = $.ajax
-    url: "/phots/tags/json"
-    async: false
-
-  $('.pillbox input').typeahead
-    name: 'phots_tags'
-    local: tags.responseJSON[0]["tags"]
-    limit: 10
-
   toggle = (what) ->
     id = $(what).data "id"
     di = $("#"+id)
 
-    $.post "/admin/phots/"+id+"/toggle", (data) ->
+    $.post "/admin/phots/#{ id }/toggle", (data) ->
       if data[0]["success"]
         window.location.reload()
 
@@ -50,3 +39,33 @@ $ ->
     html: true
     content: '<div class="btn-group"><button class="btn btn-success btn-sm confirm_btn"><i class="fa fa-check"></i></button><button class="btn btn-default btn-sm nope_btn"><i class="fa fa-times"></i></button></div>'
     container: "body"
+
+  $("#phot_tags").pillbox url: "/phots/tags/json", name: "phot"
+
+  $("#phot_name").check_field
+    url: "/phots/names/json"
+    reason: "That name is already in use."
+
+  $("#phot_name").done_typing
+    wait_interval: 1500
+    on_done: ->
+      $("#phot_name").check_field("check")
+    on_empty: ->
+      $("#phot_name").check_field("reset")
+
+  $("#new_phot").click (e) ->
+    errors = ""
+    e.preventDefault()
+    for input in $(@).parents("form").find("input")
+      do (input) ->
+        input = $ input
+        if input.hasClass "has-error"
+          errors += "#{ input.attr "name" } needs to be changed. #{ input.data "reason" }<br>"
+    if errors
+      $(@).parents("form").prepend """
+      <div class="alert alert-danger"><b>Hold it.</b> Please fix these errors: <br>
+        #{ errors }
+      </div>
+      """
+    else:
+      $(@).parents("form").submit()

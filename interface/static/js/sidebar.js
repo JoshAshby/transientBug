@@ -12,7 +12,8 @@
       $("#show").parents(".row").show();
       sessionStorage.setItem("sidebar", "hide");
       return $.event.trigger({
-        type: "sidebar-hide"
+        type: "sidebar-toggle",
+        state: "hidden"
       });
     };
     show = function(e) {
@@ -24,7 +25,8 @@
       $("#sidebar-wrapper").show().addClass("col-sm-2");
       sessionStorage.setItem("sidebar", "show");
       return $.event.trigger({
-        type: "sidebar-show"
+        type: "sidebar-toggle",
+        state: "visible"
       });
     };
     wat = sessionStorage.getItem("sidebar");
@@ -34,8 +36,14 @@
     $("#hide").click(function(e) {
       return hide(e);
     });
-    return $("#show").click(function(e) {
+    $("#show").click(function(e) {
       return show(e);
+    });
+    return $("#sidebar").on("click", ".nav>li>a", function() {
+      return $.event.trigger({
+        type: "sidebar-link",
+        what: this
+      });
     });
   });
 

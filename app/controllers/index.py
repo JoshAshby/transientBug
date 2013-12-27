@@ -21,7 +21,7 @@ class index(MixedObject):
     def GET(self):
         if self.request.session.id:
             self.view.partial("sidebar", "partials/public/index/sidebar",
-                             {"command": "home"})
+                             {"req": self.request})
             return self.view
         else:
             return Redirect("/phots")

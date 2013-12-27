@@ -57,20 +57,10 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse navbar-ex1-collapse">
               <ul class="nav navbar-nav">
-                {% if req.session.id %}
-                  <li class="dropdown {{ 'active' if nav=="new" }}">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-upload"></i> New <i class="fa fa-caret-down"></i></a>
-                    <ul class="dropdown-menu">
-                      <li><a href="/new/phot">Phot</a></li>
-                      <li><a href="/new/note">Note</a></li>
-                    </ul>
-                  </li>
-                {% endif %}
-
                 <li {{ 'class="active"' if nav=="phots" }}><a href="/phots"><i class="fa fa-picture-o"></i> Phots</a></li>
                 <li {{ 'class="active"' if nav=="notes" }}><a href="/notes"><i class="fa fa-file-text"></i> Notes</a></li>
 
-                {% if req.session.id %}
+                {% if req.session.has_screenshots %}
                   <li {{ 'class="active"' if nav=="screenshots" }}><a href="/screenshots"><i class="fa fa-desktop"></i> Scrns</a></li>
                 {% endif %}
 

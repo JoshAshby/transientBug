@@ -8,7 +8,8 @@ $ ->
     sessionStorage.setItem "sidebar", "hide"
 
     $.event.trigger
-      type: "sidebar-hide"
+      type: "sidebar-toggle"
+      state: "hidden"
 
   show = (e) ->
     if e
@@ -19,7 +20,8 @@ $ ->
     sessionStorage.setItem "sidebar", "show"
 
     $.event.trigger
-      type: "sidebar-show"
+      type: "sidebar-toggle"
+      state: "visible"
 
   wat = sessionStorage.getItem("sidebar")
 
@@ -31,3 +33,8 @@ $ ->
 
   $("#show").click (e) ->
     show(e)
+
+  $("#sidebar").on "click", ".nav>li>a", ->
+    $.event.trigger
+      type: "sidebar-link"
+      what: this

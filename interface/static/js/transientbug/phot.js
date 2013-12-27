@@ -2,18 +2,8 @@
 (function() {
 
   $(function() {
-    var tags, timeout, toggle;
+    var timeout, toggle;
     timeout = null;
-    $("#pillbox").pillbox();
-    tags = $.ajax({
-      url: "/phots/tags/json",
-      async: false
-    });
-    $('.pillbox input').typeahead({
-      name: 'phots_tags',
-      local: tags.responseJSON[0]["tags"],
-      limit: 10
-    });
     toggle = function(what) {
       var di, id;
       id = $(what).data("id");
@@ -30,7 +20,7 @@
     $(document).on("click", ".nope_btn", function() {
       return $(".toggle_btn").popover('hide');
     });
-    return $(".toggle_btn").click(function(e) {
+    $(".toggle_btn").click(function(e) {
       var id;
       e.preventDefault();
       id = $(this);
@@ -53,6 +43,45 @@
       html: true,
       content: '<div class="btn-group"><button class="btn btn-success btn-sm confirm_btn"><i class="fa fa-check"></i></button><button class="btn btn-default btn-sm nope_btn"><i class="fa fa-times"></i></button></div>',
       container: "body"
+    });
+    $("#phot_tags").pillbox({
+      url: "/phots/tags/json",
+      name: "phot"
+    });
+    $("#phot_name").check_field({
+      url: "/phots/names/json",
+      reason: "That name is already in use."
+    });
+    $("#phot_name").done_typing({
+      wait_interval: 1500,
+      on_done: function() {
+        return $("#phot_name").check_field("check");
+      },
+      on_empty: function() {
+        return $("#phot_name").check_field("reset");
+      }
+    });
+    return $("#new_phot").click(function(e) {
+      var errors, input, _fn, _i, _len, _ref;
+      errors = "";
+      e.preventDefault();
+      _ref = $(this).parents("form").find("input");
+      _fn = function(input) {
+        input = $(input);
+        if (input.hasClass("has-error")) {
+          return errors += "" + (input.attr("name")) + " needs to be changed. " + (input.data("reason")) + "<br>";
+        }
+      };
+      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+        input = _ref[_i];
+        _fn(input);
+      }
+      if (errors) {
+        $(this).parents("form").prepend("<div class=\"alert alert-danger\"><b>Hold it.</b> Please fix these errors: <br>\n  " + errors + "\n</div>");
+      }
+      return {
+        "else": $(this).parents("form").submit()
+      };
     });
   });
 

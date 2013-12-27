@@ -1,6 +1,7 @@
 +++
 base: skeletons/sidebar
 theme_color: red
+nav: notes
 
 scriptFiles:
   - lib/epiceditor.min
@@ -27,7 +28,7 @@ stylesheets:
           </label>
         </div>
         <div class="form-group">
-          <input type="text" class="form-control" name="tags" id="tags" placeholder="Tags..." value="{{tags}}"/>
+          <input type="text" class="form-control" name="tags" id="note_tags" placeholder="Tags..." value="{{tags}}"/>
         </div>
 
         <button type="button" class="btn btn-sm btn-info" id="del_btn" data-short={{note.short_code}}><i class="fa fa-trash-o"></i> Delete</button>

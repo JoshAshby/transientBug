@@ -3,9 +3,13 @@ base: skeletons/sidebar
 nav: home
 
 scriptFiles:
-  - lib/typeahead.min
   - pillbox
+  - done_typing
+  - check_field
+  - lib/typeahead.min
+  - lib/epiceditor.min
   - transientbug/phot
+  - transientbug/note
 
 stylesheets:
   - pillbox
@@ -18,23 +22,27 @@ stylesheets:
         <div class="col-md-6">
           <div class="panel panel-theme">
             <div class="panel-heading">
-              <h3 class="panel-title">Quick Phot Upload</h3>
+              <h3 class="panel-title">New Phot</h3>
             </div>
             <div class="panel-body">
               <form method="POST" action="/new/phot" enctype="multipart/form-data">
                 <fieldset>
                   <div class="form-group">
+                    <input type="url" class="form-control" id="url" name="url" placeholder="URL...">
+                  </div>
+                  <h3>Or...</h3>
+                  <div class="form-group">
                     <input type="file" class="form-control" id="file" name="file">
                   </div>
-
+                  <hr>
                   <div class="form-group">
-                    <input type="text" class="form-control" id="title" name="title" placeholder="Image Title..." required>
+                    <input type="text" class="form-control" id="phot_name" name="title" placeholder="Image Title..." required>
                   </div>
                   <div class="form-group">
-                    <input type="text" id="pillbox" name="tags">
+                    <input type="text" id="phot_tags" name="tags">
                   </div>
                   <hr>
-                  <button class="btn btn-theme btn-block" type="submit">Add</button>
+                  <button id="new_phot" class="btn btn-theme btn-block" type="submit">Add</button>
                 </fieldset>
               </form>
             </div>
@@ -45,7 +53,7 @@ stylesheets:
         <div class="col-md-6">
           <div class="panel panel-primary">
             <div class="panel-heading">
-              <h3 class="panel-title">Quick Screenshot Upload</h3>
+              <h3 class="panel-title">Media Upload</h3>
             </div>
             <div class="panel-body">
 
@@ -64,20 +72,47 @@ stylesheets:
       {% endif %}
     </div>
   </div>
-  <div class="tab-pane" id="quick_note">
-    <div class="row">
-      {% if req.session.has_notess %}
+  {% if req.session.has_notes %}
+    <div class="tab-pane" id="quick_note">
+      <div class="row">
         <div class="col-md-12">
-          <div class="panel panel-danger">
-            <div class="panel-heading">
-              <h3 class="panel-title">Quick Note</h3>
-            </div>
-            <div class="panel-body">
+          <ul class="nav nav-pills">
+            <li class="active"><a href="#quick_note_edit" data-toggle="tab">Edit</a></li>
+            <li><a href="#quick_note_preview" data-toggle="tab">Preview</a></li>
+            <li><a href="#quick_note_info" data-toggle="tab">Info</a></li>
+          </ul>
+          <div class="tab-content">
+            <div class="tab-pane" id="quick_note_info">
+              <form method="POST" action="/new/note" id="edit_form">
+                <fieldset>
+                  <textarea name="contents" id="content" style="display:none">Write something!</textarea>
+                  <div class="form-group">
+                    <input type="text" class="form-control" id="title" name="title" placeholder="Title..." value="" required>
+                  </div>
+                  <div class="checkbox">
+                    <label>
+                      <input type="checkbox" name="public" value="true"/> Make this note public?
+                      <span class="help-block"><small>This determines if the note will be visible on <a href="/notes/public">/notes/public</a> and <a href="/notes/tags">/notes/tags</a> pages.</small></span>
+                    </label>
+                  </div>
+                  <div class="form-group">
+                    <input type="text" class="form-control" name="tags" id="note_tags" placeholder="Tags..." value=""/>
+                  </div>
 
+                  <button type="submit" class="btn btn-theme pull-right btn-sm"><i class="fa fa-fw fa-save"></i> Save</button>
+
+                </fieldset>
+              </form>
+            </div>
+            <div class="tab-pane active" id="quick_note_edit" style="height:250px;">
+              <div id="epiceditor"></div>
+            </div>
+            <div class="tab-pane" id="quick_note_preview">
+              <div id="preview"></div>
             </div>
           </div>
         </div>
-      {% endif %}
+      </div>
     </div>
-  </div>
+  {% endif %}
 </div>
