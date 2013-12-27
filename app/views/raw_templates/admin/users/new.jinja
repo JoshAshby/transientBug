@@ -3,6 +3,8 @@ theme_color: orange
 nav: admin_users
 breadcrumbs_top: True
 base: skeletons/sidebar
+scriptFiles:
+ - transientbug/admin/user
 +++
 <div class="row">
   <div class="col-md-6 col-md-offset-3">
@@ -39,7 +41,22 @@ base: skeletons/sidebar
           <input type="checkbox" name="disable" value="true"> Disable account?
         </label>
       </div>
-      <button type="submit" class="btn btn-theme">Create</button>
+      <fieldset>
+        <div class="form-group" id="groups">
+          <label for="groups">Groups</label>
+          <div class="input-group">
+            <input class="form-control input-sm" name="groups" type="text" placeholder="Group..." />
+            <span class="input-group-btn">
+              <button class="btn btn-default btn-sm"><i class="fa fa-times"></i></button>
+            </span>
+          </div>
+          <br>
+        </div>
+        <div class="form-group">
+          <button class="btn btn-default btn-sm" id="add_group"><i class="fa fa-plus"></i></button>
+        </div>
+      </fieldset>
+      <button type="submit" class="btn btn-theme btn-sm pull-right">Create</button>
     </form>
   </div>
 </div>

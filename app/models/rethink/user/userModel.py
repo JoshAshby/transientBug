@@ -36,7 +36,7 @@ class User(RethinkModel):
         self._gravatar = ""
 
     @classmethod
-    def new_user(cls, username, password, email):
+    def new_user(cls, username, password, email, groups):
         """
         Make a new user, checking for username conflicts. If no conflicts are
         found the password is encrypted with bcrypt and the resulting `userORM` returned.
@@ -57,7 +57,7 @@ class User(RethinkModel):
                               created=arrow.utcnow().timestamp,
                               disable=False,
                               email=email,
-                              groups=[])
+                              groups=groups)
 
             return user
 

@@ -34,8 +34,15 @@ class new(MixedObject):
         email = self.request.getParam("email")
         disable = self.request.getParam("disable", False)
 
+        groups = self.request.getParam("groups")
+
+        if type(groups) is not list:
+            groups = [groups]
+
+        groups = [ group.strip(" ").replace(" ", "_").lower() for group in groups if group ]
+
         try:
-            user = um.User.new_user(username, password, email)
+            user = um.User.new_user(username, password, email, groups)
 
         except ue.UsernameError as e:
             self.view.data = {
