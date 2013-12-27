@@ -12,7 +12,7 @@ joshuaashby@joshashby.com
 from seshat.route import autoRoute
 from seshat.MixedObject import MixedObject
 from seshat.objectMods import login
-from seshat.actions import Redirect, NotFound
+from seshat.actions import Redirect, NotFound, Unauthorized
 
 import rethinkdb as r
 import models.rethink.note.noteModel as nm
@@ -29,6 +29,9 @@ class index(MixedObject):
 
         if f:
             note = nm.Note(**f[0])
+            if note.author.id is not self.request.session.id:
+                self.request.session.push_alert("You don't own that note, you can't edit it!", level="danger")
+                return Unauthorized()
 
             tags = ', '.join(note.tags)
 
@@ -36,7 +39,6 @@ class index(MixedObject):
             return self.view
 
         else:
-            self.request.session.push_alert("That note could not be found!", level="error")
             return NotFound()
 
     def POST(self):
@@ -53,9 +55,9 @@ class index(MixedObject):
 
         if f:
             note = nm.Note(**f[0])
-
-            if note.user != self.request.session.id:
-                note.copy()
+            if note.author.id is not self.request.session.id:
+                self.request.session.push_alert("You don't own that note, you can't edit it!", level="danger")
+                return Unauthorized()
 
             note.title = title
             note.contents = contents

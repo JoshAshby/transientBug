@@ -3,15 +3,17 @@ theme_color: orange
 nav: admin_users
 breadcrumbs_top: True
 base: skeletons/sidebar
+
+scriptFiles:
+ - transientbug/admin/user
 +++
 {{tabs}}
-
-<div class="row">
-  <div class="col-md-12">
-    <br>
-    <b>Created on:</b> {{user.formated_created}}<br>
-    <br>
-    <form role="form" method="POST">
+<br>
+<form role="form" method="POST">
+  <div class="row">
+    <div class="col-md-6">
+      <b>Created on:</b> {{user.formated_created}}<br>
+      <br>
       <div class="form-group {{ 'has-error' if error=="email" }}">
         <label for="email">Email</label>
         <input type="email" class="form-control" id="email" placeholder="Email..." name="email" value="{{user.email}}">
@@ -38,8 +40,29 @@ base: skeletons/sidebar
           <input type="checkbox" name="disable" value="true" {{ 'checked' if user.disable }}> Disable account?
         </label>
       </div>
-      <button type="submit" class="btn btn-theme">Update</button>
-    </form>
-
+    </div>
+    <div class="col-md-6">
+      <fieldset>
+        <div class="form-group" id="groups">
+          {% for group in user.groups %}
+            <div class="input-group">
+              <input class="form-control input-sm" name="groups" type="text" value="{{group}}" />
+              <span class="input-group-btn">
+                <button class="btn btn-default btn-sm"><i class="fa fa-times"></i></button>
+              </span>
+            </div>
+            <br>
+          {% endfor %}
+        </div>
+        <div class="form-group">
+          <button class="btn btn-default btn-sm" id="add_group"><i class="fa fa-plus"></i></button>
+        </div>
+      </fieldset>
+    </div>
   </div>
-</div>
+  <div class="row">
+    <div class="col-md-12">
+      <button type="submit" class="btn btn-theme btn-sm pull-right"><i class="fa fa-check"></i> Update</button>
+    </div>
+  </div>
+</form>

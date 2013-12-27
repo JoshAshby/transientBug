@@ -54,11 +54,21 @@ class view(MixedObject):
         password = self.request.getParam("password")
         disable = self.request.getParam("disable", False)
         email = self.request.getParam("email")
+        groups = self.request.getParam("groups")
+
+        if type(groups) is not list:
+            groups = [groups]
+
+        groups = [ group.strip(" ").replace(" ", "_").lower() for group in groups if group ]
+
+        user.groups = groups
 
         if password:
             user.set_password(password)
+            self.request.session.push_alert("Password updated, please let the user know the new password", level="warning")
 
         if email and email != user.email:
+          # TODO: Only allow change if email isn't in the database yet
             user.email = email
 
         user.disable = disable

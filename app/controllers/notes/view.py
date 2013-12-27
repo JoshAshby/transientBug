@@ -53,5 +53,4 @@ class view(MixedObject):
             return self.view
 
         else:
-            self.request.session.push_alert("That note could not be found!", level="error")
             return NotFound()

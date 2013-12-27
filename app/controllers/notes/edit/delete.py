@@ -12,6 +12,7 @@ joshuaashby@joshashby.com
 from seshat.route import autoRoute
 from seshat.MixedObject import MixedObject
 from seshat.objectMods import login
+from seshat.actions import Unauthorized, NotFound
 
 import rethinkdb as r
 import models.rethink.note.noteModel as nm
@@ -27,10 +28,13 @@ class delete(MixedObject):
 
         if f:
             note = nm.Note(**f[0])
+            if note.author.id is not self.request.session.id:
+                self.request.session.push_alert("You don't own that note, you can't delete it!", level="danger")
+                return Unauthorized()
+
             note.disable = True
             note.save()
             return {"success": True}
 
         else:
-            return {"success": False,
-                    "error": "That note couldn't be found. :/"}
+            return NotFound()
