@@ -2,7 +2,7 @@
 (function() {
 
   $(function() {
-    var editor, tags;
+    var tags;
     tags = $.ajax({
       url: "/phots/tags/json",
       async: false
@@ -12,7 +12,7 @@
       local: tags.responseJSON[0]["tags"],
       limit: 10
     });
-    $(".twitter-typeahead").css("display", "");
+    $(".twitter-typeahead").css("display", "block");
     $(".tt-dropdown-menu").css("top", "initial");
     $(".tt-hint").css("padding-top", "1px");
     $("#phot_tags").pillbox({
@@ -23,69 +23,11 @@
       url: "/notes/tags/json",
       name: "note"
     });
-    editor = new EpicEditor({
-      theme: {
-        base: 'css/lib/epic/base/epiceditor.css',
-        preview: 'css/lib/epic/preview/github.css',
-        editor: 'css/lib/epic/editor/epic-dark.css'
-      },
-      basePath: '/static/',
-      autogrow: {
-        minHeight: 200
-      },
-      textarea: "content",
-      button: {
-        preview: false,
-        fullscreen: false
-      }
-    }).load();
     $("#phot_name").check_field({
       url: "/phots/names/json",
       reason: "That name is already in use."
     });
-    $("#phot_name").done_typing({
-      wait_interval: 1500,
-      on_done: function() {
-        return $("#phot_name").check_field("check");
-      },
-      on_empty: function() {
-        return $("#phot_name").check_field("reset");
-      }
-    });
-    $("#new_phot").click(function(e) {
-      var errors, input, _fn, _i, _len, _ref;
-      errors = "";
-      e.preventDefault();
-      _ref = $(this).parents("form").find("input");
-      _fn = function(input) {
-        input = $(input);
-        if (input.hasClass("has-error")) {
-          return errors += "" + (input.attr("name")) + " needs to be changed. " + (input.data("reason")) + "<br>";
-        }
-      };
-      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-        input = _ref[_i];
-        _fn(input);
-      }
-      if (errors) {
-        return $(this).parents("form").prepend("<div class=\"alert alert-danger\">\n  <b>Hold it.</b> Please fix these errors: <br>\n  " + errors + "\n</div>");
-      } else {
-        return $(this).parents("form").submit();
-      }
-    });
-    editor.on('update', function() {
-      return $("#preview").html(this.exportFile(null, 'html'));
-    }).emit('update');
-    $(document).on("sidebar-toggle", function() {
-      return setTimeout(function() {
-        return editor.reflow();
-      }, 100);
-    });
-    return $(document).on("sidebar-link", function() {
-      return setTimeout(function() {
-        return editor.reflow();
-      }, 100);
-    });
+    return $("#quick_phot").check_form();
   });
 
 }).call(this);

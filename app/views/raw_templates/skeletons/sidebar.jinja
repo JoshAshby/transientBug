@@ -121,7 +121,58 @@
             <!-- End alerts section -->
           {% endif %}
 
+          {% if breadcrumbs_top and not breadcrumbs %}
+            <div class="row">
+              <div class="col-md-10 col-md-offset-1">
+                <ol class="breadcrumb">
+                  {% set breadcrumb_parts = "" %}
+                  {% for bit in req.pre_id_url %}
+                    {% set breadcrumb_parts = breadcrumb_parts+"/"+bit %}
+                    {% if loop.last and not req.command and not req.id %}
+                      <li class="active">{{bit|capitalize}}</li>
+                    {% elif loop.last and req.id and not req.command %}
+                      <li><a href="{{breadcrumb_parts}}">{{bit|capitalize}}</a></li>
+                      <li class="active">{{req.id|truncate(10, True)}}</li>
+                    {% elif loop.last and req.command %}
+                      <li><a href="{{breadcrumb_parts}}">{{bit|capitalize}}</a></li>
+                      <li><a href="{{breadcrumb_parts}}/{{req.id}}">{{req.id|truncate(10, True)}}</a></li>
+                      <li class="active">{{req.command|capitalize}}</li>
+                    {% else %}
+                      <li><a href="{{breadcrumb_parts}}">{{bit|capitalize}}</a></li>
+                    {% endif %}
+                  {% endfor %}
+                </ol>
+              </div>
+            </div>
+          {% endif %}
+
           {{body}}
+
+          {% if breadcrumbs and not breadcrumbs_top %}
+            <div class="row">
+              <div class="col-md-10 col-md-offset-1">
+                <ol class="breadcrumb">
+                  {% set breadcrumb_parts = "" %}
+                  {% for bit in req.pre_id_url %}
+                    {% set breadcrumb_parts = breadcrumb_parts+"/"+bit %}
+                    {% if loop.last and not req.command and not req.id %}
+                      <li class="active">{{bit|capitalize}}</li>
+                    {% elif loop.last and req.id and not req.command %}
+                      <li><a href="{{breadcrumb_parts}}">{{bit|capitalize}}</a></li>
+                      <li class="active">{{req.id|truncate(10, True)}}</li>
+                    {% elif loop.last and req.command %}
+                      <li><a href="{{breadcrumb_parts}}">{{bit|capitalize}}</a></li>
+                      <li><a href="{{breadcrumb_parts}}/{{req.id}}">{{req.id|truncate(10, True)}}</a></li>
+                      <li class="active">{{req.command|capitalize}}</li>
+                    {% else %}
+                      <li><a href="{{breadcrumb_parts}}">{{bit|capitalize}}</a></li>
+                    {% endif %}
+                  {% endfor %}
+                </ol>
+              </div>
+            </div>
+          {% endif %}
+
         </div>
       </div>
       <div class="col-sm-12 footer">

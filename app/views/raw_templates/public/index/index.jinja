@@ -6,12 +6,14 @@ scriptFiles:
   - pillbox
   - done_typing
   - check_field
+  - form_check
   - lib/typeahead.min
-  - lib/epiceditor.min
+  - lib/bootstrap-markdown
   - transientbug/index
 
 stylesheets:
   - pillbox
+  - lib/bootstrap-markdown.min
 +++
 
 <div class="tab-content">
@@ -24,7 +26,7 @@ stylesheets:
               <h3 class="panel-title">New Phot</h3>
             </div>
             <div class="panel-body">
-              <form method="POST" action="/new/phot" enctype="multipart/form-data">
+              <form method="POST" action="/new/phot" id="quick_phot" enctype="multipart/form-data">
                 <fieldset>
                   <div class="form-group">
                     <input type="url" class="form-control" id="url" name="url" placeholder="URL...">
@@ -94,42 +96,34 @@ stylesheets:
     <div class="tab-pane" id="quick_note">
       <div class="row">
         <div class="col-md-12">
-          <ul class="nav nav-pills">
-            <li class="active"><a href="#quick_note_edit" data-toggle="tab">Edit</a></li>
-            <li><a href="#quick_note_preview" data-toggle="tab">Preview</a></li>
-            <li><a href="#quick_note_info" data-toggle="tab">Info</a></li>
-          </ul>
-          <div class="tab-content">
-            <div class="tab-pane" id="quick_note_info">
-              <br>
-              <form method="POST" action="/new/note" id="edit_form">
-                <fieldset>
-                  <textarea name="contents" id="content" style="display:none">Write something!</textarea>
-                  <div class="form-group">
-                    <input type="text" class="form-control" id="title" name="title" placeholder="Title..." value="" required>
-                  </div>
+          <form method="POST" action="/new/note">
+            <fieldset>
+              <div class="form-group" id="quick_note">
+                <input type="text" class="form-control" id="quick_note_title" name="title" placeholder="Title..." value="" required>
+              </div>
+              <div class="form-group">
+                <textarea name="contents" id="quick_note_content" data-provide="markdown">Write something!</textarea>
+              </div>
+              <div class="form-group">
+                <input type="text" class="form-control" name="tags" id="quick_note_tags" placeholder="Tags..." value=""/>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
                   <div class="checkbox">
                     <label>
-                      <input type="checkbox" name="public" value="true"/> Make this note public?
+                      <input type="checkbox" name="public" id="quick_note_public" value="true"/> Make this note public?
                       <span class="help-block"><small>This determines if the note will be visible on <a href="/notes/public">/notes/public</a> and <a href="/notes/tags">/notes/tags</a> pages.</small></span>
                     </label>
                   </div>
-                  <div class="form-group">
-                    <input type="text" class="form-control" name="tags" id="note_tags" placeholder="Tags..." value=""/>
-                  </div>
+                </div>
+                <div class="col-md-6">
+                  <br>
+                  <button type="submit"class="btn btn-theme pull-right"><i class="fa fa-save"></i> Create!</button>
+                </div>
+              </div>
 
-                  <button type="submit" class="btn btn-theme pull-right btn-sm"><i class="fa fa-fw fa-save"></i> Save</button>
-
-                </fieldset>
-              </form>
-            </div>
-            <div class="tab-pane active" id="quick_note_edit" style="height:250px;">
-              <div id="epiceditor"></div>
-            </div>
-            <div class="tab-pane" id="quick_note_preview">
-              <div id="preview"></div>
-            </div>
-          </div>
+            </fieldset>
+          </form>
         </div>
       </div>
     </div>

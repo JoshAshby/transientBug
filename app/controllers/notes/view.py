@@ -34,9 +34,6 @@ class view(MixedObject):
                     self.request.session.push_alert("That note is not public and you do not have the rights to access it.", level="error")
                     return Unauthorized()
 
-            if self.request.session.has_notes:
-                self.view.scripts = ["transientbuug/note"]
-
             if self.request.session.id:
                 if note.public:
                     title = """<i class="fa fa-eye"></i> """

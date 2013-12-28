@@ -15,6 +15,6 @@ $ ->
 
   $('.thumbnail_h6').tooltip()
 
-  $(".twitter-typeahead").removeAttr "style"
+  $(".twitter-typeahead").css "display", "block"
   $(".tt-dropdown-menu").css "top", "initial"
   $(".tt-hint").css "padding-top", "1px"

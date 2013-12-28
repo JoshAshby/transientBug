@@ -34,9 +34,20 @@
     }
 
     FieldChecker.prototype.init = function(element, opts) {
+      var _this = this;
       this.el = $(element);
       this.opts = $.extend({}, this["default"], opts);
-      return this.opts["default"] = this.el.val();
+      this.opts["default"] = this.el.val();
+      if ($().done_typing != null) {
+        return this.el.done_typing({
+          on_done: function() {
+            return _this.check();
+          },
+          on_empty: function() {
+            return _this.reset();
+          }
+        });
+      }
     };
 
     FieldChecker.prototype.check = function() {

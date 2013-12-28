@@ -18,7 +18,7 @@
       }, 100);
     });
     $('.thumbnail_h6').tooltip();
-    $(".twitter-typeahead").removeAttr("style");
+    $(".twitter-typeahead").css("display", "block");
     $(".tt-dropdown-menu").css("top", "initial");
     return $(".tt-hint").css("padding-top", "1px");
   });

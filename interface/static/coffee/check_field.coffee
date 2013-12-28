@@ -28,6 +28,13 @@ class FieldChecker
     @opts = $.extend {}, @default, opts
     @opts.default = @el.val()
 
+    if $().done_typing?
+      @el.done_typing
+        on_done: =>
+          @check()
+        on_empty: =>
+          @reset()
+
   check: () ->
     val = @el.val()
     if val isnt @opts.default
