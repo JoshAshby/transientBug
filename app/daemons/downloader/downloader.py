@@ -38,7 +38,6 @@ class Downloader(Worker):
             fi = cStringIO.StringIO()
             for chunk in req.iter_content():
                 fi.write(chunk)
-                print "reading..."
             fi.seek(0)
 
             with open(path, 'w+b') as f:
