@@ -3,5 +3,49 @@ theme_color: orange
 nav: admin_users
 breadcrumbs_top: True
 base: skeletons/sidebar
+
+styles: "img.img {height: 75px;
+width: 75px;
+margin: 2px;
+border: 1px solid;
+padding: 5px;}"
 +++
 {{tabs}}
+<div class="row">
+  <div class="col-md-12">
+    <form class="form-inline pull-right" role="pagination_options">
+      {{page.options}}
+    </form>
+    <br>
+    <br>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <table class="table table-striped table-hover table-condensed">
+      <thead>
+        <th></th>
+        <th>Title</th>
+        <th>Created</th>
+      </thead>
+      <tbody>
+        {% for phot in page.pail %}
+          <tr {{ 'class="danger"' if phot.disable }}>
+            <td>
+              <a href="/admin/phots/{{phot.short_code}}"><img src="/i/{{phot.filename}}" alt="{{phot.filename}}" class="img"></a>
+            </td>
+            <td><a href="/admin/phots/{{phot.short_code}}">{{phot.title|truncate(25)}}</a></td>
+            <td>{{phot.formated_created}}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    {{page.paginate}}
+  </div>
+</div>

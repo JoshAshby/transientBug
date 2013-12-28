@@ -19,6 +19,11 @@ from errors.general import NotFoundError
 
 from models.rethink.user import userModel as um
 
+import rethinkdb as r
+from rethinkORM import RethinkCollection
+import models.rethink.phot.photModel as pm
+from utils.paginate import Paginate
+
 
 @login(["admin"])
 @autoRoute()
@@ -39,5 +44,12 @@ class phots(MixedObject):
                           "partials/admin/users/tabs",
                           {"user": user,
                            "command": self.request.command})
+
+        parts = r.table(pm.Phot.table).filter({"user": self.request.session.id})
+
+        result = RethinkCollection(pm.Phot, query=parts)
+        page = Paginate(result, self.request, "created", sort_direction="desc")
+
+        self.view.data = {"page": page}
 
         return self.view
