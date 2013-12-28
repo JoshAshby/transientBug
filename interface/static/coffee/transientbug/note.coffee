@@ -5,7 +5,7 @@ $ ->
 
     if yesno
       img = $(this).data "short"
-      $.post "/notes/edit/#{ img }/delete", (data) ->
+      $.post "/notes/#{ img }/delete", (data) ->
         if data[0]["success"]
           window.location.href="/notes"
 

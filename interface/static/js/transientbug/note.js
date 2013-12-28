@@ -2,48 +2,18 @@
 (function() {
 
   $(function() {
-    var editor;
     $("#del_btn").click(function(e) {
       var img, yesno;
       e.preventDefault();
       yesno = confirm("Are you sure you want to delete this note?");
       if (yesno) {
         img = $(this).data("short");
-        return $.post("/notes/edit/" + img + "/delete", function(data) {
+        return $.post("/notes/" + img + "/delete", function(data) {
           if (data[0]["success"]) {
             return window.location.href = "/notes";
           }
         });
       }
-    });
-    editor = new EpicEditor({
-      theme: {
-        base: 'css/lib/epic/base/epiceditor.css',
-        preview: 'css/lib/epic/preview/github.css',
-        editor: 'css/lib/epic/editor/epic-dark.css'
-      },
-      basePath: '/static/',
-      autogrow: {
-        minHeight: 200
-      },
-      textarea: "content",
-      button: {
-        preview: false,
-        fullscreen: false
-      }
-    }).load();
-    editor.on('update', function() {
-      return $("#preview").html(this.exportFile(null, 'html'));
-    }).emit('update');
-    $(document).on("sidebar-toggle", function() {
-      return setTimeout(function() {
-        return editor.reflow();
-      }, 100);
-    });
-    $(document).on("sidebar-link", function() {
-      return setTimeout(function() {
-        return editor.reflow();
-      }, 100);
     });
     return $("#note_tags").pillbox({
       url: "/notes/tags/json",

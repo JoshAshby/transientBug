@@ -1,46 +1,72 @@
 +++
-base: skeletons/sidebar
+base: skeletons/header
 theme_color: red
 nav: notes
 
 scriptFiles:
-  - lib/epiceditor.min
-  - lib/typeahead.min
   - pillbox
+  - lib/typeahead.min
+  - lib/bootstrap-markdown
   - transientbug/note
 
 stylesheets:
   - pillbox
+  - lib/bootstrap-markdown.min
 +++
 
+<ul class="nav nav-pills">
+  <li class="active"><a href="#view" data-toggle="tab">View</a></li>
+  <li><a href="#edit" data-toggle="tab">Edit</a></li>
+</ul>
+<br>
 <div class="tab-content">
-  <div class="tab-pane" id="info">
-    <form method="POST" id="edit_form">
-      <fieldset>
-        <textarea name="contents" id="content" style="display:none">{{note.contents}}</textarea>
-        <div class="form-group">
-          <input type="text" class="form-control" id="title" name="title" placeholder="Title..." value="{{note.title}}" required>
-        </div>
-        <div class="checkbox">
-          <label>
-            <input type="checkbox" name="public" value="true" {{ 'checked' if note.public }} /> Make this note public?
-            <span class="help-block"><small>This determines if the note will be visible on <a href="/notes/public">/notes/public</a> and <a href="/notes/tags">/notes/tags</a> pages.</small></span>
-          </label>
-        </div>
-        <div class="form-group">
-          <input type="text" class="form-control" name="tags" id="note_tags" placeholder="Tags..." value="{{tags}}"/>
-        </div>
-
-        <button type="button" class="btn btn-sm btn-info" id="del_btn" data-short={{note.short_code}}><i class="fa fa-trash-o"></i> Delete</button>
-        <button type="submit" class="btn btn-theme pull-right btn-sm"><i class="fa fa-fw fa-save"></i> Save</button>
-
-      </fieldset>
-    </form>
+  <div class="tab-pane active" id="view">
+    <div class="row">
+      <div class="col-md-12">
+        <h2>
+          <small>
+            Yours! - {{note.formated_time}}
+          </small>
+        </h2>
+        {{note.formated_contents}}
+        {% for tag in note.tags %}
+          <a href="/notes/tags/{{tag}}"><span class="label label-theme">{{tag}}</span></a>
+        {% endfor %}
+      </div>
+    </div>
   </div>
-  <div class="tab-pane active" id="edit">
-    <div id="epiceditor"></div>
-  </div>
-  <div class="tab-pane" id="view">
-    <div id="preview"></div>
+  <div class="tab-pane" id="edit">
+    <div class="row">
+      <div class="col-md-12">
+        <form method="POST">
+          <fieldset>
+            <div class="form-group" id="note">
+              <input type="text" class="form-control" id="note_title" name="title" placeholder="Title..." value="{{note.title}}" required>
+            </div>
+            <div class="form-group">
+              <textarea name="contents" id="note_content" data-provide="markdown">{{note.contents}}</textarea>
+            </div>
+            <div class="form-group">
+              <input type="text" class="form-control" name="tags" id="note_tags" placeholder="Tags..." value="{{note.tags|join(", ")}}"/>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox" name="public" id="note_public" value="true" {{ 'checked' if note.public }}/> Make this note public?
+                    <span class="help-block"><small>This determines if the note will be visible on <a href="/notes/public">/notes/public</a> and <a href="/notes/tags">/notes/tags</a> pages.</small></span>
+                  </label>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <button class="btn btn-info" id="del_btn" data-short="{{note.short_code}}"><i class="fa fa-trash-o"></i> Delete</button>
+                <button type="submit"class="btn btn-theme pull-right"><i class="fa fa-save"></i> Save</button>
+              </div>
+            </div>
+
+          </fieldset>
+        </form>
+      </div>
+    </div>
   </div>
 </div>

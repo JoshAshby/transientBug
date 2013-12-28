@@ -47,7 +47,7 @@ nav: notes
           <a href="/notes/{{note.short_code}}">{{note.title}}</a><br>
           <small>
             {% if req.session.id==note.user %}
-              Yours! <a href="/notes/{{note.short_code}}/edit">(Edit)</a>
+              Yours!
             {% else %}
               By {{note.author.username}}
             {% endif %} - {{note.formated_time}}

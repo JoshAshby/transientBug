@@ -25,7 +25,6 @@ class note(MixedObject):
     _title = "new note"
     _default_tmpl = "public/new/note"
     def GET(self):
-        self.view.partial("sidebar", "partials/public/notes/sidebar_links")
         return self.view
 
     def POST(self):

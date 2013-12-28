@@ -28,7 +28,7 @@ class delete(MixedObject):
 
         if f:
             note = nm.Note(**f[0])
-            if note.author.id is not self.request.session.id:
+            if note.author.id != self.request.session.id:
                 self.request.session.push_alert("You don't own that note, you can't delete it!", level="danger")
                 return Unauthorized()
 

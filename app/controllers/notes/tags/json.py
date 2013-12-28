@@ -30,7 +30,7 @@ class json(MixedObject):
 
         for tag in raw_tags:
             res = {
-                "value": tag,
+                "value": tag.replace("_", " "),
                 "tokens": tag.replace("_", " ").split(" ")
             }
             all_tags.append(res)

@@ -11,7 +11,7 @@ joshuaashby@joshashby.com
 """
 from seshat.route import autoRoute
 from seshat.MixedObject import MixedObject
-from seshat.actions import NotFound, Unauthorized
+from seshat.actions import NotFound, Unauthorized, Redirect
 
 import rethinkdb as r
 import models.rethink.note.noteModel as nm
@@ -29,12 +29,13 @@ class view(MixedObject):
         if f:
             note = nm.Note(**f[0])
 
-            if not note.public and (not self.request.session.id \
-                      or self.request.session.id!=note.user):
+            if not note.public:
+              if not self.request.session.id or self.request.session.id!=note.user:
                     self.request.session.push_alert("That note is not public and you do not have the rights to access it.", level="error")
                     return Unauthorized()
 
             if self.request.session.id:
+                self.view.template = "public/notes/edit"
                 if note.public:
                     title = """<i class="fa fa-eye"></i> """
                 else:
@@ -51,3 +52,33 @@ class view(MixedObject):
 
         else:
             return NotFound()
+
+    def POST(self):
+        title = self.request.getParam("title")
+        contents = self.request.getParam("contents")
+        public = self.request.getParam("public", False)
+        tags = self.request.getParam("tags")
+
+        tag = []
+        if tags:
+            tag = [ bit.lstrip().rstrip().replace(" ", "_").lower() for bit in tags.split(",") ]
+
+        f = list(r.table(nm.Note.table).filter({"short_code": self.request.id}).run())
+
+        if f:
+            note = nm.Note(**f[0])
+            if note.author.id != self.request.session.id:
+                self.request.session.push_alert("You don't own that note, you can't edit it!", level="danger")
+                return Unauthorized()
+
+            note.title = title
+            note.contents = contents
+            note.public = public
+            note.tags = tag
+
+            note.save()
+
+        else:
+            return NotFound()
+
+        return Redirect("/notes/%s" % note.short_code)
