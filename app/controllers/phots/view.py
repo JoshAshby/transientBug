@@ -76,10 +76,9 @@ class view(MixedObject):
             if new_name != photo.title:
                 new_name = new_name.replace(" ", "_")
 
-                current_path = ''.join([c.dirs.gifs, self.request.id])
+                current_path = ''.join([c.dirs.gifs, photo.filename])
 
-                extension = self.request.id.rsplit(".", 1)[1]
-                new_filename = ''.join([new_name, ".", extension])
+                new_filename = ''.join([new_name, ".", photo.extension])
 
                 photo.filename = new_filename
                 photo.title = self.request.getParam("name")
