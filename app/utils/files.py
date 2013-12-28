@@ -9,54 +9,8 @@ Josh Ashby
 http://joshashby.com
 joshuaashby@joshashby.com
 """
-import cStringIO
-import urlparse
-
-import requests
-
 import tempfile
 import shutil
-
-
-def write_file(path, files):
-    """
-    Simply writes the files contents the disk at the given location.
-    """
-    with open(path, 'w+b') as f:
-        f.write(files.read())
-
-    return True
-
-
-def download_file(url, path):
-    """
-    Download the given url to the path. File extension added automatically.
-
-    This needs to be moved into its own little thingy so it stops blocking
-    """
-    req = requests.get(url, stream=True)
-
-    if req.status_code == 200:
-        url_parts= urlparse.urlparse(url)
-
-        parts = url_parts.path.rsplit(".", 1)
-        if len(parts) > 1:
-            extension = parts[1]
-
-        path = ''.join([path, ".{}".format(extension)])
-
-        fi = cStringIO.StringIO()
-        for chunk in req.iter_content():
-            fi.write(chunk)
-        fi.seek(0)
-
-        write_file(path, fi)
-
-        return path
-
-    else:
-        # TODO: DO Shit
-        raise Exception(req.status_code)
 
 
 class TemporaryDirectory(object):

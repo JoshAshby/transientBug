@@ -60,6 +60,12 @@ redis = red.StrictRedis(general["databases"]["redis"]["URL"], db=general["databa
 
 parse_files(general)
 
+downloader = StandardODM(**general.downloader)
+parse_files(downloader)
+
+emailer = StandardODM(**general.emailer)
+parse_files(emailer)
+
 dirs = StandardODM(**general.dirs)
 files = StandardODM(**general.files)
 

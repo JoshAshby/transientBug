@@ -27,36 +27,30 @@ class phot(MixedObject):
     _title = "new phots"
     _default_tmpl = "public/new/phot"
     def GET(self):
-        # TODO: CLEAN WITH FIRE
-        self.view.scripts = ["pillbox", "transientbug/phot", "lib/typeahead.min"]
-        self.view.stylesheets = ["pillbox"]
         return self.view.render()
 
     def POST(self):
-        url = self.request.getParam("url", None)
-        files = self.request.getFile("file")
+        stuff = self.request.getParam("url", None) or self.request.getFile("file")
         title = self.request.getParam("title", "")
         tags = self.request.getParam("tags", "")
 
         if tags:
-            tag = [ bit.lstrip().rstrip().replace(" ", "_").lower() for bit in tags.split(",") ]
+            if type(tags) is str:
+                tag = [ bit.lstrip().rstrip().replace(" ", "_").lower() for bit in tags.split(",") ]
+            else:
+                tag = tags
         else:
             tag = []
 
-        found = r.table(pm.Phot.table).filter({"filename": title})
+        found = r.table(pm.Phot.table).filter({"filename": title}).count().run()
         if found:
-          title = "_".join([title, arrow.utcnow().timestamp])
+          title = "_".join([title, str(arrow.utcnow().timestamp)])
+          self.request.session.push_alert("That image name is already in use; timestamp appened to image name.")
 
-        if url:
-            phot = pm.Phot.download_phot(self.request.session.id,
-                                         url=url,
-                                         title=title,
-                                         tags=tag)
-        elif files:
-            phot = pm.Phot.upload_phot(self.request.session.id,
-                                       file_obj=files,
-                                       title=title,
-                                       tags=tag)
+        phot = pm.Phot.new_phot(self.request.session.id,
+                                stuff=stuff,
+                                title=title,
+                                tags=tag)
 
         self.request.session.push_alert("Image is being downloaded...")
-        return Redirect("/phots/%s" % phot.filename)
+        return Redirect("/phots/%s" % phot.short_code)

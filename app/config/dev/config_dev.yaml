@@ -31,3 +31,29 @@ databases:
   redis:
     db: 1
     URL: localhost
+
+downloader:
+  log_name: transientbug_downloader
+
+  files:
+    pid: tb_downloader.pid
+    log: tb_downloader.log
+    stderr: tb_downloader_error.log
+    stdout: tb_downloader_out.log
+
+  dirs:
+    pid: pid/
+    log: logs/
+
+emailer:
+  log_name: transientbug_emailer
+
+  files:
+    pid: tb_emailer.pid
+    log: tb_emailer.log
+    stderr: tb_emailer_error.log
+    stdout: tb_emailer_out.log
+
+  dirs:
+    pid: pid/
+    log: logs/
