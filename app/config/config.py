@@ -25,7 +25,7 @@ Don't change these following settings unless you know what you're doing!!!
 """
 
 current_path = os.path.dirname(__file__) + "/"
-base_path = current_path.rsplit("config")[0]
+base_path = current_path.rsplit("config", 1)[0]
 
 general = None
 with open(current_path + "config.yaml", "r") as open_config:
@@ -62,9 +62,13 @@ parse_files(general)
 
 downloader = StandardODM(**general.downloader)
 parse_files(downloader)
+downloader.files = StandardODM(**downloader.files)
+downloader.dirs = StandardODM(**downloader.dirs)
 
 emailer = StandardODM(**general.emailer)
 parse_files(emailer)
+emailer.files = StandardODM(**emailer.files)
+emailer.dirs = StandardODM(**emailer.dirs)
 
 dirs = StandardODM(**general.dirs)
 files = StandardODM(**general.files)
