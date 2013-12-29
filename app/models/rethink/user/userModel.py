@@ -73,12 +73,16 @@ class User(RethinkModel):
         found = r.table(cls.table).filter({"username": email}).coerce_to("array").run()
         if found:
             return cls(**found[0])
+        else:
+            raise NotFoundError("Username not in system")
 
     @classmethod
     def from_email(cls, email):
         found = r.table(cls.table).filter({"email": email}).coerce_to("array").run()
         if found:
             return cls(**found[0])
+        else:
+            raise NotFoundError("Email not in system")
 
     def set_password(self, password):
         """

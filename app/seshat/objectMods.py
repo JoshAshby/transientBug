@@ -24,3 +24,12 @@ def login(groups=None, redirect=""):
         HTTPObject._redirect_url = redirect
         return HTTPObject
     return wrapper
+
+
+def not_logged_in(redirect=""):
+    def wrapper(HTTPObject):
+        HTTPObject._login = False
+        HTTPObject._no_login = True
+        HTTPObject._redirect_url = redirect
+        return HTTPObject
+    return wrapper

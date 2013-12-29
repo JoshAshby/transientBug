@@ -150,13 +150,13 @@ class session(brm.SeshatRedisModel):
 
         alertStr = ""
         for alert in alerts:
-            if alert["level"] == "info":
+            if alert["level"] in ["info"]:
                 alert["icon"] = "info"
-            elif alert["level"] == "success":
+            elif alert["level"] in ["success"]:
                 alert["icon"] = "thumbs-up"
-            elif alert["level"] == "warning":
+            elif alert["level"] in ["warning"]:
                 alert["icon"] = "excalmation"
-            elif alert["level"] == "error":
+            elif alert["level"] in ["danger", "error"]:
                 alert["icon"] = "warning"
                 alert["level"] = "danger"
 

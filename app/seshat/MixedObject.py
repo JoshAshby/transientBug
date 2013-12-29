@@ -25,6 +25,7 @@ root_group = "root"
 
 class MixedObject(base.BaseHTTPObject):
     _login = False
+    _no_login = False
     _groups = None
     _redirect_url = ""
     _type = "HTML"
@@ -46,6 +47,14 @@ class MixedObject(base.BaseHTTPObject):
 
     def build(self):
         content = ""
+
+        if self._no_login and self.request.session.id:
+            self.request.session.push_alert("Thats a page only for non logged in people. Weird huh?")
+            if not self._redirect_url:
+                self.head = ("303 SEE OTHER", [("Location", "/")])
+            else:
+                self.head = ("303 SEE OTHER", [("Location", self._redirect_url)])
+            return "", self.head
 
         if self._login and not self.request.session.id:
             self.request.session.push_alert("You need to be logged in to view this page.", level="error")
