@@ -1,0 +1,43 @@
++++
+nav: account
+
+scriptFiles:
+ - transientbug/account
++++
+
+{{tabs}}
+
+<form role="form" method="POST">
+  <div class="row">
+    <div class="col-md-12">
+      <b>Joined on:</b> {{user.formated_created}}<br>
+      <br>
+      <div class="form-group {{ 'has-error' if error=="email" }}">
+        <label for="email">Email</label>
+        <input type="email" class="form-control" id="email" placeholder="Email..." name="email" value="{{user.email}}">
+        {% if error=="email" %}
+          <span class="help-text">
+            {{error_msg}}
+          </span>
+        {% endif %}
+      </div>
+      <div class="form-group {{ 'has-error' if error=="password" }}">
+        <label for="password">Password</label>
+        <input type="password" class="form-control" id="password" placeholder="Password..." name="password" value="{{password}}">
+        <span class="help-text">
+          Only changes the password if not blank. Please choose something strong and not your default password, etc.
+        </span>
+        {% if error=="password" %}
+          <span class="help-text">
+            {{error_msg}}
+          </span>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <button type="submit" class="btn btn-theme btn-sm pull-right"><i class="fa fa-check"></i> Update</button>
+    </div>
+  </div>
+</form>

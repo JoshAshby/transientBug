@@ -35,7 +35,7 @@ if __name__ == "__main__":
         AppDaemon = type('AppDaemon', (Daemon,), {"run": run})
         app = AppDaemon(config["files"]["pid"], stderr=config["files"]["stderr"])
     else:
-        App = type('App', (), {"run": run})
+        App = type('App', (), {"start": run})
         app = App()
 
     if arguments["start"]:
