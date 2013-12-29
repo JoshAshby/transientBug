@@ -68,6 +68,18 @@ class User(RethinkModel):
         elif found_e:
             raise EmailError("That email is already in our system.", email)
 
+    @classmethod
+    def from_username(cls, email):
+        found = r.table(cls.table).filter({"username": email}).coerce_to("array").run()
+        if found:
+            return cls(**found[0])
+
+    @classmethod
+    def from_email(cls, email):
+        found = r.table(cls.table).filter({"email": email}).coerce_to("array").run()
+        if found:
+            return cls(**found[0])
+
     def set_password(self, password):
         """
         Sets the users password to `password`
