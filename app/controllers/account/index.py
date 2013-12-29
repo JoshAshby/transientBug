@@ -13,6 +13,7 @@ from seshat.route import autoRoute
 from seshat.MixedObject import MixedObject
 from seshat.actions import Redirect
 from seshat.objectMods import login
+
 import rethinkdb as r
 from models.rethink.user import userModel as um
 
@@ -24,6 +25,12 @@ class index(MixedObject):
     _default_tmpl = "public/account/index"
     def GET(self):
         user = um.User(self.request.session.id)
+
+        self.view.partial("tabs",
+                          "partials/public/account/tabs",
+                          {"user": user,
+                           "command": self.request.command})
+
         self.view.data = {"user": user}
         return self.view
 

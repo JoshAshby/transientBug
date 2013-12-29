@@ -90,6 +90,10 @@ h4 {
   font-weight: 200;
 }
 
+.md-editor {
+  .lh-border-radius(4px);
+}
+
 .btn-theme {
   color: white;
   background-color: @theme;
@@ -184,7 +188,7 @@ h4 {
   border: 1px solid black;
   *border-right-width: 2px;
   *border-bottom-width: 2px;
-  .lh-border-radius(6px);
+  .lh-border-radius(4px);
   .lh-box-shadow(0 5px 10px rgba(0,0,0,.2));
   -webkit-background-clip: padding-box;
      -moz-background-clip: padding;
@@ -222,9 +226,7 @@ h4 {
   left:100%;
   margin-top:-6px;
   margin-left:-1px;
-  -webkit-border-radius:0 6px 6px 6px;
-  -moz-border-radius:0 6px 6px 6px;
-  border-radius:0 6px 6px 6px;
+  .lh-border-radius(6px);
 }
 /*.dropdown-submenu:hover>.dropdown-menu {
   display:block;
@@ -251,7 +253,5 @@ h4 {
 .dropdown-submenu.pull-left>.dropdown-menu {
   left:-100%;
   margin-left:10px;
-  -webkit-border-radius:6px 0 6px 6px;
-  -moz-border-radius:6px 0 6px 6px;
-  border-radius:6px 0 6px 6px;
+  .lh-border-radius(6px);
 }

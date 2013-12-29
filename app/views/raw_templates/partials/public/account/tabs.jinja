@@ -1,0 +1,20 @@
+<br>
+<div class="row">
+  <div class="col-md-2">
+    <img src="https://gravatar.com/avatar/{{user.gravatar}}?d=mm&s=100" alt="{{user.email}}" class="img-thumbnail">
+  </div>
+  <div class="col-md-10">
+    <h3>{{user.username}} (hey, it's you!)</h3>
+    <h5>{{user.email}}</h5>
+  </div>
+</div>
+<hr>
+<div class="row">
+  <div class="col-md-12">
+    <ul class="nav nav-tabs">
+      <li {{ 'class="active"' if not command }}><a href="/account">Settings</a></li>
+      <li {{ 'class="active"' if command=="emails" }}><a href="/account/emails">Emails</a></li>
+    </ul>
+  </div>
+</div>
+<br>
