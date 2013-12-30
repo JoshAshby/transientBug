@@ -19,7 +19,6 @@ from seshat.objectMods import login
 from seshat.actions import Redirect
 
 from utils.paginate import Paginate
-import utils.files as fu
 
 
 @login(["screenshots"])
@@ -48,7 +47,8 @@ class index(MixedObject):
 
             path = ''.join([c.dirs.screenshots, date, scrn.filename])
             try:
-                fu.write_file(path, scrn)
+                with open(path, 'w+b') as f:
+                    f.write(scrn.read())
                 self.request.session.push_alert("Screenshot uploaded...", level="success")
             except IOError as e:
                 self.request.session.push_alert("There was a problem executing that: {}".format(str(e)), level="error")

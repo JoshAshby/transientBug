@@ -31,7 +31,7 @@ class Emailer(Worker):
 
         envelope = Envelope(
             from_addr="{}@transientbug.com".format(email.service),
-            to_addr=email.destinations,
+            to_addr=email.addresses,
             subject=email.subject,
             text_body=email.contents,
         )
