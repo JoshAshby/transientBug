@@ -12,17 +12,17 @@ joshuaashby@joshashby.com
 from seshat.route import autoRoute
 from seshat.MixedObject import MixedObject
 from seshat.actions import Redirect
-from seshat.objectMods import login
+from seshat.objectMods import login, template
+from seshat.funcMods import HTML
 
 import rethinkdb as r
 from models.rethink.user import userModel as um
 
 
-@login()
 @autoRoute()
+@login()
+@template("public/account/index", "Account Settings")
 class index(MixedObject):
-    _title = "Account Settings"
-    _default_tmpl = "public/account/index"
     def GET(self):
         user = um.User(self.request.session.id)
 
@@ -34,6 +34,7 @@ class index(MixedObject):
         self.view.data = {"user": user}
         return self.view
 
+    @HTML
     def POST(self):
         error = False
         user = um.User(self.request.session.id)

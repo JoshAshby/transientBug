@@ -13,7 +13,8 @@ joshuaashby@joshashby.com
 """
 from seshat.route import autoRoute
 from seshat.MixedObject import MixedObject
-from seshat.actions import Redirect
+from seshat.objectMods import template
+from seshat.funcMods import HTML
 
 from utils.paginate import Paginate
 
@@ -23,9 +24,9 @@ import models.rethink.note.noteModel as nm
 
 
 @autoRoute()
+@template("public/notes/index", "Notes")
 class index(MixedObject):
-    _title = "notes"
-    _default_tmpl = "public/notes/index"
+    @HTML
     def GET(self):
         parts = r.table(nm.Note.table).filter({"disable": False})
 

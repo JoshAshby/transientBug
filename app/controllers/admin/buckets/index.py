@@ -11,22 +11,24 @@ joshuaashby@joshashby.com
 """
 from seshat.route import autoRoute
 from seshat.MixedObject import MixedObject
-from seshat.objectMods import login
+from seshat.objectMods import login, template
+from seshat.funcMods import HTML, JSON
 
 from utils.paginate import Paginate
 
 
-@login(["admin"])
 @autoRoute()
+@login(["admin"])
+@template("admin/buckets/index", "Buckets")
 class index(MixedObject):
-    _title = "Buckets"
-    _default_tmpl = "admin/buckets/index"
+    @HTML
     def GET(self):
         self.view.partial("sidebar", "partials/admin/sidebar", {"command": "buckets"})
         page = Paginate(self.request.buckets.list, self.request)
         self.view.data = {"page": page}
         return self.view
 
+    @JSON
     def POST(self):
         bucket_id = self.request.id
         self.request.buckets.toggle(bucket_id)

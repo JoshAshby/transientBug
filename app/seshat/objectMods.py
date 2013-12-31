@@ -2,7 +2,7 @@
 """
 Seshat
 Web App/API framework built on top of gevent
-modifying decorators
+modifying decorators for classes
 
 For more information, see: https://github.com/JoshAshby/
 
@@ -15,11 +15,11 @@ joshuaashby@joshashby.com
 """
 
 
-def login(groups=None, redirect=""):
+def login(groups=None, redirect="", quiet=False):
     if groups is None:
         groups = []
     def wrapper(HTTPObject):
-        HTTPObject._login = True
+        HTTPObject._login = (True, quiet)
         HTTPObject._groups = groups
         HTTPObject._redirect_url = redirect
         return HTTPObject
@@ -31,5 +31,14 @@ def not_logged_in(redirect=""):
         HTTPObject._login = False
         HTTPObject._no_login = True
         HTTPObject._redirect_url = redirect
+        return HTTPObject
+    return wrapper
+
+
+def template(template, title=None):
+    def wrapper(HTTPObject):
+        HTTPObject._title = title
+        HTTPObject._tmpl = template
+
         return HTTPObject
     return wrapper

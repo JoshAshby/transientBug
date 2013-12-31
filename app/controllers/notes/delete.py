@@ -12,15 +12,17 @@ joshuaashby@joshashby.com
 from seshat.route import autoRoute
 from seshat.MixedObject import MixedObject
 from seshat.objectMods import login
+from seshat.funcMods import JSON
 from seshat.actions import Unauthorized, NotFound
 
 import rethinkdb as r
 import models.rethink.note.noteModel as nm
 
 
-@login(["notes"])
 @autoRoute()
+@login(["notes"])
 class delete(MixedObject):
+    @JSON
     def POST(self):
         f = r.table(nm.Note.table)\
             .filter({"short_code": self.request.id})\

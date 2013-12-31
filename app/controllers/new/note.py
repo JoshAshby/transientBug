@@ -13,17 +13,18 @@ joshuaashby@joshashby.com
 """
 from seshat.route import autoRoute
 from seshat.MixedObject import MixedObject
-from seshat.objectMods import login
+from seshat.objectMods import login, template
+from seshat.funcMods import HTML
 from seshat.actions import Redirect
 
 import models.rethink.note.noteModel as nm
 
 
-@login(["notes"])
 @autoRoute()
+@login(["notes"])
+@template("public/new/note", "New Note")
 class note(MixedObject):
-    _title = "new note"
-    _default_tmpl = "public/new/note"
+    @HTML
     def GET(self):
         return self.view
 

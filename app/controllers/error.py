@@ -11,44 +11,31 @@ Josh Ashby
 http://joshashby.com
 joshuaashby@joshashby.com
 """
+from seshat.objectMods import template
+from seshat.funcMods import HTML
 from seshat.MixedObject import MixedObject
 
 
+@template("error/404", "404 NOT FOUND")
 class error404(MixedObject):
-    """
-    Returns base 404 error page.
-    """
-    _title = "404 NOT FOUND"
-    _default_tmpl = "error/404"
+    @HTML
     def GET(self):
-        """
-        """
         self.head = ("404 NOT FOUND", [("Content-Type", "text/html")])
         return self.view
 
 
+@template("error/401", "401 UNAUTHORIZED")
 class error401(MixedObject):
-    """
-    Returns base 401 error page.
-    """
-    _title = "401 UNAUTHORIZED"
-    _default_tmpl = "error/401"
+    @HTML
     def GET(self):
-        """
-        """
         self.head = ("401 UNAUTHORIZED", [("Content-Type", "text/html")])
         return self.view
 
 
+@template("error/500", "500 INTERNAL SERVER ERROR")
 class error500(MixedObject):
-    """
-    Returns base 500 error page.
-    """
-    _title = "500 INTERNAL SERVER ERROR"
-    _default_tmpl = "error/500"
+    @HTML
     def GET(self):
-        """
-        """
         self.head = ("500 INTERNAL SERVER ERROR", [("Content-Type", "text/html")])
         self.view.data = {"error": self.request.error[0], "tb": self.request.error[1]}
         return self.view

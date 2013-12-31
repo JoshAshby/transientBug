@@ -12,15 +12,17 @@ joshuaashby@joshashby.com
 from seshat.route import autoRoute
 from seshat.MixedObject import MixedObject
 from seshat.actions import NotFound, Unauthorized, Redirect
+from seshat.funcMods import HTML
+from seshat.objectMods import template
 
 import rethinkdb as r
 import models.rethink.note.noteModel as nm
 
 
 @autoRoute()
+@template("public/notes/view", "Note")
 class view(MixedObject):
-    _title = "note"
-    _default_tmpl = "public/notes/view"
+    @HTML
     def GET(self):
         f = r.table(nm.Note.table)\
             .filter({"short_code": self.request.id, "disable": False})\

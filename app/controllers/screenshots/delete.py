@@ -15,12 +15,14 @@ import config.config as c
 from seshat.route import autoRoute
 from seshat.MixedObject import MixedObject
 from seshat.objectMods import login
+from seshat.funcMods import JSON
 from seshat.actions import NotFound
 
 
-@login(["root"])
 @autoRoute()
+@login(["root"])
 class delete(MixedObject):
+    @JSON
     def POST(self):
         current_path = ''.join([c.dirs.screenshots, self.request.id])
 

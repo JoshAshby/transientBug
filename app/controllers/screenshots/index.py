@@ -15,20 +15,19 @@ import arrow
 
 from seshat.route import autoRoute
 from seshat.MixedObject import MixedObject
-from seshat.objectMods import login
+from seshat.objectMods import login, template
+from seshat.funcMods import HTML
 from seshat.actions import Redirect
 
 from utils.paginate import Paginate
 
 
-@login(["screenshots"])
 @autoRoute()
+@login(["screenshots"])
+@template("public/screenshots/index", "Screenshots")
 class index(MixedObject):
-    _title = "screenshots"
-    _default_tmpl = "public/screenshots/index"
+    @HTML
     def GET(self):
-        """
-        """
         f = []
         for top, folders, files in os.walk(c.dirs.screenshots):
             f.extend(files)

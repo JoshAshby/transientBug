@@ -11,9 +11,10 @@ joshuaashby@joshashby.com
 """
 from seshat.route import autoRoute
 from seshat.MixedObject import MixedObject
-from seshat.objectMods import login
+from seshat.objectMods import login, template
+from seshat.funcMods import HTML
 
-from seshat.actions import NotFound, Redirect
+from seshat.actions import NotFound
 
 from errors.general import NotFoundError
 
@@ -25,11 +26,11 @@ import models.rethink.note.noteModel as nm
 from utils.paginate import Paginate
 
 
-@login(["admin"])
 @autoRoute()
+@login(["admin"])
+@template("admin/users/notes", "User Notes")
 class notes(MixedObject):
-    _title = "Users"
-    _default_tmpl = "admin/users/notes"
+    @HTML
     def GET(self):
         self.view.partial("sidebar", "partials/admin/sidebar", {"command": "users"})
         try:

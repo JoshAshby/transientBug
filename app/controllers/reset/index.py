@@ -11,8 +11,9 @@ joshuaashby@joshashby.com
 """
 from seshat.route import autoRoute
 from seshat.MixedObject import MixedObject
-from seshat.objectMods import not_logged_in
-from seshat.actions import NotFound, Redirect
+from seshat.objectMods import not_logged_in, template
+from seshat.funcMods import HTML
+from seshat.actions import Redirect
 
 from errors.general import NotFoundError
 
@@ -25,11 +26,11 @@ import utils.short_codes as sc
 from views.template import PartialTemplate
 
 
-@not_logged_in("/account")
 @autoRoute()
+@not_logged_in("/account")
+@template("public/reset/reset", "Password Reset")
 class index(MixedObject):
-    _title = "Password Reset"
-    _default_tmpl = "public/reset/reset"
+    @HTML
     def GET(self):
         code = self.request.getParam("c")
 
@@ -45,6 +46,7 @@ class index(MixedObject):
             self.request.session.push_alert("That code isn't in the database, want to try requesting a new one?", level="danger")
             return Redirect("/reset")
 
+    @HTML
     def POST(self):
         code = self.request.getParam("c")
         username = self.request.getParam("username")

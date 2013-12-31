@@ -13,21 +13,17 @@ joshuaashby@joshashby.com
 """
 from seshat.route import autoRoute
 from seshat.MixedObject import MixedObject
+from seshat.objectMods import template
+from seshat.funcMods import HTML
 from seshat.actions import Redirect
 import errors.session as se
 
 
 @autoRoute()
+@template("public/auth/login", "Login")
 class login(MixedObject):
-    """
-
-    """
-    _title = "Login"
-    _default_tmpl = "public/auth/login"
+    @HTML
     def GET(self):
-        """
-        Display the login page or redirect to their dashboard if they are already logged in
-        """
         if self.request.session.id:
             where = self.request.getParam("return-to", "/")
             self.request.session.push_alert("You've already been signed in as: %s"
@@ -40,11 +36,8 @@ class login(MixedObject):
             self.view.partial("about", "public/about/about")
             return self.view
 
+    @HTML
     def POST(self):
-        """
-        Use form data to check login, and the redirect if successful
-        if not successful then redirect to the login page again.
-        """
         passwd = self.request.getParam("password")
         name = self.request.getParam("username")
 

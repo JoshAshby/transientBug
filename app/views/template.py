@@ -160,17 +160,19 @@ class templateFile(object):
 
 
 class template(object):
-    def __init__(self, template, data=None):
-        if data is None: data = {}
+    def __init__(self, template, request=None, additional_data=None):
         self._baseData = {
             "title": "",
-            "req": data,
             "stylesheets": [],
             "scripts": "",
             "scriptFiles": [],
             "breadcrumbs": False,
             "breadcrumbs_top": False,
         }
+        if additional_data:
+            self._baseData.update(additional_data)
+        if request:
+            self._baseData["req"] = request
 
         self._template = template
         self._base = "skeletons/navbar"

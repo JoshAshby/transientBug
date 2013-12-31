@@ -11,6 +11,7 @@ joshuaashby@joshashby.com
 """
 from seshat.route import autoRoute
 from seshat.MixedObject import MixedObject
+from seshat.funcMods import JSON
 
 import models.utils.dbUtils as dbu
 import models.rethink.phot.photModel as pm
@@ -18,6 +19,7 @@ import models.rethink.phot.photModel as pm
 
 @autoRoute()
 class json(MixedObject):
+    @JSON
     def GET(self):
         base_query = dbu.rql_where_not(pm.Phot.table, "disable", True)
 

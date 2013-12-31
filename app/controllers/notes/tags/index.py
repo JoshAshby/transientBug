@@ -11,6 +11,8 @@ joshuaashby@joshashby.com
 """
 from seshat.route import autoRoute
 from seshat.MixedObject import MixedObject
+from seshat.objectMods import template
+from seshat.funcMods import HTML
 from utils.paginate import Paginate
 
 import rethinkdb as r
@@ -22,9 +24,9 @@ import utils.search as s
 
 
 @autoRoute()
+@template("public/notes/single_tag", "Notes")
 class index(MixedObject):
-    _title = "notes"
-    _default_tmpl = "public/notes/single_tag"
+    @HTML
     def GET(self):
         query = self.request.id or self.request.getParam("q")
 

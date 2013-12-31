@@ -14,7 +14,8 @@ from rethinkORM import RethinkCollection
 
 from seshat.route import autoRoute
 from seshat.MixedObject import MixedObject
-from seshat.objectMods import login
+from seshat.objectMods import login, template
+from seshat.funcMods import HTML, JSON
 
 from utils.paginate import Paginate
 
@@ -22,11 +23,11 @@ import models.rethink.phot.photModel as pm
 import models.utils.dbUtils as dbu
 
 
-@login(["admin"])
 @autoRoute()
+@login(["admin"])
+@template("admin/phots/index", "Phots")
 class index(MixedObject):
-    _title = "Phots"
-    _default_tmpl = "admin/phots/index"
+    @HTML
     def GET(self):
         self.view.partial("sidebar", "partials/admin/sidebar", {"command": "phots"})
         what = self.request.id
@@ -52,6 +53,7 @@ class index(MixedObject):
 
         return self.view
 
+    @JSON
     def POST(self):
         current = pm.Phot(self.request.id)
 

@@ -59,7 +59,7 @@ def dispatch(env, start_response):
         return error404(request, start_response)
 
     try:
-        dataThread = gevent.spawn(newHTTPObject.build)
+        dataThread = gevent.spawn(newHTTPObject._build)
         dataThread.join()
 
         content, replyData = dataThread.get()
@@ -102,7 +102,7 @@ def error404(request, start_response):
     newHTTPObject = error.error404(request)
     gevent.spawn(log404, request)
 
-    dataThread = gevent.spawn(newHTTPObject.build)
+    dataThread = gevent.spawn(newHTTPObject._build)
     dataThread.join()
 
     content, replyData = dataThread.get()
@@ -128,7 +128,7 @@ def error500(request, start_response):
     newHTTPObject = error.error500(request)
     gevent.spawn(log500, request)
 
-    dataThread = gevent.spawn(newHTTPObject.build)
+    dataThread = gevent.spawn(newHTTPObject._build)
     dataThread.join()
 
     content, replyData = dataThread.get()
@@ -152,7 +152,7 @@ def error401(request, start_response):
     newHTTPObject = error.error401(request)
     gevent.spawn(log401, request)
 
-    dataThread = gevent.spawn(newHTTPObject.build)
+    dataThread = gevent.spawn(newHTTPObject._build)
     dataThread.join()
 
     content, replyData = dataThread.get()

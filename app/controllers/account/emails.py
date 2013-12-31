@@ -11,18 +11,18 @@ joshuaashby@joshashby.com
 """
 from seshat.route import autoRoute
 from seshat.MixedObject import MixedObject
-from seshat.actions import Redirect
-from seshat.objectMods import login
+from seshat.objectMods import login, template
+from seshat.funcMods import HTML
 
 import rethinkdb as r
 from models.rethink.user import userModel as um
 
 
-@login()
 @autoRoute()
+@login()
+@template("public/account/emails", "Emails")
 class emails(MixedObject):
-    _title = "Account Settings - Emails"
-    _default_tmpl = "public/account/index"
+    @HTML
     def GET(self):
         user = um.User(self.request.session.id)
 

@@ -11,7 +11,8 @@ joshuaashby@joshashby.com
 """
 from seshat.route import autoRoute
 from seshat.MixedObject import MixedObject
-from seshat.objectMods import login
+from seshat.objectMods import login, template
+from seshat.funcMods import HTML
 
 
 from rethinkORM import RethinkCollection
@@ -21,11 +22,11 @@ from models.utils import dbUtils as dbu
 from utils.paginate import Paginate
 
 
-@login(["admin"])
 @autoRoute()
+@login(["admin"])
+@template("admin/users/index", "Users")
 class index(MixedObject):
-    _title = "Users"
-    _default_tmpl = "admin/users/index"
+    @HTML
     def GET(self):
         self.view.partial("sidebar", "partials/admin/sidebar", {"command": "users"})
         disabled = self.request.getParam("d", True)

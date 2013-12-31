@@ -12,11 +12,13 @@ joshuaashby@joshashby.com
 """
 from seshat.route import autoRoute
 from seshat.MixedObject import MixedObject
+from seshat.objectMods import template
+from seshat.funcMods import HTML
 
 
 @autoRoute()
+@template("public/about/about", "About")
 class about(MixedObject):
-    _title = "about"
-    _default_tmpl = "public/about/about"
+    @HTML
     def GET(self):
         return self.view

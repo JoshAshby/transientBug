@@ -11,7 +11,8 @@ joshuaashby@joshashby.com
 """
 from seshat.route import autoRoute
 from seshat.MixedObject import MixedObject
-from seshat.objectMods import login
+from seshat.objectMods import login, template
+from seshat.funcMods import HTML
 from seshat.actions import Redirect
 
 import models.redis.announcement.announcementModel as am
@@ -21,11 +22,11 @@ from utils.paginate import Paginate
 import arrow
 
 
-@login(["admin"])
 @autoRoute()
+@login(["admin"])
+@template("admin/announcements/index", "Site Announcements")
 class index(MixedObject):
-    _title = "Site Announcements"
-    _default_tmpl = "admin/announcements/index"
+    @HTML
     def GET(self):
         self.view.partial("sidebar", "partials/admin/sidebar", {"command": "announcements"})
         announcements = am.all_announcements()

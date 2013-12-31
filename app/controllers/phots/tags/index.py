@@ -12,6 +12,8 @@ joshuaashby@joshashby.com
 from seshat.route import autoRoute
 from seshat.MixedObject import MixedObject
 from utils.paginate import Paginate
+from seshat.objectMods import template
+from seshat.funcMods import HTML
 
 import rethinkdb as r
 from rethinkORM import RethinkCollection
@@ -22,9 +24,9 @@ import utils.search as s
 
 
 @autoRoute()
+@template("public/phots/single_tag", "Phots")
 class index(MixedObject):
-    _title = "phots"
-    _default_tmpl = "public/phots/single_tag"
+    @HTML
     def GET(self):
         orig = self.request.getParam("filter", "all")
         filt = dbu.phot_filter(orig)

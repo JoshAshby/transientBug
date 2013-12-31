@@ -11,7 +11,8 @@ joshuaashby@joshashby.com
 """
 from seshat.route import autoRoute
 from seshat.MixedObject import MixedObject
-from seshat.objectMods import login
+from seshat.objectMods import login, template
+from seshat.funcMods import HTML
 from seshat.actions import Redirect
 
 from models.rethink.user import userModel as um
@@ -19,15 +20,16 @@ from models.rethink.user import userModel as um
 from errors import user as ue
 
 
-@login(["admin"])
 @autoRoute()
+@login(["admin"])
+@template("admin/users/new", "New User")
 class new(MixedObject):
-    _title = "New User"
-    _default_tmpl = "admin/users/new"
+    @HTML
     def GET(self):
         self.view.partial("sidebar", "partials/admin/sidebar", {"command": "users"})
         return self.view
 
+    @HTML
     def POST(self):
         username = self.request.getParam("username")
         password = self.request.getParam("password")

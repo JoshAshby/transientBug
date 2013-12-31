@@ -11,6 +11,7 @@ joshuaashby@joshashby.com
 """
 from seshat.route import autoRoute
 from seshat.MixedObject import MixedObject
+from seshat.funcMods import JSON
 
 import rethinkdb as r
 import models.rethink.phot.photModel as pm
@@ -18,6 +19,7 @@ import models.rethink.phot.photModel as pm
 
 @autoRoute()
 class json(MixedObject):
+    @JSON
     def GET(self):
         raw_names = r.table(pm.Phot.table)\
                      .map(lambda x: x["title"])\

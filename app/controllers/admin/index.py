@@ -11,14 +11,15 @@ joshuaashby@joshashby.com
 """
 from seshat.route import autoRoute
 from seshat.MixedObject import MixedObject
-from seshat.objectMods import login
+from seshat.objectMods import login, template
+from seshat.funcMods import HTML
 
 
-@login(["admin"])
 @autoRoute()
+@login(["admin"])
+@template("admin/index/index", "Admin Home")
 class index(MixedObject):
-    _title = "Admin Home"
-    _default_tmpl = "admin/index/index"
+    @HTML
     def GET(self):
         self.view.partial("sidebar", "partials/admin/sidebar", {"command": "home"})
         return self.view

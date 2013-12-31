@@ -12,12 +12,15 @@ joshuaashby@joshashby.com
 from seshat.route import autoRoute
 from seshat.MixedObject import MixedObject
 from seshat.actions import Redirect
+from seshat.objectMods import template, login
+from seshat.funcMods import HTML
 
 
 @autoRoute()
+@login(redirect="/phots", quiet=True)
+@template("public/index/index", "Home")
 class index(MixedObject):
-    _title = "Home"
-    _default_tmpl = "public/index/index"
+    @HTML
     def GET(self):
         if self.request.session.id:
             self.view.partial("sidebar", "partials/public/index/sidebar",

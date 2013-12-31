@@ -26,6 +26,6 @@ class logout(MixedObject):
         """
         if self.request.session.logout():
             self.request.session.push_alert("Come back soon!",
-                                           "B'ahBye...", "info")
+                                            "B'ahBye...", "info")
 
         return Redirect("/login")

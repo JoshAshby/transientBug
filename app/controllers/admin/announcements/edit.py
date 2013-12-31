@@ -11,7 +11,8 @@ joshuaashby@joshashby.com
 """
 from seshat.route import autoRoute
 from seshat.MixedObject import MixedObject
-from seshat.objectMods import login
+from seshat.objectMods import login, template
+from seshat.funcMods import HTML
 from seshat.actions import Redirect
 
 import models.redis.baseRedisModel as brm
@@ -19,11 +20,11 @@ import models.redis.baseRedisModel as brm
 import arrow
 
 
-@login(["admin"])
 @autoRoute()
+@login(["admin"])
+@template("admin/announcements/edit", "Site Announcement")
 class edit(MixedObject):
-    _title = "Site Announcements"
-    _default_tmpl = "admin/announcements/edit"
+    @HTML
     def GET(self):
         self.view.partial("sidebar", "partials/admin/sidebar", {"command": "announcements"})
         announcement_id = self.request.id

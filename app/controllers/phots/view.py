@@ -14,15 +14,17 @@ import config.config as c
 from seshat.route import autoRoute
 from seshat.MixedObject import MixedObject
 from seshat.actions import NotFound, Redirect, Unauthorized
+from seshat.objectMods import template
+from seshat.funcMods import HTML
 
 import models.rethink.phot.photModel as pm
 import rethinkdb as r
 
 
 @autoRoute()
+@template("public/phots/view", "Phot")
 class view(MixedObject):
-    _title = "phot"
-    _default_tmpl = "public/phots/view"
+    @HTML
     def GET(self):
         phot = self.request.id
 

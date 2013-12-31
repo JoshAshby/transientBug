@@ -11,7 +11,8 @@ joshuaashby@joshashby.com
 """
 from seshat.route import autoRoute
 from seshat.MixedObject import MixedObject
-from seshat.objectMods import login
+from seshat.objectMods import login, template
+from seshat.funcMods import HTML
 
 from seshat.actions import NotFound, Redirect
 
@@ -20,11 +21,11 @@ from errors.general import NotFoundError
 from models.rethink.user import userModel as um
 
 
-@login(["admin"])
 @autoRoute()
+@login(["admin"])
+@template("admin/users/settings", "User")
 class view(MixedObject):
-    _title = "Users"
-    _default_tmpl = "admin/users/settings"
+    @HTML
     def GET(self):
         self.view.partial("sidebar", "partials/admin/sidebar", {"command": "users"})
         try:

@@ -12,7 +12,8 @@ joshuaashby@joshashby.com
 """
 from seshat.route import autoRoute
 from seshat.MixedObject import MixedObject
-from seshat.objectMods import login
+from seshat.objectMods import login, template
+from seshat.funcMods import HTML
 from seshat.actions import Redirect
 
 import rethinkdb as r
@@ -21,11 +22,11 @@ import models.rethink.phot.photModel as pm
 import arrow
 
 
-@login(["phots"])
 @autoRoute()
+@login(["phots"])
+@template("public/new/phot", "New Phot")
 class phot(MixedObject):
-    _title = "new phots"
-    _default_tmpl = "public/new/phot"
+    @HTML
     def GET(self):
         return self.view.render()
 
