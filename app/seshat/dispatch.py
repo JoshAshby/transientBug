@@ -59,10 +59,7 @@ def dispatch(env, start_response):
         return error404(request, start_response)
 
     try:
-        dataThread = gevent.spawn(newHTTPObject._build)
-        dataThread.join()
-
-        content, replyData = dataThread.get()
+        content, replyData = newHTTPObject._build()
         if type(content) == tuple:
             request.error = content
             return error500(request, start_response)

@@ -55,6 +55,7 @@ class view(MixedObject):
         disable = self.request.getParam("disable", False)
         email = self.request.getParam("email")
         groups = self.request.getParam("groups")
+        clear_reset = self.request.getParam("clear_reset", False)
 
         if type(groups) is not list:
             groups = [groups]
@@ -70,6 +71,9 @@ class view(MixedObject):
         if email and email != user.email:
           # TODO: Only allow change if email isn't in the database yet
             user.email = email
+
+        if clear_reset:
+            del user.reset_code
 
         user.disable = disable
 

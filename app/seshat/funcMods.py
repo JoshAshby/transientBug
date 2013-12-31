@@ -48,7 +48,7 @@ def JSON(f):
 
         if type(res) is dict or type(res) is list:
             self.head = (self.head[0], [("Content-Type", "application/json")])
-            return json.dumps(res)
+            return json.dumps([res])
 
         else:
             return res

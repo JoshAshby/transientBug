@@ -7,27 +7,38 @@ http://joshashby.com
 joshuaashby@joshashby.com
 """
 import arrow
-import config.config as c
 from rethinkORM import RethinkModel
-
-from models.rethink.user import userModel as um
+import models.utils.promise as promise
 
 
 class Email(RethinkModel):
     table = "emails"
 
     @classmethod
-    def new_email(cls, service, addresses, subject="", contents=""):
+    @promise.id_promise("emailer")
+    def new_email(cls, service, users, subject="", contents=""):
+        """
+        Creates a new email and queues it to be sent by the email daemon
+
+        :param service: The local part of the email address this email should be as
+        :param users: A list or single `User` instance(s)
+        :param subject: The subject for the email
+        :param contents: The final contents that make up the body of the email.
+        """
         created = arrow.utcnow().timestamp
 
-        what = cls.create(addresses=addresses,
+        if type(users) is list:
+            users = [ user.id for user in users ]
+
+        else:
+            users = [users.id]
+
+        what = cls.create(users=users,
                           contents=contents,
                           subject=subject,
                           service=service,
                           created=created,
                           sent=None)
-
-        c.redis.rpush("emailer:queue", what.id)
 
         return what
 

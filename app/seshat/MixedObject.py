@@ -52,7 +52,7 @@ class MixedObject(base.BaseHTTPObject):
             return "", self.head
 
         if self._login[0] and not self.request.session.id:
-            if self._login[1]:
+            if not self._login[1]:
                 self.request.session.push_alert("You need to be logged in to view this page.", level="error")
 
             if not self._redirect_url:

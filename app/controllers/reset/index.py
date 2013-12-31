@@ -66,10 +66,9 @@ class index(MixedObject):
 
             content = tmpl.render()
 
-            address = ["{} <{}>".format(user.username, user.email)]
 
             em.Email.new_email(service="noreply",
-                               addresses=address,
+                               users=user,
                                subject="transientBug.com - Password Reset",
                                contents=content)
             user.save()

@@ -20,6 +20,11 @@ from errors.general import NotFoundError
 
 from models.rethink.user import userModel as um
 
+import rethinkdb as r
+from rethinkORM import RethinkCollection
+import models.rethink.email.emailModel as em
+from utils.paginate import Paginate
+
 
 @autoRoute()
 @login(["admin"])
@@ -40,5 +45,12 @@ class emails(MixedObject):
                           "partials/admin/users/tabs",
                           {"user": user,
                            "command": self.request.command})
+
+        parts = r.table(em.Email.table).filter(lambda row: row["users"].contains(user.id))
+
+        result = RethinkCollection(em.Email, query=parts)
+        page = Paginate(result, self.request, "created", sort_direction="asc")
+
+        self.view.data = {"page": page}
 
         return self.view

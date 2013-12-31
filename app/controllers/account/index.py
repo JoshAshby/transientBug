@@ -23,6 +23,7 @@ from models.rethink.user import userModel as um
 @login()
 @template("public/account/index", "Account Settings")
 class index(MixedObject):
+    @HTML
     def GET(self):
         user = um.User(self.request.session.id)
 
