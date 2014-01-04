@@ -71,6 +71,9 @@ def Guess(f):
         res = f(*args, **kwargs)
         t_res = type(res)
 
+        if isinstance(res, actions.BaseAction):
+            return res
+
         if isinstance(res, template):
             final_res = res.render()
 
