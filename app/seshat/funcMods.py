@@ -47,9 +47,13 @@ def JSON(f):
         if isinstance(res, actions.Unauthorized) or isinstance(res, actions.NotFound):
             return [{"error": res.head[0]}]
 
-        if type(res) is dict or type(res) is list:
+        if type(res) is dict:
             self.head = (self.head[0], [("Content-Type", "application/json")])
             return json.dumps([res])
+
+        elif type(res) is list:
+            self.head = (self.head[0], [("Content-Type", "application/json")])
+            return json.dumps(res)
 
         else:
             return res
@@ -73,8 +77,11 @@ def Guess(f):
         elif t_res is str:
             final_res = res
 
-        elif t_res is dict or t_res is list:
+        elif t_res is dict:
             final_res = json.dumps([res])
+
+        elif t_res is list:
+            final_res = json.dumps(res)
 
         del res
 
