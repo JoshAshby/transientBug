@@ -11,11 +11,12 @@ Josh Ashby
 http://joshashby.com
 joshuaashby@joshashby.com
 """
+
 from seshat.route import autoRoute
 from seshat.MixedObject import MixedObject
 from utils.paginate import Paginate
 from seshat.objectMods import template
-from seshat.funcMods import HTML
+from seshat.funcMods import Guess
 
 from rethinkORM import RethinkCollection
 import models.rethink.phot.photModel as pm
@@ -25,7 +26,7 @@ import models.utils.dbUtils as dbu
 @autoRoute()
 @template("public/phots/index", "Phots")
 class index(MixedObject):
-    @HTML
+    @Guess
     def GET(self):
         orig = self.request.getParam("filter", "all")
         filt = dbu.phot_filter(orig)
@@ -37,8 +38,10 @@ class index(MixedObject):
 
         page = Paginate(res, self.request, "title")
 
+        if self.request.accepts("json") and not self.request.accepts("html"):
+            return {"phots": page.for_json()}
+
         self.view.data = {"filter": orig,
                           "v": view,
                           "page": page}
-
         return self.view

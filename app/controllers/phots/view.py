@@ -15,7 +15,7 @@ from seshat.route import autoRoute
 from seshat.MixedObject import MixedObject
 from seshat.actions import NotFound, Redirect, Unauthorized
 from seshat.objectMods import template
-from seshat.funcMods import HTML
+from seshat.funcMods import Guess
 
 import models.rethink.phot.photModel as pm
 import rethinkdb as r
@@ -24,7 +24,7 @@ import rethinkdb as r
 @autoRoute()
 @template("public/phots/view", "Phot")
 class view(MixedObject):
-    @HTML
+    @Guess
     def GET(self):
         phot = self.request.id
 
@@ -46,8 +46,10 @@ class view(MixedObject):
 
         photo = pm.Phot(**f[0])
 
-        self.view.data = {"phot": photo}
+        if self.request.accepts("json") and not self.request.accepts("html"):
+            return {"phot": photo.for_json()}
 
+        self.view.data = {"phot": photo}
         return self.view
 
     def POST(self):

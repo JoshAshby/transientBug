@@ -31,10 +31,11 @@ def HTML(f):
 
         if isinstance(res, template):
             string = res.render()
-            del res
-            return string
         else:
-            return res
+            string = res
+
+        del res
+        return string
 
     return wrapper
 
@@ -52,5 +53,37 @@ def JSON(f):
 
         else:
             return res
+
+    return wrapper
+
+
+def Guess(f):
+    def wrapper(*args, **kwargs):
+        self = args[0]
+
+        data = {"title": self._title if self._title else "Untitled"}
+        self.view = template(self._tmpl, self.request, data)
+
+        res = f(*args, **kwargs)
+        t_res = type(res)
+
+        if isinstance(res, template):
+            final_res = res.render()
+
+        elif t_res is str:
+            final_res = res
+
+        elif t_res is dict or t_res is list:
+            final_res = json.dumps([res])
+
+        del res
+
+        if self.request.accepts("html") or self.request.accepts("*/*"):
+            self.head = (self.head[0], [("Content-Type", "text/html")])
+            return final_res
+
+        elif self.request.accepts("json") or self.request.accepts("*/*"):
+            self.head = (self.head[0], [("Content-Type", "application/json")])
+            return json.dumps([final_res])
 
     return wrapper

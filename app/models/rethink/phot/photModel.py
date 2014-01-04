@@ -83,3 +83,13 @@ class Phot(RethinkModel):
             self._user = um.User(self.user)
 
         return self._user
+
+    def for_json(self):
+        d = self._data.copy()
+        d.pop("id")
+        d.pop("user")
+        d["user"] = self.author.username
+        d.pop("disable") if "disable" in d else None
+        d["source"] = d["url"]
+        d["url"] = "https://transientbug.com/i/"+d["filename"]
+        return d

@@ -13,28 +13,20 @@ joshuaashby@joshashby.com
 """
 from seshat.route import autoRoute
 from seshat.MixedObject import MixedObject
-from seshat.objectMods import template
+from seshat.objectMods import template, not_logged_in
 from seshat.funcMods import HTML
 from seshat.actions import Redirect
 import errors.session as se
 
 
 @autoRoute()
+@not_logged_in("/")
 @template("public/auth/login", "Login")
 class login(MixedObject):
     @HTML
     def GET(self):
-        if self.request.session.id:
-            where = self.request.getParam("return-to", "/")
-            self.request.session.push_alert("You've already been signed in as: %s"
-                                           % self.request.session.username,
-                                           "Whoa!", "info")
-
-            return Redirect(where)
-
-        else:
-            self.view.partial("about", "public/about/about")
-            return self.view
+        self.view.partial("about", "public/about/about")
+        return self.view
 
     @HTML
     def POST(self):

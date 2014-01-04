@@ -203,3 +203,7 @@ class Paginate(StandardODM):
         tmpl.data.update({"query": self._query_string})
 
         return tmpl.render()
+
+    def for_json(self):
+        d = [ i.for_json() for i in self._pail ]
+        return d
