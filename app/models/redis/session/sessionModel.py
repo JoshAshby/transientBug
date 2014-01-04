@@ -160,7 +160,7 @@ class session(brm.SeshatRedisModel):
                 alert["icon"] = "warning"
                 alert["level"] = "danger"
 
-            alertStr += ("""<div class="alert alert-{level}"><i class="fa fa-{icon}"></i><strong>{quip}</strong> {msg}</div>""").format(**alert)
+            alertStr += ("""<div class="alert alert-{level}"><i class="fa fa-{icon}"></i> <strong>{quip}</strong> {msg}</div>""").format(**alert)
 
         self._HTML_alerts = unicode(alertStr)
 

@@ -166,6 +166,11 @@ h4 a:active {
   width: 200px;
   margin: 0px;
 }
+nav > div.navbar-header > a > img {
+  margin-top: -7px;
+  max-width: 100px;
+  max-height: 30px;
+}
 .typeahead {
   font-size: 12px;
 }

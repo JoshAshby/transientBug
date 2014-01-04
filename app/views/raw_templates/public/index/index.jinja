@@ -20,112 +20,19 @@ stylesheets:
   <div class="tab-pane active" id="home">
     <div class="row">
       <div class="col-md-6">
-        {% if req.session.has_phots %}
-          <div class="panel panel-theme">
-            <div class="panel-heading">
-              <h3 class="panel-title">New Phot</h3>
-            </div>
-            <div class="panel-body">
-              <form method="POST" action="/new/phot" id="quick_phot" enctype="multipart/form-data">
-                <fieldset>
-                  <div class="form-group">
-                    <input type="url" class="form-control" id="url" name="url" placeholder="URL...">
-                  </div>
-                  <h3>Or...</h3>
-                  <div class="form-group">
-                    <input type="file" class="form-control" id="file" name="file">
-                  </div>
-                  <hr>
-                  <div class="form-group">
-                    <input type="text" class="form-control" id="phot_name" name="title" placeholder="Image Title..." required>
-                  </div>
-                  <div class="form-group">
-                    <input type="text" id="phot_tags" name="tags">
-                  </div>
-                  <hr>
-                  <button id="new_phot" class="btn btn-theme btn-block" type="submit">Add</button>
-                </fieldset>
-              </form>
-            </div>
-          </div>
-        {% endif %}
+        {{phot_create}}
       </div>
       <div class="col-md-6">
-        <div class="panel panel-default">
-          <div class="panel-heading">
-            <h3 class="panel-title">Phot Search</h3>
-          </div>
-          <div class="panel-body">
-
-            <form method="GET" action="/phots/tags" class="form-inline">
-              <div class="form-group">
-                <div class="input-group typeahead">
-                  <input type="text" class="form-control input-sm" name="q" id="q" value="" placeholder="Search Tags...">
-                  <span class="input-group-btn">
-                    <button class="btn btn-theme btn-sm" type="submit"><i class="fa fa-search"></i></button>
-                  </span>
-                </div>
-              </div>
-            </form>
-
-          </div>
-        </div>
-        {% if req.session.has_screenshots %}
-          <div class="panel panel-primary">
-            <div class="panel-heading">
-              <h3 class="panel-title">Media Upload</h3>
-            </div>
-            <div class="panel-body">
-
-              <form method="POST" action="/screenshots" enctype="multipart/form-data">
-                <div class="input-group">
-                  <input type="file" name="file" class="form-control" />
-                  <span class="input-group-btn">
-                    <button type="submit" class="btn btn-primary">Upload</button>
-                  </span>
-                </div>
-              </form>
-
-            </div>
-          </div>
-        {% endif %}
+        {{phot_search}}
+        {{screenshot}}
       </div>
     </div>
   </div>
-  {% if req.session.has_notes %}
-    <div class="tab-pane" id="quick_note">
-      <div class="row">
-        <div class="col-md-12">
-          <form method="POST" action="/new/note">
-            <fieldset>
-              <div class="form-group" id="quick_note">
-                <input type="text" class="form-control" id="quick_note_title" name="title" placeholder="Title..." value="" required>
-              </div>
-              <div class="form-group">
-                <textarea name="contents" id="quick_note_content" data-provide="markdown">Write something!</textarea>
-              </div>
-              <div class="form-group">
-                <input type="text" class="form-control" name="tags" id="quick_note_tags" placeholder="Tags..." value=""/>
-              </div>
-              <div class="row">
-                <div class="col-md-6">
-                  <div class="checkbox">
-                    <label>
-                      <input type="checkbox" name="public" id="quick_note_public" value="true"/> Make this note public?
-                      <span class="help-block"><small>This determines if the note will be visible on <a href="/notes/public">/notes/public</a> and <a href="/notes/tags">/notes/tags</a> pages.</small></span>
-                    </label>
-                  </div>
-                </div>
-                <div class="col-md-6">
-                  <br>
-                  <button type="submit"class="btn btn-theme pull-right"><i class="fa fa-save"></i> Create!</button>
-                </div>
-              </div>
-
-            </fieldset>
-          </form>
-        </div>
+  <div class="tab-pane" id="quick_note">
+    <div class="row">
+      <div class="col-md-12">
+        {{note_create}}
       </div>
     </div>
-  {% endif %}
+  </div>
 </div>

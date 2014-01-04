@@ -34,6 +34,7 @@ class login(MixedObject):
         name = self.request.getParam("username")
 
         if not passwd and not name:
+            self.view.partial("about", "public/about/about")
             return self.view
 
         exc = ""

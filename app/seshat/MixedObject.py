@@ -40,7 +40,7 @@ class MixedObject(base.BaseHTTPObject):
         content = ""
 
         if self._no_login and self.request.session.id:
-            self.request.session.push_alert("Thats a page only for non logged in people. Weird huh?")
+            self.request.session.push_alert("That page is only for non logged in people. Weird huh?", level="info")
             if not self._redirect_url:
                 self.head = ("303 SEE OTHER", [("Location", "/")])
             else:
