@@ -86,9 +86,24 @@ class requestItem(object):
         self.user_agent = env["HTTP_USER_AGENT"] if "HTTP_USER_AGENT" in env else "Unknown User Agent"
         self.referer = env["HTTP_REFERER"] if "HTTP_REFERER" in env else "No Referer"
 
+        self.remote_accepts = []
+
+        if "HTTP_ACCEPT" in env:
+            r = env["HTTP_ACCEPT"].split(",")
+            for bit in r:
+                q = 1
+                b = bit.split(";")
+                if len(b) > 1:
+                    q = float(b[1][2:])
+                self.remote_accepts.append((b[0], q))
+
         self.pre_id_url = None
         self.id = None
         self.command = None
+
+    def accepts(self, t):
+        a = [ i for i in self.remote_accepts if t in i[0] ]
+        return len(a) > 0
 
     def post_route(self, extended):
         if extended:

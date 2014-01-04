@@ -36,10 +36,6 @@ class MixedObject(base.BaseHTTPObject):
     def _post_init_hook(self):
         self.head = ("200 OK", [("Content-Type", "text/plain")])
 
-
-    def _pre_content_hook(self):
-        pass
-
     def _build(self):
         content = ""
 
@@ -71,9 +67,8 @@ class MixedObject(base.BaseHTTPObject):
                         self.head = ("303 SEE OTHER", [("Location", self._redirect_url)])
                     return "", self.head
 
-        self._pre_content_hook()
         try:
-            content = getattr(self, self.request.method)() or ""
+            content = getattr(self, self.request.method)()
 
             if isinstance(content, actions.BaseAction):
                 self.head = content.head
