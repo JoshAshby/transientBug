@@ -38,7 +38,7 @@ $(function() {
 
   }).popover({
     trigger: "manual",
-    placement: "auto right",
+    placement: "auto left",
     html: true,
     content: '<div class="btn-group"><button class="btn btn-success btn-sm confirm_btn"><i class="fa fa-check"></i></button><button class="btn btn-default btn-sm nope_btn"><i class="fa fa-times"></i></button></div>',
     container: "body"

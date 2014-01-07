@@ -74,3 +74,4 @@ dirs = StandardODM(**general.dirs)
 files = StandardODM(**general.files)
 
 debug = general["debug"]
+send_email = general["send_email"]

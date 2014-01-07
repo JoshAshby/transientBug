@@ -46,9 +46,6 @@ class view(MixedObject):
 
         photo = pm.Phot(**f[0])
 
-        if self.request.accepts("json") and not self.request.accepts("html"):
-            return photo.for_json()
-
         self.view.data = {"phot": photo}
         return self.view
 

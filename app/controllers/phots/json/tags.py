@@ -18,7 +18,7 @@ import models.rethink.phot.photModel as pm
 
 
 @autoRoute()
-class json(MixedObject):
+class tags(MixedObject):
     @JSON
     def GET(self):
         base_query = dbu.rql_where_not(pm.Phot.table, "disable", True)

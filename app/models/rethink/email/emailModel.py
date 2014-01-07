@@ -14,33 +14,54 @@ import models.utils.promise as promise
 class Email(RethinkModel):
     table = "emails"
 
-    @classmethod
-    @promise.id_promise("emailer")
-    def new_email(cls, service, users, subject="", contents=""):
-        """
-        Creates a new email and queues it to be sent by the email daemon
+    def finish_init(self):
+        self.content = {"html": "", "text": ""}
+        self.created = arrow.utcnow().timestamp
 
-        :param service: The local part of the email address this email should be as
-        :param users: A list or single `User` instance(s)
-        :param subject: The subject for the email
-        :param contents: The final contents that make up the body of the email.
-        """
-        created = arrow.utcnow().timestamp
-
-        if type(users) is list:
-            users = [ user.id for user in users ]
-
+    def send_to(self, addresses):
+        if type(addresses) is not list:
+            self.to_addresses = [ addresses ]
         else:
-            users = [users.id]
+            self.to_addresses = addresses
 
-        what = cls.create(users=users,
-                          contents=contents,
-                          subject=subject,
-                          service=service,
-                          created=created,
-                          sent=None)
+        return self
 
-        return what
+    def send_bcc(self, addresses):
+        if type(addresses) is not list:
+            self.bcc_addresses = [ addresses ]
+        else:
+            self.bcc_addresses = addresses
+
+        return self
+
+    def send_cc(self, addresses):
+        if type(addresses) is not list:
+            self.cc_addresses = [ addresses ]
+        else:
+            self.cc_addresses = addresses
+
+        return self
+
+    def send_from(self, who):
+        self.service = who
+        return self
+
+    def set_text(self, c):
+        self.content["text"] = c
+        return self
+
+    def set_html(self, c):
+        self.content["html"] = c
+        return self
+
+    def set_subject(self, s):
+        self.subject = s
+        return self
+
+    @promise.id_promise("emailer")
+    def queue(self):
+        self.save()
+        return self
 
     @property
     def formated_created(self):

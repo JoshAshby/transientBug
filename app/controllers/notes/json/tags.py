@@ -18,7 +18,7 @@ import models.rethink.note.noteModel as nm
 
 
 @autoRoute()
-class json(MixedObject):
+class tags(MixedObject):
     @JSON
     def GET(self):
         base_query = dbu.rql_where_not(nm.Note.table, "disable", True)

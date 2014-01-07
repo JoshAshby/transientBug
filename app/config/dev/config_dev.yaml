@@ -2,6 +2,7 @@ appName: &APP transientbug
 logName: *APP
 
 debug: true
+send_email: false
 
 port: 8001
 address: 127.0.0.1

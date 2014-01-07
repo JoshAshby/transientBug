@@ -40,10 +40,10 @@ $ ->
     content: '<div class="btn-group"><button class="btn btn-success btn-sm confirm_btn"><i class="fa fa-check"></i></button><button class="btn btn-default btn-sm nope_btn"><i class="fa fa-times"></i></button></div>'
     container: "body"
 
-  $("#phot_tags").pillbox url: "/phots/tags/json", name: "phot"
+  $("#phot_tags").pillbox url: "/phots/json/tags", name: "phot"
 
   $("#phot_name").check_field
-    url: "/phots/names/json"
+    url: "/phots/json/names"
     reason: "That name is already in use."
 
   $("#phot_name").done_typing

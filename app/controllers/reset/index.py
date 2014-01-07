@@ -66,11 +66,14 @@ class index(MixedObject):
 
             content = tmpl.render()
 
+            e = em.Email()\
+                .send_to(user.id)\
+                .send_from("noreply")\
+                .set_subject("transientBug.com - Password Reset")\
+                .set_text(content)\
+                .set_html(content)\
+                .queue()
 
-            em.Email.new_email(service="noreply",
-                               users=user,
-                               subject="transientBug.com - Password Reset",
-                               contents=content)
             user.save()
 
             self.request.session.push_alert("Password reset email sent. Please check your email.")

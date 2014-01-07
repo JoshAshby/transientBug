@@ -23,7 +23,7 @@ import models.utils.dbUtils as dbu
 
 
 @autoRoute()
-class json(MixedObject):
+class index(MixedObject):
     @JSON
     def GET(self):
         orig = self.request.getParam("filter", "all")

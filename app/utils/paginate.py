@@ -206,4 +206,7 @@ class Paginate(StandardODM):
 
     def for_json(self):
         d = [ i.for_json() for i in self._pail ]
-        return d
+        page = self._page_dict.copy()
+        page.pop("show")
+
+        return {"page": page, "pail": d}

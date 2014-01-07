@@ -38,9 +38,6 @@ class index(MixedObject):
 
         page = Paginate(res, self.request, "title")
 
-        if self.request.accepts("json") and not self.request.accepts("html"):
-            return page.for_json()
-
         self.view.data = {"filter": orig,
                           "v": view,
                           "page": page}

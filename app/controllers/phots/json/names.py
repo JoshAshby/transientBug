@@ -18,7 +18,7 @@ import models.rethink.phot.photModel as pm
 
 
 @autoRoute()
-class json(MixedObject):
+class names(MixedObject):
     @JSON
     def GET(self):
         raw_names = r.table(pm.Phot.table)\
