@@ -4,7 +4,7 @@
   $(function() {
     var tags;
     tags = $.ajax({
-      url: "/phots/tags/json",
+      url: "/phots/json/tags",
       async: false
     });
     $('#q').typeahead({
@@ -16,15 +16,15 @@
     $(".tt-dropdown-menu").css("top", "initial");
     $(".tt-hint").css("padding-top", "1px");
     $("#phot_tags").pillbox({
-      url: "/phots/tags/json",
+      url: "/phots/json/tags",
       name: "phot"
     });
     $("#note_tags").pillbox({
-      url: "/notes/tags/json",
+      url: "/notes/json/tags",
       name: "note"
     });
     $("#phot_name").check_field({
-      url: "/phots/names/json",
+      url: "/phots/json/names",
       reason: "That name is already in use."
     });
     return $("#quick_phot").check_form();

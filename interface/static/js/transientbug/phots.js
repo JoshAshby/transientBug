@@ -4,7 +4,7 @@
   $(function() {
     var tags;
     tags = $.ajax({
-      url: "/phots/tags/json",
+      url: "/phots/json/tags",
       async: false
     });
     $('#q').typeahead({

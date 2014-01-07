@@ -16,7 +16,7 @@
       }
     });
     return $("#note_tags").pillbox({
-      url: "/notes/tags/json",
+      url: "/notes/json/tags",
       name: "note"
     });
   });

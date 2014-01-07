@@ -45,11 +45,11 @@
       container: "body"
     });
     $("#phot_tags").pillbox({
-      url: "/phots/tags/json",
+      url: "/phots/json/tags",
       name: "phot"
     });
     $("#phot_name").check_field({
-      url: "/phots/names/json",
+      url: "/phots/json/names",
       reason: "That name is already in use."
     });
     $("#phot_name").done_typing({
