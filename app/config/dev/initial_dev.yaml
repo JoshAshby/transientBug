@@ -15,6 +15,8 @@ tables:
   - users
   - notes
   - phots
+  - emails
+  - requests
 
 buckets:
   enable500Error:
@@ -25,8 +27,10 @@ buckets:
 flush:
   rethink:
     users: false
-    phots: true
-    notes: true
+    phots: false
+    notes: false
+    emails: false
+    requests: true
 
   redis:
     session: false

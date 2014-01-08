@@ -80,6 +80,8 @@ def dispatch(env, start_response):
 
         start_response(status, header)
 
+        gevent.spawn(request.log, status)
+
         if content: return [str(content)]
         else: return []
 
@@ -99,21 +101,7 @@ def error404(request, start_response):
     newHTTPObject = error.error404(request)
     gevent.spawn(log404, request)
 
-    dataThread = gevent.spawn(newHTTPObject._build)
-    dataThread.join()
-
-    content, replyData = dataThread.get()
-
-    header = replyData[1]
-    status = replyData[0]
-
-    header = request.generateHeader(header, len(content))
-
-    start_response(status, header)
-
-    del newHTTPObject
-
-    return [str(content)]
+    return reply(newHTTPObject, request, start_response)
 
 
 def error500(request, start_response):
@@ -125,21 +113,7 @@ def error500(request, start_response):
     newHTTPObject = error.error500(request)
     gevent.spawn(log500, request)
 
-    dataThread = gevent.spawn(newHTTPObject._build)
-    dataThread.join()
-
-    content, replyData = dataThread.get()
-
-    header = replyData[1]
-    status = replyData[0]
-
-    header = request.generateHeader(header, len(content))
-
-    start_response(status, header)
-
-    del newHTTPObject
-
-    return [str(content)]
+    return reply(newHTTPObject, request, start_response)
 
 
 def error401(request, start_response):
@@ -149,6 +123,10 @@ def error401(request, start_response):
     newHTTPObject = error.error401(request)
     gevent.spawn(log401, request)
 
+    return reply(newHTTPObject, request, start_response)
+
+
+def reply(newHTTPObject, request, start_response):
     dataThread = gevent.spawn(newHTTPObject._build)
     dataThread.join()
 
@@ -162,6 +140,8 @@ def error401(request, start_response):
     start_response(status, header)
 
     del newHTTPObject
+    gevent.spawn(request.log, status)
+    del request
 
     return [str(content)]
 

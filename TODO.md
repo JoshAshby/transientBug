@@ -2,11 +2,11 @@
 - better way to access notes by user and public/private
 - better tag searching for phots and notes
 - media upload/pairing for notes
-- move image downloading to a daemon so it doesn't halt everything
-- management & error viewing page for said daemon
+- management & error viewing page for daemons
 - integrate python side of my irssi-utils stuff
  - push messages into rethink and make a controller to view
      add support for json retrieval (more on this later)
 - finish user admin stuff
-- user invites, registration and forgotten password stuff
-- announcements info more blog post style things
+- user invites, registration
+- announcements info more blog post style things (? hmm)
+- stats controller, now that all requests are logged to rethinkdb (D3.js!! :O)

@@ -26,6 +26,8 @@ import models.redis.session.sessionModel as sm
 import models.redis.bucket.bucketModel as bm
 import models.redis.announcement.announcementModel as am
 
+import models.rethink.request.requestModel as rm
+
 
 class FileObject(object):
     _template = "< FileObject @ {id} Filename: {filename} Data: {data} >"
@@ -74,6 +76,7 @@ class requestItem(object):
         self.files = {}
         self._env = env
 
+        self._raw_url = env["PATH_INFO"]
         self.url = urlparse.urlparse(env["PATH_INFO"])
 
         self.buildParams()
@@ -169,7 +172,8 @@ class requestItem(object):
         header.append(("Content-Length", str(length)))
         header.append(("Server", self._env["SERVER_SOFTWARE"]))
         header.append(("X-Seshat-Says", "Ello!"))
-        if hasattr(self, "error"): header.append(("X-Error", str(self.error)))
+        self.error = str(self.error) if hasattr(self, "error") else ""
+        header.append(("X-Error", self.error))
 
         return header
 
@@ -197,3 +201,13 @@ class requestItem(object):
             return str(self.id)
         else:
             return "/".join([self.id, self.command])
+
+    def log(self, status):
+        rm.Request.new_request(user=self.session.id,
+                               ip=self.remote,
+                               agent=self.user_agent,
+                               url=self._raw_url,
+                               method=self.method,
+                               referer=self.referer,
+                               status=status,
+                               error=self.error)
