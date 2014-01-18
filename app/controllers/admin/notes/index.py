@@ -27,7 +27,7 @@ import models.utils.dbUtils as dbu
 class index(MixedObject):
     @HTML
     def GET(self):
-        self.view.partial("sidebar", "partials/admin/sidebar", {"command": "users"})
+        self.view.partial("sidebar", "partials/admin/sidebar", {"command": "notes"})
 
         what_type = self.request.getParam("filter", "all")
 

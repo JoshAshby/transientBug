@@ -66,7 +66,7 @@ class index(MixedObject):
 
             content = tmpl.render()
 
-            e = em.Email()\
+            e = em.Email.new()\
                 .send_to(user.id)\
                 .send_from("noreply")\
                 .set_subject("transientBug.com - Password Reset")\

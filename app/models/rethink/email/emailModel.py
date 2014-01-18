@@ -9,14 +9,17 @@ joshuaashby@joshashby.com
 import arrow
 from rethinkORM import RethinkModel
 import models.utils.promise as promise
+import models.rethink.user.userModel as um
 
 
 class Email(RethinkModel):
     table = "emails"
 
-    def finish_init(self):
-        self.content = {"html": "", "text": ""}
-        self.created = arrow.utcnow().timestamp
+    @classmethod
+    def new(cls):
+        em = cls()
+        em.content = {"html": "", "text": ""}
+        return em
 
     def send_to(self, addresses):
         if type(addresses) is not list:
@@ -60,6 +63,7 @@ class Email(RethinkModel):
 
     @promise.id_promise("emailer")
     def queue(self):
+        self.created = arrow.utcnow().timestamp
         self.save()
         return self
 
@@ -69,3 +73,27 @@ class Email(RethinkModel):
             self._formated_created = arrow.get(self.created).humanize()
 
         return self._formated_created
+
+    @property
+    def who(self):
+        fin = []
+        for user in self.to_addresses:
+            fin.append(um.User(user).email)
+
+        return fin
+
+    @property
+    def who_cc(self):
+        fin = []
+        for user in self.cc_addresses:
+            fin.append(um.User(user).email)
+
+        return fin
+
+    @property
+    def who_bcc(self):
+        fin = []
+        for user in self.bcc_addresses:
+            fin.append(um.User(user).email)
+
+        return fin

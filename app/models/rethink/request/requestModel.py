@@ -46,7 +46,7 @@ class Request(RethinkModel):
         return self._agent
 
     @property
-    def author(self):
+    def who(self):
         if self.user:
             if not hasattr(self, "_formated_author"):
                 self._formated_author = um.User(self.user)
@@ -56,7 +56,7 @@ class Request(RethinkModel):
             return None
 
     @property
-    def formated_time(self):
+    def when(self):
         if not hasattr(self, "_formated_created"):
             self._formated_created = arrow.get(self.time).humanize()
 

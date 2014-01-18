@@ -47,6 +47,12 @@ scriptFiles:
       </div>
       <hr>
     {{/page.pail}}
+    {{^page.pail}}
+      <div class="jumbotron">
+        <h1>Well, this is either good or bad</h1>
+        <p>The system doesn't have any site features currently!</p>
+      </div>
+    {{/page.pail}}
 
     {{{page.pager}}}
   </div>

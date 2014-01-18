@@ -18,7 +18,7 @@ from utils.paginate import Paginate
 from seshat.funcMods import JSON
 
 from rethinkORM import RethinkCollection
-import models.rethink.note.notEModel as nm
+import models.rethink.note.noteModel as nm
 import models.utils.dbUtils as dbu
 
 

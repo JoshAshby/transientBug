@@ -20,6 +20,7 @@ padding: 5px;}"
       <li {{ 'class="active"' if req.id=="enabled" }}><a href="/admin/phots/enabled">Enabled</a></li>
     </ul>
   </div>
+  {%if page.pail %}
   <div class="col-sm-12 col-md-6">
     <form class="form-inline pull-right" role="pagination_options">
       <div class="form-group">
@@ -36,49 +37,46 @@ padding: 5px;}"
       {{page.options}}
     </form>
   </div>
+  {%endif%}
 </div>
 <br>
 <div class="row">
   <div class="col-md-12">
-    <div id="myTabContent" class="tab-content">
-      <div class="tab-pane active" id="e">
-
-        <div class="row">
-          <div class="col-md-4 col-md-offset-2">
-            <h4>Title</h4>
+    {% if page.pail %}
+      <div class="row">
+        <div class="col-md-4 col-md-offset-2">
+          <h4>Title</h4>
+        </div>
+        <div class="col-md-4">
+          <h4>Filename</h4>
+        </div>
+      </div>
+      {% for pic in page.pail %}
+        <div class="row" id="{{pic.id}}">
+          <div class="col-md-2">
+            <a href="/phots/{{pic.short_code}}"><img src="/i/{{pic.filename}}" alt="{{pic.filename}}" class="img"></a>
           </div>
           <div class="col-md-4">
-            <h4>Filename</h4>
+            {{pic.title}}
+          </div>
+          <div class="col-md-4">
+            {{pic.filename}}
+          </div>
+          <div class="col-md-2">
+            {% if pic.disable %}
+              <button class="btn btn-default btn-sm toggle_btn" data-id="{{pic.id}}" data-title="Enable?"><i class="fa fa-times"></i> Disabled</button>
+            {% else %}
+              <button class="btn btn-theme btn-sm toggle_btn" data-id="{{pic.id}}" data-title="Disable?"><i class="fa af-check"></i> Enabled</button>
+            {% endif %}
           </div>
         </div>
-        {% for pic in page.pail %}
-          <div class="row" id="{{pic.id}}">
-            <div class="col-md-2">
-              <a href="/phots/{{pic.short_code}}"><img src="/i/{{pic.filename}}" alt="{{pic.filename}}" class="img"></a>
-            </div>
-            <div class="col-md-4">
-              {{pic.title}}
-            </div>
-            <div class="col-md-4">
-              {{pic.filename}}
-            </div>
-            <div class="col-md-2">
-              {% if pic.disable %}
-                <button class="btn btn-default btn-sm toggle_btn" data-id="{{pic.id}}" data-title="Enable?"><i class="fa fa-times"></i> Disabled</button>
-              {% else %}
-                <button class="btn btn-theme btn-sm toggle_btn" data-id="{{pic.id}}" data-title="Disable?"><i class="fa af-check"></i> Enabled</button>
-              {% endif %}
-            </div>
-          </div>
-        {% endfor %}
+      {% endfor %}
 
-        {{page.paginate}}
-
+      {{page.paginate}}
+    {% else %}
+      <div class="jumbotron">
+        <h1>No phots!</h1>
       </div>
-    </div>
+    {% endif %}
   </div>
 </div>
-
-
-
-

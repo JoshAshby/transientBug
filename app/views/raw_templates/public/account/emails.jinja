@@ -1,0 +1,48 @@
+{% set type=req.getParam("filter") %}
+
+<div class="row">
+  <div class="col-md-12">
+    <form class="form-inline pull-right" role="pagination_options">
+      <div class="form-group">
+        <label class="sr-only" for="filter">Address Type Filter</label>
+        <select name="filter" class="input-sm form-control">
+          <option value=to {{ 'selected="selected"' if type=="to" }}>To</option>
+          <option value=bcc {{ 'selected="selected"' if type=="bcc" }}>BCC</option>
+          <option value=cc {{ 'selected="selected"' if type=="cc" }}>CC</option>
+        </select>
+      </div>
+      {{page.options}}
+    </form>
+    <br>
+    <br>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <table class="table table-striped table-hover table-condensed">
+      <thead>
+        <th></th>
+        <th>Subject</th>
+        <th>Service</th>
+        <th>Sent</th>
+      </thead>
+      <tbody>
+        {% for email in page.pail %}
+          <tr>
+            <td></td>
+            <td><a href="/account/emails/{{email.id}}">{{email.subject|truncate(25)}}</a></td>
+            <td>{{email.service}}</td>
+            <td>{{email.formated_created}}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    {{page.paginate}}
+  </div>
+</div>
