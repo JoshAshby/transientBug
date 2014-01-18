@@ -25,6 +25,8 @@ from rethinkORM import RethinkCollection
 import models.rethink.phot.photModel as pm
 from utils.paginate import Paginate
 
+from models.utils import dbUtils as dbu
+
 
 @autoRoute()
 @login(["admin"])
@@ -46,10 +48,18 @@ class phots(MixedObject):
                           {"user": user,
                            "command": self.request.command})
 
-        parts = r.table(pm.Phot.table).filter({"user": self.request.session.id})
+        disabled = self.request.getParam("q")
+        hidden_ids = r.table(pm.Phot.table).filter({"user": user.id}).filter(r.row["disable"].eq(True)).concat_map(lambda doc: [doc["id"]]).coerce_to("array").run()
 
-        result = RethinkCollection(pm.Phot, query=parts)
-        page = Paginate(result, self.request, "created", sort_direction="desc")
+        if disabled == "enabled":
+            query = r.table(pm.Phot.table).filter({"user": user.id}).filter(lambda doc: ~r.expr(hidden_ids).contains(doc["id"]))
+
+        else:
+            query = r.table(pm.Phot.table).filter({"user": user.id}).filter(lambda doc: r.expr(hidden_ids).contains(doc["id"]))
+
+        res = RethinkCollection(pm.Phot, query=query)
+
+        page = Paginate(res, self.request, "created", sort_direction="desc")
 
         self.view.data = {"page": page}
 

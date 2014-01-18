@@ -25,7 +25,7 @@ class view(MixedObject):
     @HTML
     def GET(self):
         f = r.table(nm.Note.table)\
-            .filter({"short_code": self.request.id, "disable": False})\
+            .filter({"short_code": self.request.id})\
             .coerce_to('array').run()
 
         if f:
@@ -35,6 +35,9 @@ class view(MixedObject):
               if not self.request.session.id or self.request.session.id!=note.user:
                     self.request.session.push_alert("That note is not public and you do not have the rights to access it.", level="error")
                     return Unauthorized()
+
+            if not self.request.session.has_notes and note.disable:
+                return NotFound()
 
             if self.request.session.id:
                 self.view.template = "public/notes/edit"
@@ -55,6 +58,7 @@ class view(MixedObject):
         else:
             return NotFound()
 
+    @HTML
     def POST(self):
         title = self.request.getParam("title")
         contents = self.request.getParam("contents")
@@ -72,6 +76,9 @@ class view(MixedObject):
             if note.author.id != self.request.session.id:
                 self.request.session.push_alert("You don't own that note, you can't edit it!", level="danger")
                 return Unauthorized()
+
+            if not self.request.session.has_notes and note.disable:
+                return NotFound()
 
             note.title = title
             note.contents = contents

@@ -1,23 +1,13 @@
 +++
 theme_color: orange
-nav: admin_users
+nav: admin_email
 breadcrumbs_top: True
 base: skeletons/sidebar
 +++
-{% set type=req.getParam("filter") %}
-{{tabs}}
 
 <div class="row">
   <div class="col-md-12">
     <form class="form-inline pull-right" role="pagination_options">
-      <div class="form-group">
-        <label class="sr-only" for="filter">Address Type Filter</label>
-        <select name="filter" class="input-sm form-control">
-          <option value=to {{ 'selected="selected"' if type=="to" }}>To</option>
-          <option value=bcc {{ 'selected="selected"' if type=="bcc" }}>BCC</option>
-          <option value=cc {{ 'selected="selected"' if type=="cc" }}>CC</option>
-        </select>
-      </div>
       {{page.options}}
     </form>
     <br>

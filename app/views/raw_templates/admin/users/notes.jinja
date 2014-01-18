@@ -6,7 +6,13 @@ base: skeletons/sidebar
 +++
 {{tabs}}
 <div class="row">
-  <div class="col-md-12">
+  <div class="col-md-6 col-sm-12">
+    <ul class="nav nav-pills" id="myTab">
+      <li {{ 'class="active"' if req.getParam("q")!="enabled" }}><a href="/admin/users/{{req.id}}/notes">Disabled</a></li>
+      <li {{ 'class="active"' if req.getParam("q")=="enabled" }}><a href="/admin/users/{{req.id}}/notes?q=enabled">Enabled</a></li>
+    </ul>
+  </div>
+  <div class="col-sm-12 col-md-6">
     <form class="form-inline pull-right" role="pagination_options">
       <div class="form-group">
         <label class="sr-only" for="filter">Filter</label>
@@ -18,10 +24,9 @@ base: skeletons/sidebar
       </div>
       {{page.options}}
     </form>
-    <br>
-    <br>
   </div>
 </div>
+<br>
 
 <div class="row">
   <div class="col-md-12">
@@ -31,16 +36,20 @@ base: skeletons/sidebar
         <th>Title</th>
         <th>Created</th>
         <th>Visibility</th>
-        <th>Status</th>
       </thead>
       <tbody>
         {% for note in page.pail %}
           <tr {{ 'class="danger"' if note.disable }}>
             <td></td>
-            <td><a href="/admin/notes/{{note.short_code}}">{{note.title|truncate(25)}}</a></td>
-            <td>{{note.formated_created}}</td>
-            <td></td>
-            <td></td>
+            <td><a href="/notes/{{note.short_code}}">{{note.title|truncate(25)}}</a></td>
+            <td>{{note.formated_time}}</td>
+            <td>
+              {% if note.public %}
+                <i class="fa fa-eye"></i>
+              {% else %}
+                <i class="fa fa-eye-slash"></i>
+              {% endif %}
+            </td>
           </tr>
         {% endfor %}
       </tbody>

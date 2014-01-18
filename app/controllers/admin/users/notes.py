@@ -24,6 +24,7 @@ import rethinkdb as r
 from rethinkORM import RethinkCollection
 import models.rethink.note.noteModel as nm
 from utils.paginate import Paginate
+import models.utils.dbUtils as dbu
 
 
 @autoRoute()
@@ -46,19 +47,27 @@ class notes(MixedObject):
                           {"user": user,
                            "command": self.request.command})
 
-        parts = r.table(nm.Note.table).filter({"user": self.request.session.id})
+        parts = {"user": self.request.session.id}
 
         what_type = self.request.getParam("filter", "all")
 
         if what_type=="private":
-            parts = parts.filter({"public": False})
+            parts["public"] = False
         elif what_type=="public":
-            parts = parts.filter({"public": True})
+            parts["public"] = True
 
         self.view.data = {"type": what_type.lower()}
 
-        result = RethinkCollection(nm.Note, query=parts)
-        page = Paginate(result, self.request, "created", sort_direction="asc")
+        disabled = self.request.getParam("q")
+        if disabled == "enabled":
+            q = dbu.rql_where_not(nm.Note.table, "disable", True, parts)
+            res = RethinkCollection(nm.Note, query=q)
+
+        else:
+            q = dbu.rql_where_not(nm.Note.table, "disable", False, parts)
+            res = RethinkCollection(nm.Note, query=q)
+
+        page = Paginate(res, self.request, "created", sort_direction="asc")
 
         self.view.data = {"page": page}
 

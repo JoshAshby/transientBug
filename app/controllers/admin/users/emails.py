@@ -46,7 +46,15 @@ class emails(MixedObject):
                           {"user": user,
                            "command": self.request.command})
 
-        parts = r.table(em.Email.table).filter(lambda row: row["users"].contains(user.id))
+        t = self.request.getParam("filter", "to")
+        if t == "cc":
+            row_filt = "cc_addresses"
+        elif t == "bcc":
+            row_filt = "bcc_addresses"
+        else:
+            row_filt = "to_addresses"
+
+        parts = r.table(em.Email.table).filter(lambda row: row[row_filt].contains(user.id))
 
         result = RethinkCollection(em.Email, query=parts)
         page = Paginate(result, self.request, "created", sort_direction="asc")

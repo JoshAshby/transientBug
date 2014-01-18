@@ -12,14 +12,19 @@ padding: 5px;}"
 +++
 {{tabs}}
 <div class="row">
-  <div class="col-md-12">
+  <div class="col-md-6 col-sm-12">
+    <ul class="nav nav-pills" id="myTab">
+      <li {{ 'class="active"' if req.getParam("q")!="enabled" }}><a href="/admin/users/{{req.id}}/phots">Disabled</a></li>
+      <li {{ 'class="active"' if req.getParam("q")=="enabled" }}><a href="/admin/users/{{req.id}}/phots?q=enabled">Enabled</a></li>
+    </ul>
+  </div>
+  <div class="col-sm-12 col-md-6">
     <form class="form-inline pull-right" role="pagination_options">
       {{page.options}}
     </form>
-    <br>
-    <br>
   </div>
 </div>
+<br>
 
 <div class="row">
   <div class="col-md-12">
@@ -33,9 +38,9 @@ padding: 5px;}"
         {% for phot in page.pail %}
           <tr {{ 'class="danger"' if phot.disable }}>
             <td>
-              <a href="/admin/phots/{{phot.short_code}}"><img src="/i/{{phot.filename}}" alt="{{phot.filename}}" class="img"></a>
+              <a href="/phots/{{phot.short_code}}"><img src="/i/{{phot.filename}}" alt="{{phot.filename}}" class="img"></a>
             </td>
-            <td><a href="/admin/phots/{{phot.short_code}}">{{phot.title|truncate(25)}}</a></td>
+            <td><a href="/phots/{{phot.short_code}}">{{phot.title|truncate(25)}}</a></td>
             <td>{{phot.formated_created}}</td>
           </tr>
         {% endfor %}

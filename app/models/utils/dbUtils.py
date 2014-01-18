@@ -24,7 +24,7 @@ def toBoolean(str):
         raise Exception("Not a boolean")
 
 
-def rql_where_not(table, field, value):
+def rql_where_not(table, field, value, pre_filter=None):
     """
     Generates a query that is equivlent to running:
 
@@ -34,9 +34,15 @@ def rql_where_not(table, field, value):
     This query can then be passed off to collections or used for anything else.
     This may or may not get fairly slow once you start getting a lot of id's...
     """
-    hidden_ids = r.table(table).filter(r.row[field].eq(value)).concat_map(lambda doc: [doc["id"]]).coerce_to("array").run()
+    if not pre_filter:
+        hidden_ids = r.table(table).filter(r.row[field].eq(value)).concat_map(lambda doc: [doc["id"]]).coerce_to("array").run()
 
-    query = r.table(table).filter(lambda doc: ~r.expr(hidden_ids).contains(doc["id"]))
+        query = r.table(table).filter(lambda doc: ~r.expr(hidden_ids).contains(doc["id"]))
+    else:
+        hidden_ids = r.table(table).filter(pre_filter).filter(r.row[field].eq(value)).concat_map(lambda doc: [doc["id"]]).coerce_to("array").run()
+
+        query = r.table(table).filter(pre_filter).filter(lambda doc: ~r.expr(hidden_ids).contains(doc["id"]))
+
     return query
 
 

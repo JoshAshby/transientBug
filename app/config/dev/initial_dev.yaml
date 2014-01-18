@@ -30,7 +30,7 @@ flush:
     phots: false
     notes: false
     emails: false
-    requests: true
+    requests: false
 
   redis:
     session: false
