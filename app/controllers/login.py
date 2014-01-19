@@ -7,19 +7,19 @@ For more information, see: https://github.com/JoshAshby/
 http://xkcd.com/353/
 
 Josh Ashby
-2013
+2014
 http://joshashby.com
 joshuaashby@joshashby.com
 """
-from seshat.route import autoRoute
-from seshat.MixedObject import MixedObject
-from seshat.objectMods import template, not_logged_in
-from seshat.funcMods import HTML
+from seshat.route import route
+from seshat_addons.MixedObject import MixedObject
+from seshat_addons.objectMods import template, not_logged_in
+from seshat_addons.funcMods import HTML
 from seshat.actions import Redirect
 import errors.session as se
 
 
-@autoRoute()
+@route()
 @not_logged_in("/")
 @template("public/auth/login", "Login")
 class login(MixedObject):

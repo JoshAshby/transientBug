@@ -7,16 +7,16 @@ For more information, see: https://github.com/JoshAshby/
 http://xkcd.com/353/
 
 Josh Ashby
-2013
+2014
 http://joshashby.com
 joshuaashby@joshashby.com
 """
-from seshat.route import autoRoute
+from seshat.route import route
 from seshat.actions import Redirect
-from seshat.MixedObject import MixedObject
+from seshat_addons.MixedObject import MixedObject
 
 
-@autoRoute()
+@route()
 class logout(MixedObject):
     def GET(self):
         """

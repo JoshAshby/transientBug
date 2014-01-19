@@ -21,7 +21,7 @@ from docopt import docopt
 
 def run(self):
     setup_log()
-    import seshat.framework as fw
+    import utils.framework as fw
     __import__("controllers.controllerMap", globals(), locals())
 
     fw.serveForever()
