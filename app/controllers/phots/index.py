@@ -7,30 +7,30 @@ For more information, see: https://github.com/JoshAshby/
 http://xkcd.com/353/
 
 Josh Ashby
-2013
+2014
 http://joshashby.com
 joshuaashby@joshashby.com
 """
 
-from seshat.route import autoRoute
-from seshat.MixedObject import MixedObject
+from seshat.route import route
+from seshat_addons.MixedObject import MixedObject
 from utils.paginate import Paginate
-from seshat.objectMods import template
-from seshat.funcMods import Guess
+from seshat_addons.objectMods import template
+from seshat_addons.funcMods import Guess
 
 from rethinkORM import RethinkCollection
 import models.rethink.phot.photModel as pm
 import models.utils.dbUtils as dbu
 
 
-@autoRoute()
+@route()
 @template("public/phots/index", "Phots")
 class index(MixedObject):
     @Guess
     def GET(self):
-        orig = self.request.getParam("filter", "all")
+        orig = self.request.get_param("filter", "all")
         filt = dbu.phot_filter(orig)
-        view = self.request.getParam("v", 'cards')
+        view = self.request.get_param("v", 'cards')
 
         query = dbu.rql_where_not(pm.Phot.table, "disable", True)
         query = query.filter(lambda doc: doc["filename"].match(filt))

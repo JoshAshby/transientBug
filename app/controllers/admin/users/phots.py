@@ -5,14 +5,14 @@ For more information, see: https://github.com/JoshAshby/
 http://xkcd.com/353/
 
 Josh Ashby
-2013
+2014
 http://joshashby.com
 joshuaashby@joshashby.com
 """
-from seshat.route import autoRoute
-from seshat.MixedObject import MixedObject
-from seshat.objectMods import login, template
-from seshat.funcMods import HTML
+from seshat.route import route
+from seshat_addons.MixedObject import MixedObject
+from seshat_addons.objectMods import login, template
+from seshat_addons.funcMods import HTML
 
 from seshat.actions import NotFound
 
@@ -28,7 +28,7 @@ from utils.paginate import Paginate
 from models.utils import dbUtils as dbu
 
 
-@autoRoute()
+@route()
 @login(["admin"])
 @template("admin/users/phots", "User Phots")
 class phots(MixedObject):
@@ -48,7 +48,7 @@ class phots(MixedObject):
                           {"user": user,
                            "command": self.request.command})
 
-        disabled = self.request.getParam("q")
+        disabled = self.request.get_param("q")
         hidden_ids = r.table(pm.Phot.table).filter({"user": user.id}).filter(r.row["disable"].eq(True)).concat_map(lambda doc: [doc["id"]]).coerce_to("array").run()
 
         if disabled == "enabled":

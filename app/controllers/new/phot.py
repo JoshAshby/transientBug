@@ -6,14 +6,14 @@ For more information, see: https://github.com/JoshAshby/
 http://xkcd.com/353/
 
 Josh Ashby
-2013
+2014
 http://joshashby.com
 joshuaashby@joshashby.com
 """
-from seshat.route import autoRoute
-from seshat.MixedObject import MixedObject
-from seshat.objectMods import login, template
-from seshat.funcMods import HTML
+from seshat.route import route
+from seshat_addons.MixedObject import MixedObject
+from seshat_addons.objectMods import login, template
+from seshat_addons.funcMods import HTML
 from seshat.actions import Redirect
 
 import rethinkdb as r
@@ -22,7 +22,7 @@ import models.rethink.phot.photModel as pm
 import arrow
 
 
-@autoRoute()
+@route()
 @login(["phots"])
 @template("public/new/phot", "New Phot")
 class phot(MixedObject):
@@ -31,9 +31,9 @@ class phot(MixedObject):
         return self.view.render()
 
     def POST(self):
-        stuff = self.request.getParam("url", None) or self.request.getFile("file")
-        title = self.request.getParam("title", "")
-        tags = self.request.getParam("tags", "")
+        stuff = self.request.get_param("url", None) or self.request.get_file("file")
+        title = self.request.get_param("title", "")
+        tags = self.request.get_param("tags", "")
 
         if tags:
             if type(tags) is str:

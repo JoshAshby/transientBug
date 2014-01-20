@@ -7,7 +7,7 @@ For more information, see: https://github.com/JoshAshby/
 http://xkcd.com/353/
 
 Josh Ashby
-2013
+2014
 http://joshashby.com
 joshuaashby@joshashby.com
 """
@@ -47,9 +47,9 @@ class Paginate(StandardODM):
         self._data = {
             "perpage_default": perpage_default,
             "offset": 6,
-            "perpage": request.getParam("perpage", perpage_default),
-            "page": request.getParam("page", 0, int),
-            "sort_direction": request.getParam("dir", "desc") if not sort_direction else sort_direction,
+            "perpage": request.get_param("perpage", perpage_default),
+            "page": request.get_param("page", 0, int),
+            "sort_direction": request.get_param("dir", "desc") if not sort_direction else sort_direction,
             "sort": sort
         }
 

@@ -2,7 +2,7 @@
 """
 Imports all the controllers automatically
 Takes care of adding new controllers, and coupled
-with the autoRouter, makes adding new pages and
+with the router, makes adding new pages and
 controllers a breeze.
 
 For more information, see: https://github.com/JoshAshby/
@@ -10,7 +10,7 @@ For more information, see: https://github.com/JoshAshby/
 http://xkcd.com/353/
 
 Josh Ashby
-2013
+2014
 http://joshashby.com
 joshuaashby@joshashby.com
 """

@@ -5,14 +5,14 @@ For more information, see: https://github.com/JoshAshby/
 http://xkcd.com/353/
 
 Josh Ashby
-2013
+2014
 http://joshashby.com
 joshuaashby@joshashby.com
 """
-from seshat.route import autoRoute
-from seshat.MixedObject import MixedObject
-from seshat.objectMods import login, template
-from seshat.funcMods import HTML
+from seshat.route import route
+from seshat_addons.MixedObject import MixedObject
+from seshat_addons.objectMods import login, template
+from seshat_addons.funcMods import HTML
 
 from seshat.actions import NotFound, Redirect
 
@@ -21,7 +21,7 @@ from errors.general import NotFoundError
 from models.rethink.user import userModel as um
 
 
-@autoRoute()
+@route()
 @login(["admin"])
 @template("admin/users/settings", "User")
 class view(MixedObject):
@@ -51,11 +51,11 @@ class view(MixedObject):
         except NotFoundError:
             return NotFound()
 
-        password = self.request.getParam("password")
-        disable = self.request.getParam("disable", False)
-        email = self.request.getParam("email")
-        groups = self.request.getParam("groups")
-        clear_reset = self.request.getParam("clear_reset", False)
+        password = self.request.get_param("password")
+        disable = self.request.get_param("disable", False)
+        email = self.request.get_param("email")
+        groups = self.request.get_param("groups")
+        clear_reset = self.request.get_param("clear_reset", False)
 
         if type(groups) is not list:
             groups = [groups]

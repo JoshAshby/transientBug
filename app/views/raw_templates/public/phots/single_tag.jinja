@@ -6,8 +6,8 @@ scriptFiles:
 +++
 
 {% if page.pail %}
-  {% set v=req.getParam("v", "cards") %}
-  {% set filter=req.getParam("filter", "all") %}
+  {% set v=req.get_param("v", "cards") %}
+  {% set filter=req.get_param("filter", "all") %}
   <div class="row">
     <div class="col-md-5 col-sm-12">
       <form method="GET" action="/phots/tags" class="form-inline">

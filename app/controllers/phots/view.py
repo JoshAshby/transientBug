@@ -5,23 +5,23 @@ For more information, see: https://github.com/JoshAshby/
 http://xkcd.com/353/
 
 Josh Ashby
-2013
+2014
 http://joshashby.com
 joshuaashby@joshashby.com
 """
 import os
 import config.config as c
-from seshat.route import autoRoute
-from seshat.MixedObject import MixedObject
+from seshat.route import route
+from seshat_addons.MixedObject import MixedObject
 from seshat.actions import NotFound, Redirect, Unauthorized
-from seshat.objectMods import template
-from seshat.funcMods import Guess
+from seshat_addons.objectMods import template
+from seshat_addons.funcMods import Guess
 
 import models.rethink.phot.photModel as pm
 import rethinkdb as r
 
 
-@autoRoute()
+@route()
 @template("public/phots/view", "Phot")
 class view(MixedObject):
     @Guess
@@ -53,8 +53,8 @@ class view(MixedObject):
         if not self.request.session.has_phots:
             return Unauthorized()
 
-        new_name = self.request.getParam("name")
-        tags = self.request.getParam("tags")
+        new_name = self.request.get_param("name")
+        tags = self.request.get_param("tags")
 
         if tags:
             tag = [ bit.lstrip().rstrip().replace(" ", "_").lower() for bit in tags.split(",") ]
@@ -82,7 +82,7 @@ class view(MixedObject):
                 new_filename = ''.join([new_name, ".", photo.extension])
 
                 photo.filename = new_filename
-                photo.title = self.request.getParam("name")
+                photo.title = self.request.get_param("name")
 
                 new_name_path = ''.join([c.dirs.gifs, new_filename])
                 os.rename(current_path, new_name_path)

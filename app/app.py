@@ -22,9 +22,9 @@ from docopt import docopt
 def run(self):
     setup_log()
     import utils.framework as fw
+    server = fw.init()
     __import__("controllers.controllerMap", globals(), locals())
-
-    fw.serveForever()
+    fw.serve(server)
 
 
 if __name__ == "__main__":

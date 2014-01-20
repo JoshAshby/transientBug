@@ -5,7 +5,7 @@ Seshat config for daemons to use during start up
 http://xkcd.com/353/
 
 Josh Ashby
-2013
+2014
 http://joshashby.com
 joshuaashby@joshashby.com
 """

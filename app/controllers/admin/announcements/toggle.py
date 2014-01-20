@@ -5,17 +5,17 @@ For more information, see: https://github.com/JoshAshby/
 http://xkcd.com/353/
 
 Josh Ashby
-2013
+2014
 http://joshashby.com
 joshuaashby@joshashby.com
 """
-from seshat.route import autoRoute
-from seshat.MixedObject import MixedObject
-from seshat.objectMods import login
-from seshat.funcMods import JSON
+from seshat.route import route
+from seshat_addons.MixedObject import MixedObject
+from seshat_addons.objectMods import login
+from seshat_addons.funcMods import JSON
 
 
-@autoRoute()
+@route()
 @login(["admin"])
 class toggle(MixedObject):
     @JSON

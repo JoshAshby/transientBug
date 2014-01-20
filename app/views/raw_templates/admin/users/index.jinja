@@ -7,7 +7,7 @@ base: skeletons/sidebar
 +++
 <div class="row">
   <div class="col-md-12">
-    {% if req.getParam("d", True) %}
+    {% if req.get_param("d", True) %}
       <a href="?d=false" class="btn btn-theme btn-sm">Include Disabled</a>
     {% else %}
       <a href="/admin/users" class="btn btn-theme btn-sm">Hide Disabled</a>

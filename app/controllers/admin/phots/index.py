@@ -5,17 +5,17 @@ For more information, see: https://github.com/JoshAshby/
 http://xkcd.com/353/
 
 Josh Ashby
-2013
+2014
 http://joshashby.com
 joshuaashby@joshashby.com
 """
 import rethinkdb as r
 from rethinkORM import RethinkCollection
 
-from seshat.route import autoRoute
-from seshat.MixedObject import MixedObject
-from seshat.objectMods import login, template
-from seshat.funcMods import HTML, JSON
+from seshat.route import route
+from seshat_addons.MixedObject import MixedObject
+from seshat_addons.objectMods import login, template
+from seshat_addons.funcMods import HTML, JSON
 
 from utils.paginate import Paginate
 
@@ -23,7 +23,7 @@ import models.rethink.phot.photModel as pm
 import models.utils.dbUtils as dbu
 
 
-@autoRoute()
+@route()
 @login(["admin"])
 @template("admin/phots/index", "Phots")
 class index(MixedObject):
@@ -31,7 +31,7 @@ class index(MixedObject):
     def GET(self):
         self.view.partial("sidebar", "partials/admin/sidebar", {"command": "phots"})
         what = self.request.id
-        orig = self.request.getParam("filter", "all")
+        orig = self.request.get_param("filter", "all")
         filt = dbu.phot_filter(orig)
 
         hidden_ids = list(r.table(pm.Phot.table).filter(r.row["disable"].eq(True)).concat_map(lambda doc: [doc["id"]]).run())

@@ -5,14 +5,14 @@ For more information, see: https://github.com/JoshAshby/
 http://xkcd.com/353/
 
 Josh Ashby
-2013
+2014
 http://joshashby.com
 joshuaashby@joshashby.com
 """
-from seshat.route import autoRoute
-from seshat.MixedObject import MixedObject
-from seshat.objectMods import login, template
-from seshat.funcMods import HTML
+from seshat.route import route
+from seshat_addons.MixedObject import MixedObject
+from seshat_addons.objectMods import login, template
+from seshat_addons.funcMods import HTML
 
 import rethinkdb as r
 from rethinkORM import RethinkCollection
@@ -21,7 +21,7 @@ from utils.paginate import Paginate
 import models.utils.dbUtils as dbu
 
 
-@autoRoute()
+@route()
 @login(["admin"])
 @template("admin/notes/index", "Notes")
 class index(MixedObject):
@@ -29,7 +29,7 @@ class index(MixedObject):
     def GET(self):
         self.view.partial("sidebar", "partials/admin/sidebar", {"command": "notes"})
 
-        what_type = self.request.getParam("filter", "all")
+        what_type = self.request.get_param("filter", "all")
 
         parts = {}
 
@@ -40,7 +40,7 @@ class index(MixedObject):
 
         self.view.data = {"type": what_type.lower()}
 
-        disabled = self.request.getParam("q")
+        disabled = self.request.get_param("q")
         if disabled != "enabled":
             q = dbu.rql_where_not(nm.Note.table, "disable", True, parts)
             res = RethinkCollection(nm.Note, query=q)

@@ -5,20 +5,20 @@ For more information, see: https://github.com/JoshAshby/
 http://xkcd.com/353/
 
 Josh Ashby
-2013
+2014
 http://joshashby.com
 joshuaashby@joshashby.com
 """
-from seshat.route import autoRoute
-from seshat.MixedObject import MixedObject
+from seshat.route import route
+from seshat_addons.MixedObject import MixedObject
 from seshat.actions import NotFound
-from seshat.funcMods import JSON
+from seshat_addons.funcMods import JSON
 
 import models.rethink.phot.photModel as pm
 import rethinkdb as r
 
 
-@autoRoute()
+@route()
 class view(MixedObject):
     @JSON
     def GET(self):

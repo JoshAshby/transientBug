@@ -7,20 +7,20 @@ For more information, see: https://github.com/JoshAshby/
 http://xkcd.com/353/
 
 Josh Ashby
-2013
+2014
 http://joshashby.com
 joshuaashby@joshashby.com
 """
-from seshat.route import autoRoute
-from seshat.MixedObject import MixedObject
-from seshat.objectMods import login, template
-from seshat.funcMods import HTML
+from seshat.route import route
+from seshat_addons.MixedObject import MixedObject
+from seshat_addons.objectMods import login, template
+from seshat_addons.funcMods import HTML
 from seshat.actions import Redirect
 
 import models.rethink.note.noteModel as nm
 
 
-@autoRoute()
+@route()
 @login(["notes"])
 @template("public/new/note", "New Note")
 class note(MixedObject):
@@ -29,10 +29,10 @@ class note(MixedObject):
         return self.view
 
     def POST(self):
-        title = self.request.getParam("title")
-        contents = self.request.getParam("contents")
-        public = self.request.getParam("public", False)
-        tags = self.request.getParam("tags")
+        title = self.request.get_param("title")
+        contents = self.request.get_param("contents")
+        public = self.request.get_param("public", False)
+        tags = self.request.get_param("tags")
 
         if tags:
             tag = [ bit.lstrip().rstrip().replace(" ", "_").lower() for bit in tags.split(",") ]

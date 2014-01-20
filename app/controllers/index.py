@@ -10,8 +10,8 @@ http://joshashby.com
 joshuaashby@joshashby.com
 """
 from seshat.route import route
+from seshat.actions import Redirect
 from seshat_addons.MixedObject import MixedObject
-from seshat_addons.actions import Redirect
 from seshat_addons.objectMods import template, login
 from seshat_addons.funcMods import HTML
 

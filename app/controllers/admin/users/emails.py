@@ -5,14 +5,14 @@ For more information, see: https://github.com/JoshAshby/
 http://xkcd.com/353/
 
 Josh Ashby
-2013
+2014
 http://joshashby.com
 joshuaashby@joshashby.com
 """
-from seshat.route import autoRoute
-from seshat.MixedObject import MixedObject
-from seshat.objectMods import login, template
-from seshat.funcMods import HTML
+from seshat.route import route
+from seshat_addons.MixedObject import MixedObject
+from seshat_addons.objectMods import login, template
+from seshat_addons.funcMods import HTML
 
 from seshat.actions import NotFound
 
@@ -26,7 +26,7 @@ import models.rethink.email.emailModel as em
 from utils.paginate import Paginate
 
 
-@autoRoute()
+@route()
 @login(["admin"])
 @template("admin/users/emails", "User Emails")
 class emails(MixedObject):
@@ -46,7 +46,7 @@ class emails(MixedObject):
                           {"user": user,
                            "command": self.request.command})
 
-        t = self.request.getParam("filter", "to")
+        t = self.request.get_param("filter", "to")
         if t == "cc":
             row_filt = "cc_addresses"
         elif t == "bcc":

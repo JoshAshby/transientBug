@@ -5,14 +5,14 @@ For more information, see: https://github.com/JoshAshby/
 http://xkcd.com/353/
 
 Josh Ashby
-2013
+2014
 http://joshashby.com
 joshuaashby@joshashby.com
 """
-from seshat.route import autoRoute
-from seshat.MixedObject import MixedObject
-from seshat.objectMods import login, template
-from seshat.funcMods import HTML
+from seshat.route import route
+from seshat_addons.MixedObject import MixedObject
+from seshat_addons.objectMods import login, template
+from seshat_addons.funcMods import HTML
 
 
 from rethinkORM import RethinkCollection
@@ -22,14 +22,14 @@ from models.utils import dbUtils as dbu
 from utils.paginate import Paginate
 
 
-@autoRoute()
+@route()
 @login(["admin"])
 @template("admin/users/index", "Users")
 class index(MixedObject):
     @HTML
     def GET(self):
         self.view.partial("sidebar", "partials/admin/sidebar", {"command": "users"})
-        disabled = self.request.getParam("d", True)
+        disabled = self.request.get_param("d", True)
         if disabled:
             q = dbu.rql_where_not(um.User.table, "disable", True)
             res = RethinkCollection(um.User, query=q)

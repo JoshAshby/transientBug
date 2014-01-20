@@ -5,21 +5,21 @@ For more information, see: https://github.com/JoshAshby/
 http://xkcd.com/353/
 
 Josh Ashby
-2013
+2014
 http://joshashby.com
 joshuaashby@joshashby.com
 """
-from seshat.route import autoRoute
-from seshat.MixedObject import MixedObject
+from seshat.route import route
+from seshat_addons.MixedObject import MixedObject
 from seshat.actions import Redirect
-from seshat.objectMods import login, template
-from seshat.funcMods import HTML
+from seshat_addons.objectMods import login, template
+from seshat_addons.funcMods import HTML
 
 import rethinkdb as r
 from models.rethink.user import userModel as um
 
 
-@autoRoute()
+@route()
 @login()
 @template("public/account/index", "Account Settings")
 class index(MixedObject):
@@ -40,8 +40,8 @@ class index(MixedObject):
         error = False
         user = um.User(self.request.session.id)
 
-        email = self.request.getParam("email")
-        password = self.request.getParam("password")
+        email = self.request.get_param("email")
+        password = self.request.get_param("password")
 
         if email and email != user.email:
             found = r.table(um.User.table).filter({"email": email})\

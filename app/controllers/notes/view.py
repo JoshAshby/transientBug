@@ -5,21 +5,21 @@ For more information, see: https://github.com/JoshAshby/
 http://xkcd.com/353/
 
 Josh Ashby
-2013
+2014
 http://joshashby.com
 joshuaashby@joshashby.com
 """
-from seshat.route import autoRoute
-from seshat.MixedObject import MixedObject
+from seshat.route import route
+from seshat_addons.MixedObject import MixedObject
 from seshat.actions import NotFound, Unauthorized, Redirect
-from seshat.funcMods import HTML
-from seshat.objectMods import template
+from seshat_addons.funcMods import HTML
+from seshat_addons.objectMods import template
 
 import rethinkdb as r
 import models.rethink.note.noteModel as nm
 
 
-@autoRoute()
+@route()
 @template("public/notes/view", "Note")
 class view(MixedObject):
     @HTML
@@ -60,10 +60,10 @@ class view(MixedObject):
 
     @HTML
     def POST(self):
-        title = self.request.getParam("title")
-        contents = self.request.getParam("contents")
-        public = self.request.getParam("public", False)
-        tags = self.request.getParam("tags")
+        title = self.request.get_param("title")
+        contents = self.request.get_param("contents")
+        public = self.request.get_param("public", False)
+        tags = self.request.get_param("tags")
 
         tag = []
         if tags:

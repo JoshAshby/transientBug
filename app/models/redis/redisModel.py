@@ -6,7 +6,7 @@ all match a given pattern. Has support for lists and strings so far.
 http://xkcd.com/353/
 
 Josh Ashby
-2013
+2014
 http://joshashby.com
 joshuaashby@joshashby.com
 """

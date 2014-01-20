@@ -5,14 +5,14 @@ For more information, see: https://github.com/JoshAshby/
 http://xkcd.com/353/
 
 Josh Ashby
-2013
+2014
 http://joshashby.com
 joshuaashby@joshashby.com
 """
-from seshat.route import autoRoute
-from seshat.MixedObject import MixedObject
-from seshat.objectMods import not_logged_in, template
-from seshat.funcMods import HTML
+from seshat.route import route
+from seshat_addons.MixedObject import MixedObject
+from seshat_addons.objectMods import not_logged_in, template
+from seshat_addons.funcMods import HTML
 from seshat.actions import Redirect
 
 from errors.general import NotFoundError
@@ -26,13 +26,13 @@ import utils.short_codes as sc
 from views.template import PartialTemplate
 
 
-@autoRoute()
+@route()
 @not_logged_in("/account")
 @template("public/reset/reset", "Password Reset")
 class index(MixedObject):
     @HTML
     def GET(self):
-        code = self.request.getParam("c")
+        code = self.request.get_param("c")
 
         if not code:
             self.view.template = "public/reset/request"
@@ -48,9 +48,9 @@ class index(MixedObject):
 
     @HTML
     def POST(self):
-        code = self.request.getParam("c")
-        username = self.request.getParam("username")
-        password = self.request.getParam("password")
+        code = self.request.get_param("c")
+        username = self.request.get_param("username")
+        password = self.request.get_param("password")
 
         try:
             user = um.User.from_email(username)

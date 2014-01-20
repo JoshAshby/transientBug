@@ -29,7 +29,8 @@ logger = logging.getLogger("seshat")
 
 import config.config as c
 
-def main():
+
+def init():
     """
     Server
 
@@ -62,7 +63,7 @@ def main():
     return server
 
 
-def serveForever():
+def serve(server):
     """
     Server
 
@@ -77,7 +78,6 @@ def serveForever():
         address = "127.0.0.1"
     else:
         address = c.general["address"]
-    server = main()
     try:
         logger.info("""Now serving py as a WSGI server at %(address)s:%(port)s
         Press Ctrl+c if running as non daemon mode, or send a stop signal

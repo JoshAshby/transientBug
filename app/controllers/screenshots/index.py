@@ -5,7 +5,7 @@ For more information, see: https://github.com/JoshAshby/
 http://xkcd.com/353/
 
 Josh Ashby
-2013
+2014
 http://joshashby.com
 joshuaashby@joshashby.com
 """
@@ -13,16 +13,16 @@ import os
 import config.config as c
 import arrow
 
-from seshat.route import autoRoute
-from seshat.MixedObject import MixedObject
-from seshat.objectMods import login, template
-from seshat.funcMods import HTML
+from seshat.route import route
+from seshat_addons.MixedObject import MixedObject
+from seshat_addons.objectMods import login, template
+from seshat_addons.funcMods import HTML
 from seshat.actions import Redirect
 
 from utils.paginate import Paginate
 
 
-@autoRoute()
+@route()
 @login(["screenshots"])
 @template("public/screenshots/index", "Screenshots")
 class index(MixedObject):
@@ -39,7 +39,7 @@ class index(MixedObject):
         return self.view
 
     def POST(self):
-        scrn = self.request.getFile("file")
+        scrn = self.request.get_file("file")
 
         if scrn:
             date = str(arrow.utcnow().timestamp) + "_"

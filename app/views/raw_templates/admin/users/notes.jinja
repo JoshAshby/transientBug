@@ -8,8 +8,8 @@ base: skeletons/sidebar
 <div class="row">
   <div class="col-md-6 col-sm-12">
     <ul class="nav nav-pills" id="myTab">
-      <li {{ 'class="active"' if req.getParam("q")!="enabled" }}><a href="/admin/users/{{req.id}}/notes">Disabled</a></li>
-      <li {{ 'class="active"' if req.getParam("q")=="enabled" }}><a href="/admin/users/{{req.id}}/notes?q=enabled">Enabled</a></li>
+      <li {{ 'class="active"' if req.get_param("q")!="enabled" }}><a href="/admin/users/{{req.id}}/notes">Disabled</a></li>
+      <li {{ 'class="active"' if req.get_param("q")=="enabled" }}><a href="/admin/users/{{req.id}}/notes?q=enabled">Enabled</a></li>
     </ul>
   </div>
   {% if page.pail %}

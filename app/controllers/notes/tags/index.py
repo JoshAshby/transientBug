@@ -5,14 +5,14 @@ For more information, see: https://github.com/JoshAshby/
 http://xkcd.com/353/
 
 Josh Ashby
-2013
+2014
 http://joshashby.com
 joshuaashby@joshashby.com
 """
-from seshat.route import autoRoute
-from seshat.MixedObject import MixedObject
-from seshat.objectMods import template
-from seshat.funcMods import HTML
+from seshat.route import route
+from seshat_addons.MixedObject import MixedObject
+from seshat_addons.objectMods import template
+from seshat_addons.funcMods import HTML
 from utils.paginate import Paginate
 
 import rethinkdb as r
@@ -23,12 +23,12 @@ import models.utils.dbUtils as dbu
 import utils.search as s
 
 
-@autoRoute()
+@route()
 @template("public/notes/single_tag", "Notes")
 class index(MixedObject):
     @HTML
     def GET(self):
-        query = self.request.id or self.request.getParam("q")
+        query = self.request.id or self.request.get_param("q")
 
         q = dbu.rql_where_not(nm.Note.table, "disable", True)
 

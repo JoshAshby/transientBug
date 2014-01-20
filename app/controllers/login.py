@@ -30,8 +30,8 @@ class login(MixedObject):
 
     @HTML
     def POST(self):
-        passwd = self.request.getParam("password")
-        name = self.request.getParam("username")
+        passwd = self.request.get_param("password")
+        name = self.request.get_param("username")
 
         if not passwd and not name:
             self.view.partial("about", "public/about/about")
@@ -43,7 +43,7 @@ class login(MixedObject):
             self.request.session.push_alert("Welcome back, %s!" % name,
                                            "Ohia!", "success")
 
-            where = self.request.getParam("return-to", "/")
+            where = self.request.get_param("return-to", "/")
 
             return Redirect(where)
 

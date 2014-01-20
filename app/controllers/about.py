@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 """
-
 For more information, see: https://github.com/JoshAshby/
 
 http://xkcd.com/353/
