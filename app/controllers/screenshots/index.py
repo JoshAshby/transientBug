@@ -14,9 +14,9 @@ import config.config as c
 import arrow
 
 from seshat.route import route
-from seshat_addons.MixedObject import MixedObject
-from seshat_addons.objectMods import login, template
-from seshat_addons.funcMods import HTML
+from seshat_addons.mixed_object import MixedObject
+from seshat_addons.obj_mods import login, template
+from seshat_addons.func_mods import HTML
 from seshat.actions import Redirect
 
 from utils.paginate import Paginate

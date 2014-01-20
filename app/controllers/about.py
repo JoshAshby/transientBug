@@ -10,9 +10,9 @@ http://joshashby.com
 joshuaashby@joshashby.com
 """
 from seshat.route import route
-from seshat_addons.MixedObject import MixedObject
-from seshat_addons.objectMods import template
-from seshat_addons.funcMods import HTML
+from seshat_addons.mixed_object import MixedObject
+from seshat_addons.obj_mods import template
+from seshat_addons.func_mods import HTML
 
 
 @route()

@@ -10,8 +10,8 @@ http://joshashby.com
 joshuaashby@joshashby.com
 """
 from seshat.route import route
-from seshat_addons.MixedObject import MixedObject
-from seshat_addons.funcMods import JSON
+from seshat_addons.mixed_object import MixedObject
+from seshat_addons.func_mods import JSON
 
 import rethinkdb as r
 import models.rethink.phot.photModel as pm
