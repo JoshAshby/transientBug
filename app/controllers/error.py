@@ -39,5 +39,5 @@ class error500(MixedObject):
     @HTML
     def GET(self):
         self.head = Head("500 INTERNAL SERVER ERROR", [("Content-Type", "text/html")])
-        self.view.data = {"e": self.error}
+        self.view.data = {"error": self.error[0], "tb": self.error[1]}
         return self.view
