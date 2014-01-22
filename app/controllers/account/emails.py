@@ -15,7 +15,12 @@ from seshat_addons.obj_mods import login, template
 from seshat_addons.func_mods import HTML
 
 import rethinkdb as r
+
+from rethinkORM import RethinkCollection
+from utils.paginate import Paginate
+
 from models.rethink.user import userModel as um
+from models.rethink.email import emailModel as em
 
 
 @route()
@@ -31,5 +36,19 @@ class emails(MixedObject):
                           {"user": user,
                            "command": "emails"})
 
-        self.view.data = {"user": user}
+        t = self.request.get_param("filter", "to")
+        if t == "cc":
+            row_filt = "cc_addresses"
+        elif t == "bcc":
+            row_filt = "bcc_addresses"
+        else:
+            row_filt = "to_addresses"
+
+        parts = r.table(em.Email.table).filter(lambda row: row[row_filt].contains(user.id))
+
+        result = RethinkCollection(em.Email, query=parts)
+        page = Paginate(result, self.request, "created", sort_direction="asc")
+
+        self.view.data = {"user": user, "page": page}
+
         return self.view
