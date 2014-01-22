@@ -9,6 +9,8 @@ tables:
   - users
   - notes
   - phots
+  - emails
+  - requests
 
 buckets:
   enable500Error:
@@ -21,7 +23,9 @@ flush:
     users: false
     phots: false
     notes: false
+    emails: true
+    requests: true
 
   redis:
-    session: false
+    session: true
     bucket: false

@@ -19,6 +19,12 @@ class Email(RethinkModel):
     def new(cls):
         em = cls()
         em.content = {"html": "", "text": ""}
+        em.bcc_addresses = []
+        em.cc_addresses = []
+        em.to_addresses = []
+        em.service = None
+        em.subject = None
+        em.created = None
         return em
 
     def send_to(self, addresses):
