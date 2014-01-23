@@ -8,8 +8,10 @@ base: skeletons/sidebar
 <div class="row">
   <div class="col-md-6 col-sm-12">
     <ul class="nav nav-pills" id="myTab">
-      <li {{ 'class="active"' if req.id!="enabled" }}><a href="/admin/notes">Disabled</a></li>
-      <li {{ 'class="active"' if req.id=="enabled" }}><a href="/admin/notes/enabled">Enabled</a></li>
+      <li {{ 'class="active"' if not enabled }}><a
+        href="/admin/notes/disabled">Disabled</a></li>
+      <li {{ 'class="active"' if enabled }}><a
+        href="/admin/notes">Enabled</a></li>
     </ul>
   </div>
   {% if page.pail %}

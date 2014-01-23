@@ -23,16 +23,16 @@ from utils.paginate import Paginate
 @route()
 @login(["admin"])
 @template("admin/notes/index", "Notes")
-class index(MixedObject):
+class disabled(MixedObject):
     @HTML
     def GET(self):
         self.view.partial("sidebar", "partials/admin/sidebar", {"command": "notes"})
 
-        q = r.table(nm.Note.table).filter({"disable": False})
+        q = r.table(nm.Note.table).filter({"disable": True})
         res = RethinkCollection(nm.Note, query=q)
 
         page = Paginate(res, self.request, "created", sort_direction="asc")
 
-        self.view.data = {"page": page, "enabled": True}
+        self.view.data = {"page": page, "enabled": False}
 
         return self.view
