@@ -26,12 +26,15 @@ import models.rethink.note.noteModel as nm
 class note(MixedObject):
     @HTML
     def GET(self):
+        self.view.partial("note_create", "partials/public/note_create")
         return self.view
 
     def POST(self):
         title = self.request.get_param("title")
         contents = self.request.get_param("contents")
         public = self.request.get_param("public", False)
+        draft = self.request.get_param("draft", True)
+        toc = self.request.get_param("toc", False)
         tags = self.request.get_param("tags")
 
         if tags:
@@ -41,10 +44,12 @@ class note(MixedObject):
 
         try:
             note = nm.Note.new_note(user=self.request.session.id,
-                        title=title,
-                        contents=contents,
-                        public=public,
-                        tags=tag)
+                                    title=title,
+                                    contents=contents,
+                                    public=public,
+                                    tags=tag,
+                                    toc=toc,
+                                    draft=draft)
 
         except Exception as e:
             self.request.session.push_alert("That note could not be created! %s" % e.message, level="error")

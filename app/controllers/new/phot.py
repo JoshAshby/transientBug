@@ -28,7 +28,8 @@ import arrow
 class phot(MixedObject):
     @HTML
     def GET(self):
-        return self.view.render()
+        self.view.partial("phot_create", "partials/public/phot_create")
+        return self.view
 
     def POST(self):
         stuff = self.request.get_param("url", None) or self.request.get_file("file")

@@ -26,12 +26,15 @@ class delete(MixedObject):
     def POST(self):
         f = r.table(nm.Note.table)\
             .filter({"short_code": self.request.id})\
-            .coerce_to("array").run()
+            .coerce_to("array")\
+            .run()
 
         if f:
             note = nm.Note(**f[0])
-            if note.author.id != self.request.session.id:
-                self.request.session.push_alert("You don't own that note, you can't delete it!", level="danger")
+            if not self.request.session.has_admin\
+                or note.author.id != self.request.session.id:
+                self.request.session.push_alert("You don't own that note, you can't delete it!",
+                                                level="error")
                 return Unauthorized()
 
             note.disable = True

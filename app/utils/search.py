@@ -24,6 +24,7 @@ def photo_filter(filt):
 
     return orig
 
+
 def search_tags(tags, query, min_score=75):
     q = query.replace("_", " ").lower()
 

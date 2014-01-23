@@ -30,12 +30,7 @@ logger = logging.getLogger("seshat")
 import config.config as c
 
 
-def init():
-    """
-    Server
-
-    Sets up the server and all that messy stuff
-    """
+def address_and_port():
     if c.general["port"]:
         port = int(c.general["port"])
     else:
@@ -45,6 +40,17 @@ def init():
         address = "127.0.0.1"
     else:
         address = c.general["address"]
+
+    return address, port
+
+
+def init():
+    """
+    Server
+
+    Sets up the server and all that messy stuff
+    """
+    address, port = address_and_port()
 
     if c.general.use_pool:
         pool = Pool(c.general.max_connections)
@@ -69,24 +75,20 @@ def serve(server):
 
     Starts the server
     """
-    if c.general["port"]:
-        port = int(c.general["port"])
-    else:
-        port = 8000
+    address, port = address_and_port()
 
-    if not c.general["address"]:
-        address = "127.0.0.1"
-    else:
-        address = c.general["address"]
     try:
         logger.info("""Now serving py as a WSGI server at %(address)s:%(port)s
         Press Ctrl+c if running as non daemon mode, or send a stop signal
         """ % {"address": address, "port": port})
         server.serve_forever()
         logger.warn("Shutdown py operations.")
+
     except Exception as exc:
         logger.critical("""Shutdown py operations, here's why: %s""" % exc)
+
     except:
         logger.critical(traceback.format_exc())
+
     else:
         logger.critical("""Shutdown py operations for unknown reason!""")

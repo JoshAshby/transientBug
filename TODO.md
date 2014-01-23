@@ -1,16 +1,20 @@
 - whoosh searching of notes
-- better way to access notes by user and public/private
 - better tag searching for phots and notes (maybe time to break out whoosh for
   both?)
-- media upload/pairing for notes (ie: rewrite notes again)
 - management & error viewing page for daemons (have loogging to rethink with
   various client info for all error pages working)
 - integrate python side of my irssi-utils stuff
  - push messages into rethink and make a controller to view
      add support for json retrieval (more on this later)
 - finish user admin stuff
-- user invites, registration
-- announcements info more blog post style things (? hmm)
-- stats controller, now that all requests are logged to rethinkdb (D3.js!! :O)
+- user invites, registration (? thinking about this and still unsure of the use
+  for this so far, we'll see)
+- announcements info more blog post style things (? hmm, also not sure, maybe
+  provide a way to easily link to a note? who knows)
 - better email views
 - fix admin panel notes
+- rework notes_create partial to allow passing a note, so it can be used for
+  creation or editing a note. One partial for all note related stuff sounds
+  nice.
+- look into making other reused components into partials instead, maybe?
+ - as the system grows, I see this being rather useful

@@ -1,8 +1,6 @@
 +++
-base: skeletons/header
 theme_color: red
 nav: notes
-header: "<h1>New Note</h1>"
 
 scriptFiles:
   - pillbox
@@ -17,32 +15,6 @@ stylesheets:
 
 <div class="row">
   <div class="col-md-12">
-    <form method="POST">
-      <fieldset>
-        <div class="form-group" id="note">
-          <input type="text" class="form-control" id="note_title" name="title" placeholder="Title..." required>
-        </div>
-        <div class="form-group">
-          <textarea name="contents" id="note_content" data-provide="markdown"></textarea>
-        </div>
-        <div class="form-group">
-          <input type="text" class="form-control" name="tags" id="note_tags" placeholder="Tags..."/>
-        </div>
-        <div class="row">
-          <div class="col-md-6">
-            <div class="checkbox">
-              <label>
-                <input type="checkbox" name="public" id="note_public" value="true"/> Make this note public?
-                <span class="help-block"><small>This determines if the note will be visible on <a href="/notes/public">/notes/public</a> and <a href="/notes/tags">/notes/tags</a> pages.</small></span>
-              </label>
-            </div>
-          </div>
-          <div class="col-md-6">
-            <button type="submit"class="btn btn-theme pull-right"><i class="fa fa-save"></i> Create!</button>
-          </div>
-        </div>
-
-      </fieldset>
-    </form>
+   {{note_create}}
   </div>
 </div>

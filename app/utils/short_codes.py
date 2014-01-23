@@ -11,6 +11,7 @@ joshuaashby@joshashby.com
 """
 import string
 import random
+import rethinkdb as r
 
 
 def rand_short_code(length=10):
@@ -21,3 +22,22 @@ def rand_short_code(length=10):
     """
     chars = string.ascii_uppercase + string.digits
     return ''.join(random.choice(chars) for x in range(length))
+
+
+def generate_short_code(table):
+    """
+    Generates a new short_code, then checks to make sure it already isn't in
+    the given table, and keeps going till it finds a unique code
+
+    :param table: A `str` of the rethinkdb table to check for short_code
+    collisions
+    """
+    code_good = False
+    code = ""
+    while not code_good:
+        code = rand_short_code()
+        f = r.table(table).filter({"short_code": code}).count().run()
+        if f == 0:
+            code_good = True
+
+    return code

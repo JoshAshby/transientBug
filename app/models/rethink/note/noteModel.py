@@ -9,11 +9,10 @@ http://joshashby.com
 joshuaashby@joshashby.com
 """
 import arrow
-import rethinkdb as r
 
 from rethinkORM import RethinkModel
 import models.rethink.user.userModel as um
-import utils.markdownUtils as mdu
+import utils.markdown_utils as md
 
 import utils.short_codes as sc
 
@@ -22,7 +21,10 @@ class Note(RethinkModel):
     table = "notes"
 
     @classmethod
-    def new_note(cls, user, title="", contents="", public=False, tags=[]):
+    def new_note(cls, user, title="", contents="", draft=True, public=False, toc=False, tags=None):
+        if not tags:
+            tags = []
+
         time = arrow.utcnow()
         if not title:
             title = "Untitled Note @ %s" % time.format("YY/MM/DD HH:mm:ss")
@@ -30,13 +32,7 @@ class Note(RethinkModel):
 
         new_tags = [ tag.replace(" ", "_").lower() for tag in tags ]
 
-        code_good = False
-        code = ""
-        while not code_good:
-            code = sc.rand_short_code()
-            f = r.table(cls.table).filter({"short_code": code}).count().run()
-            if f == 0:
-                code_good = True
+        code = sc.generate_short_code(cls.table)
 
         what = cls.create(user=user,
                           created=created,
@@ -44,26 +40,23 @@ class Note(RethinkModel):
                           contents=contents,
                           public=public,
                           tags=new_tags,
+                          table_of_contents=toc,
+                          draft=draft,
                           short_code=code,
-                          disable=False)
+                          disable=False,
+                          reported=False)
 
         return what
 
-    def copy(self):
-        time = arrow.utcnow()
-        created = time.timestamp
+    def copy(self, user):
+        copy_data = self._data.copy().pop("id").pop("user")
+        copy_data["short_code"] = sc.generate_short_code(self.table)
+        copy_data["created"] = arrow.utcnow().timestamp
+        copy_data["user"] = user.id
 
-        code_good = False
-        code = ""
-        while not code_good:
-            code = sc.rand_short_code()
-            f = r.table(self.table).filter({"short_code": code}).count().run()
-            if f == 0:
-                code_good = True
+        copy = Note(**copy_data)
 
-        self.copy = self._data.pop("id")
-        self.short_code = code
-        self.created = created
+        return copy
 
     @property
     def author(self):
@@ -82,13 +75,6 @@ class Note(RethinkModel):
     @property
     def formated_contents(self):
         if not hasattr(self, "_formated_contents"):
-            self._formated_contents = mdu.markClean(self.contents, ['footnotes'])
+            self._formated_contents = md.markdown_clean(self.contents)
 
         return self._formated_contents
-
-    @property
-    def formated_short(self):
-        if not hasattr(self, "_formated_short_contents"):
-            self._formated_short_contents = mdu.markClean(self.contents[:160]+"...", ['footnotes'])
-
-        return self._formated_short_contents
