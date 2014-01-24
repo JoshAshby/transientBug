@@ -26,13 +26,40 @@ from utils.paginate import Paginate
 class index(MixedObject):
     @HTML
     def GET(self):
-        self.view.partial("sidebar", "partials/admin/sidebar", {"command": "notes"})
+        self.view.partial("sidebar", "partials/admin/sidebar",
+                          {"command": "notes"})
 
-        q = r.table(nm.Note.table).filter({"disable": False})
+        filter_parts = {}
+        public = self.request.get_param("public")
+        draft = self.request.get_param("draft")
+        disabled = self.request.get_param("disable")
+        reported = self.request.get_param("reported", False, bool)
+        sort_by = self.request.get_param("sort_by", "created")
+
+        if not sort_by in ["created", "title", "public", "reported", "draft",
+            "disable"]:
+            sort_by = "created"
+
+            # should this be something I try to start doing? :/
+            self.request.session.push_alert("Couldn't figure out what to sort by, as a result of an invalid value for sort_by.",
+                                            level="error")
+
+        if public:
+            filter_parts["public"] = False if public == "private" else True
+        if draft:
+            filter_parts["draft"] = False if draft == "published" else True
+        if disabled:
+            filter_parts["disable"] = False if disabled == "enabled" else True
+
+        filter_parts["reported"] = reported
+
+        print filter_parts
+
+        q = r.table(nm.Note.table).filter(filter_parts)
+
         res = RethinkCollection(nm.Note, query=q)
+        page = Paginate(res, self.request, sort_by, sort_direction="asc")
 
-        page = Paginate(res, self.request, "created", sort_direction="asc")
-
-        self.view.data = {"page": page, "enabled": True}
+        self.view.data = {"page": page}
 
         return self.view

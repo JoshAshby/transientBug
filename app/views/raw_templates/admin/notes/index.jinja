@@ -5,32 +5,37 @@ breadcrumbs_top: True
 base: skeletons/sidebar
 +++
 
-<div class="row">
-  <div class="col-md-6 col-sm-12">
-    <ul class="nav nav-pills" id="myTab">
-      <li {{ 'class="active"' if not enabled }}><a
-        href="/admin/notes/disabled">Disabled</a></li>
-      <li {{ 'class="active"' if enabled }}><a
-        href="/admin/notes">Enabled</a></li>
-    </ul>
-  </div>
-  {% if page.pail %}
+{% set public = req.get_param("public", "public") %}
+{% set draft = req.get_param("draft", "published") %}
+{% set disabled = req.get_param("disable", "enabled") %}
+{% set reported = req.get_param("reported", False, bool) %}
+{% set sort_by = req.get_param("sort_by", "created") %}
+
+<form class="form-inline" role="pagination_options">
+  <div class="row">
     <div class="col-sm-12 col-md-6">
-      <form class="form-inline pull-right" role="pagination_options">
-        <div class="form-group">
-          <label class="sr-only" for="filter">Filter</label>
-          <select name="filter" class="input-sm form-control">
-            <option value=all {{ 'selected="selected"' if type=="all" }}>All</option>
-            <option value=private {{ 'selected="selected"' if type=="private" }}>Private</option>
-            <option value=public {{ 'selected="selected"' if type=="public" }}>Public</option>
-          </select>
+      <fieldset>
+        <div class="well">
+          <div class="form-group">
+            <label for="public">Public: </label>
+            <select class="form-control">
+              <option value="public">Public</option>
+              <option value="private" {{ 'selected' if public!="public" }}>Private</option>
+            </select>
+          </div>
+          <br>
         </div>
-        {{page.options}}
-      </form>
+      </fieldset>
     </div>
-  {% endif %}
-</div>
-<br>
+    <div class="col-sm-12 col-md-6">
+      {% if page.pail %}
+        <fieldset class="pull-right">
+          {{page.options}}
+        </fieldset>
+      {% endif %}
+    </div>
+  </div>
+</form>
 
 <div class="row">
   <div class="col-md-12">
