@@ -29,15 +29,16 @@ class index(MixedObject):
         self.view.partial("sidebar", "partials/admin/sidebar",
                           {"command": "notes"})
 
+# I should figure out a way to do this filter stuff a little easier... hmm
         filter_parts = {}
         public = self.request.get_param("public")
         draft = self.request.get_param("draft")
         disabled = self.request.get_param("disable")
-        reported = self.request.get_param("reported", False, bool)
+        reported = self.request.get_param("reported", False)
         sort_by = self.request.get_param("sort_by", "created")
 
         if not sort_by in ["created", "title", "public", "reported", "draft",
-            "disable"]:
+            "disable", "author.id"]:
             sort_by = "created"
 
             # should this be something I try to start doing? :/
@@ -53,12 +54,10 @@ class index(MixedObject):
 
         filter_parts["reported"] = reported
 
-        print filter_parts
-
         q = r.table(nm.Note.table).filter(filter_parts)
 
         res = RethinkCollection(nm.Note, query=q)
-        page = Paginate(res, self.request, sort_by, sort_direction="asc")
+        page = Paginate(res, self.request, sort_by)
 
         self.view.data = {"page": page}
 

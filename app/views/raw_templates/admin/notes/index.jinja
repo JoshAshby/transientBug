@@ -5,38 +5,72 @@ breadcrumbs_top: True
 base: skeletons/sidebar
 +++
 
-{% set public = req.get_param("public", "public") %}
-{% set draft = req.get_param("draft", "published") %}
-{% set disabled = req.get_param("disable", "enabled") %}
-{% set reported = req.get_param("reported", False, bool) %}
+{% set public = req.get_param("public") %}
+{% set draft = req.get_param("draft") %}
+{% set disabled = req.get_param("disable") %}
+{% set reported = req.get_param("reported", False) %}
 {% set sort_by = req.get_param("sort_by", "created") %}
 
-<form class="form-inline" role="pagination_options">
+<form role="pagination_options" class="form">
   <div class="row">
     <div class="col-sm-12 col-md-6">
-      <fieldset>
-        <div class="well">
+      <b><a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">Filter Results <i class="fa fa-chevron-down"></i></a></b>
+      <fieldset class="form-horizontal" id="accordion">
+        <div class="well collapse" id="collapseOne">
           <div class="form-group">
-            <label for="public">Public: </label>
-            <select class="form-control">
-              <option value="public">Public</option>
-              <option value="private" {{ 'selected' if public!="public" }}>Private</option>
-            </select>
+            <label for="reported" class="col-md-4 control-label">Reported: </label>
+            <div class="col-md-8">
+              <select class="form-control" name="reported">
+                <option value="false" {{ 'selected' if not reported }}>Good Standing</option>
+                <option value="true" {{ 'selected' if reported }}>Reported</option>
+              </select>
+            </div>
           </div>
+          <div class="form-group">
+            <label for="public" class="col-md-4 control-label">Public: </label>
+            <div class="col-md-8">
+              <select class="form-control col-md-8" name="public">
+                <option value="">--</option>
+                <option value="public" {{ 'selected' if public=="public" }}>Public</option>
+                <option value="private" {{ 'selected' if public=="private" }}>Private</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="draft" class="col-md-4 control-label">Draft: </label>
+            <div class="col-md-8">
+              <select class="form-control col-md-8" name="draft">
+                <option value="">--</option>
+                <option value="published" {{ 'selected' if draft=="published" }}>Published</option>
+                <option value="draft" {{ 'selected' if draft=="draft" }}>Draft</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="disable" class="col-md-4 control-label">Deleted: </label>
+            <div class="col-md-8">
+              <select class="form-control col-md-8">
+                <option value="">--</option>
+                <option value="enabled" {{ 'selected' if disabled=="enabled" }}>Available</option>
+                <option value="disabled" {{ 'selected' if disabled=="disabled" }}>Deleted</option>
+              </select>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-theme btn-sm pull-right">Update</button>
           <br>
         </div>
       </fieldset>
     </div>
     <div class="col-sm-12 col-md-6">
       {% if page.pail %}
-        <fieldset class="pull-right">
+        <fieldset class="pull-right form-inline">
           {{page.options}}
         </fieldset>
       {% endif %}
     </div>
   </div>
 </form>
-
+<br>
 <div class="row">
   <div class="col-md-12">
     {% if page.pail %}
@@ -47,21 +81,27 @@ base: skeletons/sidebar
           <th>Author</th>
           <th>Created</th>
           <th>Visibility</th>
+          <th>Published</th>
+          <th>Deleted</th>
+          <th>Reported</th>
         </thead>
         <tbody>
           {% for note in page.pail %}
-            <tr {{ 'class="danger"' if note.disable }}>
+            <tr {{ 'class="danger"' if note.reported and not note.disable }}>
               <td></td>
               <td><a href="/notes/{{note.short_code}}">{{note.title|truncate(25)}}</a></td>
               <td><a href="/admin/users/{{note.author.id}}">{{note.author.username}}</a></td>
               <td>{{note.formated_time}}</td>
               <td>
                 {% if note.public %}
-                  <i class="fa fa-eye"></i>
+                  <i class="fa fa-eye"></i> Public
                 {% else %}
-                  <i class="fa fa-eye-slash"></i>
+                  <i class="fa fa-eye-slash"></i> Private
                 {% endif %}
               </td>
+              <td>{{ 'Draft' if note.draft }}</td>
+              <td>{{ 'Deleted' if note.disable }}</td>
+              <td>{{ 'Reported' if note.reported }}</td>
             </tr>
           {% endfor %}
         </tbody>
