@@ -25,8 +25,6 @@ from rethinkORM import RethinkCollection
 import models.rethink.phot.photModel as pm
 from utils.paginate import Paginate
 
-from models.utils import dbUtils as dbu
-
 
 @route()
 @login(["admin"])
@@ -59,7 +57,7 @@ class phots(MixedObject):
 
         res = RethinkCollection(pm.Phot, query=query)
 
-        page = Paginate(res, self.request, "created", sort_direction="desc")
+        page = Paginate(res, self.request, "created")
 
         self.view.data = {"page": page}
 

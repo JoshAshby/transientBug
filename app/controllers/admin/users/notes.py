@@ -24,7 +24,6 @@ import rethinkdb as r
 from rethinkORM import RethinkCollection
 import models.rethink.note.noteModel as nm
 from utils.paginate import Paginate
-import models.utils.dbUtils as dbu
 
 
 @route()
@@ -33,7 +32,8 @@ import models.utils.dbUtils as dbu
 class notes(MixedObject):
     @HTML
     def GET(self):
-        self.view.partial("sidebar", "partials/admin/sidebar", {"command": "users"})
+        self.view.partial("sidebar", "partials/admin/sidebar",
+                          {"command": "users"})
         try:
             user = um.User(self.request.id)
 
@@ -47,27 +47,37 @@ class notes(MixedObject):
                           {"user": user,
                            "command": self.request.command})
 
-        parts = {"user": self.request.session.id}
+# I should figure out a way to do this filter stuff a little easier... hmm
+        filter_parts = {"user": self.request.session.id}
+        public = self.request.get_param("public")
+        draft = self.request.get_param("draft")
+        disabled = self.request.get_param("disable")
+        reported = self.request.get_param("reported", False)
+        sort_by = self.request.get_param("sort_by", "created")
 
-        what_type = self.request.get_param("filter", "all")
+        if not sort_by in ["created", "title", "public", "reported", "draft",
+            "disable", "author.id"]:
+            sort_by = "created"
 
-        if what_type=="private":
-            parts["public"] = False
-        elif what_type=="public":
-            parts["public"] = True
+            # should this be something I try to start doing? :/
+            self.request.session.push_alert("Couldn't figure out what to sort by, as a result of an invalid value for sort_by.",
+                                            level="error")
 
-        self.view.data = {"type": what_type.lower()}
+        if public:
+            filter_parts["public"] = False if public == "private" else True
+        if draft:
+            filter_parts["draft"] = False if draft == "published" else True
+        if disabled:
+            filter_parts["disable"] = False if disabled == "enabled" else True
 
-        disabled = self.request.get_param("q")
-        if disabled == "enabled":
-            q = dbu.rql_where_not(nm.Note.table, "disable", True, parts)
-            res = RethinkCollection(nm.Note, query=q)
+        filter_parts["reported"] = reported
 
-        else:
-            q = dbu.rql_where_not(nm.Note.table, "disable", False, parts)
-            res = RethinkCollection(nm.Note, query=q)
+        q = r.table(nm.Note.table).filter(filter_parts)
 
-        page = Paginate(res, self.request, "created", sort_direction="asc")
+        res = RethinkCollection(nm.Note, query=q)
+
+
+        page = Paginate(res, self.request, sort_by)
 
         self.view.data = {"page": page}
 

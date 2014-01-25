@@ -1,23 +1,38 @@
-{% set type=req.get_param("filter") %}
+{% set type=req.get_param("filter", "to") %}
 
 {{tabs}}
-<div class="row">
-  <div class="col-md-12">
-    <form class="form-inline pull-right" role="pagination_options">
-      <div class="form-group">
-        <label class="sr-only" for="filter">Address Type Filter</label>
-        <select name="filter" class="input-sm form-control">
-          <option value=to {{ 'selected="selected"' if type=="to" }}>To</option>
-          <option value=bcc {{ 'selected="selected"' if type=="bcc" }}>BCC</option>
-          <option value=cc {{ 'selected="selected"' if type=="cc" }}>CC</option>
-        </select>
-      </div>
-      {{page.options}}
-    </form>
-    <br>
-    <br>
+
+<form role="pagination_options" class="form">
+  <div class="row">
+    <div class="col-sm-12 col-md-6">
+      <b><a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">Filter Results <i class="fa fa-chevron-down"></i></a></b>
+      <fieldset class="form-horizontal" id="accordion">
+        <div class="well collapse in" id="collapseOne">
+          <div class="form-group">
+            <label for="filter" class="col-md-4 control-label">Direct/CC: </label>
+            <div class="col-md-8">
+              <select class="form-control input-sm" name="filter">
+                <option value="to" {{ 'selected' if type=="to" }}>To You</option>
+                <option value="bcc" {{ 'selected' if type=="bcc" }}>BCC</option>
+                <option value="cc" {{ 'selected' if type=="cc" }}>CC</option>
+              </select>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-theme btn-sm pull-right">Update</button>
+          <br>
+        </div>
+      </fieldset>
+    </div>
+    <div class="col-sm-12 col-md-6">
+      {% if page.pail %}
+        <fieldset class="pull-right form-inline">
+          {{page.options}}
+        </fieldset>
+      {% endif %}
+    </div>
   </div>
-</div>
+</form>
+<br>
 
 <div class="row">
   <div class="col-md-12">

@@ -30,7 +30,7 @@ class index(MixedObject):
         self.view.partial("sidebar", "partials/admin/sidebar", {"command": "emails"})
 
         result = RethinkCollection(em.Email)
-        page = Paginate(result, self.request, "created", sort_direction="asc")
+        page = Paginate(result, self.request, "created")
 
         self.view.data = {"page": page}
 
