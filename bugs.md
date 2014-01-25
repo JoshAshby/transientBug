@@ -1,2 +1,0 @@
-- delete button for screenshots is broken
-- screenshots sort direction doesn't seem to work either

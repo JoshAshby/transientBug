@@ -15,7 +15,7 @@
         });
       }
     });
-    return $("#note_tags").pillbox({
+    return $("#quick_note_tags").pillbox({
       url: "/notes/json/tags",
       name: "note"
     });

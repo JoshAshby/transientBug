@@ -38,34 +38,7 @@ stylesheets:
   <div class="tab-pane" id="edit">
     <div class="row">
       <div class="col-md-12">
-        <form method="POST">
-          <fieldset>
-            <div class="form-group" id="note">
-              <input type="text" class="form-control" id="note_title" name="title" placeholder="Title..." value="{{note.title}}" required>
-            </div>
-            <div class="form-group">
-              <textarea name="contents" id="note_content" data-provide="markdown">{{note.contents}}</textarea>
-            </div>
-            <div class="form-group">
-              <input type="text" class="form-control" name="tags" id="note_tags" placeholder="Tags..." value="{{note.tags|join(", ")}}"/>
-            </div>
-            <div class="row">
-              <div class="col-md-6">
-                <div class="checkbox">
-                  <label>
-                    <input type="checkbox" name="public" id="note_public" value="true" {{ 'checked' if note.public }}/> Make this note public?
-                    <span class="help-block"><small>This determines if the note will be visible on <a href="/notes/public">/notes/public</a> and <a href="/notes/tags">/notes/tags</a> pages.</small></span>
-                  </label>
-                </div>
-              </div>
-              <div class="col-md-6">
-                <button class="btn btn-info" id="del_btn" data-short="{{note.short_code}}"><i class="fa fa-trash-o"></i> Delete</button>
-                <button type="submit"class="btn btn-theme pull-right"><i class="fa fa-save"></i> Save</button>
-              </div>
-            </div>
-
-          </fieldset>
-        </form>
+        {{note_edit}}
       </div>
     </div>
   </div>

@@ -9,4 +9,4 @@ $ ->
         if data[0]["success"]
           window.location.href="/notes"
 
-  $("#note_tags").pillbox url: "/notes/json/tags", name: "note"
+  $("#quick_note_tags").pillbox url: "/notes/json/tags", name: "note"

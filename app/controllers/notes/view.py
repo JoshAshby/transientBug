@@ -48,6 +48,8 @@ class view(MixedObject):
 
             if self.request.session.id:
                 self.view.template = "public/notes/edit"
+                self.view.partial("note_edit", "partials/public/note_create",
+                                  {"note": note})
 
             self.view.data = {"note": note}
             return self.view

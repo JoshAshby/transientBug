@@ -1,26 +1,26 @@
 <form method="POST" action="/new/note">
   <fieldset>
     <div class="form-group" id="quick_note">
-      <input type="text" class="form-control" id="quick_note_title" name="title" placeholder="Title..." value="" required>
+      <input type="text" class="form-control" id="quick_note_title" name="title" placeholder="Title..." value="{{ note.title if note }}" required>
     </div>
     <div class="form-group">
-      <textarea name="contents" id="quick_note_content" data-provide="markdown">Write something!</textarea>
+      <textarea name="contents" id="quick_note_content" data-provide="markdown">{{ note.contents if note else 'Write something!' }}</textarea>
     </div>
     <div class="form-group">
-      <input type="text" class="form-control" name="tags" id="quick_note_tags" placeholder="Tags..." value=""/>
+      <input type="text" class="form-control" name="tags" id="quick_note_tags" placeholder="Tags..." value="{{ note.tags|join(", ") if note }}"/>
     </div>
     <div class="row">
       <div class="col-md-6">
         <div class="checkbox">
           <label>
             <input type="checkbox" name="draft" id="quick_note_draft"
-            value="true" checked/> Is this currently a draft?
+            value="true" {{ 'checked' if not note or note.draft }}/> Is this currently a draft?
           </label>
         </div>
         <div class="checkbox">
           <label>
             <input type="checkbox" name="toc" id="quick_note_toc"
-            value="true"/> Should a table of contents be created for this note?
+            value="true" {{ 'checked' if note and note.table_of_contents }}/> Should a table of contents be created for this note?
             <span class="help-block"><small>This will create a floating sidebar
             along side the post that will contain a table of contents generated
             from all h1's in the post.</small></span>
@@ -28,7 +28,8 @@
         </div>
         <div class="checkbox">
           <label>
-            <input type="checkbox" name="public" id="quick_note_public" value="true"/> Make this note public?
+            <input type="checkbox" name="public" id="quick_note_public"
+            value="true" {{ 'checked' if note and note.public }}/> Make this note public?
             <span class="help-block"><small>This determines if the note will be visible on <a href="/notes/public">/notes/public</a> and <a href="/notes/tags">/notes/tags</a> pages.</small></span>
           </label>
         </div>

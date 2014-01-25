@@ -11,8 +11,5 @@
 - announcements info more blog post style things (? hmm, also not sure, maybe
   provide a way to easily link to a note? who knows)
 - better email views
-- rework notes_create partial to allow passing a note, so it can be used for
-  creation or editing a note. One partial for all note related stuff sounds
-  nice.
 - look into making other reused components into partials instead, maybe?
  - as the system grows, I see this being rather useful
