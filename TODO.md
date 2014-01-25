@@ -13,3 +13,5 @@
 - better email views
 - look into making other reused components into partials instead, maybe?
  - as the system grows, I see this being rather useful
+- do a fancy sidebar scrollspy thingy for notes that have the TOC flag set
+- restyle notes completely (ties in with the toc and searching too)
