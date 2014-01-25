@@ -19,7 +19,7 @@
       url: "/phots/json/tags",
       name: "phot"
     });
-    $("#note_tags").pillbox({
+    $("#quick_note_tags").pillbox({
       url: "/notes/json/tags",
       name: "note"
     });

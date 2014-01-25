@@ -13,7 +13,7 @@ $ ->
   $(".tt-hint").css "padding-top", "1px"
 
   $("#phot_tags").pillbox url: "/phots/json/tags", name: "phot"
-  $("#note_tags").pillbox url: "/notes/json/tags", name: "note"
+  $("#quick_note_tags").pillbox url: "/notes/json/tags", name: "note"
 
   $("#phot_name").check_field
     url: "/phots/json/names"

@@ -6,13 +6,11 @@
 - integrate python side of my irssi-utils stuff
  - push messages into rethink and make a controller to view
      add support for json retrieval (more on this later)
-- finish user admin stuff
 - user invites, registration (? thinking about this and still unsure of the use
   for this so far, we'll see)
 - announcements info more blog post style things (? hmm, also not sure, maybe
   provide a way to easily link to a note? who knows)
 - better email views
-- fix admin panel notes
 - rework notes_create partial to allow passing a note, so it can be used for
   creation or editing a note. One partial for all note related stuff sounds
   nice.

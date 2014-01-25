@@ -13,9 +13,11 @@ Josh Ashby
 http://joshashby.com
 joshuaashby@joshashby.com
 """
-from gevent import monkey; monkey.patch_all()
-from gevent.pywsgi import WSGIServer
-from gevent.pool import Pool
+#from gevent import monkey; monkey.patch_all()
+#from gevent.pywsgi import WSGIServer
+#from gevent.pool import Pool
+
+from waitress import serve
 
 import traceback
 
@@ -50,12 +52,12 @@ def init():
 
     Sets up the server and all that messy stuff
     """
-    address, port = address_and_port()
+    #address, port = address_and_port()
 
-    if c.general.use_pool:
-        pool = Pool(c.general.max_connections)
-    else:
-        pool = "default"
+    #if c.general.use_pool:
+        #pool = Pool(c.general.max_connections)
+    #else:
+        #pool = "default"
 
     dispatch.controller_folder = "controllers"
     dispatch.request_obj = r.RequestItem
@@ -64,12 +66,12 @@ def init():
     dispatch.route_table.register_error("404", error.error404)
     dispatch.route_table.register_error("401", error.error401)
 
-    server = WSGIServer((address, port), dispatch.dispatch, spawn=pool, log=None)
+    #server = WSGIServer((address, port), dispatch.dispatch, spawn=pool, log=None)
 
-    return server
+    #return server
 
 
-def serve(server):
+def server():
     """
     Server
 
@@ -81,7 +83,8 @@ def serve(server):
         logger.info("""Now serving py as a WSGI server at %(address)s:%(port)s
         Press Ctrl+c if running as non daemon mode, or send a stop signal
         """ % {"address": address, "port": port})
-        server.serve_forever()
+        #server.serve_forever()
+        serve(dispatch.dispatch, host=address, port=port)
         logger.warn("Shutdown py operations.")
 
     except Exception as exc:

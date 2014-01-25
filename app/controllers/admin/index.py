@@ -21,5 +21,6 @@ from seshat_addons.func_mods import HTML
 class index(MixedObject):
     @HTML
     def GET(self):
-        self.view.partial("sidebar", "partials/admin/sidebar", {"command": "home"})
+        self.view.partial("sidebar", "partials/admin/sidebar",
+                          {"command": "home"})
         return self.view
