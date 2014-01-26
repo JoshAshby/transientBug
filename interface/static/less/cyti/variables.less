@@ -370,20 +370,20 @@
 // -------------------------
 
 @state-success-text:             @brand-success;
-@state-success-bg:               #dff0d8;
-@state-success-border:           darken(@state-success-text, 5%);
+@state-success-bg:               @gray;
+@state-success-border:           @state-success-bg;
 
-@state-info-text:                @brand-info;
-@state-info-bg:                  #d9edf7;
-@state-info-border:              darken(@state-info-text, 7%);
+@state-info-text:                @gray;
+@state-info-bg:                  @brand-info;
+@state-info-border:              @state-info-bg;
 
-@state-warning-text:             @brand-warning;
-@state-warning-bg:               #fcf8e3;
-@state-warning-border:           darken(@state-warning-text, 5%);
+@state-warning-text:             @gray;
+@state-warning-bg:               @brand-warning;
+@state-warning-border:           @state-warning-bg;
 
-@state-danger-text:              @brand-danger;
-@state-danger-bg:                #f2dede;
-@state-danger-border:            darken(@state-danger-text, 5%);
+@state-danger-text:              @gray;
+@state-danger-bg:                @brand-danger;
+@state-danger-border:            @state-danger-bg;
 
 
 // Tooltips
@@ -434,7 +434,7 @@
 @modal-title-padding:         15px;
 @modal-title-line-height:     @line-height-base;
 
-@modal-content-bg:                             #fff;
+@modal-content-bg:                             @gray;
 @modal-content-border-color:                   rgba(0,0,0,.2);
 @modal-content-fallback-border-color:          #999;
 
@@ -495,10 +495,10 @@
 
 // Panels
 // -------------------------
-@panel-bg:                    #fff;
-@panel-inner-border:          #ddd;
+@panel-bg:                    @gray;
+@panel-inner-border:          @gray;
 @panel-border-radius:         @border-radius-base;
-@panel-footer-bg:             #f5f5f5;
+@panel-footer-bg:             @gray-dark;
 
 @panel-default-text:          @gray-dark;
 @panel-default-border:        #ddd;
