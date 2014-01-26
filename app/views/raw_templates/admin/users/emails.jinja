@@ -5,7 +5,8 @@ breadcrumbs_top: True
 base: skeletons/sidebar
 +++
 {% set type=req.get_param("filter") %}
-{{tabs}}
+
+![[partials/admin/users/tabs]]
 
 <div class="row">
   <div class="col-md-12">

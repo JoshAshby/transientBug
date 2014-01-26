@@ -42,11 +42,6 @@ class notes(MixedObject):
 
         self.view.title = user.username
 
-        self.view.partial("tabs",
-                          "partials/admin/users/tabs",
-                          {"user": user,
-                           "command": self.request.command})
-
 # I should figure out a way to do this filter stuff a little easier... hmm
         filter_parts = {"user": self.request.session.id}
         public = self.request.get_param("public")
@@ -77,9 +72,8 @@ class notes(MixedObject):
         res = RethinkCollection(nm.Note, query=q)
         page = Paginate(res, self.request, sort_by)
 
-        self.view.partial("note_table", "partials/admin/notes/table",
-                          {"page": page})
-
-        self.view.data = {"page": page}
+        self.view.data = {"page": page,
+                          "user": user,
+                          "command": self.request.command}
 
         return self.view

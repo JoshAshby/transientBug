@@ -41,11 +41,6 @@ class emails(MixedObject):
 
         self.view.title = user.username
 
-        self.view.partial("tabs",
-                          "partials/admin/users/tabs",
-                          {"user": user,
-                           "command": self.request.command})
-
         t = self.request.get_param("filter", "to")
         if t == "cc":
             row_filt = "cc_addresses"
@@ -59,6 +54,8 @@ class emails(MixedObject):
         result = RethinkCollection(em.Email, query=parts)
         page = Paginate(result, self.request, "created", sort_direction="asc")
 
-        self.view.data = {"page": page}
+        self.view.data = {"page": page,
+                          "user": user,
+                          "command": self.request.command}
 
         return self.view

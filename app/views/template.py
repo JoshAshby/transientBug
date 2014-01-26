@@ -140,11 +140,14 @@ class templateFile(object):
         self._raw_to_engine()
 
     def parse_partials(self):
-        matches = partial_re.findall(self._raw_template)
-        if matches:
-            for match in matches:
-                name = match[:len(match)-2][3:]
-                self.replace(match, tmpls[name].raw)
+        try:
+            matches = partial_re.findall(self._raw_template)
+            if matches:
+                for match in matches:
+                    name = match[:len(match)-2][3:]
+                    self.replace(match, tmpls[name].raw)
+        except KeyError:
+            raise KeyError("Couldn't find the template {}, as a partial of {}".format(name, self._file_bit))
 
     def render(self, data):
         _data = copy.deepcopy(self._config)

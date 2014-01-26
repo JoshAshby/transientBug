@@ -1,0 +1,103 @@
+{% set v=req.get_param("v", "cards") %}
+{% set filter=req.get_param("filter", "all") %}
+<div class="row">
+  <div class="col-md-5 col-sm-12">
+    <form method="GET" action="/phots/tags" class="form-inline">
+      <div class="controls">
+        <div class="input-group input-group-sm">
+          {% if req.session.has_phots %}
+            <span class="input-group-btn">
+              <a href="/new/phot" class="btn btn-green btn-sm">Add</a>
+            </span>
+          {% endif %}
+          <input type="text" class="form-control" name="q" id="q" value="" placeholder="Search Tags...">
+          <span class="input-group-btn">
+            <button class="btn btn-green btn-sm" type="submit"><i class="fa fa-search"></i></button>
+          </span>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <div class="col-sm-12 col-md-7">
+    <form class="form-inline pull-right" role="pagination_options">
+      <div class="btn-group" data-toggle="buttons" id="views">
+        <label class="btn btn-default btn-sm {{ 'active' if v=="cards" }}">
+          <input type="radio" name="v" value="cards" {{ 'checked' if v=="cards" }}/><i class="fa fa-th"></i>
+        </label>
+        <label class="btn btn-default btn-sm {{ 'active' if v=="links" }}">
+          <input type="radio" name="v" value="links" {{ 'checked' if v=="links" }}/><i class="fa fa-link"></i>
+        </label>
+      </div>
+      <div class="form-group">
+        <label class="sr-only" for="filter">Filter</label>
+        <select id="filer" name="filter" class="form-control input-sm">
+          <option value=all {{ 'selected="selected"' if filter=="all" }}>All</option>
+          <option value=gif {{ 'selected="selected"' if filter=="gif" }}>GIF</option>
+          <option value=jpg {{ 'selected="selected"' if filter=="jpg" }}>JPG</option>
+          <option value=png {{ 'selected="selected"' if filter=="png" }}>PNG</option>
+          <option value=tiff {{ 'selected="selected"' if filter=="tiff" }}>TIFF</option>
+        </select>
+      </div>
+
+      {{page.options}}
+
+    </form>
+  </div>
+</div>
+<br>
+
+{% if v=="cards" %}
+  <div class="cards">
+    {% for pic in page.pail %}
+      {% if loop.index%3==1 %}
+        <div class="row">
+      {% endif %}
+      <div class="col-md-4 col-sm-6">
+        <div class="phot-card">
+          <a href="/i/{{pic.filename}}"><img src="/i/{{pic.filename}}" alt="{{pic.filename}}"></a>
+          <div class="caption">
+            <div class="row">
+              <div class="col-md-8">
+                <a href="/i/{{pic.filename}}"><p data-toggle="tooltip" title="{{pic.title}}">{{pic.title}}</p></a>
+              </div>
+              <div class="col-md-4">
+                <a href="/phots/{{pic.filename}}" class="btn btn-green btn-sm pull-right">Page</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% if loop.index%3==0 or loop.last %}
+        </div>
+      {% endif %}
+    {% endfor %}
+  </div>
+{% elif v=="links" %}
+  <div class="links">
+    <div class="row">
+      <div class="col-md-12">
+        {% for pic in page.pail %}
+          <ul class="list-unstyled">
+            <li>
+              <a href="/phots/view/{{pic.filename}}" class="btn btn-green btn-xs">Page</a> <a href="/i/{{pic.filename}}">{{pic.filename}}</a>
+              {% if pic.tags %}
+                {% for tag in pic.tags %}
+                  <a href="/phots/tags/{{ tag }}">
+                    <span class="label label-green">{{tag|replace("_", " ")}}</span>
+                  </a>
+                {% endfor %}
+              {% endif %}
+            </li>
+          </ul>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+{% endif %}
+
+<div class="row">
+  <div class="col-md-12">
+    {{page.paginate}}
+  </div>
+</div>

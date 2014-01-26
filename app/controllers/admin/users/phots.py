@@ -41,11 +41,6 @@ class phots(MixedObject):
 
         self.view.title = user.username
 
-        self.view.partial("tabs",
-                          "partials/admin/users/tabs",
-                          {"user": user,
-                           "command": self.request.command})
-
         disabled = self.request.get_param("q")
         hidden_ids = r.table(pm.Phot.table).filter({"user": user.id}).filter(r.row["disable"].eq(True)).concat_map(lambda doc: [doc["id"]]).coerce_to("array").run()
 
@@ -59,6 +54,8 @@ class phots(MixedObject):
 
         page = Paginate(res, self.request, "created")
 
-        self.view.data = {"page": page}
+        self.view.data = {"page": page,
+                          "user": user,
+                          "command": self.request.command}
 
         return self.view

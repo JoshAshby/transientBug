@@ -36,12 +36,8 @@ class view(MixedObject):
 
         self.view.title = user.username
 
-        self.view.partial("tabs",
-                          "partials/admin/users/tabs",
-                          {"user": user,
-                           "command": self.request.command})
-
-        self.view.data = {"user": user}
+        self.view.data = {"user": user,
+                          "command": self.request.command}
 
         return self.view
 

@@ -38,7 +38,7 @@ stylesheets:
 
 <div class="row">
   <div class="col-sm-12 col-md-12">
-    <div class="panel panel-{{ 'danger' if phot.disable else 'success' }}">
+    <div class="panel panel-{{ 'red' if phot.disable else 'green' }}">
       <div class="panel-heading">
         <h3 class="panel-title">{{phot.title}} {{ 'Disabled' if phot.disable }} <small>({{phot.filename}})</small></h3>
       </div>

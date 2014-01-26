@@ -7,10 +7,10 @@ $(function() {
         console.log("dim-wit twat");
         if($(what).hasClass("btn-default")) {
           $(what).removeClass("btn-default")
-                 .addClass("btn-theme")
+                 .addClass("btn-orange")
                  .html('<i class="fa fa-check"></i>');
         } else {
-          $(what).removeClass("btn-theme")
+          $(what).removeClass("btn-orange")
                  .addClass("btn-default")
                  .html('<i class="fa fa-times"></i>');
         }
@@ -19,7 +19,7 @@ $(function() {
   };
 
   $(".toggle_btn").click(function(){
-    if($(this).hasClass("btn-theme")) {
+    if($(this).hasClass("btn-orange")) {
       toggle(this);
     } else {
       var yesno = confirm("Are you sure you want to activate this bucket?");
