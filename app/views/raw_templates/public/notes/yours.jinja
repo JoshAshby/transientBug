@@ -5,12 +5,12 @@ nav: notes
 +++
 
 {% if page.pail %}
-  ![[partials/public/notes/list]]
+  ![[partials/public/notes/table]]
 {% else %}
   <div class="jumbotron">
     <h1>No Notes :/</h1>
     {% if req.session.has_notes %}
-    <a href="/new/note" class="btn btn-red">New</a> or <a href="/notes/yours">Your notes</a>
+    <a href="/new/note" class="btn btn-red">New</a>
     {% endif %}
   </div>
 {% endif %}

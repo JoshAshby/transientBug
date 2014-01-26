@@ -1,11 +1,9 @@
 <div class="row">
   {% if req.session.has_notes %}
-    <div class="col-md-1">
-      <a href="/new/note" class="btn btn-red btn-sm">New</a>
+    <div class="col-md-6">
+      <a href="/new/note" class="btn btn-red btn-sm">New</a> <a href="/notes/yours">Your notes</a>
     </div>
   {% endif %}
-  <div class="col-sm-12 col-md-{{ '5' if req.session.has_notes else '6' }}">
-  </div>
   <div class="col-sm-12 col-md-6">
     <form class="form-inline pull-right" role="pagination_options">
       {% if req.session.id %}
@@ -34,7 +32,7 @@
           <small><b>By</b> {{ note.author.username if note.author.id!=req.session.id else 'You!'}} - {{note.formated_time}} | <b>Visibility:</b> {{ 'Public' if note.public else 'Private' }}{% if req.session.id %} | <b>Status:</b> {{ 'Draft' if note.draft else 'Published' }} {% endif %}</small>
         </div>
         <div class="note-body">
-          {{note.formated_contents|truncate(250, True)}}
+          {{note.formated_contents|truncate(250)}}
         </div>
         <b>Tags: </b>
         {% for tag in note.tags %}
