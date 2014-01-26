@@ -28,7 +28,6 @@ import arrow
 class phot(MixedObject):
     @HTML
     def GET(self):
-        self.view.partial("phot_create", "partials/public/phot_create")
         return self.view
 
     def POST(self):
@@ -46,8 +45,8 @@ class phot(MixedObject):
 
         found = r.table(pm.Phot.table).filter({"filename": title}).count().run()
         if found:
-          title = "_".join([title, str(arrow.utcnow().timestamp)])
-          self.request.session.push_alert("That image name is already in use; timestamp appened to image name.")
+            title = "_".join([title, str(arrow.utcnow().timestamp)])
+            self.request.session.push_alert("That image name is already in use; timestamp appened to image name.")
 
         phot = pm.Phot.new_phot(self.request.session.id,
                                 stuff=stuff,

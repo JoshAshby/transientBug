@@ -283,10 +283,13 @@ class template(object):
         self._baseData["stylesheets"] = []
 
     def partial(self, placeholder, template, data=None):
-        if data is None: data = {}
-        assert type(data) is dict
-        data.update(self._baseData.copy())
-        self._baseData[placeholder] = tmpls[template].render(data)
+        try:
+            if data is None: data = {}
+            assert type(data) is dict
+            data.update(self._baseData.copy())
+            self._baseData[placeholder] = tmpls[template].render(data)
+        except KeyError:
+            raise KeyError("Couldn't find the template {} when used as a partial".format(template))
 
     def render(self):
         data = self._baseData.copy()
