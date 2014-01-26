@@ -65,13 +65,18 @@ nav > div.navbar-header > a > img {
 }
 
 .phot-card {
-  .lh-border-radius(3px);
+  @radius: 3px;
+  .lh-border-radius(@radius);
   background-color: @gray-darker;
   width: 300px;
   height: 250px;
   padding: 0px;
+  margin-bottom: 20px;
 
   & > a > img {
+    .lh-border-top-left-radius(@radius);
+    .lh-border-top-right-radius(@radius);
+
     height: 200px;
     width: 300px;
   }

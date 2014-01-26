@@ -6215,8 +6215,18 @@ nav > div.navbar-header > a > img {
   width: 300px;
   height: 250px;
   padding: 0px;
+  margin-bottom: 20px;
 }
 .phot-card > a > img {
+  -webkit-border-top-left-radius: 3px;
+  -moz-border-radius-topleft: 3px;
+  border-top-left-radius: 3px;
+  -webkit-border-top-right-radius: 3px;
+  -webkit-background-clip: padding-box;
+  -moz-border-radius-topright: 3px;
+  -moz-background-clip: padding;
+  border-top-right-radius: 3px;
+  background-clip: padding-box;
   height: 200px;
   width: 300px;
 }
