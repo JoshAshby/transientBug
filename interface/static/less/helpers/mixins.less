@@ -38,10 +38,6 @@
     text-decoration: none;
   }
 
-  & > .container {
-    padding-left: 0px;
-    padding-right: 0px;
-  }
 }
 
 .container-header-theme(@theme) {
@@ -75,7 +71,7 @@
   }
 
   .container-full-@{name} {
-    .btn-theme(@color);
+    .container-header-theme(@color);
   }
 
   .panel-@{name} {
