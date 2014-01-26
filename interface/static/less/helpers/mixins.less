@@ -63,19 +63,15 @@
   }
 
   .label-@{name} {
-    .btn-theme(@color);
+    .label-theme(@color);
   }
 
   .container-header-@{name} {
-    .panel-theme(@color);
-  }
-
-  .container-full-@{name} {
     .container-header-theme(@color);
   }
 
-  .panel-@{name} {
-    .panel-theme(@color);
+  .container-full-@{name} {
+    .container-full-theme(@color);
   }
 }
 
@@ -84,7 +80,7 @@
     color: lighten(@color, 10%);
 
     &:hover {
-      color: darken(@color, 10%); //#507800;
+      color: darken(@color, 10%);
     }
   }
 

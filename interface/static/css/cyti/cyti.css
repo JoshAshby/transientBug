@@ -6081,6 +6081,10 @@ textarea.input-group.input-group-sm .twitter-typeahead .tt-hint {
 .input-group.input-group-sm .twitter-typeahead:only-child .tt-hint {
   border-radius: 3px;
 }
+.input-group.input-group-sm .twitter-typeahead:not(:first-child):not(:last-child) .tt-query,
+.input-group.input-group-sm .twitter-typeahead:not(:first-child):not(:last-child) .tt-hint {
+  border-radius: 0px;
+}
 .input-group.input-group-lg .twitter-typeahead .tt-query,
 .input-group.input-group-lg .twitter-typeahead .tt-hint {
   height: 48px;
@@ -6115,6 +6119,10 @@ textarea.input-group.input-group-lg .twitter-typeahead .tt-hint {
 .input-group.input-group-lg .twitter-typeahead:only-child .tt-query,
 .input-group.input-group-lg .twitter-typeahead:only-child .tt-hint {
   border-radius: 7px;
+}
+.input-group.input-group-lg .twitter-typeahead:not(:first-child):not(:last-child) .tt-query,
+.input-group.input-group-lg .twitter-typeahead:not(:first-child):not(:last-child) .tt-hint {
+  border-radius: 0px;
 }
 .twitter-typeahead {
   width: 100%;
@@ -6414,21 +6422,7 @@ nav > div.navbar-header > a > img {
   background-color: #77b300;
   border: #77b300 solid 1px;
 }
-.label-green:focus,
-.label-green:hover,
-.label-green:active {
-  background-color: #558000;
-  border: #558000 solid 1px;
-}
 .container-header-green {
-  border-color: #77b300;
-}
-.container-header-green.panel-heading {
-  color: white;
-  background-color: #77b300;
-  border-color: #77b300;
-}
-.container-full-green {
   width: 100%;
   color: #eee;
   padding-bottom: 30px;
@@ -6437,24 +6431,26 @@ nav > div.navbar-header > a > img {
   padding-top: 10px;
   padding-bottom: 10px;
 }
-.container-full-green a {
+.container-header-green a {
   text-decoration: none;
 }
-.container-full-green h1,
-.container-full-green h2,
-.container-full-green h3,
-.container-full-green h4,
-.container-full-green h5,
-.container-full-green h6 {
+.container-header-green h1,
+.container-header-green h2,
+.container-header-green h3,
+.container-header-green h4,
+.container-header-green h5,
+.container-header-green h6 {
   margin-top: 0px;
 }
-.panel-green {
-  border-color: #77b300;
+.container-full-green {
+  width: 100%;
+  color: #eee;
+  padding-bottom: 30px;
+  max-width: 100%;
+  background-color: #446600;
 }
-.panel-green.panel-heading {
-  color: white;
-  background-color: #77b300;
-  border-color: #77b300;
+.container-full-green a {
+  text-decoration: none;
 }
 .btn-red {
   color: white;
@@ -6480,21 +6476,7 @@ nav > div.navbar-header > a > img {
   background-color: #b30000;
   border: #b30000 solid 1px;
 }
-.label-red:focus,
-.label-red:hover,
-.label-red:active {
-  background-color: #800000;
-  border: #800000 solid 1px;
-}
 .container-header-red {
-  border-color: #b30000;
-}
-.container-header-red.panel-heading {
-  color: white;
-  background-color: #b30000;
-  border-color: #b30000;
-}
-.container-full-red {
   width: 100%;
   color: #eee;
   padding-bottom: 30px;
@@ -6503,24 +6485,26 @@ nav > div.navbar-header > a > img {
   padding-top: 10px;
   padding-bottom: 10px;
 }
-.container-full-red a {
+.container-header-red a {
   text-decoration: none;
 }
-.container-full-red h1,
-.container-full-red h2,
-.container-full-red h3,
-.container-full-red h4,
-.container-full-red h5,
-.container-full-red h6 {
+.container-header-red h1,
+.container-header-red h2,
+.container-header-red h3,
+.container-header-red h4,
+.container-header-red h5,
+.container-header-red h6 {
   margin-top: 0px;
 }
-.panel-red {
-  border-color: #b30000;
+.container-full-red {
+  width: 100%;
+  color: #eee;
+  padding-bottom: 30px;
+  max-width: 100%;
+  background-color: #660000;
 }
-.panel-red.panel-heading {
-  color: white;
-  background-color: #b30000;
-  border-color: #b30000;
+.container-full-red a {
+  text-decoration: none;
 }
 .btn-orange {
   color: white;
@@ -6546,21 +6530,7 @@ nav > div.navbar-header > a > img {
   background-color: #ff8800;
   border: #ff8800 solid 1px;
 }
-.label-orange:focus,
-.label-orange:hover,
-.label-orange:active {
-  background-color: #cc6d00;
-  border: #cc6d00 solid 1px;
-}
 .container-header-orange {
-  border-color: #ff8800;
-}
-.container-header-orange.panel-heading {
-  color: white;
-  background-color: #ff8800;
-  border-color: #ff8800;
-}
-.container-full-orange {
   width: 100%;
   color: #eee;
   padding-bottom: 30px;
@@ -6569,24 +6539,26 @@ nav > div.navbar-header > a > img {
   padding-top: 10px;
   padding-bottom: 10px;
 }
-.container-full-orange a {
+.container-header-orange a {
   text-decoration: none;
 }
-.container-full-orange h1,
-.container-full-orange h2,
-.container-full-orange h3,
-.container-full-orange h4,
-.container-full-orange h5,
-.container-full-orange h6 {
+.container-header-orange h1,
+.container-header-orange h2,
+.container-header-orange h3,
+.container-header-orange h4,
+.container-header-orange h5,
+.container-header-orange h6 {
   margin-top: 0px;
 }
-.panel-orange {
-  border-color: #ff8800;
+.container-full-orange {
+  width: 100%;
+  color: #eee;
+  padding-bottom: 30px;
+  max-width: 100%;
+  background-color: #b35f00;
 }
-.panel-orange.panel-heading {
-  color: white;
-  background-color: #ff8800;
-  border-color: #ff8800;
+.container-full-orange a {
+  text-decoration: none;
 }
 .btn-blue {
   color: white;
@@ -6612,21 +6584,7 @@ nav > div.navbar-header > a > img {
   background-color: #2a9fd6;
   border: #2a9fd6 solid 1px;
 }
-.label-blue:focus,
-.label-blue:hover,
-.label-blue:active {
-  background-color: #2180ac;
-  border: #2180ac solid 1px;
-}
 .container-header-blue {
-  border-color: #2a9fd6;
-}
-.container-header-blue.panel-heading {
-  color: white;
-  background-color: #2a9fd6;
-  border-color: #2a9fd6;
-}
-.container-full-blue {
   width: 100%;
   color: #eee;
   padding-bottom: 30px;
@@ -6635,22 +6593,24 @@ nav > div.navbar-header > a > img {
   padding-top: 10px;
   padding-bottom: 10px;
 }
-.container-full-blue a {
+.container-header-blue a {
   text-decoration: none;
 }
-.container-full-blue h1,
-.container-full-blue h2,
-.container-full-blue h3,
-.container-full-blue h4,
-.container-full-blue h5,
-.container-full-blue h6 {
+.container-header-blue h1,
+.container-header-blue h2,
+.container-header-blue h3,
+.container-header-blue h4,
+.container-header-blue h5,
+.container-header-blue h6 {
   margin-top: 0px;
 }
-.panel-blue {
-  border-color: #2a9fd6;
+.container-full-blue {
+  width: 100%;
+  color: #eee;
+  padding-bottom: 30px;
+  max-width: 100%;
+  background-color: #1d7097;
 }
-.panel-blue.panel-heading {
-  color: white;
-  background-color: #2a9fd6;
-  border-color: #2a9fd6;
+.container-full-blue a {
+  text-decoration: none;
 }

@@ -22,6 +22,7 @@ import yaml
 import jinja2
 import arrow
 import copy
+import re
 
 logger = logging.getLogger(c.general["logName"]+".views")
 
@@ -30,6 +31,11 @@ config_delim = "+++"
 default_theme_color = "green"
 
 tmpls = {}
+
+PARTIAL_REGEX = r'(\!\[{2}(?:.*?)\]{2})'
+partial_re = re.compile(PARTIAL_REGEX)
+
+partials_ready = False
 
 
 class templateFile(object):
@@ -56,7 +62,18 @@ class templateFile(object):
         if c.debug:
             self._read_template()
 
-        return self._template
+        return self._engine_template
+
+    @property
+    def raw(self):
+        """
+        Returns the raw template string, unlike template() which returns the
+        string wrapped in the correct template engine
+        """
+        if c.debug:
+            self._read_template()
+
+        return self._raw_template
 
     @property
     def config(self):
@@ -97,23 +114,37 @@ class templateFile(object):
                 raw = unicode(openTmpl.read())
 
             self._mtime = mtime
-
             self._raw = raw
-            template = self._parse_raw()
-
-            if(self.is_mustache):
-                self._template = template
-            if(self.is_jinja):
-                self._template = jinja2.Template(template)
+            self._parse_raw()
+            if partials_ready:
+                self.parse_partials()
+            self._raw_to_engine()
 
     def _parse_raw(self):
         if self._raw[:3] == config_delim:
-            config, template = self._raw.split("+++", 2)[1:]
+            config, template = self._raw.split(config_delim, 2)[1:]
             self._config = yaml.load(config)
         else:
             template = self._raw
 
-        return template
+        self._raw_template = template
+
+    def _raw_to_engine(self):
+        if(self.is_mustache):
+            self._engine_template = self._raw_template
+        if(self.is_jinja):
+            self._engine_template = jinja2.Template(self._raw_template)
+
+    def replace(self, placeholder, text):
+        self._raw_template = self._raw_template.replace(placeholder, text)
+        self._raw_to_engine()
+
+    def parse_partials(self):
+        matches = partial_re.findall(self._raw_template)
+        if matches:
+            for match in matches:
+                name = match[:len(match)-2][3:]
+                self.replace(match, tmpls[name].raw)
 
     def render(self, data):
         _data = copy.deepcopy(self._config)
@@ -299,6 +330,7 @@ class PartialTemplate(template):
         return unicode(body)
 
 
+# Parse all template files into a template object
 for top, folders, files in os.walk(c.dirs.templates):
     for fi in files:
         base = top.split(c.dirs.templates)[1]
@@ -307,3 +339,12 @@ for top, folders, files in os.walk(c.dirs.templates):
             name = '/'.join([base, file_name]).lstrip('/')
             fi = '/'.join([base, fi])
             tmpls[name] = templateFile(fi)
+
+partials_ready = True
+
+
+# Parse all partials within the templates, replacing the partial text with the
+# given partial, so that we have support for partials in both mustache and
+# jinja with the same syntax (which is currently ![[name/of/partial]])
+for key, tmpl in tmpls.iteritems():
+    tmpl.parse_partials()

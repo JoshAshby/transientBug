@@ -25,14 +25,14 @@ stylesheets:
 {% endif %}
 <div class="tab-content">
   <div class="tab-pane active" id="view">
-    {{note_view}}
+    ![[partials/public/notes/view]]
   </div>
   {% if req.session.id and req.session.id==note.author.id and req.session.has_notes %}
     <div class="tab-pane" id="edit">
       <br>
       <div class="row">
         <div class="col-md-8 col-md-offset-2">
-          {{note_edit}}
+          ![[partials/public/notes/edit]]
         </div>
       </div>
     </div>
