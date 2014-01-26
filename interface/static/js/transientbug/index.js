@@ -12,16 +12,14 @@
       local: tags.responseJSON[0]["tags"],
       limit: 10
     });
-    $(".twitter-typeahead").css("display", "block");
-    $(".tt-dropdown-menu").css("top", "initial");
-    $(".tt-hint").css("padding-top", "1px");
     $("#phot_tags").pillbox({
       url: "/phots/json/tags",
       name: "phot"
     });
     $("#quick_note_tags").pillbox({
       url: "/notes/json/tags",
-      name: "note"
+      name: "note",
+      theme: "red"
     });
     $("#phot_name").check_field({
       url: "/phots/json/names",

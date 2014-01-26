@@ -5959,77 +5959,221 @@ td.visible-print {
     display: none !important;
   }
 }
-.typeahead {
-  font-size: 12px;
+/*
+ * typehead.js-bootstrap3.less 0.1.4
+ * https://github.com/hyspace/typehead.js-bootstrap3.less
+ *
+ * Licensed under the MIT license:
+ * http://www.opensource.org/licenses/MIT
+ */
+.twitter-typeahead .tt-query,
+.twitter-typeahead .tt-hint {
+  margin: 0;
+  width: 100%;
+  color: #555555;
+  vertical-align: middle;
+  background-color: #ffffff;
+  border: 1px solid #cccccc;
+  height: 35px;
+  padding: 6px 12px;
+  font-size: 15px;
+  line-height: 1.428571429;
+  border-radius: 5px;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  -webkit-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+  transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
 }
-.typeahead input:not([type=submit]):not([type=file]) {
-  border: 0px;
-  margin: 0px;
-  padding: 5px;
-  outline: none;
+select.twitter-typeahead .tt-query,
+select.twitter-typeahead .tt-hint {
+  height: 35px;
+  line-height: 35px;
 }
-.typeahead input:not([type=submit]):not([type=file]):first-child {
-  -webkit-border-bottom-left-radius: 3px;
-  -moz-border-radius-bottomleft: 3px;
-  border-bottom-left-radius: 3px;
-  -webkit-border-top-left-radius: 3px;
-  -webkit-background-clip: padding-box;
-  -moz-border-radius-topleft: 3px;
-  -moz-background-clip: padding;
-  border-top-left-radius: 3px;
-  background-clip: padding-box;
+textarea.twitter-typeahead .tt-query,
+textarea.twitter-typeahead .tt-hint {
+  height: auto;
 }
-.typeahead .twitter-typeahead {
-  display: inline;
-  position: relative;
+.twitter-typeahead .tt-query:focus,
+.twitter-typeahead .tt-hint:focus {
+  border-color: #66afe9;
+  outline: 0;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, 0.6);
+  box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, 0.6);
 }
-.typeahead .tt-hint {
+.has-warning .twitter-typeahead .tt-query,
+.has-warning .twitter-typeahead .tt-hint {
+  border-color: #555555;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+}
+.has-warning .twitter-typeahead .tt-query:focus,
+.has-warning .twitter-typeahead .tt-hint:focus {
+  border-color: #3b3b3b;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #888888;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #888888;
+}
+.has-error .twitter-typeahead .tt-query,
+.has-error .twitter-typeahead .tt-hint {
+  border-color: #555555;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+}
+.has-error .twitter-typeahead .tt-query:focus,
+.has-error .twitter-typeahead .tt-hint:focus {
+  border-color: #3b3b3b;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #888888;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #888888;
+}
+.has-success .twitter-typeahead .tt-query,
+.has-success .twitter-typeahead .tt-hint {
+  border-color: #77b300;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+}
+.has-success .twitter-typeahead .tt-query:focus,
+.has-success .twitter-typeahead .tt-hint:focus {
+  border-color: #558000;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #b2ff1a;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #b2ff1a;
+}
+.input-group .twitter-typeahead:first-child .tt-query,
+.input-group .twitter-typeahead:first-child .tt-hint {
+  border-bottom-left-radius: 5px;
+  border-top-left-radius: 5px;
+}
+.input-group .twitter-typeahead:last-child .tt-query,
+.input-group .twitter-typeahead:last-child .tt-hint {
+  border-bottom-right-radius: 5px;
+  border-top-right-radius: 5px;
+}
+.input-group.input-group-sm .twitter-typeahead .tt-query,
+.input-group.input-group-sm .twitter-typeahead .tt-hint {
   height: 30px;
-  top: 0px;
-  padding-top: 1px;
+  padding: 5px 10px;
+  font-size: 12px;
+  line-height: 1.5;
+  border-radius: 3px;
+}
+select.input-group.input-group-sm .twitter-typeahead .tt-query,
+select.input-group.input-group-sm .twitter-typeahead .tt-hint {
+  height: 30px;
+  line-height: 30px;
+}
+textarea.input-group.input-group-sm .twitter-typeahead .tt-query,
+textarea.input-group.input-group-sm .twitter-typeahead .tt-hint {
+  height: auto;
+}
+.input-group.input-group-sm .twitter-typeahead:first-child .tt-query,
+.input-group.input-group-sm .twitter-typeahead:first-child .tt-hint {
+  border-bottom-left-radius: 3px;
+  border-top-left-radius: 3px;
+  border-bottom-right-radius: 0;
+  border-top-right-radius: 0;
+}
+.input-group.input-group-sm .twitter-typeahead:last-child .tt-query,
+.input-group.input-group-sm .twitter-typeahead:last-child .tt-hint {
+  border-bottom-left-radius: 0;
+  border-top-left-radius: 0;
+  border-bottom-right-radius: 3px;
+  border-top-right-radius: 3px;
+}
+.input-group.input-group-sm .twitter-typeahead:only-child .tt-query,
+.input-group.input-group-sm .twitter-typeahead:only-child .tt-hint {
+  border-radius: 3px;
+}
+.input-group.input-group-lg .twitter-typeahead .tt-query,
+.input-group.input-group-lg .twitter-typeahead .tt-hint {
+  height: 48px;
+  padding: 10px 16px;
+  font-size: 19px;
+  line-height: 1.33;
+  border-radius: 7px;
+}
+select.input-group.input-group-lg .twitter-typeahead .tt-query,
+select.input-group.input-group-lg .twitter-typeahead .tt-hint {
+  height: 48px;
+  line-height: 48px;
+}
+textarea.input-group.input-group-lg .twitter-typeahead .tt-query,
+textarea.input-group.input-group-lg .twitter-typeahead .tt-hint {
+  height: auto;
+}
+.input-group.input-group-lg .twitter-typeahead:first-child .tt-query,
+.input-group.input-group-lg .twitter-typeahead:first-child .tt-hint {
+  border-bottom-left-radius: 7px;
+  border-top-left-radius: 7px;
+  border-bottom-right-radius: 0;
+  border-top-right-radius: 0;
+}
+.input-group.input-group-lg .twitter-typeahead:last-child .tt-query,
+.input-group.input-group-lg .twitter-typeahead:last-child .tt-hint {
+  border-bottom-left-radius: 0;
+  border-top-left-radius: 0;
+  border-bottom-right-radius: 7px;
+  border-top-right-radius: 7px;
+}
+.input-group.input-group-lg .twitter-typeahead:only-child .tt-query,
+.input-group.input-group-lg .twitter-typeahead:only-child .tt-hint {
+  border-radius: 7px;
+}
+.twitter-typeahead {
   width: 100%;
 }
-.typeahead .tt-query {
-  width: 100%;
+.twitter-typeahead .tt-hint {
+  color: #888888;
+  z-index: 1;
+  border: 1px solid transparent;
 }
-.typeahead .tt-dropdown-menu {
-  top: inherit;
+.twitter-typeahead .tt-query {
+  z-index: 2;
+}
+.twitter-typeahead .tt-query[disabled],
+.twitter-typeahead .tt-query[readonly],
+fieldset[disabled] .twitter-typeahead .tt-query {
+  cursor: not-allowed;
+  background-color: #adafae !important;
 }
 .tt-dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 1000;
   min-width: 160px;
-  margin-top: 2px;
+  width: 100%;
   padding: 5px 0;
-  background-color: #555555;
-  border: 1px solid #ccc;
-  border: 1px solid black;
+  margin: 2px 0 0;
+  list-style: none;
+  font-size: 15px;
+  background-color: #ffffff;
+  border: 1px solid #cccccc;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 5px;
+  -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+  background-clip: padding-box;
   *border-right-width: 2px;
   *border-bottom-width: 2px;
-  -webkit-border-radius: 4px;
-  -moz-border-radius: 4px;
-  border-radius: 4px;
-  -webkit-box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
-  -moz-box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
-  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
-  -webkit-background-clip: padding-box;
-  -moz-background-clip: padding;
-  background-clip: padding-box;
 }
-.tt-suggestion {
+.tt-dropdown-menu .tt-suggestion {
   display: block;
   padding: 3px 20px;
+  clear: both;
+  font-weight: normal;
+  line-height: 1.428571429;
+  color: #555555;
+  white-space: nowrap;
 }
-.tt-suggestion.tt-is-under-cursor {
-  color: white;
+.tt-dropdown-menu .tt-suggestion.tt-is-under-cursor {
+  text-decoration: none;
+  outline: 0;
+  background-color: #77b300;
+  color: #ffffff;
 }
-.tt-suggestion p {
+.tt-dropdown-menu .tt-suggestion.tt-is-under-cursor a {
+  color: #ffffff;
+}
+.tt-dropdown-menu .tt-suggestion p {
   margin: 0;
-}
-.tt-hint {
-  right: 1px;
-  color: #bbbbbb;
-}
-.tt-query {
-  color: black;
 }
 nav {
   position: relative;

@@ -12,15 +12,11 @@
       local: tags.responseJSON[0]["tags"],
       limit: 10
     });
-    $("#views").click(function() {
+    return $("#views").click(function() {
       return setTimeout(function() {
         return $("#views").parents("form").submit();
       }, 100);
     });
-    $('.thumbnail_h6').tooltip();
-    $(".twitter-typeahead").css("display", "block");
-    $(".tt-dropdown-menu").css("top", "initial");
-    return $(".tt-hint").css("padding-top", "1px");
   });
 
 }).call(this);

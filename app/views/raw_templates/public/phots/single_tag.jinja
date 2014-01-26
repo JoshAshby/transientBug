@@ -12,13 +12,13 @@ scriptFiles:
     <div class="col-md-5 col-sm-12">
       <form method="GET" action="/phots/tags" class="form-inline">
         <div class="form-group">
-          <div class="input-group typeahead">
+          <div class="input-group input-group-sm typeahead">
             {% if req.session.has_phots %}
               <span class="input-group-btn">
                 <a href="/new/phot" class="btn btn-green btn-sm">Add</a>
               </span>
             {% endif %}
-            <input type="text" class="form-control input-sm" name="q" id="q" placeholder="Search Tags...">
+            <input type="text" class="form-control" name="q" id="q" placeholder="Search Tags...">
             <span class="input-group-btn">
               <button class="btn btn-green btn-sm" type="submit"><i class="fa fa-search"></i></button>
             </span>

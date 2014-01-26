@@ -12,9 +12,3 @@ $ ->
     setTimeout ->
       $("#views").parents("form").submit()
     , 100
-
-  $('.thumbnail_h6').tooltip()
-
-  $(".twitter-typeahead").css "display", "block"
-  $(".tt-dropdown-menu").css "top", "initial"
-  $(".tt-hint").css "padding-top", "1px"
