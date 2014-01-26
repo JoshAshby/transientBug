@@ -5,72 +5,7 @@ nav: notes
 +++
 
 {% if page.pail %}
-  <div class="row">
-    {% if req.session.has_notes %}
-      <div class="col-md-1">
-        <a href="/new/note" class="btn btn-red btn-sm">New</a>
-      </div>
-    {% endif %}
-    <div class="col-sm-12 col-md-{{ '5' if req.session.has_notes else '6' }}">
-      <h4><a href="/notes"><i class="fa fa-file-text"></i> Notes</a></h4>
-    </div>
-    <div class="col-sm-12 col-md-6">
-      <form class="form-inline pull-right" role="pagination_options">
-        {% if req.session.id %}
-          <div class="form-group">
-            <label class="sr-only" for="filter">Filter</label>
-            <select name="filter" class="input-sm form-control">
-              <option value=all {{ 'selected="selected"' if type=="all" }}>All</option>
-              <option value=private {{ 'selected="selected"' if type=="private" }}>Private</option>
-              <option value=public {{ 'selected="selected"' if type=="public" }}>Public</option>
-            </select>
-          </div>
-        {% endif %}
-
-        {{page.options}}
-      </form>
-    </div>
-  </div>
-  <br>
-
-  {% for note in page.pail %}
-    <div class="row">
-      <div class="col-md-12">
-        <h2>
-          {% if req.session.id == note.user %}
-            {% if note.public %}
-              <i class="fa fa-eye"></i>
-            {% else %}
-              <i class="fa fa-eye-slash"></i>
-            {% endif %}
-          {% endif %}
-          <a href="/notes/{{note.short_code}}">{{note.title}}</a><br>
-          <small>
-            {% if req.session.id==note.user %}
-              Yours!
-            {% else %}
-              By {{note.author.username}}
-            {% endif %} - {{note.formated_time}}
-          </small>
-        </h2>
-        {% if page.pail|length==1 %}
-          {{note.formated_contents}}
-        {% else %}
-          {{note.formated_short}}
-        {% endif %}
-        {% for tag in note.tags %}
-          <a href="/notes/tags/{{tag}}"><span class="label label-red">{{tag}}</span></a>
-        {% endfor %}
-        {% if not loop.last %}<hr>{% endif %}
-      </div>
-    </div>
-  {% endfor %}
-
-  <div class="row">
-    <div class="col-md-10 col-md-offset-1">
-      {{page.pager}}
-    </div>
-  </div>
+  {{note_list}}
 {% else %}
   <div class="jumbotron">
     <h1>No Notes :/</h1>

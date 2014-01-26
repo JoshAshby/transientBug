@@ -75,9 +75,10 @@ class notes(MixedObject):
         q = r.table(nm.Note.table).filter(filter_parts)
 
         res = RethinkCollection(nm.Note, query=q)
-
-
         page = Paginate(res, self.request, sort_by)
+
+        self.view.partial("note_table", "partials/admin/notes/table",
+                          {"page": page})
 
         self.view.data = {"page": page}
 

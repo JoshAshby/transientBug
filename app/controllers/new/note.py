@@ -26,14 +26,14 @@ import models.rethink.note.noteModel as nm
 class note(MixedObject):
     @HTML
     def GET(self):
-        self.view.partial("note_create", "partials/public/note_create")
+        self.view.partial("note_create", "partials/public/notes/edit")
         return self.view
 
     def POST(self):
         title = self.request.get_param("title")
         contents = self.request.get_param("contents")
         public = self.request.get_param("public", False)
-        draft = self.request.get_param("draft", True)
+        draft = self.request.get_param("draft", False)
         toc = self.request.get_param("toc", False)
         tags = self.request.get_param("tags")
 

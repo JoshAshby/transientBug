@@ -25,17 +25,17 @@ class index(MixedObject):
         if self.request.session.id:
             self.view.partial("sidebar", "partials/public/index/sidebar",
                              {"req": self.request})
-            self.view.partial("phot_search", "partials/public/phot_search")
+            self.view.partial("phot_search", "partials/public/phots/search")
 
             if self.request.session.has_phots:
-                self.view.partial("phot_create", "partials/public/phot_create")
+                self.view.partial("phot_create", "partials/public/phots/create")
 
             if self.request.session.has_screenshots:
                 self.view.partial("screenshot",
                     "partials/public/screenshot_create")
 
             if self.request.session.has_notes:
-                self.view.partial("note_create", "partials/public/note_create")
+                self.view.partial("note_create", "partials/public/notes/edit")
 
             return self.view
         else:

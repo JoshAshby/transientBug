@@ -49,6 +49,9 @@ class index(MixedObject):
             res = RethinkCollection(nm.Note, query=q)
             page = Paginate(res, self.request, "title")
 
+            self.view.partial("note_list", "partials/public/notes/list",
+                              {"page": page})
+
             self.view.data = {"tags": similar,
                               "tag": top,
                               "page": page}

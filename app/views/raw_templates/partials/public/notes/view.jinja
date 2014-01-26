@@ -1,0 +1,28 @@
+<div class="note">
+  <div class="row">
+    {% if note.table_of_contents %}
+      <div class="col-md-4 hidden-sm hidden-xs">
+        <div id="toc">
+          <h3>Table of Contents</h3>
+        </div>
+      </div>
+      <div class="col-md-8 col-sm-12">
+    {% else %}
+      <div class="col-md-8 col-md-offset-2">
+    {% endif %}
+      <div  class="note-header">
+        <h1>{{note.title}}</h1>
+        <small><b>By</b> {{ note.author.username if note.author.id!=req.session.id else 'You!'}} - {{note.formated_time}} | <b>Visibility:</b> {{ 'Public' if note.public else 'Private' }}{% if req.session.id %} | <b>Status:</b> {{ 'Draft' if note.draft else 'Published' }} {% endif %}</small>
+      </div>
+      <hr>
+      <div class="note-body">
+        {{note.formated_contents}}
+      </div>
+      <hr>
+      <b>Tags: </b>
+      {% for tag in note.tags %}
+        <a href="/notes/tags/{{tag}}"><span class="label label-red">{{tag}}</span></a>
+      {% endfor %}
+    </div>
+  </div>
+</div>

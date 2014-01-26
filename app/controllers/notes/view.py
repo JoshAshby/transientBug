@@ -32,7 +32,7 @@ class view(MixedObject):
         if f:
             note = nm.Note(**f[0])
 
-            if not note.public:
+            if not note.public or note.draft:
               if not self.request.session.id or\
                   self.request.session.id!=note.user:
                   self.request.session.push_alert("That note is not public and you do not have the rights to access it.",
@@ -46,12 +46,25 @@ class view(MixedObject):
                 self.view.template = "public/notes/reported"
                 return self.view
 
-            if self.request.session.id:
-                self.view.template = "public/notes/edit"
-                self.view.partial("note_edit", "partials/public/note_create",
+            if self.request.session.id and \
+                self.request.session.id==note.author.id and \
+                self.request.session.has_notes:
+                self.view.partial("note_edit", "partials/public/notes/edit",
                                   {"note": note})
 
+            if note.draft:
+                self.view.skeleton = "skeletons/header"
+                self.view.data = {"header": """
+                  <span style="text-align: center">
+                    <h1 style="font-weight: 700">DRAFT</h1>
+                  </span>
+                    """}
+
+            self.view.partial("note_view", "partials/public/notes/view",
+                              {"note": note})
+
             self.view.data = {"note": note}
+
             return self.view
 
         else:
