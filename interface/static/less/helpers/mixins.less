@@ -1,0 +1,109 @@
+@import "lesshat.less";
+@import "colors.less";
+
+.btn-theme(@theme) {
+  color: white;
+  background-color: @theme;
+  border: @theme solid 1px;
+
+  &:focus, &:hover, &:active {
+    background-color: darken(@theme, 10%);
+    border: darken(@theme, 10%) solid 1px;
+  }
+}
+
+.label-theme(@theme) {
+  color: white;
+  background-color: @theme;
+  border: @theme solid 1px;
+}
+
+.panel-theme(@theme) {
+  border-color: @theme;
+  &.panel-heading {
+    color: white;
+    background-color: @theme;
+    border-color: @theme;
+  }
+}
+
+.container-full-theme(@theme) {
+  width: 100%;
+  color: #eee;
+  padding-bottom: 30px;
+  max-width: 100%;
+  background-color: darken(@theme, 15%); //#507800;
+
+  a {
+    text-decoration: none;
+  }
+
+  & > .container {
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+}
+
+.container-header-theme(@theme) {
+  .container-full-theme(@theme);
+
+  padding-top: 10px;
+  padding-bottom: 10px;
+
+  h1, h2, h3, h4, h5, h6 {
+    margin-top: 0px;
+  }
+}
+
+.theme-elements(@raw_name, @color) {
+  @name: e(@raw_name);
+
+  .btn-@{name} {
+    .btn-theme(@color);
+  }
+
+  .panel-@{name} {
+    .panel-theme(@color);
+  }
+
+  .label-@{name} {
+    .btn-theme(@color);
+  }
+
+  .container-header-@{name} {
+    .panel-theme(@color);
+  }
+
+  .container-full-@{name} {
+    .btn-theme(@color);
+  }
+
+  .panel-@{name} {
+    .panel-theme(@color);
+  }
+}
+
+.theme(@color) {
+  a {
+    color: lighten(@color, 10%);
+
+    &:hover {
+      color: darken(@color, 10%); //#507800;
+    }
+  }
+
+  .dropdown-menu>.active>a, .dropdown-menu>.active>a:hover, .dropdown-menu>.active>a:focus, .dropdown-menu>li>a:hover, .dropdown-menu>li>a:focus {
+    background-color: @color;
+  }
+
+  .pager li>a:hover, .pager li>a:focus {
+    background-color: @color;
+    color: white;
+  }
+
+  .pagination>.active>a, .pagination>.active>span, .pagination>.active>a:hover, .pagination>.active>span:hover, .pagination>.active>a:focus, .pagination>.active>span:focus, .nav-pills>li.active>a, .nav-pills>li.active>a:hover, .nav-pills>li.active>a:focus, .nav-tabs>li.active>a, .nav-tabs>li.active>a:hover, .nav-tabs>li.active>a:focus {
+    color: white;
+    background-color: @color;
+    border: @color solid 1px;
+  }
+}

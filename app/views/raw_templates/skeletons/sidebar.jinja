@@ -8,14 +8,12 @@
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
     <link rel="icon" href="/favicon.ico" type="image/x-icon">
 
-    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/static/css/cyti/cyti.css" rel="stylesheet">
     <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
-    <link href="//netdna.bootstrapcdn.com/bootswatch/3.0.0/cyborg/bootstrap.min.css" rel="stylesheet">
 
     <!-- Begin page stylsheets -->
-    <link href="/static/css/themes/{{theme_color}}_theme.css" rel="stylesheet">
+    <link href="/static/css/themes/{{theme_color}}.css" rel="stylesheet">
     <link href="/static/css/sidebars/sidebar.css" rel="stylesheet">
-
     {% for sheet in stylesheets %}
       <link href="/static/css/{{sheet}}.css" rel="stylesheet">
     {% endfor %}
@@ -28,7 +26,7 @@
     <script src="//code.jquery.com/jquery.js"></script>
   </head>
   <body>
-    <nav class="navbar navbar-default navbar-inverse navbar-fixed-top" role="navigation">
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
       <!-- Brand and toggle get grouped for better mobile display -->
       <div class="navbar-header">
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
@@ -56,13 +54,7 @@
               <ul class="dropdown-menu">
 
                 {% if req.session.has_admin %}
-                  <li class="menu-item dropdown dropdown-submenu"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-cogs"></i> Admin</a>
-                    <ul class="dropdown-menu">
-                      <li class="menu-item"><a href="/admin">Dashboard</a></li>
-                      <li class="menu-item"><a href="/admin/users">Users</a></li>
-                      <li class="menu-item"><a href="/admin/announcements">Announcements</a></li>
-                    </ul>
-                  </li>
+                  <li><a href="/admin"><i class="fa fa-cogs"></i> Admin</a></li>
                   <li><a href="/account"><i class="fa fa-cog"></i> Settings</a></li>
                   <li class="divider"></li>
                 {% endif %}
@@ -72,7 +64,7 @@
           </ul>
         {% else %}
           <ul class="nav navbar-nav navbar-right" style="margin-right: 15px">
-            <li><a id="nav_extra_menu_btn" href="#" data-html="true" data-content='<form role="logic" action="/login" method="POST"><div class="form-group"><input type="text" class="form-control" placeholder="Username..." name="username"></div><div class="form-group"><input type="password" class="form-control" placeholder="Password..." name="password"></div><input type="hidden" name="return-to" value="{{req.url.path}}" /><button type="submit" class="btn btn-default btn-theme btn-block">Login</button></form>' data-container="body" data-title="Login" data-placement="bottom">Heya, stranger <i class="fa fa-chevron-down"></i></a>
+            <li><a id="nav_extra_menu_btn" href="#" data-html="true" data-content='<form role="logic" action="/login" method="POST"><div class="form-group"><input type="text" class="form-control" placeholder="Username..." name="username"></div><div class="form-group"><input type="password" class="form-control" placeholder="Password..." name="password"></div><input type="hidden" name="return-to" value="{{req.url.path}}" /><button type="submit" class="btn btn-default btn-primary btn-block">Login</button></form>' data-container="body" data-title="Login" data-placement="bottom">Heya, stranger <i class="fa fa-chevron-down"></i></a>
             </li>
           </ul>
         {% endif %}
@@ -197,28 +189,6 @@
 
     <script>
       {{scripts}}
-
-
-      // Multi level menus from: http://bootply.com/92442
-      $('ul.dropdown-menu [data-toggle=dropdown]').on('click', function(event) {
-        // Avoid following the href location when clicking
-        event.preventDefault(); 
-        // Avoid having the menu to close when clicking
-        event.stopPropagation(); 
-        // If a menu is already open we close it
-        //$('ul.dropdown-menu [data-toggle=dropdown]').parent().removeClass('open');
-        // opening the one you clicked on
-        $(this).parent().addClass('open');
-
-        var menu = $(this).parent().find("ul");
-        var menupos = menu.offset();
-        if ((menupos.left + menu.width()) + 30 > $(window).width()) {
-            var newpos = - menu.width();
-        } else {
-            var newpos = $(this).parent().width();
-        }
-        menu.css({ left:newpos });
-      });
     </script>
     <!-- End page scripts -->
     <br>

@@ -8,12 +8,11 @@
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
     <link rel="icon" href="/favicon.ico" type="image/x-icon">
 
-    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/static/css/cyti/cyti.css" rel="stylesheet">
     <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
-    <link href="//netdna.bootstrapcdn.com/bootswatch/3.0.0/cyborg/bootstrap.min.css" rel="stylesheet">
 
     <!-- Begin page stylsheets -->
-    <link href="/static/css/themes/{{theme_color}}_theme.css" rel="stylesheet">
+    <link href="/static/css/themes/{{theme_color}}.css" rel="stylesheet">
     {% for sheet in stylesheets %}
       <link href="/static/css/{{sheet}}.css" rel="stylesheet">
     {% endfor %}
@@ -27,7 +26,7 @@
   </head>
   <body>
     {% if req.has_announcements and not hide_announcements %}
-      <div class="container container-alert">
+      <div class="container-alert">
         <div class="row">
           <div class="col-md-1 col-sm-1" style="text-align: center;">
             <i class="fa fa-exclamation fa-4x"></i>

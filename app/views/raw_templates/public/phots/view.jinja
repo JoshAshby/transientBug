@@ -20,12 +20,12 @@ stylesheets:
       <div class="input-group typeahead">
         {% if req.session.has_phots %}
           <span class="input-group-btn">
-            <a href="/new/phot" class="btn btn-theme btn-sm">Add</a>
+            <a href="/new/phot" class="btn btn-green btn-sm">Add</a>
           </span>
         {% endif %}
         <input type="text" class="form-control input-sm" name="q" id="q" placeholder="Search...">
         <span class="input-group-btn">
-          <button class="btn btn-theme btn-sm" type="submit"><i class="fa fa-search"></i></button>
+          <button class="btn btn-green btn-sm" type="submit"><i class="fa fa-search"></i></button>
         </span>
       </div>
 
@@ -53,7 +53,7 @@ stylesheets:
         {% endif %}
         <br>
         {% for tag in phot.tags %}
-          <a href="/phots/tags/{{tag}}"><span class="label label-theme">{{tag|replace("_", " ")}}</span></a>
+          <a href="/phots/tags/{{tag}}"><span class="label label-green">{{tag|replace("_", " ")}}</span></a>
         {% endfor %}
         <br>
         <br>
@@ -70,10 +70,10 @@ stylesheets:
             {% if phot.disable %}
               <button class="btn btn-default toggle_btn" data-id="{{phot.id}}" data-title="Enable?"><i class="icon-remove"></i> Disabled</button>
             {% else %}
-              <button class="btn btn-theme toggle_btn" data-id="{{phot.id}}" data-title="Disable?"><i class="icon-ok"></i> Enabled</button>
+              <button class="btn btn-green toggle_btn" data-id="{{phot.id}}" data-title="Disable?"><i class="icon-ok"></i> Enabled</button>
             {% endif %}
 
-            <button id="new_phot" type="submit" class="btn btn-theme pull-right"><i class="fa fa-check"></i> Update</button>
+            <button id="new_phot" type="submit" class="btn btn-green pull-right"><i class="fa fa-check"></i> Update</button>
           </form>
         {% endif %}
 

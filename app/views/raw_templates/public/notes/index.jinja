@@ -8,7 +8,7 @@ nav: notes
   <div class="row">
     {% if req.session.has_notes %}
       <div class="col-md-1">
-        <a href="/new/note" class="btn btn-theme btn-sm">New</a>
+        <a href="/new/note" class="btn btn-red btn-sm">New</a>
       </div>
     {% endif %}
     <div class="col-sm-12 col-md-{{ '5' if req.session.has_notes else '6' }}">
@@ -59,7 +59,7 @@ nav: notes
           {{note.formated_short}}
         {% endif %}
         {% for tag in note.tags %}
-          <a href="/notes/tags/{{tag}}"><span class="label label-theme">{{tag}}</span></a>
+          <a href="/notes/tags/{{tag}}"><span class="label label-red">{{tag}}</span></a>
         {% endfor %}
         {% if not loop.last %}<hr>{% endif %}
       </div>
@@ -75,7 +75,7 @@ nav: notes
   <div class="jumbotron">
     <h1>No Notes :/</h1>
     {% if req.session.has_notes %}
-      <a href="/new/note" class="btn btn-theme">New</a>
+      <a href="/new/note" class="btn btn-red">New</a>
     {% endif %}
   </div>
 {% endif %}

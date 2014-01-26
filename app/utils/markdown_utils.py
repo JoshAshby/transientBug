@@ -13,13 +13,18 @@ http://joshashby.com
 joshuaashby@joshashby.com
 """
 import bleach as bl
-import markdown2 as md
+import markdown as md
 
 cleanTags = list(bl.ALLOWED_TAGS)
 cleanTags.extend(['p', 'img', 'small', 'pre', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6','br', 'hr'])
 cleanAttr = dict(bl.ALLOWED_ATTRIBUTES)
 cleanAttr["img"] = ["src", "width", "height"]
 cleanAttr["i"] = ["class"]
+
+
+class CustomMarkdownExtension(md.Extension):
+    def extendMarkdown(self, md, md_globals):
+        pass
 
 
 def sanitize(pre_clean):
@@ -31,7 +36,7 @@ def sanitize(pre_clean):
     return bl.clean(pre_clean, tags=cleanTags, attributes=cleanAttr)
 
 
-def markdown(text):
+def markdown_raw(text):
     """
     Renders markdown into, well, markdown, through markdown2 and a custom
     markdown class (for custom preprocessing).
@@ -45,12 +50,19 @@ def markdown(text):
 
     :param text: `str` or `unicode` object which is the text to render to html
     """
-    extras = ["header-ids", "footnote", "fenced-code-blocks",
-        "break-on-newline", "pyshell"]
-    return CustomMarkdown(extras=extras).convert(text)
+    extras = [
+        "headerid",
+        "footnotes",
+        "fenced_code",
+        "nl2br",
+        "wikilinks",
+        CustomMarkdownExtension()
+    ]
+
+    return md.markdown(text, extensions=extras)
 
 
-def markdown_clean(text):
+def markdown(text):
     """
     Renders markdown into, well, markdown, through markdown2 and a custom
     markdown class (for custom preprocessing). Then runs it through bleach to
@@ -65,21 +77,5 @@ def markdown_clean(text):
 
     :param text: `str` or `unicode` object which is the text to render to html
     """
-    text = markdown(text)
+    text = markdown_raw(text)
     return sanitize(text)
-
-
-class CustomMarkdown(md.Markdown):
-    def preprocces(self, text):
-        """
-        currently does nothing, however I want a more simple way to embed media
-        into a post in transientbug so I'm looking into doing something like
-        `[[media name]]` or something that this will then just basically parse and
-        replace with the proper link or something. Maybe its more of a post
-        processing thing? Idk, because the markdown2, unlike the plain markdown
-        module for Python doesn't support writing your own extensions without
-        subclassing the Markdown class and basically rewriting things to do:
-        `if "blag" in self.extras`
-        """
-        print "[[media]]" in text
-        return text

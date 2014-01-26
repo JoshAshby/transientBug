@@ -75,6 +75,6 @@ class Note(RethinkModel):
     @property
     def formated_contents(self):
         if not hasattr(self, "_formated_contents"):
-            self._formated_contents = md.markdown_clean(self.contents)
+            self._formated_contents = md.markdown(self.contents)
 
         return self._formated_contents

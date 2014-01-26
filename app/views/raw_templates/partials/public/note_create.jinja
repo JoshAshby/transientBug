@@ -36,7 +36,10 @@
       </div>
       <div class="col-md-6">
         <br>
-        <button type="submit"class="btn btn-theme pull-right"><i class="fa fa-save"></i> Create!</button>
+        {% if note %}
+          <button class="btn btn-info" id="del_btn" data-short="{{note.short_code}}"><i class="fa fa-trash-o"></i> Delete</button>
+        {% endif %}
+        <button type="submit"class="btn btn-red pull-right"><i class="fa fa-save"></i> Create!</button>
       </div>
     </div>
   </fieldset>

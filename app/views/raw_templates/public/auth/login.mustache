@@ -1,30 +1,7 @@
 +++
 base: skeletons/empty
-styles: "@import url(https://fonts.googleapis.com/css?family=Maven+Pro:700);
-
-      html,body {
-        height:100%;
-      }
-
-      .container-full h1 {
-        font-size:80px;
-      }
-
-      /* Custom container */
-      .container-full {
-        margin: 0 auto;
-        width: 100%;
-        min-height:100%;
-        overflow:hidden;
-      }
-
-      .v-center {
-        margin-top:7%;
-      }
-
-      .popover-title, .popover-content {
-        color: black;
-      }"
+stylesheets:
+ - login
 +++
     <div class="container-full">
       <div class="row">
@@ -57,7 +34,7 @@ styles: "@import url(https://fonts.googleapis.com/css?family=Maven+Pro:700);
                 <span class="help-block">This password doesn't match up with the username! Are you sure it's typed in correctly? <a href="/reset">Forgot your password?</a></span>
               </div>
             {{/passwordError}}
-            <button class="btn btn-lg btn-theme btn-block" type="submit">Login</button>
+            <button class="btn btn-lg btn-green btn-block" type="submit">Login</button>
           </form>
           {{/banError}}
           {{#banError}}

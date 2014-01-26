@@ -15,12 +15,12 @@ scriptFiles:
           <div class="input-group typeahead">
             {% if req.session.has_phots %}
               <span class="input-group-btn">
-                <a href="/new/phot" class="btn btn-theme btn-sm">Add</a>
+                <a href="/new/phot" class="btn btn-green btn-sm">Add</a>
               </span>
             {% endif %}
             <input type="text" class="form-control input-sm" name="q" id="q" placeholder="Search Tags...">
             <span class="input-group-btn">
-              <button class="btn btn-theme btn-sm" type="submit"><i class="fa fa-search"></i></button>
+              <button class="btn btn-green btn-sm" type="submit"><i class="fa fa-search"></i></button>
             </span>
           </div>
         </div>
@@ -58,12 +58,12 @@ scriptFiles:
 
 <div class="row">
   <div class="col-md-12">
-    <b>Top match: </b> <span class="label label-theme">{{tag|replace("_", " ")}}</span><br>
+    <b>Top match: </b> <span class="label label-green">{{tag|replace("_", " ")}}</span><br>
     <br>
     {% if tags %}
       <b>Similar tags: </b>
       {% for t in tags %}
-        <a href="/phots/tags/{{t}}"><span class="label label-theme">{{t|replace("_", " ")}}</span></a> 
+        <a href="/phots/tags/{{t}}"><span class="label label-green">{{t|replace("_", " ")}}</span></a> 
       {% endfor %}
     {% else %}
       <p>No similar tags found...</p>
@@ -88,7 +88,7 @@ scriptFiles:
                   <a href="/i/{{pic.filename}}"><h6 data-toggle="tooltip" title="{{pic.title}}">{{pic.title}}</h6></a>
                 </div>
                 <div class="col-md-4">
-                  <a href="/phots/{{pic.filename}}" class="btn btn-theme btn-sm pull-right">Page</a>
+                  <a href="/phots/{{pic.filename}}" class="btn btn-green btn-sm pull-right">Page</a>
                 </div>
               </div>
             </div>
@@ -106,11 +106,11 @@ scriptFiles:
           {% for pic in page.pail %}
             <ul class="list-unstyled">
               <li>
-                <a href="/phots/view/{{pic.filename}}" class="btn btn-theme btn-xs">Page</a> <a href="/i/{{pic.filename}}">{{pic.filename}}</a>
+                <a href="/phots/view/{{pic.filename}}" class="btn btn-green btn-xs">Page</a> <a href="/i/{{pic.filename}}">{{pic.filename}}</a>
                 {% if pic.tags %}
                   {% for t in pic.tags %}
                     <a href="/phots/tags/{{t}}">
-                      <span class="label label-theme">{{t|replace("_", " ")}}</span>
+                      <span class="label label-green">{{t|replace("_", " ")}}</span>
                     </a>
                   {% endfor %}
                 {% endif %}
@@ -132,7 +132,7 @@ scriptFiles:
   <h1>Um...</h1>
   <p>We currently don't have any photos in the collection which have tags that match {{tag}}!</p>
   {% if req.session.has_phots %}
-    <a href="/new/phot" class="btn btn-theme">New</a>
+    <a href="/new/phot" class="btn btn-green">New</a>
   {% endif %}
 </div>
 {% endif %}

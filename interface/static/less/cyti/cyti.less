@@ -1,0 +1,90 @@
+// Cyti Theme for Bootstrap 3.0.3
+// Joshua Ashby
+// -----------------------------------------------------
+
+// Core variables and mixins
+@import "variables.less";
+@import "../bootstrap/bootstrap.less";
+
+@import "../helpers/lesshat.less";
+@import "../helpers/flexbox.less";
+@import "../helpers/mixins.less";
+@import "../helpers/typeahead.less";
+
+// General styling
+nav {
+  .navbar;
+  .navbar-default;
+  max-height: 46px;
+}
+
+hr {
+  border: 0;
+  height: 1px;
+  @left: rgba(0,0,0,0);
+  @center: rgba(red(gray), green(gray), blue(gray), 0.75);
+  @right: @left;
+  .lh-background-image(linear-gradient(left, @left, @center, @right));
+}
+
+.container-alert {
+  .container-header-theme(@red);
+}
+
+.navbar-brand {
+  font-family: 'Maven Pro', sans-serif;
+  font-weight: 700;
+}
+
+.navbar-header {
+  padding-right: 0px;
+}
+
+#footer {
+  font-size: 10px;
+  font-weight: 200;
+}
+
+.md-editor {
+  .lh-border-radius(4px);
+}
+
+.input-group .form-control {
+  border: white solid 1px;
+}
+
+.nav_list {
+  width: 200px;
+  margin: 0px;
+}
+
+nav > div.navbar-header > a > img {
+  margin-top: -6px;
+  max-width: 100px;
+  max-height: 30px;
+}
+
+.phot-card {
+  .lh-border-radius(3px);
+  background-color: @gray-darker;
+  width: 300px;
+  height: 250px;
+  padding: 0px;
+
+  & > a > img {
+    height: 200px;
+    width: 300px;
+  }
+
+  .caption {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+}
+
+.theme-elements("green", @green);
+.theme-elements("red", @red);
+.theme-elements("orange", @orange);
+.theme-elements("blue", @blue);

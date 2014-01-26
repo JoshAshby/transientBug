@@ -1,5 +1,5 @@
 +++
-base: skeletons/header
+base: skeletons/navbar
 theme_color: red
 nav: notes
 
@@ -22,15 +22,26 @@ stylesheets:
 <div class="tab-content">
   <div class="tab-pane active" id="view">
     <div class="row">
+      <div class="col-md-6">
+        <h1>{{note.title}}</h1>
+      </div>
+      <div class="col-md-6">
+        <div class="well">
+          <b>By</b> {{ note.author.username if note.author.id!=req.session.id else 'You!'}} - {{note.formated_time}}
+        </div>
+      </div>
+    </div>
+    <div class="row">
       <div class="col-md-12">
-        <h2>
-          <small>
-            Yours! - {{note.formated_time}}
-          </small>
-        </h2>
         {{note.formated_contents}}
+      </div>
+    </div>
+    <hr>
+    <div class="row">
+      <div class="col-md-12">
+        <b>Tags: </b>
         {% for tag in note.tags %}
-          <a href="/notes/tags/{{tag}}"><span class="label label-theme">{{tag}}</span></a>
+          <a href="/notes/tags/{{tag}}"><span class="label label-red">{{tag}}</span></a>
         {% endfor %}
       </div>
     </div>

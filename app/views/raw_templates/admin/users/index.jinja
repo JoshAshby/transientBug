@@ -8,13 +8,13 @@ base: skeletons/sidebar
 <div class="row">
   <div class="col-md-12">
     {% if req.get_param("d", True) %}
-      <a href="?d=false" class="btn btn-theme btn-sm">Include Disabled</a>
+      <a href="?d=false" class="btn btn-orange btn-sm">Include Disabled</a>
     {% else %}
-      <a href="/admin/users" class="btn btn-theme btn-sm">Hide Disabled</a>
+      <a href="/admin/users" class="btn btn-orange btn-sm">Hide Disabled</a>
     {% endif %}
 
     <form class="form-inline pull-right" role="pagination_options">
-      <a href="/admin/users/new" class="btn btn-theme btn-sm">New User</a>
+      <a href="/admin/users/new" class="btn btn-orange btn-sm">New User</a>
       {{page.options}}
     </form>
     <br>

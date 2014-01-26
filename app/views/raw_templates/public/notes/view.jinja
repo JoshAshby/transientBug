@@ -1,19 +1,30 @@
 +++
 theme_color: red
-base: skeletons/header
+base: skeletons/navbar
 nav: notes
 +++
 <br>
 <div class="row">
   <div class="col-md-12">
-    <h2>
-      <small>
-        By {{note.author.username}} - {{note.formated_time}}
-      </small>
-    </h2>
+    <h1>{{note.title}}</h1>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12">
+    <div class="well">
+      <b>By</b> {{note.author.username}} - {{note.formated_time}}
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12">
     {{note.formated_contents}}
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12">
     {% for tag in note.tags %}
-      <a href="/notes/tags/{{tag}}"><span class="label label-theme">{{tag}}</span></a>
+      <a href="/notes/tags/{{tag}}"><span class="label label-red">{{tag}}</span></a>
     {% endfor %}
   </div>
 </div>

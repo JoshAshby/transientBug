@@ -11,12 +11,12 @@ scriptFiles:
       <div class="input-group typeahead">
         {% if req.session.has_phots %}
           <span class="input-group-btn">
-            <a href="/new/phot" class="btn btn-theme btn-sm">Add</a>
+            <a href="/new/phot" class="btn btn-green btn-sm">Add</a>
           </span>
         {% endif %}
         <input type="text" class="form-control input-sm" name="q" id="q" placeholder="Search...">
         <span class="input-group-btn">
-          <button class="btn btn-theme btn-sm" type="submit"><i class="fa fa-search"></i></button>
+          <button class="btn btn-green btn-sm" type="submit"><i class="fa fa-search"></i></button>
         </span>
       </div>
 
@@ -29,7 +29,7 @@ scriptFiles:
 {% if tags %}
   <div class="tags">
     {% for tag in tags %}
-      <a href="/phots/tags/{{tag}}"><span class="label label-theme">{{tag|replace("_", " ")}}</span></a>
+      <a href="/phots/tags/{{tag}}"><span class="label label-green">{{tag|replace("_", " ")}}</span></a>
     {% endfor %}
   </div>
 {% else %}

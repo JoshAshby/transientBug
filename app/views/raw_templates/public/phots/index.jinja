@@ -16,12 +16,12 @@ scriptFiles:
           <div class="input-group typeahead">
             {% if req.session.has_phots %}
               <span class="input-group-btn">
-                <a href="/new/phot" class="btn btn-theme btn-sm">Add</a>
+                <a href="/new/phot" class="btn btn-green btn-sm">Add</a>
               </span>
             {% endif %}
             <input type="text" class="form-control input-sm" name="q" id="q" value="" placeholder="Search Tags...">
             <span class="input-group-btn">
-              <button class="btn btn-theme btn-sm" type="submit"><i class="fa fa-search"></i></button>
+              <button class="btn btn-green btn-sm" type="submit"><i class="fa fa-search"></i></button>
             </span>
           </div>
         </div>
@@ -62,16 +62,16 @@ scriptFiles:
         {% if loop.index%3==1 %}
           <div class="row">
         {% endif %}
-        <div class="col-sm-6 col-md-4" style="margin-bottom: 20px;">
-          <div class="thumbnail">
-            <a href="/i/{{pic.filename}}" class="thumbnail"><img src="/i/{{pic.filename}}" style="height: 200px" alt="{{pic.filename}}"></a>
+        <div class="col-md-4 col-sm-6">
+          <div class="phot-card">
+            <a href="/i/{{pic.filename}}"><img src="/i/{{pic.filename}}" alt="{{pic.filename}}"></a>
             <div class="caption">
               <div class="row">
                 <div class="col-md-8">
-                  <a href="/i/{{pic.filename}}"><h6 data-toggle="tooltip" title="{{pic.title}}">{{pic.title}}</h6></a>
+                  <a href="/i/{{pic.filename}}"><p data-toggle="tooltip" title="{{pic.title}}">{{pic.title}}</p></a>
                 </div>
                 <div class="col-md-4">
-                  <a href="/phots/{{pic.filename}}" class="btn btn-theme btn-sm pull-right">Page</a>
+                  <a href="/phots/{{pic.filename}}" class="btn btn-green btn-sm pull-right">Page</a>
                 </div>
               </div>
             </div>
@@ -89,11 +89,11 @@ scriptFiles:
           {% for pic in page.pail %}
             <ul class="list-unstyled">
               <li>
-                <a href="/phots/view/{{pic.filename}}" class="btn btn-theme btn-xs">Page</a> <a href="/i/{{pic.filename}}">{{pic.filename}}</a>
+                <a href="/phots/view/{{pic.filename}}" class="btn btn-green btn-xs">Page</a> <a href="/i/{{pic.filename}}">{{pic.filename}}</a>
                 {% if pic.tags %}
                   {% for tag in pic.tags %}
                     <a href="/phots/tags/{{ tag }}">
-                      <span class="label label-theme">{{tag|replace("_", " ")}}</span>
+                      <span class="label label-green">{{tag|replace("_", " ")}}</span>
                     </a>
                   {% endfor %}
                 {% endif %}
@@ -115,7 +115,7 @@ scriptFiles:
   <h1>Um...</h1>
   <p>We currently don't have any photos in the collection!</p>
   {% if req.session.has_phots %}
-    <a href="/new/phot" class="btn btn-theme">New</a>
+    <a href="/new/phot" class="btn btn-green">New</a>
   {% endif %}
 </div>
 {% endif %}
