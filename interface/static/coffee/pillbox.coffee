@@ -16,6 +16,7 @@ class Pillbox
     field: "tags"
     placeholder: ""
     name: ""
+    theme: "green"
 
   constructor: (el, opts) ->
     @el = null
@@ -80,7 +81,7 @@ class Pillbox
     @pill.find("span.label").remove()
     for tag, status of @tags
       if status and tag
-        @pill.prepend """ <span class="label label-theme">#{ tag } <i data-role="remove" class="fa fa-times"></i></span> """
+        @pill.prepend """ <span class="label label-#{ @opts.theme }">#{ tag } <i data-role="remove" class="fa fa-times"></i></span> """
         tags.push tag
 
     @el.val tags.join ","

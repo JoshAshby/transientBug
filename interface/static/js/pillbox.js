@@ -23,7 +23,8 @@
       url: "",
       field: "tags",
       placeholder: "",
-      name: ""
+      name: "",
+      theme: "green"
     };
 
     function Pillbox(el, opts) {
@@ -104,7 +105,7 @@
       for (tag in _ref) {
         status = _ref[tag];
         if (status && tag) {
-          this.pill.prepend(" <span class=\"label label-theme\">" + tag + " <i data-role=\"remove\" class=\"fa fa-times\"></i></span> ");
+          this.pill.prepend(" <span class=\"label label-" + this.opts.theme + "\">" + tag + " <i data-role=\"remove\" class=\"fa fa-times\"></i></span> ");
           tags.push(tag);
         }
       }

@@ -17,8 +17,22 @@
     });
     return $("#quick_note_tags").pillbox({
       url: "/notes/json/tags",
-      name: "note"
+      name: "note",
+      theme: "red"
     });
+  });
+
+  $("#toc").tocify({
+    context: '.note-body',
+    showEffect: 'none',
+    showEffectSpeed: 'fast'
+  });
+
+  $("#toc").affix({
+    offset: {
+      top: 100,
+      bottom: 100
+    }
   });
 
 }).call(this);

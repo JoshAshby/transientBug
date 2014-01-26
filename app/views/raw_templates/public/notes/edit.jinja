@@ -7,10 +7,13 @@ scriptFiles:
   - pillbox
   - lib/typeahead.min
   - lib/bootstrap-markdown
+  - lib/jquery-ui-1.9.1.custom.min
+  - lib/jquery.tocify.min
   - transientbug/note
 
 stylesheets:
   - pillbox
+  - tocify
   - lib/bootstrap-markdown.min
 +++
 
@@ -18,35 +21,39 @@ stylesheets:
   <li class="active"><a href="#view" data-toggle="tab">View</a></li>
   <li><a href="#edit" data-toggle="tab">Edit</a></li>
 </ul>
-<br>
 <div class="tab-content">
   <div class="tab-pane active" id="view">
-    <div class="row">
-      <div class="col-md-6">
-        <h1>{{note.title}}</h1>
-      </div>
-      <div class="col-md-6">
-        <div class="well">
-          <b>By</b> {{ note.author.username if note.author.id!=req.session.id else 'You!'}} - {{note.formated_time}}
+    <div class="note">
+      <div class="row">
+        {% if note.table_of_contents %}
+          <div class="col-md-4 hidden-sm hidden-xs">
+            <div id="toc">
+              <h3>Table of Contents</h3>
+            </div>
+          </div>
+          <div class="col-md-8 col-sm-12">
+        {% else %}
+          <div class="col-md-12">
+        {% endif %}
+          <div  class="note-header">
+            <h1>{{note.title}}</h1>
+            <small><b>By</b> {{ note.author.username if note.author.id!=req.session.id else 'You!'}} - {{note.formated_time}} | <b>Visibility:</b> {{ 'Public' if note.public else 'Private' }}</small>
+          </div>
+          <hr>
+          <div class="note-body">
+            {{note.formated_contents}}
+          </div>
+          <hr>
+          <b>Tags: </b>
+          {% for tag in note.tags %}
+            <a href="/notes/tags/{{tag}}"><span class="label label-red">{{tag}}</span></a>
+          {% endfor %}
         </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-12">
-        {{note.formated_contents}}
-      </div>
-    </div>
-    <hr>
-    <div class="row">
-      <div class="col-md-12">
-        <b>Tags: </b>
-        {% for tag in note.tags %}
-          <a href="/notes/tags/{{tag}}"><span class="label label-red">{{tag}}</span></a>
-        {% endfor %}
       </div>
     </div>
   </div>
   <div class="tab-pane" id="edit">
+    <br>
     <div class="row">
       <div class="col-md-12">
         {{note_edit}}

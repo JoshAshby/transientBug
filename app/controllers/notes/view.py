@@ -62,7 +62,7 @@ class view(MixedObject):
         title = self.request.get_param("title")
         contents = self.request.get_param("contents")
         public = self.request.get_param("public", False)
-        draft = self.request.get_param("draft", True)
+        draft = self.request.get_param("draft", False)
         toc = self.request.get_param("toc", False)
         tags = self.request.get_param("tags")
 
@@ -76,7 +76,7 @@ class view(MixedObject):
             .run()
 
         if f:
-            note = nm.Note(**f[0])
+            note = nm.Note(f[0]["id"])
             if note.author.id != self.request.session.id:
                 self.request.session.push_alert("You don't own that note, you can't edit it!",
                                                 level="danger")
@@ -93,12 +93,12 @@ class view(MixedObject):
             note.contents = contents
             note.public = public
             note.tags = tag
-            note.toc = toc
+            note.table_of_contents = toc
             note.draft = draft
 
             note.save()
 
+            return Redirect("/notes/%s" % note.short_code)
+
         else:
             return NotFound()
-
-        return Redirect("/notes/%s" % note.short_code)

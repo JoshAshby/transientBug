@@ -3423,7 +3423,7 @@ textarea.input-group-sm > .input-group-btn > .btn {
   max-width: none;
 }
 .nav-tabs {
-  border-bottom: 1px solid #dddddd;
+  border-bottom: 1px solid #282828;
 }
 .nav-tabs > li {
   float: left;
@@ -3436,7 +3436,7 @@ textarea.input-group-sm > .input-group-btn > .btn {
   border-radius: 5px 5px 0 0;
 }
 .nav-tabs > li > a:hover {
-  border-color: #adafae #adafae #dddddd;
+  border-color: #282828 #282828 #282828;
 }
 .nav-tabs > li.active > a,
 .nav-tabs > li.active > a:hover,
@@ -4108,7 +4108,7 @@ textarea.input-group-sm > .input-group-btn > .btn {
   padding: 6px 12px;
   line-height: 1.428571429;
   text-decoration: none;
-  background-color: transparent;
+  background-color: #555555;
   border: 1px solid transparent;
   margin-left: -1px;
 }
@@ -4127,7 +4127,7 @@ textarea.input-group-sm > .input-group-btn > .btn {
 .pagination > li > span:hover,
 .pagination > li > a:focus,
 .pagination > li > span:focus {
-  background-color: #adafae;
+  background-color: #282828;
 }
 .pagination > .active > a,
 .pagination > .active > span,
@@ -4148,7 +4148,7 @@ textarea.input-group-sm > .input-group-btn > .btn {
 .pagination > .disabled > a:hover,
 .pagination > .disabled > a:focus {
   color: #888888;
-  background-color: transparent;
+  background-color: #555555;
   border-color: transparent;
   cursor: not-allowed;
 }
@@ -4211,14 +4211,14 @@ textarea.input-group-sm > .input-group-btn > .btn {
 .pager li > span {
   display: inline-block;
   padding: 5px 14px;
-  background-color: transparent;
+  background-color: #555555;
   border: 1px solid transparent;
   border-radius: 3px;
 }
 .pager li > a:hover,
 .pager li > a:focus {
   text-decoration: none;
-  background-color: #adafae;
+  background-color: #282828;
 }
 .pager .next > a,
 .pager .next > span {
@@ -4233,7 +4233,7 @@ textarea.input-group-sm > .input-group-btn > .btn {
 .pager .disabled > a:focus,
 .pager .disabled > span {
   color: #888888;
-  background-color: transparent;
+  background-color: #555555;
   cursor: not-allowed;
 }
 .label {
@@ -6231,6 +6231,20 @@ nav > div.navbar-header > a > img {
   padding-bottom: 10px;
   padding-left: 5px;
   padding-right: 5px;
+}
+.note .note-header h1 {
+  font-weight: 700;
+  font-size: 50px;
+  margin-bottom: 0px;
+  margin-top: 0px;
+}
+.note .affix {
+  position: fixed;
+  top: 25px;
+}
+.note .affix-top {
+  position: fixed;
+  top: initial;
 }
 .btn-green {
   color: white;

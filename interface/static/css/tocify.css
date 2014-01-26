@@ -1,0 +1,65 @@
+@import url("//fonts.googleapis.com/css?family=Noto+Sans:300italic,400italic,700italic,400,300,700");
+
+@import url("//fonts.googleapis.com/css?family=Maven+Pro:300italic,400italic,700italic,400,300,700");
+/*@navbar-default-border:            darken(@navbar-default-bg, 6.5%);*/
+/* The Table of Contents container element */
+.tocify {
+  max-height: 90%;
+  overflow: auto;
+  position: fixed;
+  /* The Table of Contents is composed of multiple nested unordered lists.  These styles remove the default styling of an unordered list because it is ugly. */
+
+  /* Top level subheader elements.  These are the first nested items underneath a header element. */
+
+  /* Makes the font smaller for all subheader elements. */
+
+  /* Further indents second level subheader elements. */
+
+  /* Further indents third level subheader elements. You can continue this pattern if you have more nested elements. */
+
+  /* Twitter Bootstrap Override Style */
+
+}
+.tocify h3 {
+  text-align: center;
+}
+.tocify ul,
+.tocify li {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border: none;
+  line-height: 30px;
+}
+.tocify .tocify-header {
+  text-indent: 10px;
+}
+.tocify .tocify-subheader {
+  text-indent: 20px;
+  display: none;
+}
+.tocify .tocify-subheader li {
+  font-size: 12px;
+}
+.tocify .tocify-subheader .tocify-subheader {
+  text-indent: 30px;
+}
+.tocify .tocify-subheader .tocify-subheader .tocify-subheader {
+  text-indent: 40px;
+}
+.tocify .nav-list > li > a,
+.tocify .nav-list .nav-header {
+  margin: 0px;
+}
+.tocify .nav-list > li > a {
+  padding: 5px;
+  -webkit-border-radius: 5px;
+  -webkit-background-clip: padding-box;
+  -moz-border-radius: 5px;
+  -moz-background-clip: padding;
+  border-radius: 5px;
+  background-clip: padding-box;
+}
+.tocify .active > a {
+  background-color: #282828;
+}

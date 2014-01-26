@@ -28,7 +28,7 @@ import models.rethink.note.noteModel as nm
 class index(MixedObject):
     @HTML
     def GET(self):
-        parts = r.table(nm.Note.table).filter({"disable": False, "public": True})
+        parts = r.table(nm.Note.table).filter({"disable": False, "public": True, "draft": False})
 
         result = RethinkCollection(nm.Note, query=parts)
         page = Paginate(result, self.request, "created")
