@@ -35,6 +35,7 @@ class note(MixedObject):
         public = self.request.get_param("public", False)
         draft = self.request.get_param("draft", False)
         toc = self.request.get_param("toc", False)
+        comments = self.request.get_param("comments", False)
         tags = self.request.get_param("tags")
 
         if tags:
@@ -49,6 +50,7 @@ class note(MixedObject):
                                     public=public,
                                     tags=tag,
                                     toc=toc,
+                                    has_comments=comments,
                                     draft=draft)
 
         except Exception as e:

@@ -23,6 +23,26 @@
       {% for tag in note.tags %}
         <a href="/notes/tags/{{tag}}"><span class="label label-red">{{tag}}</span></a>
       {% endfor %}
+      <hr>
+      {% if note.has_comments and note.public and not note.draft %}
+        <div id="disqus_thread"></div>
+        <script>
+            var disqus_shortname = 'transientbug';
+            var disqus_identifier = '{{note.short_code}}';
+            var disqus_title = '{{note.title}}';
+            var disqus_url = 'https://transientbug.com/notes/{{note.short_code}}';
+
+            /* * * DON'T EDIT BELOW THIS LINE * * */
+            (function() {
+                console.log(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]);
+                var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+            })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+        <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+      {% endif %}
     </div>
   </div>
 </div>

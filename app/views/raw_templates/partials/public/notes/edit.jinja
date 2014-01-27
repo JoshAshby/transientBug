@@ -26,6 +26,11 @@
         </div>
         <div class="checkbox">
           <label>
+            <input type="checkbox" name="comments" id="quick_note_comments" value="true" {{ 'checked' if note and note.has_comments }}/> Should this note have comments from Disqus enabled?
+          </label>
+        </div>
+        <div class="checkbox">
+          <label>
             <input type="checkbox" name="public" id="quick_note_public" value="true" {{ 'checked' if note and note.public }}/> Make this note public?
             <span class="help-block"><small>This determines if the note will be visible on <a href="/notes">/notes</a> and <a href="/notes/tags">/notes/tags</a> pages.</small></span>
           </label>
