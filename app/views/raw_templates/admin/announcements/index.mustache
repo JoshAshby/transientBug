@@ -6,10 +6,12 @@ nav: admin_annoucements
 breadcrumbs_top: True
 
 scriptFiles:
+  - lib/bootstrap-markdown
   - lib/bootstrap-datetimepicker.min
   - transientbug/admin/announcement
 
 stylesheets:
+  - lib/bootstrap-markdown.min
   - lib/bootstrap-datetimepicker.min
 +++
 
@@ -58,7 +60,7 @@ stylesheets:
           <br>
           <div class="row">
             <div class="col-md-12">
-              {{message}}
+              <pre>{{message}}</pre>
             </div>
           </div>
           <br>
@@ -103,7 +105,7 @@ stylesheets:
                 </div>
 
                 <div class="form-group">
-                  <textarea rows="5" class="form-control" name="message" placeholder="Announcement..."></textarea>
+                  <textarea rows="5" class="form-control" name="message" placeholder="Announcement..." data-provide="markdown"></textarea>
                 </div>
                 <div class="checkbox">
                   <label>

@@ -6,9 +6,11 @@ nav: admin_annoucements
 breadcrumbs_top: True
 
 scriptFiles:
+  - lib/bootstrap-markdown
   - lib/bootstrap-datetimepicker.min
 
 stylesheets:
+  - lib/bootstrap-markdown.min
   - lib/bootstrap-datetimepicker.min
 
 scripts: "
@@ -49,7 +51,7 @@ scripts: "
             </div>
 
             <div class="form-group">
-              <textarea rows="5" class="form-control" name="message" placeholder="Announcement...">{{announcement.message}}</textarea>
+              <textarea rows="5" class="form-control" name="message" placeholder="Announcement..." data-provide="markdown">{{announcement.message}}</textarea>
             </div>
             <div class="checkbox">
               <label>

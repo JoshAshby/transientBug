@@ -13,6 +13,7 @@ import uuid
 import config.config as c
 import models.utils.dbUtils as dbu
 from utils.standard import StandardODM
+from utils import markdown_utils as md
 
 import arrow
 
@@ -88,7 +89,7 @@ class CfgAnnouncements(StandardODM):
                 ann_key = ':'.join([key.rsplit(":", 1)[0], "message"])
                 message = self._redis.get(ann_key)
 
-                keys[ID] = message
+                keys[ID] = md.markdown(message)
 
         self._data = keys
 

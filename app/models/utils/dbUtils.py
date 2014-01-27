@@ -12,16 +12,11 @@ joshuaashby@joshashby.com
 """
 import rethinkdb as r
 
+from seshat.request import parse_bool
 
-def toBoolean(str):
-    if str == 'True':
-        return True
 
-    elif str == 'False':
-        return False
-
-    else:
-        raise Exception("Not a boolean")
+def toBoolean(s):
+    return parse_bool(s)
 
 
 def rql_where_not(table, field, value, pre_filter=None):
