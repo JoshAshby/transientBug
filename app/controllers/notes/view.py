@@ -32,7 +32,7 @@ class view(MixedObject):
         if f:
             note = nm.Note(**f[0])
 
-            if not note.public or note.draft:
+            if not note.public:
               if not self.request.session.id or\
                   self.request.session.id!=note.user:
                   self.request.session.push_alert("That note is not public and you do not have the rights to access it.",
