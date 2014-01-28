@@ -23,7 +23,7 @@ from models.rethink.email import emailModel as em
 
 import utils.short_codes as sc
 
-from views.template import PartialTemplate
+from seshat_addons.template import PartialTemplate
 
 
 @route()

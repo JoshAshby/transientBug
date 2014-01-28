@@ -21,7 +21,7 @@ dirs:
   pid: pid/
   log: logs/
   search_index: s_index/
-  templates: views/raw_templates/
+  templates: views/
   base: /srv/http/transientbug/
   screenshots: /srv/http/transientbug/scrn/
   gifs: /srv/http/transientbug/i/
