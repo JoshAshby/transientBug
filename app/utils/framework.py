@@ -19,6 +19,7 @@ import traceback
 
 import logging
 import seshat.dispatch as dispatch
+import seshat.route_containers as route_containers
 
 import seshat_addons.request_item as r
 import seshat_addons.template as tmpl
@@ -53,7 +54,8 @@ def init():
     tmpl.templates_base = c.dirs.templates
     tmpl.dynamic_reloading = True
 
-    dispatch.controller_folder = "controllers"
+    route_containers.controller_folder = "controllers"
+
     dispatch.request_obj = r.RequestItem
 
     tmpl.read_in_templates()
