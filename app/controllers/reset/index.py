@@ -10,9 +10,9 @@ http://joshashby.com
 joshuaashby@joshashby.com
 """
 from seshat.route import route
-from seshat_addons.mixed_object import MixedObject
-from seshat_addons.obj_mods import not_logged_in, template
-from seshat_addons.func_mods import HTML
+from seshat_addons.seshat.mixed_object import MixedObject
+from seshat_addons.seshat.obj_mods import not_logged_in, template
+from seshat_addons.seshat.func_mods import HTML
 from seshat.actions import Redirect
 
 from errors.general import NotFoundError
@@ -23,7 +23,7 @@ from models.rethink.email import emailModel as em
 
 import utils.short_codes as sc
 
-from seshat_addons.template import PartialTemplate
+from seshat_addons.view.template import PartialTemplate
 
 
 @route()
@@ -35,7 +35,7 @@ class index(MixedObject):
         code = self.request.get_param("c")
 
         if not code:
-            self.view.template = "public/reset/request"
+            self.seshat_addons.view.template = "public/reset/request"
             return self.view
 
         found = r.table(um.User.table).filter({"reset_code": code}).count().run()
@@ -77,7 +77,7 @@ class index(MixedObject):
             user.save()
 
             self.request.session.push_alert("Password reset email sent. Please check your email.")
-            self.view.template = "public/reset/sent"
+            self.seshat_addons.view.template = "public/reset/sent"
             return self.view
 
         found = r.table(um.User.table).filter({"reset_code": code}).count().run()

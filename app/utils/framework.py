@@ -21,8 +21,8 @@ import logging
 import seshat.dispatch as dispatch
 import seshat.route_containers as route_containers
 
-import seshat_addons.request_item as r
-import seshat_addons.template as tmpl
+import seshat_addons.seshat.request_item as r
+import seshat_addons.view.template as tmpl
 
 import controllers.error as error
 

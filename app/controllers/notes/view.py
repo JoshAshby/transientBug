@@ -10,10 +10,10 @@ http://joshashby.com
 joshuaashby@joshashby.com
 """
 from seshat.route import route
-from seshat_addons.mixed_object import MixedObject
+from seshat_addons.seshat.mixed_object import MixedObject
 from seshat.actions import NotFound, Unauthorized, Redirect
-from seshat_addons.func_mods import HTML
-from seshat_addons.obj_mods import template
+from seshat_addons.seshat.func_mods import HTML
+from seshat_addons.seshat.obj_mods import template
 
 import rethinkdb as r
 import models.rethink.note.noteModel as nm
@@ -43,7 +43,7 @@ class view(MixedObject):
                 return NotFound()
 
             if note.reported:
-                self.view.template = "public/notes/reported"
+                self.seshat_addons.view.template = "public/notes/reported"
                 return self.view
 
             if note.draft:
@@ -91,7 +91,7 @@ class view(MixedObject):
                 return NotFound()
 
             if note.reported:
-                self.view.template = "public/notes/reported"
+                self.seshat_addons.view.template = "public/notes/reported"
                 return self.view
 
             note.title = title

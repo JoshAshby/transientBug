@@ -13,9 +13,9 @@ joshuaashby@joshashby.com
 """
 
 from seshat.route import route
-from seshat_addons.mixed_object import MixedObject
+from seshat_addons.seshat.mixed_object import MixedObject
 from utils.paginate import Paginate
-from seshat_addons.func_mods import JSON
+from seshat_addons.seshat.func_mods import JSON
 
 from rethinkORM import RethinkCollection
 import models.rethink.note.noteModel as nm

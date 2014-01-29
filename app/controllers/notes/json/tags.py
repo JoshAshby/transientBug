@@ -10,8 +10,8 @@ http://joshashby.com
 joshuaashby@joshashby.com
 """
 from seshat.route import route
-from seshat_addons.mixed_object import MixedObject
-from seshat_addons.func_mods import JSON
+from seshat_addons.seshat.mixed_object import MixedObject
+from seshat_addons.seshat.func_mods import JSON
 
 import models.utils.dbUtils as dbu
 import models.rethink.note.noteModel as nm

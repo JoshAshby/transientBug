@@ -10,9 +10,9 @@ http://joshashby.com
 joshuaashby@joshashby.com
 """
 from seshat.route import route
-from seshat_addons.mixed_object import MixedObject
-from seshat_addons.obj_mods import template
-from seshat_addons.func_mods import HTML
+from seshat_addons.seshat.mixed_object import MixedObject
+from seshat_addons.seshat.obj_mods import template
+from seshat_addons.seshat.func_mods import HTML
 from utils.paginate import Paginate
 
 import rethinkdb as r
@@ -58,7 +58,7 @@ class index(MixedObject):
             return self.view
 
         else:
-            self.view.template = "public/notes/tags"
+            self.seshat_addons.view.template = "public/notes/tags"
 
             self.view.data = {"tags": all_tags}
 

@@ -19,7 +19,7 @@ import urllib
 import math
 
 from utils.standard import StandardODM
-from seshat_addons.template import PartialTemplate
+from seshat_addons.view.template import PartialTemplate
 
 
 class Paginate(StandardODM):
