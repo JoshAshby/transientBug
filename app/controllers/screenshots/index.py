@@ -33,7 +33,7 @@ class index(MixedObject):
             f.extend(files)
             break
 
-        page = Paginate(f, self.request)
+        page = Paginate(f, self.request, sort_direction_default="asc")
 
         self.view.data = {"page": page}
         return self.view

@@ -32,7 +32,7 @@ class index(MixedObject):
         public = self.request.get_param("public")
         draft = self.request.get_param("draft")
         reported = self.request.get_param("reported", False)
-        sort_by = self.request.get_param("sort_by", "created")
+        sort_by = self.request.get_param("sort_by", "created", "asc")
 
         if not sort_by in ["created", "title", "public", "reported", "draft",
             "author.id"]:

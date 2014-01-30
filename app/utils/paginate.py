@@ -23,7 +23,7 @@ from seshat_addons.view.template import PartialTemplate
 
 
 class Paginate(StandardODM):
-    def __init__(self, pail, request, sort="", perpage_default=24, sort_direction=""):
+    def __init__(self, pail, request, sort="", perpage_default=24, sort_direction_default=""):
         """
         Now: PAGINATE ALL THE THINGS.
 
@@ -49,7 +49,7 @@ class Paginate(StandardODM):
             "offset": 6,
             "perpage": request.get_param("perpage", perpage_default),
             "page": request.get_param("page", 0, int),
-            "sort_direction": request.get_param("dir", "desc") if not sort_direction else sort_direction,
+            "sort_direction": request.get_param("dir", sort_direction_default),
             "sort": sort
         }
 
