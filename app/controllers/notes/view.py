@@ -30,7 +30,7 @@ class view(MixedObject):
             .coerce_to('array')\
             .run()
 
-        slideshow = self.request.get_param("v")
+        view_type = self.request.get_param("v")
 
         if f:
             note = nm.Note(**f[0])
@@ -57,8 +57,10 @@ class view(MixedObject):
                   </span>
                     """}
 
-            if slideshow == "slideshow":
-# Sick(ill) little bit of code to break things apart for remark.js
+            if view_type == "slideshow":
+# Sick/(ill) little bit of code to break things apart for remark.js
+# Mildly ugly, and probably slow, but needed since remark doesn't
+# accept making a new slide on each new h1 :/
                 slide_break = "\n---\n# "
                 self.view.template = "public/notes/slideshow"
                 raw = note.contents
