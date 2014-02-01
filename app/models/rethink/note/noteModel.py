@@ -21,7 +21,8 @@ class Note(RethinkModel):
     table = "notes"
 
     @classmethod
-    def new_note(cls, user, title="", contents="", draft=True, public=False, toc=False, has_comments=False, tags=None):
+    def new_note(cls, user, title="", contents="", draft=True, public=False,
+            toc=False, has_comments=False, tags=None, theme="default"):
         if not tags:
             tags = []
 
@@ -44,6 +45,7 @@ class Note(RethinkModel):
                           draft=draft,
                           has_comments=has_comments,
                           short_code=code,
+                          theme=theme,
                           disable=False,
                           reported=False)
 

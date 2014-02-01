@@ -9,6 +9,7 @@ Josh Ashby
 http://joshashby.com
 joshuaashby@joshashby.com
 """
+import config.config as c
 from seshat.route import route
 from seshat_addons.seshat.mixed_object import MixedObject
 from seshat.actions import NotFound, Unauthorized, Redirect
@@ -20,6 +21,7 @@ import models.rethink.note.noteModel as nm
 import re
 
 import utils.markdown_utils as md
+import utils.md_extras.slideshow as mdsl
 
 
 @route()
@@ -68,10 +70,18 @@ class view(MixedObject):
                 raw = note.contents
                 body = re.sub(r'(^\#\s)', slide_break, raw, flags=re.M)
                 body = re.sub(re.escape("</section>"), "", body, count=1)
-                self.view.data = {"body": md.markdown_raw(note.contents)}
+                self.view.data = {"body": md.markdown_raw(note.contents, [mdsl.Slideshow()])}
+                try:
+                    self.view.stylesheets = ["slideshows/"+note.theme]
+                except:
+                    pass
+
                 return self.view
 
-            self.view.data = {"note": note}
+            self.view.data = {
+                "note": note,
+                "themes": c.general.slideshow_themes
+            }
 
             return self.view
 
@@ -87,6 +97,7 @@ class view(MixedObject):
         toc = self.request.get_param("toc", False)
         comments = self.request.get_param("comments", False)
         tags = self.request.get_param("tags")
+        theme = self.request.get_param("theme", "default")
 
         tag = []
         if tags:
@@ -118,6 +129,7 @@ class view(MixedObject):
             note.table_of_contents = toc
             note.draft = draft
             note.has_comments = comments
+            note.theme = theme
 
             note.save()
 

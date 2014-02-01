@@ -1,0 +1,84 @@
+@import "../helpers/lesshat.less";
+@import "../helpers/colors.less";
+@import "../cyti/variables.less";
+/*bespoke-parent  The deck's containing element*/
+/*bespoke-slide Every slide element*/
+/*bespoke-active  The active slide*/
+/*bespoke-inactive  All inactive slides*/
+/*bespoke-before  All slides before the active slide*/
+/*bespoke-before-n  All slides before the active slide, with n value incrementing*/
+/*bespoke-after All slides after the active slide*/
+/*bespoke-after-n All slides after the active slide, with n value incrementing*/
+/*bespoke-progress-parent The progress bar's parent element*/
+/*bespoke-progress-bar The progress bar*/
+
+.bespoke-progress-parent {
+  & > .bespoke-progress-bar {
+    position: fixed;
+    z-index: 100;
+    bottom: 0;
+    left: 0;
+
+    background-color: @brand-primary;
+
+    height: 2px;
+    .lh-box-shadow(-5px 0px 3px 4px @brand-primary);
+  }
+}
+
+@speed: .3s;
+
+article.bespoke-parent {
+  background-color: darken(@gray-darker, 20%);
+  color: lighten(@gray-lighter, 20%);
+
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  section {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    h1 {
+      font-size: 8em;
+
+      &.page-header {
+        font-size: 12em;
+        font-weight: 700;
+      }
+    }
+
+    h2 {
+      margin-top: 0px;
+      padding-top: 0px;
+      font-size: 6em;
+    }
+
+    p {
+      font-size: 2.5em;
+    }
+
+    &.bespoke-slide {
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 20px;
+      padding-bottom: 20px;
+    }
+
+    &.bespoke-active {
+      .lh-transition(opacity @speed ease, background @speed ease);
+      opacity: 1;
+      z-index: 1;
+    }
+
+    &.bespoke-inactive {
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0;
+    }
+  }
+}

@@ -11,6 +11,10 @@ max_connections: 10000
 
 time_format: "MM/DD/YYYY hh:mm a"
 
+slideshow_themes:
+  - default
+  - light
+
 files:
   pid: transientbug.pid
   log: transientbug.log

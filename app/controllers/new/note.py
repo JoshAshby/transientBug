@@ -11,6 +11,7 @@ Josh Ashby
 http://joshashby.com
 joshuaashby@joshashby.com
 """
+import config.config as c
 from seshat.route import route
 from seshat_addons.seshat.mixed_object import MixedObject
 from seshat_addons.seshat.obj_mods import login, template
@@ -26,7 +27,7 @@ import models.rethink.note.noteModel as nm
 class note(MixedObject):
     @HTML
     def GET(self):
-        self.view.partial("note_create", "partials/public/notes/edit")
+        self.view.data = {"themes": c.general.slideshow_themes}
         return self.view
 
     def POST(self):
@@ -37,6 +38,7 @@ class note(MixedObject):
         toc = self.request.get_param("toc", False)
         comments = self.request.get_param("comments", False)
         tags = self.request.get_param("tags")
+        theme = self.request.get_param("theme")
 
         if tags:
             tag = [ bit.lstrip().rstrip().replace(" ", "_").lower() for bit in tags.split(",") ]
@@ -51,7 +53,8 @@ class note(MixedObject):
                                     tags=tag,
                                     toc=toc,
                                     has_comments=comments,
-                                    draft=draft)
+                                    draft=draft,
+                                    theme=theme)
 
         except Exception as e:
             self.request.session.push_alert("That note could not be created! %s" % e.message, level="error")
