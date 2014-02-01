@@ -17,6 +17,7 @@ from seshat_addons.seshat.obj_mods import template
 
 import rethinkdb as r
 import models.rethink.note.noteModel as nm
+import re
 
 
 @route()
@@ -28,6 +29,8 @@ class view(MixedObject):
             .filter({"short_code": self.request.id})\
             .coerce_to('array')\
             .run()
+
+        slideshow = self.request.get_param("v")
 
         if f:
             note = nm.Note(**f[0])
@@ -53,6 +56,16 @@ class view(MixedObject):
                     <h1 style="font-weight: 700">DRAFT</h1>
                   </span>
                     """}
+
+            if slideshow == "slideshow":
+# Sick(ill) little bit of code to break things apart for remark.js
+                slide_break = "\n---\n# "
+                self.view.template = "public/notes/slideshow"
+                raw = note.contents
+                body = re.sub(r'(^\#\s)', slide_break, raw, flags=re.M)
+                body = re.sub(re.escape(slide_break), "# ", body, count=1)
+                self.view.data = {"body": body}
+                return self.view
 
             self.view.data = {"note": note}
 

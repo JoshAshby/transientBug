@@ -31,7 +31,7 @@ class index(MixedObject):
         parts = r.table(nm.Note.table).filter({"disable": False, "public": True, "draft": False})
 
         result = RethinkCollection(nm.Note, query=parts)
-        page = Paginate(result, self.request, "created", "asc")
+        page = Paginate(result, self.request, "created", sort_direction_default="asc")
 
         self.view.data = {"page": page}
 
