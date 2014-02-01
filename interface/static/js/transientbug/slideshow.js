@@ -5,7 +5,10 @@
     var slideshow;
     return slideshow = bespoke.from('article', {
       keys: true,
-      progress: true
+      progress: true,
+      touch: true,
+      blackout: true,
+      hash: true
     });
   });
 

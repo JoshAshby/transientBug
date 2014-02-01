@@ -6191,6 +6191,7 @@ nav {
   background-color: #282828;
   border-color: #282828;
   max-height: 46px;
+  z-index: 100px;
 }
 nav:before,
 nav:after {
