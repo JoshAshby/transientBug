@@ -55,6 +55,7 @@ article.bespoke-parent section p {
   font-size: 2.5em;
 }
 article.bespoke-parent section.bespoke-slide {
+  overflow-y: auto;
   padding-left: 50px;
   padding-right: 50px;
   padding-top: 20px;
