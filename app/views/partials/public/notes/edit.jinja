@@ -39,7 +39,7 @@
           <label for="theme">Slideshow Theme</label>
           <select name="theme" class="form-control">
             {% for theme in themes %}
-              <option value="{{theme}}" {{ 'selected' if note.theme==theme }}>{{theme|capitalize()}}</option>
+              <option value="{{theme}}" {{ 'selected' if note and note.theme==theme }}>{{theme|capitalize()}}</option>
             {% endfor %}
           </select>
         </div>
