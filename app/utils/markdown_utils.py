@@ -14,17 +14,45 @@ joshuaashby@joshashby.com
 """
 import bleach as bl
 import markdown as md
+from markdown.util import etree
+from markdown.treeprocessors import Treeprocessor
 
 cleanTags = list(bl.ALLOWED_TAGS)
-cleanTags.extend(['p', 'img', 'small', 'pre', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6','br', 'hr'])
+cleanTags.extend(['p', 'img', 'small', 'pre', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6','br', 'hr', 'article', 'section', 'div'])
 cleanAttr = dict(bl.ALLOWED_ATTRIBUTES)
 cleanAttr["img"] = ["src", "width", "height"]
 cleanAttr["i"] = ["class"]
 
 
+class SectionWrapperTreeprocessor(Treeprocessor):
+    def run(self, doc):
+        first = True
+        body = etree.Element("div")
+        sec = etree.SubElement(body, "section")
+        for elem in doc:
+            if elem.tag in ['h1'] and not first:
+                sec = etree.SubElement(body, "section")
+
+            if first:
+                first = False
+
+            sec.append(elem)
+
+        return body
+
+
 class CustomMarkdownExtension(md.Extension):
+    def __init__(self, configs={}):
+        self.config = {}
+        for key, value in configs:
+            self.setConfig(key, value)
+
     def extendMarkdown(self, md, md_globals):
-        pass
+        md.registerExtension(self)
+        self.processor = SectionWrapperTreeprocessor()
+        self.processor.md = md
+        self.processor.config = self.getConfigs()
+        md.treeprocessors.add('sectionwrap', self.processor, '>prettify')
 
 
 def sanitize(pre_clean):

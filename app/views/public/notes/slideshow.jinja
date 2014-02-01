@@ -4,13 +4,15 @@ base: skeletons/empty
 nav: notes
 
 scriptFiles:
-  - lib/remark
+  - lib/bespoke
+  - lib/bespoke-progress
+  - lib/bespoke-keys
   - transientbug/slideshow
 
 stylesheets:
-  - remark
+  - bespoke
 +++
 
-<textarea id="source">
-  {{body}}
-</textarea>
+<article id="presentation">
+   {{body}}
+</article>
