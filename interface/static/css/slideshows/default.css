@@ -12,6 +12,17 @@
 /*bespoke-after-n All slides after the active slide, with n value incrementing*/
 /*bespoke-progress-parent The progress bar's parent element*/
 /*bespoke-progress-bar The progress bar*/
+.bespoke-progress-parent > .bespoke-progress-bar {
+  position: fixed;
+  z-index: 100;
+  bottom: 0;
+  left: 0;
+  background-color: #77b300;
+  height: 2px;
+  -webkit-box-shadow: -5px 0px 3px 4px #77b300;
+  -moz-box-shadow: -5px 0px 3px 4px #77b300;
+  box-shadow: -5px 0px 3px 4px #77b300;
+}
 article.bespoke-parent {
   background-color: #000000;
   color: #e1e1e1;
