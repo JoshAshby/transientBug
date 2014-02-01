@@ -4237,7 +4237,7 @@ textarea.input-group-sm > .input-group-btn > .btn {
   cursor: not-allowed;
 }
 .label {
-  display: inline;
+  display: inline-block;
   padding: .2em .6em .3em;
   font-size: 75%;
   font-weight: bold;
@@ -6361,7 +6361,7 @@ nav > div.navbar-header > a > img {
   border-radius: 3px;
   background-clip: padding-box;
   background-color: #222222;
-  width: 300px;
+  width: 100%;
   height: 250px;
   padding: 0px;
   margin-bottom: 20px;
@@ -6377,7 +6377,7 @@ nav > div.navbar-header > a > img {
   border-top-right-radius: 3px;
   background-clip: padding-box;
   height: 200px;
-  width: 300px;
+  width: 100%;
 }
 .phot-card .caption {
   padding-top: 10px;

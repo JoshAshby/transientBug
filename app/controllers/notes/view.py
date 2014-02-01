@@ -50,7 +50,7 @@ class view(MixedObject):
                 return NotFound()
 
             if note.reported:
-                self.seshat_addons.view.template = "public/notes/reported"
+                self.view.template = "public/notes/reported"
                 return self.view
 
             if note.draft:
@@ -119,7 +119,7 @@ class view(MixedObject):
                 return NotFound()
 
             if note.reported:
-                self.seshat_addons.view.template = "public/notes/reported"
+                self.view.template = "public/notes/reported"
                 return self.view
 
             note.title = title

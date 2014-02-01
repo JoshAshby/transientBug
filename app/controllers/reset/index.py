@@ -35,7 +35,7 @@ class index(MixedObject):
         code = self.request.get_param("c")
 
         if not code:
-            self.seshat_addons.view.template = "public/reset/request"
+            self.view.template = "public/reset/request"
             return self.view
 
         found = r.table(um.User.table).filter({"reset_code": code}).count().run()
@@ -77,7 +77,7 @@ class index(MixedObject):
             user.save()
 
             self.request.session.push_alert("Password reset email sent. Please check your email.")
-            self.seshat_addons.view.template = "public/reset/sent"
+            self.view.template = "public/reset/sent"
             return self.view
 
         found = r.table(um.User.table).filter({"reset_code": code}).count().run()

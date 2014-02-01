@@ -58,7 +58,7 @@ class index(MixedObject):
             return self.view
 
         else:
-            self.seshat_addons.view.template = "public/phots/tags"
+            self.view.template = "public/phots/tags"
 
             self.view.data = {"tags": all_tags}
 
