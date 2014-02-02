@@ -14,24 +14,16 @@
 .sw[nop]
 *.tmp
 *.scratchpad
-.flagSearchIndex/
 virt/
 *.out
+.pylintrc
+
 node_modules
-interface/resources/css/bootstrap/
-interface/resources/css/fontawesome/
-interface/resources/js/bootstrap/
-interface/compiled_templates/
+interface/build/
 app/logs/
 app/pid/
 app/.coverage
-app/config/*.json
-.pylintrc
-*.flagr.js
-old/
-interface/templates/
 app/rethinkdb_data
-
 app/config/config.yaml
 app/config/initial.yaml
 
