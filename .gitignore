@@ -20,6 +20,7 @@ virt/
 
 node_modules
 interface/build/
+interface/lib/bower
 app/logs/
 app/pid/
 app/.coverage

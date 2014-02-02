@@ -1,0 +1,21 @@
+{
+  "name": "transientbug",
+  "version": "1.0.0",
+  "homepage": "https://github.com/JoshAshby/transientBug",
+  "authors": [
+    "JoshAshby <joshuaashby@joshashby.com>"
+  ],
+  "license": "CC BY-NC-SA",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "interface/lib/bower/",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "pnotify": "~1.2.0"
+  }
+}
