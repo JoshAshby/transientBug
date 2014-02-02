@@ -1,20 +1,20 @@
 import os
+import secrets
 from fabric.api import run, env, cd, prefix
 from contextlib import contextmanager as _contextmanager
 
 
-if env.host == "localhost":
-    path = os.path.abspath(__file__).rsplit('/', 1)[0]
-    venv = path + "/virt/{}/bin/activate".format("package")
-    env.static = "/srv/http/transientbug/static/"
+#if env.host == "localhost":
+    #path = os.path.abspath(__file__).rsplit('/', 1)[0]
+    #venv = path + "/virt/{}/bin/activate".format("package")
+    #env.static = "/srv/http/transientbug/static/"
 
-else:
-    import secrets
-    path = secrets.remote_base
-    env.key_name = secrets.ssh_key
-    venv = path + "/virt/{}/bin/activate".format("normal")
-    env.static = secrets.remote_static
-
+#else:
+path = secrets.remote_base
+env.key_name = secrets.ssh_key
+venv = path + "/virt/{}/bin/activate".format("normal")
+env.static = secrets.remote_static
+env.hosts = ["transientbug.com"]
 env.path = path
 env.directory = path + "/app/"
 env.activate = 'source '+venv
