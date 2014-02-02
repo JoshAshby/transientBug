@@ -26,6 +26,7 @@ app/.coverage
 app/rethinkdb_data
 app/config/config.yaml
 app/config/initial.yaml
+secrets.py
 
 # Compiled source #
 ###################
