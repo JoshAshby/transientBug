@@ -15,6 +15,7 @@ else:
     venv = path + "/virt/{}/bin/activate".format("normal")
     env.static = secrets.remote_static
 
+env.path = path
 env.directory = path + "/app/"
 env.activate = 'source '+venv
 
@@ -27,12 +28,14 @@ def virtualenv():
 
 
 def update():
-    run("git pull")
+    with cd(env.path):
+        run("git pull")
 
 
 def static():
-    run("grunt")
-    run("cp -r interface/build/* {}".format(env.static))
+    with cd(env.path):
+        run("grunt")
+        run("cp -r interface/build/* {}".format(env.static))
 
 
 def start():
@@ -51,6 +54,7 @@ def restart():
 
 
 def deploy():
+    stop()
     update()
     static()
-    restart()
+    start()
