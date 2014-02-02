@@ -52,7 +52,7 @@ class emails(MixedObject):
         parts = r.table(em.Email.table).filter(lambda row: row[row_filt].contains(user.id))
 
         result = RethinkCollection(em.Email, query=parts)
-        page = Paginate(result, self.request, "created", sort_direction="asc")
+        page = Paginate(result, self.request, "created", sort_direction_default="asc")
 
         self.view.data = {"page": page,
                           "user": user,

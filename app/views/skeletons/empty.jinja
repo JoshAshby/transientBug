@@ -21,8 +21,6 @@
       {{styles}}
     </style>
     <!-- End page style sheets -->
-
-    <script src="//code.jquery.com/jquery.js"></script>
   </head>
   <body>
     {% if req.has_announcements and not hide_announcements %}
@@ -42,7 +40,10 @@
 
     {{body}}
 
+    <script src="/static/js/lib/lazyload.js"></script>
+    <script src="//code.jquery.com/jquery.js"></script>
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+    <script src="/static/js/main.js"></script>
 
     <!-- Begin page scripts -->
     {% for script in scriptFiles %}
