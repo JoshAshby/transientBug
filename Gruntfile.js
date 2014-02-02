@@ -7,7 +7,7 @@ module.exports = function(grunt) {
       compile:  {
         expand: true,     // Enable dynamic expansion.
         cwd: 'interface/src/coffee',      // Src matches are relative to this path.
-        src: ['**/*.coffee'], // Actual pattern(s) to match.
+        src: ['**/*.coffee', '**/*.litcoffee'], // Actual pattern(s) to match.
         dest: 'interface/build/js',   // Destination path prefix.
         ext: '.js',   // Dest filepaths will have this extension.
       }

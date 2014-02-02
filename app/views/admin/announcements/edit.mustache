@@ -6,24 +6,8 @@ nav: admin_annoucements
 breadcrumbs_top: True
 
 scriptFiles:
-  - lib/bootstrap-markdown
-  - lib/bootstrap-datetimepicker.min
-
-stylesheets:
-  - lib/bootstrap-markdown.min
-  - lib/bootstrap-datetimepicker.min
-
-scripts: "
-  $(function() {
-    $('.datetimepicker').datetimepicker({
-      language: 'en',
-      pick12HourFormat: true,
-      pickSeconds: false,
-    });
-  });
-  "
+  - transientbug/admin/announcement
 +++
-
 
 <div class="row">
   <div class="col-md-8 col-md-offset-2 col-sm-12">
@@ -64,12 +48,3 @@ scripts: "
     </div>
   </div>
 </div>
-
-<script type="text/javascript">
-  $(function() {
-    $('#datetimepicker').datetimepicker({
-      language: 'en',
-      pick12HourFormat: true
-    });
-  });
-</script>
