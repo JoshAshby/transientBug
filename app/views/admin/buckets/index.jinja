@@ -21,14 +21,14 @@ scriptFiles:
 <br>
 <div class="row">
   <div class="col-md-8 col-md-offset-2 col-sm-12">
-    {% for item in page.pain %}
+    {% for item in page.pail %}
       <div class="row">
         <div class="col-md-9">
           <h4>{{item.id}} <small>{{item.name}}</small></h4>
         </div>
         <div class="col-md-3">
           <div class="pull-right">
-            <input type="checkbox" data-id="{{item.id}}" {{ 'checked' if item.active }}/>
+            <input type="checkbox" data-id="{{item.id}}" data-on="orange" {{ 'checked' if item.status }}/>
           </div>
         </div>
       </div>

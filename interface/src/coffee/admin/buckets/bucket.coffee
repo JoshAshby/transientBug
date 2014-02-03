@@ -1,23 +1,31 @@
-$ ->
-  toggle = (what) ->
-    id = $(what).data "id"
+LazyLoad.css [
+  '/static/css/lib/bootstrap-switch.min.css'
+]
 
-    $.post "/admin/buckets/#{ id }/toggle/", (data) ->
-      if data[0]["success"]
-        if $(what).hasClass "btn-default"
-          $(what).removeClass "btn-default"
-                 .addClass "btn-orange"
-                 .html '<i class="fa fa-check"></i>'
-        else
-          $(what).removeClass "btn-orange"
-                 .addClass "btn-default"
-                 .html '<i class="fa fa-times"></i>'
+LazyLoad.js [
+  '/static/js/lib/moment.min.js'
+  '/static/js/lib/bootstrap-switch.min.js'
+  '/static/js/lib/bootstrap-growl.min.js'
+], ->
+    $ ->
+      growl_options =
+        position:
+          from: "bottom"
+          align: "right"
+        template:
+          container: '<div class="col-xs-10 col-sm-10 col-md-4 alert">'
 
-  $(".toggle_btn").click ->
-    if $(this).hasClass "btn-orange"
-      toggle this
-    else
-      yesno = confirm "Are you sure you want to activate this bucket?"
+      $('input[type=checkbox]').bootstrapSwitch()
 
-      if yesno
+      $('input[type=checkbox]').on 'switch-change', (e, data) ->
         toggle this
+
+      toggle = (what, val) ->
+        id = $(what).data "id"
+
+        $.post "/admin/buckets/#{ id }/toggle/", (data) ->
+          if data[0]["success"]
+            wording = "shut off"
+            if $(what).bootstrapSwitch 'state'
+              wording = "activated"
+            $.growl "Announcement #{ wording }!<br><small>#{ id }</small>", growl_options
