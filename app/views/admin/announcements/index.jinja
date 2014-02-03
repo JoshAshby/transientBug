@@ -1,0 +1,32 @@
++++
+base: skeletons/sidebar
+theme_color: orange
+
+nav: admin_annoucements
+breadcrumbs_top: True
+
+scriptFiles:
+  - admin/announcements/announcement
++++
+
+<div class="row">
+  <div class="col-md-12">
+    <ul class="nav nav-pills" id="myTab">
+      <li {{ 'class="active"' if page.pail }}><a href="#view" data-toggle="tab">View</a></li>
+      <li {{ 'class="active"' if not page.pail }}><a href="#new" data-toggle="tab">New</a></li>
+    </ul>
+  </div>
+</div>
+<br>
+<div class="row">
+  <div class="col-md-8 col-md-offset-2 col-sm-12">
+    <div id="myTabContent" class="tab-content">
+      <div class="tab-pane {{ 'active' if page.pail }}" id="view">
+        ![[partials/admin/announcements/list]]
+      </div>
+      <div class="tab-pane {{ 'active' if not page.pail }}" id="new">
+        ![[partials/admin/announcements/edit]]
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,38 @@
+<div class="panel panel-orange">
+  <div class="panel-heading">
+    {{ 'Edit' if announcement else 'New' }} Announcement...
+  </div>
+  <div class="panel-body">
+    <form method="POST" id="quick_announcement_edit">
+      <fieldset>
+        <div class="form-group">
+          <div class="row">
+            <div class="col-md-4">
+              <div class='input-group date' id="start">
+                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                <input type='text' class="form-control" name="start" data-time="{{ announcement.start if announcement }}" />
+              </div>
+            </div>
+            <div class="col-md-4"></div>
+            <div class="col-md-4">
+              <div class='input-group date' id="end">
+                <input type='text' class="form-control" name="end" data-time="{{ announcement.end if announcement }}" />
+                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <textarea rows="5" class="form-control" name="message" placeholder="Announcement..." data-provide="markdown">{{ announcement.message if announcement }}</textarea>
+        </div>
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" name="status" data-on="orange" value="true" {{ 'checked' if not announcement or announcement.status }}/> Make this announcement active?
+          </label>
+        </div>
+        <button class="btn btn-orange btn-block" type="submit"><i class="fa fa-check"></i> Save</button>
+      </fieldset>
+    </form>
+  </div>
+</div>

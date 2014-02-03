@@ -1,56 +1,63 @@
-<form method="POST" action={{ "/new/note" if not note else "/notes/"+note.short_code }}>
-  <fieldset>
-    <div class="form-group" id="quick_note">
-      <input type="text" class="form-control" id="quick_note_title" name="title" placeholder="Title..." value="{{ note.title if note }}" required>
-    </div>
-    <div class="form-group">
-      <textarea name="contents" id="quick_note_content" data-provide="markdown">{{ note.contents if note else 'Write something!' }}</textarea>
-    </div>
-    <div class="form-group">
-      <input type="text" class="form-control" name="tags" id="quick_note_tags" placeholder="Tags..." value="{{ note.tags|join(", ") if note }}"/>
-    </div>
-    <div class="row">
-      <div class="col-md-6">
-        <div class="checkbox">
-          <label>
-            <input type="checkbox" name="draft" id="quick_note_draft" value="true" {{ 'checked' if not note or note.draft }}/> Is this currently a draft?
-          </label>
-        </div>
-        <div class="checkbox">
-          <label>
-            <input type="checkbox" name="toc" id="quick_note_toc" value="true" {{ 'checked' if note and note.table_of_contents }}/> Should a table of contents be created for this note?
-            <span class="help-block"><small>This will create a floating sidebar
-            along side the post that will contain a table of contents generated
-            from all h1's in the post.</small></span>
-          </label>
-        </div>
-        <div class="checkbox">
-          <label>
-            <input type="checkbox" name="comments" id="quick_note_comments" value="true" {{ 'checked' if note and note.has_comments }}/> Should this note have comments from Disqus enabled?
-          </label>
-        </div>
-        <div class="checkbox">
-          <label>
-            <input type="checkbox" name="public" id="quick_note_public" value="true" {{ 'checked' if note and note.public }}/> Make this note public?
-            <span class="help-block"><small>This determines if the note will be visible on <a href="/notes">/notes</a> and <a href="/notes/tags">/notes/tags</a> pages.</small></span>
-          </label>
+<div class="panel panel-red">
+  <div class="panel-heading">
+    <h3 class="panel-title">{{ 'New Note' if not note else 'Edit Note' }}</h3>
+  </div>
+  <div class="panel-body">
+    <form method="POST" action={{ "/new/note" if not note else "/notes/"+note.short_code }}>
+      <fieldset>
+        <div class="form-group" id="quick_note">
+          <input type="text" class="form-control" id="quick_note_title" name="title" placeholder="Title..." value="{{ note.title if note }}" required>
         </div>
         <div class="form-group">
-          <label for="theme">Slideshow Theme</label>
-          <select name="theme" class="form-control">
-            {% for theme in themes %}
-              <option value="{{theme}}" {{ 'selected' if note and note.theme==theme }}>{{theme|capitalize()}}</option>
-            {% endfor %}
-          </select>
+          <textarea name="contents" id="quick_note_content" data-provide="markdown">{{ note.contents if note else 'Write something!' }}</textarea>
         </div>
-      </div>
-      <div class="col-md-6">
-        <br>
-        {% if note %}
-          <button class="btn btn-info" id="del_btn" data-short="{{note.short_code}}"><i class="fa fa-trash-o"></i> Delete</button>
-        {% endif %}
-        <button type="submit"class="btn btn-red pull-right"><i class="fa fa-save"></i> {{ 'Create!' if not note else 'Save!' }}</button>
-      </div>
-    </div>
-  </fieldset>
-</form>
+        <div class="form-group">
+          <input type="text" class="form-control" name="tags" id="quick_note_tags" placeholder="Tags..." value="{{ note.tags|join(", ") if note }}"/>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="checkbox">
+              <label>
+                <input type="checkbox" name="draft" id="quick_note_draft" value="true" {{ 'checked' if not note or note.draft }}/> Is this currently a draft?
+              </label>
+            </div>
+            <div class="checkbox">
+              <label>
+                <input type="checkbox" name="toc" id="quick_note_toc" value="true" {{ 'checked' if note and note.table_of_contents }}/> Should a table of contents be created for this note?
+                <span class="help-block"><small>This will create a floating sidebar
+                along side the post that will contain a table of contents generated
+                from all h1's in the post.</small></span>
+              </label>
+            </div>
+            <div class="checkbox">
+              <label>
+                <input type="checkbox" name="comments" id="quick_note_comments" value="true" {{ 'checked' if note and note.has_comments }}/> Should this note have comments from Disqus enabled?
+              </label>
+            </div>
+            <div class="checkbox">
+              <label>
+                <input type="checkbox" name="public" id="quick_note_public" value="true" {{ 'checked' if note and note.public }}/> Make this note public?
+                <span class="help-block"><small>This determines if the note will be visible on <a href="/notes">/notes</a> and <a href="/notes/tags">/notes/tags</a> pages.</small></span>
+              </label>
+            </div>
+            <div class="form-group">
+              <label for="theme">Slideshow Theme</label>
+              <select name="theme" class="form-control">
+                {% for theme in themes %}
+                  <option value="{{theme}}" {{ 'selected' if note and note.theme==theme }}>{{theme|capitalize()}}</option>
+                {% endfor %}
+              </select>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <br>
+            {% if note %}
+              <button class="btn btn-info" id="del_btn" data-short="{{note.short_code}}"><i class="fa fa-trash-o"></i> Delete</button>
+            {% endif %}
+            <button type="submit"class="btn btn-red pull-right"><i class="fa fa-save"></i> {{ 'Create!' if not note else 'Save!' }}</button>
+          </div>
+        </div>
+      </fieldset>
+    </form>
+  </div>
+</div>

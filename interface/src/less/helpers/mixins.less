@@ -20,11 +20,15 @@
 
 .panel-theme(@theme) {
   border-color: @theme;
-  &.panel-heading {
+  .panel-heading {
     color: white;
     background-color: @theme;
     border-color: @theme;
   }
+}
+
+.switch-theme(@theme) {
+  background-color: @theme !important;
 }
 
 .container-full-theme(@theme) {
@@ -64,6 +68,10 @@
 
   .label-@{name} {
     .label-theme(@color);
+  }
+
+  .switch-@{name} {
+    .switch-theme(@color);
   }
 
   .container-header-@{name} {

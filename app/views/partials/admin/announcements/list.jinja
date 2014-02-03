@@ -1,0 +1,43 @@
+<div id="announcement_list">
+  <div class="row">
+    <div class="col-md-12">
+      <form class="form-inline pull-right" role="pagination_options">
+        {{page.options}}
+      </form>
+    </div>
+  </div>
+  <br>
+  {% for item in page.pail %}
+    <div class="row">
+      <div class="col-md-12">
+        <div class="pull-right">
+          <input type="checkbox" data-id="{{item.id}}" data-on="orange" {{ 'checked' if item.status }}/>
+          <a href="/admin/announcements/edit/{{item.id}}"
+            class="btn btn-orange btn-sm"
+            data-toggle="tooltip"
+            data-placement="top auto"
+            title="Edit">
+            <i class="fa fa-edit"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+    <br>
+    <div class="row">
+      <div class="col-md-12">
+        <pre>{{item.message}}</pre>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <small class="muted">ID: {{item.id}}</small><br>
+        <span class="time" data-time="{{item.created}}" data-msg="Create"></span>
+        <span class="time" data-time="{{item.start}}" data-msg="Activate"></span>
+        <span class="time" data-time="{{item.end}}" data-msg="Deactivate"></span>
+      </div>
+    </div>
+    <hr>
+  {% endfor %}
+
+  {{page.pager}}
+</div>

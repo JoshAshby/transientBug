@@ -33,8 +33,7 @@ def all_announcements():
         data = {"message": message,
                 "status": val,
                 "id": ID,
-                "created": time_created.timestamp,
-                "formated_created": time_created.format("MM/DD/YYYY HH:mm")}
+                "created": time_created.timestamp}
 
 
         ann_start_key = ':'.join([key.rsplit(":", 1)[0], "start"])
@@ -42,7 +41,6 @@ def all_announcements():
         if start and start != '0':
             start = arrow.get(start)
             data["start"] = start.timestamp
-            data["formated_start"] = start.format("MM/DD/YYYY HH:mm")
         else:
             data["start"] = 0
 
@@ -51,7 +49,6 @@ def all_announcements():
         if end and end != '0':
             end = arrow.get(end)
             data["end"] = end.timestamp
-            data["formated_end"] = end.format("MM/DD/YYYY HH:mm")
         else:
             data["end"] = 0
 
@@ -127,9 +124,15 @@ class CfgAnnouncements(StandardODM):
 
         return True
 
-    def toggle_announcement(self, ID):
+    def toggle_announcement(self, ID, val=None):
         """
         Toggles the given announcement via `ID` to the inverse of its current value
         """
-        current = dbu.toBoolean(self._redis.get("announcement:%s:status"%ID))
-        return self._redis.set("announcement:%s:status"%ID, not current)
+        if val is None:
+            current = dbu.toBoolean(self._redis.get("announcement:%s:status"%ID))
+            self._redis.set("announcement:%s:status"%ID, not current)
+            return not current
+        else:
+            assert type(val) is bool
+            self._redis.set("announcement:%s:status"%ID, val)
+            return val

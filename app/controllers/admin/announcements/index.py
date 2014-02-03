@@ -19,8 +19,6 @@ import models.redis.announcement.announcementModel as am
 
 from utils.paginate import Paginate
 
-import arrow
-
 
 @route()
 @login(["admin"])
@@ -33,8 +31,7 @@ class index(MixedObject):
 
         page = Paginate(announcements, self.request, "created")
 
-        self.view.data = {"page": page,
-                          "now": arrow.utcnow().format("MM/DD/YYYY HH:mm")}
+        self.view.data = {"page": page}
 
         return self.view
 
@@ -43,12 +40,6 @@ class index(MixedObject):
         message = self.request.get_param("message")
         start = self.request.get_param("start")
         end = self.request.get_param("end")
-
-        if start:
-            start = arrow.get(start, 'MM/DD/YYYY HH:mm').to("UTC").timestamp
-
-        if end:
-            end = arrow.get(end, 'MM/DD/YYYY HH:mm').to("UTC").timestamp
 
         self.request.announcements.new_announcement(message, status, start, end)
 

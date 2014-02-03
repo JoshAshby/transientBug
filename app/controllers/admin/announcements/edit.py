@@ -17,8 +17,6 @@ from seshat.actions import Redirect
 
 import models.redis.baseRedisModel as brm
 
-import arrow
-
 
 @route()
 @login(["admin"])
@@ -31,15 +29,7 @@ class edit(MixedObject):
 
         announcement = brm.SeshatRedisModel("announcement:"+announcement_id)
 
-        if announcement.start:
-            announcement._formated_start = arrow.get(announcement.start)\
-                .format("MM/DD/YYYY HH:mm")
-        if announcement.end:
-            announcement._formated_end = arrow.get(announcement.end)\
-                .format("MM/DD/YYYY HH:mm")
-
-        self.view.data = {"announcement": announcement,
-                          "now": arrow.utcnow().format("MM/DD/YYYY HH:mm")}
+        self.view.data = {"announcement": announcement}
 
         return self.view
 
@@ -49,12 +39,6 @@ class edit(MixedObject):
         message = self.request.get_param("message")
         start = self.request.get_param("start")
         end = self.request.get_param("end")
-
-        if start:
-            start = arrow.get(start, 'MM/DD/YYYY HH:mm').to("UTC").timestamp
-
-        if end:
-            end = arrow.get(end, 'MM/DD/YYYY HH:mm').to("UTC").timestamp
 
         self.request.announcements.edit_announcement(ID, message, status, start, end)
 
