@@ -3,36 +3,20 @@ base: skeletons/sidebar
 nav: home
 
 scriptFiles:
-  - pillbox
-  - done_typing
-  - check_field
-  - form_check
-  - lib/typeahead.min
-  - lib/bootstrap-markdown
   - public/index/index
-
-stylesheets:
-  - pillbox
-  - lib/bootstrap-markdown.min
 +++
 
-<div class="tab-content">
-  <div class="tab-pane active" id="home">
-    <div class="row">
-      <div class="col-md-6">
-        {{phot_create}}
-      </div>
-      <div class="col-md-6">
-        {{phot_search}}
-        {{screenshot}}
-      </div>
-    </div>
+<div id="wall">
+  <div class="brick col-md-6">
+    ![[partials/public/phots/create]]
   </div>
-  <div class="tab-pane" id="quick_note">
-    <div class="row">
-      <div class="col-md-12">
-        {{note_create}}
-      </div>
-    </div>
+  <div class="brick col-md-6">
+    ![[partials/public/notes/edit]]
+  </div>
+  <div class="brick col-md-6">
+    ![[partials/public/phots/search]]
+  </div>
+  <div class="brick col-md-6">
+    ![[partials/public/screenshot_create]]
   </div>
 </div>

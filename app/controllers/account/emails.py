@@ -31,11 +31,6 @@ class emails(MixedObject):
     def GET(self):
         user = um.User(self.request.session.id)
 
-        self.view.partial("tabs",
-                          "partials/public/account/tabs",
-                          {"user": user,
-                           "command": "emails"})
-
         t = self.request.get_param("filter", "to")
         if t == "cc":
             row_filt = "cc_addresses"

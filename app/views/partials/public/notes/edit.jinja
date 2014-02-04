@@ -3,9 +3,9 @@
     <h3 class="panel-title">{{ 'New Note' if not note else 'Edit Note' }}</h3>
   </div>
   <div class="panel-body">
-    <form method="POST" action={{ "/new/note" if not note else "/notes/"+note.short_code }}>
+    <form method="POST" action={{ "/new/note" if not note else "/notes/"+note.short_code }} id="quick_note">
       <fieldset>
-        <div class="form-group" id="quick_note">
+        <div class="form-group">
           <input type="text" class="form-control" id="quick_note_title" name="title" placeholder="Title..." value="{{ note.title if note }}" required>
         </div>
         <div class="form-group">
@@ -15,7 +15,7 @@
           <input type="text" class="form-control" name="tags" id="quick_note_tags" placeholder="Tags..." value="{{ note.tags|join(", ") if note }}"/>
         </div>
         <div class="row">
-          <div class="col-md-6">
+          <div class="col-md-12">
             <div class="checkbox">
               <label>
                 <input type="checkbox" name="draft" id="quick_note_draft" value="true" {{ 'checked' if not note or note.draft }}/> Is this currently a draft?
@@ -49,7 +49,9 @@
               </select>
             </div>
           </div>
-          <div class="col-md-6">
+        </div>
+        <div class="row">
+          <div class="col-md-12">
             <br>
             {% if note %}
               <button class="btn btn-info" id="del_btn" data-short="{{note.short_code}}"><i class="fa fa-trash-o"></i> Delete</button>
