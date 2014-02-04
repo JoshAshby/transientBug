@@ -43,6 +43,7 @@ LazyLoad.js [
         "My legs... They burn!"
         "I smell bad... So... I'm gonna go take a shower then go to work."
         "That was awkward."
+        "Fix the div or whatever!"
       ]
       syells[Math.floor(Math.random()*syells.length)]
 
