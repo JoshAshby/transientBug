@@ -4,7 +4,7 @@
   font-size: 14px;
   line-height: 1.5;
   vertical-align: middle;
-  border: 1px solid #282828;
+  border: 1px solid #cccccc;
 
   display: inline-block;
   background-color: #fff;
@@ -14,15 +14,21 @@
   width: 100%;
   .lh-border-radius(4px);
 
+  .twitter-typeahead {
+    width: auto;
+  }
+
   .label {
     position: relative;
     top: 2px;
   }
 
-  input:not([type=submit]):not([type=file]) {
-    border: 0px;
+  input:not([type=submit]):not([type=file]),
+  input:not([type=submit]):not([type=file]):focus {
+    border: none;
     margin: 0px;
     padding: 5px;
     outline: none;
+    box-shadow: none;
   }
 }
