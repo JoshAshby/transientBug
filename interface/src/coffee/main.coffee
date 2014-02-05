@@ -9,3 +9,5 @@ $ ->
         history.pushState null, null, e.target.hash
       else
         window.location.hash = e.target.hash
+
+  $(".tooltip").tooltip()

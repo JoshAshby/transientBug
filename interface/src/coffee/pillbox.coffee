@@ -66,6 +66,10 @@ class Pillbox
 
     @pill.click =>
       @input.focus()
+      @pill.addClass "focus"
+
+    @pill.focusout =>
+      @pill.removeClass "focus"
 
     if $().typeahead?
       tags = $.ajax url: @opts.url, async: false

@@ -1,4 +1,7 @@
 @import "helpers/lesshat";
+@import "helpers/colors.less";
+@import "cyti/variables.less";
+@import "bootstrap/mixins.less";
 
 .pillbox {
   font-size: 14px;
@@ -16,6 +19,15 @@
 
   .twitter-typeahead {
     width: auto;
+  }
+
+  .box-shadow(inset 0 1px 1px rgba(0,0,0,.075));
+  .transition(~"border-color ease-in-out .15s, box-shadow ease-in-out .15s");
+  @color-rgba: rgba(red(@input-border-focus), green(@input-border-focus), blue(@input-border-focus), .6);
+  &.focus {
+    border-color: @input-border-focus;
+    outline: 0;
+    .box-shadow(~"inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px @{color-rgba}");
   }
 
   .label {

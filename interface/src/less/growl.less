@@ -1,0 +1,24 @@
+@import "helpers/colors.less";
+@import "helpers/lesshat.less";
+
+.growl-animated {
+  -webkit-transition: all 0.5s ease-in-out;
+  -moz-transition: all 0.5s ease-in-out;
+  -o-transition: all 0.5s ease-in-out;
+  -ms-transition: all 0.5s ease-in-out;
+  transition: all 0.5s ease-in-out;
+}
+
+.growl-mouseover {
+  .lh-opacity(1);
+  .lh-transition(opacity 0.2 ease-in);
+
+  & > button {
+    pointer-events: auto;
+  }
+
+  &.growl-mouseover-hover {
+    .lh-opacity(0.1);
+    .lh-blur(50);
+  }
+}

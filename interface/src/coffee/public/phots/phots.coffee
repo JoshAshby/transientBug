@@ -1,3 +1,7 @@
+LazyLoad.css [
+  '/static/css/growl.css'
+]
+
 LazyLoad.js [
   '/static/js/lib/typeahead.min.js',
   '/static/js/lib/mousetrap.min.js',
@@ -26,11 +30,12 @@ LazyLoad.js [
 
     # Who said anything about eggs?
     growl_options =
+      delay: 0
       position:
         from: "top"
         align: "center"
       template:
-        container: '<div class="col-xs-10 col-sm-10 col-md-8 alert">'
+        container: '<div class="col-xs-10 col-sm-10 col-md-8 alert growl-animated growl-mouseover">'
 
     syellayell = (msg) ->
       $.growl msg, growl_options
