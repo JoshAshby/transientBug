@@ -25,15 +25,17 @@ scriptFiles:
   </div>
 </div>
 <br>
-{% if tags %}
-  <div class="tags">
-    {% for tag in tags %}
-      <a href="/phots/tags/{{tag}}"><span class="label label-green">{{tag|replace("_", " ")}}</span></a>
-    {% endfor %}
-  </div>
-{% else %}
-  <div class="jumbotron">
-    <h1>No tags</h1>
-    <p>So sad...</p>
-  </div>
-{% endif %}
+<div class="phots-collection">
+  {% if tags %}
+    <div class="tags">
+      {% for tag in tags %}
+        <a href="/phots/tags/{{tag}}"><span class="label label-green">{{tag|replace("_", " ")}}</span></a>
+      {% endfor %}
+    </div>
+  {% else %}
+    <div class="jumbotron">
+      <h1>No tags</h1>
+      <p>So sad...</p>
+    </div>
+  {% endif %}
+</div>

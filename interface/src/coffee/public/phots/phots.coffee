@@ -30,7 +30,8 @@ LazyLoad.js [
 
     # Who said anything about eggs?
     growl_options =
-      delay: 0
+      ele: ".phots-collection"
+      offset: 40
       position:
         from: "top"
         align: "center"
@@ -49,6 +50,7 @@ LazyLoad.js [
         "I smell bad... So... I'm gonna go take a shower then go to work."
         "That was awkward."
         "Fix the div or whatever!"
+        "Thanks JoshAshby. My quotes, out of context, are immortalized in your world."
       ]
       syells[Math.floor(Math.random()*syells.length)]
 

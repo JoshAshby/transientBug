@@ -47,54 +47,56 @@
 </div>
 <br>
 
-{% if v=="cards" %}
-  <div class="cards">
-    {% for pic in page.pail %}
-      {% if loop.index%3==1 %}
-        <div class="row">
-      {% endif %}
-      <div class="col-md-4 col-sm-6">
-        <div class="phot-card">
-          <a href="/i/{{pic.filename}}"><img src="/i/{{pic.filename}}" alt="{{pic.filename}}"></a>
-          <div class="caption">
-            <div class="row">
-              <div class="col-md-8">
-                <a href="/i/{{pic.filename}}"><p data-toggle="tooltip" title="{{pic.title}}">{{pic.title}}</p></a>
-              </div>
-              <div class="col-md-4">
-                <a href="/phots/{{pic.filename}}" class="btn btn-green btn-sm pull-right">Page</a>
+<div class="phots-collection">
+  {% if v=="cards" %}
+    <div class="cards">
+      {% for pic in page.pail %}
+        {% if loop.index%3==1 %}
+          <div class="row">
+        {% endif %}
+        <div class="col-md-4 col-sm-6">
+          <div class="phot-card">
+            <a href="/i/{{pic.filename}}"><img src="/i/{{pic.filename}}" alt="{{pic.filename}}"></a>
+            <div class="caption">
+              <div class="row">
+                <div class="col-md-8">
+                  <a href="/i/{{pic.filename}}"><p data-toggle="tooltip" title="{{pic.title}}">{{pic.title}}</p></a>
+                </div>
+                <div class="col-md-4">
+                  <a href="/phots/{{pic.filename}}" class="btn btn-green btn-sm pull-right">Page</a>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-      {% if loop.index%3==0 or loop.last %}
+        {% if loop.index%3==0 or loop.last %}
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+  {% elif v=="links" %}
+    <div class="links">
+      <div class="row">
+        <div class="col-md-12">
+          {% for pic in page.pail %}
+            <ul class="list-unstyled">
+              <li>
+                <a href="/phots/view/{{pic.filename}}" class="btn btn-green btn-xs">Page</a> <a href="/i/{{pic.filename}}">{{pic.filename}}</a>
+                {% if pic.tags %}
+                  {% for tag in pic.tags %}
+                    <a href="/phots/tags/{{ tag }}">
+                      <span class="label label-green">{{tag|replace("_", " ")}}</span>
+                    </a>
+                  {% endfor %}
+                {% endif %}
+              </li>
+            </ul>
+          {% endfor %}
         </div>
-      {% endif %}
-    {% endfor %}
-  </div>
-{% elif v=="links" %}
-  <div class="links">
-    <div class="row">
-      <div class="col-md-12">
-        {% for pic in page.pail %}
-          <ul class="list-unstyled">
-            <li>
-              <a href="/phots/view/{{pic.filename}}" class="btn btn-green btn-xs">Page</a> <a href="/i/{{pic.filename}}">{{pic.filename}}</a>
-              {% if pic.tags %}
-                {% for tag in pic.tags %}
-                  <a href="/phots/tags/{{ tag }}">
-                    <span class="label label-green">{{tag|replace("_", " ")}}</span>
-                  </a>
-                {% endfor %}
-              {% endif %}
-            </li>
-          </ul>
-        {% endfor %}
       </div>
     </div>
-  </div>
-{% endif %}
+  {% endif %}
+</div>
 
 <div class="row">
   <div class="col-md-12">
