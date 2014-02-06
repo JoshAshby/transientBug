@@ -4,13 +4,6 @@
   </div>
   <div class="panel-body">
     <form method="POST" action={{ "/new/note" if not note else "/notes/"+note.short_code }} id="quick_note">
-      <ul class="nav nav-tabs nav-justified">
-        <li class="active"><a href="#quick_note_edit" data-toggle="tab">Edit</a></li>
-        <li><a href="#quick_note_options" data-toggle="tab">Options</a></li>
-      </ul>
-      <div class="tab-content">
-        <div class="tab-pane active" id="quick_note_edit">
-          <br>
           <fieldset>
             <div class="form-group">
               <input type="text" class="form-control" id="quick_note_title" name="title" placeholder="Title..." value="{{ note.title if note }}" required>
@@ -22,8 +15,6 @@
               <input type="text" class="form-control" name="tags" id="quick_note_tags" placeholder="Tags..." value="{{ note.tags|join(", ") if note }}"/>
             </div>
           </fieldset>
-        </div>
-        <div class="tab-pane" id="quick_note_options">
           <fieldset>
             <div class="row">
               <div class="col-md-12">
@@ -62,8 +53,6 @@
               </div>
             </div>
           </fieldset>
-        </div>
-      </div>
       <fieldset>
         <div class="row">
           <div class="col-md-12">

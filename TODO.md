@@ -10,5 +10,3 @@
   for this so far, we'll see)
 - better email views
 - Custom themes for slideshows?
-
-
