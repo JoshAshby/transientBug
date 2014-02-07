@@ -6,14 +6,18 @@ from whoosh.index import EmptyIndexError
 
 logger = logging.getLogger("search")
 
+base_path = ""
+
 
 class BaseSearcher(object):
-    def __init__(self, index_name, schema=None):
-        self._name = index_name
-        self._path = self._name
-        self._schema = schema
+    def __init__(self, schema=None):
+        if schema:
+            self.set_schema(schema)
 
         self.get_index()
+
+    def set_schema(self, schema):
+        self._schema = schema
 
     def get_index(self):
         try:
@@ -26,38 +30,36 @@ class BaseSearcher(object):
                 raise Exception("No schema defined, and no index found.")
 
     def create_index(self):
-        if not os.path.exists(self._path):
-            os.makedirs(self._path)
-        self.ix = whoosh.index.create_in(self._path, self._schema)
+        if not os.path.exists(base_path+self.name):
+            os.makedirs(base_path+self.name)
+        self.ix = whoosh.index.create_in(base_path+self.name, self._schema)
 
     def open_index(self):
-        self.ix = whoosh.index.open_dir(self._path)
+        self.ix = whoosh.index.open_dir(base_path+self.name)
 
     def add(self, item):
-        writer = whoosh.writing.AsyncWriter(self.ix)
-      # Fill in stuff to add
-        writer.commit()
+        pass
 
     def add_multiple(self, items):
-        writer = whoosh.writing.AsyncWriter(self.ix)
-      # Fill in stuff to add
-        for item in items:
-          # writer.add_document()
-            pass
-
-        writer.commit()
+        pass
 
     def update(self, item):
-        writer = whoosh.writing.AsyncWriter(self.ix)
-      # writer.update_document()
-      # Fill in stuff to add
-        writer.commit()
+        pass
 
     def delete(self, id):
-        writer = self.ix.writer()
         document = whoosh.query.Term("id", id)
-        writer.delete_by_query(document)
-        writer.commit()
+        self.writer.delete_by_query(document)
+
+    def save(self):
+        self.writer.commit()
+
+    @property
+    def writer(self):
+        if not hasattr(self, "_writer") or not self._writer:
+            self._writer = whoosh.writing.AsyncWriter(self.ix)
+            #self._writer = self.ix.writer()
+
+        return self._writer
 
     def search(self, search, limit=None):
         ids = []
