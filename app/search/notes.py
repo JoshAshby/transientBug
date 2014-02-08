@@ -1,4 +1,4 @@
-import copy
+import arrow
 
 import search.base_searcher as searcher
 
@@ -16,37 +16,35 @@ fields_to_search = ["title", "short_code", "contents", "tags"]
 class NoteSchema(SchemaClass):
     id = ID(stored=True, unique=True)
     created = DATETIME()
-    title = TEXT(analyzer=FancyAnalyzer, spelling=True)
+    title = TEXT(analyzer=FancyAnalyzer(), spelling=True)
     contents = TEXT(spelling=True)
     public = BOOLEAN()
     draft = BOOLEAN()
     short_code = ID(stored=True, unique=True)
-    disabled = BOOLEAN()
+    disable = BOOLEAN()
     reported = BOOLEAN()
     tags = KEYWORD(commas=True)
+    user = ID()
 
 
 class NoteSearcher(searcher.BaseSearcher):
     name = "notes"
-    _schema = NoteSchema()
+    _schema = NoteSchema
 
     def add(self, note):
-      # This isn't at all anything near best practice, but it's my own module
-      # and code so I'm allowing myself to do this. I wouldn't recommend it
-      # however for anyone else to do.
-        d = copy.copy(note._data) # BAD BAD BAD BAD
-        tags = d.pop("tags")
-        d["tags"] = ",".join(tags)
+        d = {"id":note.id,
+             "created":arrow.get(note.created).datetime,
+             "title":note.title,
+             "contents":note.contents,
+             "public":note.public,
+             "draft":note.draft,
+             "short_code":note.short_code,
+             "disable":note.disable,
+             "reported":note.reported,
+             "user":note.user}
 
-        d.pop("disable")
-        d.pop("reported")
-        d.pop("draft")
-        d.pop("table_of_contents")
-        d.pop("public")
-        d.pop("created")
-        d.pop("theme")
-        d.pop("has_comments")
-        d.pop("user")
+        if note.tags:
+            d["tags"] = ",".join(note.tags)
 
         self.writer.add_document(**d)
 
@@ -57,7 +55,7 @@ class NoteSearcher(searcher.BaseSearcher):
         """
         ids = []
         with self.ix.searcher() as searcher:
-            if not isinstance(search, QueryParser()):
+            if not isinstance(search, QueryParser):
                 query = MultifieldParser(fields_to_search, self.ix.schema).parse(search)
             else:
                 query = search

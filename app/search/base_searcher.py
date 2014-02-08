@@ -68,7 +68,7 @@ class BaseSearcher(object):
     def search(self, search, limit=None):
         ids = []
         with self.ix.searcher() as searcher:
-            if not isinstance(search, whoosh.qparser.QueryParser()):
+            if not isinstance(search, whoosh.qparser.QueryParser):
                 query = whoosh.qparser.QueryParser("content", self.ix.schema).parse(search)
             else:
                 query = search
