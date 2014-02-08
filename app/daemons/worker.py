@@ -15,17 +15,14 @@ import logging
 logger = logging.getLogger("worker")
 
 
-class Worker(object):
+class BaseWorker(object):
     name = ""
 
     def start(self):
         self.run()
 
     def _setup(self):
-        self._queues = (
-            ":".join([self.name, "queue"]),
-            ":".join([self.name, "command"])
-        )
+        pass
 
     def run(self):
         self._setup()
@@ -37,13 +34,7 @@ class Worker(object):
             logger.info("Keyboard shutdown")
 
     def _poll(self):
-        while True:
-            next_id = c.redis.blpop(self._queues)
-            if next_id[0] == self._queues[0]:
-                self.data = next_id[1]
-                self.build()
-            else:
-                pass
+        pass
 
     def build(self):
         pass
@@ -53,3 +44,20 @@ class Worker(object):
 
     def _shutdown(self):
         pass
+
+
+class RedisWorker(BaseWorker):
+    def _setup(self):
+        self._queues = (
+            ":".join([self.name, "queue"]),
+            ":".join([self.name, "command"])
+        )
+
+    def _poll(self):
+        while True:
+            next_id = c.redis.blpop(self._queues)
+            if next_id[0] == self._queues[0]:
+                self.data = next_id[1]
+                self.build()
+            else:
+                pass

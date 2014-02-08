@@ -1,3 +1,14 @@
+#!/usr/bin/env python
+"""
+Search all the notes!
+
+http://xkcd.com/353/
+
+Josh Ashby
+2014
+http://joshashby.com
+joshuaashby@joshashby.com
+"""
 import arrow
 
 import search.base_searcher as searcher

@@ -1,3 +1,18 @@
+#!/usr/bin/env python
+"""
+Search all the things.
+Just a general template for making more advanced searchers. This creates a
+little bit of a nicer object to work with, I think, rather than the whoosh api.
+Its also fully contained. A single searcher is all you need to both search and
+index documents.
+
+http://xkcd.com/353/
+
+Josh Ashby
+2014
+http://joshashby.com
+joshuaashby@joshashby.com
+"""
 import os
 import logging
 import whoosh.qparser

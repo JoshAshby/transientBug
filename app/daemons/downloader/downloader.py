@@ -9,7 +9,7 @@ Josh Ashby
 http://joshashby.com
 joshuaashby@joshashby.com
 """
-from daemons.worker import Worker
+from daemons.worker import RedisWorker
 
 import config.config as c
 
@@ -23,7 +23,7 @@ import logging
 logger = logging.getLogger(c.downloader.log_name)
 
 
-class Downloader(Worker):
+class Downloader(RedisWorker):
     name = "downloader"
     def build(self):
         phot = pm.Phot(self.data)

@@ -9,7 +9,7 @@ Josh Ashby
 http://joshashby.com
 joshuaashby@joshashby.com
 """
-from daemons.worker import Worker
+from daemons.worker import RedisWorker
 
 import config.config as c
 
@@ -24,7 +24,7 @@ import logging
 logger = logging.getLogger(c.emailer.log_name)
 
 
-class Emailer(Worker):
+class Emailer(RedisWorker):
     name = "emailer"
     def build(self):
         email = em.Email(self.data)
