@@ -1,12 +1,15 @@
 import os
 import logging
-import whoosh
+import whoosh.qparser
+import whoosh.writing
+import whoosh.index
+import whoosh.query
 
 from whoosh.index import EmptyIndexError
 
-logger = logging.getLogger("search")
+import config.config as c
 
-base_path = ""
+logger = logging.getLogger("search")
 
 
 class BaseSearcher(object):
@@ -30,18 +33,19 @@ class BaseSearcher(object):
                 raise Exception("No schema defined, and no index found.")
 
     def create_index(self):
-        if not os.path.exists(base_path+self.name):
-            os.makedirs(base_path+self.name)
-        self.ix = whoosh.index.create_in(base_path+self.name, self._schema)
+        if not os.path.exists(c.dirs.search_index+self.name):
+            os.makedirs(c.dirs.search_index+self.name)
+        self.ix = whoosh.index.create_in(c.dirs.search_index+self.name, self._schema)
 
     def open_index(self):
-        self.ix = whoosh.index.open_dir(base_path+self.name)
+        self.ix = whoosh.index.open_dir(c.dirs.search_index+self.name)
 
     def add(self, item):
         pass
 
     def add_multiple(self, items):
-        pass
+        for item in items:
+            self.add(item)
 
     def update(self, item):
         pass
@@ -73,7 +77,7 @@ class BaseSearcher(object):
             for item in results:
                 ids.append(item["id"])
 
-            return ids
+        return ids
 
     def count(self):
         return self.ix.doc_count()

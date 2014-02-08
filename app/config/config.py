@@ -60,6 +60,10 @@ redis = red.StrictRedis(general["databases"]["redis"]["URL"], db=general["databa
 
 parse_files(general)
 
+
+# I need a better way to get around this. Maybe time to write something that
+# looks for dicts within the yaml, and converts them to a ODM and then attaches
+# that ODM to the parent as an attribute
 downloader = StandardODM(**general.downloader)
 parse_files(downloader)
 downloader.files = StandardODM(**downloader.files)
@@ -69,6 +73,8 @@ emailer = StandardODM(**general.emailer)
 parse_files(emailer)
 emailer.files = StandardODM(**emailer.files)
 emailer.dirs = StandardODM(**emailer.dirs)
+
+indexer = StandardODM(**general.indexer)
 
 dirs = StandardODM(**general.dirs)
 files = StandardODM(**general.files)

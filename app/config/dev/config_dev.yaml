@@ -37,6 +37,8 @@ databases:
     db: 1
     URL: localhost
 
+
+
 downloader:
   log_name: transientbug_downloader
 
@@ -62,3 +64,6 @@ emailer:
   dirs:
     pid: pid/
     log: logs/
+
+indexer:
+  log_name: tb_indexer
