@@ -18,6 +18,7 @@ from seshat_addons.seshat.obj_mods import template
 
 import rethinkdb as r
 import models.rethink.note.noteModel as nm
+from searchers.notes import NoteSearcher
 import re
 
 import utils.markdown_utils as md
@@ -132,6 +133,13 @@ class view(MixedObject):
             note.theme = theme
 
             note.save()
+
+            try:
+                searcher = NoteSearcher()
+                searcher.update(note)
+                searcher.save()
+            except Exception as e:
+                print e
 
             return Redirect("/notes/%s" % note.short_code)
 

@@ -17,6 +17,7 @@ from seshat.actions import Unauthorized, NotFound
 
 import rethinkdb as r
 import models.rethink.note.noteModel as nm
+from searchers.notes import NoteSearcher
 
 
 @route()
@@ -39,6 +40,11 @@ class delete(MixedObject):
 
             note.disable = True
             note.save()
+
+            searcher = NoteSearcher()
+            searcher.update(note)
+            searcher.save()
+
             return {"success": True}
 
         else:

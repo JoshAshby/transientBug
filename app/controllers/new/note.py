@@ -19,6 +19,7 @@ from seshat_addons.seshat.func_mods import HTML
 from seshat.actions import Redirect
 
 import models.rethink.note.noteModel as nm
+from searchers.notes import NoteSearcher
 
 
 @route()
@@ -56,7 +57,12 @@ class note(MixedObject):
                                     draft=draft,
                                     theme=theme)
 
+            searcher = NoteSearcher()
+            searcher.add(note)
+            searcher.save()
+
         except Exception as e:
+            print e
             self.request.session.push_alert("That note could not be created! %s" % e.message, level="error")
             return Redirect("/new/note")
 

@@ -11,7 +11,7 @@ joshuaashby@joshashby.com
 """
 import arrow
 
-import search.base_searcher as searcher
+import searchers.base_searcher as searcher
 
 from whoosh.fields import SchemaClass, TEXT, KEYWORD, ID, DATETIME, BOOLEAN
 from whoosh.analysis import FancyAnalyzer
@@ -38,28 +38,39 @@ class NoteSchema(SchemaClass):
     user = ID()
 
 
+def get_note_data(note):
+    d = {"id":unicode(note.id),
+         "created":arrow.get(note.created).datetime,
+         "title":unicode(note.title),
+         "contents":unicode(note.contents),
+         "public":note.public,
+         "draft":note.draft,
+         "short_code":unicode(note.short_code),
+         "disable":note.disable,
+         "reported":note.reported,
+         "user":unicode(note.user)}
+
+    if note.tags:
+        d["tags"] = u",".join(note.tags)
+
+    return d
+
+
 class NoteSearcher(searcher.BaseSearcher):
     name = "notes"
     _schema = NoteSchema
 
     def add(self, note):
-        d = {"id":note.id,
-             "created":arrow.get(note.created).datetime,
-             "title":note.title,
-             "contents":note.contents,
-             "public":note.public,
-             "draft":note.draft,
-             "short_code":note.short_code,
-             "disable":note.disable,
-             "reported":note.reported,
-             "user":note.user}
-
-        if note.tags:
-            d["tags"] = ",".join(note.tags)
+        d = get_note_data(note)
 
         self.writer.add_document(**d)
 
-    def search(self, search, limit=None):
+    def update(self, note):
+        d = get_note_data(note)
+
+        self.writer.update_document(**d)
+
+    def search(self, search, limit=None, collection=False):
         """
         Returns a RethinkCollection containing all notes which matched the
         query contained in `search`
@@ -75,7 +86,10 @@ class NoteSearcher(searcher.BaseSearcher):
             for item in results:
                 ids.append(item["id"])
 
-        query = r.table(nm.Note.table).get_all(*ids)
-        results = RethinkCollection(nm.Note, query=query)
+        if collection and ids:
+            query = r.table(nm.Note.table).get_all(*ids)
+            results = RethinkCollection(nm.Note, query=query)
 
-        return results
+            return results
+
+        return ids
