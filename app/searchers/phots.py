@@ -31,7 +31,7 @@ def get_phot_data(phot):
          "created":arrow.get(phot.created).datetime,
          "title":unicode(phot.title),
          "short_code":unicode(phot.short_code),
-         "disable":phot.disable,
+         "disable":phot.disable if hasattr(phot, "disable") else False,
          "user":unicode(phot.user)}
 
     if phot.tags:

@@ -59,7 +59,8 @@ class Phot(RethinkModel):
                           url=url,
                           tags=new_tags,
                           short_code=code,
-                          filename=filename)
+                          filename=filename,
+                          disable=False)
 
         if type(stuff) is str:
             c.redis.rpush("downloader:queue", what.id)
