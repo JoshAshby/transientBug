@@ -113,8 +113,16 @@ class FileInputConverter
           top:moveInputY
 
       # Update the filename attribute once there is a change to the file input
-      $('.file-input-wrapper input[type=file]').change (e) =>
-        @filename e.target
+      $('.file-input-wrapper input[type=file]').change (e) ->
+        el = $ this
+        fileName = el.val()
+
+        if el.prop('files')? and el.prop('files').length > 1
+          fileName = el[0].files.length+' files'
+        else
+          fileName = fileName.substring fileName.lastIndexOf('\\')+1, fileName.length
+
+        el.parents(".file-input-wrapper").find("input[type=text]").val fileName
 
   btn: (classes, title, clone) ->
     """
@@ -125,17 +133,6 @@ class FileInputConverter
       <input type="text" class="form-control file-input-name" value="No File Selected" readonly>
     </div>
     """
-
-  filename: (wat) ->
-    el = $ wat
-    fileName = el.val()
-
-    if el.prop('files')? and el.prop('files').length > 1
-      fileName = el[0].files.length+' files'
-    else
-      fileName = fileName.substring fileName.lastIndexOf('\\')+1, fileName.length
-
-    el.parent().find("input[type=text]").val fileName
 
 # Add the styles before the first stylesheet
 # This ensures they can be easily overridden with developer styles
