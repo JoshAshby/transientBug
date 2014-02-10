@@ -44,6 +44,6 @@ class emails(MixedObject):
         result = RethinkCollection(em.Email, query=parts)
         page = Paginate(result, self.request, "created", sort_direction_default="asc")
 
-        self.view.data = {"user": user, "page": page}
+        self.view.data = {"user": user, "page": page, "command": "emails"}
 
         return self.view

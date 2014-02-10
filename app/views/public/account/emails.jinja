@@ -1,71 +1,75 @@
-{% set type=req.get_param("filter", "to") %}
+<div class="row">
+  <div class="col-md-8 col-md-offset-2">
+    {% set type=req.get_param("filter", "to") %}
 
-{{tabs}}
+    ![[partials/public/account/tabs]]
 
-<form role="pagination_options" class="form">
-  <div class="row">
-    <div class="col-sm-12 col-md-6">
-      <b><a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">Filter Results <i class="fa fa-chevron-down"></i></a></b>
-      <fieldset class="form-horizontal" id="accordion">
-        <div class="well collapse in" id="collapseOne">
-          <div class="form-group">
-            <label for="filter" class="col-md-4 control-label">Direct/CC: </label>
-            <div class="col-md-8">
-              <select class="form-control input-sm" name="filter">
-                <option value="to" {{ 'selected' if type=="to" }}>To You</option>
-                <option value="bcc" {{ 'selected' if type=="bcc" }}>BCC</option>
-                <option value="cc" {{ 'selected' if type=="cc" }}>CC</option>
-              </select>
+    <form role="pagination_options" class="form">
+      <div class="row">
+        <div class="col-sm-12 col-md-6">
+          <b><a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">Filter Results <i class="fa fa-chevron-down"></i></a></b>
+          <fieldset class="form-horizontal" id="accordion">
+            <div class="well collapse in" id="collapseOne">
+              <div class="form-group">
+                <label for="filter" class="col-md-4 control-label">Direct/CC: </label>
+                <div class="col-md-8">
+                  <select class="form-control input-sm" name="filter">
+                    <option value="to" {{ 'selected' if type=="to" }}>To You</option>
+                    <option value="bcc" {{ 'selected' if type=="bcc" }}>BCC</option>
+                    <option value="cc" {{ 'selected' if type=="cc" }}>CC</option>
+                  </select>
+                </div>
+              </div>
+              <button type="submit" class="btn btn-green btn-sm pull-right">Update</button>
+              <br>
             </div>
-          </div>
-          <button type="submit" class="btn btn-green btn-sm pull-right">Update</button>
-          <br>
+          </fieldset>
         </div>
-      </fieldset>
-    </div>
-    <div class="col-sm-12 col-md-6">
-      {% if page.pail %}
-        <fieldset class="pull-right form-inline">
-          {{page.options}}
-        </fieldset>
-      {% endif %}
-    </div>
-  </div>
-</form>
-<br>
-
-<div class="row">
-  <div class="col-md-12">
-    {% if page.pail %}
-    <table class="table table-striped table-hover table-condensed">
-      <thead>
-        <th></th>
-        <th>Subject</th>
-        <th>Service</th>
-        <th>Sent</th>
-      </thead>
-      <tbody>
-        {% for email in page.pail %}
-          <tr>
-            <td></td>
-            <td><a href="/account/emails/{{email.id}}">{{email.subject|truncate(25)}}</a></td>
-            <td>{{email.service}}</td>
-            <td>{{email.formated_created}}</td>
-          </tr>
-        {% endfor %}
-      </tbody>
-    </table>
-    {% else %}
-      <div class="jumbotron">
-        <h1>No emails sent!</h1>
-        <p>Looks like we haven't sent you any emails yet! (this is typically a good thing)</p>
+        <div class="col-sm-12 col-md-6">
+          {% if page.pail %}
+            <fieldset class="pull-right form-inline">
+              {{page.options}}
+            </fieldset>
+          {% endif %}
+        </div>
       </div>
-    {% endif %}
-  </div>
-</div>
+    </form>
+    <br>
 
-<div class="row">
-  <div class="col-md-12">
-    {{page.paginate}}
+    <div class="row">
+      <div class="col-md-12">
+        {% if page.pail %}
+        <table class="table table-striped table-hover table-condensed">
+          <thead>
+            <th></th>
+            <th>Subject</th>
+            <th>Service</th>
+            <th>Sent</th>
+          </thead>
+          <tbody>
+            {% for email in page.pail %}
+              <tr>
+                <td></td>
+                <td><a href="/account/emails/{{email.id}}">{{email.subject|truncate(25)}}</a></td>
+                <td>{{email.service}}</td>
+                <td>{{email.formated_created}}</td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+        {% else %}
+          <div class="jumbotron">
+            <h1>No emails sent!</h1>
+            <p>Looks like we haven't sent you any emails yet! (this is typically a good thing)</p>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12">
+        {{page.paginate}}
+      </div>
+    </div>
   </div>
 </div>

@@ -13,7 +13,7 @@
   <div class="col-md-12">
     <ul class="nav nav-tabs">
       <li {{ 'class="active"' if not command }}><a href="/account">Settings</a></li>
-      <li {{ 'class="active"' if command=="emails" }}><a href="/account/emails">Emails</a></li>
+      <li {{ 'class="active"' if command and command=="emails" }}><a href="/account/emails">Emails</a></li>
     </ul>
   </div>
 </div>

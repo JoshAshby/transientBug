@@ -27,11 +27,6 @@ class index(MixedObject):
     def GET(self):
         user = um.User(self.request.session.id)
 
-        self.view.partial("tabs",
-                          "partials/public/account/tabs",
-                          {"user": user,
-                           "command": self.request.command})
-
         self.view.data = {"user": user}
         return self.view
 
