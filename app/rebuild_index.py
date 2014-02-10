@@ -10,13 +10,21 @@ http://joshashby.com
 joshuaashby@joshashby.com
 """
 from searchers.notes import NoteSearcher
+from searchers.phots import PhotSearcher
 from rethinkORM import RethinkCollection
 from models.rethink.note.noteModel import Note
+from models.rethink.phot.photModel import Phot
 
 
 if __name__ == "__main__":
     searcher = NoteSearcher()
 
     all_notes = RethinkCollection(Note).fetch()
-    searcher.add_multiple(all_notes)
+    searcher.update_multiple(all_notes)
+    searcher.save()
+
+    searcher = PhotSearcher()
+
+    all_phots = RethinkCollection(Phot).fetch()
+    searcher.update_multiple(all_phots)
     searcher.save()

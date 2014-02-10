@@ -15,13 +15,7 @@ import searchers.base_searcher as searcher
 
 from whoosh.fields import SchemaClass, TEXT, KEYWORD, ID, DATETIME, BOOLEAN
 from whoosh.analysis import FancyAnalyzer
-from whoosh.qparser import QueryParser, MultifieldParser
-
-import rethinkdb as r
-from rethinkORM import RethinkCollection
 import models.rethink.note.noteModel as nm
-
-fields_to_search = ["title", "short_code", "contents", "tags"]
 
 
 class NoteSchema(SchemaClass):
@@ -56,43 +50,22 @@ def get_note_data(note):
     return d
 
 
-class NoteSearcher(searcher.BaseSearcher):
+class NoteSearcher(searcher.RethinkSearcher):
     name = "notes"
     _schema = NoteSchema
+    _model = nm.Note
+    _fields_to_search = ["title", "short_code", "contents", "tags"]
 
     def add(self, note):
         d = get_note_data(note)
 
         self.writer.add_document(**d)
 
+        return self
+
     def update(self, note):
         d = get_note_data(note)
 
         self.writer.update_document(**d)
 
-    def search(self, search, limit=None, collection=False):
-        """
-        Returns a RethinkCollection containing all notes which matched the
-        query contained in `search`
-        """
-        ids = []
-        with self.ix.searcher() as searcher:
-            if not isinstance(search, QueryParser):
-                query = MultifieldParser(fields_to_search, self.ix.schema).parse(search)
-            else:
-                query = search
-            results = searcher.search(query, limit=limit)
-
-            for item in results:
-                ids.append(item["id"])
-
-        if not ids:
-            return None
-
-        if collection and ids:
-            query = r.table(nm.Note.table).get_all(*ids)
-            results = RethinkCollection(nm.Note, query=query)
-
-            return results
-
-        return ids
+        return self

@@ -19,8 +19,10 @@ import whoosh.qparser
 import whoosh.writing
 import whoosh.index
 import whoosh.query
-
 from whoosh.index import EmptyIndexError
+
+import rethinkdb as r
+from rethinkORM import RethinkCollection
 
 import config.config as c
 
@@ -28,6 +30,8 @@ logger = logging.getLogger("search")
 
 
 class BaseSearcher(object):
+    _fields_to_search = []
+
     def __init__(self, schema=None):
         if schema:
             self.set_schema(schema)
@@ -36,6 +40,8 @@ class BaseSearcher(object):
 
     def set_schema(self, schema):
         self._schema = schema
+
+        return self
 
     def get_index(self):
         try:
@@ -47,13 +53,19 @@ class BaseSearcher(object):
             else:
                 raise Exception("No schema defined, and no index found.")
 
+        return self
+
     def create_index(self):
         if not os.path.exists(c.dirs.search_index+self.name):
             os.makedirs(c.dirs.search_index+self.name)
         self.ix = whoosh.index.create_in(c.dirs.search_index+self.name, self._schema)
 
+        return self
+
     def open_index(self):
         self.ix = whoosh.index.open_dir(c.dirs.search_index+self.name)
+
+        return self
 
     def add(self, item):
         pass
@@ -62,15 +74,27 @@ class BaseSearcher(object):
         for item in items:
             self.add(item)
 
+        return self
+
     def update(self, item):
         pass
+
+    def update_multiple(self, items):
+        for item in items:
+            self.update(item)
+
+        return self
 
     def delete(self, id):
         document = whoosh.query.Term("id", id)
         self.writer.delete_by_query(document)
 
+        return self
+
     def save(self):
         self.writer.commit()
+
+        return self
 
     @property
     def writer(self):
@@ -80,11 +104,43 @@ class BaseSearcher(object):
 
         return self._writer
 
-    def search(self, search, limit=None):
+    def search(self, search, limit):
+        """
+        Returns a RethinkCollection containing all notes which matched the
+        query contained in `search`
+        """
+        with self.ix.searcher() as searcher:
+            if not isinstance(search, whoosh.qparser.QueryParser):
+                query = whoosh.qparser.MultifieldParser(self._fields_to_search, self.ix.schema).parse(search)
+            else:
+                query = search
+            results = searcher.search(query, limit=limit)
+
+        if not results:
+            return None
+
+        return results
+
+
+    def count(self):
+        return self.ix.doc_count()
+
+    def __len__(self):
+        return self.count()
+
+
+class RethinkSearcher(BaseSearcher):
+    _model = None
+
+    def search(self, search, limit=None, collection=False):
+        """
+        Returns a RethinkCollection containing all notes which matched the
+        query contained in `search`
+        """
         ids = []
         with self.ix.searcher() as searcher:
             if not isinstance(search, whoosh.qparser.QueryParser):
-                query = whoosh.qparser.QueryParser("content", self.ix.schema).parse(search)
+                query = whoosh.qparser.MultifieldParser(self._fields_to_search, self.ix.schema).parse(search)
             else:
                 query = search
             results = searcher.search(query, limit=limit)
@@ -92,10 +148,13 @@ class BaseSearcher(object):
             for item in results:
                 ids.append(item["id"])
 
+        if not ids:
+            return None
+
+        if collection and ids:
+            query = r.table(self._model.table).get_all(*ids)
+            results = RethinkCollection(self._model, query=query)
+
+            return results
+
         return ids
-
-    def count(self):
-        return self.ix.doc_count()
-
-    def __len__(self):
-        return self.count()
