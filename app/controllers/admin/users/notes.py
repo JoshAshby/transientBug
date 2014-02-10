@@ -72,7 +72,7 @@ class notes(MixedObject):
         res = RethinkCollection(nm.Note, query=q)
         page = Paginate(res, self.request, sort_by)
 
-        self.view.data = {"page": page,
+        self.view.data = {"note_page": page,
                           "user": user,
                           "command": self.request.command}
 

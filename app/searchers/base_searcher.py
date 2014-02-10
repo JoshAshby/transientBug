@@ -106,8 +106,8 @@ class BaseSearcher(object):
 
     def search(self, search, limit):
         """
-        Returns a RethinkCollection containing all notes which matched the
-        query contained in `search`
+        returns a list of dicts containing the stored fields within the index
+        for the results that matched the search query
         """
         with self.ix.searcher() as searcher:
             if not isinstance(search, whoosh.qparser.QueryParser):

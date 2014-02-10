@@ -1,7 +1,5 @@
 #!/usr/bin/env python
 """
-main index listing for notes - reroutes to login if you're not logged in
-
 For more information, see: https://github.com/JoshAshby/
 
 http://xkcd.com/353/
@@ -27,7 +25,7 @@ import models.utils.dbUtils as dbu
 
 @route()
 @template("public/search/index", "Search")
-class search(MixedObject):
+class index(MixedObject):
     @HTML
     def GET(self):
         search_term = self.request.get_param("s")
@@ -36,10 +34,10 @@ class search(MixedObject):
             self.view.template = "public/search/results"
 
           # Notes searching
-            searcher = NoteSearcher()
+            notes_searcher = NoteSearcher()
             notes_parts = {"disable": False, "public": True, "draft": False}
 
-            notes_ids = searcher.search(search_term, collection=True)
+            notes_ids = notes_searcher.search(search_term, collection=True)
             if notes_ids is not None:
                 notes_ids.filter(notes_parts)
                 notes_ids.fetch()
@@ -50,11 +48,10 @@ class search(MixedObject):
             else:
                 self.view.data = {"note_page": None}
 
-
           # Phots searching
-            searcher = PhotSearcher()
+            phots_searcher = PhotSearcher()
             phots_hidden_query = dbu.rql_where_not(pm.Phot.table, "disable", True)
-            phots_ids = searcher.search(search_term, collection=True, pre_query=phots_hidden_query)
+            phots_ids = phots_searcher.search(search_term, collection=True, pre_query=phots_hidden_query)
             if phots_ids is not None:
                 phots_ids.fetch()
 

@@ -33,6 +33,6 @@ class index(MixedObject):
         result = RethinkCollection(nm.Note, query=parts)
         page = Paginate(result, self.request, "created", sort_direction_default="asc")
 
-        self.view.data = {"page": page}
+        self.view.data = {"note_page": page}
 
         return self.view

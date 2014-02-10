@@ -40,5 +40,5 @@ class index(MixedObject):
 
         self.view.data = {"filter": orig,
                           "v": view,
-                          "page": page}
+                          "phot_page": page}
         return self.view
