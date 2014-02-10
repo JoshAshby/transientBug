@@ -86,6 +86,9 @@ class NoteSearcher(searcher.BaseSearcher):
             for item in results:
                 ids.append(item["id"])
 
+        if not ids:
+            return None
+
         if collection and ids:
             query = r.table(nm.Note.table).get_all(*ids)
             results = RethinkCollection(nm.Note, query=query)

@@ -13,13 +13,14 @@
     {% endif %}
       <div  class="note-header">
         <h1>{{note.title}}</h1>
-        <small><b>By</b> {{ note.author.username if note.author.id!=req.session.id else 'You!'}} - {{note.formated_time}} | <b>Visibility:</b> {{ 'Public' if note.public else 'Private' }}{% if req.session.id %} | <b>Status:</b> {{ 'Draft' if note.draft else 'Published' }} {% endif %}</small>
+        <small><b>By</b> {{ note.author.username if
+          note.author.id!=req.session.id else 'You!'}} - {{note.formated_time}}{% if req.session.id %} | <b>Visibility:</b> {{ 'Public' if note.public else 'Private' }} | <b>Status:</b> {{ 'Draft' if note.draft else 'Published' }} {% endif %}</small>
       </div>
-      <hr>
+      <br>
       <div class="note-body">
         {{note.formated_contents}}
       </div>
-      <hr>
+      <br>
       <b>Tags: </b>
       {% for tag in note.tags %}
         <a href="/notes/tags/{{tag}}"><span class="label label-red">{{tag}}</span></a>

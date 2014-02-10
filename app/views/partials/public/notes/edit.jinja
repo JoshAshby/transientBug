@@ -20,12 +20,12 @@
               <div class="col-md-12">
                 <div class="checkbox">
                   <label>
-                    <input type="checkbox" name="draft" id="quick_note_draft" value="true" {{ 'checked' if not note or note.draft }}/> Is this currently a draft?
+                    <input type="checkbox" name="draft" class="switch-mini" id="quick_note_draft" value="true" {{ 'checked' if not note or note.draft }}/> Is this currently a draft?
                   </label>
                 </div>
                 <div class="checkbox">
                   <label>
-                    <input type="checkbox" name="toc" id="quick_note_toc" value="true" {{ 'checked' if note and note.table_of_contents }}/> Should a table of contents be created for this note?
+                    <input type="checkbox" name="toc" class="switch-mini" id="quick_note_toc" value="true" {{ 'checked' if note and note.table_of_contents }}/> Should a table of contents be created for this note?
                     <span class="help-block"><small>This will create a floating sidebar
                     along side the post that will contain a table of contents generated
                     from all h1's in the post.</small></span>
@@ -33,12 +33,12 @@
                 </div>
                 <div class="checkbox">
                   <label>
-                    <input type="checkbox" name="comments" id="quick_note_comments" value="true" {{ 'checked' if note and note.has_comments }}/> Should this note have comments from Disqus enabled?
+                    <input type="checkbox" name="comments" class="switch-mini" id="quick_note_comments" value="true" {{ 'checked' if note and note.has_comments }}/> Should this note have comments from Disqus enabled?
                   </label>
                 </div>
                 <div class="checkbox">
                   <label>
-                    <input type="checkbox" name="public" id="quick_note_public" value="true" {{ 'checked' if note and note.public }}/> Make this note public?
+                    <input type="checkbox" name="public" class="switch-mini" id="quick_note_public" value="true" {{ 'checked' if note and note.public }}/> Make this note public?
                     <span class="help-block"><small>This determines if the note will be visible on <a href="/notes">/notes</a> and <a href="/notes/tags">/notes/tags</a> pages.</small></span>
                   </label>
                 </div>

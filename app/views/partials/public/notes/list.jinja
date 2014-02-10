@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="col-md-6 col-sm-12">
+  <div class="col-md-4 col-sm-12">
     <form method="GET" action="/notes/search" class="form-inline">
       <div class="controls">
         <div class="input-group input-group-sm">
@@ -16,7 +16,11 @@
       </div>
     </form>
   </div>
-
+  <div class="col-sm-12 col-md-2">
+    {% if req.session %}
+      <a href="/notes/yours" class="btn btn-red btn-sm">Your Notes</a>
+    {% endif %}
+  </div>
   <div class="col-sm-12 col-md-6">
     <form class="form-inline pull-right" role="pagination_options">
       {% if req.session.id %}
@@ -42,11 +46,13 @@
       <div class="col-md-8 col-md-offset-2">
         <div  class="note-header">
           <a href="/notes/{{note.short_code}}"><h1>{{note.title}}</h1></a>
-          <small><b>By</b> {{ note.author.username if note.author.id!=req.session.id else 'You!'}} - {{note.formated_time}} | <b>Visibility:</b> {{ 'Public' if note.public else 'Private' }}{% if req.session.id %} | <b>Status:</b> {{ 'Draft' if note.draft else 'Published' }} {% endif %}</small>
+          <small><b>By</b> {{ note.author.username if note.author.id!=req.session.id else 'You!'}} - {{note.formated_time}}{% if req.session.id %} | <b>Visibility:</b> {{ 'Public' if note.public else 'Private' }} | <b>Status:</b> {{ 'Draft' if note.draft else 'Published' }} {% endif %}</small>
         </div>
+        <br>
         <div class="note-body">
           {{note.formated_contents|truncate(250)}}
         </div>
+        <br>
         <b>Tags: </b>
         {% for tag in note.tags %}
           <a href="/notes/tags/{{tag}}"><span class="label label-red">{{tag}}</span></a>

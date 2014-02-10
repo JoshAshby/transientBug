@@ -8,8 +8,27 @@ nav: notes
   ![[partials/public/notes/list]]
 {% else %}
   <div class="jumbotron">
-    <h1>No Notes :/</h1>
-    <p>We couldn't find any notes that matched your search. Maybe try a slightly different search?</p>
+
+    <div class="row">
+      <div class="col-md-6 col-md-offset-3">
+      <h3><i class="fa fa-search"></i> Search for something else...</h3>
+
+        <form method="GET" action="/notes/search" class="form-inline">
+          <div class="form-group">
+            <div class="input-group input-group typeahead">
+              <input type="text" class="form-control" name="s" id="s" value="{{ req.get_param("s") }}" placeholder="Search...">
+              <span class="input-group-btn">
+                <button class="btn btn-red" type="submit"><i class="fa fa-search"></i></button>
+              </span>
+            </div>
+          </div>
+        </form>
+
+      </div>
+    </div>
+
+    <p>We couldn't find any notes that matched your search for <code>{{ req.get_param("s") }}</code>!</p>
+
     {% if req.session.has_notes %}
     <a href="/new/note" class="btn btn-red">New</a> or <a href="/notes/yours">Your notes</a>
     {% endif %}
