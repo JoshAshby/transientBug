@@ -24,7 +24,7 @@ import models.rethink.note.noteModel as nm
 
 @route()
 @login(["notes"])
-@template("public/notes/yours", "Notes")
+@template("public/notes/yours/index", "Notes")
 class index(MixedObject):
     @HTML
     def GET(self):

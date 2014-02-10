@@ -18,14 +18,11 @@ from seshat_addons.seshat.func_mods import HTML
 
 from utils.paginate import Paginate
 
-#import rethinkdb as r
-#from rethinkORM import RethinkCollection
-#import models.rethink.note.noteModel as nm
 from searchers.notes import NoteSearcher
 
 
 @route()
-@template("public/notes/search", "Notes")
+@template("public/notes/search/index", "Notes")
 class search(MixedObject):
     @HTML
     def GET(self):
@@ -36,15 +33,16 @@ class search(MixedObject):
             parts = {"disable": False, "public": True, "draft": False}
 
             ids = searcher.search(search_term, collection=True)
-            if ids is not []:
+            if ids is not None:
                 ids.filter(parts)
                 ids.fetch()
 
                 page = Paginate(ids, self.request, "created", sort_direction_default="asc")
                 self.view.data = {"page": page}
+
             else:
                 self.view.data = {"page": None}
 
-            self.view.template = "public/notes/results"
+            self.view.template = "public/notes/search/results"
 
         return self.view

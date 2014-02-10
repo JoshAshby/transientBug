@@ -1,0 +1,17 @@
++++
+theme_color: red
+
+nav: notes
++++
+
+{% if page.pail %}
+  ![[partials/public/notes/list]]
+{% else %}
+  <div class="jumbotron">
+    <h1>No Notes :/</h1>
+    <p>We couldn't find any notes that matched your search. Maybe try a slightly different search?</p>
+    {% if req.session.has_notes %}
+    <a href="/new/note" class="btn btn-red">New</a> or <a href="/notes/yours">Your notes</a>
+    {% endif %}
+  </div>
+{% endif %}

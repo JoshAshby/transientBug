@@ -67,7 +67,7 @@ class view(MixedObject):
 # Mildly ugly, and probably slow, but needed since remark doesn't
 # accept making a new slide on each new h1 :/
                 slide_break = "</section>\n<section>\n# "
-                self.view.template = "public/notes/slideshow"
+                self.view.template = "public/slideshows/slideshow"
                 raw = note.contents
                 body = re.sub(r'(^\#\s)', slide_break, raw, flags=re.M)
                 body = re.sub(re.escape("</section>"), "", body, count=1)
@@ -134,12 +134,9 @@ class view(MixedObject):
 
             note.save()
 
-            try:
-                searcher = NoteSearcher()
-                searcher.update(note)
-                searcher.save()
-            except Exception as e:
-                print e
+            searcher = NoteSearcher()
+            searcher.update(note)
+            searcher.save()
 
             return Redirect("/notes/%s" % note.short_code)
 
