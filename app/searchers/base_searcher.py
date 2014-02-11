@@ -132,7 +132,8 @@ class BaseSearcher(object):
 class RethinkSearcher(BaseSearcher):
     _model = None
 
-    def search(self, search, limit=None, collection=False):
+    def search(self, search, limit=None, collection=False, pre_query=None,
+            pre_filter=None):
         """
         Returns a RethinkCollection containing all notes which matched the
         query contained in `search`
@@ -151,8 +152,17 @@ class RethinkSearcher(BaseSearcher):
         if not ids:
             return None
 
+        ids = list(set(ids))
+
         if collection and ids:
-            query = r.table(self._model.table).get_all(*ids)
+            if not pre_query:
+                query = r.table(self._model.table).get_all(*ids)
+            else:
+                query = pre_query.get_all(*ids)
+
+            if pre_filter:
+                query = query.filter(pre_filter)
+
             results = RethinkCollection(self._model, query=query)
 
             return results

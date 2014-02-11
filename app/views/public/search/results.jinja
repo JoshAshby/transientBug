@@ -1,11 +1,12 @@
 +++
-theme_color: red
+theme_color: blue
 
-nav: notes
+nav: search
 +++
 
-{% if page.pail %}
-  ![[partials/public/notes/list]]
+{% if page %}
+  ![[partials/public/search/notes_list]]
+  ![[partials/public/search/phots_list]]
 {% else %}
   <div class="jumbotron">
 
@@ -13,12 +14,12 @@ nav: notes
       <div class="col-md-6 col-md-offset-3">
       <h3><i class="fa fa-search"></i> Search for something else...</h3>
 
-        <form method="GET" action="/notes/search" class="form-inline">
+        <form method="GET" class="form-inline">
           <div class="form-group">
             <div class="input-group input-group typeahead">
               <input type="text" class="form-control" name="s" id="s" value="{{ req.get_param("s") }}" placeholder="Search...">
               <span class="input-group-btn">
-                <button class="btn btn-red" type="submit"><i class="fa fa-search"></i></button>
+                <button class="btn btn-blue" type="submit"><i class="fa fa-search"></i></button>
               </span>
             </div>
           </div>
@@ -27,10 +28,6 @@ nav: notes
       </div>
     </div>
 
-    <p>We couldn't find any notes that matched your search for <code>{{ req.get_param("s") }}</code>!</p>
-
-    {% if req.session.has_notes %}
-    <a href="/new/note" class="btn btn-red">New</a> or <a href="/notes/yours">Your notes</a>
-    {% endif %}
+    <p>We couldn't find anything that matched your search for <code>{{ req.get_param("s") }}</code>!</p>
   </div>
 {% endif %}

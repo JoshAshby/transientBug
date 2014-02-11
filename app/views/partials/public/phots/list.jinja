@@ -2,7 +2,7 @@
 {% set filter=req.get_param("filter", "all") %}
 <div class="row">
   <div class="col-md-5 col-sm-12">
-    <form method="GET" action="/phots/tags" class="form-inline">
+    <form method="GET" action="/phots/search" class="form-inline">
       <div class="controls">
         <div class="input-group input-group-sm">
           {% if req.session.has_phots %}
@@ -10,7 +10,7 @@
               <a href="/new/phot" class="btn btn-green btn-sm">Add</a>
             </span>
           {% endif %}
-          <input type="text" class="form-control" name="q" id="q" value="" placeholder="Search Tags...">
+          <input type="text" class="form-control" name="s" id="search" value="" placeholder="Search...">
           <span class="input-group-btn">
             <button class="btn btn-green btn-sm" type="submit"><i class="fa fa-search"></i></button>
           </span>
@@ -40,7 +40,7 @@
         </select>
       </div>
 
-      {{page.options}}
+      {{phot_page.options}}
 
     </form>
   </div>
@@ -50,7 +50,7 @@
 <div class="phots-collection">
   {% if v=="cards" %}
     <div class="cards">
-      {% for pic in page.pail %}
+      {% for pic in phot_page.pail %}
         {% if loop.index%3==1 %}
           <div class="row">
         {% endif %}
@@ -78,7 +78,7 @@
     <div class="links">
       <div class="row">
         <div class="col-md-12">
-          {% for pic in page.pail %}
+          {% for pic in phot_page.pail %}
             <ul class="list-unstyled">
               <li>
                 <a href="/phots/view/{{pic.filename}}" class="btn btn-green btn-xs">Page</a> <a href="/i/{{pic.filename}}">{{pic.filename}}</a>
@@ -100,6 +100,6 @@
 
 <div class="row">
   <div class="col-md-12">
-    {{page.paginate}}
+    {{phot_page.paginate}}
   </div>
 </div>

@@ -19,7 +19,7 @@ def toBoolean(s):
     return parse_bool(s)
 
 
-def rql_where_not(table, field, value, pre_filter=None):
+def rql_where_not(table, field, value, pre_filter=None, raw=False):
     """
     Generates a query that is equivlent to running:
 
@@ -31,14 +31,22 @@ def rql_where_not(table, field, value, pre_filter=None):
     """
     if not pre_filter:
         hidden_ids = r.table(table).filter(r.row[field].eq(value)).concat_map(lambda doc: [doc["id"]]).coerce_to("array").run()
-
-        query = r.table(table).filter(lambda doc: ~r.expr(hidden_ids).contains(doc["id"]))
     else:
         hidden_ids = r.table(table).filter(pre_filter).filter(r.row[field].eq(value)).concat_map(lambda doc: [doc["id"]]).coerce_to("array").run()
 
-        query = r.table(table).filter(pre_filter).filter(lambda doc: ~r.expr(hidden_ids).contains(doc["id"]))
+    filt = lambda doc: ~r.expr(hidden_ids).contains(doc["id"])
 
-    return query
+    if not raw:
+        if not pre_filter:
+            query = r.table(table).filter(filt)
+
+        else:
+            query = r.table(table).filter(pre_filter).filter(filt)
+
+        return query
+
+    else:
+        return filt
 
 
 def rql_highest_revs(query, field):
@@ -66,6 +74,7 @@ def rql_highest_revs(query, field):
     ).map(lambda group: group["reduction"]["id"]).coerce_to("array").run()
 
     return query.filter(lambda doc: r.expr(ids).contains(doc["id"]))
+
 
 def phot_filter(filt):
     orig = ""

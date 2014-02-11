@@ -1,0 +1,43 @@
++++
+nav: phots
++++
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+  <h1><i class="fa fa-search"></i> Search Phots...</h1>
+
+    <form method="GET" action="/phots/search" class="form-inline">
+      <div class="form-group">
+        <div class="input-group input-group typeahead">
+          <input type="text" class="form-control" name="s" id="search" value="" placeholder="Search...">
+          <span class="input-group-btn">
+            <button class="btn btn-green" type="submit"><i class="fa fa-search"></i></button>
+          </span>
+        </div>
+      </div>
+    </form>
+
+  </div>
+</div>
+<br>
+<br>
+<div class="row">
+  <div class="col-md-8 col-md-offset-2">
+
+    <div class="phots-collection">
+      {% if tags %}
+        <div class="tags">
+          {% for tag in tags %}
+            <a href="/phots/search?s=tags:{{tag}}"><span class="label label-green">{{tag|replace("_", " ")}}</span></a>
+          {% endfor %}
+        </div>
+      {% else %}
+        <div class="jumbotron">
+          <h1>No tags</h1>
+          <p>So sad...</p>
+        </div>
+      {% endif %}
+    </div>
+
+  </div>
+</div>

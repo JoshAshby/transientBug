@@ -1,0 +1,27 @@
+<div class="phots-collection">
+  <div class="cards">
+    {% for pic in page["phots"].pail[:9] %}
+      {% if loop.index%3==1 %}
+        <div class="row">
+      {% endif %}
+      <div class="col-md-4 col-sm-6">
+        <div class="phot-card">
+          <a href="/i/{{pic.filename}}"><img src="/i/{{pic.filename}}" alt="{{pic.filename}}"></a>
+          <div class="caption">
+            <div class="row">
+              <div class="col-md-8">
+                <a href="/i/{{pic.filename}}"><p data-toggle="tooltip" title="{{pic.title}}">{{pic.title}}</p></a>
+              </div>
+              <div class="col-md-4">
+                <a href="/phots/{{pic.filename}}" class="btn btn-green btn-sm pull-right">Page</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% if loop.index%3==0 or loop.last %}
+        </div>
+      {% endif %}
+    {% endfor %}
+  </div>
+</div>
