@@ -10,7 +10,7 @@
               <a href="/new/phot" class="btn btn-green btn-sm">Add</a>
             </span>
           {% endif %}
-          <input type="text" class="form-control" name="s" id="search" value="" placeholder="Search...">
+          <input type="text" class="form-control" name="s" id="search" value="{{ req.get_param("s") }}" placeholder="Search...">
           <span class="input-group-btn">
             <button class="btn btn-green btn-sm" type="submit"><i class="fa fa-search"></i></button>
           </span>

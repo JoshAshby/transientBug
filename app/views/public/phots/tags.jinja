@@ -6,7 +6,7 @@ scriptFiles:
 +++
 <div class="row">
   <div class="col-md-6 col-sm-12">
-    <form method="GET" class="form-inline">
+    <form method="GET" action="/phots/search" class="form-inline">
 
       <div class="input-group input-group-sm typeahead">
         {% if req.session.has_phots %}
@@ -14,7 +14,7 @@ scriptFiles:
             <a href="/new/phot" class="btn btn-green btn-sm">Add</a>
           </span>
         {% endif %}
-        <input type="text" class="form-control" name="q" id="q" placeholder="Search...">
+        <input type="text" class="form-control" name="s" id="search" placeholder="Search...">
         <span class="input-group-btn">
           <button class="btn btn-green btn-sm" type="submit"><i class="fa fa-search"></i></button>
         </span>
@@ -30,7 +30,7 @@ scriptFiles:
   {% if tags %}
     <div class="tags">
       {% for tag in tags %}
-        <a href="/phots/tags/{{tag}}"><span class="label label-green">{{tag|replace("_", " ")}}</span></a>
+        <a href="/phots/search?s=tag:{{tag}}"><span class="label label-green">{{tag|replace("_", " ")}}</span></a>
       {% endfor %}
     </div>
   {% else %}

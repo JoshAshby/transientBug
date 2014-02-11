@@ -53,7 +53,7 @@ stylesheets:
         {% endif %}
         <br>
         {% for tag in phot.tags %}
-          <a href="/phots/tags/{{tag}}"><span class="label label-green">{{tag|replace("_", " ")}}</span></a>
+          <a href="/phots/search?s=tag:{{tag}}"><span class="label label-green">{{tag|replace("_", " ")}}</span></a>
         {% endfor %}
         <br>
         <br>
