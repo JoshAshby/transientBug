@@ -14,7 +14,7 @@ LazyLoad.js [
       url: "/phots/json/tags"
       async: false
 
-    $('#q').typeahead
+    $('#search').typeahead
       name: 'tag_search'
       local: tags.responseJSON[0]["tags"]
       limit: 10
@@ -54,7 +54,7 @@ LazyLoad.js [
       ]
       syells[Math.floor(Math.random()*syells.length)]
 
-    $("#q").parents("form").on "submit", (e) ->
+    $("#search").parents("form").on "submit", (e) ->
       val = $("#q").val()
       if val
         ev = Base64.encode val
