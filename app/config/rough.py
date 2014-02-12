@@ -49,9 +49,7 @@ def setup_log(name=None):
     """
     import logging
     import config as c
-    level = logging.WARNING
-    if c.debug:
-            level = logging.DEBUG
+    level = logging.INFO
 
     formatter = logging.Formatter("""%(asctime)s - %(name)s - %(levelname)s
     %(message)s""")
