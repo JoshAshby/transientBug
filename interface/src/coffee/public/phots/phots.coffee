@@ -24,10 +24,12 @@ LazyLoad.js [
       e.preventDefault()
       $("#q").focus()
 
-    $("#views").click ->
+    $("#views").on "change", "input[type=radio]", (e) ->
+      b = $ this
       a = URI()
-      a.setSearch "v", @val()
-      window.location.href = a.build()
+      a.setSearch "v", b.val()
+      console.log a.build()
+      #window.location.href = a.build()
 
     # Who said anything about eggs?
     growl_options =
