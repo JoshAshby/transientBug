@@ -22,14 +22,15 @@ LazyLoad.js [
 
     Mousetrap.bind 's', (e) ->
       e.preventDefault()
-      $("#q").focus()
+      $("#search").focus()
 
     $("#views").on "change", "input[type=radio]", (e) ->
+      e.preventDefault()
       b = $ this
       a = URI()
       a.setSearch "v", b.val()
       console.log a.build()
-      #window.location.href = a.build()
+      window.location.href = a.build()
 
     # Who said anything about eggs?
     growl_options =

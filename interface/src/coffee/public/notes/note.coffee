@@ -12,20 +12,9 @@ LazyLoad.js [
   '/static/js/lib/jquery-ui-1.9.1.custom.min.js'
   '/static/js/lib/jquery-tocify.min.js'
   '/static/js/lib/mousetrap.min.js'
-  '/static/js/done_typing.js'
   '/static/js/lib/bootstrap-switch.min.js'
 ], ->
   $ ->
-    #save = () ->
-      #if localStorage
-        #form = $("#quick_note").serializeArray()
-        #console.log form
-
-    #$("#quick_note_content").done_typing
-      #wait_interval: 1000
-      #on_done: ->
-        #save()
-
     $("#del_btn").click (e) ->
       e.preventDefault()
       yesno = confirm "Are you sure you want to delete this note?"
