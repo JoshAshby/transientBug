@@ -26,7 +26,7 @@ LazyLoad.js [
 
     $("#views").click ->
       a = URI()
-      a.setSearch "v", @val
+      a.setSearch "v", @val()
       window.location.href = a.build()
 
     # Who said anything about eggs?
