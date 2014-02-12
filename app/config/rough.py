@@ -50,6 +50,8 @@ def setup_log(name=None):
     import logging
     import config as c
     level = logging.INFO
+    if c.debug:
+        level = logging.DEBUG
 
     formatter = logging.Formatter("""%(asctime)s - %(name)s - %(levelname)s
     %(message)s""")
