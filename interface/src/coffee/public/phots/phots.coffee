@@ -8,6 +8,7 @@ LazyLoad.js [
   '/static/js/done_typing.js',
   '/static/js/lib/bootstrap-growl.min.js',
   '/static/js/lib/base64.js'
+  '/static/js/lib/URI.js'
 ], ->
   $ ->
     tags = $.ajax
@@ -24,9 +25,9 @@ LazyLoad.js [
       $("#q").focus()
 
     $("#views").click ->
-      setTimeout ->
-        $("#views").parents("form").submit()
-      , 100
+      a = URI()
+      a.setSearch "v", @val
+      window.location.href = a.build()
 
     # Who said anything about eggs?
     growl_options =
