@@ -18,6 +18,8 @@ from seshat_addons.seshat.func_mods import HTML
 
 from utils.paginate import Paginate
 
+import rethinkdb as r
+import models.rethink.note.noteModel as nm
 from searchers.notes import NoteSearcher
 
 
@@ -26,10 +28,19 @@ from searchers.notes import NoteSearcher
 class search(MixedObject):
     @HTML
     def GET(self):
-        self.view.data = {"note_page": None}
         search_term = self.request.get_param("s")
 
+        all_tags = r.table(nm.Note.table)\
+            .concat_map(lambda doc: doc["tags"])\
+            .distinct()\
+            .coerce_to('array').run()
+
+        self.view.data = {"tags": all_tags, "note_page": None}
+
+        search_term = self.request.get_param("s")
         if search_term:
+            search_term = search_term.replace("tag:", "tags:")
+
             searcher = NoteSearcher()
             parts = {"disable": False, "public": True, "draft": False}
 

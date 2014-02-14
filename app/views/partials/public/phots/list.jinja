@@ -10,7 +10,7 @@
               <a href="/new/phot" class="btn btn-green btn-sm">Add</a>
             </span>
           {% endif %}
-          <input type="search" class="form-control" name="s" id="search" value="{{ req.get_param("s") }}" placeholder="Search...">
+          <input type="text" class="form-control" name="s" id="search" value="{{ req.get_param("s") }}" placeholder="Search...">
           <span class="input-group-btn">
             <button class="btn btn-green btn-sm" type="submit"><i class="fa fa-search"></i></button>
           </span>
@@ -63,7 +63,7 @@
                   <a href="/i/{{pic.filename}}"><p data-toggle="tooltip" title="{{pic.title}}">{{pic.title}}</p></a>
                 </div>
                 <div class="col-md-4">
-                  <a href="/phots/{{pic.filename}}" class="btn btn-green btn-sm pull-right">Page</a>
+                  <a href="/phots/{{pic.short_code}}" class="btn btn-green btn-sm pull-right">Page</a>
                 </div>
               </div>
             </div>
@@ -78,20 +78,27 @@
     <div class="links">
       <div class="row">
         <div class="col-md-12">
-          {% for pic in phot_page.pail %}
-            <ul class="list-unstyled">
-              <li>
-                <a href="/phots/view/{{pic.filename}}" class="btn btn-green btn-xs">Page</a> <a href="/i/{{pic.filename}}">{{pic.filename}}</a>
-                {% if pic.tags %}
-                  {% for tag in pic.tags %}
-                    <a href="/phots/tags/{{ tag }}">
-                      <span class="label label-green">{{tag|replace("_", " ")}}</span>
-                    </a>
-                  {% endfor %}
-                {% endif %}
-              </li>
-            </ul>
-          {% endfor %}
+          <table class="table table-hover table-condensed">
+            {% for pic in phot_page.pail %}
+              <tr>
+                <td>
+                  <a href="/phots/{{pic.short_code}}" class="btn btn-green btn-xs">Page</a>
+                </td>
+                <td>
+                  <a href="/i/{{pic.filename}}">{{pic.filename}}</a>
+                </td>
+                <td>
+                  {% if pic.tags %}
+                    {% for tag in pic.tags %}
+                      <a href="/phots/search?s=tags:{{ tag }}">
+                        <span class="label label-green">{{tag|replace("_", " ")}}</span>
+                      </a>
+                    {% endfor %}
+                  {% endif %}
+                </td>
+              </tr>
+            {% endfor %}
+          </table>
         </div>
       </div>
     </div>

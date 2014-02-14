@@ -2,6 +2,9 @@
 theme_color: red
 
 nav: notes
+
+scriptFiles:
+ - public/notes/notes
 +++
 
 <h2>Notes Search Results...</h2>
@@ -18,7 +21,7 @@ nav: notes
         <form method="GET" action="/notes/search" class="form-inline">
           <div class="form-group">
             <div class="input-group input-group typeahead">
-              <input type="text" class="form-control" name="s" id="s" value="{{ req.get_param("s") }}" placeholder="Search...">
+              <input type="text" class="form-control" name="s" id="search" value="{{ req.get_param("s") }}" placeholder="Search...">
               <span class="input-group-btn">
                 <button class="btn btn-red" type="submit"><i class="fa fa-search"></i></button>
               </span>
@@ -34,5 +37,22 @@ nav: notes
     {% if req.session.has_notes %}
     <a href="/new/note" class="btn btn-red">New</a> or <a href="/notes/yours">Your notes</a>
     {% endif %}
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      {% if tags %}
+        <div class="tags">
+          {% for tag in tags %}
+            <a href="/notes/search?s=tags:{{tag}}"><span class="label label-red">{{tag|replace("_", " ")}}</span></a>
+          {% endfor %}
+        </div>
+      {% else %}
+        <div class="jumbotron">
+          <h1>No tags</h1>
+          <p>So sad...</p>
+        </div>
+      {% endif %}
+    </div>
   </div>
 {% endif %}

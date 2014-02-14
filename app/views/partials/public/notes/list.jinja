@@ -5,10 +5,10 @@
         <div class="input-group input-group-sm">
           {% if req.session.has_phots %}
             <span class="input-group-btn">
-              <a href="/new/phot" class="btn btn-red btn-sm">New</a>
+              <a href="/new/note" class="btn btn-red btn-sm">New</a>
             </span>
           {% endif %}
-          <input type="text" class="form-control" name="s" id="s" value="{{req.get_param("s")}}" placeholder="Search Tags...">
+          <input type="text" class="form-control search" name="s" id="search" value="{{req.get_param("s")}}" placeholder="Search Tags...">
           <span class="input-group-btn">
             <button class="btn btn-red btn-sm" type="submit"><i class="fa fa-search"></i></button>
           </span>

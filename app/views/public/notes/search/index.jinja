@@ -2,6 +2,9 @@
 theme_color: red
 
 nav: notes
+
+scriptFiles:
+ - public/notes/notes
 +++
 
 <div class="row">
@@ -11,13 +14,35 @@ nav: notes
     <form method="GET" action="/notes/search" class="form-inline">
       <div class="form-group">
         <div class="input-group input-group typeahead">
-          <input type="text" class="form-control" name="s" id="q" value="" placeholder="Search...">
+          <input type="text" class="form-control" name="s" id="search" value="" placeholder="Search...">
           <span class="input-group-btn">
             <button class="btn btn-red" type="submit"><i class="fa fa-search"></i></button>
           </span>
         </div>
       </div>
     </form>
+
+  </div>
+</div>
+<br>
+<br>
+<div class="row">
+  <div class="col-md-12">
+
+    <div class="phots-collection">
+      {% if tags %}
+        <div class="tags">
+          {% for tag in tags %}
+            <a href="/notes/search?s=tags:{{tag}}"><span class="label label-red">{{tag|replace("_", " ")}}</span></a>
+          {% endfor %}
+        </div>
+      {% else %}
+        <div class="jumbotron">
+          <h1>No tags</h1>
+          <p>So sad...</p>
+        </div>
+      {% endif %}
+    </div>
 
   </div>
 </div>

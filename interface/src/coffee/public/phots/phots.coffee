@@ -23,6 +23,7 @@ LazyLoad.js [
     Mousetrap.bind 's', (e) ->
       e.preventDefault()
       $("#search").focus()
+      $("#search").val ""
 
     $("#views").on "change", "input[type=radio]", (e) ->
       e.preventDefault()
