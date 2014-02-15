@@ -39,7 +39,6 @@ LazyLoad.js [
       b = $ this
       a = URI()
       a.setSearch "v", b.val()
-      console.log a.build()
       window.location.href = a.build()
 
     # Who said anything about eggs?
@@ -68,7 +67,7 @@ LazyLoad.js [
       ]
       syells[Math.floor(Math.random()*syells.length)]
 
-    $("#search").parents("form").on "submit", (e) ->
+    $(".search").parents("form").on "submit", (e) ->
       val = $("#q").val()
       if val
         ev = Base64.encode val
