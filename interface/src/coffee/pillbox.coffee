@@ -71,13 +71,24 @@ class Pillbox
     @pill.focusout =>
       @pill.removeClass "focus"
 
-    if $().typeahead?
-      tags = $.ajax url: @opts.url, async: false
-
-      @input.typeahead
-        name: "#{ @opts.name }_tags"
-        local: tags.responseJSON[0][@opts.field]
+    if $().typeahead? and Bloodhound?
+      tags = new Bloodhound
+        datumTokenizer: (d) ->
+          Bloodhound.tokenizers.nonword d.tag
+        queryTokenizer: Bloodhound.tokenizers.whitespace
         limit: 10
+        prefetch:
+          url: @opts.url
+          filter: (list) =>
+            $.map list[0][@opts.field], (tag) ->
+              {tag: tag}
+
+      tags.initialize()
+
+      @input.typeahead null,
+        {name: "#{ @opts.name }_tags"
+        displayKey: "tag"
+        source: tags.ttAdapter()}
 
   refresh: () ->
     text = ""

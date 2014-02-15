@@ -7,7 +7,7 @@ LazyLoad.css [
 
 LazyLoad.js [
   '/static/js/pillbox.js'
-  '/static/js/lib/typeahead.min.js'
+  '/static/js/lib/typeahead.bundle.min.js'
   '/static/js/lib/bootstrap-markdown.js'
   '/static/js/lib/jquery-ui-1.9.1.custom.min.js'
   '/static/js/lib/jquery-tocify.min.js'
@@ -30,7 +30,7 @@ LazyLoad.js [
       .bootstrapSwitch 'setOffLabel', 'No'
 
     $("#quick_note_tags").pillbox
-      url: "/notes/json/tags"
+      url: "/api/v0/notes/tags"
       name: "note"
       theme: "red"
 
