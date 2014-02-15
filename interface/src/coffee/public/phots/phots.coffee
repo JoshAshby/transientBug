@@ -3,7 +3,7 @@ LazyLoad.css [
 ]
 
 LazyLoad.js [
-  '/static/js/lib/typeahead.min.js',
+  '/static/js/lib/typeahead.bundle.min.js',
   '/static/js/lib/mousetrap.min.js',
   '/static/js/done_typing.js',
   '/static/js/lib/bootstrap-growl.min.js',
@@ -11,19 +11,28 @@ LazyLoad.js [
   '/static/js/lib/URI.js'
 ], ->
   $ ->
-    tags = $.ajax
-      url: "/phots/json/tags"
-      async: false
-
-    $('#search').typeahead
-      name: 'tag_search'
-      local: tags.responseJSON[0]["tags"]
-      limit: 10
-
     Mousetrap.bind 's', (e) ->
       e.preventDefault()
       $("#search").focus()
       $("#search").val ""
+
+    tags = new Bloodhound
+      datumTokenizer: (d) ->
+        Bloodhound.tokenizers.nonword d.tag
+      queryTokenizer: Bloodhound.tokenizers.whitespace
+      limit: 10
+      prefetch:
+        url: '/api/v0/phots/tags'
+        filter: (list) ->
+          $.map list[0]["tags"], (tag) ->
+            {tag: tag}
+
+    tags.initialize()
+
+    $('.search').typeahead null,
+      {name: 'phottags'
+      displayKey: "tag"
+      source: tags.ttAdapter()}
 
     $("#views").on "change", "input[type=radio]", (e) ->
       e.preventDefault()

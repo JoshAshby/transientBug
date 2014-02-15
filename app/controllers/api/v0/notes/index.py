@@ -19,16 +19,19 @@ from seshat_addons.seshat.func_mods import JSON
 
 from rethinkORM import RethinkCollection
 import models.rethink.note.noteModel as nm
-import models.utils.dbUtils as dbu
-
+import rethinkdb as r
 
 @route()
 class index(MixedObject):
     @JSON
     def GET(self):
-        query = dbu.rql_where_not(nm.Note.table, "disable", True)
+        query = r.table(nm.Note.table).filter({"disable": False,
+            "reported": False,
+            "public": True,
+            "draft": False})
+
         res = RethinkCollection(nm.Note, query=query)
 
-        page = Paginate(res, self.request, "title")
+        page = Paginate(res, self.request, "created", sort_direction_default="asc")
 
         return page.for_json()

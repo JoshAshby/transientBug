@@ -13,7 +13,7 @@ from seshat.route import route
 from seshat_addons.seshat.mixed_object import MixedObject
 from seshat_addons.seshat.func_mods import JSON
 
-import models.utils.dbUtils as dbu
+import rethinkdb as r
 import models.rethink.note.noteModel as nm
 
 
@@ -21,7 +21,10 @@ import models.rethink.note.noteModel as nm
 class tags(MixedObject):
     @JSON
     def GET(self):
-        base_query = dbu.rql_where_not(nm.Note.table, "disable", True)
+        base_query = r.table(nm.Note.table).filter({"disable": False,
+            "reported": False,
+            "public": True,
+            "draft": False})
 
         raw_tags = base_query\
             .concat_map(lambda doc: doc["tags"])\

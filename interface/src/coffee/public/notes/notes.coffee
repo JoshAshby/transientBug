@@ -11,18 +11,14 @@ LazyLoad.js [
     posts = new Bloodhound
       datumTokenizer: (d) ->
         Bloodhound.tokenizers.whitespace d.title
-
       queryTokenizer: Bloodhound.tokenizers.whitespace
       limit: 10
       prefetch:
-        url: '/notes/json/posts'
-        filter: (list) ->
-          $.map list[0]["posts"], (post) ->
-            {title: post.title}
+        url: '/api/v0/notes/'
 
     posts.initialize()
 
     $('.search').typeahead null,
-      {name: 'Posts'
+      {name: 'posts'
       displayKey: 'title'
       source: posts.ttAdapter()}
