@@ -44,7 +44,7 @@ LazyLoad.js [
     # Who said anything about eggs?
     growl_options =
       ele: ".phots-collection"
-      offset: 40
+      offset: 75
       position:
         from: "top"
         align: "center"
@@ -67,8 +67,8 @@ LazyLoad.js [
       ]
       syells[Math.floor(Math.random()*syells.length)]
 
-    $(".search").parents("form").on "submit", (e) ->
-      val = $("#q").val()
+    $("#search").parents("form").on "submit", (e) ->
+      val = $("#search").val()
       if val
         ev = Base64.encode val
         switch ev
