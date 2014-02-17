@@ -42,14 +42,25 @@ LazyLoad.js [
       window.location.href = a.build()
 
     # Who said anything about eggs?
+    sehll = () ->
+      c = [
+        "success"
+        "info"
+        "warning"
+        "danger"
+      ]
+      c[Math.floor(Math.random()*c.length)]
+
+
     growl_options =
+      type: sehll()
       ele: ".phots-collection"
       offset: 75
       position:
         from: "top"
         align: "center"
       template:
-        container: '<div class="col-xs-10 col-sm-10 col-md-8 alert growl-animated growl-mouseover">'
+        container: "<div class=\"col-xs-10 col-sm-10 col-md-8 alert growl-animated growl-mouseover\">"
 
     syellayell = (msg) ->
       $.growl msg, growl_options
@@ -64,6 +75,7 @@ LazyLoad.js [
         "That was awkward."
         "Fix the div or whatever!"
         "Thanks JoshAshby. My quotes, out of context, are immortalized in your world."
+        "earmuffs, JoshAshby!"
       ]
       syells[Math.floor(Math.random()*syells.length)]
 
@@ -72,7 +84,7 @@ LazyLoad.js [
       if val
         ev = Base64.encode val
         switch ev
-          when "c2dyYWNl"
+          when "c2dyYWNl", "aGlseQ=="
             e.preventDefault()
             syell = choose_syell()
             syellayell syell
