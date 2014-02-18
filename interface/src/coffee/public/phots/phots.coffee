@@ -87,7 +87,7 @@ LazyLoad.js [
       syells[Math.floor(Math.random()*syells.length)]
 
     $("#search").parents("form").on "submit", (e) ->
-      val = $("#search").val()
+      val = $("#search").val().toLowerCase()
       if val
         ev = Base64.encode val
         switch ev
