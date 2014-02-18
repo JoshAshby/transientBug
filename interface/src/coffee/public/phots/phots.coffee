@@ -65,18 +65,25 @@ LazyLoad.js [
     syellayell = (msg) ->
       $.growl msg, growl_options
 
-    choose_syell = () ->
-      syells = [
-        "I still don't understand fizzy water. Water tastes just fine without the CO2."
-        "Interbutts is being slow."
-        "WAY TO GO JOSH"
-        "My legs... They burn!"
-        "I smell bad... So... I'm gonna go take a shower then go to work."
-        "That was awkward."
-        "Fix the div or whatever!"
-        "Thanks JoshAshby. My quotes, out of context, are immortalized in your world."
-        "earmuffs, JoshAshby!"
-      ]
+    choose_syell = (who) ->
+      switch who
+        when "c2dyYWNl"
+          syells = [
+            "I still don't understand fizzy water. Water tastes just fine without the CO2."
+            "Interbutts is being slow."
+            "WAY TO GO JOSH"
+            "My legs... They burn!"
+            "I smell bad... So... I'm gonna go take a shower then go to work."
+            "That was awkward."
+            "Fix the div or whatever!"
+            "Thanks JoshAshby. My quotes, out of context, are immortalized in your world."
+          ]
+        when "aGlseQ=="
+          syells = [
+            "that sounded like a scoff, was that a scoff?"
+            "whys everybody always ddo's on me?"
+            "earmuffs, JoshAshby!"
+          ]
       syells[Math.floor(Math.random()*syells.length)]
 
     $("#search").parents("form").on "submit", (e) ->
@@ -86,5 +93,5 @@ LazyLoad.js [
         switch ev
           when "c2dyYWNl", "aGlseQ=="
             e.preventDefault()
-            syell = choose_syell()
+            syell = choose_syell(ev)
             syellayell syell
