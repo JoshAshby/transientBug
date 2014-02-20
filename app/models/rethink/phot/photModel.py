@@ -16,6 +16,7 @@ import config.config as c
 import rethinkdb as r
 from rethinkORM import RethinkModel
 import models.rethink.user.userModel as um
+import os
 
 import utils.short_codes as sc
 
@@ -25,7 +26,8 @@ class Phot(RethinkModel):
 
     @classmethod
     def new_phot(cls, user, stuff, title, tags=[]):
-        name = title.replace(" ", "_")
+        name = title.rstrip().lstrip().replace(" ", "_").lower()
+
         if type(stuff) is str:
             extension = urlparse.urlparse(stuff).path.rsplit(".", 1)[1]
             filename = '.'.join([name, extension])
@@ -39,11 +41,9 @@ class Phot(RethinkModel):
             url = ""
 
         time = arrow.utcnow()
-        if not title:
-            title = "Untitled Phot @ %s" % time.format("YY/MM/DD HH:mm:ss")
         created = time.timestamp
 
-        new_tags = [ tag.strip(" ").replace(" ", "_").lower() for tag in tags ]
+        new_tags = [ tag.lstrip().rstrip().replace(" ", "_").lower() for tag in tags ]
 
         code_good = False
         code = ""
@@ -52,6 +52,9 @@ class Phot(RethinkModel):
             f = r.table(cls.table).filter({"short_code": code}).count().run()
             if f == 0:
                 code_good = True
+
+        if not title:
+            title = code
 
         what = cls.create(user=user,
                           created=created,
@@ -66,6 +69,21 @@ class Phot(RethinkModel):
             c.redis.rpush("downloader:queue", what.id)
 
         return what
+
+    def rename(self, title):
+        title = title.lower().rstrip().lstrip()
+        if title != self.title:
+            new_name = title.replace(" ", "_")
+
+            current_path = ''.join([c.dirs.gifs, self.filename])
+
+            new_filename = ''.join([new_name, ".", self.extension])
+
+            self.filename = new_filename
+            self.title = title
+
+            new_name_path = ''.join([c.dirs.gifs, new_filename])
+            os.rename(current_path, new_name_path)
 
     @property
     def extension(self):

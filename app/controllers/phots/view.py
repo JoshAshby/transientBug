@@ -9,14 +9,13 @@ Josh Ashby
 http://joshashby.com
 joshuaashby@joshashby.com
 """
-import os
-import config.config as c
 from seshat.route import route
 from seshat_addons.seshat.mixed_object import MixedObject
 from seshat.actions import NotFound, Redirect, Unauthorized
 from seshat_addons.seshat.obj_mods import template
 from seshat_addons.seshat.func_mods import Guess
 
+from searchers.phots import PhotSearcher
 import models.rethink.phot.photModel as pm
 import rethinkdb as r
 
@@ -72,22 +71,13 @@ class view(MixedObject):
 
         if f:
             photo = pm.Phot(**f[0])
+            photo.rename(new_name)
             photo.tags = tag
-
-            if new_name != photo.title:
-                new_name = new_name.replace(" ", "_")
-
-                current_path = ''.join([c.dirs.gifs, photo.filename])
-
-                new_filename = ''.join([new_name, ".", photo.extension])
-
-                photo.filename = new_filename
-                photo.title = self.request.get_param("name")
-
-                new_name_path = ''.join([c.dirs.gifs, new_filename])
-                os.rename(current_path, new_name_path)
-
             photo.save()
+
+            searcher = PhotSearcher()
+            searcher.update(photo)
+            searcher.save()
 
             return Redirect("/phots/"+photo.short_code)
 

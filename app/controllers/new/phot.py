@@ -18,7 +18,7 @@ from seshat.actions import Redirect
 
 import rethinkdb as r
 import models.rethink.phot.photModel as pm
-
+from searchers.phots import PhotSearcher
 import arrow
 
 
@@ -52,6 +52,10 @@ class phot(MixedObject):
                                 stuff=stuff,
                                 title=title,
                                 tags=tag)
+
+        searcher = PhotSearcher()
+        searcher.update(phot)
+        searcher.save()
 
         self.request.session.push_alert("Image is being downloaded...")
         return Redirect("/phots/%s" % phot.short_code)
