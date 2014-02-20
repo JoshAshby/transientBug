@@ -43,6 +43,8 @@ class phot(MixedObject):
         else:
             tag = []
 
+        title = title.rstrip().lstrip().lower()
+
         found = r.table(pm.Phot.table).filter({"filename": title}).count().run()
         if found:
             title = "_".join([title, str(arrow.utcnow().timestamp)])
