@@ -12,17 +12,25 @@ import arrow
 import searchers.base_searcher as searcher
 
 from whoosh.fields import SchemaClass, TEXT, KEYWORD, ID, DATETIME, BOOLEAN
-from whoosh.analysis import FancyAnalyzer
 import models.rethink.phot.photModel as pm
+from whoosh.analysis import *
+
+
+iwf_i = IntraWordFilter(mergewords=True, mergenums=True)
+iwf_q = IntraWordFilter(mergewords=False, mergenums=False)
+iwf = MultiFilter(index=iwf_i, query=iwf_q)
+
+custom_analyzer = SpaceSeparatedTokenizer() | iwf | LowercaseFilter() | StemFilter()
+tag_analyzer = CommaSeparatedTokenizer() | iwf | LowercaseFilter() | StemFilter()
 
 
 class PhotSchema(SchemaClass):
     id = ID(stored=True, unique=True)
     created = DATETIME()
-    title = TEXT(analyzer=FancyAnalyzer(), spelling=True)
+    title = TEXT(analyzer=custom_analyzer, spelling=True)
     short_code = ID(stored=True, unique=True)
     disable = BOOLEAN()
-    tags = KEYWORD(commas=True)
+    tags = TEXT(analyzer=tag_analyzer, spelling=True)
     user = ID()
 
 
