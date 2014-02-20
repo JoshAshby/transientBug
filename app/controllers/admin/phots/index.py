@@ -61,7 +61,7 @@ class index(MixedObject):
             current.disable = not current.disable if "disable" in current._data else True
             current.save()
 
-            return {"success": True}
+            return {"success": True, "state": current.disable}
 
         else:
             return {"success": False, "error": "That image couldn't be found. :/"}
