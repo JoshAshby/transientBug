@@ -37,7 +37,7 @@ class phot(MixedObject):
 
         if tags:
             if type(tags) is str:
-                tag = [ bit.lstrip().rstrip().replace(" ", "_").lower() for bit in tags.split(",") ]
+                tag = tags.split(",")
             else:
                 tag = tags
         else:
@@ -59,5 +59,4 @@ class phot(MixedObject):
         searcher.update(phot)
         searcher.save()
 
-        self.request.session.push_alert("Image is being downloaded...")
         return Redirect("/phots/%s" % phot.short_code)
