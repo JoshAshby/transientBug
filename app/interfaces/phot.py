@@ -10,49 +10,13 @@ Josh Ashby
 http://joshashby.com
 joshuaashby@joshashby.com
 """
-import rethinkdb as r
-import models.rethink.phot.photModel as pm
+from interfaces.base_interface import BaseInterface
 import models.rethink.user.userModel as um
 
 
-class InterfaceException(Exception): pass
-
-
-class BaseInterface(object):
-    def __init__(self, model):
-        self._model = model
-
-    def _get(self, attr):
-        if hasattr(self, attr):
-            return object.__getattribute__(self, attr)
-        elif attr in self._model:
-            return getattr(self._model, attr)
-        else:
-            raise InterfaceException("Can't find symbol within interface or model!")
-
-    def _set(self, attr, val):
-        if attr in self._model and not hasattr(self, attr):
-            return object.__setattr__(self._model, attr, val)
-        else:
-            return object.__setattr__(self, attr, val)
-
-    def __getattr__(self, item):
-        return self._get(item)
-
-    def __getitem__(self, item):
-        return self._get(item)
-
-    def __setattr__(self, item, value):
-        return self._set(item, value)
-
-    def __setitem__(self, item, value):
-        return self._set(item, value)
-
-    def __delitem__(self, item):
-        pass
-
-
 class Phot(BaseInterface):
+    _user = None
+
     @property
     def title(self):
         return self._model.title
@@ -69,3 +33,18 @@ class Phot(BaseInterface):
     def tags(self, val):
         tag = [ bit.lstrip().rstrip().lower().replace(" ", "_") for bit in val ]
         self._model.tags = tag
+
+    @property
+    def user(self):
+        if self._user is None:
+            self._user = um.User(self._model.user)
+        return self._user
+
+    @user.setter
+    def user(self, val):
+        if isinstance(val, um.User):
+            self._model.user = val.id
+        else:
+            self._model.user = val
+
+        self._user = um.User(self._model.user)
