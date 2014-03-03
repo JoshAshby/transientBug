@@ -24,6 +24,9 @@ import utils.short_codes as sc
 class Phot(BaseInterface):
     table = "phots"
 
+    def finish_init(self):
+        print self._data
+
     @classmethod
     def new_phot(cls, user, stuff, title, tags=[]):
         name = title.rstrip().lstrip().replace(" ", "_").lower()
@@ -70,9 +73,18 @@ class Phot(BaseInterface):
 
         return what
 
-    def rename(self, title):
+    @property
+    def extension(self):
+        return self.filename.rsplit(".", 1)[1]
+
+    @property
+    def title(self):
+        return self._data.get("title")
+
+    @title.setter
+    def title(self, title):
         title = title.lower().rstrip().lstrip()
-        if title != self.title:
+        if self._data.get("title") and title != self._data["title"]:
             new_name = title.replace(" ", "_")
 
             current_path = ''.join([c.dirs.gifs, self.filename])
@@ -88,18 +100,7 @@ class Phot(BaseInterface):
         else:
             self._data["title"] = title
 
-    @property
-    def extension(self):
-        return self.filename.rsplit(".", 1)[1]
-
-    @property
-    def title(self):
-        print self._data
-        return self._data.get("title")
-
-    @title.setter
-    def title(self, title):
-        return self.rename(title)
+        return title
 
     @property
     def tags(self):
@@ -107,7 +108,6 @@ class Phot(BaseInterface):
 
     @tags.setter
     def tags(self, val):
-        print val
         tag = [ bit.lstrip().rstrip().lower().replace(" ", "_") for bit in val ]
         self._data["tags"] = tag
 
