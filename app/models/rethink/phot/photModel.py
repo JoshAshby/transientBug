@@ -86,15 +86,6 @@ class Phot(RethinkModel):
             os.rename(current_path, new_name_path)
 
     @property
-    def tags(self):
-        return self._data["tags"]
-
-    @tags.setter
-    def tags(self, val):
-        tag = [ bit.lstrip().rstrip().lower().replace(" ", "_") for bit in val ]
-        self._data["tags"] = tag
-
-    @property
     def extension(self):
         return self.filename.rsplit(".", 1)[1]
 

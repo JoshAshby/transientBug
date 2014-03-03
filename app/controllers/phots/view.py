@@ -43,7 +43,7 @@ class view(MixedObject):
                 not self.request.session.has_phots:
             return NotFound()
 
-        photo = pm.Phot(**f[0])
+        photo = pm.Phot(f[0]["id"])
 
         self.view.data = {"phot": photo}
         return self.view
@@ -56,7 +56,7 @@ class view(MixedObject):
         tags = self.request.get_param("tags")
 
         if tags:
-            tag = [ bit.lstrip().rstrip().replace(" ", "_").lower() for bit in tags.split(",") ]
+            tag = tags.split(",")
         else:
             tag = []
 
