@@ -79,7 +79,7 @@
               <td></td>
               <td><a href="/notes/{{note.short_code}}">{{note.title|truncate(25)}}</a></td>
               <td>{{ note.author.username if note.author.id!=req.session.id else 'You!'}}</td>
-              <td>{{note.formated_time}}</td>
+              <td>{{note.created.humanize()}}</td>
               <td>
                 {% if note.public %}
                   <i class="fa fa-eye"></i> Public

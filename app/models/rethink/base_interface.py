@@ -30,6 +30,24 @@ class BaseInterface(RethinkModel):
     setters.
 
                                  **BE CAREFUL**
+
+    All getter and setters must access the data through self._data[] dict and
+    not object properties. ie:
+
+        @property
+        def tags(self):
+            return self.tags
+
+    will result in a recursive loop (bad)
+
+        @property
+        def tags(self):
+            return self._data["tags"]
+
+    is correct. All setters must also be able to take care of the case of when
+    the model is being populated or else things happen.
+
+                            **YOU HAVE BEEN WARNED**
     """
     def __init__(self, id=None, **kwargs):
         """
@@ -75,11 +93,10 @@ class BaseInterface(RethinkModel):
             return object.__getattribute__(self, attr)
 
         else:
-            data = object.__getattribute__(self, "_data")
-            if hasattr(self, attr):
+            try:
                 return object.__getattribute__(self, attr)
-
-            else:
+            except AttributeError:
+                data = object.__getattribute__(self, "_data")
                 return data[attr]
 
     def _set(self, attr, val):
@@ -88,11 +105,11 @@ class BaseInterface(RethinkModel):
             return object.__setattr__(self, attr, val)
 
         else:
-            data = object.__getattribute__(self, "_data")
             if hasattr(val, "__call__") or hasattr(self, attr):
                 return object.__setattr__(self, attr, val)
 
             else:
+                data = object.__getattribute__(self, "_data")
                 data[attr] = val
                 return val
 

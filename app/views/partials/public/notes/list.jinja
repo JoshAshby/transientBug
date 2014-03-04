@@ -46,11 +46,11 @@
       <div class="col-md-8 col-md-offset-2">
         <div  class="note-header">
           <a href="/notes/{{note.short_code}}"><h1>{{note.title}}</h1></a>
-          <small><b>By</b> {{ note.author.username if note.author.id!=req.session.id else 'You!'}} - {{note.formated_time}}{% if req.session.id %} | <b>Visibility:</b> {{ 'Public' if note.public else 'Private' }} | <b>Status:</b> {{ 'Draft' if note.draft else 'Published' }} {% endif %}</small>
+          <small><b>By</b> {{ note.author.username if note.author.id!=req.session.id else 'You!'}} - {{note.created.humanize()}}{% if req.session.id %} | <b>Visibility:</b> {{ 'Public' if note.public else 'Private' }} | <b>Status:</b> {{ 'Draft' if note.draft else 'Published' }} {% endif %}</small>
         </div>
         <br>
         <div class="note-body">
-          {{note.formated_contents|truncate(250)}}
+          {{note.contents|truncate(250)}}
         </div>
         <br>
         <b>Tags: </b>

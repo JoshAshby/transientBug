@@ -9,7 +9,7 @@
               <input type="text" class="form-control" id="quick_note_title" name="title" placeholder="Title..." value="{{ note.title if note }}" required>
             </div>
             <div class="form-group">
-              <textarea name="contents" id="quick_note_content" data-provide="markdown">{{ note.contents if note else 'Write something!' }}</textarea>
+              <textarea name="contents" id="quick_note_content" data-provide="markdown">{{ note.raw if note else 'Write something!' }}</textarea>
             </div>
             <div class="form-group">
               <input type="text" class="form-control" name="tags" id="quick_note_tags" placeholder="Tags..." value="{{ note.tags|join(", ") if note }}"/>

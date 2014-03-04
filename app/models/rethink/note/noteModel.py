@@ -63,17 +63,50 @@ class Note(BaseInterface):
 
     @property
     def author(self):
-        if not hasattr(self, "_formated_author"):
-            self._formated_author = um.User(self._data["user"])
+        return self.user
 
-        return self._formated_author
+    @author.setter
+    def author(self, val):
+        self.user = val
+
+    @property
+    def tags(self):
+        return self._data.get("tags")
+
+    @tags.setter
+    def tags(self, val):
+        tag = [ bit.lstrip().rstrip().lower().replace(" ", "_") for bit in val ]
+        self._data["tags"] = tag
+
+    @property
+    def user(self):
+        if not hasattr(self, "_user") or self._user is None:
+            self._user = um.User(self._data.get("user"))
+        return self._user
+
+    @user.setter
+    def user(self, val):
+        if isinstance(val, um.User):
+            self._data["user"] = val.id
+        else:
+            self._data["user"] = val
+
+        self._user = um.User(self._data["user"])
 
     @property
     def created(self):
-        if not hasattr(self, "_formated_created"):
-            self._formated_created = arrow.get(self._data["created"]).humanize()
+        if not hasattr(self, "_formated_created") or self._formated_created is None:
+            self._formated_created = arrow.get(self._data["created"])
 
         return self._formated_created
+
+    @created.setter
+    def created(self, val):
+        """
+        val should be a unix timestamp of the created datetime instance
+        """
+        self._formated_created = val
+        self._data["created"] = val
 
     @property
     def contents(self):
@@ -81,6 +114,10 @@ class Note(BaseInterface):
             self._formated_contents = md.markdown(self._data["contents"])
 
         return self._formated_contents
+
+    @contents.setter
+    def contents(self, val):
+        self._data["contents"] = val
 
     @property
     def raw(self):
