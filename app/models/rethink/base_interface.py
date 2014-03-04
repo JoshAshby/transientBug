@@ -18,6 +18,19 @@ class InterfaceException(Exception): pass
 
 
 class BaseInterface(RethinkModel):
+    """
+    This is a subclass of RethinkModel which allows for custom getters and
+    setters for the models so I can have functions which allow for data
+    validation and formating. This is a rather dangerous rabbit hole for end
+    users which is why this feature is actually disabled within the context of
+    pyRethinkORM. I have to make a small change to the __init__ process to
+    ignore the current properties of the object (by doing self._protected_items
+    = dir(self)) and rework the whole of _get and _set which are called by
+    __setattr__ and __getattr__ to allow the use of these custom getters and
+    setters.
+
+                                 **BE CAREFUL**
+    """
     def __init__(self, id=None, **kwargs):
         """
         Initializes the main object, if `id` is the only thing passed then we
@@ -84,4 +97,4 @@ class BaseInterface(RethinkModel):
                 return val
 
     def __json__(self):
-        return dict()
+        return {}

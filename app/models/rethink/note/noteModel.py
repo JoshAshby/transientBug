@@ -10,14 +10,14 @@ joshuaashby@joshashby.com
 """
 import arrow
 
-from rethinkORM import RethinkModel
+from models.rethink.base_interface import BaseInterface
 import models.rethink.user.userModel as um
 import utils.markdown_utils as md
 
 import utils.short_codes as sc
 
 
-class Note(RethinkModel):
+class Note(BaseInterface):
     table = "notes"
 
     @classmethod
@@ -64,20 +64,24 @@ class Note(RethinkModel):
     @property
     def author(self):
         if not hasattr(self, "_formated_author"):
-            self._formated_author = um.User(self.user)
+            self._formated_author = um.User(self._data["user"])
 
         return self._formated_author
 
     @property
-    def formated_time(self):
+    def created(self):
         if not hasattr(self, "_formated_created"):
-            self._formated_created = arrow.get(self.created).humanize()
+            self._formated_created = arrow.get(self._data["created"]).humanize()
 
         return self._formated_created
 
     @property
-    def formated_contents(self):
+    def contents(self):
         if not hasattr(self, "_formated_contents"):
-            self._formated_contents = md.markdown(self.contents)
+            self._formated_contents = md.markdown(self._data["contents"])
 
         return self._formated_contents
+
+    @property
+    def raw(self):
+        return self._data["contents"]

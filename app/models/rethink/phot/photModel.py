@@ -110,7 +110,7 @@ class Phot(BaseInterface):
 
     @property
     def user(self):
-        if not hasattr("") or self._user is None:
+        if not hasattr(self, "_user") or self._user is None:
             self._user = um.User(self._data.get("user"))
         return self._user
 
@@ -126,7 +126,7 @@ class Phot(BaseInterface):
     @property
     def created(self):
         if not hasattr(self, "_formated_created") or self._formated_created is None:
-            self._formated_created = arrow.get(self._data["created"]).humanize()
+            self._formated_created = arrow.get(self._data["created"])
 
         return self._formated_created
 
@@ -141,9 +141,6 @@ class Phot(BaseInterface):
     def __json__(self):
         d = self._data.copy()
         d.pop("id")
-        d.pop("user")
-        d["user"] = self.author.username
-        d.pop("disable") if "disable" in d else None
-        d["source"] = d["url"]
-        d["url"] = "https://transientbug.com/i/"+d["filename"]
+        d["user"] = self.user.username
+        d["source"] = d.pop("url") if "url" in d else ""
         return d
