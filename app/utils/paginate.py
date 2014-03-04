@@ -204,8 +204,8 @@ class Paginate(StandardODM):
 
         return tmpl.render()
 
-    def for_json(self):
-        d = [ i.for_json() for i in self._pail ]
+    def __json__(self):
+        d = [ i.__json__() for i in self._pail ]
         page = self._page_dict.copy()
         page.pop("show")
 

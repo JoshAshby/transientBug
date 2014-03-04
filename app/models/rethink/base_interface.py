@@ -13,6 +13,7 @@ joshuaashby@joshashby.com
 import rethinkdb as r
 from rethinkORM import RethinkModel
 
+
 class InterfaceException(Exception): pass
 
 
@@ -68,7 +69,6 @@ class BaseInterface(RethinkModel):
             else:
                 return data[attr]
 
-
     def _set(self, attr, val):
         pro_its = object.__getattribute__(self, "_protected_items")
         if attr[0] == "_" or attr in pro_its:
@@ -82,3 +82,6 @@ class BaseInterface(RethinkModel):
             else:
                 data[attr] = val
                 return val
+
+    def __json__(self):
+        return dict()

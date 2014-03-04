@@ -37,8 +37,7 @@ class view(MixedObject):
             if not self.request.session.has_notes and note.disable:
                 return NotFound()
 
-            return note.for_json()
-
+            return note
 
         else:
             return NotFound()

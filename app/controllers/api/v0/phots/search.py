@@ -39,7 +39,7 @@ class search(MixedObject):
                 ids.fetch()
 
                 page = Paginate(ids, self.request, "title", sort_direction_default="desc")
-                return page.for_json()
+                return page
 
             return {"page": None, "pail": None}
 

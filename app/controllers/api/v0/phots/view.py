@@ -42,4 +42,4 @@ class view(MixedObject):
 
         photo = pm.Phot(**f[0])
 
-        return photo.for_json()
+        return photo

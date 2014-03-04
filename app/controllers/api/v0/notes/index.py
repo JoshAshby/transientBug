@@ -34,4 +34,4 @@ class index(MixedObject):
 
         page = Paginate(res, self.request, "created", sort_direction_default="asc")
 
-        return page.for_json()
+        return page

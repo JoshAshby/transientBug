@@ -24,9 +24,6 @@ import utils.short_codes as sc
 class Phot(BaseInterface):
     table = "phots"
 
-    def finish_init(self):
-        print self._data
-
     @classmethod
     def new_phot(cls, user, stuff, title, tags=[]):
         name = title.rstrip().lstrip().replace(" ", "_").lower()
@@ -142,9 +139,6 @@ class Phot(BaseInterface):
         self._data["created"] = val
 
     def __json__(self):
-        return self.for_json()
-
-    def for_json(self):
         d = self._data.copy()
         d.pop("id")
         d.pop("user")

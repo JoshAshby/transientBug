@@ -35,4 +35,4 @@ class index(MixedObject):
 
         page = Paginate(res, self.request, "title")
 
-        return page.for_json()
+        return page
