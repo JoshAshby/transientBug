@@ -26,9 +26,9 @@ class index(MixedObject):
     @JSON
     def GET(self):
         query = r.table(nm.Note.table).filter({"disable": False,
-            "reported": False,
-            "public": True,
-            "draft": False})
+                                               "reported": False,
+                                               "public": True,
+                                               "draft": False})
 
         res = RethinkCollection(nm.Note, query=query)
 

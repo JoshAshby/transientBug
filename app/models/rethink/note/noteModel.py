@@ -122,3 +122,13 @@ class Note(BaseInterface):
     @property
     def raw(self):
         return self._data["contents"]
+
+    def __json__(self):
+        d = self._data.copy()
+        d.pop("id")
+        d.pop("theme")
+        d.pop("disable")
+        d.pop("reported")
+        d["user"] = self.user.username
+
+        return d

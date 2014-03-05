@@ -141,6 +141,7 @@ class Phot(BaseInterface):
     def __json__(self):
         d = self._data.copy()
         d.pop("id")
+        d.pop("disable") if "disable" in d else None
         d["user"] = self.user.username
         d["source"] = d.pop("url") if "url" in d else ""
         return d
