@@ -7,13 +7,12 @@ Josh Ashby
 http://joshashby.com
 joshuaashby@joshashby.com
 """
-import arrow
-
 import searchers.base_searcher as searcher
 
-from whoosh.fields import SchemaClass, TEXT, KEYWORD, ID, DATETIME, BOOLEAN
-import models.rethink.phot.photModel as pm
+from whoosh.fields import SchemaClass, TEXT, ID, DATETIME, BOOLEAN
 from whoosh.analysis import *
+
+import models.rethink.phot.photModel as pm
 
 
 iwf_i = IntraWordFilter(mergewords=True, mergenums=True)
@@ -40,7 +39,7 @@ def get_phot_data(phot):
          "title":unicode(phot.title),
          "short_code":unicode(phot.short_code),
          "disable":phot.disable if hasattr(phot, "disable") else False,
-         "user":unicode(phot.user)}
+         "user":unicode(phot.user.id)}
 
     if phot.tags:
         d["tags"] = u",".join(phot.tags)

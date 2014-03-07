@@ -9,11 +9,9 @@ Josh Ashby
 http://joshashby.com
 joshuaashby@joshashby.com
 """
-import arrow
-
 import searchers.base_searcher as searcher
 
-from whoosh.fields import SchemaClass, TEXT, KEYWORD, ID, DATETIME, BOOLEAN
+from whoosh.fields import SchemaClass, TEXT, ID, DATETIME, BOOLEAN
 from whoosh.analysis import *
 import models.rethink.note.noteModel as nm
 
@@ -44,13 +42,13 @@ def get_note_data(note):
     d = {"id":unicode(note.id),
          "created":note.created.datetime,
          "title":unicode(note.title),
-         "contents":unicode(note.contents),
+         "contents":unicode(note.raw),
          "public":note.public,
          "draft":note.draft,
          "short_code":unicode(note.short_code),
          "disable":note.disable,
          "reported":note.reported,
-         "user":unicode(note.user)}
+         "user":unicode(note.user.id)}
 
     if note.tags:
         d["tags"] = u",".join(note.tags)
