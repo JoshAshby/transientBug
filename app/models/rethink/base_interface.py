@@ -92,29 +92,25 @@ class BaseInterface(RethinkModel):
         if attr[0] == "_" or attr in pro_its:
             return object.__getattribute__(self, attr)
 
+        elif attr in dir(self):
+            return object.__getattribute__(self, attr)
+
         else:
-            try:
-                return object.__getattribute__(self, attr)
-            except AttributeError:
-                data = object.__getattribute__(self, "_data")
-                return data.get(attr)
+            data = object.__getattribute__(self, "_data")
+            return data[attr]
 
     def _set(self, attr, val):
         pro_its = object.__getattribute__(self, "_protected_items")
         if attr[0] == "_" or attr in pro_its:
             return object.__setattr__(self, attr, val)
 
+        elif hasattr(val, "__call__") or attr in dir(self):
+            return object.__setattr__(self, attr, val)
+
         else:
-            if hasattr(val, "__call__") or hasattr(self, attr):
-                return object.__setattr__(self, attr, val)
-
-            else:
-                data = object.__getattribute__(self, "_data")
-                data[attr] = val
-                return val
-
-    def __contains__(self, attr):
-        return attr in self._data
+            data = object.__getattribute__(self, "_data")
+            data[attr] = val
+            return val
 
     def __json__(self):
         return {}
