@@ -38,7 +38,7 @@ class index(MixedObject):
                 self.view.template = "public/register/closed"
                 return self.view
 
-            found = r.table(um.User.table).filter({"reset_code": code}).coerce_to("array").run()
+            found = r.table(im.Invite.table).filter({"short_code": code}).coerce_to("array").run()
             if found:
                 return self.view
 
@@ -57,51 +57,52 @@ class index(MixedObject):
         email = self.request.get_param("email")
         password = self.request.get_param("password")
 
-        found = r.table(im.Invite.table).filter({"short_code": code}).coerce_to("array").run()
-        if found:
-            invite = im.Invite(**found)
+        if code:
+            found = r.table(im.Invite.table).filter({"short_code": code}).coerce_to("array").run()
+            if found:
+                invite = im.Invite(**found[0])
 
-            if email != invite.email:
-                self.request.session.push_alert("Your email doesn't match the email for that invite!")
-                self.view.template = "public/register/closed"
-                return self.view
+                if email != invite.email:
+                    self.request.session.push_alert("Your email doesn't match the email for that invite!")
+                    self.view.template = "public/register/closed"
+                    return self.view
 
-            try:
-                user = um.User.new_user(
-                        username=username,
-                        password=password,
-                        groups=["default"]
-                        )
+                try:
+                    user = um.User.new_user(
+                            username=username,
+                            password=password,
+                            email=email,
+                            groups=["default"]
+                            )
 
-                user.email = email
-                invite.closed = True
+                    user.email = email
+                    invite.closed = True
 
-                tmpl = PartialTemplate("emails/account_registered")
-                tmpl.data = {"user": user}
-                content = tmpl.render()
+                    tmpl = PartialTemplate("emails/account_registered")
+                    tmpl.data = {"user": user}
+                    content = tmpl.render()
 
-                em.Email.new()\
-                    .send_to(user.id)\
-                    .send_from("noreply")\
-                    .set_subject("transientBug.com - Account Registered!")\
-                    .set_text(content)\
-                    .set_html(content)\
-                    .queue()
+                    em.Email.new()\
+                        .send_to(user.id)\
+                        .send_from("noreply")\
+                        .set_subject("transientBug.com - Account Registered!")\
+                        .set_text(content)\
+                        .set_html(content)\
+                        .queue()
 
-                invite.save()
-                user.save()
+                    invite.save()
+                    user.save()
 
-                self.request.session.push_alert("Account registered. Please login to make sure everything is okay!")
-                return Redirect("/login")
+                    self.request.session.push_alert("Account registered. Please login to make sure everything is okay!")
+                    return Redirect("/login")
 
-            except UsernameError:
-                self.view.data = {"error": "username"}
-                return self.view
+                except UsernameError:
+                    self.view.data = {"error": "username", "error_msg": "That username is already in use, please choose another one."}
+                    return self.view
 
-            except EmailError:
-                self.view.data = {"error": "email"}
-                return self.view
+                except EmailError:
+                    self.view.data = {"error": "email", "error_msg": "That email is already registered. Maybe try logging in?"}
+                    return self.view
 
-        else:
-            self.view.template = "public/register/closed"
-            return self.view
+        self.view.template = "public/register/closed"
+        return self.view

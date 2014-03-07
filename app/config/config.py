@@ -74,8 +74,6 @@ parse_files(emailer)
 emailer.files = StandardODM(**emailer.files)
 emailer.dirs = StandardODM(**emailer.dirs)
 
-indexer = StandardODM(**general.indexer)
-
 dirs = StandardODM(**general.dirs)
 files = StandardODM(**general.files)
 
