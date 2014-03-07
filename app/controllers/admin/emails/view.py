@@ -14,11 +14,7 @@ from seshat_addons.seshat.mixed_object import MixedObject
 from seshat_addons.seshat.obj_mods import login, template
 from seshat_addons.seshat.func_mods import HTML, JSON
 
-from seshat.actions import Redirect
-
-from rethinkORM import RethinkCollection
 import models.rethink.email.emailModel as em
-from utils.paginate import Paginate
 
 
 @route()
@@ -37,4 +33,10 @@ class view(MixedObject):
 
     @JSON
     def POST(self):
-        pass
+        email = em.Email(self.request.id)
+
+        email.queue()
+
+        self.request.session.push_alert("Email resent")
+
+        return {"success": True}

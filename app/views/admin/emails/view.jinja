@@ -3,6 +3,9 @@ theme_color: orange
 nav: admin_email
 breadcrumbs_top: True
 base: skeletons/sidebar
+
+scriptFiles:
+  - admin/emails/email
 +++
 
 <div class="row">
@@ -11,7 +14,8 @@ base: skeletons/sidebar
   </div>
   <div class="col-md-6">
     <span class="pull-right">
-      Sent: {{email.formated_created}}
+      Sent: {{email.formated_created}} <br>
+      <button data-email="{{email.id}}" class="btn btn-orange btn-small resend-email">Resend</button>
     </span>
   </div>
 </div>
