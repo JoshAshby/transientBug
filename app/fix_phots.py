@@ -17,7 +17,7 @@ if __name__ == "__main__":
     all_phots = RethinkCollection(Phot).fetch()
 
     for phot in all_phots:
-        phot.rename(phot.title)
-        phot.tags = [ bit.lstrip().rstrip().replace(" ", "_").lower() for bit in phot.tags ]
-        print "Updated phot", phot
-        phot.save()
+        if not "disable" in phot:
+            phot.disable = False
+            print "Updated phot", phot
+            phot.save()

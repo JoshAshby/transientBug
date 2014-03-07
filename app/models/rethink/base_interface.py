@@ -97,7 +97,7 @@ class BaseInterface(RethinkModel):
                 return object.__getattribute__(self, attr)
             except AttributeError:
                 data = object.__getattribute__(self, "_data")
-                return data[attr]
+                return data.get(attr)
 
     def _set(self, attr, val):
         pro_its = object.__getattribute__(self, "_protected_items")
@@ -112,6 +112,9 @@ class BaseInterface(RethinkModel):
                 data = object.__getattribute__(self, "_data")
                 data[attr] = val
                 return val
+
+    def __contains__(self, attr):
+        return attr in self._data
 
     def __json__(self):
         return {}
