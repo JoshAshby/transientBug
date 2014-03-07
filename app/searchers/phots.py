@@ -36,7 +36,7 @@ class PhotSchema(SchemaClass):
 
 def get_phot_data(phot):
     d = {"id":unicode(phot.id),
-         "created":arrow.get(phot.created).datetime,
+         "created":phot.created.datetime,
          "title":unicode(phot.title),
          "short_code":unicode(phot.short_code),
          "disable":phot.disable if hasattr(phot, "disable") else False,

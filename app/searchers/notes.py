@@ -42,7 +42,7 @@ class NoteSchema(SchemaClass):
 
 def get_note_data(note):
     d = {"id":unicode(note.id),
-         "created":arrow.get(note.created).datetime,
+         "created":note.created.datetime,
          "title":unicode(note.title),
          "contents":unicode(note.contents),
          "public":note.public,
