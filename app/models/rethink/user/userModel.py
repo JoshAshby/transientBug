@@ -74,7 +74,7 @@ class User(RethinkModel):
         if found:
             return cls(**found[0])
         else:
-            raise NotFoundError("Username not in system")
+            return None
 
     @classmethod
     def from_email(cls, email):
@@ -82,7 +82,7 @@ class User(RethinkModel):
         if found:
             return cls(**found[0])
         else:
-            raise NotFoundError("Email not in system")
+            return None
 
     def set_password(self, password):
         """

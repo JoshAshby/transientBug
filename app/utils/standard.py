@@ -15,7 +15,7 @@ class StandardODM(object):
     """
     Object Dictionary Mapper
 
-    This is a basic ODM which takes in a dictionary and 
+    This is a basic ODM which takes in a dictionary and
     generates an object for it, much like an ORM would.
     """
     _data = {}
@@ -104,9 +104,9 @@ name exists in data""")
         Returns the objects internal data object, which is a dict
 
         :return: The internal data
-        :rtype: Dict
+        :rtype: Str of the internal data Dict
         """
-        return self._data
+        return str(self._data)
 
     def __str__(self):
         return str(self._data)

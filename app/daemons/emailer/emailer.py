@@ -29,26 +29,29 @@ class Emailer(RedisWorker):
     def build(self):
         email = em.Email(self.data)
 
-        logger.info("Sending email {}".format(email.id))
+        if email:
+            logger.info("Sending email {}".format(email.id))
 
-        to = [ um.User(a).email for a in email.to_addresses ]
-        bcc = [ um.User(a).email for a in email.bcc_addresses ]
-        cc = [ um.User(a).email for a in email.cc_addresses ]
+            to = [ um.User(a).email if "@" not in a else a for a in email.to_addresses ]
+            bcc = [ um.User(a).email if "@" not in a else a for a in email.bcc_addresses ]
+            cc = [ um.User(a).email if "@" not in a else a for a in email.cc_addresses ]
 
-        envelope = Envelope(
-            from_addr="{}@transientbug.com".format(email.service),
-            to_addr=to,
-            bcc_addr=bcc,
-            cc_addr=cc,
-            subject=email.subject,
-            text_body=email.contents["text"],
-            html_body=email.contents["html"]
-        )
+            envelope = Envelope(
+                from_addr="{}@transientbug.com".format(email.service),
+                to_addr=to,
+                bcc_addr=bcc,
+                cc_addr=cc,
+                subject=email.subject,
+                text_body=email.content["text"],
+                html_body=email.content["html"]
+            )
 
-        if c.send_emails:
-            envelope.send('localhost', port=25)
+            if c.send_email:
+                envelope.send('localhost', port=25)
 
-        email.sent = arrow.utcnow().timestamp
-        email.save()
-        logger.info("Sent email {}".format(email.id))
+            if c.debug:
+                logger.info(email)
 
+            email.sent = arrow.utcnow().timestamp
+            email.save()
+            logger.info("Sent email {}".format(email.id))

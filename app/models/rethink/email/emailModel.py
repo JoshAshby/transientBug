@@ -84,7 +84,10 @@ class Email(RethinkModel):
     def who(self):
         fin = []
         for user in self.to_addresses:
-            fin.append(um.User(user).email)
+            if "@" not in user:
+                fin.append(um.User(user).email)
+            else:
+                fin.append(user)
 
         return fin
 
@@ -92,7 +95,10 @@ class Email(RethinkModel):
     def who_cc(self):
         fin = []
         for user in self.cc_addresses:
-            fin.append(um.User(user).email)
+            if "@" not in user:
+                fin.append(um.User(user).email)
+            else:
+                fin.append(user)
 
         return fin
 
@@ -100,6 +106,9 @@ class Email(RethinkModel):
     def who_bcc(self):
         fin = []
         for user in self.bcc_addresses:
-            fin.append(um.User(user).email)
+            if "@" not in user:
+                fin.append(um.User(user).email)
+            else:
+                fin.append(user)
 
         return fin

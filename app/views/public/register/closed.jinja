@@ -1,0 +1,28 @@
++++
+theme_color: green
+
+nav: register
++++
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <h1><i class="fa fa-frown-o"></i> Closed</h1>
+
+    <p>We're sorry but site registration is currently closed.<p>
+    {% if req.buckets.enablePublicInvites %}
+
+    <p>However, invites are currently able to register. If you have recieved an invite email, please enter your invite code below</p>
+      <form method="GET" class="form-inline">
+        <div class="form-group">
+          <div class="input-group input-group">
+            <input type="text" class="form-control" name="c" id="invite_code" value="" placeholder="Invite code">
+            <span class="input-group-btn">
+              <button class="btn btn-green" type="submit">Register</button>
+            </span>
+          </div>
+        </div>
+      </form>
+   {% endif %}
+
+  </div>
+</div>
