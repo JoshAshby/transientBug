@@ -40,6 +40,11 @@ class index(MixedObject):
 
             found = r.table(im.Invite.table).filter({"short_code": code}).coerce_to("array").run()
             if found:
+                found = im.Invite(**found[0])
+                if found.closed:
+                    self.view.template = "public/register/closed"
+                    self.request.session.push_alert("That invite has already been used!")
+
                 return self.view
 
             else:
@@ -65,6 +70,11 @@ class index(MixedObject):
                 if email != invite.email:
                     self.request.session.push_alert("Your email doesn't match the email for that invite!")
                     self.view.template = "public/register/closed"
+                    return self.view
+
+                if invite.closed:
+                    self.view.template = "public/register/closed"
+                    self.request.session.push_alert("That invite has already been used!")
                     return self.view
 
                 try:
