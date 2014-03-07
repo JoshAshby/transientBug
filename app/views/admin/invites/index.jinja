@@ -38,14 +38,14 @@ breadcrumbs_top: True
         <tbody>
           {% for invite in page.pail %}
             <tr>
-              <td>{{invite.email}}</td>
+              <td><a href="/admin/emails/{{invite.email.id}}">{{invite.email.who|join(",")}}</a></td>
               <td>{{invite.short_code}}</td>
               <td>{{invite.created.humanize()}}</td>
               <td>
                 {% if invite.user %}
                   <a href="/admin/users/{{invite.user.id}}">{{invite.user.username}}</a>
                 {% else %}
-                  Pending <button class="btn btn-orange btn-sm">Resend</button>
+                  <button data-email="{{invite.email.id}}" class="btn btn-orange btn-sm resend-invite">Pending</button>
                 {% endif %}
               </td>
             </tr>

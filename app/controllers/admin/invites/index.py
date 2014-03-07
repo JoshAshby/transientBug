@@ -15,16 +15,10 @@ from seshat_addons.seshat.mixed_object import MixedObject
 from seshat_addons.seshat.obj_mods import login, template
 from seshat_addons.seshat.func_mods import HTML
 
-
 from rethinkORM import RethinkCollection
 from models.rethink.invite import inviteModel as im
-from models.rethink.email import emailModel as em
 
 from utils.paginate import Paginate
-
-from seshat_addons.view.template import PartialTemplate
-
-
 
 
 @route()
@@ -43,22 +37,13 @@ class index(MixedObject):
         return self.view
 
     def POST(self):
-        email = self.request.get_param("email")
+        try:
+            email = self.request.get_param("email")
 
-        if email:
-            invite = im.Invite.new(email)
+            if email:
+                im.Invite.new(email)
 
-            tmpl = PartialTemplate("emails/invite")
-            tmpl.data = {"invite": invite}
-            content = tmpl.render()
-
-            em.Email.new()\
-                .send_to(email)\
-                .send_from("noreply")\
-                .set_subject("transientBug.com - Invite to Register!")\
-                .set_text(content)\
-                .set_html(content)\
-                .queue()
-
-        self.request.session.push_alert("Invite sent!")
-        return Redirect("/admin/invites")
+            self.request.session.push_alert("Invite sent!")
+            return Redirect("/admin/invites")
+        except Exception as e:
+            print e

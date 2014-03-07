@@ -86,7 +86,7 @@ class index(MixedObject):
                             )
 
                     user.email = email
-                    invite.closed = True
+                    invite.user = user.id
 
                     tmpl = PartialTemplate("emails/account_registered")
                     tmpl.data = {"user": user}

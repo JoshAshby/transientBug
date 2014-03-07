@@ -12,7 +12,7 @@ joshuaashby@joshashby.com
 from seshat.route import route
 from seshat_addons.seshat.mixed_object import MixedObject
 from seshat_addons.seshat.obj_mods import login, template
-from seshat_addons.seshat.func_mods import HTML
+from seshat_addons.seshat.func_mods import HTML, JSON
 
 from seshat.actions import Redirect
 
@@ -34,3 +34,7 @@ class view(MixedObject):
         self.view.data = {"email": email}
 
         return self.view
+
+    @JSON
+    def POST(self):
+        pass
