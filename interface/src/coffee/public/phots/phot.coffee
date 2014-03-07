@@ -32,7 +32,7 @@ LazyLoad.js [
     toggle = (what, val) ->
       id = $(what).data "id"
 
-      $.post "/admin/phots/#{ id }/toggle", {state: val}, (data) ->
+      $.post "/admin/phots/#{ id }", {state: val}, (data) ->
         if data[0]["success"]
           wording = "enabled"
           if data[0]["state"]

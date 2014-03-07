@@ -58,7 +58,7 @@ class index(MixedObject):
         current = pm.Phot(self.request.id)
 
         if current.filename:
-            current.disable = not current.disable if "disable" in current._data else True
+            current.disable = not current.disable if "disable" in current else True
             current.save()
 
             return {"success": True, "state": current.disable}
