@@ -17,7 +17,7 @@
     </form>
   </div>
   <div class="col-sm-12 col-md-2">
-    {% if req.session %}
+    {% if req.session.id %}
       <a href="/notes/yours" class="btn btn-red btn-sm">Your Notes</a>
     {% endif %}
   </div>
