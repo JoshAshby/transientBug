@@ -1,0 +1,59 @@
++++
+theme_color: purple
+nav: new_recipe
+
+scriptFiles:
+  - public/recipes/new
++++
+
+<div class="row">
+  <div class="col-sm-12 col-md-8 col-md-offset-2">
+
+    <div class="panel panel-purple">
+      <div class="panel-heading">
+        <h3 class="panel-title">New Recipe</h3>
+      </div>
+      <div class="panel-body">
+        <form method="POST" action="/recipes/new" id="new_recipe">
+          <fieldset id="info">
+            <legend>Basic info</legend>
+            <div class="form-group">
+              <input type="text" class="form-control" id="recipe-name" name="title" placeholder="Recipe Title..." required>
+            </div>
+            <div class="form-group">
+              <input type="text" id="recipe-tags" name="tags">
+            </div>
+          </fieldset>
+          <fieldset id="ingredients">
+            <legend>Ingredients</legend>
+            <div class="input-group">
+              <input type="text" class="form-control input-sm" name="ingredients" placeholder="Ingredient..." />
+              <span class="input-group-btn">
+                <button class="btn btn-default btn-sm"><i class="fa fa-times"></i></button>
+              </span>
+            </div>
+            <br>
+          </fieldset>
+          <fieldset id="steps">
+            <legend>Steps/Process</legend>
+            <div class="form-group">
+              <label for="step-0" class="sr-only">Step 0</label>
+              <div class="row">
+                <div class="col-md-11">
+                  <textarea class="form-control step" name="steps" data-order="0" rows=10></textarea>
+                </div>
+                <div class="col-md-1">
+                  <button class="remove-step" class="btn btn-default"><i class="fa fa-times"></i></button>
+                </div>
+              </div>
+            </div>
+            <br>
+          </fieldset>
+
+          <button class="btn btn-purple btn-block" type="submit">Add</button>
+        </form>
+      </div>
+    </div>
+
+  </div>
+</div>

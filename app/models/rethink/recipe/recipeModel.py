@@ -25,7 +25,7 @@ class Recipe(BaseInterface, UserValidator, TagsValidator, CreatedValidator):
     _created_field = "created"
 
     @classmethod
-    def new(cls, user, title="", tags=None, country="'Merica!", ingredients=None, steps=None, has_comments=False, public=False):
+    def new(cls, user, title="", description="", country="'Merica!", ingredients=None, steps=None, tags=None, has_comments=False, public=False):
         if not tags:
             tags = []
 
@@ -33,23 +33,20 @@ class Recipe(BaseInterface, UserValidator, TagsValidator, CreatedValidator):
             ingredients = []
 
         if not steps:
-            steps = []
-
-        title = title.rstrip().lstrip().replace(" ", "_").lower()
-        created = arrow.utcnow().timestamp
-
-        new_tags = [ tag.lstrip().rstrip().replace(" ", "_").lower() for tag in tags ]
-
-        code = sc.generate_short_code(cls.table)
+            steps = {}
 
         what = cls.create(user=user,
-                          created=created,
-                          title=title,
+                          created=arrow.utcnow().timestamp,
+                          title=title.rstrip().lstrip(),
+                          description=description,
+                          country=country,
+                          ingredients=ingredients,
+                          steps=steps,
+                          tags=TagsValidator.parse_tags(tags),
                           public=public,
-                          tags=new_tags,
                           has_comments=has_comments,
-                          short_code=code,
-                          disable=False,
+                          short_code=sc.generate_short_code(cls.table),
+                          deleted=False,
                           reported=False)
 
         return what
