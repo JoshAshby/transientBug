@@ -1,17 +1,18 @@
-new_step = """
-<div class="form-group">
-  <label for="step-#{ step_counter }" class="sr-only"></label>
-  <div class="row">
-    <div class="col-md-11">
-      <textarea class="form-control step" name="steps" data-order="#{ step_counter }" rows=10></textarea>
-    </div>
-    <div class="col-md-1">
-      <button class="remove-step" class="btn btn-default"><i class="fa fa-times"></i></button>
+new_step = (counter) ->
+  """
+  <div class="form-group">
+    <label for="step-#{ counter }" class="step-number"></label>
+    <div class="row">
+      <div class="col-md-11">
+        <textarea class="form-control step" name="steps" data-order="#{ counter }" rows=5></textarea>
+      </div>
+      <div class="col-md-1">
+        <button class="remove-step btn btn-default"><i class="fa fa-times"></i></button>
+      </div>
     </div>
   </div>
-</div>
-<br>
-"""
+  <br>
+  """
 
 new_ingredient = """
 <div class="input-group">
@@ -22,8 +23,6 @@ new_ingredient = """
 </div>
 <br>
 """
-
-step_counter = 1
 
 LazyLoad.css [
   '/static/css/pillbox.css'
@@ -38,44 +37,53 @@ LazyLoad.js [
   '/static/js/lib/bootstrap-growl.min.js'
 ], ->
   $ ->
+    #growl_options =
+      #position:
+        #from: "bottom"
+        #align: "right"
+      #template:
+        #container: '<div class="col-xs-10 col-sm-10 col-md-4 alert">'
+
     #$("#recipe-tags").pillbox url: "/api/v0/recipes/tags", name: "recipes"
 
     #file_upload =  $ '#phot_file'
     #file_upload.bootstrapFileInput()
 
-    growl_options =
-      position:
-        from: "bottom"
-        align: "right"
-      template:
-        container: '<div class="col-xs-10 col-sm-10 col-md-4 alert">'
-
-    #list.find('input[type=checkbox]').bootstrapSwitch()
+    $("#new-recipe").find('input[type=checkbox]').bootstrapSwitch()
 
     reorder_steps = () ->
-      step = 0
-      $(".steps").each (e, i) ->
-        $(e).data "order", step
-        step++
+      steps = $("#steps").find("div.form-group")
+      if steps.length is 1
+        steps.first().find("button.remove-step").hide()
+      else
+        steps.each (i, e) ->
+          $el = $(e)
+          $el.find("button.remove-step").show()
+          $el.find("label.step-number").html "Step #{ i }"
+
+    step_counter = 1
 
     $("#add-step").click (e) ->
       e.preventDefault()
-      $("#steps").append new_step
+      $("#steps").append new_step step_counter
       step_counter++
+      reorder_steps()
 
     $("#steps").on "click", "button.remove-step", (e) ->
       e.preventDefault()
       yn = confirm "Are you sure you want to remove this step?"
       if yn
-        $(@).parents("div.form-group").next().remove() # remove the br
-        $(@).parents("div.form-group").remove()
+        $el = $(@).parents "div.form-group"
+        $el.next().remove() # br
+        $el.remove()
         reorder_steps()
 
     $("#add-ingredient").click (e) ->
       e.preventDefault()
-      $("#ingredients").append
+      $("#ingredients").append new_ingredient
 
     $("#ingredients").on "click", "button", (e) ->
       e.preventDefault()
-      $(@).parents("div.input-group").next().remove() # get the br too
-      $(@).parents("div.input-group").remove()
+      $el = $(@).parents "div.input-group"
+      $el.next().remove() # br
+      $el.remove()
