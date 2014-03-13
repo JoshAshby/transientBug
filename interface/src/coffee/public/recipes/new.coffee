@@ -1,15 +1,10 @@
-new_step = (counter) ->
+new_step = (count) ->
   """
   <div class="form-group">
-    <label for="step-#{ counter }" class="step-number"></label>
-    <div class="row">
-      <div class="col-md-11">
-        <textarea class="form-control step" name="steps" data-order="#{ counter }" rows=5></textarea>
-      </div>
-      <div class="col-md-1">
-        <button class="remove-step btn btn-default"><i class="fa fa-times"></i></button>
-      </div>
-    </div>
+    <label for="steps">Step <span class="step-number">#{ count }</span></label>
+    <a href="#" class="insert-step-before">Insert Empty Step Before</a>
+    <a href="#" class="remove-step pull-right">Remove</a>
+    <textarea class="form-control step" name="steps" data-step="#{ count }" rows=5></textarea>
   </div>
   <br>
   """
@@ -51,32 +46,38 @@ LazyLoad.js [
 
     $("#new-recipe").find('input[type=checkbox]').bootstrapSwitch()
 
-    reorder_steps = () ->
-      steps = $("#steps").find("div.form-group")
-      if steps.length is 1
-        steps.first().find("button.remove-step").hide()
-      else
-        steps.each (i, e) ->
-          $el = $(e)
-          $el.find("button.remove-step").show()
-          $el.find("label.step-number").html "Step #{ i }"
-
-    step_counter = 1
+    relabel_steps = () ->
+      steps = $("#steps").find "div.form-group"
+      steps.each (i, e) ->
+        $el = $(e)
+        $el.find("span.step-number").html i
+        $el.find("textarea.step").data "step", i
 
     $("#add-step").click (e) ->
       e.preventDefault()
-      $("#steps").append new_step step_counter
-      step_counter++
-      reorder_steps()
+      $el = $ "#steps"
+      count = $el.find("textarea.step").last().data "step"
+      $el.append new_step count+1
 
-    $("#steps").on "click", "button.remove-step", (e) ->
+    $(document).on "click", "a.insert-step-before", (e) ->
+      e.preventDefault()
+      $el = $ $(@).parents("div.form-group")
+      $el.before new_step
+      relabel_steps()
+
+    $(document).on "click", "a.remove-step", (e) ->
       e.preventDefault()
       yn = confirm "Are you sure you want to remove this step?"
       if yn
-        $el = $(@).parents "div.form-group"
-        $el.next().remove() # br
-        $el.remove()
-        reorder_steps()
+        steps = $("#steps").find "div.form-group"
+        if steps.length isnt 1
+          $el = $(@).parents "div.form-group"
+          $el.next().remove() # br
+          $el.remove()
+          relabel_steps()
+        else
+          $el = $(@).parents("div.form-group").find "textarea"
+          $el.val ""
 
     $("#add-ingredient").click (e) ->
       e.preventDefault()
@@ -84,6 +85,38 @@ LazyLoad.js [
 
     $("#ingredients").on "click", "button", (e) ->
       e.preventDefault()
-      $el = $(@).parents "div.input-group"
-      $el.next().remove() # br
-      $el.remove()
+      ingrs = $("#ingredients").find "div.input-group"
+      if ingrs.length isnt 1
+        $el = $(@).parents "div.input-group"
+        $el.next().remove() # br
+        $el.remove()
+      else
+        $el = $(@).parents("div.input-group").find "input"
+        $el.val ""
+
+    $("#new-recipe").on "click", 'button[type="submit"]', (e) ->
+      e.preventDefault()
+      recipe = {}
+
+      $form = $("#new-recipe")
+
+      for field in ["name", "tags"]
+        recipe[field] = $form.find("input[name=\"#{ field }\"]").val()
+
+      steps = {}
+      for step in $("#steps").find("textarea")
+        $step = $(step)
+        steps[$step.data("step")] = $step.val()
+
+      ingredients = []
+      for ingre in $("#ingredients").find('input[type="text"]')
+        $ingr = $(ingre)
+        ingredients.push $ingr.val()
+
+      recipe["ingredients"] = ingredients
+      recipe["steps"] = steps
+
+      console.log recipe
+
+      #$.post "/recipes/new", recipe, (data) ->
+        #console.log data
