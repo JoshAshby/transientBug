@@ -8,56 +8,6 @@ scriptFiles:
 
 <div class="row">
   <div class="col-sm-12 col-md-8 col-md-offset-2">
-
-    <div class="panel panel-purple">
-      <div class="panel-heading">
-        <h3 class="panel-title">New Recipe</h3>
-      </div>
-      <div class="panel-body">
-        <form method="POST" action="/recipes/new" id="new-recipe">
-          <fieldset>
-<!--            <legend>Basic info</legend>  -->
-            <div class="form-group">
-              <input type="text" class="form-control" id="recipe-name" name="name" placeholder="Recipe Title..." required>
-            </div>
-            <div class="form-group">
-              <input type="text" id="recipe-tags" name="tags">
-            </div>
-          </fieldset>
-          <hr>
-          <fieldset>
-<!--            <legend>Ingredients</legend> -->
-            <div id="ingredients">
-              <div class="input-group">
-                <input type="text" class="form-control input-sm" name="ingredients" placeholder="Ingredient..." />
-                <span class="input-group-btn">
-                  <button class="btn btn-default btn-sm"><i class="fa fa-times"></i></button>
-                </span>
-              </div>
-              <br>
-            </div>
-            <button class="btn btn-default pull-right" id="add-ingredient"><i class="fa fa-plus"></i></button>
-          </fieldset>
-          <hr>
-          <fieldset>
-<!--            <legend>Steps/Process</legend> -->
-            <div id="steps">
-              <div class="form-group">
-                <label for="step-0">Step <span class="step-number">0</span></label>
-                <a href="#" class="insert-step-before">Insert Empty Step Before</a>
-                <a href="#" class="remove-step pull-right">Remove</a>
-                <textarea class="form-control step" name="steps" data-step="0" rows=5></textarea>
-              </div>
-              <br>
-            </div>
-            <button class="btn btn-default pull-right" id="add-step"><i class="fa fa-plus"></i></button>
-            <br>
-          </fieldset>
-          <br>
-          <button class="btn btn-purple btn-block" type="submit">Add</button>
-        </form>
-      </div>
-    </div>
-
+    ![[partials/public/recipes/create]]
   </div>
 </div>

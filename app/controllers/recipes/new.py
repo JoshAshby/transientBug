@@ -12,12 +12,8 @@ joshuaashby@joshashby.com
 from seshat.route import route
 from seshat_addons.seshat.mixed_object import MixedObject
 from seshat_addons.seshat.obj_mods import template, login
-from seshat_addons.seshat.func_mods import HTML
+from seshat_addons.seshat.func_mods import HTML, JSON
 
-from utils.paginate import Paginate
-
-import rethinkdb as r
-from rethinkORM import RethinkCollection
 import models.rethink.recipe.recipeModel as rm
 
 
@@ -29,5 +25,22 @@ class new(MixedObject):
     def GET(self):
         return self.view
 
+    @JSON
     def POST(self):
-        pass
+        try:
+            name = self.request.get_param("name")
+            tags = self.request.get_param("tags")
+            ingredients = self.request.get_param("ingredients")
+            steps = self.request.get_param("steps")
+
+            recipe = rm.Recipe.new_recipe(self.request.session.id,
+                               title=name,
+                               ingredients=ingredients,
+                               steps=steps,
+                               tags=tags)
+
+            print recipe
+
+            return {"success": True}
+        except Exception as e:
+            print e

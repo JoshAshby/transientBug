@@ -17,7 +17,7 @@ from models.validators.created_validator import CreatedValidator
 import utils.short_codes as sc
 
 
-class Recipe(BaseInterface, UserValidator, TagsValidator, CreatedValidator):
+class Recipe(UserValidator, TagsValidator, CreatedValidator, BaseInterface):
     table = "recipes"
 
     _user_field = "user"
@@ -25,7 +25,7 @@ class Recipe(BaseInterface, UserValidator, TagsValidator, CreatedValidator):
     _created_field = "created"
 
     @classmethod
-    def new(cls, user, title="", description="", country="'Merica!", ingredients=None, steps=None, tags=None, has_comments=False, public=False):
+    def new_recipe(cls, user, title="", description="", country="'Merica!", ingredients=None, steps=None, tags=None, has_comments=False, public=False):
         if not tags:
             tags = []
 
@@ -33,9 +33,9 @@ class Recipe(BaseInterface, UserValidator, TagsValidator, CreatedValidator):
             ingredients = []
 
         if not steps:
-            steps = {}
+            steps = []
 
-        what = cls.create(user=user,
+        what = cls(user=user,
                           created=arrow.utcnow().timestamp,
                           title=title.rstrip().lstrip(),
                           description=description,
@@ -49,7 +49,27 @@ class Recipe(BaseInterface, UserValidator, TagsValidator, CreatedValidator):
                           deleted=False,
                           reported=False)
 
+        what.save()
+
         return what
+
+    #@property
+    #def steps(self):
+        #vals = []
+        #keys = sorted([ int(i) for i in self._data["steps"].iterkeys() ])
+        #for key in keys:
+            #vals.append(self._["data"][key])
+
+        #return vals
+
+    #@steps.setter
+    #def steps(self, val):
+        #assert type(val) is list
+        #ss = {}
+        #for i in range(len(val)):
+            #ss[str(i)] = val[i]
+
+        #self._data["steps"] = ss
 
     def copy(self, user):
         copy_data = self._data.copy().pop("id").pop("user")

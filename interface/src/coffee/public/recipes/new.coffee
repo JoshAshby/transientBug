@@ -39,7 +39,7 @@ LazyLoad.js [
       #template:
         #container: '<div class="col-xs-10 col-sm-10 col-md-4 alert">'
 
-    #$("#recipe-tags").pillbox url: "/api/v0/recipes/tags", name: "recipes"
+    $("#recipe-tags").pillbox url: "/api/v0/recipes/tags", name: "recipes", theme: "purple"
 
     #file_upload =  $ '#phot_file'
     #file_upload.bootstrapFileInput()
@@ -96,27 +96,27 @@ LazyLoad.js [
 
     $("#new-recipe").on "click", 'button[type="submit"]', (e) ->
       e.preventDefault()
-      recipe = {}
+      recipe = $("#new-recipe").serialize()
 
-      $form = $("#new-recipe")
+      #$form = $("#new-recipe")
 
-      for field in ["name", "tags"]
-        recipe[field] = $form.find("input[name=\"#{ field }\"]").val()
+      #for field in ["name", "tags"]
+        #recipe[field] = $form.find("input[name=\"#{ field }\"]").val()
 
-      steps = {}
-      for step in $("#steps").find("textarea")
-        $step = $(step)
-        steps[$step.data("step")] = $step.val()
+      #steps = {}
+      #for step in $("#steps").find("textarea")
+        #$step = $(step)
+        #steps[$step.data("step")] = $step.val()
 
-      ingredients = []
-      for ingre in $("#ingredients").find('input[type="text"]')
-        $ingr = $(ingre)
-        ingredients.push $ingr.val()
+      #ingredients = []
+      #for ingre in $("#ingredients").find('input[type="text"]')
+        #$ingr = $(ingre)
+        #ingredients.push $ingr.val()
 
-      recipe["ingredients"] = ingredients
-      recipe["steps"] = steps
+      #recipe["ingredients"] = ingredients
+      #recipe["steps"] = steps
 
-      console.log recipe
+      #console.log recipe
 
-      #$.post "/recipes/new", recipe, (data) ->
-        #console.log data
+      $.post "/recipes/new", recipe, (data) ->
+        console.log data

@@ -14,6 +14,8 @@ class TagsValidator(object):
 
     @staticmethod
     def parse_tags(tags):
+        if isinstance(tags, str):
+            tags = tags.split(",")
         new_tags = [ tag.lstrip().rstrip().replace(" ", "_").lower() for tag in tags ]
         return new_tags
 

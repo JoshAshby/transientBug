@@ -81,8 +81,13 @@ class BaseInterface(RethinkModel):
         else:
             for item in kwargs:
                 if item not in self._protected_items and item[0] != "_":
-                    self._data[item] = kwargs[item]
-            self._data[self.primary_key] = key
+                    setattr(self, item, kwargs[item])
+            setattr(self, self.primary_key, key)
+
+            #for item in kwargs:
+                #if item not in self._protected_items and item[0] != "_":
+                    #self._data[item] = kwargs[item]
+            #self._data[self.primary_key] = key
 
         # Hook to run any inherited class code, if needed
         self.finish_init()
