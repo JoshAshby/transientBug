@@ -39,7 +39,7 @@ LazyLoad.js [
       #template:
         #container: '<div class="col-xs-10 col-sm-10 col-md-4 alert">'
 
-    $("#recipe-tags").pillbox url: "/api/v0/recipes/tags", name: "recipes", theme: "purple"
+    $("#recipe-tags").pillbox url: "/api/v0/recipes/tags", name: "recipe_tags", theme: "purple"
 
     #file_upload =  $ '#phot_file'
     #file_upload.bootstrapFileInput()

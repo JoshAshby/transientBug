@@ -40,20 +40,29 @@ class Pillbox
 
     input_keypress = (e) =>
       switch e.keyCode
+        when 9
+          @tags[@input.val().trim()] = true
+          @clearInput()
+          @refresh()
+
         when 13
           e.preventDefault()
           @tags[@input.val().trim()] = true
-          @input.val ""
+          @clearInput()
           @refresh()
 
         when 8, 46
-          if @getCaretPosition(@input.get()[0]) is 0
+          console.log @shouldDelete()
+          #if @getCaretPosition(@input.get()[0]) is 0 and @input.selectionEnd?
+          if @shouldDelete()
             e.preventDefault()
             last = @pill.find("span.label").last()
             if last?
               key = last.text().trim()
               @tags[key]= false
               @refresh()
+              @inputToValue key
+
 
     for tag in @init_val.split(",")
       @tags[tag.trim()] = true
@@ -96,7 +105,7 @@ class Pillbox
     @pill.find("span.label").remove()
     for tag, status of @tags
       if status and tag
-        @pill.prepend """ <span class="label label-#{ @opts.theme }">#{ tag } <i data-role="remove" class="fa fa-times"></i></span> """
+        @input.before """ <span class="label label-#{ @opts.theme }">#{ tag } <i data-role="remove" class="fa fa-times"></i></span> """
         tags.push tag
 
     @el.val tags.join ","
@@ -114,13 +123,31 @@ class Pillbox
     @tags = {}
     @refresh()
 
-  getCaretPosition: (oField) ->
-    iCaretPos = 0
-    if document.selection
-      oField.focus()
-      oSel = document.selection.createRange()
-      oSel.moveStart 'character', -oField.value.length
-      iCaretPos = oSel.text.length
-    else if oField.selectionStart or oField.selectionStart is '0'
-      iCaretPos = oField.selectionStart
-    iCaretPos
+  inputToValue: (val) ->
+    @input.val val
+    if $().typeahead?
+      @input.typeahead 'val', val
+
+  clearInput: () ->
+    @inputToValue ""
+    #@input.val ""
+    #if $().typeahead?
+      #@input.typeahead 'val', ''
+
+  shouldDelete: () ->
+    if @input[0].selectionStart is 0
+      @input[0].selectionEnd == @input[0].selectionStart
+    else
+      false
+
+  #getCaretPosition: (oField) ->
+    #iCaretPos = 0
+    #if document.selection?
+      #oField.focus()
+      #oSel = document.selection.createRange()
+      #oSel.moveStart 'character', -oField.value.length
+      #iCaretPos = oSel.text.length
+      #console.log iCaretPos
+    #else if oField.selectionStart or oField.selectionStart is '0'
+      #iCaretPos = oField.selectionStart
+    #iCaretPos
