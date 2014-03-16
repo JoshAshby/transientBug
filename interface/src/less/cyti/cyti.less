@@ -58,10 +58,18 @@ hr {
   margin: 0px;
 }
 
-nav > div.navbar-header > a > img {
-  margin-top: -6px;
-  max-width: 100px;
-  max-height: 30px;
+nav > div.navbar-header > a {
+  vertical-align: top;
+  & > svg {
+    margin-top: -10px;
+    max-width: 50px;
+    max-height: 40px;
+    margin-bottom: -15px;
+
+    #bug-body {
+      fill: @transientbug_green;
+    }
+  }
 }
 
 .phot-card {
