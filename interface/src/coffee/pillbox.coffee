@@ -52,7 +52,6 @@ class Pillbox
           @refresh()
 
         when 8, 46
-          console.log @shouldDelete()
           #if @getCaretPosition(@input.get()[0]) is 0 and @input.selectionEnd?
           if @shouldDelete()
             e.preventDefault()
@@ -147,7 +146,6 @@ class Pillbox
       #oSel = document.selection.createRange()
       #oSel.moveStart 'character', -oField.value.length
       #iCaretPos = oSel.text.length
-      #console.log iCaretPos
     #else if oField.selectionStart or oField.selectionStart is '0'
       #iCaretPos = oField.selectionStart
     #iCaretPos
