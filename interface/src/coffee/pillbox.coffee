@@ -60,7 +60,8 @@ class Pillbox
               key = last.text().trim()
               @tags[key]= false
               @refresh()
-              @inputToValue key
+              if @input.val() is ""
+                @inputToValue key
 
 
     for tag in @init_val.split(",")
