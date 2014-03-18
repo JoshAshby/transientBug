@@ -1,6 +1,4 @@
 """
-Notes model for use in seshat built off of rethinkdb
-
 http://xkcd.com/353/
 
 Josh Ashby
@@ -11,14 +9,20 @@ joshuaashby@joshashby.com
 import arrow
 
 from models.rethink.base_interface import BaseInterface
-import models.rethink.user.userModel as um
-import utils.markdown_utils as md
+from models.validators.user_validator import UserValidator
+from models.validators.tags_validator import TagsValidator
+from models.validators.created_validator import CreatedValidator
 
+import utils.markdown_utils as md
 import utils.short_codes as sc
 
 
-class Note(BaseInterface):
+class Note(UserValidator, TagsValidator, CreatedValidator, BaseInterface):
     table = "notes"
+
+    _user_field = "user"
+    _tags_field = "tags"
+    _created_field = "created"
 
     @classmethod
     def new_note(cls, user, title="", contents="", draft=True, public=False,
@@ -60,53 +64,6 @@ class Note(BaseInterface):
         copy = Note(**copy_data)
 
         return copy
-
-    @property
-    def author(self):
-        return self.user
-
-    @author.setter
-    def author(self, val):
-        self.user = val
-
-    @property
-    def tags(self):
-        return self._data.get("tags")
-
-    @tags.setter
-    def tags(self, val):
-        tag = [ bit.lstrip().rstrip().lower().replace(" ", "_") for bit in val ]
-        self._data["tags"] = tag
-
-    @property
-    def user(self):
-        if not hasattr(self, "_user") or self._user is None:
-            self._user = um.User(self._data.get("user"))
-        return self._user
-
-    @user.setter
-    def user(self, val):
-        if isinstance(val, um.User):
-            self._data["user"] = val.id
-        else:
-            self._data["user"] = val
-
-        self._user = um.User(self._data["user"])
-
-    @property
-    def created(self):
-        if not hasattr(self, "_formated_created") or self._formated_created is None:
-            self._formated_created = arrow.get(self._data["created"])
-
-        return self._formated_created
-
-    @created.setter
-    def created(self, val):
-        """
-        val should be a unix timestamp of the created datetime instance
-        """
-        self._formated_created = val
-        self._data["created"] = val
 
     @property
     def contents(self):

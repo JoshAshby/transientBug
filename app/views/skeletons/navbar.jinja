@@ -62,11 +62,12 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse navbar-ex1-collapse">
               <ul class="nav navbar-nav">
-                <li {{ 'class="active"' if nav=="phots" }}><a href="/phots"><i class="fa fa-picture-o"></i> Phots</a></li>
-                <li {{ 'class="active"' if nav=="notes" }}><a href="/notes"><i class="fa fa-file-text"></i> Notes</a></li>
+                <li {{ 'class="active"' if "phots" in nav }}><a href="/phots"><i class="fa fa-picture-o"></i> Phots</a></li>
+                <li {{ 'class="active"' if "notes" in nav }}><a href="/notes"><i class="fa fa-file-text"></i> Notes</a></li>
+                <li {{ 'class="active"' if "recipes" in nav }}><a href="/recipes"><i class="fa fa-cutlery"></i> Recipes</a></li>
 
                 {% if req.session.has_screenshots %}
-                  <li {{ 'class="active"' if nav=="screenshots" }}><a href="/screenshots"><i class="fa fa-desktop"></i> Scrns</a></li>
+                  <li {{ 'class="active"' if "screenshots" in nav }}><a href="/screenshots"><i class="fa fa-desktop"></i> Scrns</a></li>
                 {% endif %}
 
               </ul>
@@ -167,7 +168,7 @@
       <footer id="footer">
         <div class="row">
           <div class="col-md-6">
-            <a href="https://github.com/transientBug">transientBug - transientBug.com 2014</a>
+            <a href="https://github.com/JoshAshby/transientBug">transientBug.com 2014</a>
             <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/3.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>.
           </div>
           <div class="col-md-6">

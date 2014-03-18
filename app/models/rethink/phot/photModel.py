@@ -16,13 +16,19 @@ import config.config as c
 
 import rethinkdb as r
 from models.rethink.base_interface import BaseInterface
-import models.rethink.user.userModel as um
+from models.validators.user_validator import UserValidator
+from models.validators.tags_validator import TagsValidator
+from models.validators.created_validator import CreatedValidator
 
 import utils.short_codes as sc
 
 
-class Phot(BaseInterface):
+class Phot(UserValidator, TagsValidator, CreatedValidator, BaseInterface):
     table = "phots"
+
+    _user_field = "user"
+    _tags_field = "tags"
+    _created_field = "created"
 
     @classmethod
     def new_phot(cls, user, stuff, title, tags=[]):
@@ -98,45 +104,6 @@ class Phot(BaseInterface):
             self._data["title"] = title
 
         return title
-
-    @property
-    def tags(self):
-        return self._data.get("tags")
-
-    @tags.setter
-    def tags(self, val):
-        tag = [ bit.lstrip().rstrip().lower().replace(" ", "_") for bit in val ]
-        self._data["tags"] = tag
-
-    @property
-    def user(self):
-        if not hasattr(self, "_user") or self._user is None:
-            self._user = um.User(self._data.get("user"))
-        return self._user
-
-    @user.setter
-    def user(self, val):
-        if isinstance(val, um.User):
-            self._data["user"] = val.id
-        else:
-            self._data["user"] = val
-
-        self._user = um.User(self._data["user"])
-
-    @property
-    def created(self):
-        if not hasattr(self, "_formated_created") or self._formated_created is None:
-            self._formated_created = arrow.get(self._data["created"])
-
-        return self._formated_created
-
-    @created.setter
-    def created(self, val):
-        """
-        val should be a unix timestamp of the created datetime instance
-        """
-        self._formated_created = val
-        self._data["created"] = val
 
     def __json__(self):
         d = self._data.copy()

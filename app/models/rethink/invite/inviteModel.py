@@ -9,7 +9,8 @@ joshuaashby@joshashby.com
 import arrow
 
 from models.rethink.base_interface import BaseInterface
-from models.rethink.user import userModel as um
+from models.validators.user_validator import UserValidator
+from models.validators.created_validator import CreatedValidator
 from models.rethink.email import emailModel as em
 
 from seshat_addons.view.template import PartialTemplate
@@ -17,8 +18,11 @@ from seshat_addons.view.template import PartialTemplate
 import utils.short_codes as sc
 
 
-class Invite(BaseInterface):
+class Invite(UserValidator, CreatedValidator, BaseInterface):
     table = "invites"
+
+    _user_field = "user_id"
+    _created_field = "created"
 
     @classmethod
     def new(cls, email):
@@ -50,36 +54,6 @@ class Invite(BaseInterface):
         what.save()
 
         return what
-
-    @property
-    def created(self):
-        if not hasattr(self, "_formated_created") or self._formated_created is None:
-            self._formated_created = arrow.get(self._data["created"])
-
-        return self._formated_created
-
-    @created.setter
-    def created(self, val):
-        """
-        val should be a unix timestamp of the created datetime instance
-        """
-        self._formated_created = val
-        self._data["created"] = val
-
-    @property
-    def user(self):
-        if self.user_id:
-            if not hasattr(self, "_user") or self._user is None:
-                try:
-                    self._user = um.User(self.user_id)
-
-                except:
-                    self._user = None
-
-            return self._user
-
-        else:
-            return None
 
     @property
     def email(self):
