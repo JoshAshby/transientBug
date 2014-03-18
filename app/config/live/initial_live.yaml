@@ -12,6 +12,7 @@ tables:
   - emails
   - requests
   - invites
+  - recipes
 
 buckets:
   enable500Error:
@@ -32,6 +33,7 @@ flush:
     notes: false
     emails: true
     requests: true
+    recipes: false
 
   redis:
     session: true

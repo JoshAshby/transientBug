@@ -1,0 +1,90 @@
+<div class="panel panel-purple">
+  <div class="panel-heading">
+    <h3 class="panel-title">{{ "Update Recipe for "+recipe.title if recipe else "New Recipe" }}</h3>
+  </div>
+  <div class="panel-body">
+    <form method="POST" action={{ "/recipes/"+recipe.short_code if recipe else "/recipes/new" }}" id="new-recipe">
+      <div class="row">
+        <div class="col-md-6">
+          <fieldset>
+            <legend>Basic info</legend>
+            <div class="form-group">
+              <input type="text" class="form-control" id="recipe-name" name="name" placeholder="Recipe Title..." value="{{ recipe.title if recipe }}" required>
+            </div>
+            <div class="form-group">
+              <textarea name="description" data-provide="markdown" placeholder="Recipe Description">{{ recipe.raw_description if recipe }}</textarea>
+            </div>
+            <div class="form-group">
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox" name="public" class="switch-small" data-on-label="Yes" data-off-label="NO!" data-on="purple" value="true" {{ 'checked' if not recipe or recipe.public }}/> Make this recipe public to anyone?
+                </label>
+              </div>
+            </div>
+            <div class="form-group">
+              <input type="text" id="recipe-tags" name="tags" value="{{ recipe.tags|join(",") if recipe }}">
+            </div>
+            <div class="form-group">
+              <input type="text" placeholder="Recipe Country of Origin..." id="countries" class="form-control" name="country" value="{{ recipe.country if recipe }}" />
+            </div>
+          </fieldset>
+        </div>
+        <div class="col-md-6">
+          <fieldset>
+            <legend>Ingredients</legend>
+            <div id="ingredients">
+              {% if recipe %}
+                {% for ingredient in recipe.ingredients %}
+                <div class="input-group">
+                  <input type="text" class="form-control input-sm" name="ingredients" placeholder="Ingredient..." value="{{ingredient}}" />
+                  <span class="input-group-btn">
+                    <button class="btn btn-default btn-sm"><i class="fa fa-times"></i></button>
+                  </span>
+                </div>
+                <br>
+                {% endfor %}
+              {% else %}
+                <div class="input-group">
+                  <input type="text" class="form-control input-sm" name="ingredients" placeholder="Ingredient..." />
+                  <span class="input-group-btn">
+                    <button class="btn btn-default btn-sm"><i class="fa fa-times"></i></button>
+                  </span>
+                </div>
+                <br>
+              {% endif %}
+            </div>
+            <button class="btn btn-default btn-sm pull-right" id="add-ingredient"><i class="fa fa-plus"></i></button>
+          </fieldset>
+          <fieldset>
+            <legend>Steps/Process</legend>
+            <div id="steps">
+              {% if recipe %}
+                {% for step in recipe.steps %}
+                  <div class="form-group">
+                    <label for="steps">Step {{loop.index}}<span class="step-number">{{loop.index}}</span></label>
+                    <a href="#" class="insert-step-before">Insert Empty Step Before</a>
+                    <a href="#" class="remove-step pull-right">Remove</a>
+                    <textarea class="form-control step" name="steps" data-step="{{loop.index}}" rows=5>{{step}}</textarea>
+                  </div>
+                  <br>
+                {% endfor %}
+              {% else %}
+                <div class="form-group">
+                  <label for="steps">Step <span class="step-number">0</span></label>
+                  <a href="#" class="insert-step-before">Insert Empty Step Before</a>
+                  <a href="#" class="remove-step pull-right">Remove</a>
+                  <textarea class="form-control step" name="steps" data-step="0" rows=5></textarea>
+                </div>
+                <br>
+              {% endif %}
+            </div>
+            <button class="btn btn-default btn-sm pull-right" id="add-step"><i class="fa fa-plus"></i></button>
+            <br>
+          </fieldset>
+        </div>
+      </div>
+      <br>
+      <button class="btn btn-purple btn-block" type="submit">{{ "Update" if recipe else "Add" }}</button>
+    </form>
+  </div>
+</div>

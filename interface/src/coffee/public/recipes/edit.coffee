@@ -22,6 +22,7 @@ new_ingredient = """
 LazyLoad.css [
   '/static/css/pillbox.css'
   '/static/css/lib/bootstrap-switch.min.css'
+  '/static/css/lib/bootstrap-markdown.min.css'
 ]
 
 LazyLoad.js [
@@ -30,6 +31,7 @@ LazyLoad.js [
   '/static/js/bootstrap-fileinput.js'
   '/static/js/lib/bootstrap-switch.min.js'
   '/static/js/lib/bootstrap-growl.min.js'
+  '/static/js/lib/bootstrap-markdown.js'
 ], ->
   $ ->
     #growl_options =
@@ -39,7 +41,7 @@ LazyLoad.js [
       #template:
         #container: '<div class="col-xs-10 col-sm-10 col-md-4 alert">'
 
-    $("#recipe-tags").pillbox url: "/api/v0/recipes/tags", name: "recipe_tags", theme: "purple"
+    $("#recipe-tags").pillbox url: "/api/v0/recipes/tags", name: "recipe_tags", theme: "purple", placeholder: "Recipe Tags..."
 
     #file_upload =  $ '#phot_file'
     #file_upload.bootstrapFileInput()
@@ -59,13 +61,13 @@ LazyLoad.js [
       count = $el.find("textarea.step").last().data "step"
       $el.append new_step count+1
 
-    $(document).on "click", "a.insert-step-before", (e) ->
+    $("#steps").on "click", "a.insert-step-before", (e) ->
       e.preventDefault()
       $el = $ $(@).parents("div.form-group")
       $el.before new_step
       relabel_steps()
 
-    $(document).on "click", "a.remove-step", (e) ->
+    $("#steps").on "click", "a.remove-step", (e) ->
       e.preventDefault()
       yn = confirm "Are you sure you want to remove this step?"
       if yn
@@ -94,29 +96,37 @@ LazyLoad.js [
         $el = $(@).parents("div.input-group").find "input"
         $el.val ""
 
+    $("#ingredients").on "keydown", "input", (e) ->
+      switch e.keyCode
+        when 9, 13
+          e.preventDefault()
+          $("#ingredients").append new_ingredient
+          $("#ingredients").last("div.input-group").find('input').focus()
+
     $("#new-recipe").on "click", 'button[type="submit"]', (e) ->
       e.preventDefault()
-      recipe = $("#new-recipe").serialize()
-
-      #$form = $("#new-recipe")
-
-      #for field in ["name", "tags"]
-        #recipe[field] = $form.find("input[name=\"#{ field }\"]").val()
-
-      #steps = {}
-      #for step in $("#steps").find("textarea")
-        #$step = $(step)
-        #steps[$step.data("step")] = $step.val()
-
-      #ingredients = []
-      #for ingre in $("#ingredients").find('input[type="text"]')
-        #$ingr = $(ingre)
-        #ingredients.push $ingr.val()
-
-      #recipe["ingredients"] = ingredients
-      #recipe["steps"] = steps
-
-      #console.log recipe
-
-      $.post "/recipes/new", recipe, (data) ->
+      $.post "/recipes/new", $("#new-recipe").serialize(), (data) ->
         console.log data
+
+    if $().typeahead? and Bloodhound?
+      tags = new Bloodhound
+        datumTokenizer: (d) ->
+          Bloodhound.tokenizers.nonword d.name
+        queryTokenizer: Bloodhound.tokenizers.whitespace
+        sorter: (a, b) ->
+          if a.relevance is b.relevance
+            0
+          else if a.relevance < b.relevance
+            1
+          else
+            -1
+        limit: 10
+        prefetch:
+          url: "/static/json/countries.json"
+
+      tags.initialize()
+
+      $("#countries").typeahead null,
+        {name: "countries"
+        displayKey: "name"
+        source: tags.ttAdapter()}

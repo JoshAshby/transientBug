@@ -9,12 +9,14 @@ joshuaashby@joshashby.com
 """
 import arrow
 
+import rethinkdb as r
 from models.rethink.base_interface import BaseInterface
 from models.validators.user_validator import UserValidator
 from models.validators.tags_validator import TagsValidator
 from models.validators.created_validator import CreatedValidator
 
 import utils.short_codes as sc
+import utils.markdown_utils as md
 
 
 class Recipe(UserValidator, TagsValidator, CreatedValidator, BaseInterface):
@@ -23,6 +25,20 @@ class Recipe(UserValidator, TagsValidator, CreatedValidator, BaseInterface):
     _user_field = "user"
     _tags_field = "tags"
     _created_field = "created"
+
+    @classmethod
+    def find(cls, key):
+        if len(key) == 10:
+            res = r.table(cls.table).filter({"short_code": key})\
+                    .coerce_to("array").run()
+
+        else:
+            res = r.table(cls.table).get(key).coerce_to("array").run()
+
+        if res:
+            return cls(**res[0])
+
+        return None
 
     @classmethod
     def new_recipe(cls, user, title="", description="", country="'Merica!", ingredients=None, steps=None, tags=None, has_comments=False, public=False):
@@ -52,6 +68,21 @@ class Recipe(UserValidator, TagsValidator, CreatedValidator, BaseInterface):
         what.save()
 
         return what
+
+    @property
+    def description(self):
+        if not hasattr(self, "_formated_description"):
+            self._formated_description = md.markdown(self._data["description"])
+
+        return self._formated_description
+
+    @description.setter
+    def description(self, val):
+        self._data["description"] = val
+
+    @property
+    def raw_description(self):
+        return self._data["description"]
 
     #@property
     #def steps(self):
