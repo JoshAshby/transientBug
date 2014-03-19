@@ -1,0 +1,44 @@
++++
+theme_color: purple
+
+nav: recipes
+
+scriptFiles:
+ - public/recipes/search
++++
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+  <h1><i class="fa fa-search"></i> Search Recipes...</h1>
+
+    <form method="GET" action="/recipes/search" class="form-inline">
+      <div class="input-group typeahead">
+        <input type="text" class="form-control" name="s" id="search" placeholder="Search...">
+        <span class="input-group-btn">
+          <button class="btn btn-purple" type="submit"><i class="fa fa-search"></i></button>
+        </span>
+      </div>
+    </form>
+
+  </div>
+</div>
+<br>
+<br>
+<div class="row">
+  <div class="col-md-12">
+
+    <div class="recipe-tags">
+      {% if tags %}
+        {% for tag in tags %}
+          <a href="/recipes/search?s=tags:{{tag|e}}"><span class="label label-purple">{{tag|replace("_", " ")|e}}</span></a>
+        {% endfor %}
+      {% else %}
+        <div class="jumbotron">
+          <h1>No tags</h1>
+          <p>So sad...</p>
+        </div>
+      {% endif %}
+    </div>
+
+  </div>
+</div>

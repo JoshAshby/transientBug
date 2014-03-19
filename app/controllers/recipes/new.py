@@ -16,6 +16,7 @@ from seshat_addons.seshat.obj_mods import template, login
 from seshat_addons.seshat.func_mods import HTML, JSON
 
 import models.rethink.recipe.recipeModel as rm
+import searchers.recipes as rs
 
 
 @route()
@@ -44,6 +45,10 @@ class new(MixedObject):
                                       description=description,
                                       ingredients=ingredients,
                                       steps=steps)
+
+        searcher = rs.RecipeSearcher()
+        searcher.add(recipe)
+        searcher.save()
 
         return {"success": True, "recipe": recipe}
         #return Redirect("/recipes/{}".format(self.request.id))

@@ -28,10 +28,10 @@ LazyLoad.css [
 LazyLoad.js [
   '/static/js/lib/typeahead.bundle.min.js'
   '/static/js/pillbox.js'
-  '/static/js/bootstrap-fileinput.js'
   '/static/js/lib/bootstrap-switch.min.js'
-  '/static/js/lib/bootstrap-growl.min.js'
   '/static/js/lib/bootstrap-markdown.js'
+  #'/static/js/bootstrap-fileinput.js'
+  #'/static/js/lib/bootstrap-growl.min.js'
 ], ->
   $ ->
     #growl_options =
@@ -41,10 +41,10 @@ LazyLoad.js [
       #template:
         #container: '<div class="col-xs-10 col-sm-10 col-md-4 alert">'
 
-    $("#recipe-tags").pillbox url: "/api/v0/recipes/tags", name: "recipe_tags", theme: "purple", placeholder: "Recipe Tags..."
-
     #file_upload =  $ '#phot_file'
     #file_upload.bootstrapFileInput()
+
+    $("#recipe-tags").pillbox url: "/api/v0/recipes/tags", name: "recipe_tags", theme: "purple", placeholder: "Recipe Tags..."
 
     $("#new-recipe").find('input[type=checkbox]').bootstrapSwitch()
 

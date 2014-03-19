@@ -1,18 +1,18 @@
 <div class="panel panel-purple">
   <div class="panel-heading">
-    <h3 class="panel-title">{{ "Update Recipe for "+recipe.title if recipe else "New Recipe" }}</h3>
+    <h3 class="panel-title">{{ "Update Recipe for "+recipe.title|e if recipe else "New Recipe" }}</h3>
   </div>
   <div class="panel-body">
-    <form method="POST" action={{ "/recipes/"+recipe.short_code if recipe else "/recipes/new" }}" id="new-recipe">
+    <form method="POST" action={{ "/recipes/"+recipe.short_code|e if recipe else "/recipes/new" }}" id="new-recipe">
       <div class="row">
         <div class="col-md-6">
           <fieldset>
             <legend>Basic info</legend>
             <div class="form-group">
-              <input type="text" class="form-control" id="recipe-name" name="name" placeholder="Recipe Title..." value="{{ recipe.title if recipe }}" required>
+              <input type="text" class="form-control" id="recipe-name" name="name" placeholder="Recipe Title..." value="{{ recipe.title|e if recipe }}" required>
             </div>
             <div class="form-group">
-              <textarea name="description" data-provide="markdown" placeholder="Recipe Description">{{ recipe.raw_description if recipe }}</textarea>
+              <textarea name="description" data-provide="markdown" placeholder="Recipe Description">{{ recipe.raw_description|e if recipe }}</textarea>
             </div>
             <div class="form-group">
               <div class="checkbox">
@@ -22,10 +22,10 @@
               </div>
             </div>
             <div class="form-group">
-              <input type="text" id="recipe-tags" name="tags" value="{{ recipe.tags|join(",") if recipe }}">
+              <input type="text" id="recipe-tags" name="tags" value="{{ recipe.tags|join(",")|e if recipe }}">
             </div>
             <div class="form-group">
-              <input type="text" placeholder="Recipe Country of Origin..." id="countries" class="form-control" name="country" value="{{ recipe.country if recipe }}" />
+              <input type="text" placeholder="Recipe Country of Origin..." id="countries" class="form-control" name="country" value="{{ recipe.country|e if recipe }}" />
             </div>
           </fieldset>
         </div>
@@ -36,7 +36,7 @@
               {% if recipe %}
                 {% for ingredient in recipe.ingredients %}
                 <div class="input-group">
-                  <input type="text" class="form-control input-sm" name="ingredients" placeholder="Ingredient..." value="{{ingredient}}" />
+                  <input type="text" class="form-control input-sm" name="ingredients" placeholder="Ingredient..." value="{{ingredient|e}}" />
                   <span class="input-group-btn">
                     <button class="btn btn-default btn-sm"><i class="fa fa-times"></i></button>
                   </span>
@@ -64,7 +64,7 @@
                     <label for="steps">Step {{loop.index}}<span class="step-number">{{loop.index}}</span></label>
                     <a href="#" class="insert-step-before">Insert Empty Step Before</a>
                     <a href="#" class="remove-step pull-right">Remove</a>
-                    <textarea class="form-control step" name="steps" data-step="{{loop.index}}" rows=5>{{step}}</textarea>
+                    <textarea class="form-control step" name="steps" data-step="{{loop.index}}" rows=5>{{step|e}}</textarea>
                   </div>
                   <br>
                 {% endfor %}

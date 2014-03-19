@@ -84,24 +84,6 @@ class Recipe(UserValidator, TagsValidator, CreatedValidator, BaseInterface):
     def raw_description(self):
         return self._data["description"]
 
-    #@property
-    #def steps(self):
-        #vals = []
-        #keys = sorted([ int(i) for i in self._data["steps"].iterkeys() ])
-        #for key in keys:
-            #vals.append(self._["data"][key])
-
-        #return vals
-
-    #@steps.setter
-    #def steps(self, val):
-        #assert type(val) is list
-        #ss = {}
-        #for i in range(len(val)):
-            #ss[str(i)] = val[i]
-
-        #self._data["steps"] = ss
-
     def copy(self, user):
         copy_data = self._data.copy().pop("id").pop("user")
         copy_data["short_code"] = sc.generate_short_code(self.table)

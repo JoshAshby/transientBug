@@ -1,0 +1,57 @@
++++
+theme_color: purple
+
+nav: recipes
+
+scriptFiles:
+ - public/recipes/search
+ - public/recipes/list
++++
+
+<h2>Search Results... {% if recipes.pail %}({{len(recipes)}} recipes){% endif %}</h2>
+
+{% if recipes.pail %}
+  ![[partials/public/recipes/list]]
+{% else %}
+  <div class="jumbotron">
+
+    <div class="row">
+      <div class="col-md-6 col-md-offset-3">
+      <h3><i class="fa fa-search"></i> Search for something else...</h3>
+
+        <form method="GET" action="/recipes/search" class="form-inline">
+          <div class="input-group input-group typeahead">
+            <input type="text" class="form-control" name="s" id="search" value="{{ req.get_param("s")|e }}" placeholder="Search...">
+            <span class="input-group-btn">
+              <button class="btn btn-purple" type="submit"><i class="fa fa-search"></i></button>
+            </span>
+          </div>
+        </form>
+
+      </div>
+    </div>
+
+    <p>We couldn't find any recipes that matched your search for <code>{{ req.get_param("s")|e }}</code>!</p>
+
+    {% if req.session.id %}
+    <a href="/recipes/new" class="btn btn-purple">New</a> or <a href="/recipes/">Your recipes</a>
+    {% endif %}
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      {% if tags %}
+        <div class="tags">
+          {% for tag in tags %}
+            <a href="/recipes/search?s=tags:{{tag|e}}"><span class="label label-purple">{{tag|replace("_", " ")|e}}</span></a>
+          {% endfor %}
+        </div>
+      {% else %}
+        <div class="jumbotron">
+          <h1>No tags</h1>
+          <p>So sad...</p>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+{% endif %}
