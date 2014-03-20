@@ -12,14 +12,15 @@ joshuaashby@joshashby.com
 from seshat.route import route
 from seshat.actions import NotFound, Unauthorized, Redirect
 from seshat_addons.seshat.mixed_object import MixedObject
-from seshat_addons.seshat.obj_mods import template
-from seshat_addons.seshat.func_mods import HTML, JSON
+from seshat_addons.seshat.obj_mods import template, login
+from seshat_addons.seshat.func_mods import HTML
 
 import models.rethink.recipe.recipeModel as rm
 import searchers.recipes as rs
 
 
 @route()
+@login(["recipes"])
 @template("public/recipes/view", "Recipe")
 class view(MixedObject):
     @HTML
@@ -34,10 +35,9 @@ class view(MixedObject):
                 return Unauthorized()
 
         self.view.title = recipe.title
-        self.view.data = {"recipe": recipe}
-        return self.view
+        return {"recipe": recipe}
 
-    @JSON
+    @HTML
     def POST(self):
         recipe = rm.Recipe.find(self.request.id)
 
@@ -62,5 +62,4 @@ class view(MixedObject):
         searcher.update(recipe)
         searcher.save()
 
-        return {"success": True, "recipe": recipe}
-        #return Redirect("/recipes/{}".format(self.request.id))
+        return Redirect("/recipes/{}".format(self.request.id))

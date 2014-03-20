@@ -103,11 +103,6 @@ LazyLoad.js [
           $("#ingredients").append new_ingredient
           $("#ingredients").last("div.input-group").find('input').focus()
 
-    $("#new-recipe").on "click", 'button[type="submit"]', (e) ->
-      e.preventDefault()
-      $.post "/recipes/new", $("#new-recipe").serialize(), (data) ->
-        console.log data
-
     if $().typeahead? and Bloodhound?
       tags = new Bloodhound
         datumTokenizer: (d) ->

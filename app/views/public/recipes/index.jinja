@@ -8,7 +8,9 @@ scriptFiles:
 +++
 
 {% if recipes.pail %}
+  ![[partials/public/recipes/options_bar]]
   ![[partials/public/recipes/list]]
+  {{recipes.pager}}
 {% else %}
   <div class="jumbotron">
     <h1>No Recipes :/</h1>

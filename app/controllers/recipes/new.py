@@ -13,7 +13,7 @@ from seshat.route import route
 from seshat.actions import Redirect
 from seshat_addons.seshat.mixed_object import MixedObject
 from seshat_addons.seshat.obj_mods import template, login
-from seshat_addons.seshat.func_mods import HTML, JSON
+from seshat_addons.seshat.func_mods import HTML
 
 import models.rethink.recipe.recipeModel as rm
 import searchers.recipes as rs
@@ -27,7 +27,7 @@ class new(MixedObject):
     def GET(self):
        return self.view
 
-    @JSON
+    @HTML
     def POST(self):
         name = self.request.get_param("name")
         tags = self.request.get_param("tags")
@@ -50,5 +50,4 @@ class new(MixedObject):
         searcher.add(recipe)
         searcher.save()
 
-        return {"success": True, "recipe": recipe}
-        #return Redirect("/recipes/{}".format(self.request.id))
+        return Redirect("/recipes/{}".format(self.request.id))

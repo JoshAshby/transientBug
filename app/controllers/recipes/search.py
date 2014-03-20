@@ -11,7 +11,7 @@ joshuaashby@joshashby.com
 """
 from seshat.route import route
 from seshat_addons.seshat.mixed_object import MixedObject
-from seshat_addons.seshat.obj_mods import template
+from seshat_addons.seshat.obj_mods import template, login
 from seshat_addons.seshat.func_mods import HTML
 
 from utils.paginate import Paginate
@@ -22,6 +22,7 @@ from searchers.recipes import RecipeSearcher
 
 
 @route()
+@login(["recipes"])
 @template("public/recipes/search/index", "Search Recipes")
 class search(MixedObject):
     @HTML

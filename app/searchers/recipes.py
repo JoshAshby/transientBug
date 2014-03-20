@@ -31,26 +31,29 @@ class RecipeSchema(SchemaClass):
     short_code = ID(stored=True, unique=True)
     tags = TEXT(analyzer=tag_analyzer, spelling=True)
     user = ID()
+    steps = TEXT(analyzer=tag_analyzer, spelling=True)
+    ingredients = TEXT(analyzer=tag_analyzer, spelling=True)
+    country = TEXT(spelling=True)
 
 
-def get_recipe_data(note):
+def get_recipe_data(recipe):
     d = {"id":unicode(recipe.id),
          "created":recipe.created.datetime,
          "title":unicode(recipe.title),
-         "description":unicode(recipe.raw),
+         "description":unicode(recipe.raw_description),
          "public":recipe.public,
          "short_code":unicode(recipe.short_code),
          "user":unicode(recipe.user.id),
-         "steps": unicode(recipe.steps.join(",")),
-         "ingredients": unicode(recipe.ingredients.join(",")),
-         "tags": unicode(recipe.tags.join(",")),
+         "steps": unicode(",".join(recipe.steps)),
+         "ingredients": unicode(",".join(recipe.ingredients)),
+         "tags": unicode(",".join(recipe.tags)),
          "country": unicode(recipe.country)}
 
     return d
 
 
 class RecipeSearcher(searcher.RethinkSearcher):
-    name = "recipe"
+    name = "recipes"
     _schema = RecipeSchema
     _model = rm.Recipe
     _fields_to_search = ["title",
@@ -61,15 +64,15 @@ class RecipeSearcher(searcher.RethinkSearcher):
                          "steps",
                          "ingredients"]
 
-    def add(self, note):
-        d = get_recipe_data(note)
+    def add(self, recipe):
+        d = get_recipe_data(recipe)
 
         self.writer.add_document(**d)
 
         return self
 
-    def update(self, note):
-        d = get_recipe_data(note)
+    def update(self, recipe):
+        d = get_recipe_data(recipe)
 
         self.writer.update_document(**d)
 

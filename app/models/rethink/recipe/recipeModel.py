@@ -32,8 +32,11 @@ class Recipe(UserValidator, TagsValidator, CreatedValidator, BaseInterface):
             res = r.table(cls.table).filter({"short_code": key})\
                     .coerce_to("array").run()
 
-        else:
+        elif len(key) == 36:
             res = r.table(cls.table).get(key).coerce_to("array").run()
+
+        else:
+            res = None
 
         if res:
             return cls(**res[0])
@@ -51,7 +54,7 @@ class Recipe(UserValidator, TagsValidator, CreatedValidator, BaseInterface):
         if not steps:
             steps = []
 
-        what = cls(user=user,
+        what = cls.create(user=user,
                           created=arrow.utcnow().timestamp,
                           title=title.rstrip().lstrip(),
                           description=description,
@@ -83,6 +86,30 @@ class Recipe(UserValidator, TagsValidator, CreatedValidator, BaseInterface):
     @property
     def raw_description(self):
         return self._data["description"]
+
+    @property
+    def steps(self):
+        return self._data["steps"]
+
+    @steps.setter
+    def steps(self, val):
+        if isinstance(val, str):
+            val = val.split(",")
+        new_val = filter(None, [ v.lstrip().rstrip() for v in val ])
+
+        self._data["steps"] = new_val
+
+    @property
+    def ingredients(self):
+        return self._data["ingredients"]
+
+    @ingredients.setter
+    def ingredients(self, val):
+        if isinstance(val, str):
+            val = val.split(",")
+        new_val = filter(None, [ v.lstrip().rstrip() for v in val ])
+
+        self._data["ingredients"] = new_val
 
     def copy(self, user):
         copy_data = self._data.copy().pop("id").pop("user")

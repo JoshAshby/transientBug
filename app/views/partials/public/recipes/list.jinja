@@ -1,62 +1,22 @@
-<div class="row">
-  <div class="col-md-4 col-sm-12">
-    <form method="GET" action="/recipes/search" class="form-inline">
-      <div class="controls">
-        <div class="input-group input-group-sm">
-          {% if req.session.id %}
-            <span class="input-group-btn">
-              <a href="/recipes/new" class="btn btn-purple btn-sm">New</a>
-            </span>
-          {% endif %}
-          <input type="text" class="form-control search" name="s" id="search" value="{{req.get_param("s")|e}}" placeholder="Search Recipes...">
-          <span class="input-group-btn">
-            <button class="btn btn-purple btn-sm" type="submit"><i class="fa fa-search"></i></button>
-          </span>
-        </div>
-      </div>
-    </form>
-  </div>
-  <div class="col-sm-12 col-md-2">
-    {% if req.session.id %}
-      <a href="/recipes/yours" class="btn btn-purple btn-sm">Your Recipes</a>
-    {% endif %}
-  </div>
-  <div class="col-sm-12 col-md-6">
-    <form class="form-inline pull-right" role="pagination_options">
-      {{recipes.options}}
-    </form>
-  </div>
-</div>
-<br>
-
 {% for recipe in recipes.pail %}
   <div class="recipe">
-    <div class="row">
-      <div class="col-md-12">
-
-        <div class="recipe-header">
-          <a href="/recipes/{{recipe.short_code|e}}"><h1>{{recipe.title|e}}</h1></a>
-          <small><b>By</b> {{ recipe.user.username|e if recipe.user.id!=req.session.id else 'You!'}} - {{recipe.created.humanize()}}{% if req.session.id %} | <b>Visibility:</b> {{ 'Public' if recipe.public else 'Private' }}{% endif %}</small>
-          <p>{{recipe.description}}</p>
-          {% if recipe.tags %}
-            <b>Tags: </b>
-            {% for tag in recipe.tags %}
-              <a href="/recipes/search?s=tags:{{tag|e}}"><span class="label label-purple">{{tag|e}}</span></a>
-            {% endfor %}
-            <br>
-          {% endif %}
-          {% if recipe.country %}
-            <b>Country: </b> {{recipe.country|e}} <br>
-          {% endif %}
-        </div>
-
-      </div>
+    <div class="recipe-header">
+      <a href="/recipes/{{recipe.short_code|e}}"><h1>{{recipe.title|e}}</h1></a>
+      <small><b>By</b> {{ recipe.user.username|e if recipe.user.id!=req.session.id else 'You!'}} - {{recipe.created.humanize()}}{% if req.session.id %} | <b>Visibility:</b> {{ 'Public' if recipe.public else 'Private' }}{% endif %}</small><br>
+      {% if recipe.country %}
+        <b>Country: </b> {{recipe.country|e}} <br>
+      {% endif %}
+      {% if recipe.tags %}
+        <b>Tags: </b>
+        {% for tag in recipe.tags %}
+          <a href="/recipes/search?s=tags:{{tag|e}}"><span class="label label-purple">{{tag|e}}</span></a>
+        {% endfor %}
+        <br>
+      {% endif %}
+      <p>{{recipe.description}}</p>
     </div>
+    {% if not loop.last %}
+      <hr>
+    {% endif %}
   </div>
 {% endfor %}
-
-<div class="row">
-  <div class="col-md-10 col-md-offset-1">
-    {{recipes.pager}}
-  </div>
-</div>
