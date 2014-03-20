@@ -28,6 +28,8 @@ class RecipeSchema(SchemaClass):
     title = TEXT(analyzer=custom_analyzer, spelling=True)
     description = TEXT(spelling=True)
     public = BOOLEAN()
+    deleted = BOOLEAN()
+    reported = BOOLEAN()
     short_code = ID(stored=True, unique=True)
     tags = TEXT(analyzer=tag_analyzer, spelling=True)
     user = ID()
@@ -41,13 +43,15 @@ def get_recipe_data(recipe):
          "created":recipe.created.datetime,
          "title":unicode(recipe.title),
          "description":unicode(recipe.raw_description),
-         "public":recipe.public,
          "short_code":unicode(recipe.short_code),
          "user":unicode(recipe.user.id),
          "steps": unicode(",".join(recipe.steps)),
          "ingredients": unicode(",".join(recipe.ingredients)),
          "tags": unicode(",".join(recipe.tags)),
-         "country": unicode(recipe.country)}
+         "country": unicode(recipe.country),
+         "deleted": recipe.deleted,
+         "reported": recipe.reported,
+         "public": recipe.public}
 
     return d
 
@@ -62,7 +66,11 @@ class RecipeSearcher(searcher.RethinkSearcher):
                          "tags",
                          "country",
                          "steps",
-                         "ingredients"]
+                         "ingredients",
+                         "user",
+                         "deleted",
+                         "reported",
+                         "public"]
 
     def add(self, recipe):
         d = get_recipe_data(recipe)

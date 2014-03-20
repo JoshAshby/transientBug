@@ -20,6 +20,8 @@ import rethinkdb as r
 import models.rethink.recipe.recipeModel as rm
 from searchers.recipes import RecipeSearcher
 
+import whoosh.query as q
+
 
 @route()
 @login(["recipes"])
@@ -40,14 +42,24 @@ class search(MixedObject):
             search_term = search_term.replace("tag:", "tags:")
 
             searcher = RecipeSearcher()
-            parts = {"deleted": False, "public": True}
 
-            ids = searcher.search(search_term, collection=True)
+            if self.request.session.id:
+                allow = q.Or([q.Term("user", self.request.session.id),
+                              q.And([q.Term("public", True),
+                                   q.Term("deleted", False),
+                                   q.Term("reported", False)])
+                              ])
+            else:
+                allow = q.And([q.Term("public", True),
+                        q.Term("deleted", False),
+                        q.Term("reported", False)])
+
+
+            ids = searcher.search(search_term, collection=True, allow=allow)
             if ids is not None:
-                ids.filter(parts)
                 ids.fetch()
 
-                page = Paginate(ids, self.request, "created", sort_direction_default="asc")
+                page = Paginate(ids, self.request, "title", sort_direction_default="desc")
                 self.view.data = {"recipes": page}
 
             self.view.template = "public/recipes/search/results"

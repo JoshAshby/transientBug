@@ -104,7 +104,7 @@ class BaseSearcher(object):
 
         return self._writer
 
-    def search(self, search, limit):
+    def search(self, search, limit=None, allow=None, disallow=None):
         """
         returns a list of dicts containing the stored fields within the index
         for the results that matched the search query
@@ -114,7 +114,7 @@ class BaseSearcher(object):
                 query = whoosh.qparser.MultifieldParser(self._fields_to_search, self.ix.schema).parse(search)
             else:
                 query = search
-            results = searcher.search(query, limit=limit)
+            results = searcher.search(query, limit=limit, filter=allow, mask=disallow)
 
         if not results:
             return None
@@ -133,7 +133,7 @@ class RethinkSearcher(BaseSearcher):
     _model = None
 
     def search(self, search, limit=None, collection=False, pre_query=None,
-            pre_filter=None):
+            pre_filter=None, allow=None, disallow=None):
         """
         Returns a RethinkCollection containing all notes which matched the
         query contained in `search`
@@ -144,7 +144,7 @@ class RethinkSearcher(BaseSearcher):
                 query = whoosh.qparser.MultifieldParser(self._fields_to_search, self.ix.schema).parse(search)
             else:
                 query = search
-            results = searcher.search(query, limit=limit)
+            results = searcher.search(query, limit=limit, filter=allow, mask=disallow)
 
             for item in results:
                 ids.append(item["id"])
