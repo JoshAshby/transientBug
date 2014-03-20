@@ -34,9 +34,13 @@ class index(MixedObject):
 
         query = dbu.rql_where_not(pm.Phot.table, "disable", True)
         query = query.filter(lambda doc: doc["filename"].match(filt))
-        res = RethinkCollection(pm.Phot, query=query)
 
-        page = Paginate(res, self.request, "title")
+        try:
+            res = RethinkCollection(pm.Phot, query=query)
+
+            page = Paginate(res, self.request, "title")
+        except Exception as e:
+            print e
 
         return {"filter": orig,
                 "v": view,
