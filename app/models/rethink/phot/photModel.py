@@ -80,6 +80,10 @@ class Phot(UserValidator, TagsValidator, CreatedValidator, BaseInterface):
     def extension(self):
         return self.filename.rsplit(".", 1)[1]
 
+    @extension.setter
+    def extension(self, val):
+        pass
+
     @property
     def title(self):
         return self._data.get("title")
