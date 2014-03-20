@@ -13,7 +13,7 @@ from seshat.route import route
 from seshat_addons.seshat.mixed_object import MixedObject
 from seshat.actions import NotFound, Redirect, Unauthorized
 from seshat_addons.seshat.obj_mods import template
-from seshat_addons.seshat.func_mods import Guess
+from seshat_addons.seshat.func_mods import HTML
 
 from searchers.phots import PhotSearcher
 import models.rethink.phot.photModel as pm
@@ -23,7 +23,7 @@ import rethinkdb as r
 @route()
 @template("public/phots/view", "Phot")
 class view(MixedObject):
-    @Guess
+    @HTML
     def GET(self):
         phot = self.request.id
 
@@ -45,8 +45,7 @@ class view(MixedObject):
 
         photo = pm.Phot(f[0]["id"])
 
-        self.view.data = {"phot": photo}
-        return self.view
+        return {"phot": photo}
 
     def POST(self):
         if not self.request.session.has_phots:

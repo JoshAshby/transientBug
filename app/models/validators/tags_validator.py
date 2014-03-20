@@ -25,5 +25,5 @@ class TagsValidator(object):
 
     @tags.setter
     def tags(self, val):
-        tag = [ bit.lstrip().rstrip().lower().replace(" ", "_") for bit in val ]
+        tag = TagsValidator.parse_tags(val)
         self._data[self._tags_field] = tag

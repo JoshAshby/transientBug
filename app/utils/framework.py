@@ -63,9 +63,9 @@ def init():
 
 
 def setup_error_pages():
-    dispatch.route_table.register_error("500", error.error500)
-    dispatch.route_table.register_error("404", error.error404)
-    dispatch.route_table.register_error("401", error.error401)
+    dispatch.error_catcher.register("500", error.error500)
+    dispatch.error_catcher.register("404", error.error404)
+    dispatch.error_catcher.register("401", error.error401)
 
 
 def server():
