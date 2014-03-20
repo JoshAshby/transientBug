@@ -27,7 +27,7 @@ buckets:
 
 flush:
   rethink:
-    invites: false
+    invites: true
     users: false
     phots: false
     notes: false
