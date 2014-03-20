@@ -105,7 +105,6 @@ class BaseInterface(RethinkModel):
             return data[attr]
 
     def _set(self, attr, val):
-        print attr, val
         pro_its = object.__getattribute__(self, "_protected_items")
         if attr[0] == "_" or attr in pro_its:
             return object.__setattr__(self, attr, val)
