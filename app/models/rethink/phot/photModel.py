@@ -105,6 +105,17 @@ class Phot(UserValidator, TagsValidator, CreatedValidator, BaseInterface):
 
         return title
 
+    @property
+    def disable(self):
+        if "disable" in self._data:
+            return self._data["disable"]
+
+        return False
+
+    @disable.setter
+    def disable(self, val):
+        self._data["disable"] = val
+
     def __json__(self):
         d = self._data.copy()
         d.pop("id")
