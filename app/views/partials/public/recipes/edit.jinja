@@ -3,7 +3,7 @@
     <h3 class="panel-title">{{ "Update Recipe for "+recipe.title|e if recipe else "New Recipe" }}</h3>
   </div>
   <div class="panel-body">
-    <form method="POST" action={{ "/recipes/"+recipe.short_code|e if recipe else "/recipes/new" }}" id="new-recipe">
+    <form method="POST" action="{{ "/recipes/"+recipe.short_code|e if recipe else "/recipes/new" }}" id="new-recipe">
       <div class="row">
         <div class="col-md-6">
           <fieldset>

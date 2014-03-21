@@ -25,17 +25,17 @@ tag_analyzer = CommaSeparatedTokenizer() | iwf | LowercaseFilter() | StemFilter(
 class RecipeSchema(SchemaClass):
     id = ID(stored=True, unique=True)
     created = DATETIME()
-    title = TEXT(analyzer=custom_analyzer, spelling=True)
-    description = TEXT(spelling=True)
+    title = TEXT(analyzer=custom_analyzer)
+    description = TEXT(analyzer=custom_analyzer)
     public = BOOLEAN()
     deleted = BOOLEAN()
     reported = BOOLEAN()
     short_code = ID(stored=True, unique=True)
-    tags = TEXT(analyzer=tag_analyzer, spelling=True)
+    tags = TEXT(analyzer=tag_analyzer)
     user = ID()
-    steps = TEXT(analyzer=tag_analyzer, spelling=True)
-    ingredients = TEXT(analyzer=tag_analyzer, spelling=True)
-    country = TEXT(spelling=True)
+    steps = TEXT(analyzer=custom_analyzer)
+    ingredients = TEXT(analyzer=custom_analyzer)
+    country = TEXT(analyzer=custom_analyzer)
 
 
 def get_recipe_data(recipe):
@@ -45,13 +45,19 @@ def get_recipe_data(recipe):
          "description":unicode(recipe.raw_description),
          "short_code":unicode(recipe.short_code),
          "user":unicode(recipe.user.id),
-         "steps": unicode(",".join(recipe.steps)),
-         "ingredients": unicode(",".join(recipe.ingredients)),
-         "tags": unicode(",".join(recipe.tags)),
          "country": unicode(recipe.country),
          "deleted": recipe.deleted,
          "reported": recipe.reported,
          "public": recipe.public}
+
+    if recipe.steps:
+        d["steps"] = unicode(",".join(recipe.steps))
+
+    if recipe.ingredients:
+        d["ingredients"] = unicode(",".join(recipe.ingredients))
+
+    if recipe.tags:
+        d["tags"] = unicode(",".join(recipe.tags))
 
     return d
 

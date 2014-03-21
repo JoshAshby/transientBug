@@ -50,4 +50,4 @@ class new(MixedObject):
         searcher.add(recipe)
         searcher.save()
 
-        return Redirect("/recipes/{}".format(self.request.id))
+        return Redirect("/recipes/{}".format(recipe.id))
