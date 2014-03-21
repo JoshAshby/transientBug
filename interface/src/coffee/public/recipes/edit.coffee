@@ -52,8 +52,8 @@ LazyLoad.js [
       steps = $("#steps").find "div.form-group"
       steps.each (i, e) ->
         $el = $(e)
-        $el.find("span.step-number").html i
-        $el.find("textarea.step").data "step", i
+        $el.find("span.step-number").html i+1
+        $el.find("textarea.step").data "step", i+1
 
     $("#add-step").click (e) ->
       e.preventDefault()

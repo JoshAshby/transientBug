@@ -61,7 +61,7 @@
               {% if recipe %}
                 {% for step in recipe.steps %}
                   <div class="form-group">
-                    <label for="steps">Step {{loop.index}}<span class="step-number">{{loop.index}}</span></label>
+                    <label for="steps">Step <span class="step-number">{{loop.index}}</span></label>
                     <a href="#" class="insert-step-before">Insert Empty Step Before</a>
                     <a href="#" class="remove-step pull-right">Remove</a>
                     <textarea class="form-control step" name="steps" data-step="{{loop.index}}" rows=5>{{step|e}}</textarea>
@@ -70,10 +70,10 @@
                 {% endfor %}
               {% else %}
                 <div class="form-group">
-                  <label for="steps">Step <span class="step-number">0</span></label>
+                  <label for="steps">Step <span class="step-number">1</span></label>
                   <a href="#" class="insert-step-before">Insert Empty Step Before</a>
                   <a href="#" class="remove-step pull-right">Remove</a>
-                  <textarea class="form-control step" name="steps" data-step="0" rows=5></textarea>
+                  <textarea class="form-control step" name="steps" data-step="1" rows=5></textarea>
                 </div>
                 <br>
               {% endif %}
