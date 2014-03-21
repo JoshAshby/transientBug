@@ -12,6 +12,7 @@ from models.rethink.base_interface import BaseInterface
 from models.validators.user_validator import UserValidator
 from models.validators.created_validator import CreatedValidator
 from models.rethink.email import emailModel as em
+from models.rethink.user import userModel as um
 
 from seshat_addons.view.template import PartialTemplate
 

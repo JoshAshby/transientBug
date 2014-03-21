@@ -26,6 +26,8 @@ class UserValidator(object):
     def user(self):
         if not hasattr(self, "_user_cache") or self._user_cache is None:
             self._user_cache = um.User(self._data.get(self._user_field))
+            if not self._user_cache.id:
+                self._user_cache = None
         return self._user_cache
 
     @user.setter
