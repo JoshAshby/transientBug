@@ -33,7 +33,7 @@ LazyLoad.js [
           url: '/api/v0/recipes/tags'
           filter: (list) ->
             $.map list[0]["tags"], (tag) ->
-              {tag: tag}
+              {tag: tag, search: "tags:#{ tag }"}
 
       tags.initialize()
       countries.initialize()
@@ -46,7 +46,7 @@ LazyLoad.js [
             header: """ <b>Countries</b> """
         }, {
           name: "tags"
-          displayKey: "tag"
+          displayKey: "search"
           source: tags.ttAdapter()
           templates:
             header: """ <b>Tags</b> """
