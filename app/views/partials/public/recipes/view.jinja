@@ -29,13 +29,14 @@
     </div>
   </div>
   <br>
-  {% for col in recipe.steps|slice(2) %}
-    <div class="row">
-      {% for step in col %}
-        <div class="col-md-6">
-          <b>Step {{loop.index}} - </b>{{step|e}}<br>
-        </div>
-      {% endfor %}
-    </div>
-  {% endfor %}
+  <div class="row">
+    {% for col in recipe.steps|slice(2) %}
+    {% set outerloop = loop %}
+      <div class="col-md-6">
+        {% for step in col %}
+          <b>Step {{loop.index if outerloop.index==1 else loop.index+outerloop.index}} - </b>{{step|e}}<br>
+        {% endfor %}
+      </div>
+    {% endfor %}
+  </div>
 </div>
