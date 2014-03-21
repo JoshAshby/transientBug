@@ -30,7 +30,7 @@ class index(MixedObject):
         self.view.partial("sidebar", "partials/admin/sidebar", {"command": "invites"})
 
         res = RethinkCollection(im.Invite)
-        page = Paginate(res, self.request, "created", sort_order="asc")
+        page = Paginate(res, self.request, "created", sort_direction_default="asc")
 
         self.view.data = {"page": page}
 
