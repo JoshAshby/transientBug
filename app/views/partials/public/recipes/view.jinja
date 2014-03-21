@@ -1,7 +1,6 @@
 <div class="recipe">
   <div class="row">
-    <div class="col-md-12">
-
+    <div class="col-md-6">
       <div class="recipe-header">
         <h1>{{recipe.title|e}}</h1>
         <small><b>By</b> {{ recipe.user.username|e if recipe.user.id!=req.session.id else 'You!'}} - {{recipe.created.humanize()}}{% if req.session.id %} | <b>Visibility:</b> {{ 'Public' if recipe.public else 'Private' }}{% endif %}</small>
@@ -17,7 +16,26 @@
           <b>Country: </b> {{recipe.country|e}} <br>
         {% endif %}
       </div>
-
+    </div>
+    <div class="col-md-6">
+      <div class="recipe-ingredients well">
+        <h3 style="margin-top: 0px;">Ingredients</h3>
+        <ul>
+          {% for ingredient in recipe.ingredients %}
+            <li>{{ingredient|e}}</li>
+          {% endfor %}
+        </ul>
+      </div>
     </div>
   </div>
+  <br>
+  {% for col in recipe.steps|slice(2) %}
+    <div class="row">
+      {% for step in col %}
+        <div class="col-md-6">
+          <b>Step {{loop.index}} - </b>{{step|e}}<br>
+        </div>
+      {% endfor %}
+    </div>
+  {% endfor %}
 </div>

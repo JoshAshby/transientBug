@@ -5,7 +5,6 @@ LazyLoad.css [
 LazyLoad.js [
   '/static/js/lib/typeahead.bundle.min.js',
   '/static/js/lib/mousetrap.min.js',
-  '/static/js/done_typing.js',
   '/static/js/lib/bootstrap-growl.min.js',
   '/static/js/lib/base64.js'
   '/static/js/lib/URI.js'

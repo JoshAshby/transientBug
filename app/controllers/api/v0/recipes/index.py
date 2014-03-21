@@ -23,10 +23,9 @@ import rethinkdb as r
 class index(MixedObject):
     @JSON
     def GET(self):
-        #query = r.table(rm.Recipe.table).filter({"disable": False,
-                                                 #"reported": False,
-                                                 #"public": True})
-        query = r.table(rm.Recipe.table)
+        query = r.table(rm.Recipe.table).filter({"deleted": False,
+                                                 "reported": False,
+                                                 "public": True})
 
         res = RethinkCollection(rm.Recipe, query=query)
 

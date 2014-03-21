@@ -21,9 +21,12 @@ import models.rethink.recipe.recipeModel as rm
 class tags(MixedObject):
     @JSON
     def GET(self):
-        base_query = r.table(rm.Recipe.table).filter({"disable": False,
-                                                      "reported": False,
-                                                      "public": True})
+        if not self.request.session.id:
+            base_query = r.table(rm.Recipe.table).filter({"deleted": False,
+                                                          "reported": False,
+                                                          "public": True})
+        else:
+            base_query = r.table(rm.Recipe.table).filter((r.row["user"]==self.request.session.id) | (r.row["deleted"]==False & r.row["reported"]==False & r.row["public"]==True) )
 
         raw_tags = base_query\
             .concat_map(lambda doc: doc["tags"])\

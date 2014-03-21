@@ -22,6 +22,7 @@ module.exports = function(grunt) {
           'themes/*.less',
           'slideshows/*.less',
           '*.less',
+          'pages/**/*.less',
         ],
         dest: 'interface/build/css',   // Destination path prefix.
         ext: '.css',   // Dest filepaths will have this extension.

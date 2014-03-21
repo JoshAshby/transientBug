@@ -11,31 +11,42 @@ joshuaashby@joshashby.com
 """
 from seshat.route import route
 from seshat_addons.seshat.mixed_object import MixedObject
-from seshat_addons.seshat.func_mods import HTML
+from seshat_addons.seshat.func_mods import JSON
 
 from utils.paginate import Paginate
 
 from searchers.recipes import RecipeSearcher
+import whoosh.query as q
 
 
 @route()
 class search(MixedObject):
-    @HTML
+    @JSON
     def GET(self):
         search_term = self.request.get_param("s")
-        if search_term:
+        if not search_term:
+            return {"recipes": None}
+
+        else:
             search_term = search_term.replace("tag:", "tags:")
 
             searcher = RecipeSearcher()
-            hidden_notes = {"disable": False,
-                            "public": True}
 
-            ids = searcher.search(search_term, collection=True, pre_filter=hidden_notes)
+            if self.request.session.id:
+                allow = q.Or([q.Term("user", self.request.session.id),
+                              q.And([q.Term("public", True),
+                                   q.Term("deleted", False),
+                                   q.Term("reported", False)])
+                              ])
+            else:
+                allow = q.And([q.Term("public", True),
+                        q.Term("deleted", False),
+                        q.Term("reported", False)])
+
+            ids = searcher.search(search_term, collection=True, allow=allow)
 
             if ids is not None:
-                ids.fetch()
+                page = Paginate(ids, self.request, "title", sort_direction_default="desc")
+                return {"recipes": page}
 
-                page = Paginate(ids, self.request, "created", sort_direction_default="asc")
-                self.view.data = {"recipes": page}
-
-        return self.view
+        return {"recipes": None}
