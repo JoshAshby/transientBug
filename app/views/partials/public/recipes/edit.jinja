@@ -9,7 +9,7 @@
           <fieldset>
             <legend>Basic info</legend>
             <div class="form-group">
-              <input type="text" class="form-control" id="recipe-name" name="name" placeholder="Recipe Title..." value="{{ recipe.title|e if recipe }}" required>
+              <input type="text" class="form-control" id="recipe-title" name="title" placeholder="Recipe Title..." value="{{ recipe.title|e if recipe }}" required>
             </div>
             <div class="form-group">
               <textarea name="description" data-provide="markdown" placeholder="Recipe Description">{{ recipe.raw_description|e if recipe }}</textarea>

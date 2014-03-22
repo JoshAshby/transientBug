@@ -28,15 +28,8 @@ class Recipe(UserValidator, TagsValidator, CreatedValidator, BaseInterface):
 
     @classmethod
     def find(cls, key):
-        if len(key) == 10:
-            res = r.table(cls.table).filter({"short_code": key})\
-                    .coerce_to("array").run()
-
-        elif len(key) == 36:
-            res = r.table(cls.table).get(key).coerce_to("array").run()
-
-        else:
-            res = None
+        res = r.table(cls.table).filter({"short_code": key})\
+                .coerce_to("array").run()
 
         if res:
             return cls(**res[0])

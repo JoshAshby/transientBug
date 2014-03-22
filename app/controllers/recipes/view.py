@@ -48,7 +48,7 @@ class view(MixedObject):
             if not recipe.public:
                 return Unauthorized()
 
-        recipe.name = self.request.get_param("name")
+        recipe.title = self.request.get_param("title")
         recipe.tags = self.request.get_param("tags")
         recipe.public = self.request.get_param("public", False)
         recipe.country = self.request.get_param("country")

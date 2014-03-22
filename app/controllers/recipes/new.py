@@ -29,7 +29,7 @@ class new(MixedObject):
 
     @HTML
     def POST(self):
-        name = self.request.get_param("name")
+        name = self.request.get_param("title")
         tags = self.request.get_param("tags")
         public = self.request.get_param("public", False)
         country = self.request.get_param("country")
