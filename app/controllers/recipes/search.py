@@ -10,6 +10,7 @@ http://joshashby.com
 joshuaashby@joshashby.com
 """
 from seshat.route import route
+from seshat.actions import Redirect
 from seshat_addons.seshat.mixed_object import MixedObject
 from seshat_addons.seshat.obj_mods import template, login
 from seshat_addons.seshat.func_mods import HTML
@@ -39,6 +40,15 @@ class search(MixedObject):
         self.view.data = {"tags": all_tags, "recipes": None}
 
         if search_term:
+            if "recipe:" in search_term:
+                parts = search_term.split(" ")
+                for part in parts:
+                    if "recipe:" in part:
+                        recipe = rm.Recipe.find(part[7:])
+
+                        if recipe is not None:
+                            return Redirect("/recipes/{}".format(part[7:]))
+
             search_term = search_term.replace("tag:", "tags:")
 
             searcher = RecipeSearcher()

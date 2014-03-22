@@ -8,6 +8,18 @@ LazyLoad.js [
   '/static/js/lib/mousetrap.min.js'
 ], ->
   $ ->
+    tags_tmpl = """ <p><span class="label label-purple">{{tag}}</span></p> """
+    tags_handlebars = Handlebars.compile tags_tmpl
+
+    recipes_tmpl = """
+    <p class="recipe-typeahead" data-short="{{short_code}}">
+      <i>{{title}}</i><br>
+      <b>Tags:</b> {{#tags}} <span class="label label-purple">{{this}}</span> {{/tags}}<br>
+      <b>Country:</b> {{country}}
+    </p>
+    """
+    recipes_handlebars = Handlebars.compile recipes_tmpl
+
     if $().typeahead? and Bloodhound?
       countries = new Bloodhound
         datumTokenizer: (d) ->
@@ -35,10 +47,31 @@ LazyLoad.js [
             $.map list[0]["tags"], (tag) ->
               {tag: tag, search: "tags:#{ tag }"}
 
+      recipes = new Bloodhound
+        datumTokenizer: (d) ->
+          d = "#{ d.title } #{ d.tags} #{ d.description}"
+          Boolhound.tokenizers.nonword d
+        queryTokenizer: Bloodhound.tokenizers.whitespace
+        limit: 5
+        remote:
+          url: '/api/v0/recipes/search?s=%QUERY'
+          filter: (d) ->
+            $.map d[0]["pail"], (e) ->
+              e["display"] = "recipe:#{ e.short_code }"
+              e
+
       tags.initialize()
       countries.initialize()
+      recipes.initialize()
 
       $("#search").typeahead null, {
+          name: "recipes"
+          displayKey: "display"
+          source: recipes.ttAdapter()
+          templates:
+            header: """ <b>Recipes</b> """
+            suggestion: recipes_handlebars
+        }, {
           name: "countries"
           displayKey: "name"
           source: countries.ttAdapter()
@@ -50,7 +83,7 @@ LazyLoad.js [
           source: tags.ttAdapter()
           templates:
             header: """ <b>Tags</b> """
-            suggestion: Handlebars.compile """ <p><span class="label label-purple">{{tag}}</span></p> """
+            suggestion: tags_handlebars
         }
 
     Mousetrap.bind 's', (e) ->
@@ -59,3 +92,7 @@ LazyLoad.js [
       $("#search").val ""
       if $().typeahead? and Bloodhound?
         $("#search").typeahead "val", ""
+
+    $(document).on "click", ".recipe-typeahead", (e) ->
+      short = $(@).data "short"
+      window.location.href = "/recipes/#{ short }"

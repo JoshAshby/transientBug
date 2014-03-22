@@ -17,9 +17,7 @@
     </form>
   </div>
   <div class="col-sm-12 col-md-2">
-    {% if req.session.id %}
-      <a href="/recipes/yours" class="btn btn-purple btn-sm">Your Recipes</a>
-    {% endif %}
+    <a href="/recipes/yours" class="btn btn-purple btn-sm">Your Recipes</a>
   </div>
   <div class="col-sm-12 col-md-6">
     <form class="form-inline pull-right" role="pagination_options">
@@ -27,8 +25,11 @@
     </form>
   </div>
 </div>
-<br>
-
 {% if req.get_param("s") %}
-  <p>Results for: {{ req.get_param("s")|e }} ({{recipes.pail|length if recipes.pail else 0}} recipes)</p>
+  <br>
+  <div class="row">
+    <div class="col-md-12">
+      <p>Results for: {{ req.get_param("s")|e }} ({{recipes.pail|length if recipes.pail else 0}} recipes)</p>
+    </div>
+  </div>
 {% endif %}

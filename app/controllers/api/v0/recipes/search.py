@@ -24,10 +24,7 @@ class search(MixedObject):
     @JSON
     def GET(self):
         search_term = self.request.get_param("s")
-        if not search_term:
-            return {"recipes": None}
-
-        else:
+        if search_term:
             search_term = search_term.replace("tag:", "tags:")
 
             searcher = RecipeSearcher()
@@ -47,6 +44,6 @@ class search(MixedObject):
 
             if ids is not None:
                 page = Paginate(ids, self.request, "title", sort_direction_default="desc")
-                return {"recipes": page}
+                return page
 
-        return {"recipes": None}
+        return {"page": None, "pail": None}
