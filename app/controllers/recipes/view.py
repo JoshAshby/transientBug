@@ -22,7 +22,7 @@ import searchers.recipes as rs
 @route()
 @login(["recipes"])
 @template("public/recipes/view", "Recipe")
-class index(MixedObject):
+class view(MixedObject):
     @HTML
     def GET(self):
         if len(self.request.id) == 10:
