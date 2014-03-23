@@ -25,8 +25,14 @@ class tags(MixedObject):
             base_query = r.table(rm.Recipe.table).filter({"deleted": False,
                                                           "reported": False,
                                                           "public": True})
+
         else:
-            base_query = r.table(rm.Recipe.table).filter((r.row["user"]==self.request.session.id) | (r.row["deleted"]==False & r.row["reported"]==False & r.row["public"]==True) )
+            base_query = r.table(rm.Recipe.table).filter(
+                (r.row["user"]==self.request.session.id) |\
+                (r.row["deleted"]==False & \
+                    r.row["reported"]==False & \
+                    r.row["public"]==True)
+            )
 
         raw_tags = base_query\
             .concat_map(lambda doc: doc["tags"])\

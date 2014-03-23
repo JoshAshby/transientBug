@@ -13,7 +13,7 @@ from seshat.route import route
 from seshat.actions import NotFound, Unauthorized, Redirect
 from seshat_addons.seshat.mixed_object import MixedObject
 from seshat_addons.seshat.obj_mods import template, login
-from seshat_addons.seshat.func_mods import HTML
+from seshat_addons.seshat.func_mods import HTML, JSON
 
 import models.rethink.recipe.recipeModel as rm
 import searchers.recipes as rs
@@ -22,15 +22,22 @@ import searchers.recipes as rs
 @route()
 @login(["recipes"])
 @template("public/recipes/view", "Recipe")
-class view(MixedObject):
+class index(MixedObject):
     @HTML
     def GET(self):
-        recipe = rm.Recipe.find(self.request.id)
+        if len(self.request.id) == 10:
+            recipe = rm.Recipe.find(self.request.id)
 
-        if recipe is None:
+        elif len(self.request.id) == 36:
+            recipe = rm.Recipe(self.request.id)
+
+        else:
+            recipe = None
+
+        if recipe is None or recipe.deleted:
             return NotFound()
 
-        if recipe.user.id is not self.request.session.id:
+        if recipe.user.id != self.request.session.id:
             if not recipe.public:
                 return Unauthorized()
 
@@ -39,12 +46,19 @@ class view(MixedObject):
 
     @HTML
     def POST(self):
-        recipe = rm.Recipe.find(self.request.id)
+        if len(self.request.id) == 10:
+            recipe = rm.Recipe.find(self.request.id)
 
-        if recipe is None:
+        elif len(self.request.id) == 36:
+            recipe = rm.Recipe(self.request.id)
+
+        else:
+            recipe = None
+
+        if recipe is None or recipe.deleted:
             return NotFound()
 
-        if recipe.user.id is not self.request.session.id:
+        if recipe.user.id != self.request.session.id:
             if not recipe.public:
                 return Unauthorized()
 
@@ -63,3 +77,30 @@ class view(MixedObject):
         searcher.save()
 
         return Redirect("/recipes/{}".format(recipe.short_code))
+
+    @JSON
+    def DELETE(self):
+        if len(self.request.id) == 10:
+            recipe = rm.Recipe.find(self.request.id)
+
+        elif len(self.request.id) == 36:
+            recipe = rm.Recipe(self.request.id)
+
+        else:
+            recipe = None
+
+        if recipe is None or recipe.deleted:
+            return NotFound()
+
+        if recipe.user.id != self.request.session.id:
+            return Unauthorized()
+
+        recipe.deleted = True
+
+        recipe.save()
+
+        searcher = rs.RecipeSearcher()
+        searcher.update(recipe)
+        searcher.save()
+
+        return {"success": True}

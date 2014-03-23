@@ -25,6 +25,15 @@ class error404(MixedObject):
         self.head = Head("404 NOT FOUND", [("Content-Type", "text/html")])
         return self.view
 
+    def POST(self):
+        return self.GET()
+
+    def PUT(self):
+        return self.GET()
+
+    def DELETE(self):
+        return self.GET()
+
 
 @template("error/401", "401 UNAUTHORIZED")
 class error401(MixedObject):
@@ -32,6 +41,15 @@ class error401(MixedObject):
     def GET(self):
         self.head = Head("401 UNAUTHORIZED", [("Content-Type", "text/html")])
         return self.view
+
+    def POST(self):
+        return self.GET()
+
+    def PUT(self):
+        return self.GET()
+
+    def DELETE(self):
+        return self.GET()
 
 
 @template("error/500", "500 INTERNAL SERVER ERROR")
@@ -41,3 +59,12 @@ class error500(MixedObject):
         self.head = Head("500 INTERNAL SERVER ERROR", headers=[("Content-Type", "text/html")], errors=self.errors)
         self.view.data = {"error": self.errors[0], "tb": self.errors[1]}
         return self.view
+
+    def POST(self):
+        return self.GET()
+
+    def PUT(self):
+        return self.GET()
+
+    def DELETE(self):
+        return self.GET()

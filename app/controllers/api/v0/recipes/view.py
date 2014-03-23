@@ -15,29 +15,31 @@ from seshat.actions import NotFound, Unauthorized
 from seshat_addons.seshat.func_mods import JSON
 
 import models.rethink.recipe.recipeModel as rm
-import rethinkdb as r
 
 
 @route()
 class view(MixedObject):
     @JSON
     def GET(self):
-        f = r.table(rm.Recipe.table)\
-            .filter({"short_code": self.request.id})\
-            .coerce_to('array').run()
+        recipe = None
+        if len(self.request.id) == 10:
+            recipe = rm.Recipe.find(self.request.id)
 
-        if f:
-            recipe = rm.Recipe(**f[0])
+        elif len(self.request.id) == 36:
+            recipe = rm.Recipe(self.request.id)
 
-            if not recipe.public:
-              if not self.request.session.id or self.request.session.id!=recipe.user:
-                    self.request.session.push_alert("That recipe is not public and you do not have the rights to access it.", level="error")
-                    return Unauthorized()
-
-            if not self.request.session.has_recipes and recipe.disable:
-                return NotFound()
-
-            return recipe
-
-        else:
+        if recipe is None:
             return NotFound()
+
+        if recipe.user.id != self.request.session.id:
+            return Unauthorized()
+
+        if not recipe.public:
+          if not self.request.session.id or self.request.session.id!=recipe.user:
+                self.request.session.push_alert("That recipe is not public and you do not have the rights to access it.", level="error")
+                return Unauthorized()
+
+        if recipe.deleted:
+            return NotFound()
+
+        return recipe
