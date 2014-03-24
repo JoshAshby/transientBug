@@ -1,0 +1,75 @@
+<div class="row">
+  <div class="col-md-6 col-sm-12">
+    <form method="GET" action="/admin/recipes/search" class="form-inline">
+      <div class="controls">
+        <div class="input-group input-group-sm">
+          <input type="text" class="form-control search" name="s" id="search" placeholder="Search Recipes...">
+          <span class="input-group-btn">
+            <button class="btn btn-purple btn-sm" type="submit"><i class="fa fa-search"></i></button>
+          </span>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="col-sm-12 col-md-6">
+    <form class="form-inline pull-right" role="pagination_options">
+      {{recipes.options}}
+    </form>
+  </div>
+</div>
+
+{% if req.get_param("s") %}
+  <br>
+  <div class="row">
+    <div class="col-md-12">
+      <p>Results for: {{ req.get_param("s")|e }} ({{recipes.pail|length if recipes.pail else 0}} recipes)</p>
+    </div>
+  </div>
+{% endif %}
+
+<div class="row">
+  <div class="col-md-12">
+    <table class="table table-condensed">
+      <thead>
+        <th>Title</th>
+        <th>User</th>
+        <th>Created</th>
+        <th>Country</th>
+        <th>Tags</th>
+        <th>Visibility</th>
+        <th>Deleted</th>
+        <th>Reported</th>
+      </thead>
+      <tbody>
+        {% for recipe in recipes.pail %}
+          <tr>
+            <td><a href="/recipes/{{recipe.short_code}}">{{recipe.title|e}}</a></td>
+            <td><a href="/users/{{recipe.user.id}}">{{recipe.user.username|e}}</a></td>
+            <td>{{recipe.created.humanize()}}</td>
+            <td>{{recipe.country|e}}</td>
+            <td>
+              {% for tag in recipe.tags %}
+                <a href="/recipes/search?s=tags:{{tag|e}}"><span class="label label-purple">{{tag|e}}</span></a>
+              {% endfor %}
+            </td>
+            <td>
+              {% if recipe.public %}
+                <i class="fa fa-eye"></i> Public
+              {% else %}
+                <i class="fa fa-eye-slash"></i> Private
+              {% endif %}
+            </td>
+            <td>{{ 'Deleted' if recipe.deleted }}</td>
+            <td>{{ 'Reported' if recipe.reported }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    {{recipes.paginate}}
+  </div>
+</div>

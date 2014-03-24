@@ -43,7 +43,7 @@ class notes(MixedObject):
         self.view.title = user.username
 
 # I should figure out a way to do this filter stuff a little easier... hmm
-        filter_parts = {"user": self.request.session.id}
+        filter_parts = {"user": user.id}
         public = self.request.get_param("public")
         draft = self.request.get_param("draft")
         disabled = self.request.get_param("disable")
