@@ -19,6 +19,9 @@ from rethinkORM import RethinkCollection
 import models.rethink.recipe.recipeModel as rm
 from utils.paginate import Paginate
 
+from searchers.recipes import RecipeSearcher
+import whoosh.query as q
+
 
 @route()
 @login(["admin"])
@@ -30,17 +33,27 @@ class index(MixedObject):
 
         deleted = self.request.get_param("d", False)
         reported = self.request.get_param("r", False)
+        public = self.request.get_param("p", False)
+        search = self.request.get_param("s")
 
-        parts = {}
+        if not search:
+            parts = {}
 
-        if deleted:
-            parts["deleted"] = True
+            if deleted:
+                parts["deleted"] = True
 
-        if reported:
-            parts["reported"] = True
+            if reported:
+                parts["reported"] = True
 
-        query = r.table(rm.Recipe.table).filter(parts)
-        res = RethinkCollection(rm.Recipe, query=query)
+            if public:
+                parts["public"] = True
+
+            query = r.table(rm.Recipe.table).filter(parts)
+            res = RethinkCollection(rm.Recipe, query=query)
+
+        else:
+            pass
+
         page = Paginate(res, self.request, "title", sort_direction_default="desc")
 
         return {"recipes": page}
