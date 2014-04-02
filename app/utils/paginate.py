@@ -171,7 +171,7 @@ class Paginate(StandardODM):
         Generate and return a string consisting of two selects
         and an update/submit button to be used for the pagination options form.
         """
-        tmpl = PartialTemplate("partials/options", self._request)
+        tmpl = PartialTemplate("partials/options", {"req": self._request})
         tmpl.data.update(self._page_dict)
         tmpl.data.update(self._data)
         tmpl.data.update({"query": self._query_string})
@@ -184,7 +184,7 @@ class Paginate(StandardODM):
         Generate and return a string consisting of just a simple pager:
         next and previous buttons.
         """
-        tmpl = PartialTemplate("partials/pager", self._request)
+        tmpl = PartialTemplate("partials/pager",{"req": self._request})
         tmpl.data.update(self._page_dict)
         tmpl.data.update(self._data)
         tmpl.data.update({"query": self._query_string})
@@ -197,7 +197,7 @@ class Paginate(StandardODM):
         Generate and return a string consisting of a full pagination module.
         Next, previous, first, last and page numbers.
         """
-        tmpl = PartialTemplate("partials/paginate", self._request)
+        tmpl = PartialTemplate("partials/paginate", {"req": self._request})
         tmpl.data.update(self._page_dict)
         tmpl.data.update(self._data)
         tmpl.data.update({"query": self._query_string})
