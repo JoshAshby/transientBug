@@ -11,20 +11,28 @@ joshuaashby@joshashby.com
 """
 from searchers.notes import NoteSearcher
 from searchers.phots import PhotSearcher
+from searchers.recipes import RecipeSearcher
 from rethinkORM import RethinkCollection
 from models.rethink.note.noteModel import Note
 from models.rethink.phot.photModel import Phot
+from models.rethink.recipe.recipeModel import Recipe
 
 
 if __name__ == "__main__":
-    searcher = NoteSearcher()
+    searcher = RecipeSearcher()
 
-    all_notes = RethinkCollection(Note).fetch()
-    searcher.update_multiple(all_notes)
+    all_recipes = RethinkCollection(Recipe).fetch()
+    searcher.update_multiple(all_recipes)
     searcher.save()
 
-    searcher = PhotSearcher()
+    #searcher = NoteSearcher()
 
-    all_phots = RethinkCollection(Phot).fetch()
-    searcher.update_multiple(all_phots)
-    searcher.save()
+    #all_notes = RethinkCollection(Note).fetch()
+    #searcher.update_multiple(all_notes)
+    #searcher.save()
+
+    #searcher = PhotSearcher()
+
+    #all_phots = RethinkCollection(Phot).fetch()
+    #searcher.update_multiple(all_phots)
+    #searcher.save()

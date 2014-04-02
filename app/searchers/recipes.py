@@ -35,7 +35,7 @@ class RecipeSchema(SchemaClass):
     user = ID()
     steps = TEXT(analyzer=custom_analyzer)
     ingredients = TEXT(analyzer=custom_analyzer)
-    country = TEXT(analyzer=custom_analyzer)
+    country = TEXT()
 
 
 def get_recipe_data(recipe):
@@ -73,10 +73,7 @@ class RecipeSearcher(searcher.RethinkSearcher):
                          "country",
                          "steps",
                          "ingredients",
-                         "user",
-                         "deleted",
-                         "reported",
-                         "public"]
+                         "user"]
 
     def add(self, recipe):
         d = get_recipe_data(recipe)
