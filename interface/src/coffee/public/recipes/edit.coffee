@@ -26,6 +26,7 @@ LazyLoad.css [
 ]
 
 LazyLoad.js [
+  '/static/js/lib/mousetrap.min.js'
   '/static/js/lib/typeahead.bundle.min.js'
   '/static/js/pillbox.js'
   '/static/js/lib/bootstrap-switch.min.js'
@@ -102,6 +103,17 @@ LazyLoad.js [
           e.preventDefault()
           $("#ingredients").append new_ingredient
           $("#ingredients").last("div.input-group").find('input').focus()
+
+    $("#steps").on "keydown", "textarea", (e) ->
+      switch e.keyCode
+        when 9, 13
+          e.preventDefault()
+          $el = $ "#steps"
+          count = $el.find("textarea.step").last().data "step"
+          $el.append new_step count+1
+          $("#steps").last("div.form-group").find('textarea').focus()
+
+    Mousetrap.bindGlobal "enter"
 
     if $().typeahead? and Bloodhound?
       tags = new Bloodhound

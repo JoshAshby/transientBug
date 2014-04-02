@@ -50,7 +50,8 @@ class session(brm.SeshatRedisModel):
 
         :returns: True if the user was successfully logged in
         """
-        foundUser = list(r.table(um.User.table).filter({'username': user}).run())
+        reg = "(?i)^{}$".format(user)
+        foundUser = r.table(um.User.table).filter(lambda doc: doc["username"].match(reg)).coerce_to("array").run()
         if len(foundUser) > 0:
             foundUser = um.User(foundUser[0]["id"])
             if not foundUser.disable:
@@ -78,7 +79,8 @@ class session(brm.SeshatRedisModel):
 
         :returns: True if the user was successfully logged in
         """
-        foundUser = list(r.table(um.User.table).filter({'username': user}).run())
+        reg = "(?i)^{}$".format(user)
+        foundUser = r.table(um.User.table).filter(lambda doc: doc["username"].match(reg)).coerce_to("array").run()
         if len(foundUser) > 0:
             foundUser = um.User(**foundUser[0])
             if not foundUser.disable:

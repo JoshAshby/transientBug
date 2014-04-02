@@ -104,11 +104,12 @@ class BaseSearcher(object):
 
         return self._writer
 
-    def search(self, search, limit=None, allow=None, disallow=None):
+    def search(self, search, limit=None, allow=None, disallow=None, fields=None):
         """
         returns a list of dicts containing the stored fields within the index
         for the results that matched the search query
         """
+        fields = fields or self._fields_to_search
         with self.ix.searcher() as searcher:
             if not isinstance(search, whoosh.qparser.QueryParser):
                 query = whoosh.qparser.MultifieldParser(self._fields_to_search, self.ix.schema).parse(search)
@@ -132,18 +133,21 @@ class BaseSearcher(object):
 class RethinkSearcher(BaseSearcher):
     _model = None
 
-    def search(self, search, limit=None, collection=False, pre_query=None,
-            pre_filter=None, allow=None, disallow=None):
+    def search(self, search, limit=None, allow=None, disallow=None, fields=None, pre_query=None, pre_filter=None, collection=False):
         """
         Returns a RethinkCollection containing all notes which matched the
         query contained in `search`
         """
+        fields = fields or self._fields_to_search
         ids = []
         with self.ix.searcher() as searcher:
             if not isinstance(search, whoosh.qparser.QueryParser):
-                query = whoosh.qparser.MultifieldParser(self._fields_to_search, self.ix.schema).parse(search)
+                query = whoosh.qparser.MultifieldParser(fields, self.ix.schema).parse(search)
             else:
                 query = search
+
+            print query, allow, disallow
+
             results = searcher.search(query, limit=limit, filter=allow, mask=disallow)
 
             for item in results:

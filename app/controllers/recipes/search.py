@@ -54,16 +54,23 @@ class search(MixedObject):
             searcher = RecipeSearcher()
 
             if self.request.session.id:
-                allow = q.Or([q.Term("user", self.request.session.id),
-                              q.And([q.Term("public", True),
-                                   q.Term("deleted", False),
-                                   q.Term("reported", False)])
-                              ])
-            else:
-                allow = q.And([q.Term("public", True),
+                allow = q.Or([
+                    q.And([
+                        q.Term("user", self.request.session.id),
+                        q.Term("deleted", False),
+                        q.Term("reported", False)]),
+                    q.And([
+                        q.Term("public", True),
                         q.Term("deleted", False),
                         q.Term("reported", False)])
+                ])
 
+            else:
+                allow = q.And([
+                    q.Term("public", True),
+                    q.Term("deleted", False),
+                    q.Term("reported", False)
+                ])
 
             ids = searcher.search(search_term, collection=True, allow=allow)
             if ids is not None:
