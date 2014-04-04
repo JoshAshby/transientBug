@@ -15,7 +15,7 @@ from seshat_addons.seshat.obj_mods import login, template
 from seshat_addons.seshat.func_mods import HTML
 from seshat.actions import Redirect
 
-import models.redis.baseRedisModel as brm
+from redisORM import RedisModel
 
 
 @route()
@@ -27,7 +27,7 @@ class edit(MixedObject):
         self.view.partial("sidebar", "partials/admin/sidebar", {"command": "announcements"})
         announcement_id = self.request.id
 
-        announcement = brm.SeshatRedisModel("announcement:"+announcement_id)
+        announcement = RedisModel(namespace="announcement", key=announcement_id)
 
         self.view.data = {"announcement": announcement}
 

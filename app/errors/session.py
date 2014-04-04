@@ -12,21 +12,24 @@ joshuaashby@joshashby.com
 """
 
 
-class UsernameError(Exception):
+class SessionError(Exception): pass
+
+
+class UsernameError(SessionError):
     def __init__(self, value):
         self.value = value
     def __str__(self):
         return repr(self.value)
 
 
-class PasswordError(Exception):
+class PasswordError(SessionError):
     def __init__(self, value):
         self.value = value
     def __str__(self):
         return repr(self.value)
 
 
-class DisableError(Exception):
+class DisableError(SessionError):
     def __init__(self, value):
         self.value = value
     def __str__(self):
