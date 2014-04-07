@@ -41,5 +41,5 @@ class index(MixedObject):
 
         email.queue()
 
-        self.request.session.push_alert("Email queued to be resent.")
+        self.session.push_alert("Email queued to be resent.")
         return Redirect("/admin/emails")

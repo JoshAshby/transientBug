@@ -31,7 +31,7 @@ class yours(MixedObject):
         p = self.request.get_param("p")
         parts = {
             "deleted": False,
-            "user": self.request.session.id
+            "user": self.session.id
         }
 
         if d:

@@ -34,7 +34,7 @@ class delete(MixedObject):
         if self.request.id in f:
             os.remove(current_path)
 
-            self.request.session.push_alert("Deleting screenshot...")
+            self.session.push_alert("Deleting screenshot...")
             return {"success": True}
 
         else:

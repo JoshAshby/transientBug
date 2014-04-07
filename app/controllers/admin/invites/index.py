@@ -43,7 +43,7 @@ class index(MixedObject):
             if email:
                 im.Invite.new(email)
 
-            self.request.session.push_alert("Invite sent!")
+            self.session.push_alert("Invite sent!")
             return Redirect("/admin/invites")
         except Exception as e:
             print e

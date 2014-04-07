@@ -39,8 +39,8 @@ class login(MixedObject):
 
         exc = ""
         try:
-            self.request.session.login(name, passwd)
-            self.request.session.push_alert("Welcome back, %s!" % name,
+            self.session.login(name, passwd)
+            self.session.push_alert("Welcome back, %s!" % name,
                                            "Ohia!", "success")
 
             where = self.request.get_param("return-to", "/")
@@ -63,6 +63,6 @@ class login(MixedObject):
 
         exc = unicode(exc).strip("'")
 
-        self.request.session.push_alert("%s <br/>Please try again." % exc,
+        self.session.push_alert("%s <br/>Please try again." % exc,
                                        "Uh oh...", "error")
         return self.view

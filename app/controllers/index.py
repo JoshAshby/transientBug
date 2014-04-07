@@ -22,7 +22,7 @@ from seshat_addons.seshat.func_mods import HTML
 class index(MixedObject):
     @HTML
     def GET(self):
-        if self.request.session.id:
+        if self.session.id:
             return self.view
 
         else:

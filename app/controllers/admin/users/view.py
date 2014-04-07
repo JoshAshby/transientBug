@@ -62,7 +62,7 @@ class view(MixedObject):
 
         if password:
             user.set_password(password)
-            self.request.session.push_alert("Password updated, please let the user know the new password", level="warning")
+            self.session.push_alert("Password updated, please let the user know the new password", level="warning")
 
         if email and email != user.email:
           # TODO: Only allow change if email isn't in the database yet

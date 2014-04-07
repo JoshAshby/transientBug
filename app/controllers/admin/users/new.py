@@ -79,5 +79,5 @@ class new(MixedObject):
 
             return self.view
 
-        self.request.session.push_alert("User created...", level="success")
+        self.session.push_alert("User created...", level="success")
         return Redirect("/admin/users/"+user.id)

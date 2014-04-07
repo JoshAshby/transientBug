@@ -66,17 +66,17 @@
                 <li {{ 'class="active"' if "notes" in nav }}><a href="/notes"><i class="fa fa-file-text"></i> Notes</a></li>
                 <li {{ 'class="active"' if "recipes" in nav }}><a href="/recipes"><i class="fa fa-cutlery"></i> Recipes</a></li>
 
-                {% if req.session.has_screenshots %}
+                {% if session.has_screenshots %}
                   <li {{ 'class="active"' if "screenshots" in nav }}><a href="/screenshots"><i class="fa fa-desktop"></i> Scrns</a></li>
                 {% endif %}
 
               </ul>
-              {% if req.session.id %}
+              {% if session.id %}
                 <ul class="nav navbar-nav navbar-right" style="margin-right: 15px">
                   <li class="dropdown {{ 'active' if nav=="admin" }}">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Heya, {{req.session.username}} <i class="fa fa-caret-down"></i></a>
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Heya, {{session.username}} <i class="fa fa-caret-down"></i></a>
                     <ul class="dropdown-menu">
-                      {% if req.session.has_admin %}
+                      {% if session.has_admin %}
                         <li><a href="/admin"><i class="fa fa-cogs"></i> Admin</a></li>
                         <li><a href="/account"><i class="fa fa-cog"></i> Settings</a></li>
                         <li class="divider"></li>
@@ -96,11 +96,11 @@
         </div>
       </div>
 
-      {% if req.session.alerts %}
+      {% if session.alerts %}
         <!-- Begin alerts section -->
         <div class="row">
           <div class="col-md-10 col-md-offset-1">
-            {{req.session.alerts}}
+            {{session.alerts}}
           </div>
         </div>
         <!-- End alerts section -->
@@ -189,7 +189,7 @@
     {% endfor %}
 
     <script>
-      {% if not req.session.id %}
+      {% if not session.id %}
         $(function() {
           $("#nav_extra_menu_btn").popover();
         });

@@ -34,7 +34,7 @@ scriptFiles:
 
     <p>We couldn't find any notes that matched your search for <code>{{ req.get_param("s") }}</code>!</p>
 
-    {% if req.session.has_notes %}
+    {% if session.has_notes %}
     <a href="/new/note" class="btn btn-red">New</a> or <a href="/notes/yours">Your notes</a>
     {% endif %}
   </div>

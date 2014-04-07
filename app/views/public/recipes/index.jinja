@@ -15,7 +15,7 @@ scriptFiles:
 {% else %}
   <div class="jumbotron">
     <h1>No Recipes :/</h1>
-    {% if req.session.id %}
+    {% if session.id %}
       <a href="/recipes/new" class="btn btn-purple">New</a>
     {% endif %}
   </div>

@@ -18,7 +18,7 @@ stylesheets:
     <form method="GET" action="/phots/search" class="form-inline">
 
       <div class="input-group input-group-sm typeahead">
-        {% if req.session.has_phots %}
+        {% if session.has_phots %}
           <span class="input-group-btn">
             <a href="/new/phot" class="btn btn-green btn-sm">Add</a>
           </span>
@@ -58,7 +58,7 @@ stylesheets:
         <br>
         <br>
 
-        {% if req.session.has_phots %}
+        {% if session.has_phots %}
           <form role="form" method="POST">
             <div class="form-group">
               <label for="name">Rename</label>

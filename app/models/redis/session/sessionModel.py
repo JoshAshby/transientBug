@@ -31,10 +31,10 @@ class Session(BaseSession):
     def load(self):
         namespace = "session"
         if self.request.headers.authorization is None:
-            if not self.cookie_name in self.request.headers.cookie:
-                self.request.headers.cookie[self.cookie_name] = str(uuid.uuid4())
+            if not self.cookie_id in self.request.headers.cookies:
+                self.request.headers.cookies[self.cookie_id] = str(uuid.uuid4())
 
-            key = self.request.headers.cookie[self.cookie_name].value
+            key = self.request.headers.cookies[self.cookie_id].value
 
         elif self.request.headers.authorization:
             key = self.request.headers.authorization.username
@@ -52,9 +52,13 @@ class Session(BaseSession):
         if int(response.status[:3]) not in [303]:
             del self.alerts
 
-        for cookie in self.request.cookies.all_cookies:
+        for cookie in self.request.headers.cookies.all_cookies:
             val = cookie.render_response()
             response.headers.append("Set-Cookie", val)
+
+    @property
+    def id(self):
+        return self.key
 
     @property
     def alerts(self):

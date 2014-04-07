@@ -3,7 +3,7 @@
     <div class="col-md-6">
       <div class="recipe-header">
         <h1>{{recipe.title|e}}</h1>
-        <small><b>By</b> {{ recipe.user.username|e if recipe.user.id!=req.session.id else 'You!'}} - {{recipe.created.humanize()}}{% if req.session.id %} | <b>Visibility:</b> {{ 'Public' if recipe.public else 'Private' }}{% endif %}</small>
+        <small><b>By</b> {{ recipe.user.username|e if recipe.user.id!=session.id else 'You!'}} - {{recipe.created.humanize()}}{% if session.id %} | <b>Visibility:</b> {{ 'Public' if recipe.public else 'Private' }}{% endif %}</small>
         <p>{{recipe.description}}</p>
         {% if recipe.tags %}
           <b>Tags: </b>

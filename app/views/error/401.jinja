@@ -1,7 +1,7 @@
 <div class="jumbotron">
   <h1><i class="fa fa-bell"></i> 401 <small>(Unauthorized)</small></h1>
 
-  {% if req.session.id %}
+  {% if session.id %}
     <p>You don't seem to have access to this page. Tough luck.</p>
   {% else %}
     <p>It looks like you're not authorized to view this page. If you are not logged in, you can login now and try again.</p>

@@ -23,7 +23,7 @@ from seshat.error_catcher import catcher as error_catcher
 import seshat.route as route
 
 import seshat_addons.view.template as tmpl
-import seshat_addons.seshat.session as session
+from models.redis.session.sessionModel import Session
 
 import controllers.error as error
 
@@ -57,7 +57,7 @@ def init():
 
     route.controller_folder = "controllers"
 
-    dispatch.session_obj = session.Session
+    dispatch.session_obj = Session
 
     tmpl.read_in_templates()
     setup_error_pages()

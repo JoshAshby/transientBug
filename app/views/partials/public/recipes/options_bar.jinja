@@ -3,7 +3,7 @@
     <form method="GET" action="/recipes/search" class="form-inline">
       <div class="controls">
         <div class="input-group input-group-sm">
-          {% if req.session.id %}
+          {% if session.id %}
             <span class="input-group-btn">
               <a href="/recipes/new" class="btn btn-purple btn-sm">New</a>
             </span>

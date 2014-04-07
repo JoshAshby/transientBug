@@ -14,7 +14,7 @@
       <div  class="note-header">
         <h1>{{note.title}}</h1>
         <small><b>By</b> {{ note.author.username if
-          note.author.id!=req.session.id else 'You!'}} - {{note.created.humanize()}}{% if req.session.id %} | <b>Visibility:</b> {{ 'Public' if note.public else 'Private' }} | <b>Status:</b> {{ 'Draft' if note.draft else 'Published' }} {% endif %}</small>
+          note.author.id!=session.id else 'You!'}} - {{note.created.humanize()}}{% if session.id %} | <b>Visibility:</b> {{ 'Public' if note.public else 'Private' }} | <b>Status:</b> {{ 'Draft' if note.draft else 'Published' }} {% endif %}</small>
       </div>
       <br>
       <div class="note-body">

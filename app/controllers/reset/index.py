@@ -43,7 +43,7 @@ class index(MixedObject):
             return self.view
 
         else:
-            self.request.session.push_alert("That code isn't in the database, want to try requesting a new one?", level="danger")
+            self.session.push_alert("That code isn't in the database, want to try requesting a new one?", level="danger")
             return Redirect("/reset")
 
     @HTML
@@ -56,7 +56,7 @@ class index(MixedObject):
             user = um.User.from_email(username)
 
         except NotFoundError:
-            self.request.session.push_alert("That email wasn't found in our system. Are you sure its correct?", level="danger")
+            self.session.push_alert("That email wasn't found in our system. Are you sure its correct?", level="danger")
             return Redirect("/reset")
 
         if not code:
@@ -76,7 +76,7 @@ class index(MixedObject):
 
             user.save()
 
-            self.request.session.push_alert("Password reset email sent. Please check your email.")
+            self.session.push_alert("Password reset email sent. Please check your email.")
             self.view.template = "public/reset/sent"
             return self.view
 
@@ -86,19 +86,19 @@ class index(MixedObject):
                 if user.reset_code == code:
                     user.set_password(password)
 
-                    self.request.session.push_alert("Password reset, please login with it now to make sure it works :)")
+                    self.session.push_alert("Password reset, please login with it now to make sure it works :)")
                     return Redirect("/login")
 
                 else:
-                    self.request.session.push_alert("That isn't your reset code!", level="danger")
+                    self.session.push_alert("That isn't your reset code!", level="danger")
                     return Redirect("/reset")
 
             else:
-                self.request.session.push_alert("That email doesn't have a reset request!", level="danger")
+                self.session.push_alert("That email doesn't have a reset request!", level="danger")
                 return Redirect("/reset")
 
         else:
-            self.request.session.push_alert("That code isn't in the database, want to try requesting a new one?", level="danger")
+            self.session.push_alert("That code isn't in the database, want to try requesting a new one?", level="danger")
             return Redirect("/reset")
 
 
