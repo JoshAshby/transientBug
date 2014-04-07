@@ -20,7 +20,6 @@ from redisORM import RedisModel
 
 from seshat.session import Session as BaseSession
 
-import config.config as c
 import errors.session as use
 import models.rethink.user.userModel as um
 
@@ -30,32 +29,36 @@ class Session(BaseSession):
     _user_cache = None
 
     def load(self):
-        if self.request.headers.authorization is not None:
+        namespace = "session"
+        if self.request.headers.authorization is None:
             if not self.cookie_name in self.request.headers.cookie:
                 self.request.headers.cookie[self.cookie_name] = str(uuid.uuid4())
 
-            namespace = "session"
             key = self.request.headers.cookie[self.cookie_name].value
 
-        else:
-            namespace = "session"
+        elif self.request.headers.authorization:
             key = self.request.headers.authorization.username
 
-        self._data = RedisModel(namespace, key, c.redis)
+        self.data = RedisModel(namespace, key)
         self.key = key
-        if not "alerts" in self._data:
-            self._data["alerts"] = []
+
+        if not "alerts" in self.data:
+            self.data["alerts"] = []
+
+        if not "groups" in self.data:
+            self.data["groups"] = []
 
     def save(self, response):
         if int(response.status[:3]) not in [303]:
             del self.alerts
 
-        val = None
-        response.headers.append("Set-Cookie", val)
+        for cookie in self.request.cookies.all_cookies:
+            val = cookie.render_response()
+            response.headers.append("Set-Cookie", val)
 
     @property
     def alerts(self):
-        return self._data["alerts"]
+        return self.data["alerts"]
 
     @alerts.deleter
     def alerts(self):
@@ -91,8 +94,8 @@ class Session(BaseSession):
     @property
     def user(self):
         if not hasattr(self, "_user_cache") or self._user_cache is None:
-            if "user" in self._data:
-                self._user_cache = um.User(self._data.get("user"))
+            if "user" in self.data:
+                self._user_cache = um.User(self.data.get("user"))
                 if not self._user_cache.id:
                     self._user_cache = None
             else:
@@ -102,11 +105,11 @@ class Session(BaseSession):
     @user.setter
     def user(self, val):
         if isinstance(val, um.User):
-            self._data["user"] = val.id
+            self.data["user"] = val.id
         else:
-            self._data["user"] = val
+            self.data["user"] = val
 
-        self._user_cache = um.User(self._data["user"]) if self._data["user"] else None
+        self._user_cache = um.User(self.data["user"]) if self.data["user"] else None
 
     def login(self, user, password):
         """
@@ -150,7 +153,7 @@ class Session(BaseSession):
                 sure you have the correct information?")
 
     def has_perm(self, group_name):
-        if group_name in self._data.groups or "root" in self._data.groups:
+        if group_name in self.data.groups or "root" in self.data.groups:
             return True
 
         return False
