@@ -29,9 +29,9 @@ class tags(MixedObject):
         else:
             base_query = r.table(rm.Recipe.table).filter(
                 (r.row["user"]==self.session.id) |\
-                (r.row["deleted"]==False & \
-                    r.row["reported"]==False & \
-                    r.row["public"]==True)
+                ((r.row["deleted"]==False) & \
+                    (r.row["reported"]==False) & \
+                    (r.row["public"]==True))
             )
 
         raw_tags = base_query\

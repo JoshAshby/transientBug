@@ -61,6 +61,10 @@ class Session(BaseSession):
         return self.key
 
     @property
+    def groups(self):
+        return self.data["groups"]
+
+    @property
     def alerts(self):
         return self.data["alerts"]
 
