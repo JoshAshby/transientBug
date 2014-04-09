@@ -52,17 +52,18 @@ class Session(BaseSession):
         if int(response.status[:3]) not in [303]:
             del self.alerts
 
+      # TODO: Rotate the session key each time? This should help preventing old
+      # sessions from being used
+
+      # TODO: Set a key expire for each redis key. This is a feature that needs
+      # to be added to RedisORM anyways so I'll wait till thats a go before
+      # adding it here.
+
+        print type(response.headers)
+
         for cookie in self.request.headers.cookies.all_cookies:
             val = cookie.render_response()
             response.headers.append("Set-Cookie", val)
-
-    @property
-    def id(self):
-        return self.key
-
-    @property
-    def groups(self):
-        return self.data["groups"]
 
     @property
     def alerts(self):
@@ -74,9 +75,10 @@ class Session(BaseSession):
         Clears the current users expired alerts.
         """
         for alert in self.alerts:
+            raw = alert
             alert = json.loads(alert)
             if alert["expire"] == "next":
-                self.alerts.pop(self.alerts.index(alert))
+                self.alerts.remove(raw)
 
     @alerts.setter
     def alerts(self, val):
@@ -118,6 +120,21 @@ class Session(BaseSession):
             self.data["user"] = val
 
         self._user_cache = um.User(self.data["user"]) if self.data["user"] else None
+        self.data["groups"] = self._user_cache["groups"]
+
+    @property
+    def id(self):
+        return self.data["user"] if "user" in self.data else None
+
+    @property
+    def groups(self):
+        return self.data["groups"]
+
+    def has_perm(self, group_name):
+        if group_name in self.data.groups or "root" in self.data.groups:
+            return True
+
+        return False
 
     def login(self, user, password):
         """
@@ -160,8 +177,8 @@ class Session(BaseSession):
         raise use.UsernameError("We can't find your user, are you \
                 sure you have the correct information?")
 
-    def has_perm(self, group_name):
-        if group_name in self.data.groups or "root" in self.data.groups:
-            return True
-
-        return False
+    def logout(self):
+        del self.data["groups"]
+        del self.data["user"]
+        self._user_cache = None
+        return True

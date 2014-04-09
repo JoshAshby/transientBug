@@ -38,7 +38,7 @@ class error404(MixedObject):
 class error401(MixedObject):
     @HTML
     def GET(self):
-        return Response(404, [("Content-Type", "text/html")], self.view.render())
+        return Response(401, [("Content-Type", "text/html")], self.view.render())
 
     def POST(self):
         return self.GET()
@@ -58,7 +58,7 @@ class error500(MixedObject):
             "error": self.request.errors["exception"],
             "tb": self.errors["traceback"]
         }
-        return Response(404, [("Content-Type", "text/html")], self.view.render())
+        return Response(500, [("Content-Type", "text/html")], self.view.render())
 
     def POST(self):
         return self.GET()

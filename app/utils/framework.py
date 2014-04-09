@@ -64,9 +64,9 @@ def init():
 
 
 def setup_error_pages():
-    error_catcher.register("500", error.error500)
-    error_catcher.register("404", error.error404)
-    error_catcher.register("401", error.error401)
+    error_catcher.register(500, error.error500)
+    error_catcher.register(404, error.error404)
+    error_catcher.register(401, error.error401)
 
 
 def server():
