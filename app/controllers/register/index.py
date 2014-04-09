@@ -33,7 +33,7 @@ class index(MixedObject):
     def GET(self):
         code = self.request.get_param("c")
 
-        if self.request.buckets.enablePublicInvites:
+        if self.buckets.enablePublicInvites:
             if not code:
                 self.view.template = "public/register/closed"
                 return self.view

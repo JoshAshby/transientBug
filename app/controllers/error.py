@@ -55,8 +55,8 @@ class error500(MixedObject):
     @HTML
     def GET(self):
         self.view.data = {
-            "error": self.request.errors["exception"],
-            "tb": self.errors["traceback"]
+            "error": self.request.errors.exception,
+            "tb": self.request.errors.traceback
         }
         return Response(500, [("Content-Type", "text/html")], self.view.render())
 

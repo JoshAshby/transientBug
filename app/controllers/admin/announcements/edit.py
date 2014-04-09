@@ -40,6 +40,6 @@ class edit(MixedObject):
         start = self.request.get_param("start")
         end = self.request.get_param("end")
 
-        self.request.announcements.edit_announcement(ID, message, status, start, end)
+        self.announcements.edit_announcement(ID, message, status, start, end)
 
         return Redirect("/admin/announcements")

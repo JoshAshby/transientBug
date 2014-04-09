@@ -24,12 +24,12 @@ class index(MixedObject):
     @HTML
     def GET(self):
         self.view.partial("sidebar", "partials/admin/sidebar", {"command": "buckets"})
-        page = Paginate(self.request.buckets.list, self.request)
+        page = Paginate(self.buckets.list, self.request)
         self.view.data = {"page": page}
         return self.view
 
     @JSON
     def POST(self):
         bucket_id = self.request.id
-        self.request.buckets.toggle(bucket_id)
+        self.buckets.toggle(bucket_id)
         return {"success": True, "id": bucket_id}

@@ -59,8 +59,6 @@ class Session(BaseSession):
       # to be added to RedisORM anyways so I'll wait till thats a go before
       # adding it here.
 
-        print type(response.headers)
-
         for cookie in self.request.headers.cookies.all_cookies:
             val = cookie.render_response()
             response.headers.append("Set-Cookie", val)
@@ -68,6 +66,25 @@ class Session(BaseSession):
     @property
     def alerts(self):
         return self.data["alerts"]
+
+    def _render_alerts(self):
+        alerts = [ json.loads(s) for s in self.alerts ]
+      # TODO: Move this out of the session and into templates.
+        alertStr = ""
+        for alert in alerts:
+            if alert["level"] in ["info"]:
+                alert["icon"] = "info"
+            elif alert["level"] in ["success"]:
+                alert["icon"] = "thumbs-up"
+            elif alert["level"] in ["warning"]:
+                alert["icon"] = "excalmation"
+            elif alert["level"] in ["danger", "error"]:
+                alert["icon"] = "warning"
+                alert["level"] = "danger"
+
+            alertStr += ("""<div class="alert alert-{level}"><i class="fa fa-{icon}"></i> <strong>{quip}</strong> {msg}</div>""").format(**alert)
+
+        return unicode(alertStr)
 
     @alerts.deleter
     def alerts(self):

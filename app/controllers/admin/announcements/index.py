@@ -41,6 +41,6 @@ class index(MixedObject):
         start = self.request.get_param("start")
         end = self.request.get_param("end")
 
-        self.request.announcements.new_announcement(message, status, start, end)
+        self.announcements.new_announcement(message, status, start, end)
 
         return Redirect("/admin/announcements")
