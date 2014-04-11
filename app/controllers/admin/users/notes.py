@@ -26,7 +26,7 @@ import models.rethink.note.noteModel as nm
 from utils.paginate import Paginate
 
 
-@route()
+@route("/admin/users/:id/notes")
 @login(["admin"])
 @template("admin/users/notes", "User Notes")
 class notes(MixedObject):
@@ -74,6 +74,6 @@ class notes(MixedObject):
 
         self.view.data = {"note_page": page,
                           "user": user,
-                          "command": self.request.command}
+                          "command": "notes"}
 
         return self.view

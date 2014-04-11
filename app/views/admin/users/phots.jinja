@@ -45,7 +45,7 @@ padding: 5px;}"
                 <a href="/phots/{{phot.short_code}}"><img src="/i/{{phot.filename}}" alt="{{phot.filename}}" class="img"></a>
               </td>
               <td><a href="/phots/{{phot.short_code}}">{{phot.title|truncate(25)}}</a></td>
-              <td>{{phot.formated_created}}</td>
+              <td>{{phot.created}}</td>
             </tr>
           {% endfor %}
         </tbody>

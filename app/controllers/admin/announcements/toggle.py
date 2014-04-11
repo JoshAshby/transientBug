@@ -15,7 +15,7 @@ from seshat_addons.seshat.obj_mods import login
 from seshat_addons.seshat.func_mods import JSON
 
 
-@route()
+@route("/admin/announcements/:id/toggle")
 @login(["admin"])
 class toggle(MixedObject):
     @JSON

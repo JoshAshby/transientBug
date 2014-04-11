@@ -7,7 +7,7 @@ scriptFiles:
 +++
 
 
-{% if session.id and session.id==note.author.id and session.has_notes %}
+{% if session.id and session.id==note.author.id or session.has_group("notes") %}
   <ul class="nav nav-pills">
     <li class="active"><a href="#view" data-toggle="tab">View</a></li>
     <li><a href="#edit" data-toggle="tab">Edit</a></li>
@@ -17,7 +17,7 @@ scriptFiles:
   <div class="tab-pane active" id="view">
     ![[partials/public/notes/view]]
   </div>
-  {% if session.id and session.id==note.author.id and session.has_notes %}
+  {% if session.id and session.id==note.author.id or session.has_group("notes") %}
     <div class="tab-pane" id="edit">
       <br>
       <div class="row">

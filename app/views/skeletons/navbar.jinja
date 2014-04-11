@@ -66,7 +66,7 @@
                 <li {{ 'class="active"' if "notes" in nav }}><a href="/notes"><i class="fa fa-file-text"></i> Notes</a></li>
                 <li {{ 'class="active"' if "recipes" in nav }}><a href="/recipes"><i class="fa fa-cutlery"></i> Recipes</a></li>
 
-                {% if session.has_screenshots %}
+                {% if session.has_group("screenshots") %}
                   <li {{ 'class="active"' if "screenshots" in nav }}><a href="/screenshots"><i class="fa fa-desktop"></i> Scrns</a></li>
                 {% endif %}
 
@@ -74,13 +74,13 @@
               {% if session.id %}
                 <ul class="nav navbar-nav navbar-right" style="margin-right: 15px">
                   <li class="dropdown {{ 'active' if nav=="admin" }}">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Heya, {{session.username}} <i class="fa fa-caret-down"></i></a>
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Heya, {{session.user.username}} <i class="fa fa-caret-down"></i></a>
                     <ul class="dropdown-menu">
-                      {% if session.has_admin %}
+                      {% if session.has_group("admin") %}
                         <li><a href="/admin"><i class="fa fa-cogs"></i> Admin</a></li>
-                        <li><a href="/account"><i class="fa fa-cog"></i> Settings</a></li>
-                        <li class="divider"></li>
                       {% endif %}
+                      <li><a href="/account"><i class="fa fa-cog"></i> Settings</a></li>
+                      <li class="divider"></li>
                       <li><a href="/logout"><i class="fa fa-sign-out"></i> Logout</a></li>
                     </ul>
                   </li>
@@ -107,62 +107,12 @@
         <br>
       {% endif %}
 
-      {% if breadcrumbs_top and not breadcrumbs %}
-        <div class="row">
-          <div class="col-md-10 col-md-offset-1">
-            <ol class="breadcrumb">
-              {% set breadcrumb_parts = "" %}
-              {% for bit in req.pre_id_url %}
-                {% set breadcrumb_parts = breadcrumb_parts+"/"+bit %}
-                {% if loop.last and not req.command and not req.id %}
-                  <li class="active">{{bit|capitalize}}</li>
-                {% elif loop.last and req.id and not req.command %}
-                  <li><a href="{{breadcrumb_parts}}">{{bit|capitalize}}</a></li>
-                  <li class="active">{{req.id|truncate(10, True)}}</li>
-                {% elif loop.last and req.command %}
-                  <li><a href="{{breadcrumb_parts}}">{{bit|capitalize}}</a></li>
-                  <li><a href="{{breadcrumb_parts}}/{{req.id}}">{{req.id|truncate(10, True)}}</a></li>
-                  <li class="active">{{req.command|capitalize}}</li>
-                {% else %}
-                  <li><a href="{{breadcrumb_parts}}">{{bit|capitalize}}</a></li>
-                {% endif %}
-              {% endfor %}
-            </ol>
-          </div>
-        </div>
-      {% endif %}
-
       <div class="row">
         <div class="col-md-10 col-md-offset-1">
           {{body}}
         </div>
       </div>
       <br>
-
-      {% if breadcrumbs and not breadcrumbs_top %}
-        <div class="row">
-          <div class="col-md-10 col-md-offset-1">
-            <ol class="breadcrumb">
-              {% set breadcrumb_parts = "" %}
-              {% for bit in req.pre_id_url %}
-                {% set breadcrumb_parts = breadcrumb_parts+"/"+bit %}
-                {% if loop.last and not req.command and not req.id %}
-                  <li class="active">{{bit|capitalize}}</li>
-                {% elif loop.last and req.id and not req.command %}
-                  <li><a href="{{breadcrumb_parts}}">{{bit|capitalize}}</a></li>
-                  <li class="active">{{req.id|truncate(10, True)}}</li>
-                {% elif loop.last and req.command %}
-                  <li><a href="{{breadcrumb_parts}}">{{bit|capitalize}}</a></li>
-                  <li><a href="{{breadcrumb_parts}}/{{req.id}}">{{req.id|truncate(10, True)}}</a></li>
-                  <li class="active">{{req.command|capitalize}}</li>
-                {% else %}
-                  <li><a href="{{breadcrumb_parts}}">{{bit|capitalize}}</a></li>
-                {% endif %}
-              {% endfor %}
-            </ol>
-          </div>
-        </div>
-      {% endif %}
 
       <hr>
       <footer id="footer">

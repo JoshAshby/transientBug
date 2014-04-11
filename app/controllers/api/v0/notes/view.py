@@ -30,11 +30,13 @@ class view(MixedObject):
             note = nm.Note(**f[0])
 
             if not note.public:
-              if not self.session.id or self.session.id!=note.user:
+              if not self.session.id or \
+                      self.session.id!=note.user or \
+                      not self.session.has_group("notes"):
                     self.session.push_alert("That note is not public and you do not have the rights to access it.", level="error")
                     return Unauthorized()
 
-            if not self.session.has_notes and note.disable:
+            if not self.session.has_group("notes") and note.disable:
                 return NotFound()
 
             return note

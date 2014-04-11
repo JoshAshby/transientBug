@@ -18,7 +18,7 @@ from seshat.actions import Redirect
 from redisORM import RedisModel
 
 
-@route()
+@route("/admin/announcements/edit/:id")
 @login(["admin"])
 @template("admin/announcements/edit", "Site Announcement")
 class edit(MixedObject):

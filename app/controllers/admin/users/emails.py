@@ -26,7 +26,7 @@ import models.rethink.email.emailModel as em
 from utils.paginate import Paginate
 
 
-@route()
+@route("/admin/users/:id/emails")
 @login(["admin"])
 @template("admin/users/emails", "User Emails")
 class emails(MixedObject):
@@ -56,6 +56,6 @@ class emails(MixedObject):
 
         self.view.data = {"page": page,
                           "user": user,
-                          "command": self.request.command}
+                          "command": "emails"}
 
         return self.view

@@ -148,6 +148,9 @@ class Session(BaseSession):
         return self.data["groups"]
 
     def has_perm(self, group_name):
+        return self.has_group(group_name)
+
+    def has_group(self, group_name):
         if group_name in self.data.groups or "root" in self.data.groups:
             return True
 

@@ -34,10 +34,12 @@ class view(MixedObject):
         except NotFoundError:
             return NotFound()
 
+        print self.request.url_params
+
         self.view.title = user.username
 
         self.view.data = {"user": user,
-                          "command": self.request.command}
+                          "command": ""}
 
         return self.view
 

@@ -40,7 +40,7 @@ class view(MixedObject):
             return NotFound()
 
         if "disable" in f[0] and f[0]["disable"] and \
-                not self.session.has_phots:
+                not self.session.has_group("phots"):
             return NotFound()
 
         photo = pm.Phot(f[0]["id"])
@@ -48,7 +48,7 @@ class view(MixedObject):
         return {"phot": photo}
 
     def POST(self):
-        if not self.session.has_phots:
+        if not self.session.has_group("phots"):
             return Unauthorized()
 
         new_name = self.request.get_param("name")
@@ -70,7 +70,7 @@ class view(MixedObject):
 
         if f:
             photo = pm.Phot(**f[0])
-            photo.rename(new_name)
+            photo.title = new_name
             photo.tags = tag
             photo.save()
 

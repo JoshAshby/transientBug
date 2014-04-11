@@ -9,7 +9,7 @@ scriptFiles:
     <form method="GET" action="/phots/search" class="form-inline">
 
       <div class="input-group input-group-sm typeahead">
-        {% if session.has_phots %}
+        {% if session.has_group("phots") %}
           <span class="input-group-btn">
             <a href="/new/phot" class="btn btn-green btn-sm">Add</a>
           </span>

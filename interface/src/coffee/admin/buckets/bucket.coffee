@@ -23,7 +23,7 @@ LazyLoad.js [
       toggle = (what, val) ->
         id = $(what).data "id"
 
-        $.post "/admin/buckets/#{ id }/toggle/", (data) ->
+        $.post "/admin/buckets", {id: id}, (data) ->
           if data[0]["success"]
             wording = "shut off"
             if $(what).bootstrapSwitch 'state'

@@ -30,6 +30,6 @@ class index(MixedObject):
 
     @JSON
     def POST(self):
-        bucket_id = self.request.id
+        bucket_id = self.request.get_param("id")
         self.buckets.toggle(bucket_id)
         return {"success": True, "id": bucket_id}

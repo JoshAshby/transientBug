@@ -3,7 +3,7 @@
     <form method="GET" action="/notes/search" class="form-inline">
       <div class="controls">
         <div class="input-group input-group-sm">
-          {% if session.has_phots %}
+          {% if session.has_group("notes") %}
             <span class="input-group-btn">
               <a href="/new/note" class="btn btn-red btn-sm">New</a>
             </span>

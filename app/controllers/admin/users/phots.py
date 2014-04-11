@@ -26,7 +26,7 @@ import models.rethink.phot.photModel as pm
 from utils.paginate import Paginate
 
 
-@route()
+@route("/admin/users/:id/phots")
 @login(["admin"])
 @template("admin/users/phots", "User Phots")
 class phots(MixedObject):
@@ -56,6 +56,6 @@ class phots(MixedObject):
 
         self.view.data = {"page": page,
                           "user": user,
-                          "command": self.request.command}
+                          "command": "phots"}
 
         return self.view
