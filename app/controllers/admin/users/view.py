@@ -77,4 +77,4 @@ class view(MixedObject):
 
         user.save()
 
-        return Redirect("/admin/users/"+self.request.id_extended)
+        return Redirect("/admin/users/"+self.request.id)

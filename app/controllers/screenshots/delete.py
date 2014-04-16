@@ -20,7 +20,7 @@ from seshat.actions import NotFound
 
 
 @route()
-@login(["root"])
+@login(["screenshots"])
 class delete(MixedObject):
     @JSON
     def POST(self):
