@@ -34,7 +34,12 @@
     {% set outerloop = loop %}
       <div class="col-md-6">
         {% for step in col %}
-          <b>Step {{loop.index if outerloop.index==1 else loop.index+outerloop.index}} - </b>{{step|e}}<br>
+          {% if recipe.steps|length%2==1 %}
+            {% set add = loop.length+1 %}
+          {% else %}
+            {% set add = loop.length %}
+          {% endif %}
+          <b>Step {{loop.index if outerloop.index==1 else loop.index+add}} - </b>{{step|e}}<br>
         {% endfor %}
       </div>
     {% endfor %}
