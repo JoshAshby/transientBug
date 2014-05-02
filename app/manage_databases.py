@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 """
-Aid to get flagr setup and running
+Aid to get transientBug setup and running, along with keeping the database updated
+
+TODO: FIXTHISSHITPLS (for the love of all small furry things, this should probably be rewritten before it causes some mass chaos which in turn causes some small deity to get pissed off and smite a bunny).
 
 For more information, see: https://github.com/JoshAshby/
 

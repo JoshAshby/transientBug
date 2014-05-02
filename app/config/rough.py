@@ -21,7 +21,7 @@ def rough_parse_config(name=None):
     current_path = os.getcwd() + "/"
 
     config = yaml.load(file(current_path+"config/config.yaml", 'r'))
-    if name:
+    if name and name!="main-server":
         config = config[name]
 
     for directory in config["dirs"]:
