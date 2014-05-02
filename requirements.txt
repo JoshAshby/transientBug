@@ -25,6 +25,6 @@ rethinkdb==1.12.0-0
 six==1.6.1
 waitress==0.8.8
 wsgiref==0.1.2
-git+git://github.com/JoshAshby/seshat.git
-git+git://github.com/JoshAshby/seshat_addons.git
+git+git://github.com/JoshAshby/seshat.git@dev
+git+git://github.com/JoshAshby/seshat_addons.git@dev
 git+git://github.com/JoshAshby/pyRethinkORM.git@dev
