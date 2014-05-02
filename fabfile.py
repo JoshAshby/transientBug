@@ -30,28 +30,19 @@ def static():
         run("cp -r interface/build/* {}".format(env.static))
 
 
-#def indexes():
-    #with virtualenv():
-        #run("python rebuild_index.py")
-
-
 def start():
     with virtualenv():
-        run("python manage_services.py start main-server")
-        run("python manage_services.py start downloader")
-        run("python manage_services.py start emailer")
+        run("supervisorctl start all")
 
 
 def stop():
     with virtualenv():
-        run("python manage_services.py stop main-server")
-        run("python manage_services.py stop downloader")
-        run("python manage_services.py stop emailer")
+        run("supervisorctl stop all")
 
 
 def restart():
-    stop()
-    start()
+    with virtualenv():
+        run("supervisorctl restart all")
 
 
 def deploy():
