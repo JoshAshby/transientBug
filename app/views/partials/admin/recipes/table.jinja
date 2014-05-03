@@ -44,7 +44,7 @@
         {% for recipe in recipes.pail %}
           <tr>
             <td><a href="/recipes/{{recipe.short_code}}">{{recipe.title|e}}</a></td>
-            <td><a href="/users/{{recipe.user.id}}">{{recipe.user.username|e}}</a></td>
+            <td><a href="/admin/users/{{recipe.user.id}}">{{recipe.user.username|e}}</a></td>
             <td>{{recipe.created.humanize()}}</td>
             <td>{{recipe.country|e}}</td>
             <td>

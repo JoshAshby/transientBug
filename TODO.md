@@ -13,3 +13,4 @@
   messy
 - look into component for managing client side stuff? looks nicer than bower
   and doesn't just do a git clone like bower
+- github webhook to auto deploy from master when updated
