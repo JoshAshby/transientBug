@@ -3,7 +3,7 @@ $ ->
     id = $(what).data "id"
     di = $ "##{ id }"
 
-    $.post "/admin/phots/#{ id }", (data) ->
+    $.post "/admin/phots", {phot: id}, (data) ->
       if data[0]["success"]
         di.fadeOut().find("button").popover 'hide'
 

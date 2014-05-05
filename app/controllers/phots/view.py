@@ -13,7 +13,7 @@ from seshat.route import route
 from seshat_addons.seshat.mixed_object import MixedObject
 from seshat.actions import NotFound, Redirect, Unauthorized
 from seshat_addons.seshat.obj_mods import template
-from seshat_addons.seshat.func_mods import HTML
+from seshat_addons.seshat.func_mods import HTML, JSON
 
 from searchers.phots import PhotSearcher
 import models.rethink.phot.photModel as pm
@@ -29,6 +29,8 @@ class view(MixedObject):
 
         # check if its a short code by looking for an extension
         # otherwise we assume it's a filename
+
+      # TODO: This could probably be just one but I'm too lazy to try
         if len(phot.rsplit(".")) == 1:
             f = r.table(pm.Phot.table).filter({"short_code": phot})\
                 .coerce_to("array").run()
@@ -82,3 +84,30 @@ class view(MixedObject):
 
         else:
             return NotFound()
+
+    @JSON
+    def DELETE(self):
+        if not self.session.has_group("phots"):
+            return Unauthorized()
+
+        phot = self.request.id
+        if len(phot.rsplit(".")) == 1:
+            f = r.table(pm.Phot.table).filter({"short_code": phot})\
+                .coerce_to("array").run()
+        else:
+            f = r.table(pm.Phot.table).filter({"filename": phot})\
+                .coerce_to("array").run()
+
+        if f:
+            photo = pm.Phot(**f[0])
+            photo.disable = not photo.disable if "disable" in photo else True
+            photo.save()
+
+            searcher = PhotSearcher()
+            searcher.update(photo)
+            searcher.save()
+
+            return {"success": True, "state": photo.disable}
+
+        else:
+            return {"success": False, "error": "That image couldn't be found. :/"}

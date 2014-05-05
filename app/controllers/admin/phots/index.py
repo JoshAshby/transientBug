@@ -55,7 +55,7 @@ class index(MixedObject):
 
     @JSON
     def POST(self):
-        current = pm.Phot(self.request.id)
+        current = pm.Phot(self.request.get_param("phot"))
 
         if current.filename:
             current.disable = not current.disable if "disable" in current else True

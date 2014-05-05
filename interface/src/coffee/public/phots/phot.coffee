@@ -32,9 +32,13 @@ LazyLoad.js [
     toggle = (what, val) ->
       id = $(what).data "id"
 
-      $.post "/admin/phots/#{ id }", {state: val}, (data) ->
-        if data[0]["success"]
-          wording = "enabled"
-          if data[0]["state"]
-            wording = "disabled"
-          $.growl "Phot #{ wording }!<br><small>#{ id }</small>", growl_options
+      $.ajax
+        type: "DELETE"
+        url:"/phots/#{ id }"
+        data: {state: val}
+        success: (data) ->
+          if data[0]["success"]
+            wording = "enabled"
+            if data[0]["state"]
+              wording = "disabled"
+            $.growl "Phot #{ wording }!<br><small>#{ id }</small>", growl_options
