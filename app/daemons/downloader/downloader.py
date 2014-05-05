@@ -16,7 +16,7 @@ import config.config as c
 import models.rethink.phot.photModel as pm
 
 import requests
-import cStringIO
+#import cStringIO
 
 import logging
 
@@ -30,18 +30,12 @@ class Downloader(RedisWorker):
 
         path = ''.join([c.dirs.gifs, phot.filename])
 
-        req = requests.get(phot.url, stream=True)
-
         logger.info("Downloading photo {}".format(phot.url))
+        req = requests.get(phot.url)
 
         if req.status_code == 200:
-            fi = cStringIO.StringIO()
-            for chunk in req.iter_content():
-                fi.write(chunk)
-            fi.seek(0)
-
             with open(path, 'w+b') as f:
-                f.write(fi.read())
+                f.write(req.content)
 
             logger.info("Download for photo {} finished.".format(phot.url))
 
