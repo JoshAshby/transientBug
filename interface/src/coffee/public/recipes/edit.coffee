@@ -27,6 +27,7 @@ LazyLoad.css [
 
 LazyLoad.js [
   '/static/js/lib/mousetrap.min.js'
+  '/static/js/lib/mousetrap-global-bind.min.js'
   '/static/js/lib/typeahead.bundle.min.js'
   '/static/js/pillbox.js'
   '/static/js/lib/bootstrap-switch.min.js'
