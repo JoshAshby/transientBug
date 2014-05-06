@@ -1,8 +1,3 @@
-<div class="panel panel-purple">
-  <div class="panel-heading">
-    <h3 class="panel-title">{{ "Update Recipe for "+recipe.title|e if recipe else "New Recipe" }}</h3>
-  </div>
-  <div class="panel-body">
     <form method="POST" action="{{ "/recipes/"+recipe.short_code|e if recipe else "/recipes/new" }}" id="new-recipe">
       <div class="row">
         <div class="col-md-6">
@@ -84,7 +79,5 @@
         </div>
       </div>
       <br>
-      <button class="btn btn-purple btn-block" type="submit">{{ "Update" if recipe else "Add" }}</button>
+      <button class="btn btn-purple btn-block" type="submit"><br>{{ "Update" if recipe else "Add" }}<br><br></button>
     </form>
-  </div>
-</div>

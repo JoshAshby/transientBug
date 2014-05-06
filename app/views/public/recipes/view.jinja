@@ -7,6 +7,33 @@ scriptFiles:
   - public/recipes/edit
 +++
 
+<div class="recipe-header">
+  <div class="row">
+    <div class="col-md-12">
+      <h1>{{recipe.title|e}}</h1>
+      <small><b>By</b> {{ recipe.user.username|e if recipe.user.id!=session.id else 'You!'}} - {{recipe.created.humanize()}}{% if session.id %} | <b>Visibility:</b> {{ 'Public' if recipe.public else 'Private' }}{% endif %}</small>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <p>{{recipe.description}}</p>
+    </div>
+    <div class="col-md-6">
+      {% if recipe.tags %}
+        <b>Tags: </b>
+        {% for tag in recipe.tags %}
+          <a href="/recipes/search?s=tags:{{tag|e}}"><span class="label label-purple">{{tag|e}}</span></a>
+        {% endfor %}
+        <br>
+      {% endif %}
+      {% if recipe.country %}
+        <b>Country: </b> {{recipe.country|e}} <br>
+      {% endif %}
+    </div>
+  </div>
+</div>
+<br>
+
 {% if session.id and session.id==recipe.user.id %}
   <ul class="nav nav-pills">
     <li class="active"><a href="#view" data-toggle="tab">View</a></li>
