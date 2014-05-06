@@ -49,8 +49,3 @@ LazyLoad.js [
 
     Mousetrap.bind 'e', ->
       $("ul.nav a[href=#edit]").tab 'show'
-
-    Mousetrap.bind 's s', ->
-      old_url = window.location.toString()
-      new_url = old_url.substring 0, old_url.indexOf '?'
-      window.location = new_url+"?v=slideshow"
