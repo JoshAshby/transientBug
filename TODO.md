@@ -3,6 +3,7 @@
 - Rewrite of ACL (this goes for seshat_addons too) for finer control.
 - rewrite of nav: directive for templates
 - clean up unused code, like all the daemon stuff
+- remake fabric file and make deploys to new systems more replicatable
 
 # Ideas
 - error viewing page for things
@@ -14,3 +15,4 @@
 - look into component for managing client side stuff? looks nicer than bower
   and doesn't just do a git clone like bower
 - github webhook to auto deploy from master when updated
+- move to docker or something similar? be easier to move, but whats the use?
