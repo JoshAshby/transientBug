@@ -32,7 +32,7 @@ scriptFiles:
 
     <p>We couldn't find any recipes that matched your search for <code>{{ req.get_param("s")|e }}</code>!</p>
 
-    {% if req.session.id %}
+    {% if session.id %}
     <a href="/recipes/new" class="btn btn-purple">New</a> or <a href="/recipes/">Your recipes</a>
     {% endif %}
   </div>

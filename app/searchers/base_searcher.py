@@ -146,8 +146,6 @@ class RethinkSearcher(BaseSearcher):
             else:
                 query = search
 
-            print query, allow, disallow
-
             results = searcher.search(query, limit=limit, filter=allow, mask=disallow)
 
             for item in results:

@@ -26,7 +26,7 @@ import models.rethink.recipe.recipeModel as rm
 from utils.paginate import Paginate
 
 
-@route()
+@route("/admin/users/:id/recipes")
 @login(["admin"])
 @template("admin/users/recipes", "User Recipes")
 class recipes(MixedObject):
@@ -58,4 +58,4 @@ class recipes(MixedObject):
 
         return {"recipes": page,
                 "user": user,
-                "command": self.request.command}
+                "command": "recipes"}

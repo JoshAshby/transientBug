@@ -33,7 +33,7 @@ class index(MixedObject):
     def GET(self):
         code = self.request.get_param("c")
 
-        if self.request.buckets.enablePublicInvites:
+        if self.buckets.enablePublicInvites:
             if not code:
                 self.view.template = "public/register/closed"
                 return self.view
@@ -43,12 +43,12 @@ class index(MixedObject):
                 found = im.Invite(**found[0])
                 if found.user is not None:
                     self.view.template = "public/register/closed"
-                    self.request.session.push_alert("That invite has already been used!")
+                    self.session.push_alert("That invite has already been used!")
 
                 return self.view
 
             else:
-                self.request.session.push_alert("I couldn't find that invite code. Are you sure you typed it in correctly?", level="danger")
+                self.session.push_alert("I couldn't find that invite code. Are you sure you typed it in correctly?", level="danger")
                 self.view.template = "public/register/closed"
                 return self.view
 
@@ -68,13 +68,13 @@ class index(MixedObject):
                 invite = im.Invite(**found[0])
 
                 if email != invite.email_address:
-                    self.request.session.push_alert("Your email doesn't match the email for that invite!")
+                    self.session.push_alert("Your email doesn't match the email for that invite!")
                     self.view.template = "public/register/closed"
                     return self.view
 
                 if invite.closed:
                     self.view.template = "public/register/closed"
-                    self.request.session.push_alert("That invite has already been used!")
+                    self.session.push_alert("That invite has already been used!")
                     return self.view
 
                 try:
@@ -103,7 +103,7 @@ class index(MixedObject):
                     invite.save()
                     user.save()
 
-                    self.request.session.push_alert("Account registered. Please login to make sure everything is okay!")
+                    self.session.push_alert("Account registered. Please login to make sure everything is okay!")
                     return Redirect("/login")
 
                 except UsernameError:

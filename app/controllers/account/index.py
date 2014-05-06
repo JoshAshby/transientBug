@@ -25,7 +25,7 @@ from models.rethink.user import userModel as um
 class index(MixedObject):
     @HTML
     def GET(self):
-        user = um.User(self.request.session.id)
+        user = um.User(self.session.id)
 
         self.view.data = {"user": user}
         return self.view
@@ -33,7 +33,7 @@ class index(MixedObject):
     @HTML
     def POST(self):
         error = False
-        user = um.User(self.request.session.id)
+        user = um.User(self.session.id)
 
         email = self.request.get_param("email")
         password = self.request.get_param("password")
@@ -53,7 +53,7 @@ class index(MixedObject):
 
         if password:
             user.set_password(password)
-            self.request.session.push_alert("Password updated, please make sure to use it :)", level="warning")
+            self.session.push_alert("Password updated, please make sure to use it :)", level="warning")
 
         user.save()
 

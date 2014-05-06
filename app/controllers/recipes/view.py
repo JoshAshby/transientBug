@@ -37,7 +37,7 @@ class view(MixedObject):
         if recipe is None or recipe.deleted:
             return NotFound()
 
-        if recipe.user.id != self.request.session.id:
+        if recipe.user.id != self.session.id:
             if not recipe.public:
                 return Unauthorized()
 
@@ -58,7 +58,7 @@ class view(MixedObject):
         if recipe is None or recipe.deleted:
             return NotFound()
 
-        if recipe.user.id != self.request.session.id:
+        if recipe.user.id != self.session.id:
             if not recipe.public:
                 return Unauthorized()
 
@@ -92,7 +92,7 @@ class view(MixedObject):
         if recipe is None or recipe.deleted:
             return NotFound()
 
-        if recipe.user.id != self.request.session.id:
+        if recipe.user.id != self.session.id:
             return Unauthorized()
 
         recipe.deleted = True

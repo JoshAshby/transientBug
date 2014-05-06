@@ -3,7 +3,7 @@
     <div class="col-md-6">
       <div class="recipe-header">
         <h1>{{recipe.title|e}}</h1>
-        <small><b>By</b> {{ recipe.user.username|e if recipe.user.id!=req.session.id else 'You!'}} - {{recipe.created.humanize()}}{% if req.session.id %} | <b>Visibility:</b> {{ 'Public' if recipe.public else 'Private' }}{% endif %}</small>
+        <small><b>By</b> {{ recipe.user.username|e if recipe.user.id!=session.id else 'You!'}} - {{recipe.created.humanize()}}{% if session.id %} | <b>Visibility:</b> {{ 'Public' if recipe.public else 'Private' }}{% endif %}</small>
         <p>{{recipe.description}}</p>
         {% if recipe.tags %}
           <b>Tags: </b>
@@ -34,7 +34,12 @@
     {% set outerloop = loop %}
       <div class="col-md-6">
         {% for step in col %}
-          <b>Step {{loop.index if outerloop.index==1 else loop.index+outerloop.index}} - </b>{{step|e}}<br>
+          {% if recipe.steps|length%2==1 %}
+            {% set add = loop.length+1 %}
+          {% else %}
+            {% set add = loop.length %}
+          {% endif %}
+          <b>Step {{loop.index if outerloop.index==1 else loop.index+add}} - </b>{{step|e}}<br>
         {% endfor %}
       </div>
     {% endfor %}

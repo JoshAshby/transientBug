@@ -48,8 +48,8 @@ class index(MixedObject):
             try:
                 with open(path, 'w+b') as f:
                     f.write(scrn.read())
-                self.request.session.push_alert("Screenshot uploaded...", level="success")
+                self.session.push_alert("Screenshot uploaded...", level="success")
             except IOError as e:
-                self.request.session.push_alert("There was a problem executing that: {}".format(str(e)), level="error")
+                self.session.push_alert("There was a problem executing that: {}".format(str(e)), level="error")
 
         return Redirect("/screenshots")

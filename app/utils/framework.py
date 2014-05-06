@@ -19,10 +19,11 @@ import traceback
 
 import logging
 import seshat.dispatch as dispatch
-import seshat.route_containers as route_containers
+from seshat.error_catcher import catcher as error_catcher
+import seshat.route as route
 
-import seshat_addons.seshat.request_item as r
 import seshat_addons.view.template as tmpl
+from models.redis.session.sessionModel import Session
 
 import controllers.error as error
 
@@ -54,18 +55,18 @@ def init():
     tmpl.templates_base = c.dirs.templates
     tmpl.dynamic_reloading = True
 
-    route_containers.controller_folder = "controllers"
+    route.controller_folder = "controllers"
 
-    dispatch.request_obj = r.RequestItem
+    dispatch.session_obj = Session
 
     tmpl.read_in_templates()
     setup_error_pages()
 
 
 def setup_error_pages():
-    dispatch.error_catcher.register("500", error.error500)
-    dispatch.error_catcher.register("404", error.error404)
-    dispatch.error_catcher.register("401", error.error401)
+    error_catcher.register(500, error.error500)
+    error_catcher.register(404, error.error404)
+    error_catcher.register(401, error.error401)
 
 
 def server():

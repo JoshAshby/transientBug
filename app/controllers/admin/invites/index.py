@@ -37,13 +37,10 @@ class index(MixedObject):
         return self.view
 
     def POST(self):
-        try:
-            email = self.request.get_param("email")
+        email = self.request.get_param("email")
 
-            if email:
-                im.Invite.new(email)
+        if email:
+            im.Invite.new(email)
 
-            self.request.session.push_alert("Invite sent!")
-            return Redirect("/admin/invites")
-        except Exception as e:
-            print e
+        self.session.push_alert("Invite sent!")
+        return Redirect("/admin/invites")

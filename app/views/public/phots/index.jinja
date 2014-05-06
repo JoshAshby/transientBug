@@ -11,7 +11,7 @@ scriptFiles:
   <div class="jumbotron">
     <h1>Um...</h1>
     <p>We currently don't have any photos in the collection!</p>
-    {% if req.session.has_phots %}
+    {% if session.has_group("phots") %}
       <a href="/new/phot" class="btn btn-green">New</a>
     {% endif %}
   </div>

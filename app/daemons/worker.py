@@ -60,4 +60,5 @@ class RedisWorker(BaseWorker):
                 self.data = next_id[1]
                 self.build()
             else:
+                # TODO: Worker commands?
                 pass

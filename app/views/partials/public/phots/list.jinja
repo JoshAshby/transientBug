@@ -5,7 +5,7 @@
     <form method="GET" action="/phots/search" class="form-inline">
       <div class="controls">
         <div class="input-group input-group-sm">
-          {% if req.session.has_phots %}
+          {% if session.has_group("phots") %}
             <span class="input-group-btn">
               <a href="/new/phot" class="btn btn-green btn-sm">Add</a>
             </span>
@@ -85,7 +85,7 @@
                   <a href="/phots/{{pic.short_code}}" class="btn btn-green btn-xs">Page</a>
                 </td>
                 <td>
-                  <a href="/i/{{pic.filename}}">{{pic.filename}}</a>
+                  <a href="/i/{{pic.filename}}">{{pic.title}}</a>
                 </td>
                 <td>
                   {% if pic.tags %}

@@ -31,12 +31,12 @@ class view(MixedObject):
         if recipe is None:
             return NotFound()
 
-        if recipe.user.id != self.request.session.id:
+        if recipe.user.id != self.session.id:
             return Unauthorized()
 
         if not recipe.public:
-          if not self.request.session.id or self.request.session.id!=recipe.user:
-                self.request.session.push_alert("That recipe is not public and you do not have the rights to access it.", level="error")
+          if not self.session.id or self.session.id!=recipe.user:
+                self.session.push_alert("That recipe is not public and you do not have the rights to access it.", level="error")
                 return Unauthorized()
 
         if recipe.deleted:

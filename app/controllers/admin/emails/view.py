@@ -37,6 +37,6 @@ class view(MixedObject):
 
         email.queue()
 
-        self.request.session.push_alert("Email resent")
+        self.session.push_alert("Email resent")
 
         return {"success": True}

@@ -16,8 +16,8 @@ padding: 5px;}"
 <div class="row">
   <div class="col-md-6 col-sm-12">
     <ul class="nav nav-pills" id="myTab">
-      <li {{ 'class="active"' if req.id!="enabled" }}><a href="/admin/phots">Disabled</a></li>
-      <li {{ 'class="active"' if req.id=="enabled" }}><a href="/admin/phots/enabled">Enabled</a></li>
+      <li {{ 'class="active"' if req.get_param("v")!="enabled" }}><a href="/admin/phots">Disabled</a></li>
+      <li {{ 'class="active"' if req.get_param("v")=="enabled" }}><a href="/admin/phots?v=enabled">Enabled</a></li>
     </ul>
   </div>
   {%if page.pail %}

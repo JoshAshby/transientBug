@@ -2,7 +2,7 @@
   <div class="recipe">
     <div class="recipe-header">
       <a href="/recipes/{{recipe.short_code|e}}"><h1>{{recipe.title|e}}</h1></a>
-      <small><b>By</b> {{ recipe.user.username|e if recipe.user.id!=req.session.id else 'You!'}} - {{recipe.created.humanize()}}{% if req.session.id %} | <b>Visibility:</b> {{ 'Public' if recipe.public else 'Private' }}{% endif %}</small><br>
+      <small><b>By</b> {{ recipe.user.username|e if recipe.user.id!=session.id else 'You!'}} - {{recipe.created.humanize()}}{% if session.id %} | <b>Visibility:</b> {{ 'Public' if recipe.public else 'Private' }}{% endif %}</small><br>
       {% if recipe.country %}
         <b>Country: </b> {{recipe.country|e}} <br>
       {% endif %}

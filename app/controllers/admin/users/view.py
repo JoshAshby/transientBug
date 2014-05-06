@@ -34,10 +34,12 @@ class view(MixedObject):
         except NotFoundError:
             return NotFound()
 
+        print self.request.url_params
+
         self.view.title = user.username
 
         self.view.data = {"user": user,
-                          "command": self.request.command}
+                          "command": ""}
 
         return self.view
 
@@ -62,7 +64,7 @@ class view(MixedObject):
 
         if password:
             user.set_password(password)
-            self.request.session.push_alert("Password updated, please let the user know the new password", level="warning")
+            self.session.push_alert("Password updated, please let the user know the new password", level="warning")
 
         if email and email != user.email:
           # TODO: Only allow change if email isn't in the database yet
@@ -75,4 +77,4 @@ class view(MixedObject):
 
         user.save()
 
-        return Redirect("/admin/users/"+self.request.id_extended)
+        return Redirect("/admin/users/"+self.request.id)

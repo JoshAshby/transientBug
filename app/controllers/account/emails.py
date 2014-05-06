@@ -29,7 +29,7 @@ from models.rethink.email import emailModel as em
 class emails(MixedObject):
     @HTML
     def GET(self):
-        user = um.User(self.request.session.id)
+        user = um.User(self.session.id)
 
         t = self.request.get_param("filter", "to")
         if t == "cc":

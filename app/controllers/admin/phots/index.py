@@ -30,7 +30,7 @@ class index(MixedObject):
     @HTML
     def GET(self):
         self.view.partial("sidebar", "partials/admin/sidebar", {"command": "phots"})
-        what = self.request.id
+        what = self.request.get_param("v")
         orig = self.request.get_param("filter", "all")
         filt = dbu.phot_filter(orig)
 
@@ -55,7 +55,7 @@ class index(MixedObject):
 
     @JSON
     def POST(self):
-        current = pm.Phot(self.request.id)
+        current = pm.Phot(self.request.get_param("phot"))
 
         if current.filename:
             current.disable = not current.disable if "disable" in current else True

@@ -53,10 +53,10 @@ class search(MixedObject):
 
             searcher = RecipeSearcher()
 
-            if self.request.session.id:
+            if self.session.id:
                 allow = q.Or([
                     q.And([
-                        q.Term("user", self.request.session.id),
+                        q.Term("user", self.session.id),
                         q.Term("deleted", False),
                         q.Term("reported", False)]),
                     q.And([

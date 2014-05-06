@@ -1,10 +1,8 @@
 #!/usr/bin/env python
 """
-session model
+Seshat
 
-Takes advantage of collections to make a dynamic system allowing
-both regular needed session data along with temporary session data storage
-available to the system through the requests object
+For more information, see: https://github.com/JoshAshby/
 
 http://xkcd.com/353/
 
@@ -13,143 +11,65 @@ Josh Ashby
 http://joshashby.com
 joshuaashby@joshashby.com
 """
-import bcrypt
-import models.redis.baseRedisModel as brm
-import errors.session as use
 import json
-
-import models.rethink.user.userModel as um
+import uuid
+import bcrypt
 import rethinkdb as r
 
+from redisORM import RedisModel
 
-class session(brm.SeshatRedisModel):
-    _protected_items = []
-    def _finish_init(self):
-        if not hasattr(self, "raw_alerts"): self.raw_alerts = "[]"
-        if not hasattr(self, "username"): self.username = ""
-        if not hasattr(self, "id"): self.id = ""
-        if not hasattr(self, "groups"): self.groups = []
-        self._HTML_alerts = ""
+from seshat.session import Session as BaseSession
 
-    def _get(self, item):
-        if "groups" in self._keys:
-            if "has_" in item:
-                if "root" in self.groups or item[4:] in self.groups:
-                    return True
-                else:
-                    return False
-        return super(session, self)._get(item)
+import errors.session as use
+import models.rethink.user.userModel as um
 
-    def login_without_check(self, user):
-        """
-        Tries to find the user in the database, if the user is successfully
-        logged in then the sessions username and user ID is set to that users
 
-        :param user: Str of the username or ID to try and login
-        :type user: Str
+class Session(BaseSession):
+    cookie_id = "bug_sid"
+    _user_cache = None
 
-        :returns: True if the user was successfully logged in
-        """
-        reg = "(?i)^{}$".format(user)
-        foundUser = r.table(um.User.table).filter(lambda doc: doc["username"].match(reg)).coerce_to("array").run()
-        if len(foundUser) > 0:
-            foundUser = um.User(foundUser[0]["id"])
-            if not foundUser.disable:
-                self.username = foundUser.username
-                self.id = foundUser.id
-                self.groups = foundUser.groups
-                return True
-            else:
-                raise use.DisableError("Your user is currently disabled. \
-                        Please contact an admin for additional information.")
-        raise use.UsernameError("We can't find your user, are you \
-                sure you have the correct information?")
+    def load(self):
+        namespace = "session"
+        if self.request.headers.authorization is None:
+            if not self.cookie_id in self.request.headers.cookies:
+                self.request.headers.cookies[self.cookie_id] = str(uuid.uuid4())
 
-    def login(self, user, password):
-        """
-        Tries to find the user in the database,then tries to use the plain text
-        password from `password` to match against the known password hash in
-        the users object. If the user is successfully logged in then the sessions
-        username and user ID is set to that users
+            key = self.request.headers.cookies[self.cookie_id].value
 
-        :param user: Str of the username or ID to try and login
-        :type user: Str
-        :param password: Clear text str of the users password to hash and check
-        :type password: Str
+        elif self.request.headers.authorization:
+            key = self.request.headers.authorization.username
 
-        :returns: True if the user was successfully logged in
-        """
-        reg = "(?i)^{}$".format(user)
-        foundUser = r.table(um.User.table).filter(lambda doc: doc["username"].match(reg)).coerce_to("array").run()
-        if len(foundUser) > 0:
-            foundUser = um.User(**foundUser[0])
-            if not foundUser.disable:
-                if str(foundUser.password) == bcrypt.hashpw(str(password),
-                        str(foundUser.password)):
-                    self.username = foundUser.username
-                    self.id = foundUser.id
-                    self.groups = foundUser.groups
-                    return True
-                else:
-                    raise use.PasswordError("Your password appears to \
-                            be wrong.")
-            else:
-                raise use.DisableError("Your user is currently disabled. \
-                        Please contact an admin for additional information.")
-        raise use.UsernameError("We can't find your user, are you \
-                sure you have the correct information?")
+        self.data = RedisModel(namespace, key)
+        self.key = key
 
-    def logout(self):
-        """
-        Sets the users loggedIn to False then removes the link between their
-        session and their `userORM`
-        """
-        self.username = ""
-        self.id = ""
-        self.groups.reset()
-        return True
+        if not "alerts" in self.data:
+            self.data["alerts"] = []
 
-    def push_alert(self, message, quip="", level="success"):
-        """
-        Creates an alert message to be displayed or relayed to the user,
-        This is a higher level one for use in HTML templates.
-        All params are of type str
+        if not "groups" in self.data:
+            self.data["groups"] = []
 
-        :param message: The text to be placed into the main body of the alert
-        :param quip: Similar to a title, however just a quick attention getter
-        :param level: Can be any of `success` `error` `info` `warning`
-        """
-        alerts = json.loads(self.raw_alerts)
-        alerts.append({"msg": message, "level": level, "expire": "next", "quip": quip})
-        self.raw_alerts = json.dumps(alerts)
+    def save(self, response):
+        if int(response.status[:3]) not in [303]:
+            del self.alerts
+
+      # TODO: Rotate the session key each time? This should help preventing old
+      # sessions from being used
+
+      # TODO: Set a key expire for each redis key. This is a feature that needs
+      # to be added to RedisORM anyways so I'll wait till thats a go before
+      # adding it here.
+
+        for cookie in self.request.headers.cookies.all_cookies:
+            val = cookie.render_response()
+            response.headers.append("Set-Cookie", val)
 
     @property
-    def alerts(self, no_cache=False):
-        """
-        Returns a list of dictonary elements representing the users alerts
-
-        :return: List of Dicts
-        """
-        if not self._HTML_alerts or no_cache:
-            self._render_alerts() # cache results if we haven't already,
-                                  #   or if we're overriding the cache
-        return self._HTML_alerts
-
-    @alerts.deleter
     def alerts(self):
-        """
-        Clears the current users expired alerts.
-        """
-        alerts = json.loads(self.raw_alerts)
-        for alert in alerts:
-            if alert["expire"] == "next":
-                alerts.pop(alerts.index(alert))
-
-        self.raw_alerts = json.dumps(alerts)
+        return self.data["alerts"]
 
     def _render_alerts(self):
-        alerts = json.loads(self.raw_alerts)
-
+        alerts = [ json.loads(s) for s in self.alerts ]
+      # TODO: Move this out of the session and into templates.
         alertStr = ""
         for alert in alerts:
             if alert["level"] in ["info"]:
@@ -164,9 +84,121 @@ class session(brm.SeshatRedisModel):
 
             alertStr += ("""<div class="alert alert-{level}"><i class="fa fa-{icon}"></i> <strong>{quip}</strong> {msg}</div>""").format(**alert)
 
-        self._HTML_alerts = unicode(alertStr)
+        return unicode(alertStr)
+
+    @alerts.deleter
+    def alerts(self):
+        """
+        Clears the current users expired alerts.
+        """
+        for alert in self.alerts:
+            raw = alert
+            alert = json.loads(alert)
+            if alert["expire"] == "next":
+                self.alerts.remove(raw)
+
+    @alerts.setter
+    def alerts(self, val):
+        assert isinstance(val, dict)
+        base = {"msg": "", "level": "success", "expire": "next", "quip": ""}
+        base.update(val)
+        self.alerts.append(json.dumps(base))
+
+    def push_alert(self, message, quip="", level="success", expires=None):
+        """
+        Creates an alert message to be displayed or relayed to the user,
+        This is a higher level one for use in HTML templates.
+        All params are of type str
+
+        :param message: The text to be placed into the main body of the alert
+        :param quip: Similar to a title, however just a quick attention getter
+        :param level: Can be any of `success` `error` `info` `warning`
+        """
+        expires = expires or "next"
+        alert = {"msg": message, "level": level, "expire": expires, "quip": quip}
+        self.alerts.append(json.dumps(alert))
+
+    @property
+    def user(self):
+        if not hasattr(self, "_user_cache") or self._user_cache is None:
+            if "user" in self.data:
+                self._user_cache = um.User(self.data.get("user"))
+                if not self._user_cache.id:
+                    self._user_cache = None
+            else:
+                self._user_cache = None
+        return self._user_cache
+
+    @user.setter
+    def user(self, val):
+        if isinstance(val, um.User):
+            self.data["user"] = val.id
+        else:
+            self.data["user"] = val
+
+        self._user_cache = um.User(self.data["user"]) if self.data["user"] else None
+        self.data["groups"] = self._user_cache["groups"]
+
+    @property
+    def id(self):
+        return self.data["user"] if "user" in self.data else None
+
+    @property
+    def groups(self):
+        return self.data["groups"]
 
     def has_perm(self, group_name):
-        if group_name in self.groups or "root" in self.groups:
+        return self.has_group(group_name)
+
+    def has_group(self, group_name):
+        if group_name in self.data.groups or "root" in self.data.groups:
             return True
+
         return False
+
+    def login(self, user, password):
+        """
+        Tries to find the user in the database,then tries to use the plain text
+        password from `password` to match against the known password hash in
+        the users object. If the user is successfully logged in then the
+        sessions `user` entry is set to that of the users id
+
+        :param user: Str of the username or ID to try and login
+        :type user: Str
+        :param password: Clear text str of the users password to hash and check
+        :type password: Str
+
+        :returns: True if the user was successfully logged in
+
+        :raises SessionError: Will raise a subclass of
+            :py:class:`.SessionError` if there was a problem logging the user in
+        """
+        reg = "(?i)^{}$".format(user)
+        foundUser = r.table(um.User.table)\
+                .filter(lambda doc: doc["username"].match(reg))\
+                .coerce_to("array")\
+                .run()
+
+        if foundUser:
+            foundUser = um.User(**foundUser[0])
+            if not foundUser.disable:
+                if str(foundUser.password) == bcrypt.hashpw(str(password), str(foundUser.password)):
+                    self.user = foundUser
+                    return True
+
+                else:
+                    raise use.PasswordError("Your password appears to \
+                            be wrong.")
+
+            else:
+                raise use.DisableError("Your user is currently disabled. \
+                        Please contact an admin for additional information.")
+
+        raise use.UsernameError("We can't find your user, are you \
+                sure you have the correct information?")
+
+    def logout(self):
+        del self.data["groups"]
+        del self.data["user"]
+        self._user_cache = None
+        return True

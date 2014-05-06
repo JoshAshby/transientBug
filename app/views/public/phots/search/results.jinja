@@ -32,7 +32,7 @@ scriptFiles:
 
     <p>We couldn't find any phots that matched your search for <code>{{ req.get_param("s") }}</code>!</p>
 
-    {% if req.session.has_phots %}
+    {% if session.has_group("phots") %}
       <a href="/new/phot" class="btn btn-green">Add One</a>
     {% endif %}
   </div>

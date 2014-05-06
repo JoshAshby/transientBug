@@ -15,13 +15,13 @@ from seshat_addons.seshat.obj_mods import login
 from seshat_addons.seshat.func_mods import JSON
 
 
-@route()
+@route("/admin/announcements/:id/toggle")
 @login(["admin"])
 class toggle(MixedObject):
     @JSON
     def POST(self):
         state = self.request.get_param("state", None, cast=bool)
-        new_state = self.request.announcements.toggle_announcement(self.request.id, state)
+        new_state = self.announcements.toggle_announcement(self.request.id, state)
 
         success = False
         if state is None:

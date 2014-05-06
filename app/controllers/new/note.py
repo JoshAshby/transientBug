@@ -47,7 +47,7 @@ class note(MixedObject):
             tag = []
 
         try:
-            note = nm.Note.new_note(user=self.request.session.id,
+            note = nm.Note.new_note(user=self.session.id,
                                     title=title,
                                     contents=contents,
                                     public=public,
@@ -63,7 +63,7 @@ class note(MixedObject):
 
         except Exception as e:
             print e
-            self.request.session.push_alert("That note could not be created! %s" % e.message, level="error")
+            self.session.push_alert("That note could not be created! %s" % e.message, level="error")
             return Redirect("/new/note")
 
         return Redirect("/notes/%s" % note.short_code)

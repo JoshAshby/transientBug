@@ -18,7 +18,7 @@ stylesheets:
     <form method="GET" action="/phots/search" class="form-inline">
 
       <div class="input-group input-group-sm typeahead">
-        {% if req.session.has_phots %}
+        {% if session.has_group("phots") %}
           <span class="input-group-btn">
             <a href="/new/phot" class="btn btn-green btn-sm">Add</a>
           </span>
@@ -58,7 +58,7 @@ stylesheets:
         <br>
         <br>
 
-        {% if req.session.has_phots %}
+        {% if session.has_group("phots") %}
           <form role="form" method="POST">
             <div class="form-group">
               <label for="name">Rename</label>
@@ -70,7 +70,7 @@ stylesheets:
 
             <div class="form-group">
               <label for="disable">
-                <input type="checkbox" data-on-text="Yes" data-off-text="No" data-on="red" data-off="green" data-id="{{phot.id}}" name="disable" {{ 'checked' if phot.disable }}/>
+                <input type="checkbox" data-on-text="Yes" data-off-text="No" data-on="red" data-off="green" data-id="{{phot.short_code}}" name="disable" {{ 'checked' if phot.disable }}/>
                 Disabled?
               </label>
           </div>

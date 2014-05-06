@@ -39,7 +39,7 @@ class index(MixedObject):
             sort_by = "created"
 
             # should this be something I try to start doing? :/
-            self.request.session.push_alert("Couldn't figure out what to sort by, as a result of an invalid value for sort_by.",
+            self.session.push_alert("Couldn't figure out what to sort by, as a result of an invalid value for sort_by.",
                                             level="error")
 
         if public:

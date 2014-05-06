@@ -26,7 +26,7 @@ import models.rethink.note.noteModel as nm
 from utils.paginate import Paginate
 
 
-@route()
+@route("/admin/users/:id/notes")
 @login(["admin"])
 @template("admin/users/notes", "User Notes")
 class notes(MixedObject):
@@ -55,7 +55,7 @@ class notes(MixedObject):
             sort_by = "created"
 
             # should this be something I try to start doing? :/
-            self.request.session.push_alert("Couldn't figure out what to sort by, as a result of an invalid value for sort_by.",
+            self.session.push_alert("Couldn't figure out what to sort by, as a result of an invalid value for sort_by.",
                                             level="error")
 
         if public:
@@ -74,6 +74,6 @@ class notes(MixedObject):
 
         self.view.data = {"note_page": page,
                           "user": user,
-                          "command": self.request.command}
+                          "command": "notes"}
 
         return self.view

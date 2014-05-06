@@ -37,7 +37,7 @@ class new(MixedObject):
         ingredients = self.request.get_param("ingredients")
         steps = self.request.get_param("steps")
 
-        recipe = rm.Recipe.new_recipe(self.request.session.id,
+        recipe = rm.Recipe.new_recipe(self.session.id,
                                       title=name,
                                       tags=tags,
                                       public=public,

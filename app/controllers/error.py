@@ -15,15 +15,14 @@ from seshat_addons.seshat.obj_mods import template
 from seshat_addons.seshat.func_mods import HTML
 from seshat_addons.seshat.mixed_object import MixedObject
 
-from seshat.head import Head
+from seshat.response import Response
 
 
 @template("error/404", "404 NOT FOUND")
 class error404(MixedObject):
     @HTML
     def GET(self):
-        self.head = Head("404 NOT FOUND", [("Content-Type", "text/html")])
-        return self.view
+        return Response(404, [("Content-Type", "text/html")], self.view.render())
 
     def POST(self):
         return self.GET()
@@ -39,8 +38,7 @@ class error404(MixedObject):
 class error401(MixedObject):
     @HTML
     def GET(self):
-        self.head = Head("401 UNAUTHORIZED", [("Content-Type", "text/html")])
-        return self.view
+        return Response(401, [("Content-Type", "text/html")], self.view.render())
 
     def POST(self):
         return self.GET()
@@ -56,9 +54,11 @@ class error401(MixedObject):
 class error500(MixedObject):
     @HTML
     def GET(self):
-        self.head = Head("500 INTERNAL SERVER ERROR", headers=[("Content-Type", "text/html")], errors=self.errors)
-        self.view.data = {"error": self.errors[0], "tb": self.errors[1]}
-        return self.view
+        self.view.data = {
+            "error": self.request.errors.exception,
+            "tb": self.request.errors.traceback
+        }
+        return Response(500, [("Content-Type", "text/html")], self.view.render())
 
     def POST(self):
         return self.GET()

@@ -13,6 +13,7 @@ import os
 import yaml
 import redis as red
 import rethinkdb as r
+import redisORM.redis_model
 
 from utils.standard import StandardODM
 
@@ -57,6 +58,7 @@ def parse_files(conf):
 
 rethink = r.connect(db=general["databases"]["rethink"]["db"]).repl()
 redis = red.StrictRedis(general["databases"]["redis"]["URL"], db=general["databases"]["redis"]["db"])
+redisORM.redis_model.redis = redis
 
 parse_files(general)
 

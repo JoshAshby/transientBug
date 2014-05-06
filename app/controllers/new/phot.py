@@ -48,9 +48,9 @@ class phot(MixedObject):
         found = r.table(pm.Phot.table).filter({"filename": title}).count().run()
         if found:
             title = "_".join([title, str(arrow.utcnow().timestamp)])
-            self.request.session.push_alert("That image name is already in use; timestamp appened to image name.")
+            self.session.push_alert("That image name is already in use; timestamp appened to image name.")
 
-        phot = pm.Phot.new_phot(self.request.session.id,
+        phot = pm.Phot.new_phot(self.session.id,
                                 stuff=stuff,
                                 title=title,
                                 tags=tag)

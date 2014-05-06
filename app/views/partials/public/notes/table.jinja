@@ -7,7 +7,7 @@
   <div class="row">
     <div class="col-sm-12 col-md-6">
 
-      {% if req.session.has_notes %}
+      {% if session.has_group("notes") %}
         <a href="/new/note" class="btn btn-red btn-sm">New</a> 
       {% endif %}
 
@@ -78,7 +78,7 @@
             <tr {{ 'class="danger"' if note.reported and not note.disable }}>
               <td></td>
               <td><a href="/notes/{{note.short_code}}">{{note.title|truncate(25)}}</a></td>
-              <td>{{ note.author.username if note.author.id!=req.session.id else 'You!'}}</td>
+              <td>{{ note.author.username if note.author.id!=session.id else 'You!'}}</td>
               <td>{{note.created.humanize()}}</td>
               <td>
                 {% if note.public %}
