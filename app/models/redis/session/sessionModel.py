@@ -15,6 +15,7 @@ import json
 import uuid
 import bcrypt
 import rethinkdb as r
+from cookies import Cookie
 
 from redisORM import RedisModel
 
@@ -32,7 +33,7 @@ class Session(BaseSession):
         namespace = "session"
         if self.request.headers.authorization is None:
             if not self.cookie_id in self.request.headers.cookies:
-                self.request.headers.cookies[self.cookie_id] = str(uuid.uuid4())
+                self.request.headers.cookies.add(Cookie(self.cookie_id, str(uuid.uuid4())))
 
             key = self.request.headers.cookies[self.cookie_id].value
 
