@@ -43,6 +43,12 @@ class Session(BaseSession):
         self.data = RedisModel(namespace, key)
         self.key = key
 
+        if self.request.headers.authorization:
+            try:
+                self.login(self.request.headers.authorization.username, self.request.headers.authorization.password)
+            except:
+                self.logout()
+
         if not "alerts" in self.data:
             self.data["alerts"] = []
 
