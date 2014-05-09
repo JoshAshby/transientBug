@@ -20,31 +20,12 @@
     <style>
       {{styles}}
       body {
-        {% set height=45 %}
-        {% if has_announcements %}
-          {% set height=100 %}
-        {% endif %}
-        padding-top: {{height}}px;
+        padding-top: 45px;
       }
     </style>
     <!-- End page style sheets -->
   </head>
   <body>
-    {% if has_announcements %}
-      <div class="container-alert">
-        <div class="row">
-          <div class="col-md-1 col-sm-1" style="text-align: center;">
-            <i class="fa fa-exclamation fa-4x"></i>
-          </div>
-          <div class="col-md-10 col-sm-10">
-            {% for announcement in announcements %}
-              {{announcement}}
-            {% endfor %}
-          </div>
-        </div>
-      </div>
-    {% endif %}
-
     <div class="container-full-{{theme_color}}">
       <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
         <!-- Brand and toggle get grouped for better mobile display -->
@@ -95,6 +76,20 @@
           {% endif %}
         </div><!-- /.navbar-collapse -->
       </nav>
+    {% if has_announcements %}
+      <div class="container-alert">
+        <div class="row">
+          <div class="col-md-1 col-sm-1" style="text-align: center;">
+            <i class="fa fa-exclamation fa-4x"></i>
+          </div>
+          <div class="col-md-10 col-sm-10">
+            {% for announcement in announcements %}
+              {{announcement}}
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    {% endif %}
       <br>
       <div class="container">
         {% if session.alerts %}
