@@ -8,10 +8,9 @@
     <h5>{{user.email}}</h5>
   </div>
 </div>
-<hr>
 <div class="row">
   <div class="col-md-12">
-    <ul class="nav nav-tabs">
+    <ul class="nav nav-pills">
       <li {{ 'class="active"' if not command }}><a href="/account">Settings</a></li>
       <li {{ 'class="active"' if command and command=="emails" }}><a href="/account/emails">Emails</a></li>
     </ul>

@@ -23,7 +23,7 @@ import models.rethink.recipe.recipeModel as rm
 
 @route()
 @login(["recipes"])
-@template("public/recipes/index", "Recipes")
+@template("public/recipes/yours", "Recipes")
 class yours(MixedObject):
     @HTML
     def GET(self):

@@ -44,16 +44,14 @@
       <div class="collapse navbar-collapse navbar-ex1-collapse">
         <ul class="nav navbar-nav">
           <li {{ 'class="active"' if "phots" in nav }}><a href="/phots"><i class="fa fa-picture-o"></i> Phots</a></li>
-          <li {{ 'class="active"' if "notes" in nav }}><a href="/notes"><i class="fa fa-file-text"></i> Notes</a></li>
           <li {{ 'class="active"' if "recipes" in nav }}><a href="/recipes"><i class="fa fa-cutlery"></i> Recipes</a></li>
-
-          {% if session.has_group("screenshots") %}
-            <li {{ 'class="active"' if "screenshots" in nav }}><a href="/screenshots"><i class="fa fa-desktop"></i> Scrns</a></li>
-          {% endif %}
-
+          <li {{ 'class="active"' if "notes" in nav }}><a href="/notes"><i class="fa fa-file-text"></i> Notes</a></li>
         </ul>
         {% if session.id %}
           <ul class="nav navbar-nav navbar-right" style="margin-right: 15px">
+            {% if session.has_group("screenshots") %}
+              <li {{ 'class="active"' if "screenshots" in nav }}><a href="/screenshots">Scrns</a></li>
+            {% endif %}
             <li class="dropdown {{ 'active' if nav=="admin" }}">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Heya, {{session.user.username}} <i class="fa fa-caret-down"></i></a>
               <ul class="dropdown-menu">

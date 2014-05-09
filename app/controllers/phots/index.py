@@ -30,7 +30,16 @@ class index(MixedObject):
     def GET(self):
         orig = self.request.get_param("filter", "all")
         filt = dbu.phot_filter(orig)
-        view = self.request.get_param("v", 'cards')
+        view = self.request.get_param("v")
+
+        if "phot_view" in self.session.data:
+            if not view:
+                view = self.session.data.phot_view
+
+        self.session.data.phot_view = view
+
+        print self.session.data.phot_view
+        print view
 
         query = dbu.rql_where_not(pm.Phot.table, "disable", True)
         query = query.filter(lambda doc: doc["filename"].match(filt))

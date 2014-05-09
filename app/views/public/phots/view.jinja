@@ -1,4 +1,5 @@
 +++
+base: skeletons/navbar
 nav: phots
 
 scriptFiles:
@@ -31,55 +32,72 @@ stylesheets:
 
     </form>
   </div>
-  <div class="col-md-6 col-sm-12">
-  </div>
 </div>
 <br>
 
 <div class="row">
   <div class="col-sm-12 col-md-12">
-    <div class="panel panel-{{ 'red' if phot.disable else 'green' }}" id="phot_collection">
-      <div class="panel-heading">
-        <h3 class="panel-title">{{phot.title}} <a href="/i/{{phot.filename}}"><small>({{phot.filename}})</small></a> <span class="pull-right"> {{ '(DISABLED)' if phot.disable }} </span>  </h3>
-      </div>
-      <div class="panel-body">
-        <div style="text-align: center;">
-          <img src="/i/{{phot.filename}}" alt="{{phot.filename}}" class="col-md-12">
-        </div>
-        <br>
-        <b>Added to collection: </b>{{phot.created.humanize()}}<br>
-        {% if phot.url %}
-          <b>From: </b>{{phot.url}}<br>
-        {% endif %}
-        <br>
-        {% for tag in phot.tags %}
-          <a href="/phots/search?s=tag:{{tag}}"><span class="label label-green">{{tag|replace("_", " ")}}</span></a>
-        {% endfor %}
-        <br>
-        <br>
+    <h2>{{phot.title}}
+      <a href="/i/{{phot.filename}}">
+        <small>({{phot.filename}})</small>
+      </a>
+      <span class="pull-right">
+        {{ '(DISABLED)' if phot.disable }}
+      </span>
+    </h2>
+  </div>
+</div>
 
-        {% if session.has_group("phots") %}
-          <form role="form" method="POST">
-            <div class="form-group">
-              <label for="name">Rename</label>
-              <input type="text" class="form-control" id="phot_name" name="name" value="{{phot.title}}" required>
-            </div>
-            <div class="form-group">
-              <input type="text" name="tags" id="phot_tags" value="{{phot.tags|join(",")}}">
-            </div>
-
-            <div class="form-group">
-              <label for="disable">
-                <input type="checkbox" data-on-text="Yes" data-off-text="No" data-on="red" data-off="green" data-id="{{phot.short_code}}" name="disable" {{ 'checked' if phot.disable }}/>
-                Disabled?
-              </label>
-          </div>
-
-            <button id="new_phot" type="submit" class="btn btn-green pull-right"><i class="fa fa-check"></i> Update</button>
-          </form>
-        {% endif %}
-
-      </div>
+<div class="row">
+  <div class="col-md-12">
+    <div class=""style="text-align: center;">
+      <img src="/i/{{phot.filename}}" alt="{{phot.filename}}">
     </div>
   </div>
 </div>
+
+<div class="row">
+  <div class="col-md-12">
+    <b>Added to collection: </b>{{phot.created.humanize()}}<br>
+    {% if phot.url %}
+      <b>From: </b>{{phot.url}}<br>
+    {% endif %}
+    {% for tag in phot.tags %}
+      <a href="/phots/search?s=tag:{{tag}}"><span class="label label-green">{{tag|replace("_", " ")}}</span></a>
+    {% endfor %}
+  </div>
+</div>
+
+{% if session.has_group("phots") %}
+  <div class="row">
+    <div class="col-md-12">
+      <br>
+      <div class="panel panel-{{ 'red' if phot.disable else 'green' }}" id="phot_collection">
+        <div class="panel-heading">
+          <h3 class="panel-title">Edit? Okay, edit.</h3>
+        </div>
+        <div class="panel-body">
+            <form role="form" method="POST">
+              <div class="form-group">
+                <label for="name">Rename</label>
+                <input type="text" class="form-control" id="phot_name" name="name" value="{{phot.title}}" required>
+              </div>
+              <div class="form-group">
+                <input type="text" name="tags" id="phot_tags" value="{{phot.tags|join(",")}}">
+              </div>
+
+              <div class="form-group">
+                <label for="disable">
+                  <input type="checkbox" data-on-text="Yes" data-off-text="No" data-on="red" data-off="green" data-id="{{phot.short_code}}" name="disable" {{ 'checked' if phot.disable }}/>
+                  Disabled?
+                </label>
+            </div>
+
+              <button id="new_phot" type="submit" class="btn btn-green pull-right"><i class="fa fa-check"></i> Update</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endif %}

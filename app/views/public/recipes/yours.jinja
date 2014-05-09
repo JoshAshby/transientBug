@@ -1,0 +1,47 @@
++++
+theme_color: purple
+
+nav: recipes
+
+scriptFiles:
+ - public/recipes/list
+ - public/recipes/search
++++
+
+{% if recipes.pail %}
+<h2>Your Recipes</h2>
+<div class="row">
+  <div class="col-md-6 col-sm-12">
+    <form method="GET" action="/recipes/search" class="form-inline">
+      <div class="controls">
+        <div class="input-group input-group-sm">
+          {% if session.id %}
+            <span class="input-group-btn">
+              <a href="/recipes/new" class="btn btn-purple btn-sm">New</a>
+            </span>
+          {% endif %}
+          <input type="text" class="form-control search" name="s" id="search" placeholder="Search Recipes...">
+          <span class="input-group-btn">
+            <button class="btn btn-purple btn-sm" type="submit"><i class="fa fa-search"></i></button>
+          </span>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="col-sm-12 col-md-6">
+    <form class="form-inline pull-right" role="pagination_options">
+      {{recipes.options}}
+    </form>
+  </div>
+</div>
+
+  ![[partials/public/recipes/list]]
+  {{recipes.pager}}
+{% else %}
+  <div class="jumbotron">
+    <h1>No Recipes :/</h1>
+    {% if session.id %}
+      <a href="/recipes/new" class="btn btn-purple">New</a>
+    {% endif %}
+  </div>
+{% endif %}

@@ -1,22 +1,47 @@
 +++
-base: skeletons/sidebar
 nav: home
 
 scriptFiles:
   - public/index/index
 +++
 
-<div id="wall">
-  <div class="brick col-md-6">
-    ![[partials/public/phots/create]]
-  </div>
-  <div class="brick col-md-6">
-    ![[partials/public/notes/edit]]
-  </div>
-  <div class="brick col-md-6">
+<div class="row">
+  <div class="col-md-12">
     ![[partials/public/phots/search]]
   </div>
-  <div class="brick col-md-6">
-    ![[partials/public/screenshot_create]]
+</div>
+
+<div class="row">
+  <div class="col-md-4">
+    {% if session.has_group("phots") %}
+      <a href="/new/phot" class="btn btn-block btn-green"><i class="fa fa-picture-o"></i><br>New Phot</a>
+    {% endif %}
+  </div>
+  <div class="col-md-4">
+    {% if session.has_group("notes") %}
+      <a href="/new/note" class="btn btn-block btn-red"><i class="fa fa-file-text"></i><br>New Note</a>
+   {% endif %}
+  </div>
+  <div class="col-md-4">
+    {% if session.has_group("recipes") %}
+      <a href="/recipes/new" class="btn btn-block btn-purple"><i class="fa fa-cutlery"></i><br>New Recipe</a>
+    {% endif %}
   </div>
 </div>
+<br>
+<div class="row">
+  <div class="col-md-4">
+    <a href="/phots" >Phots</a>
+  </div>
+  <div class="col-md-4">
+    <a href="/notes">Notes</a>
+  </div>
+  <div class="col-md-4">
+    <a href="/recipes">Recipe</a>
+  </div>
+</div>
+<hr>
+
+{% if session.has_group("screenshots") %}
+  ![[partials/public/screenshot_create]]
+{% endif %}

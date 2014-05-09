@@ -3,7 +3,6 @@
     {% if note.table_of_contents %}
       <div class="col-md-4 hidden-sm hidden-xs">
         <div id="toc" style="margin-top: 20px">
-          <a href="?v=slideshow"><i class="fa fa-expand"></i> Slideshow</a>
           <h3 style="margin-top: 0px; padding-top: 0px;">Table of Contents</h3>
         </div>
       </div>
@@ -14,7 +13,7 @@
       <div  class="note-header">
         <h1>{{note.title}}</h1>
         <small><b>By</b> {{ note.author.username if
-          note.author.id!=session.id else 'You!'}} - {{note.created.humanize()}}{% if session.id %} | <b>Visibility:</b> {{ 'Public' if note.public else 'Private' }} | <b>Status:</b> {{ 'Draft' if note.draft else 'Published' }} {% endif %}</small>
+          note.author.id!=session.id else 'You!'}} - {{note.created.humanize()}}{% if session.id %} | <b>Visibility:</b> {{ 'Public' if note.public else 'Private' }}{% endif %}</small>
       </div>
       <br>
       <div class="note-body">
@@ -25,8 +24,8 @@
       {% for tag in note.tags %}
         <a href="/notes/search?s=tags:{{tag}}"><span class="label label-red">{{tag}}</span></a>
       {% endfor %}
-      <hr>
       {% if note.has_comments and note.public and not note.draft %}
+        <hr>
         <div id="disqus_thread"></div>
         <script>
             var disqus_shortname = 'transientbug';
