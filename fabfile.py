@@ -8,6 +8,7 @@ from fabric.colors import red, green, blue, yellow, white, magenta, cyan
 from contextlib import contextmanager as _contextmanager
 from app.utils.standard import StandardODM
 import yaml
+import arrow
 
 config = None
 with open("fabconfig.yaml", "r") as f:
@@ -53,7 +54,7 @@ def static():
     print cyan("Rebuilding static files...")
     with cd(env.path):
         run("grunt")
-        run("cp -r interface/build/* {}".format(config.static))
+        run("cp -r interface/build/* {}/static/".format(config.html))
 
 @task
 def git_pull():
@@ -87,3 +88,14 @@ def stop():
     ans = get_service("stop")
     if ans is not None:
         services("stop", ans)
+
+@task
+def backup():
+    time = arrow.utcnow().format("YYYY-MM-DD_HH-mm-ss")
+    db_backup = "transientbug_rethinkdb_backup_{}.tar.gz".format(time)
+    html_backup = "transientbug_html_backup_{}.tar.gz".format(time)
+    with cd(env.path), virtualenv():
+        run("rethinkdb dump {}".format(db_backup))
+        run("tar -cvpzf {} {}".format(html_backup, config.html))
+        get(db_backup)
+        get(html_backup)
