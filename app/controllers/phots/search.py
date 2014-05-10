@@ -29,6 +29,7 @@ import models.utils.dbUtils as dbu
 class search(MixedObject):
     @HTML
     def GET(self):
+        view = self.request.get_param("v")
         q = dbu.rql_where_not(pm.Phot.table, "disable", True)
 
         all_tags = q\
@@ -36,7 +37,19 @@ class search(MixedObject):
             .distinct()\
             .coerce_to('array').run()
 
-        self.view.data = {"tags": all_tags, "phot_page": None}
+        if "phot_view" in self.session.data:
+            if not view:
+                view = self.session.data.phot_view
+        else:
+            self.session.data.phot_view = "cards"
+            view = "cards"
+
+        self.session.data.phot_view = view
+
+        self.view.data = {
+            "tags": all_tags,
+            "phot_page": None
+        }
 
         search_term = self.request.get_param("s")
         if search_term:
@@ -50,7 +63,7 @@ class search(MixedObject):
                 ids.fetch()
 
                 page = Paginate(ids, self.request, "title", sort_direction_default="desc")
-                self.view.data = {"phot_page": page}
+                self.view.data = {"phot_page": page, "v": view}
 
             self.view.template = "public/phots/search/results"
 
