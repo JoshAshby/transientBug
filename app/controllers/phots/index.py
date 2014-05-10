@@ -40,6 +40,7 @@ class index(MixedObject):
 
         if not self.session.data.phot_view:
             self.session.data.phot_view = "cards"
+            view = "cards"
 
         query = dbu.rql_where_not(pm.Phot.table, "disable", True)
         query = query.filter(lambda doc: doc["filename"].match(filt))
