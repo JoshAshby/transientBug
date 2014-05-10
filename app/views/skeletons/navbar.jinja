@@ -20,7 +20,11 @@
     <style>
       {{styles}}
       body {
-        padding-top: 45px;
+        {% set height=55 %}
+        {% if has_announcements %}
+          {% set height=45 %}
+        {% endif %}
+        padding-top: {{height}}px;
       }
     </style>
     <!-- End page style sheets -->
