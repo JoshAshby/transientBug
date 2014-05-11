@@ -99,3 +99,9 @@ def backup():
         run("tar -cvpzf {} {}".format(html_backup, config.html))
         get(db_backup)
         get(html_backup)
+
+@task
+def deploy():
+    git_pull()
+    static()
+    services("restart", "all")
