@@ -42,4 +42,4 @@ LazyLoad.js [
             ending = "s"
           else
             ending = "d"
-          el.html "#{ msg }#{ ending } on: #{ time.format 'MMM ddd hh:mm A' }<br>"
+          el.html "#{ msg }#{ ending } on: #{ time.format 'MMM Do (ddd), YYYY' } at #{ time.format 'hh:mm A' }<br>"
