@@ -84,22 +84,22 @@ $ ->
           syell = choose_syell(ev)
           syellayell syell
 
-  imgs = $(".phots-collection").find("img")
+  #imgs = $(".phots-collection").find("img")
 
-  imgs.each (i, e) ->
-    console.log e
-    orig_src = e.src
-    c = document.createElement('canvas')
-    w = c.width = e.width
-    h = c.height = e.height
-    c.getContext('2d').drawImage(e, 0, 0, w, h)
+  #imgs.each (i, e) ->
+    #console.log e
+    #orig_src = e.src
+    #c = document.createElement('canvas')
+    #w = c.width = e.width
+    #h = c.height = e.height
+    #c.getContext('2d').drawImage(e, 0, 0, w, h)
 
-    $(e).data({src: orig_src, pause: c.toDataURL("image/gif")})
+    #$(e).data({src: orig_src, pause: c.toDataURL("image/gif")})
 
-    $(e).mouseenter ->
-      @.src = $(@).data("src")
+    #$(e).mouseenter ->
+      #@.src = $(@).data("src")
 
-    $(e).mouseleave ->
-      @.src = $(@).data("pause")
+    #$(e).mouseleave ->
+      #@.src = $(@).data("pause")
 
-    e.src = c.toDataURL("image/gif")
+    #e.src = c.toDataURL("image/gif")

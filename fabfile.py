@@ -49,18 +49,18 @@ def services(action, ans):
         with cd("app/"):
             run("supervisorctl {} {}".format(action, ans))
 
-@task
-def static():
-    print cyan("Rebuilding static files...")
-    with cd(env.path):
-        run("grunt")
-        run("cp -r interface/build/* {}/static/".format(config.html))
-
-@task
 def git_pull():
     print cyan("Updating git repository...")
     with cd(env.path):
         run("git pull origin master")
+
+@task
+def static():
+    git_pull()
+    print cyan("Rebuilding static files...")
+    with cd(env.path):
+        run("grunt")
+        run("cp -r interface/build/* {}/static/".format(config.html))
 
 @task
 def status():
