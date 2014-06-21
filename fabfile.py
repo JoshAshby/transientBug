@@ -95,7 +95,7 @@ def backup():
     db_backup = "transientbug_rethinkdb_backup_{}.tar.gz".format(time)
     html_backup = "transientbug_html_backup_{}.tar.gz".format(time)
     with cd(env.path), virtualenv():
-        run("rethinkdb dump {}".format(db_backup))
+        run("rethinkdb dump -f {}".format(db_backup))
         run("tar -cvpzf {} {}".format(html_backup, config.html))
         get(db_backup)
         get(html_backup)
