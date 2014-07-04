@@ -1,7 +1,7 @@
 from fabric.api import env
 from fabric.decorators import task
 from fabric.context_managers import cd, prefix, warn_only
-from fabric.operations import run, local, get, put, prompt
+from fabric.operations import run, local, get, put, prompt, sudo
 
 from fabric.colors import red, green, blue, yellow, white, magenta, cyan
 
@@ -21,6 +21,7 @@ if not config:
 env.key_name = config.ssh_key
 env.hosts = config.hosts
 env.path = config.path
+env.user = "josh"
 
 
 @_contextmanager
@@ -93,12 +94,12 @@ def stop():
 def backup():
     time = arrow.utcnow().format("YYYY-MM-DD_HH-mm-ss")
     db_backup = "transientbug_rethinkdb_backup_{}.tar.gz".format(time)
-    html_backup = "transientbug_html_backup_{}.tar.gz".format(time)
+    images_backup = "transientbug_image_backup_{}.tar.gz".format(time)
     with cd(env.path), virtualenv():
-        run("rethinkdb dump -f {}".format(db_backup))
-        run("tar -cvpzf {} {}".format(html_backup, config.html))
+        sudo("rethinkdb dump -f {}".format(db_backup))
+        run("tar -cvpzf {} {}".format(images_backup, config.images))
         get(db_backup)
-        get(html_backup)
+        get(images_backup)
 
 @task
 def deploy():
