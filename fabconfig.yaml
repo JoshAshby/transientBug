@@ -3,6 +3,7 @@ ssh_key: ~/.ssh/id_rsa
 virtualenv_name: normal
 path: /var/www/transientbug/repos/transientBug/
 images: /var/www/transientbug/html/i/
+html: /var/www/transientbug/html/
 
 hosts:
   - transientbug.com
