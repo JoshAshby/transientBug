@@ -94,10 +94,10 @@ def stop():
 def backup():
     time = arrow.utcnow().format("YYYY-MM-DD_HH-mm-ss")
     db_backup = "transientbug_rethinkdb_backup_{}.tar.gz".format(time)
-    images_backup = "transientbug_image_backup_{}.tar.gz".format(time)
+    images_backup = "transientbug_static_backup_{}.tar.gz".format(time)
     with cd(env.path), virtualenv():
         sudo("rethinkdb dump -f {}".format(db_backup))
-        run("tar -cvpzf {} {}".format(images_backup, config.images))
+        run("tar -cvpzf {} {}".format(images_backup, config.html))
         get(db_backup)
         get(images_backup)
 
