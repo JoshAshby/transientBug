@@ -97,9 +97,15 @@ def backup():
     images_backup = "transientbug_static_backup_{}.tar.gz".format(time)
     with cd(env.path), virtualenv():
         sudo("rethinkdb dump -f {}".format(db_backup))
-        run("tar -cvpzf {} {}".format(images_backup, config.html))
+        run("tar -czf {} {}".format(images_backup, config.html))
         get(db_backup)
         get(images_backup)
+
+@task
+def reindex():
+    with cd(env.path), virtualenv():
+        with cd("app"):
+            run("python reindex.py")
 
 @task
 def deploy():
