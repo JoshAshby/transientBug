@@ -103,6 +103,14 @@ name exists in data""")
         for key, items in self._data.iteritems():
             yield key
 
+    def items(self):
+        for key, items in self._data.iteritems():
+            yield key, items
+
+    def iteritems(self):
+        for key, items in self._data.iteritems():
+            yield key, items
+
     def __repr__(self):
         """
         Returns the objects internal data object, which is a dict

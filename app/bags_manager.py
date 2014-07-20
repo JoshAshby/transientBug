@@ -22,16 +22,11 @@ import models.redis.bucket.bucketModel as bm
 from errors.user import UsernameError
 
 
-logger = logging.getLogger(c.logName+".bags_manager")
+logger = logging.getLogger(c.general.logName+".bags_manager")
 
 
-rethink_bags = None
-with open("config/current/bags/rethink.yaml", "r") as f:
-    rethink_bags = StandardODM(**yaml.load(unicode(f.read())))
-
-redis_bags = None
-with open("config/current/bags/redis.yaml", "r") as f:
-    redis_bags = StandardODM(**yaml.load(unicode(f.read())))
+rethink_bags = c.load_yaml_as_object("config/current/bags/rethink.yaml")
+redis_bags = c.load_yaml_as_object("config/current/bags/redis.yaml")
 
 
 if not rethink_bags or not redis_bags:
@@ -122,3 +117,13 @@ def redis_buckets_setup():
 
 if __name__ == "__main__":
     arguments = docopt(__doc__, version='transientBug bags manager v0.0.0')
+
+    if arguments["rethink"]:
+        create_rethink_database()
+        flush_rethink_tables()
+        create_rethink_tables()
+        user_setup()
+
+    if arguments["redis"]:
+        flush_redis_keyspaces()
+        redis_buckets_setup()

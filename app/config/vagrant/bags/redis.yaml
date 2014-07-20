@@ -1,14 +1,13 @@
-keys:
-  bucket:
-    enable500Error:
-      status: true
-      name: Enable errors on 500 pages
-      description: Enable the display of the server errors and their stacktraces on 500 pages
+buckets:
+  enable500Error:
+    status: true
+    name: Enable errors on 500 pages
+    description: Enable the display of the server errors and their stacktraces on 500 pages
 
-    enablePublicInvites:
-      status: true
-      name: Enable the public invite page
-      description: Allows anyone to request an invite to join the site when on, and opens registration for those invites
+  enablePublicInvites:
+    status: true
+    name: Enable the public invite page
+    description: Allows anyone to request an invite to join the site when on, and opens registration for those invites
 
 flush:
   session: false

@@ -43,7 +43,6 @@ current_path = os.path.dirname(__file__) + "/"
 base_path = current_path.rsplit("config", 1)[0]
 
 general = load_yaml_as_object(current_path + "current/config.yaml")
-print general
 
 if not general:
     raise Exception("Could not load config.yaml into StandardODM!")
