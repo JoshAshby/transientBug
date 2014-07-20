@@ -99,6 +99,10 @@ name exists in data""")
             return True
         return False
 
+    def __iter__(self):
+        for key, items in self._data.iteritems():
+            yield key
+
     def __repr__(self):
         """
         Returns the objects internal data object, which is a dict

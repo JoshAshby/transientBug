@@ -22,7 +22,6 @@ def odm_nested_dicts(raw):
         if isinstance(value, dict):
             raw[key] = odm_nested_dicts(value)
 
-    print raw
     return StandardODM(**raw)
 
 
@@ -43,13 +42,8 @@ Don't change these following settings unless you know what you're doing!!!
 current_path = os.path.dirname(__file__) + "/"
 base_path = current_path.rsplit("config", 1)[0]
 
-general = None
-with open(current_path + "current/config.yaml", "r") as open_config:
-    res = yaml.load(unicode(open_config.read()))
-    general = StandardODM(**res)
-
-    print odm_nested_dicts(res)
-
+general = load_yaml_as_object(current_path + "current/config.yaml")
+print general
 
 if not general:
     raise Exception("Could not load config.yaml into StandardODM!")
@@ -81,11 +75,9 @@ redisORM.redis_model.redis = redis
 
 parse_files(general)
 
-
-downloader = StandardODM(**general.downloader)
-emailer = StandardODM(**general.emailer)
-dirs = StandardODM(**general.dirs)
-files = StandardODM(**general.files)
-
 debug = general["debug"]
 send_email = general["send_email"]
+emailer = general["emailer"]
+downloader = general["downloader"]
+files = general["files"]
+dirs = general["dirs"]
