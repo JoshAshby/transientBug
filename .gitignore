@@ -25,10 +25,9 @@ app/logs/
 app/pid/
 app/.coverage
 app/rethinkdb_data
-app/config/config.yaml
-app/config/initial.yaml
 app/s_index/
 secrets.py
+app/config/current
 
 # Compiled source #
 ###################

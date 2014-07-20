@@ -1,0 +1,27 @@
+tables:
+  users:
+    - username: bug
+      password: josh
+      email: joshuaashby@joshashby.com
+      groups:
+        - root
+
+    - username: test
+      password: test
+      email: test@joshashby.com
+      groups:
+        - default
+
+  notes:
+  phots:
+  emails:
+  invites:
+  recipes:
+
+flush:
+  users: false
+  notes: false
+  phots: false
+  emails: false
+  invites: false
+  recipes: false
