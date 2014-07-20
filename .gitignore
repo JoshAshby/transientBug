@@ -28,7 +28,6 @@ app/rethinkdb_data
 app/s_index/
 secrets.py
 app/config/current
-app/supervisord.conf
 
 # Compiled source #
 ###################

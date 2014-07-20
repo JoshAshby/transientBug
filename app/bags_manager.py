@@ -4,7 +4,14 @@
 Util for setting up, and updating the databases
 
 Usage:
-    bags_manager.py (rethink|redis)
+    bags_manager.py (rethink|redis) [-v | --verbose] [-d | --debug]
+    bags_manager.py --version
+    bags_manager.py (-h | --help)
+
+Options:
+    --help -h          Show this
+    --debug -d         Start the service in debug mode
+    --verbose -v       Log to the console along with default files
 
 """
 import logging
@@ -53,6 +60,7 @@ def create_rethink_tables():
 
     for table in tables_to_create:
         rethinkdb.table_create(table).run()
+        logger.debug("Table {} created in rethink".format(table))
 
 
 def flush_rethink_tables():
@@ -68,6 +76,7 @@ def flush_rethink_tables():
     for table in flushing_tables:
         rethinkdb.table_drop(table).run()
         rethinkdb.table_create(table).run()
+        logger.debug("Table {} flushed in rethink".format(table))
 
 
 def user_setup():
@@ -91,6 +100,7 @@ def flush_redis_keyspaces():
     for keyspace in keyspaces_to_flush:
         keyspace += ":*"
         c.redis.delete(keyspace)
+        logger.debug("Flushed keyspace {} in redis".format(keyspace))
 
 
 def redis_buckets_setup():
@@ -101,12 +111,13 @@ def redis_buckets_setup():
     pre_buckets = bm.CfgBuckets()
     for ID in buckets:
         bucket = buckets[ID]
-        if bucket["name"] in pre_buckets:
+        if ID in pre_buckets:
             logger.debug("\tUpdating Bucket: {} with bag:\n\t{}".format(ID, bucket))
             pre_buckets.edit(ID,
                              bucket["name"],
                              bucket["description"],
                              bucket["status"])
+
         else:
             logger.debug("\tAdding Bucket: {} with bag:\n\t{}".format(ID, bucket))
             pre_buckets.new(ID,
@@ -117,6 +128,31 @@ def redis_buckets_setup():
 
 if __name__ == "__main__":
     arguments = docopt(__doc__, version='transientBug bags manager v0.0.0')
+
+    c.debug = True if arguments["--debug"] else False
+
+    level = logging.INFO
+    if c.debug:
+        level = logging.DEBUG
+
+    formatter = logging.Formatter("""%(asctime)s - %(name)s - %(levelname)s
+    %(message)s""")
+
+    logger.setLevel(level)
+
+    fh = logging.FileHandler(c.files.log)
+    fh.setLevel(level)
+    fh.setFormatter(formatter)
+    logger.addHandler(fh)
+
+    if arguments["--verbose"]:
+        try:
+            ch = logging.StreamHandler()
+            ch.setLevel(level)
+            ch.setFormatter(formatter)
+            logger.addHandler(ch)
+        except:
+            pass
 
     if arguments["rethink"]:
         create_rethink_database()
