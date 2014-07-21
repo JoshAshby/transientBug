@@ -17,6 +17,20 @@ import redisORM.redis_model
 
 from utils.standard import StandardODM
 
+def odm_nested_dicts(raw):
+    for key, value in raw.iteritems():
+        if isinstance(value, dict):
+            raw[key] = odm_nested_dicts(value)
+
+    return StandardODM(**raw)
+
+
+def load_yaml_as_object(filename):
+    res = None
+    with open(filename, "r") as f:
+        res = odm_nested_dicts(yaml.load(unicode(f.read())))
+
+    return res
 
 """
 #########################STOP EDITING#####################################
@@ -28,9 +42,7 @@ Don't change these following settings unless you know what you're doing!!!
 current_path = os.path.dirname(__file__) + "/"
 base_path = current_path.rsplit("config", 1)[0]
 
-general = None
-with open(current_path + "config.yaml", "r") as open_config:
-    general = StandardODM(**yaml.load(unicode(open_config.read())))
+general = load_yaml_as_object(current_path + "current/config.yaml")
 
 if not general:
     raise Exception("Could not load config.yaml into StandardODM!")
@@ -62,22 +74,9 @@ redisORM.redis_model.redis = redis
 
 parse_files(general)
 
-
-# I need a better way to get around this. Maybe time to write something that
-# looks for dicts within the yaml, and converts them to a ODM and then attaches
-# that ODM to the parent as an attribute
-downloader = StandardODM(**general.downloader)
-parse_files(downloader)
-downloader.files = StandardODM(**downloader.files)
-downloader.dirs = StandardODM(**downloader.dirs)
-
-emailer = StandardODM(**general.emailer)
-parse_files(emailer)
-emailer.files = StandardODM(**emailer.files)
-emailer.dirs = StandardODM(**emailer.dirs)
-
-dirs = StandardODM(**general.dirs)
-files = StandardODM(**general.files)
-
 debug = general["debug"]
 send_email = general["send_email"]
+emailer = general["emailer"]
+downloader = general["downloader"]
+files = general["files"]
+dirs = general["dirs"]

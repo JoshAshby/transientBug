@@ -94,10 +94,23 @@ name exists in data""")
         This only works with the internal _data, and does not include other
         properties in the objects namepsace.
         """
-        keys = object.__getattribute__(self, "_data")
+        keys = object.__getattribute__(self, "_data").keys()
         if item in keys:
             return True
         return False
+
+    def __iter__(self):
+        for key, items in self._data.iteritems():
+            yield key
+
+    def items(self):
+        return self.iteritems()
+
+    def iteritems(self):
+        return self._data.iteritems()
+
+    def keys(self):
+        return self._data.keys()
 
     def __repr__(self):
         """

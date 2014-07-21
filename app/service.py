@@ -64,12 +64,7 @@ if __name__ == "__main__":
     logger = logging.getLogger()
     logger.setLevel(level)
 
-    if not name:
-        fh = logging.FileHandler(c.files.log)
-    else:
-        name = getattr(c, name)
-        fh = logging.FileHandler(name.files.log)
-
+    fh = logging.FileHandler(c.files.log)
     fh.setLevel(level)
     fh.setFormatter(formatter)
     logger.addHandler(fh)

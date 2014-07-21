@@ -1,0 +1,36 @@
+appName: &APP leach
+logName: *APP
+
+debug: true
+send_email: false
+
+port: 8000
+address: 127.0.0.1
+use_pool: true
+max_connections: 10000
+
+time_format: "MM/DD/YYYY hh:mm a"
+
+files:
+  log: leach.log
+
+dirs:
+  log: logs/
+  search_index: s_index/
+  templates: views/
+  base: /var/www/
+  screenshots: /var/www/scrn/
+  gifs: /var/www/i/
+
+databases:
+  rethink:
+    db: app
+  redis:
+    db: 1
+    URL: localhost
+
+downloader:
+  log_name: leach_downloader
+
+emailer:
+  log_name: leach_emailer
