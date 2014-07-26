@@ -20,10 +20,12 @@
         {{note.contents}}
       </div>
       <br>
-      <b>Tags: </b>
-      {% for tag in note.tags %}
-        <a href="/notes/search?s=tags:{{tag}}"><span class="label label-red">{{tag}}</span></a>
-      {% endfor %}
+      {% if note.tags %}
+        <b>Tags: </b>
+        {% for tag in note.tags %}
+          <a href="/notes/search?s=tags:{{tag}}"><span class="label label-red">{{tag}}</span></a>
+        {% endfor %}
+      {% endif %}
       {% if note.has_comments and note.public and not note.draft %}
         <hr>
         <div id="disqus_thread"></div>
@@ -35,7 +37,6 @@
 
             /* * * DON'T EDIT BELOW THIS LINE * * */
             (function() {
-                console.log(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]);
                 var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
                 dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
                 (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
