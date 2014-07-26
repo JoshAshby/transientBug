@@ -55,7 +55,7 @@
         <br>
         <b>Tags: </b>
         {% for tag in note.tags %}
-          <a href="/notes/tags/{{tag}}"><span class="label label-red">{{tag}}</span></a>
+          <a href="/notes/search?s=tags:{{tag}}"><span class="label label-red">{{tag}}</span></a>
         {% endfor %}
         <hr>
       </div>

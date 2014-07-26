@@ -20,7 +20,7 @@ import models.rethink.note.noteModel as nm
 from searchers.notes import NoteSearcher
 
 
-@route()
+@route("/notes/:id/delete")
 @login(["notes"])
 class delete(MixedObject):
     @JSON
@@ -35,7 +35,7 @@ class delete(MixedObject):
             if not self.session.has_group("admin")\
                 or note.author.id != self.session.id:
                 self.session.push_alert("You don't own that note, you can't delete it!",
-                                                level="error")
+                                        level="error")
                 return Unauthorized()
 
             note.disable = True

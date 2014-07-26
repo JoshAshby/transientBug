@@ -79,11 +79,10 @@ class view(MixedObject):
         toc = self.request.get_param("toc", False)
         comments = self.request.get_param("comments", False)
         tags = self.request.get_param("tags")
-        theme = self.request.get_param("theme", "default")
 
         tag = []
         if tags:
-            tag = [ bit.lstrip().rstrip().replace(" ", "_").lower() for bit in tags.split(",") ]
+            tag = [ bit.lstrip().rstrip().lower() for bit in tags.split(",") ]
 
         f = r.table(nm.Note.table)\
             .filter({"short_code": self.request.id})\
@@ -94,7 +93,7 @@ class view(MixedObject):
             note = nm.Note(f[0]["id"])
             if note.author.id != self.session.id:
                 self.session.push_alert("You don't own that note, you can't edit it!",
-                                                level="danger")
+                                        level="danger")
                 return Unauthorized()
 
             if not "notes" in self.session.groups and note.disable:
@@ -111,7 +110,6 @@ class view(MixedObject):
             note.table_of_contents = toc
             note.draft = draft
             note.has_comments = comments
-            note.theme = theme
 
             note.save()
 

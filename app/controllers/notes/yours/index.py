@@ -34,13 +34,12 @@ class index(MixedObject):
         reported = self.request.get_param("reported", False)
         sort_by = self.request.get_param("sort_by", "created", "asc")
 
-        if not sort_by in ["created", "title", "public", "reported", "draft",
-            "author.id"]:
+        if not sort_by in ["created", "title", "public", "reported", "draft", "author.id"]:
             sort_by = "created"
 
             # should this be something I try to start doing? :/
             self.session.push_alert("Couldn't figure out what to sort by, as a result of an invalid value for sort_by.",
-                                            level="error")
+                                    level="error")
 
         if public:
             filter_parts["public"] = False if public == "private" else True

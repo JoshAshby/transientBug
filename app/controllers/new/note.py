@@ -28,7 +28,6 @@ from searchers.notes import NoteSearcher
 class note(MixedObject):
     @HTML
     def GET(self):
-        self.view.data = {"themes": c.general.slideshow_themes}
         return self.view
 
     def POST(self):
@@ -39,10 +38,9 @@ class note(MixedObject):
         toc = self.request.get_param("toc", False)
         comments = self.request.get_param("comments", False)
         tags = self.request.get_param("tags")
-        theme = self.request.get_param("theme")
 
         if tags:
-            tag = [ bit.lstrip().rstrip().replace(" ", "_").lower() for bit in tags.split(",") ]
+            tag = [ bit.lstrip().rstrip().lower() for bit in tags.split(",") ]
         else:
             tag = []
 
@@ -54,8 +52,7 @@ class note(MixedObject):
                                     tags=tag,
                                     toc=toc,
                                     has_comments=comments,
-                                    draft=draft,
-                                    theme=theme)
+                                    draft=draft)
 
             searcher = NoteSearcher()
             searcher.add(note)

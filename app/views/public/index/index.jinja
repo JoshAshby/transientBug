@@ -4,13 +4,6 @@ nav: home
 scriptFiles:
   - public/index/index
 +++
-
-<div class="row">
-  <div class="col-md-12">
-    ![[partials/public/phots/search]]
-  </div>
-</div>
-
 <div class="row">
   <div class="col-md-4">
     {% if session.has_group("phots") %}
@@ -41,7 +34,3 @@ scriptFiles:
   </div>
 </div>
 <hr>
-
-{% if session.has_group("screenshots") %}
-  ![[partials/public/screenshot_create]]
-{% endif %}
