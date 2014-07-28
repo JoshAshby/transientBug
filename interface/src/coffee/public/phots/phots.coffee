@@ -1,6 +1,6 @@
 $ ->
   if $().typeahead? and Bloodhound? and Handlebars?
-    tags_tmpl = """ <p><span class="label label-red">{{tag}}</span></p> """
+    tags_tmpl = """ <p><span class="label label-green">{{tag}}</span></p> """
     tags_handlebars = Handlebars.compile tags_tmpl
 
     phots_tmpl = """
@@ -12,7 +12,7 @@ $ ->
           </td>
           <td>
             <i>{{title}}</i><br>
-            <b>Tags:</b> {{#tags}} <span class="label label-red">{{this}}</span> {{/tags}}<br />
+            <b>Tags:</b> {{#tags}} <span class="label label-green">{{this}}</span> {{/tags}}<br />
           </td>
         </tr>
       </table>
