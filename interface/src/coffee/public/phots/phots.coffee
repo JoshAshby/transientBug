@@ -1,26 +1,80 @@
 $ ->
+  if $().typeahead? and Bloodhound? and Handlebars?
+    tags_tmpl = """ <p><span class="label label-red">{{tag}}</span></p> """
+    tags_handlebars = Handlebars.compile tags_tmpl
+
+    phots_tmpl = """
+    <p class="phot-typeahead" data-short="{{short_code}}">
+      <table>
+        <tr>
+          <td>
+            <img height="50px" width="50px" src="/i/{{filename}}" />
+          </td>
+          <td>
+            <i>{{title}}</i><br>
+            <b>Tags:</b> {{#tags}} <span class="label label-red">{{this}}</span> {{/tags}}<br />
+          </td>
+        </tr>
+      </table>
+    </p>
+    """
+    phots_handlebars = Handlebars.compile phots_tmpl
+
+    tags = new Bloodhound
+      datumTokenizer: (d) ->
+        Bloodhound.tokenizers.nonword d.tag
+      queryTokenizer: Bloodhound.tokenizers.whitespace
+      limit: 5
+      prefetch:
+        url: '/api/v0/phots/tags'
+        filter: (list) ->
+          $.map list[0].tags, (tag) ->
+            tag = tag.replace(/_/g, ' ')
+            {tag: tag, search: "tags:#{ tag }"}
+
+    phots = new Bloodhound
+      datumTokenizer: (d) ->
+        d = "#{ d.title } #{ d.tags }"
+        Bloodhound.tokenizers.nonword d
+      queryTokenizer: Bloodhound.tokenizers.whitespace
+      limit: 5
+      remote:
+        url: '/api/v0/phots/search?s=%QUERY'
+        filter: (d) ->
+          $.map d[0].pail, (e) ->
+            e.display = "phot:#{ e.short_code }"
+            e
+
+    tags.initialize()
+    phots.initialize()
+
+    $('#search').typeahead null,
+      {
+        name: 'phot-tags'
+        displayKey: 'tag'
+        source: tags.ttAdapter()
+        templates:
+            header: '<b>Tags</b>'
+            suggestion: tags_handlebars
+      }, {
+        name: 'phots',
+        displayKey: 'display'
+        source: phots.ttAdapter()
+        teplates:
+          header: '<b>Phots</b>'
+          suggestion: phots_handlebars
+      }
+
   Mousetrap.bind 's', (e) ->
     e.preventDefault()
     $("#search").focus()
     $("#search").val ""
+    if $().typeahead? and Bloodhound? and Handlebars?
+      $("#search").typeahead "val", ""
 
-  tags = new Bloodhound
-    datumTokenizer: (d) ->
-      Bloodhound.tokenizers.nonword d.tag
-    queryTokenizer: Bloodhound.tokenizers.whitespace
-    limit: 10
-    prefetch:
-      url: '/api/v0/phots/tags'
-      filter: (list) ->
-        $.map list[0]["tags"], (tag) ->
-          {tag: tag}
-
-  tags.initialize()
-
-  $('.search').typeahead null,
-    {name: 'phottags'
-    displayKey: "tag"
-    source: tags.ttAdapter()}
+  $(document).on "click", ".phot-typeahead", (e) ->
+    short = $(@).data "short"
+    window.location.href = "/phots/#{ short }"
 
   $("#views").on "change", "input[type=radio]", (e) ->
     e.preventDefault()
@@ -38,7 +92,6 @@ $ ->
       "danger"
     ]
     c[Math.floor(Math.random()*c.length)]
-
 
   growl_options =
     type: sehll()
@@ -83,23 +136,3 @@ $ ->
           e.preventDefault()
           syell = choose_syell(ev)
           syellayell syell
-
-  #imgs = $(".phots-collection").find("img")
-
-  #imgs.each (i, e) ->
-    #console.log e
-    #orig_src = e.src
-    #c = document.createElement('canvas')
-    #w = c.width = e.width
-    #h = c.height = e.height
-    #c.getContext('2d').drawImage(e, 0, 0, w, h)
-
-    #$(e).data({src: orig_src, pause: c.toDataURL("image/gif")})
-
-    #$(e).mouseenter ->
-      #@.src = $(@).data("src")
-
-    #$(e).mouseleave ->
-      #@.src = $(@).data("pause")
-
-    #e.src = c.toDataURL("image/gif")

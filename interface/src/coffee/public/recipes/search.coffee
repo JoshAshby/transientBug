@@ -50,7 +50,7 @@ LazyLoad.js [
       recipes = new Bloodhound
         datumTokenizer: (d) ->
           d = "#{ d.title } #{ d.tags} #{ d.description}"
-          Boolhound.tokenizers.nonword d
+          Bloodhound.tokenizers.nonword d
         queryTokenizer: Bloodhound.tokenizers.whitespace
         limit: 5
         remote:
