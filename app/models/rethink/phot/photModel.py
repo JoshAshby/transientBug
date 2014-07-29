@@ -49,7 +49,7 @@ class Phot(UserValidator, TagsValidator, CreatedValidator, BaseInterface):
         time = arrow.utcnow()
         created = time.timestamp
 
-        new_tags = [ tag.lstrip().rstrip().replace(" ", "_").lower() for tag in tags ]
+        new_tags = [ tag.lstrip().rstrip().lower() for tag in tags ]
 
         code_good = False
         code = ""

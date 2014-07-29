@@ -1,6 +1,9 @@
 """
 Makes all the tags on models un-underscored
 """
+from models.rethink.phot.photModel import Phot
+
+models = [Phot]
 
 def migration(document):
     if "tags" in document:

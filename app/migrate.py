@@ -4,7 +4,8 @@
 Util to list and run migrations in the migrations directory.
 
 Usage:
-    migrate.py (list) [-v | --verbose] [-d | --debug]
+    migrate.py list
+    migrate.py run <migration>  [-v | --verbose] [-d | --debug]
     migrate.py --version
     migrate.py (-h | --help)
 
@@ -15,29 +16,63 @@ Options:
 """
 import logging
 import os
+import importlib
+import inspect
 from docopt import docopt
 
 import config.config as c
 
 from utils.mass_updater import MassUpdater
 
+
 logger = logging.getLogger(c.general.logName+".migrate")
 
-migrations_dir = 'migrations/'
+migrations_dir = 'migrations'
+
+migrations = {}
+
+
+def filter_files(f):
+    if f[-3:] == '.py' and f != "__init__.py":
+        return True
+
+    return False
+
+
+def walk_migrations():
+    files = os.listdir(migrations_dir)
+    files = filter(filter_files, files)
+
+
+    for f in files:
+        name = migrations_dir + '.' + f[:-3] # Strip the .py and make the module name string
+        module = importlib.import_module(name)
+
+        migrations[f[:-3]] = {
+            "module": module,
+            "description": inspect.getdoc(module)
+        }
 
 
 def list_migrations():
     print "Current migrations:"
+    for migration in migrations:
+        print "\t{} - {}".format(migration, migrations[migration]['description'])
 
-    files = os.listdir(migrations_dir)
-    files.pop(files.index("__init__.py"))
 
-    for f in files:
-        print "\t"+f
+def run_migrations(migration):
+    for model in migration['module'].models:
+        run_migration(model, migration['module'].migration)
+
+
+def run_migration(model, migration):
+    mu = MassUpdater(model, migration)
+    mu.start_migration()
 
 
 if __name__ == "__main__":
     arguments = docopt(__doc__, version='transientBug v2.0.0')
+    walk_migrations()
 
     c.debug = True if arguments["--debug"] else False
 
@@ -67,3 +102,11 @@ if __name__ == "__main__":
 
     if arguments['list']:
         list_migrations()
+
+    if arguments['run']:
+        migration = arguments['<migration>']
+
+        if migration in migrations:
+            migration = migrations[migration]
+
+            run_migrations(migration)
