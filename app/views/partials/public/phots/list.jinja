@@ -90,7 +90,7 @@
                   {% if pic.tags %}
                     {% for tag in pic.tags %}
                       <a href="/phots/search?s=tags:{{ tag }}">
-                        <span class="label label-green">{{tag|replace("_", " ")}}</span>
+                        <span class="label label-green">{{tag}}</span>
                       </a>
                     {% endfor %}
                   {% endif %}

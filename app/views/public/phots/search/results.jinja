@@ -54,7 +54,7 @@ stylesheets:
         {% if tags %}
           <div class="tags">
             {% for tag in tags %}
-              <a href="/phots/search?s=tags:{{tag}}"><span class="label label-green">{{tag|replace("_", " ")}}</span></a>
+              <a href="/phots/search?s=tags:{{tag}}"><span class="label label-green">{{tag}}</span></a>
             {% endfor %}
           </div>
         {% else %}
