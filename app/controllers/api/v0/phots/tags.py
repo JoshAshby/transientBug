@@ -21,9 +21,8 @@ import models.rethink.phot.photModel as pm
 class tags(MixedObject):
     @JSON
     def GET(self):
-        base_query = dbu.rql_where_not(pm.Phot.table, "disable", True)
-
-        raw_tags = base_query\
+        raw_tags = r.table(pm.Phot.table)\
+            .filter({"disable": False})\
             .concat_map(lambda doc: doc["tags"])\
             .distinct()\
             .coerce_to('array').run()

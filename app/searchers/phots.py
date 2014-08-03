@@ -15,7 +15,7 @@ from whoosh.analysis import *
 import models.rethink.phot.photModel as pm
 
 
-iwf_i = IntraWordFilter(mergewords=True, mergenums=True)
+iwf_i = IntraWordFilter(mergewords=False, mergenums=False)
 iwf_q = IntraWordFilter(mergewords=False, mergenums=False)
 iwf = MultiFilter(index=iwf_i, query=iwf_q)
 
@@ -34,15 +34,17 @@ class PhotSchema(SchemaClass):
 
 
 def get_phot_data(phot):
-    d = {"id":unicode(phot.id),
-         "created":phot.created.datetime,
-         "title":unicode(phot.title),
-         "short_code":unicode(phot.short_code),
-         "disable":phot.disable if hasattr(phot, "disable") else False,
-         "user":unicode(phot.user.id)}
+    d = {
+        "id"         : unicode(phot.id),
+        "created"    : phot.created.datetime,
+        "title"      : unicode(phot.title),
+        "short_code" : unicode(phot.short_code),
+        "disable"    : phot.disable,
+        "user"       : unicode(phot.user.id)
+    }
 
     if phot.tags:
-        d["tags"] = u",".join(phot.tags)
+        d["tags"] = unicode(",".join(phot.tags))
 
     return d
 
@@ -51,7 +53,7 @@ class PhotSearcher(searcher.RethinkSearcher):
     name = "phots"
     _schema = PhotSchema
     _model = pm.Phot
-    _fields_to_search = ["title", "short_code", "tags"]
+    _fields_to_search = ["title", "short_code", "tags", "created"]
 
     def add(self, phot):
         d = get_phot_data(phot)

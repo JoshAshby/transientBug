@@ -15,12 +15,14 @@ from seshat.route import route
 from seshat_addons.seshat.mixed_object import MixedObject
 from seshat_addons.seshat.func_mods import JSON
 
+from utils.short_codes import short_code_in_search
 from utils.paginate import Paginate
 
+import whoosh.query as q
 from searchers.phots import PhotSearcher
 
+import rethinkdb as r
 import models.rethink.phot.photModel as pm
-import models.utils.dbUtils as dbu
 
 
 @route()
@@ -32,8 +34,12 @@ class search(MixedObject):
             search_term = search_term.replace("tag:", "tags:")
 
             searcher = PhotSearcher()
-            phots_hidden_filter = dbu.rql_where_not(pm.Phot.table, "disable", True, raw=True)
-            ids = searcher.search(search_term, collection=True, pre_filter=phots_hidden_filter)
+
+            allow = q.And([
+                q.Term("disable", False)
+            ])
+
+            ids = searcher.search(search_term, collection=True, allow=allow)
 
             if ids is not None:
                 ids.fetch()

@@ -26,7 +26,7 @@ from rethinkORM import RethinkCollection
 
 import config.config as c
 
-logger = logging.getLogger("search")
+logger = logging.getLogger(c.general.logName+".search")
 
 
 class BaseSearcher(object):
@@ -49,6 +49,7 @@ class BaseSearcher(object):
         except (EmptyIndexError, OSError) as e:
             logger.exception(e)
             if self._schema is not None:
+                logger.debug("Creating index...")
                 self.create_index()
             else:
                 raise Exception("No schema defined, and no index found.")
@@ -57,12 +58,15 @@ class BaseSearcher(object):
 
     def create_index(self):
         if not os.path.exists(c.dirs.search_index+self.name):
+            logger.debug("Creating directory for index...")
             os.makedirs(c.dirs.search_index+self.name)
+
         self.ix = whoosh.index.create_in(c.dirs.search_index+self.name, self._schema)
 
         return self
 
     def open_index(self):
+        logger.debug("Opening index...")
         self.ix = whoosh.index.open_dir(c.dirs.search_index+self.name)
 
         return self
@@ -80,18 +84,21 @@ class BaseSearcher(object):
         pass
 
     def update_multiple(self, items):
+        logger.debug("Updating multiple documents: {}".format(items))
         for item in items:
             self.update(item)
 
         return self
 
     def delete(self, id):
+        logger.debug("Deleting item: {}".format(id))
         document = whoosh.query.Term("id", id)
         self.writer.delete_by_query(document)
 
         return self
 
     def save(self):
+        logger.debug("Saving index...")
         self.writer.commit()
 
         return self
@@ -110,15 +117,20 @@ class BaseSearcher(object):
         for the results that matched the search query
         """
         fields = fields or self._fields_to_search
+        logger.debug("Searching on fields {} for {}".format(fields, search))
+
         with self.ix.searcher() as searcher:
             if not isinstance(search, whoosh.qparser.QueryParser):
-                query = whoosh.qparser.MultifieldParser(self._fields_to_search, self.ix.schema).parse(search)
+                query = whoosh.qparser.MultifieldParser(self._fields_to_search, self.ix.schema, termclass=whoosh.query.FuzzyTerm).parse(search)
             else:
                 query = search
             results = searcher.search(query, limit=limit, filter=allow, mask=disallow)
 
         if not results:
+            logger.debug("Results were empty: {}".format(search))
             return None
+
+        logger.debug("Results were: {}".format(results))
 
         return results
 
@@ -139,10 +151,12 @@ class RethinkSearcher(BaseSearcher):
         query contained in `search`
         """
         fields = fields or self._fields_to_search
+        logger.debug("Searching on fields {} for {}".format(fields, search))
         ids = []
+
         with self.ix.searcher() as searcher:
             if not isinstance(search, whoosh.qparser.QueryParser):
-                query = whoosh.qparser.MultifieldParser(fields, self.ix.schema).parse(search)
+                query = whoosh.qparser.MultifieldParser(fields, self.ix.schema, termclass=whoosh.query.FuzzyTerm).parse(search)
             else:
                 query = search
 
@@ -152,9 +166,12 @@ class RethinkSearcher(BaseSearcher):
                 ids.append(item["id"])
 
         if not ids:
+            logger.debug("Results were empty: {}".format(search))
             return None
 
         ids = list(set(ids))
+
+        logger.debug("Results were: {}".format(ids))
 
         if collection and ids:
             if not pre_query:

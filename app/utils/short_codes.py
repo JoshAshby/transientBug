@@ -30,7 +30,7 @@ def generate_short_code(table):
     the given table, and keeps going till it finds a unique code
 
     :param table: A `str` of the rethinkdb table to check for short_code
-    collisions
+      collisions
     """
     code_good = False
     code = ""
@@ -41,3 +41,26 @@ def generate_short_code(table):
             code_good = True
 
     return code
+
+
+def short_code_in_search(prefix, search):
+    """
+    Useful for finding a short code in a search query, and returning that
+    short code if so.
+
+    :param prefix: A `str` that denotes what prefix the short code will have.
+      ie: phot:AW234R3
+    :param search: A `str` of the search query to check
+    """
+    if prefix[-1] != ":":
+        prefix = "{}:".format(prefix)
+
+    length = len(prefix)
+
+    if prefix in search:
+        parts = search.split(" ")
+        for part in parts:
+            if prefix in part:
+                return part[length:]
+
+    return None

@@ -6,5 +6,5 @@ from models.rethink.phot.photModel import Phot
 models = [Phot]
 
 def migration(document):
-    if not "disabled" in document:
-        document.disabled = False
+    if not "disable" in document:
+        document.disable = False

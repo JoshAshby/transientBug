@@ -5,7 +5,7 @@ Util to list and run migrations in the migrations directory.
 
 Usage:
     migrate.py list
-    migrate.py run <migration>  [-v | --verbose] [-d | --debug]
+    migrate.py run <migration> [-v | --verbose] [-d | --debug]
     migrate.py --version
     migrate.py (-h | --help)
 

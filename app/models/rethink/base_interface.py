@@ -119,3 +119,14 @@ class BaseInterface(RethinkModel):
 
     def __json__(self):
         return {}
+
+    @classmethod
+    def find(cls, key):
+        res = r.table(cls.table)\
+                .filter({"short_code": key})\
+                .coerce_to("array").run()
+
+        if res:
+            return cls(**res[0])
+
+        return None
